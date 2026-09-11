@@ -1,0 +1,10 @@
+# 기관 식별 정보 거부 목록 — 목록 자체가 식별 정보라 절대 커밋하지 않는다
+tools/.denylist.local
+# 계측·생성 도구의 로컬 설정(형제 저장소 경로 등)
+tools/.local.json
+.env
+.env.*
+
+node_modules/
+.DS_Store
+*.log
