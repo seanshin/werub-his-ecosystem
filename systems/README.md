@@ -1,4 +1,8 @@
 # 시스템 구성서
+**C — System reference sheets**
+
+> **EN** — All 13 systems described against [one template](TEMPLATE.md): identity, composition, scale, core functions, install requirements, key settings, integrations, standards and regulation, AI use, limitations, and source. Versions, scale and connection status follow the [draft integrated release](../RELEASES/draft/) and the [measurement snapshot](../data/scale-snapshot.json).
+
 
 시스템 13개를 [같은 틀](TEMPLATE.md)로 설명합니다. 이 시스템을 세우려면 무엇을 알아야 하는지를 정리했습니다. 정체성 · 구성도 · 규모 · 핵심 기능 · 설치 요구사항 · 주요 설정 · 연동 · 표준과 규제 · AI 사용 · 한계 · 소스 순서입니다.
 

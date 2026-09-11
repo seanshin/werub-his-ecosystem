@@ -1,17 +1,24 @@
 # WeRU.B HIS Ecosystem
 
 **AI 기반 병원정보시스템(HIS)을 오픈 형태로 — 적은 자원으로도 세울 수 있게**
+**An open ecosystem for AI-assisted hospital information systems — buildable with modest resources**
 
 > 이 저장소는 **소개·구축 자료 저장소**입니다. 소스 코드는 담지 않습니다. 각 시스템의 소스는 아래 [시스템 13](#시스템-13)의 링크로 갑니다(링크는 정리되는 대로 채웁니다).
 > 현재 상태: **자료 제작 중** — 진행 계획은 [ROADMAP.md](ROADMAP.md)를 보세요.
+> **EN** — This is a **documentation repository**: it introduces the ecosystem and explains how to build it. It contains **no source code**; links to each system's source are listed under [시스템 13 / The 13 systems](#시스템-13) and will be filled in as they are settled. Status: **work in progress** — see [ROADMAP.md](ROADMAP.md).
+> Documents are written in Korean with English summaries (marked **EN**) in each section.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 ## 이 프로젝트가 바라는 것
+**What this project aims for**
 
 ### 의료정보시스템이 비용 때문에 멈추지 않기를
+**So that health information systems are not stopped by cost**
+
+> **EN** — Running a hospital takes far more than a chart: registration, orders, labs, imaging, pharmacy, billing, claims, accounting, HR and staff education all have to run on connected systems. Acquiring them is still a large, expensive project — license fees, dedicated hardware and vendor lock-in leave **many institutions worldwide running on paper and spreadsheets**. This ecosystem exists to lower that threshold: the ecosystem's own code is offered under the [MIT license](LICENSE); it covers the whole set of 13 interlocking systems rather than a single HIS; and it is meant to be within reach of small and mid-sized hospitals, clinics, public health agencies and **health facilities in low-resource countries** — institutions that will build and run it themselves.
 
 병원 하나가 제대로 돌아가려면 진료 기록만으로는 부족합니다. 접수·처방·검사·영상·약제·수납·청구·회계·인사·교육까지, 병원의 모든 일이 정보시스템 위에서 이어져야 합니다. 그런데 이 시스템을 갖추는 일은 여전히 크고 비싼 사업입니다. 라이선스 비용, 전용 하드웨어, 특정 업체에 묶이는 구조 때문에 **정보시스템 없이 종이와 엑셀로 버티는 의료기관**이 세계 곳곳에 많습니다.
 
@@ -22,6 +29,10 @@
 - **많은 곳에서 폭넓게 쓰이기를 바랍니다.** 큰 병원만이 아니라 중소 병원, 의원급 기관, 공공 보건기관, 그리고 **의료 인프라가 부족한 개발도상국의 의료기관**도 자기 손으로 세우고 운영할 수 있는 것이 목표입니다.
 
 ### 최소한의 사양과 구현으로 쓸 수 있게
+**Designed to run on minimal hardware**
+
+> **EN** — "AI-based HIS" usually calls to mind a server room and datacenter GPUs. This ecosystem was designed the other way around: it is assembled from **freely available open components** (PostgreSQL, Redis, Node.js, Python, Orthanc, Ollama — note that each carries its own license terms, some of which change by version; see [THIRD_PARTY.md](THIRD_PARTY.md)); systems are **independent and attached as needed** over standard protocols (FHIR, DICOM, HL7 v2), so an institution can start with the HIS alone and connect an existing PACS rather than replacing it; **every AI feature has a switch** and the HIS is designed to work without the AI server, showing "fallback" or "cannot compute" instead of pretending a value exists.
+> **A measured record, not a recommended spec** — eight systems (HIS, PACS, sign, LIS, twin, cerno, edu, Jitsi) ran together on **one 8-core / 16GB virtual server** (operations record of 2026-08-25, about 10GB memory in use, no swap headroom). Treat it as close to a *lower bound that actually ran*, not as a sizing recommendation. Per-system recommended specs will be measured during a fresh install walkthrough and published in the [build guide](build-guide/).
 
 "AI 기반 HIS"라고 하면 대형 서버실과 데이터센터용 GPU 를 먼저 떠올립니다. 이 생태계는 반대 방향으로 설계했습니다.
 
@@ -35,6 +46,13 @@
 **실제로 돌아간 기록** — HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi 8개 시스템이 **8코어 · 16GB 메모리 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용). 다만 이 구성은 여유가 넉넉하지 않았습니다(스왑 여유 없음). 그래서 이 수치는 **"권장 사양"이 아니라 "실제로 돌아간 하한에 가까운 기록"** 입니다. 시스템별 권장 사양은 새 설치본으로 구축 절차를 따라가 보면서 측정해 [구축 가이드](build-guide/)에 싣습니다.
 
 ### AI 는 소비자용 GPU 한 장으로 — RTX 5080(16GB)
+**AI on a single consumer GPU — RTX 5080 (16GB)**
+
+> **EN** — All AI computation is handled by one **AI Server** inside the institution, developed and operated on a **single consumer GPU (NVIDIA RTX 5080, 16GB VRAM)**; the code is written to share that 16GB across models. A general-purpose 14B-class model (~10.5GB resident) is the default, either kept resident or loaded on demand and unloaded after five idle minutes; time-of-day profiles swap in smaller medical models as needed; speech-to-text and the ~1GB embedding model share the same memory. Accelerator selection (CUDA / Apple Silicon Metal / CPU) is automatic.
+> **What the AI does is always assistive** — triage suggestions, draft clinical notes, voice records, medication explanations, DUR interaction checks, checkup result drafts, RAG answers, risk score cards. **A human must approve** before anything becomes part of the record, and the approval is logged.
+> **Patient data does not leave the institution** — medical, personal-health and regulated AI work is bound by a `local_only` policy; attempts to route it to an external AI provider are **refused by the code** (fail-closed). External providers can be wired in, but every such default is off (verified 2026-09-11).
+> **Institutions obtain the models themselves** — no model weights are included here or in the ecosystem source. Default targets are open-weight models (Qwen, MedGemma, Llama-derived medical models, Whisper) whose **terms differ per model**: the MedGemma terms direct clinical use toward regulatory approval, and some developers warn against clinical use without further validation. See [THIRD_PARTY.md §3](THIRD_PARTY.md#3-ai-모델-가중치).
+> 📏 **Not yet measured** — throughput by concurrent users, per-model latency, and speed without a GPU. We do not call unmeasured things "sufficient."
 
 이 생태계의 AI 연산은 **AI Server** 한 곳이 맡습니다. 이 AI Server 는 데이터센터용 GPU 가 아니라 **소비자용 GPU 한 장(NVIDIA RTX 5080 · VRAM 16GB)** 을 기준으로 개발하고 돌려 왔습니다. 코드도 처음부터 16GB 안에서 여러 모델을 나눠 쓰도록 짜여 있습니다(2026-09-11 코드 확인).
 
@@ -65,6 +83,10 @@
 > 📏 **아직 싣지 않은 수치** — 동시 사용자 수에 따른 처리량, 모델별 응답 시간, GPU 없는 환경의 속도는 아직 공개할 수 있는 계측이 없습니다. 측정 방법과 측정일을 붙여 [구축 가이드](build-guide/)에 싣습니다. 계측하지 않은 것을 "충분하다"고 말하지 않기 위해서입니다.
 
 ### 개발도상국에서도 세울 수 있는 수준으로
+**Buildable in low-resource settings**
+
+> **EN** — Taken together, the choices above are meant to hold up under real constraints: **small budget** (MIT code, free open components, no commercial DB, one consumer GPU); **few IT staff** (the build is divided into nine stages, S0–S8, each with its own verification screens and completion criteria, and the system itself tracks ~60 opening-readiness and ~60 go-live items); **unreliable internet** (inference runs on the institution's own GPU); **differing regulations** (hospital policy values are changed on a settings screen, not in code, and a *country axis* carries national rules — currently KR and AE); **different languages** (UI strings are language packs; Korean is the base, English and Japanese catalogs exist, Arabic is in preparation — **all current translations are AI drafts with no completed human review**); **staged adoption** (attach systems one at a time, connect existing ones over standard protocols).
+> **Honestly, what an institution must supply in a new country** — **code masters** (drug, diagnosis, fee schedule, lab codes) differ by country and are distributed on each government's terms, so the institution obtains and loads them; **external-agency transmission** (claims, eligibility, notifiable disease reporting) follows national specifications and **is not implemented**, so an institution must add a module or run alongside existing claims software; **medical device and software approval** and privacy-regulation judgments are **made by the adopting institution** (see the [medical disclaimer](DISCLAIMER.md)).
 
 위의 선택들을 모으면, 이 생태계는 다음 조건에서도 세울 수 있도록 만들어졌습니다.
 
@@ -87,6 +109,9 @@
 ---
 
 ## 이 자료가 답하려는 것
+**What these materials answer**
+
+> **EN** — Thirteen systems interlock as one ecosystem. These materials help an institution that intends to **build it in its own hospital** understand three things: **intent** (why it is designed this way — the principles an HIS should hold to in the age of AI), **structure** (what it is made of and how the systems connect), and **build** (in what order to stand it up, what to configure, what people must decide, and how far to turn AI on). All demonstrations use **synthetic hospital data**.
 
 병원 하나를 돌리는 데 필요한 시스템 13개가 하나의 생태계로 맞물려 있습니다. 이 자료는 그 생태계를 **자기 병원에 세우려는 의료기관**이 다음 세 가지를 이해하도록 돕습니다.
 
@@ -97,8 +122,9 @@
 데모는 모두 **가상 병원 데이터**로 보여줍니다.
 
 ## 누가 읽나
+**Who reads this**
 
-| 역할 | 들고 오는 질문 |
+| 역할 · Role | 들고 오는 질문 · The question they bring |
 |---|---|
 | 병원장·CIO | 왜 이 구조인가? 무엇을 얻고 무엇을 감수하나? 구축 규모와 비용은? |
 | 전산·인프라팀 | 무엇을 어디에 설치하나? 서버·GPU·DB 요구사항은? |
@@ -108,8 +134,11 @@
 | 보건 당국·국제 협력 기관 | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? |
 
 ## 설계 취지
+**Design principles**
 
-| 취지 | 구축 기관에게 의미하는 것 |
+> **EN** — Eight principles, each with what it means for the adopting institution: **AI assists, people decide** (approval and its history are required before an AI output becomes part of the record); **state the source** (every value is marked human / AI / fallback / cannot-compute); **do not pretend to know** (no sample means "cannot compute," not zero — so a green dashboard can be trusted); **one system of record** (vocabulary, numeric policy and status labels come from one place); **what people decide belongs on a screen** (decisions are layered — licensing authority / hospital committee / individual staff judgment — and recorded in one registry); **independent systems joined by standards** (attach what you need, swap what you already run); **outbound transmission takes three conditions** (implemented + configured, default off + approved); **pre- and post-opening are separated by build mode** (development / rehearsal / real).
+
+| 취지 · Principle | 구축 기관에게 의미하는 것 · What it means for the institution |
 |---|---|
 | **AI 는 보조, 판단은 사람** | AI 를 켜도 책임 구조가 바뀌지 않습니다. AI 산출물은 사람이 승인해야 정본이 되고, 그 이력이 남습니다 |
 | **출처를 말한다** | 값마다 사람 / AI / 폴백 / 산출 불가를 구분합니다. AI 서버가 멈춰도 화면이 정상인 척하지 않습니다 |
@@ -121,8 +150,9 @@
 | **개시 전과 후를 모드로 가른다** | 개발 / 리허설 / 리얼. 리얼 전환 뒤에는 시험용 통로가 원천적으로 없습니다 |
 
 ## 시스템 13
+**The 13 systems**
 
-| 계층 | 시스템 | 한 줄 정의 | 소스 |
+| 계층 · Layer | 시스템 · System | 한 줄 정의 · In one line | 소스 · Source |
 |---|---|---|---|
 | 코어 | **Hospital RUN (HIS)** | 외래·입원·수술·응급·검사·약제·검진·경영지원 통합 HIS · 생태계의 신원 허브 | 정리 중 |
 | 환자 접점 | 공개 홈페이지 · 환자 앱 | 예약·결과 열람·동의·문진 | 정리 중 |
@@ -137,11 +167,16 @@
 | 협업·교육 | **edu** | 직원 이러닝·법정교육·전자 이수증 | 정리 중 |
 | 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | 정리 중 |
 
+> **EN** — A core HIS at the center (also the ecosystem's **identity hub**), with patient-facing, clinical-department, trust, management, AI, and collaboration/education layers around it. "정리 중" in the Source column means the source link is still being settled.
+
 버전·규모·구현 상태는 첫 [통합 릴리즈](RELEASES/)에서 매니페스트로 고정해 싣습니다. 이 자료의 모든 수치에는 **값 · 센 방법 · 계측일**을 함께 적습니다.
 
 ## 구축은 이렇게 진행됩니다
+**How a build proceeds**
 
-| 단계 | 내용 |
+> **EN** — Nine stages. **S0 preparation** (terms, servers, GPU, DB, institution profile, naming decision-makers) and **S1 core HIS** come first; **S2–S6** (patient access, clinical departments, trust layer, management layer, AI layer) are attached only as needed — though the **trust layer (sign) is best stood up before anything that needs signatures**; **S7 rehearsal** runs the whole flow on synthetic data; **S8 real cutover** isolates synthetic data, migrates real data and deploys a *real build* — it is not a settings toggle. Each stage chapter records ① install ② configure ③ what people must decide ④ verification screens and completion criteria ⑤ **what does not work yet and the workaround** ⑥ common pitfalls.
+
+| 단계 · Stage | 내용 · What happens |
 |---|---|
 | S0 준비 | 제공 조건(MIT · 면책 · 제3자 구성요소) 확인 · 서버·GPU·DB 확보 · 기관 프로파일(국가·기관명·진료과) · 결정 권한자 지정 |
 | S1 코어 HIS | 설치 · 코드 마스터 반입 · 부서·병상·직원·역할 · 병원 규정 설정 |
@@ -156,6 +191,9 @@
 단계마다 ① 설치 ② 설정 ③ 사람이 정할 것 ④ 확인 화면·완료 조건 ⑤ **아직 안 되는 것과 대체 수단** ⑥ 흔한 함정을 [구축 가이드](build-guide/)에 적습니다. S0~S8 은 새 설치본으로 실제로 따라가 본 뒤에 싣습니다.
 
 ## 지금 알고 시작해야 할 것
+**Know this before you start**
+
+> **EN** — So that an institution does not plan around things that are not there. Items needing a workaround today: **external-agency transmission** (claims, eligibility, notifiable disease reporting) is **not implemented**; **no SMS provider** is registered, so patient identity-verification texts are simulated; **signing keys are held in software** (no HSM), and a qualified timestamp authority and identity-verification vendor are the institution's to arrange; **the Jitsi telehealth install does not currently work** and must be rebuilt; **login** uses public-key verification for five systems (sign, PACS, edu, twin, cerno), a **shared secret** for two (ERP, Jitsi — separate key management required) and an API key for Clinic; **the hospital name is still hard-coded** in 118 HIS files (re-counted at the 2026-09-11 base commit), so changing it means editing code until that work lands; and **one specific installation's addresses are code defaults** in 245 files across 11 repositories (docs excluded, same base commit) — change them before installing and **bring the system up first with outbound network access blocked**, or requests may go to another installation.
 
 구축 기관이 계획을 잘못 세우지 않도록, 현재 구현 상태에서 대체 수단을 준비해야 하는 것을 먼저 밝힙니다. 발행 전에 다시 확인해 확인일과 함께 갱신합니다.
 
@@ -168,8 +206,9 @@
 - **기관 주소 설정** — 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있으므로**, 설치 전에 바꾸고 첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다. 바꿔야 할 설정 목록은 [구축 가이드](build-guide/)에 싣습니다.
 
 ## 저장소 구성
+**Repository layout**
 
-| 경로 | 내용 | 상태 |
+| 경로 · Path | 내용 · Contents | 상태 · Status |
 |---|---|---|
 | [`ROADMAP.md`](ROADMAP.md) | 자료 제작 계획 | ✅ |
 | [`overview/`](overview/) | 취지·구조 개요서(10장) | 🟡 초안 |
@@ -181,15 +220,23 @@
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |
 | [`data/`](data/) | 규모 계측 스냅샷(계측일 · 기준 커밋 포함) | ✅ 1차 계측 |
 | [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈(버전 조합 매니페스트 · 시스템별 릴리즈 요약 13) | 🟡 초안 |
+| [`screens/`](screens/) | **화면으로 보는 생태계**(시스템 13장 · 캡처와 설명) | 🟡 초안(캡처 넣는 중) |
+| [`assets/screens/`](assets/screens/) | 화면 캡처 이미지 + [캡처 목록 266](assets/screens/INDEX.md)(자동 생성) | 🟡 0 / 266 |
 | [`diagrams/`](diagrams/) | 도식 8종 + 연결 지도(연결 상태 표에서 자동 생성) | 🟡 초안 |
 | [`glossary.md`](glossary.md) | 용어집 | 🟡 초안 |
 | `tools/` | 공개 검사기 · 규모 계측기 · 체크리스트 추출기 · 매니페스트 생성기 · 연결 지도 생성기 · HIS 메뉴 추출기 | ✅ |
 
 ## 참여
+**Contributing**
 
 이 자료는 아직 제작 중입니다. 외부 기여(이슈 · 풀 리퀘스트)를 어떻게 받을지는 정하는 중이며, 정해지면 이곳에 안내합니다.
 
+> **EN** — These materials are still being produced. How external contributions (issues, pull requests) will be accepted is not yet decided; it will be announced here.
+
 ## 라이선스
+**License**
+
+> **EN** — This repository is [MIT](LICENSE), Copyright (c) 2026 Sean Shin. The ecosystem software is intended to be MIT as well, **but third-party servers run as separate services, AI model weights (each with its own terms) and government-distributed code master data follow their own conditions** — see [THIRD_PARTY.md](THIRD_PARTY.md). **The source repositories are not yet relabeled to MIT**; each repository's current declaration is carried verbatim in the [release manifest](RELEASES/draft/manifest.md), so check the label in the repository you obtain. And see the [medical disclaimer](DISCLAIMER.md): **this software is not an approved medical device**; AI output is supportive information, and clinical judgment and responsibility rest with the clinicians and the adopting institution.
 
 - 이 저장소: [MIT](LICENSE) · Copyright (c) 2026 Sean Shin (신현묵)
 - 생태계 소프트웨어도 MIT 로 제공합니다. 다만 별도 서비스로 쓰는 제3자 서버, **AI 모델 가중치**(모델마다 별도 약관), 공공기관이 배포하는 코드 마스터 데이터는 **각자의 조건**을 따릅니다. 목록은 [THIRD_PARTY.md](THIRD_PARTY.md)에 정리합니다.

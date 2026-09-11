@@ -1,4 +1,8 @@
 # 도식 원본
+**Diagram sources**
+
+> **EN** — Eight hand-drawn diagrams plus one generated connection map, all in **mermaid** (no ASCII art), rendered directly by GitHub. Each carries a short explanation and the public document it was derived from. The connection map is generated from the connection-status table by `tools/build-diagrams.mjs` — do not edit it by hand.
+
 
 생태계를 그림으로 봅니다. 모든 도식은 **mermaid** 원본이며(ASCII 그림은 쓰지 않습니다), GitHub 에서 바로 그려집니다. 도식마다 짧은 설명과 **근거**(어느 공개 문서에서 가져왔는지)를 함께 적었습니다.
 

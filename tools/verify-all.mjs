@@ -22,6 +22,7 @@ const CHECKS = [
   ['HIS 메뉴 목록 = 코드', 'extract-his-nav.mjs', ['--check']],
   ['매니페스트 = 저장소·스냅샷·입력 · 요약 머리 대조', 'build-manifest.mjs', ['--check']],
   ['연결 지도 = 연결 상태 표', 'build-diagrams.mjs', ['--check']],
+  ['화면 캡처 목록 = 메뉴 구성표 · 실제 파일', 'build-screen-index.mjs', ['--check']],
   ['구성서 = 매니페스트 · 연결 상태 표', 'check-consistency.mjs', []],
 ];
 const MEANING = { 0: '통과', 1: '실패', 2: '도구 오류', 3: '미실행' };

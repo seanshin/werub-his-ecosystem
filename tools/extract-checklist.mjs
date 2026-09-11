@@ -503,7 +503,9 @@ function buildDecisions(src, ctx, R) {
 
 function buildReadme(ctx, op, gl, dc, redactions) {
   const L = [];
-  L.push(GENERATED_NOTE, '', '# G 구축 체크리스트', '');
+  L.push(GENERATED_NOTE, '', '# G 구축 체크리스트', '',
+    '**G — Build checklists**', '',
+    '> **EN** — Three checklists extracted verbatim from the HIS registries: opening stages, go-live control, and human decisions. **Auto-generated — do not edit by hand.** "Real verification" items are decided by the system reading settings, the database, approval records or code, and a person marking them done does not change them; "self-declared" items are marked by a responsible person with evidence kept outside the screen. An item with no record reads **"no record," not "incomplete."** These lists are not exhaustive: items vary by institution class, region and exemptions.', '');
   L.push('> 자동 생성 — 손으로 고치지 않습니다.', '');
   L.push('AI 기반 HIS 를 세우는 의료기관이 **개원 준비 · 운영 전환 · 사람 결정**을 빠짐없이 챙길 수 있도록, HIS 안에 이미 있는 관리 화면의 항목을 표로 옮긴 것입니다. 이 표는 새로 지어낸 절차가 아니라 **HIS 의 레지스트리(코드)에서 기계적으로 뽑은 것**입니다. 그래서 코드가 바뀌면 추출기를 다시 돌려 표를 갱신합니다.', '');
   L.push(table(['파일', '무엇인가', 'HIS 화면', '항목 수'], [

@@ -10,4 +10,12 @@
 
 ---
 
-*This software is not a certified medical device. Suitability for clinical use, regulatory approval, and compliance are the responsibility of the deploying institution. AI outputs are assistive only and require approval by an authorized person. All demo data is fictional.*
+## English
+
+This repository and the software it introduces are provided under the [MIT License](LICENSE), **"AS IS" and without warranty of any kind**. Because this software may be used in healthcare settings, the following is stated separately.
+
+1. **It is not a medical device.** This software has not been approved or cleared as a medical device (including SaMD) in any country.
+2. **Suitability and regulatory approval are the responsibility of the adopting institution.** Whether to use it clinically, and within what scope, is the decision of the healthcare institution that adopts and builds it. The same applies to medical-device classification review, regulatory approval, and compliance with privacy and medical-practice law.
+3. **AI output is supportive information.** The AI features in this ecosystem do not finalize diagnoses or prescriptions. They produce drafts and suggestions; an authorized person must approve them before they become part of the medical record.
+4. **Demo data is fictional.** Every hospital, patient, staff member and clinical record appearing in these materials is synthetic data created for demonstration and bears no relation to any real institution or person.
+5. **Implementation status described here is a fact about one reference version.** Each document is written against the version combination recorded in the [integrated release](RELEASES/) manifest. The facts may differ in other versions.

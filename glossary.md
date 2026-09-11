@@ -1,5 +1,9 @@
 # H 용어집
 
+**Glossary**
+
+> **EN** — Terms used across these materials — interoperability standards (FHIR, SMART on FHIR, CDS Hooks, HL7 v2, DICOM, IHE), imaging, code systems (LOINC, SNOMED CT, KCD), trust and PKI (TSA, PAdES, hash chain), identity, AI, clinical and management terms — plus this repository's own status labels (`구현·미검증` implemented-but-unverified, `대응 설계` designed-for-compliance, and so on).
+
 이 자료에 나오는 표준 · 기술 · 임상 용어를 한 줄로 풉니다. **"이 생태계에서 쓰이는 곳"** 칸은 그 용어가 어느 시스템에 나오는지를 적은 것이며, 그 표준의 인증 · 적합성 · 준수를 뜻하지 않습니다. 연결별 구현 상태는 [연결 지도](diagrams/connections.md)와 [`compatibility.md`](RELEASES/draft/compatibility.md)에서 봅니다.
 
 - 근거: [README](README.md) · [통합 릴리즈 초안의 시스템별 요약](RELEASES/draft/systems/) · [`compatibility.md`](RELEASES/draft/compatibility.md) · [THIRD_PARTY.md](THIRD_PARTY.md) · [checklist/](checklist/) (모두 2026-09-11 기준)

@@ -1,5 +1,9 @@
 # 제3자 구성요소와 MIT 가 덮지 않는 것
 
+**Third-party components**
+
+> **EN** — What the MIT license does **not** cover: third-party servers run as separate services (some AGPL/GPL; Redis changes terms from 7.4), third-party code taken and modified, **AI model weights** (each with its own terms — MedGemma's HAI-DEF, Llama community licenses), and **government-distributed code masters** (drug, diagnosis, fee schedule, lab codes; SNOMED CT requires registration with a national release centre). This file records license names, what the original text says, and where to read it — **it is not a legal review**; the adopting institution and its counsel decide what obligations arise.
+
 생태계 자체 코드는 [MIT](LICENSE)로 제공합니다. 이 문서는 MIT 가 **덮지 않는** 구성요소를 적습니다. 각 구성요소는 자기 조건을 따르므로 구축 기관이 따로 확인해야 합니다.
 
 > **이 문서는 법률 검토가 아닙니다.** 구성요소의 이름·버전·라이선스·원문 위치라는 사실만 적습니다. 의무가 생기는지, 생긴다면 어떻게 이행할지는 **구축 기관과 법무가** 설치 형태에 맞춰 확인합니다.

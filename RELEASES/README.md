@@ -1,4 +1,8 @@
 # 생태계 통합 릴리즈
+**Integrated ecosystem release**
+
+> **EN** — The 13 systems version themselves differently. This folder pins **exactly which version combination these materials describe**, as one release: a manifest (version, base commit, release date, license declaration, source link, implementation status per system), a human-readable release note, per-system release summaries, and the connection-status table for that combination.
+
 
 13개 시스템은 저장소마다 버전을 매기는 방식이 다릅니다. 이 폴더는 **이 자료가 설명하는 것이 정확히 어느 버전 조합인지**를 릴리즈 한 벌로 고정합니다. 자료의 모든 수치 · 상태 · 설명은 그 조합을 기준으로 합니다.
 

@@ -1,4 +1,8 @@
 # A 취지 · 구조 개요서
+**A — Intent and structure: the overview**
+
+> **EN** — The first document to read: it explains **why** the ecosystem is designed this way, **what** it is made of, and **in what order** to build it — in one pass. Written so a hospital director or CIO can read it end to end, with each chapter handing off to the role-specific documents. Every statement is a fact about one version combination (measured 2026-09-11); base commits are pinned in `data/base-commits.json`.
+
 
 > 🟡 **초안 — 시스템 담당 확인 전 · 새 설치본 따라가기 전**
 > **기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)** — 이 개요서의 모든 설명은 그 버전 조합(계측일 2026-09-11 · 기준 커밋은 [`data/base-commits.json`](../data/base-commits.json)에 고정)에서의 사실입니다.

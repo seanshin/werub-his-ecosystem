@@ -1,4 +1,8 @@
 # F 발표 덱
+**F — Presentation deck**
+
+> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 29 content slides plus 6 section covers, in six parts — intent, structure, build, **current status**, demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
+
 
 A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태계로 AI 기반 HIS 를 세울지 정하는 **병원장 · CIO** 가 한 번에 볼 수 있게 썼습니다.
 

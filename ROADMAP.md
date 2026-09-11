@@ -1,5 +1,9 @@
 # 로드맵 — 생태계 소개·구축 자료 제작 계획
 
+**Roadmap**
+
+> **EN** — The production plan for these materials: deliverables A–H, the eight diagrams, the release and status conventions, the phases (P0 foundation → P5 publication), and the pre-publication checks. Progress is updated here as each phase closes.
+
 > 이 문서는 이 저장소의 자료를 **무엇을, 어떤 순서로, 어떤 기준으로** 만드는지 적습니다.
 > 진행 상황은 각 단계의 체크 표시로 갱신합니다.
 

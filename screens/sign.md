@@ -1,0 +1,29 @@
+# sign 화면
+
+> 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [sign 시스템 구성서](../systems/sign.md)
+> 계층 신뢰 · 버전 `1.30.1` · 구현 상태 `통합` · 화면 38 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
+
+**EN** — PKI, timestamping and e-signature. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+
+---
+
+## 무엇을 하는 화면인가
+
+자체 PKI · RFC 3161 타임스탬프 · PAdES-LTA 전자서명. **"누가 · 언제 · 무엇에 서명했고 그 뒤로 바뀌지 않았다"** 를 제3자가 검증할 수 있게 하는 자리입니다. 동의서(HIS) · 판독(PACS) · 이수증(edu) · 계약(ERP)이 모두 여기를 부릅니다.
+
+## 캡처 자리
+
+| # | 담을 화면 | 파일 | 상태 |
+|---|---|---|---|
+| 📷 sign-1 | 서명 요청과 서명 완료 상태 | `sign-request.png` | ⬜ |
+| 📷 sign-2 | 인증서 발급 · 목록 | `sign-certificates.png` | ⬜ |
+| 📷 sign-3 | 타임스탬프 · 감사 해시체인 봉인 | `sign-timestamp-anchor.png` | ⬜ |
+| 📷 sign-4 | 서명 검증 결과(PAdES-LTA) | `sign-verify.png` | ⬜ |
+
+## 알아 둘 것
+
+🔴 기준 버전은 **인증 기관 키를 소프트웨어로 보관**합니다(하드웨어 보안 모듈 미적용). 화면에 키 · 인증서 세부가 보이면 가리고 찍습니다. **전자서명의 법적 효력 판단은 구축 기관과 법무가 합니다.**
+
+- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에서 봅니다 — **`검증됨` 0**(판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음).
+- 설치 요구사항 · 주요 설정 · 한계는 [sign 시스템 구성서](../systems/sign.md)에 있습니다.
+- 캡처를 넣는 규칙은 [캡처 안내](../assets/screens/README.md), 사람 확인은 [캡처 대장](../assets/CAPTURE-LEDGER.md)에 있습니다.

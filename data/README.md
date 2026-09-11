@@ -1,4 +1,8 @@
 # 계측 스냅샷
+**Measurement snapshot**
+
+> **EN** — The scale and versions of all 13 systems, counted **on one day in one pass** from each repository's pinned base commit. Every number in these materials comes from here; numbers written in the individual repositories' own READMEs are not used, because versions and counts disagree across them. Each entry carries the value, the counting rule, and the measurement date.
+
 
 이 폴더에는 생태계 13개 시스템의 **규모와 버전을 한날 한 번에 센 결과**가 들어 있습니다.
 이 자료의 모든 수치는 여기서 나옵니다. 각 시스템 저장소 README 에 적힌 수치는 쓰지 않습니다. 저장소마다 버전과 수치가 서로 어긋나 있기 때문입니다.
