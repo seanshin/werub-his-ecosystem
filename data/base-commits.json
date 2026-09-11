@@ -1,0 +1,17 @@
+{
+  "note": "통합 릴리즈 초안의 기준 커밋 — 도구는 이 커밋의 내용만 읽는다. 옮길 때는 `node tools/measure-scale.mjs --repin`.",
+  "pinnedAt": "2026-09-11",
+  "commits": {
+    "his": "e9d303984f80eda8271f29064a326bedad766815",
+    "sign": "93f56d839c3f5a0bc7ca8ed6b1b0404f006423d5",
+    "lis": "ffb34e9d1dbc6aecaf7c99c4e9ed0063e54c27b4",
+    "erp": "0e1f54c5b90213806615a865a38494e22abcab92",
+    "pacs": "532a8ed13e872941ab478caed63a02824258f181",
+    "ai-server": "55acaee900688326683bc0c2f17827ae9d099d0e",
+    "twin": "526b4f9a4d3fdad5c7ada4b76855367d58c00b0b",
+    "cerno": "4f5c22b331fc2ce67969ac3a0e266d9e62af2597",
+    "edu": "f8127e6ee278fd5d8e808ee75675d62e734e5a30",
+    "clinic": "2b20a89b7c3ab8128730f8aca5fea84cdb314658",
+    "jitsi": "0984fbec7177796ed619f82348cba4e721695710"
+  }
+}

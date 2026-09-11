@@ -1,0 +1,127 @@
+# H 용어집
+
+이 자료에 나오는 표준 · 기술 · 임상 용어를 한 줄로 풉니다. **"이 생태계에서 쓰이는 곳"** 칸은 그 용어가 어느 시스템에 나오는지를 적은 것이며, 그 표준의 인증 · 적합성 · 준수를 뜻하지 않습니다. 연결별 구현 상태는 [연결 지도](diagrams/connections.md)와 [`compatibility.md`](RELEASES/draft/compatibility.md)에서 봅니다.
+
+- 근거: [README](README.md) · [통합 릴리즈 초안의 시스템별 요약](RELEASES/draft/systems/) · [`compatibility.md`](RELEASES/draft/compatibility.md) · [THIRD_PARTY.md](THIRD_PARTY.md) · [checklist/](checklist/) (모두 2026-09-11 기준)
+- 뜻풀이는 일반적인 정의를 짧게 옮긴 것입니다. 정확한 정의는 각 표준 원문을 따릅니다.
+
+## 1. 상호운용 표준
+
+| 용어 | 한 줄 뜻 | 이 생태계에서 쓰이는 곳 |
+|---|---|---|
+| **FHIR** (R4) | HL7 International 의 의료 정보 교환 표준. 환자 · 관찰 · 오더 같은 "자원"을 REST API 로 주고받습니다. R4 는 네 번째 정식판입니다 | HIS(외부 표면) · LIS(검사 오더 · Reflex 오더) · twin(write-back) · cerno(환자 맥락 읽기) · PACS(자원 래퍼) |
+| **SMART on FHIR** | FHIR 서버 위에서 외부 앱을 실행하고 권한을 받는 규격(OAuth 2.0 · OpenID Connect 기반). EHR launch 는 차트 안에서 앱을 여는 방식입니다 | HIS(앱 등록 · 런처) → twin · cerno. twin 은 서버 간 읽기에 SMART Backend Services 도 씁니다 |
+| **CDS Hooks** | EHR 의 정해진 시점(예: 차트 열람)에 외부 의사결정 지원 서비스를 불러 "카드"를 받아 보여주는 규격 | HIS → twin(차트 열람 시 위험 점수 카드) |
+| **HL7 v2** | 병원 시스템 사이에 오더 · 결과 · 환자 정보를 보내는 메시지 표준. 메시지 종류 예: ORM · OML(오더) · ORU(결과) · ADT(입퇴원 · 인구정보) | LIS → PACS(병리 스캔 워크리스트) · PACS(영상 오더 · ADT 수신) · HIS ⇄ LIS · PACS 의 대체 경로 |
+| **MLLP** | HL7 v2 메시지를 TCP 로 보내는 최소 전송 규약. 메시지 앞뒤에 표시 바이트를 붙여 경계를 나눕니다 | HL7 v2 를 쓰는 LIS · PACS 연결 |
+| **IHE** | Integrating the Healthcare Enterprise. 기존 표준을 어떤 조합으로 쓸지 정한 "통합 프로파일" 모음 | PACS(XDS-I.b · XDM · PIX · ATNA) |
+| **IHE XDS-I.b** | 기관 사이에 영상 문서(KOS 매니페스트)를 등록 · 공유하는 IHE 프로파일. XDM 은 같은 문서를 ZIP 같은 오프라인 매체로 주고받는 프로파일입니다 | PACS → 외부 XDS-I.b 저장소 · XDM 패키지 내보내기 |
+| **PIX** (IHE) | 여러 시스템 · 기관의 환자 식별자를 서로 대응시키는 IHE 프로파일(피드 ITI-8 · 조회 ITI-9) | HIS → PACS 환자 인구정보 · 병합 연결 |
+| **ATNA** (IHE) | 감사 기록 송신과 노드 인증을 정한 IHE 프로파일 | PACS(선택 · 기본 꺼짐) |
+| **ASTM E1394** | 검사 분석기와 LIS 사이의 결과 레코드 형식 표준. 저수준 전송은 ASTM E1381 이며, 현재는 CLSI LIS2-A2 로 이어집니다 | 검사 장비 → LIS(결과 자동 수집) |
+| **웹훅** (webhook) | 어떤 일이 생기면 미리 등록한 주소로 HTTP 요청을 보내 알리는 방식 | sign(서명 완료 통지) · HIS → edu(직원 이벤트) · Clinic → HIS(결재 결과) 등 |
+| **OpenAPI** | REST API 의 경로 · 입력 · 응답을 기계가 읽는 형식으로 적는 명세 규격 | sign · AI Server · Jitsi(회의 관리 API) |
+
+## 2. 영상
+
+| 용어 | 한 줄 뜻 | 이 생태계에서 쓰이는 곳 |
+|---|---|---|
+| **DICOM** | 의료 영상과 그 부가 정보를 저장 · 전송하는 국제 표준. 네트워크 서비스(DIMSE)로 C-STORE(저장) · C-FIND(검색) · C-MOVE(가져오기) · C-ECHO(연결 확인) 등이 있습니다 | PACS(영상 서버 Orthanc) · 촬영 장비 · 외부 PACS |
+| **DICOMweb** | DICOM 의 웹(HTTP) 서비스 묶음 — QIDO-RS(검색) · WADO-RS · WADO-URI(조회) · STOW-RS(저장) | PACS(토큰 게이트 뒤) · LIS(병리 영상 도착 확인) · HIS(영상 중계) |
+| **MWL** (Modality Worklist) | 촬영 장비가 "누구를 무슨 검사로 찍을지" 목록을 받아 가는 DICOM 서비스 | PACS → 촬영 장비 · LIS 의 병리 스캔 워크리스트 |
+| **MPPS** | Modality Performed Procedure Step. 장비가 촬영 시작 · 완료 상태를 알리는 DICOM 서비스 | PACS ⇄ 촬영 장비 |
+| **Storage Commitment** | 장비가 보낸 영상을 받은 쪽이 안전하게 보관했음을 확인해 주는 DICOM 서비스 | PACS ⇄ 촬영 장비 |
+| **KOS** | Key Object Selection. 영상 가운데 주요 영상을 가리키는 DICOM 객체 | PACS(주요 영상 표시 · XDS-I.b 매니페스트) |
+| **DICOM SR · SEG** | 구조화 보고(SR)와 영상 분할 결과(SEG)를 담는 DICOM 객체 | PACS(AI 결과 저장) |
+| **WSI** | Whole Slide Image. 병리 슬라이드 전체를 스캔한 디지털 영상 | LIS → PACS(병리 워크리스트 · 현미경 모드 뷰어) |
+| **Orthanc** | 공개 소스 DICOM 영상 서버 | PACS(별도 컨테이너 · 라이선스는 THIRD_PARTY §1) |
+| **OHIF Viewer** | 공개 소스 웹 의료 영상 뷰어 | PACS 웹 뷰어(소스를 받아 고쳐 빌드 · THIRD_PARTY §2) |
+
+## 3. 코드 체계 · 기준 데이터
+
+| 용어 | 한 줄 뜻 | 이 생태계에서 쓰이는 곳 |
+|---|---|---|
+| **LOINC** | 검사 · 관찰 항목을 식별하는 국제 코드 체계(Regenstrief Institute) | LIS · HIS(검사 코드 매핑 · 진료정보교류 문서 코드) · twin |
+| **SNOMED CT** | 진단 · 소견 · 시술 같은 임상 개념을 표현하는 국제 의학 용어 체계(SNOMED International) | HIS · LIS(코드 참조) |
+| **KCD** | 한국표준질병·사인분류. ICD 를 바탕으로 한 국내 질병 분류 코드 | HIS · AI Server(코드 조회 · 매핑) |
+| **EDI** (코드) | 전자문서교환. 국내 의료에서는 건강보험 청구 서식과, 거기에 쓰는 행위 · 약제 · 치료재료 코드를 함께 부르는 말로 쓰입니다 | HIS(청구서 EDI 서식) · AI Server(수가 코드 조회) · LIS(검사 코드 카탈로그) |
+| **DUR** | Drug Utilization Review. 의약품 안전사용 점검 — 병용금기 · 연령금기 · 임부금기 · 용량 등을 확인합니다 | AI Server(점검 보조) · HIS · twin · cerno(AI Server 를 통해) |
+| **ISBT 128** | 혈액 · 세포 · 조직 제품을 식별하는 국제 코드 표준 | LIS(수혈) |
+| **HGVS · VCF** | 유전 변이를 적는 표기법(HGVS)과 변이 목록 파일 형식(VCF) | LIS(유전체) |
+| **코드 마스터** | 약품 · 진단 · 수가 · 검사 코드처럼 나라마다 공공기관이 배포하는 기준 코드 묶음 | HIS(반입) · AI Server(조회). 구축 기관이 배포 기관에서 직접 받습니다(THIRD_PARTY §4) |
+
+## 4. 신뢰 · 보안 · 신원
+
+| 용어 | 한 줄 뜻 | 이 생태계에서 쓰이는 곳 |
+|---|---|---|
+| **PKI** | 공개키 기반구조. 인증 기관(CA)이 발급한 인증서로 공개키와 그 주인을 묶는 체계 | sign(자체 2단 CA — Root · Issuing) |
+| **X.509** | 공개키 인증서의 표준 형식 | sign(서명자별 인증서) |
+| **CRL · OCSP** | 폐기된 인증서 목록(CRL)과, 인증서 상태를 그때그때 묻는 프로토콜(OCSP) | sign(서명 시점 기준 폐기 확인) |
+| **TSA** | Time-Stamping Authority. "이 데이터가 이 시각에 있었다"를 서명으로 증명하는 타임스탬프 발급 주체 | sign(자체 TSA · 외부 TSA 교차 앵커는 선택) |
+| **RFC 3161** | 타임스탬프 요청 · 응답 형식을 정한 IETF 표준 | sign(서명 · 감사 앵커의 타임스탬프) |
+| **CAdES** | CMS(Cryptographic Message Syntax) 기반 전자서명의 표준 형식(ETSI). CAdES-BES 는 기본형입니다 | sign |
+| **PAdES-LTA** | PDF 전자서명 표준(PAdES)의 장기 보관형. 검증 자료와 문서 타임스탬프를 PDF 안에 넣어 인증서 만료 뒤에도 검증할 수 있게 합니다 | sign(동의서 · 판독 보고서 · 계약서) |
+| **HSM** | Hardware Security Module. 개인키를 장치 밖으로 꺼내지 않고 서명 연산을 하는 하드웨어. PKCS#11 은 HSM 을 부르는 표준 API 입니다 | sign(HSM 어댑터 — CA 키 대상 · 기본은 소프트웨어 수탁) |
+| **감사 해시체인** | 기록마다 앞 기록의 해시를 품게 해, 중간을 고치면 뒤가 모두 어긋나 드러나는 추가 전용(append-only) 기록 | sign(감사 스트림) · HIS · ERP · Clinic 이 감사 이벤트를 sign 에 기록 |
+| **앵커** (anchor) | 해시체인의 머리 값에 타임스탬프를 받아, 그 시각의 체인 상태를 봉인하는 것 | sign |
+| **JWT** | JSON Web Token. 서명된 JSON 클레임을 담은 토큰 | HIS(직원 토큰 발급) → sign · PACS · edu · twin · cerno · Jitsi |
+| **JWKS** | JSON Web Key Set. 토큰 검증용 공개키 목록을 게시하는 형식 | HIS(공개) → sign · PACS · edu · twin · cerno(검증) |
+| **RS256** | RSA 개인키로 서명하고 공개키로 검증하는 JWT 서명 알고리즘(SHA-256) | HIS 발급 토큰(PACS · edu · twin · cerno 요약에 표기) |
+| **HS256** | 같은 비밀키로 서명 · 검증하는 JWT 서명 알고리즘(HMAC-SHA-256) | HIS → Jitsi(공유 비밀키 방식) |
+| **HMAC** | 공유 비밀키로 메시지 인증 코드를 만드는 방식 | sign(웹훅 서명) · HIS → twin(구방식 런치 URL) |
+| **PKCE** | OAuth 2.0 인가 코드를 가로채 쓰지 못하게 하는 확장. S256 은 해시로 확인하는 방식입니다 | HIS → twin · cerno(SMART 앱 실행) |
+| **SSO** | Single Sign-On. 한 번 로그인으로 여러 시스템을 쓰는 방식 | HIS → ERP · edu(HIS 토큰으로 로그인) · Clinic → HIS(Clinic 토큰으로 HIS 로그인) |
+| **API 키** | 호출하는 시스템을 식별하는 비밀 문자열 | Clinic(HIS 연동) · AI Server(호출자 구분) · Jitsi(회의 관리 API) |
+| **RBAC** | 역할 기반 접근 제어. 사람이 아니라 역할에 권한을 붙입니다 | HIS(사용자 역할 14종) · sign(admin · operator · viewer) · PACS(임상 역할 공용 정의) |
+| **Break-the-Glass** | 응급 시 평소 권한 밖의 기록을 열되, 사유를 남기고 나중에 검토받는 긴급 접근 | HIS(긴급 접근 검토) · PACS(임상 조회에 한정) |
+| **TOTP** | 시간에 따라 바뀌는 일회용 비밀번호. 2단계 인증에 씁니다 | sign(콘솔) |
+
+## 5. AI
+
+| 용어 | 한 줄 뜻 | 이 생태계에서 쓰이는 곳 |
+|---|---|---|
+| **LLM** | 대규모 언어 모델. 문장을 이해하고 만들어 내는 AI 모델 | AI Server(모델 서빙) |
+| **RAG** | 검색 증강 생성. 문서를 먼저 검색하고, 찾은 근거를 바탕으로 답변을 만듭니다 | AI Server · cerno(근거가 없으면 생성하지 않음) · ERP(청구 사전심사) · edu(학습 튜터) |
+| **임베딩** | 문장을 숫자 벡터로 바꾼 것. 뜻이 가까운 문서를 찾는 데 씁니다 | AI Server · cerno(BGE-M3 · THIRD_PARTY §3) |
+| **STT** | Speech-to-Text. 음성을 글자로 바꾸는 음성 인식 | AI Server → HIS(진료 음성 기록) · edu(녹취 전사) · Jitsi(실시간 자막 · 선택 구성) |
+| **화자 분리** | 녹음에서 누가 언제 말했는지 나누는 것 | AI Server(앰비언트 진료 기록 · 회의 분석) · edu |
+| **Ollama** | 공개 가중치 모델을 내려받아 로컬에서 서빙하는 모델 서버 | AI Server |
+| **local_only** | AI Server 코드의 정책 이름. 의료 · 개인건강정보 · 규제 관련 역할을 외부 AI 제공자로 보내지 못하게 막습니다 | AI Server |
+| **MCP** | Model Context Protocol. AI 모델이 외부 도구 · 데이터에 접근하는 개방형 규약 | twin(읽기 기능을 MCP 도구로 노출 · 기본 꺼짐) |
+| **SaMD** | Software as a Medical Device. 하드웨어 없이 소프트웨어 자체가 의료 목적으로 쓰이는 의료기기 | HIS 결정 등록부(`legal.ai.deviceClassification` — AI 자동실행의 해당성 확인은 기관이 함) |
+| **PCCP** | Predetermined Change Control Plan. AI 모델을 바꿀 때 따를 절차를 미리 정해 두는 계획 | twin(모델 변경 절차) |
+| **triage** (분류) | 증상에 따라 긴급도와 진료과를 가리는 일 | AI Server(분류 보조) · HIS(응급실 분류 · AI 분류 보조) |
+
+## 6. 임상 · 경영 용어
+
+| 용어 | 한 줄 뜻 | 이 생태계에서 쓰이는 곳 |
+|---|---|---|
+| **SOAP** | 주관적 소견 · 객관적 소견 · 평가 · 계획 순으로 쓰는 진료 기록 형식 | AI Server(요약 초안) · twin(의료진 작성 SOAP write-back) |
+| **SBAR** | 상황 · 배경 · 평가 · 권고 순으로 전하는 의료진 소통 형식 | twin(규칙 기반 생성 · LLM 을 쓰지 않음) |
+| **NEWS2** | 활력징후로 환자 악화 위험을 점수로 매기는 조기 경보 점수(영국 왕립내과의사협회) | twin(위험 점수 카드 · LLM 을 거치지 않음) |
+| **CPOE** | 처방 · 오더를 의료진이 직접 전산으로 입력하는 것 | HIS |
+| **CDSS** | 임상 의사결정 지원 시스템. 처방 규칙 · 경고로 판단을 돕습니다 | HIS(처방 규칙) |
+| **MAR · BCMA** | 투약 기록(MAR)과 바코드로 환자 · 약을 대조하는 투약 확인(BCMA) | HIS(간호) |
+| **MRN** | 병원 등록번호(환자번호) | HIS(정본) · PACS(MRN ↔ DICOM PatientID 매핑) · ERP |
+| **HIE** | 진료정보교류. 의료기관 사이에 진료 기록을 주고받는 체계 | HIS(교류 문서 · LOINC 문서 코드) |
+| **OMOP CDM** | OHDSI 공통 데이터 모델. 기관마다 다른 임상 데이터를 같은 구조 · 어휘로 바꿔 연구에 씁니다 | HIS(임상 연구 화면) |
+| **K-IFRS** | 한국채택국제회계기준 | ERP(회계기준 대응 — `대응 설계` 단계 · 외부 인증 아님) |
+| **SCORM · xAPI** | 이러닝 콘텐츠 포장 규격(SCORM)과 학습 경험 기록 규격(xAPI · 받는 쪽을 LRS 라 부름) | edu |
+
+## 7. 이 자료의 표기 · 이 생태계의 장치
+
+| 용어 | 한 줄 뜻 | 쓰이는 곳 |
+|---|---|---|
+| **신원 허브** | 직원 로그인 토큰을 한 곳(HIS)에서 발급하고 형제 시스템이 검증하는 구조 | HIS · [신원 허브 도식](diagrams/identity-hub.md) |
+| **운영 모드** | 개발 / 리허설 / 리얼. 리얼 전환 뒤에는 시험용 통로가 없습니다 | HIS · 구축 단계 S7 · S8 |
+| **안전 게이트** | 위험한 동작을 끔 / 경고 / 차단 세 단계로 다루는 장치 | HIS · 구축 단계 S7 |
+| **결정 등록부** | 사람이 정해야 하는 것(허가권자 · 원내 위원회 · 직원 건별)을 한 곳에 모은 화면 | HIS · [checklist/decisions.md](checklist/decisions.md) |
+| **대외 발신 세 조건** | 외부로 나가는 발신은 구현 + 설정(기본 꺼짐) + 승인이 모두 있어야 합니다 | HIS |
+| **폴백 · 산출 불가** | AI 나 계산이 없을 때 화면이 정상인 척하지 않고 대체값(폴백)이나 "산출 불가"로 표시하는 것 | HIS · 생태계 전반 |
+| **상시 감시자** | 데이터 정합성 · 파이프 생존 · 연동 계약 어긋남 · 흐름 완결성을 따로 지켜보는 프로세스 | HIS |
+| **국가 축** | 나라별 규칙 · 코드 · 언어를 담는 설정 축(현재 한국 · UAE) | HIS |
+| **구현 상태** | `개발` · `통합` · `파일럿` · `운영` 과 단계 밖의 `중단` · `확인 필요` | [통합 릴리즈 매니페스트](RELEASES/draft/manifest.md) |
+| **연동 상태** | `검증됨`(확인일 필수) · `구현·미검증` · `설계만` · `미구현` · `중단`, 그리고 코드만으로 정할 수 없는 `판정 불가` | [`compatibility.md`](RELEASES/draft/compatibility.md) · [도식](diagrams/) |
+| **규제 표기** | `대응 설계` · `자체 점검 완료` · `외부 인증·승인`(증빙이 있을 때만). "인증 · 준수"는 셋째 단계에서만 씁니다 | 이 자료 전체([ROADMAP §6](ROADMAP.md#6-표기-원칙)) |
+| **통합 릴리즈 · 매니페스트** | 13개 시스템의 버전 조합을 한 장으로 고정한 것. 이 자료의 모든 설명은 그 조합을 기준으로 합니다 | [RELEASES/](RELEASES/) |
+| **기준 커밋** | 이 자료가 읽은 각 저장소의 커밋. 옮기기 전까지 표의 값이 바뀌지 않습니다 | [data/base-commits.json](data/base-commits.json) |

@@ -1,0 +1,21 @@
+{
+  "_note": "사람이 적는 입력 — 코드에서 뽑을 수 없는 판단만 둔다(구현 상태 · 소스 링크 · 모노레포의 시스템 범위 pathScope). 나머지는 tools/build-manifest.mjs 가 저장소에서 읽는다. 상태 어휘: 개발 · 통합 · 파일럿 · 운영 · 중단 · 확인 필요",
+  "releaseId": null,
+  "releaseIdNote": "번호 체계 미정 — 정해지면 폴더 이름과 이 값을 함께 바꾼다",
+  "statusBasis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전",
+  "systems": {
+    "his": { "status": "통합", "statusNote": "리허설 모드(가상 병원 데이터)", "sourceLink": null },
+    "homepage": { "status": "운영", "statusNote": "공개 사이트로 쓰이는 중", "sourceLink": null },
+    "patient-app": { "status": "개발", "statusNote": "스토어 미배포", "sourceLink": null },
+    "sign": { "status": "통합", "statusNote": null, "sourceLink": null },
+    "lis": { "status": "파일럿", "statusNote": null, "sourceLink": null },
+    "erp": { "status": "파일럿", "statusNote": "문서마다 운영·개발 표기가 엇갈려 재확인 대상", "sourceLink": null },
+    "pacs": { "status": "통합", "statusNote": null, "sourceLink": null },
+    "ai-server": { "status": "통합", "statusNote": "의료 기능 기준 — 비의료 기능은 이 생태계 범위 밖", "sourceLink": null },
+    "twin": { "status": "통합", "statusNote": null, "sourceLink": null },
+    "cerno": { "status": "파일럿", "statusNote": "섀도우 · 비임상", "sourceLink": null },
+    "edu": { "status": "확인 필요", "statusNote": "운영 여부 재확인 전", "sourceLink": null },
+    "clinic": { "status": "통합", "statusNote": "모노레포 안의 병원 서비스만", "sourceLink": null, "pathScope": "packages/hospital-web" },
+    "jitsi": { "status": "중단", "statusNote": "현재 설치본이 동작하지 않음 — 구축 기관은 새로 구성", "sourceLink": null }
+  }
+}

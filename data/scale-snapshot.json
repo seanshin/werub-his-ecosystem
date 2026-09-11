@@ -1,0 +1,643 @@
+{
+  "measuredAt": "2026-09-11",
+  "tool": {
+    "name": "tools/measure-scale.mjs",
+    "rulesVersion": 1
+  },
+  "conventions": {
+    "fileSet": "기준 커밋에 들어 있는 파일(`git archive <기준 커밋>` 으로 임시 폴더에 푼 것 — 작업 트리의 미커밋 변경은 세지 않는다). 경로에 node_modules·.venv·venv·dist·dist.bak·.next·build·out·__pycache__·coverage·.turbo·.expo·.ohif-src 조각이 있으면 제외(의존성·빌드 산출물·외부 원본 소스).",
+    "nullValue": "셀 수 없으면 value=null 과 reason 을 적는다. 추정하거나 자르지 않는다.",
+    "handlers": "엔드포인트 수는 \"핸들러(데코레이터·함수) 수\"이지 \"고유 경로 수\"가 아니다. 테스트 수는 선언 수이지 실행·통과 수가 아니다.",
+    "version": "version.value 는 정본 위치 한 곳의 선언값. otherDeclarations 는 다른 선언·태그. 앞의 v 를 뗀 값이 하나라도 다르면 mismatch=true 이고 다른 곳을 mismatchWith 에 적는다. tagForValue 는 정본 값과 같은 이름의 태그(v1.2.3 또는 1.2.3)가 있으면 그 이름, 없으면 null.",
+    "state": "계측은 기준 커밋(state.head)의 내용만 읽는다. 기준 커밋은 data/base-commits.json 에 고정된 해시(state.pinned=true) 또는 계측 시점의 HEAD. 같은 기준 커밋이면 언제 재도 같은 값이다."
+  },
+  "systems": {
+    "his": {
+      "name": "HIS",
+      "repoKey": "his",
+      "state": {
+        "head": "e9d303984f80eda8271f29064a326bedad766815",
+        "headDate": "2026-09-11",
+        "lastTag": "v3.46.0",
+        "pinned": true
+      },
+      "version": {
+        "value": "v4.18.0",
+        "source": "packages/shared/src/constants.ts HIS_VERSION",
+        "otherDeclarations": [
+          {
+            "value": "1.0.0",
+            "where": "package.json version"
+          },
+          {
+            "value": "1.5.0",
+            "where": "apps/api/package.json version"
+          },
+          {
+            "value": "1.5.0",
+            "where": "apps/web/package.json version"
+          },
+          {
+            "value": "v3.46.0",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "package.json version",
+          "apps/api/package.json version",
+          "apps/web/package.json version",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": null
+      },
+      "counts": {
+        "dataModels": {
+          "value": 562,
+          "rule": "HIS 저장소 정본 계측기 `scripts/system-scale.mjs --json` 의 `prismaModels` 값을 그대로 옮긴다. 그 계측기의 규칙: 포함: apps/api/prisma/schema.prisma 의 행 시작 `model <Name> {` 선언. 제외: `enum`·`type`·`view`·주석 처리된 model·다른 .prisma 파일(현재 없음)."
+        },
+        "apiEndpoints": {
+          "value": 3251,
+          "rule": "HIS 저장소 정본 계측기 `scripts/system-scale.mjs --json` 의 `apiEndpoints` 값을 그대로 옮긴다. 그 계측기의 규칙: 포함: apps/api/src/**/*.controller.ts 안의 **행 시작 HTTP 메서드 데코레이터 수** (@Get/@Post/@Put/@Patch/@Delete/@All/@Head/@Options). = \"핸들러 수\"이지 \"고유 라우트 경로 수\"가 아니다. 제외: @Sse(별도 집계)·주석/문자열 안의 데코레이터(행 시작 앵커로 배제)·test/ 아래."
+        },
+        "apiEndpointsSse": {
+          "value": 15,
+          "rule": "HIS 저장소 정본 계측기 `scripts/system-scale.mjs --json` 의 `apiEndpointsSse` 값을 그대로 옮긴다. 그 계측기의 규칙: 포함: 같은 파일들의 @Sse() 데코레이터 수. API Endpoints 본 수치에는 **더해지지 않는다**."
+        },
+        "pages": {
+          "value": 450,
+          "rule": "HIS 저장소 정본 계측기 `scripts/system-scale.mjs --json` 의 `webPagesTotal` 값을 그대로 옮긴다. 그 계측기의 규칙: 포함: apps/web/src/app/**/page.tsx 전부(라우트 그룹 `(…)` 포함). 제외: layout/template/loading/error/not-found·route.ts(API 라우트)·page.test.tsx·**별도 앱 apps/homepage**(다른 워크스페이스라 아래 homepageAppPages 로 따로 센다)."
+        }
+      }
+    },
+    "homepage": {
+      "name": "공개 홈페이지",
+      "repoKey": "his",
+      "state": {
+        "head": "e9d303984f80eda8271f29064a326bedad766815",
+        "headDate": "2026-09-11",
+        "lastTag": "v3.46.0",
+        "pinned": true
+      },
+      "version": {
+        "value": "v4.18.0",
+        "source": "packages/shared/src/constants.ts HIS_VERSION",
+        "otherDeclarations": [
+          {
+            "value": "1.0.0",
+            "where": "apps/homepage/package.json version"
+          },
+          {
+            "value": "v3.46.0",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "apps/homepage/package.json version",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": null,
+        "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다"
+      },
+      "counts": {
+        "pages": {
+          "value": 50,
+          "rule": "HIS 저장소 정본 계측기 `scripts/system-scale.mjs --json` 의 `homepageAppPages` 값을 그대로 옮긴다. 그 계측기의 규칙: 포함: apps/homepage/**/page.tsx (별도 Next 앱). Frontend Pages(Total) 에 **포함되지 않는다**."
+        }
+      }
+    },
+    "patient-app": {
+      "name": "환자 앱",
+      "repoKey": "his",
+      "state": {
+        "head": "e9d303984f80eda8271f29064a326bedad766815",
+        "headDate": "2026-09-11",
+        "lastTag": "v3.46.0",
+        "pinned": true
+      },
+      "version": {
+        "value": "v4.18.0",
+        "source": "packages/shared/src/constants.ts HIS_VERSION",
+        "otherDeclarations": [
+          {
+            "value": "1.0.0",
+            "where": "apps/mobile/package.json version"
+          },
+          {
+            "value": "1.0.0",
+            "where": "apps/mobile/app.json expo.version"
+          },
+          {
+            "value": "v3.46.0",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "apps/mobile/package.json version",
+          "apps/mobile/app.json expo.version",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": null,
+        "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다"
+      },
+      "counts": {
+        "screens": {
+          "value": 32,
+          "rule": "HIS 저장소 정본 계측기 `scripts/system-scale.mjs --json` 의 `mobileScreens` 값을 그대로 옮긴다. 그 계측기의 규칙: 포함: apps/mobile/app/**/*.tsx (expo-router 라우트 파일) 중 `_layout.tsx` 를 **제외**한 것. 제외 근거: web 쪽 Frontend Pages 가 page.tsx 만 세고 layout.tsx 는 세지 않는 것과 같은 규칙. 제외: apps/mobile/src/**(컴포넌트)·App.tsx."
+        }
+      }
+    },
+    "sign": {
+      "name": "sign",
+      "repoKey": "sign",
+      "state": {
+        "head": "93f56d839c3f5a0bc7ca8ed6b1b0404f006423d5",
+        "headDate": "2026-09-10",
+        "lastTag": "v1.30.1",
+        "pinned": true
+      },
+      "version": {
+        "value": "1.30.1",
+        "source": "package.json version",
+        "otherDeclarations": [
+          {
+            "value": "1.25.0",
+            "where": "web/package.json version"
+          },
+          {
+            "value": "1.30.1",
+            "where": "docs/openapi.json info.version"
+          },
+          {
+            "value": "1.30.1",
+            "where": "CHANGELOG.md 첫 버전 제목"
+          },
+          {
+            "value": "v1.30.1",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "web/package.json version"
+        ],
+        "tagForValue": "v1.30.1"
+      },
+      "counts": {
+        "dataModels": {
+          "value": 14,
+          "rule": "포함: prisma/schema.prisma 의 행 시작 `model <Name> {` 선언. 제외: enum·type·view·주석 처리된 model·다른 .prisma 파일."
+        },
+        "apiOperations": {
+          "value": 162,
+          "rule": "포함: docs/openapi.json 의 paths 아래 HTTP 메서드(get·post·put·patch·delete·head·options·trace) 항목 수. 제외: parameters 등 메서드가 아닌 키.",
+          "detail": "경로 144"
+        },
+        "apiEndpoints": {
+          "value": 162,
+          "rule": "포함: src/**/*.ts 안의 행 시작 HTTP 메서드 데코레이터(@Get·@Post·@Put·@Patch·@Delete·@All·@Head·@Options) 수 = 핸들러 수. 제외: *.spec.ts·*.test.ts·@Sse·주석/문자열 안의 데코레이터(행 시작 앵커로 배제)."
+        },
+        "pages": {
+          "value": 38,
+          "rule": "포함: web/src/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        }
+      }
+    },
+    "lis": {
+      "name": "LIS",
+      "repoKey": "lis",
+      "state": {
+        "head": "ffb34e9d1dbc6aecaf7c99c4e9ed0063e54c27b4",
+        "headDate": "2026-09-09",
+        "lastTag": "v1.56.18",
+        "pinned": true
+      },
+      "version": {
+        "value": "1.56.18",
+        "source": "package.json version",
+        "otherDeclarations": [
+          {
+            "value": "1.56.18",
+            "where": "apps/api/package.json version"
+          },
+          {
+            "value": "1.56.18",
+            "where": "apps/web/package.json version"
+          },
+          {
+            "value": "1.56.13",
+            "where": "apps/web/src/lib/version.ts APP_VERSION"
+          },
+          {
+            "value": "1.56.18",
+            "where": "CHANGELOG.md 첫 버전 제목"
+          },
+          {
+            "value": "v1.56.18",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "apps/web/src/lib/version.ts APP_VERSION"
+        ],
+        "tagForValue": "v1.56.18"
+      },
+      "counts": {
+        "dataModels": {
+          "value": 84,
+          "rule": "포함: apps/api/prisma/schema.prisma 의 행 시작 `model <Name> {` 선언. 제외: enum·type·view·주석 처리된 model·다른 .prisma 파일."
+        },
+        "apiEndpoints": {
+          "value": 356,
+          "rule": "포함: apps/api/src/**/*.ts 안의 행 시작 HTTP 메서드 데코레이터(@Get·@Post·@Put·@Patch·@Delete·@All·@Head·@Options) 수 = 핸들러 수. 제외: *.spec.ts·*.test.ts·@Sse·주석/문자열 안의 데코레이터(행 시작 앵커로 배제)."
+        },
+        "pages": {
+          "value": 41,
+          "rule": "포함: apps/web/src/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        },
+        "e2eCases": {
+          "value": 470,
+          "rule": "포함: apps/api/test/**/*.e2e-spec.ts 의 행 시작 `it('…'`·`test('…'` 선언(첫 인자가 제목 문자열) 수. 제외: describe·훅(beforeEach 등)·.skip/.only/.each 등 수식 호출·실행 중 조건부 skip.",
+          "detail": "파일 1"
+        }
+      }
+    },
+    "erp": {
+      "name": "ERP",
+      "repoKey": "erp",
+      "state": {
+        "head": "0e1f54c5b90213806615a865a38494e22abcab92",
+        "headDate": "2026-09-10",
+        "lastTag": "v1.287.3",
+        "pinned": true
+      },
+      "version": {
+        "value": "1.287.3",
+        "source": "services/core/pyproject.toml [project] version",
+        "otherDeclarations": [
+          {
+            "value": "0.1.0",
+            "where": "apps/web/package.json version"
+          },
+          {
+            "value": "v1.287.3",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "apps/web/package.json version"
+        ],
+        "tagForValue": "v1.287.3"
+      },
+      "counts": {
+        "dataModels": {
+          "value": 219,
+          "rule": "포함: services/core/src/**/*.py 의 행 시작 `__tablename__ =` 선언 수(SQLAlchemy 모델 1개 = 1). 제외: `Table(…)` 로만 정의한 연결 테이블·alembic 마이그레이션·tests."
+        },
+        "apiEndpoints": {
+          "value": 717,
+          "rule": "포함: services/core/src/** 의 .py 파일에서 `X = APIRouter(…)`·`X = FastAPI(…)` 로 만든 변수 X 의 행 시작 HTTP 데코레이터(@X.get·post·put·patch·delete·head·options·trace·api_route) 수 = 핸들러 수. 변수 이름은 파일을 가리지 않고 범위 전체에서 모은다(다른 파일에서 가져온 라우터 포함). 제외: @X.websocket.",
+          "detail": "라우터 변수 이름 2종"
+        },
+        "pages": {
+          "value": 113,
+          "rule": "포함: apps/web/src/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트). (로그인·첫 화면 등 `(app)` 그룹 밖 화면 포함 — detail 에 나눠 적는다.)",
+          "detail": "(app) 그룹 110 · 그 밖 3"
+        },
+        "testCases": {
+          "value": 1736,
+          "rule": "포함: services/core/tests/**/test_*.py 의 행 시작 `def test_…(`·`async def test_…(` 선언 수. 제외: 다른 위치의 파일·conftest.py·parametrize 로 늘어나는 실행 건수(선언 1개 = 1).",
+          "detail": "파일 222"
+        }
+      }
+    },
+    "pacs": {
+      "name": "PACS",
+      "repoKey": "pacs",
+      "state": {
+        "head": "532a8ed13e872941ab478caed63a02824258f181",
+        "headDate": "2026-09-10",
+        "lastTag": "v11.2",
+        "pinned": true
+      },
+      "version": {
+        "value": "v13.48",
+        "source": "docs/releases/v*.md 파일명(가장 높은 번호)",
+        "otherDeclarations": [
+          {
+            "value": "2.0.0",
+            "where": "admin/package.json version"
+          },
+          {
+            "value": "2.0.0",
+            "where": "backend/app/main.py FastAPI(version=…)"
+          },
+          {
+            "value": "v11.2",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "admin/package.json version",
+          "backend/app/main.py FastAPI(version=…)",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": null,
+        "note": "코드에 버전 선언이 없어 docs/releases 의 릴리즈 기록 파일명 중 가장 높은 번호를 읽는다(단일 버전 파일명 58개 · 그 밖의 .md 2개는 비교에서 뺀다)"
+      },
+      "counts": {
+        "apiEndpoints": {
+          "value": 475,
+          "rule": "포함: backend/app/** 의 .py 파일에서 `X = APIRouter(…)`·`X = FastAPI(…)` 로 만든 변수 X 의 행 시작 HTTP 데코레이터(@X.get·post·put·patch·delete·head·options·trace·api_route) 수 = 핸들러 수. 변수 이름은 파일을 가리지 않고 범위 전체에서 모은다(다른 파일에서 가져온 라우터 포함). 제외: @X.websocket(아래 apiWebsockets 로 따로 센다).",
+          "detail": "라우터 변수 이름 5종"
+        },
+        "apiWebsockets": {
+          "value": 3,
+          "rule": "포함: backend/app/** 의 .py 파일에서 `X = APIRouter(…)`·`X = FastAPI(…)` 로 만든 변수 X 의 행 시작 HTTP 데코레이터(@X.get·post·put·patch·delete·head·options·trace·api_route) 수 = 핸들러 수. 변수 이름은 파일을 가리지 않고 범위 전체에서 모은다(다른 파일에서 가져온 라우터 포함). 중 @X.websocket 데코레이터 수만. apiEndpoints 에 더해지지 않는다."
+        },
+        "pages": {
+          "value": 47,
+          "rule": "포함: admin/src/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        },
+        "testCases": {
+          "value": 166,
+          "rule": "포함: backend/tests/**/test_*.py 의 행 시작 `def test_…(`·`async def test_…(` 선언 수. 제외: 다른 위치의 파일·conftest.py·parametrize 로 늘어나는 실행 건수(선언 1개 = 1).",
+          "detail": "파일 14"
+        },
+        "e2eCases": {
+          "value": 132,
+          "rule": "포함: e2e/tests/**/*.spec.{ts,js} 의 행 시작 `it('…'`·`test('…'` 선언(첫 인자가 제목 문자열) 수. 제외: describe·훅(beforeEach 등)·.skip/.only/.each 등 수식 호출·실행 중 조건부 skip.",
+          "detail": "파일 23"
+        }
+      }
+    },
+    "ai-server": {
+      "name": "AI Server",
+      "repoKey": "ai-server",
+      "state": {
+        "head": "55acaee900688326683bc0c2f17827ae9d099d0e",
+        "headDate": "2026-09-09",
+        "lastTag": "v2.8.0",
+        "pinned": true
+      },
+      "version": {
+        "value": "2.125.41",
+        "source": "app.py VERSION",
+        "otherDeclarations": [
+          {
+            "value": "v2.8.0",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": null
+      },
+      "counts": {
+        "apiEndpoints": {
+          "value": 654,
+          "rule": "포함: app.py 의 Flask 앱 변수(`X = Flask(…)`)와, app.py 가 `register_blueprint(Y)` 로 등록하는 Blueprint Y(정의 파일은 app.py 의 `from … import Y` 로 찾는다)의 행 시작 라우트 데코레이터(@X/@Y.route·get·post·put·patch·delete) 수 = 핸들러 수(methods 가 여럿이어도 1). 조건부 등록(설정에 따라 꺼질 수 있는 것)도 포함. 제외: 등록되지 않은 Blueprint·별도 프로세스 Flask 앱(app.py 밖의 `Flask(`)·tests/.",
+          "detail": "등록 Blueprint 37개(정의 파일 37개) + app.py · 제외: 미등록 Blueprint 0개(라우트 0) · 별도 프로세스 앱 3개(라우트 12)"
+        },
+        "testCases": {
+          "value": 1930,
+          "rule": "포함: tests/**/test_*.py 의 행 시작 `def test_…(`·`async def test_…(` 선언 수. 제외: 다른 위치의 파일·conftest.py·parametrize 로 늘어나는 실행 건수(선언 1개 = 1).",
+          "detail": "파일 181"
+        }
+      }
+    },
+    "twin": {
+      "name": "twin",
+      "repoKey": "twin",
+      "state": {
+        "head": "526b4f9a4d3fdad5c7ada4b76855367d58c00b0b",
+        "headDate": "2026-09-03",
+        "lastTag": "v1.20.72",
+        "pinned": true
+      },
+      "version": {
+        "value": "1.20.88",
+        "source": "services/twin/twin/__init__.py __version__",
+        "otherDeclarations": [
+          {
+            "value": "1.6.1",
+            "where": "services/twin-web/package.json version"
+          },
+          {
+            "value": "v1.20.72",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "services/twin-web/package.json version",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": null
+      },
+      "counts": {
+        "apiEndpoints": {
+          "value": 107,
+          "rule": "포함: services/twin/twin/** 의 .py 파일에서 `X = APIRouter(…)`·`X = FastAPI(…)` 로 만든 변수 X 의 행 시작 HTTP 데코레이터(@X.get·post·put·patch·delete·head·options·trace·api_route) 수 = 핸들러 수. 변수 이름은 파일을 가리지 않고 범위 전체에서 모은다(다른 파일에서 가져온 라우터 포함). 제외: @X.websocket.",
+          "detail": "라우터 변수 이름 3종"
+        },
+        "pages": {
+          "value": 15,
+          "rule": "포함: services/twin-web/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        },
+        "testCases": {
+          "value": 881,
+          "rule": "포함: services/twin/tests/**/test_*.py 의 행 시작 `def test_…(`·`async def test_…(` 선언 수. 제외: 다른 위치의 파일·conftest.py·parametrize 로 늘어나는 실행 건수(선언 1개 = 1).",
+          "detail": "파일 104"
+        }
+      }
+    },
+    "cerno": {
+      "name": "cerno",
+      "repoKey": "cerno",
+      "state": {
+        "head": "4f5c22b331fc2ce67969ac3a0e266d9e62af2597",
+        "headDate": "2026-08-04",
+        "lastTag": "v0.1.8",
+        "pinned": true
+      },
+      "version": {
+        "value": "0.1.0",
+        "source": "services/cerno-api/cerno/api/main.py FastAPI(version=…)",
+        "otherDeclarations": [
+          {
+            "value": "0.1.0",
+            "where": "services/cerno-web/package.json version"
+          },
+          {
+            "value": "0.1.8",
+            "where": "CHANGELOG.md 첫 버전 제목"
+          },
+          {
+            "value": "v0.1.8",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "CHANGELOG.md 첫 버전 제목",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": "v0.1.0"
+      },
+      "counts": {
+        "apiEndpoints": {
+          "value": 11,
+          "rule": "포함: services/cerno-api/** 의 .py 파일에서 `X = APIRouter(…)`·`X = FastAPI(…)` 로 만든 변수 X 의 행 시작 HTTP 데코레이터(@X.get·post·put·patch·delete·head·options·trace·api_route) 수 = 핸들러 수. 변수 이름은 파일을 가리지 않고 범위 전체에서 모은다(다른 파일에서 가져온 라우터 포함). 제외: @X.websocket.",
+          "detail": "라우터 변수 이름 2종"
+        },
+        "pages": {
+          "value": 3,
+          "rule": "포함: services/cerno-web/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        },
+        "testCases": {
+          "value": 255,
+          "rule": "포함: tests/**/test_*.py 의 행 시작 `def test_…(`·`async def test_…(` 선언 수. 제외: 다른 위치의 파일·conftest.py·parametrize 로 늘어나는 실행 건수(선언 1개 = 1).",
+          "detail": "파일 21"
+        }
+      }
+    },
+    "edu": {
+      "name": "edu",
+      "repoKey": "edu",
+      "state": {
+        "head": "f8127e6ee278fd5d8e808ee75675d62e734e5a30",
+        "headDate": "2026-07-30",
+        "lastTag": "v2.7.0",
+        "pinned": true
+      },
+      "version": {
+        "value": "2.7.0",
+        "source": "package.json version",
+        "otherDeclarations": [
+          {
+            "value": "0.1.0",
+            "where": "apps/api/package.json version"
+          },
+          {
+            "value": "0.1.0",
+            "where": "apps/web/package.json version"
+          },
+          {
+            "value": "2.7.0",
+            "where": "CHANGELOG.md 첫 버전 제목"
+          },
+          {
+            "value": "v2.7.0",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "apps/api/package.json version",
+          "apps/web/package.json version"
+        ],
+        "tagForValue": "v2.7.0"
+      },
+      "counts": {
+        "dataModels": {
+          "value": 40,
+          "rule": "포함: apps/api/prisma/schema.prisma 의 행 시작 `model <Name> {` 선언. 제외: enum·type·view·주석 처리된 model·다른 .prisma 파일."
+        },
+        "apiEndpoints": {
+          "value": 167,
+          "rule": "포함: apps/api/src/**/*.ts 안의 행 시작 HTTP 메서드 데코레이터(@Get·@Post·@Put·@Patch·@Delete·@All·@Head·@Options) 수 = 핸들러 수. 제외: *.spec.ts·*.test.ts·@Sse·주석/문자열 안의 데코레이터(행 시작 앵커로 배제)."
+        },
+        "pages": {
+          "value": 41,
+          "rule": "포함: apps/web/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        }
+      }
+    },
+    "clinic": {
+      "name": "Clinic",
+      "repoKey": "clinic",
+      "state": {
+        "head": "2b20a89b7c3ab8128730f8aca5fea84cdb314658",
+        "headDate": "2026-09-09",
+        "lastTag": "v8.42.1",
+        "pinned": true
+      },
+      "version": {
+        "value": "1.4.0",
+        "source": "packages/hospital-web/package.json version",
+        "otherDeclarations": [
+          {
+            "value": "8.52.4",
+            "where": "package.json version"
+          },
+          {
+            "value": "v8.42.1",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그 · 저장소 전체의 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "package.json version",
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그 · 저장소 전체의 태그)"
+        ],
+        "tagForValue": null,
+        "note": "모노레포 안의 병원 서비스 패키지만 대상 — 저장소 태그는 모노레포 전체의 것이라 tagForValue 를 찾지 않는다"
+      },
+      "counts": {
+        "pages": {
+          "value": 16,
+          "rule": "포함: packages/hospital-web/src/app/**/page.(tsx|jsx|ts|js) 전부(라우트 그룹 `(…)`·동적 경로 포함). 제외: layout·template·loading·error·not-found·route.ts(API 라우트)."
+        },
+        "hisApiRoutes": {
+          "value": 44,
+          "rule": "포함: src/app/api/clinic/his/**/route.ts 파일 수(Next.js 라우트 핸들러 파일 1개 = 경로 1개). 제외: 모노레포의 다른 서비스 API. 병원 서비스용이지만 HIS 연동이 아닌 /api/clinic/* 라우트는 detail 에 따로 적는다.",
+          "detail": "내보낸 HTTP 메서드 핸들러 60 · HIS 연동 밖 /api/clinic 라우트 파일 14(본 수치 미포함)"
+        }
+      }
+    },
+    "jitsi": {
+      "name": "Jitsi",
+      "repoKey": "jitsi",
+      "state": {
+        "head": "0984fbec7177796ed619f82348cba4e721695710",
+        "headDate": "2026-07-24",
+        "lastTag": "v2.10.0",
+        "pinned": true
+      },
+      "version": {
+        "value": "1.0.0",
+        "source": "api/package.json version",
+        "otherDeclarations": [
+          {
+            "value": "1.0.0",
+            "where": "api/src/index.ts version: '…'"
+          },
+          {
+            "value": "v2.10.0",
+            "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          }
+        ],
+        "mismatch": true,
+        "mismatchWith": [
+          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+        ],
+        "tagForValue": "v1.0.0"
+      },
+      "counts": {
+        "containers": {
+          "value": 9,
+          "rule": "포함: docker-compose.yml 의 최상위 services: 아래 서비스 수(서비스 1개 = 컨테이너 1개로 본다 · 복제 수 설정 없음 전제). 제외: 선택 오버레이 compose 파일(docker-compose.*.yml)에만 있는 서비스 — detail 에 따로 적는다.",
+          "detail": "오버레이 1개 파일에만 있는 서비스 2"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,791 @@
+{
+  "releaseId": null,
+  "releaseIdNote": "번호 체계 미정 — 정해지면 폴더 이름과 이 값을 함께 바꾼다",
+  "draft": true,
+  "measuredAt": "2026-09-11",
+  "generator": "tools/build-manifest.mjs",
+  "conventions": {
+    "mismatchGrades": "주요 = 태그·릴리즈 기록이 정본과 다름 · 표면 = 화면·API 에 보이는 버전 상수가 다름 · 참고 = 하위 패키지 선언만 다름 · 없음",
+    "license": "목표 = MIT(생태계 결정). declared 는 각 저장소 기준 커밋의 표기(종류·위치만 — 저작권자 문구는 옮기지 않음)",
+    "status": "구현 상태는 사람이 적는 입력(RELEASES/draft/inputs.json)이다. 연결별 상태는 compatibility.md(예정)"
+  },
+  "systems": {
+    "his": {
+      "name": "HIS",
+      "repoKey": "his",
+      "version": {
+        "value": "v4.18.0",
+        "source": "packages/shared/src/constants.ts HIS_VERSION",
+        "note": null,
+        "tag": null,
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.0.0",
+              "where": "package.json version",
+              "differs": true
+            },
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.5.0",
+              "where": "apps/api/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.5.0",
+              "where": "apps/web/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v3.46.0",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "e9d303984f80eda8271f29064a326bedad766815",
+        "date": "2026-09-11",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-10",
+        "method": "정본 위치(packages/shared/src/constants.ts)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "commitsAfter": 3
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "통합",
+        "note": "리허설 모드(가상 병원 데이터)",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.his"
+    },
+    "homepage": {
+      "name": "공개 홈페이지",
+      "repoKey": "his",
+      "version": {
+        "value": "v4.18.0",
+        "source": "packages/shared/src/constants.ts HIS_VERSION",
+        "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다",
+        "tag": null,
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.0.0",
+              "where": "apps/homepage/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v3.46.0",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "e9d303984f80eda8271f29064a326bedad766815",
+        "date": "2026-09-11",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-10",
+        "method": "정본 위치(packages/shared/src/constants.ts)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "commitsAfter": 3
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "운영",
+        "note": "공개 사이트로 쓰이는 중",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.homepage"
+    },
+    "patient-app": {
+      "name": "환자 앱",
+      "repoKey": "his",
+      "version": {
+        "value": "v4.18.0",
+        "source": "packages/shared/src/constants.ts HIS_VERSION",
+        "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다",
+        "tag": null,
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.0.0",
+              "where": "apps/mobile/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "화면·API 표기",
+              "grade": "표면",
+              "value": "1.0.0",
+              "where": "apps/mobile/app.json expo.version",
+              "differs": true
+            },
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v3.46.0",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "e9d303984f80eda8271f29064a326bedad766815",
+        "date": "2026-09-11",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-10",
+        "method": "정본 위치(packages/shared/src/constants.ts)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "commitsAfter": 3
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "개발",
+        "note": "스토어 미배포",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.patient-app"
+    },
+    "sign": {
+      "name": "sign",
+      "repoKey": "sign",
+      "version": {
+        "value": "1.30.1",
+        "source": "package.json version",
+        "note": null,
+        "tag": "v1.30.1",
+        "mismatches": {
+          "grade": "참고",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.25.0",
+              "where": "web/package.json version",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "93f56d839c3f5a0bc7ca8ed6b1b0404f006423d5",
+        "date": "2026-09-10",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-10",
+        "method": "정본 버전의 태그 v1.30.1 가 가리키는 커밋의 날짜",
+        "commitsAfter": 1
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "package.json license",
+            "kind": "UNLICENSED(비공개 선언)"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "통합",
+        "note": null,
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.sign"
+    },
+    "lis": {
+      "name": "LIS",
+      "repoKey": "lis",
+      "version": {
+        "value": "1.56.18",
+        "source": "package.json version",
+        "note": null,
+        "tag": "v1.56.18",
+        "mismatches": {
+          "grade": "표면",
+          "items": [
+            {
+              "kind": "화면·API 표기",
+              "grade": "표면",
+              "value": "1.56.13",
+              "where": "apps/web/src/lib/version.ts APP_VERSION",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "ffb34e9d1dbc6aecaf7c99c4e9ed0063e54c27b4",
+        "date": "2026-09-09",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-09",
+        "method": "정본 버전의 태그 v1.56.18 가 가리키는 커밋의 날짜",
+        "commitsAfter": 1
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "LICENSE",
+            "kind": "독점"
+          },
+          {
+            "where": "package.json license",
+            "kind": "UNLICENSED(비공개 선언)"
+          },
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "파일럿",
+        "note": null,
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.lis"
+    },
+    "erp": {
+      "name": "ERP",
+      "repoKey": "erp",
+      "version": {
+        "value": "1.287.3",
+        "source": "services/core/pyproject.toml [project] version",
+        "note": null,
+        "tag": "v1.287.3",
+        "mismatches": {
+          "grade": "참고",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "0.1.0",
+              "where": "apps/web/package.json version",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "0e1f54c5b90213806615a865a38494e22abcab92",
+        "date": "2026-09-10",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-09",
+        "method": "정본 버전의 태그 v1.287.3 가 가리키는 커밋의 날짜",
+        "commitsAfter": 3
+      },
+      "license": {
+        "declared": [
+          {
+            "where": null,
+            "kind": "표기 없음"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "파일럿",
+        "note": "문서마다 운영·개발 표기가 엇갈려 재확인 대상",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.erp"
+    },
+    "pacs": {
+      "name": "PACS",
+      "repoKey": "pacs",
+      "version": {
+        "value": "v13.48",
+        "source": "docs/releases/v*.md 파일명(가장 높은 번호)",
+        "note": "코드에 버전 선언이 없어 docs/releases 의 릴리즈 기록 파일명 중 가장 높은 번호를 읽는다(단일 버전 파일명 58개 · 그 밖의 .md 2개는 비교에서 뺀다)",
+        "tag": null,
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "2.0.0",
+              "where": "admin/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "화면·API 표기",
+              "grade": "표면",
+              "value": "2.0.0",
+              "where": "backend/app/main.py FastAPI(version=…)",
+              "differs": true
+            },
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v11.2",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "532a8ed13e872941ab478caed63a02824258f181",
+        "date": "2026-09-10",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-10",
+        "method": "릴리즈 기록 docs/releases/v13.48.md 이 처음 커밋된 날짜",
+        "commitsAfter": 2
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "통합",
+        "note": null,
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.pacs"
+    },
+    "ai-server": {
+      "name": "AI Server",
+      "repoKey": "ai-server",
+      "version": {
+        "value": "2.125.41",
+        "source": "app.py VERSION",
+        "note": null,
+        "tag": null,
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v2.8.0",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "55acaee900688326683bc0c2f17827ae9d099d0e",
+        "date": "2026-09-09",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-09",
+        "method": "정본 위치(app.py)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "commitsAfter": 4
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "LICENSE",
+            "kind": "독점"
+          },
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "통합",
+        "note": "의료 기능 기준 — 비의료 기능은 이 생태계 범위 밖",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.ai-server"
+    },
+    "twin": {
+      "name": "twin",
+      "repoKey": "twin",
+      "version": {
+        "value": "1.20.88",
+        "source": "services/twin/twin/__init__.py __version__",
+        "note": null,
+        "tag": null,
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "1.6.1",
+              "where": "services/twin-web/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v1.20.72",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "526b4f9a4d3fdad5c7ada4b76855367d58c00b0b",
+        "date": "2026-09-03",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-09-03",
+        "method": "정본 위치(services/twin/twin/__init__.py)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "commitsAfter": 1
+      },
+      "license": {
+        "declared": [
+          {
+            "where": null,
+            "kind": "표기 없음"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "통합",
+        "note": null,
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.twin"
+    },
+    "cerno": {
+      "name": "cerno",
+      "repoKey": "cerno",
+      "version": {
+        "value": "0.1.0",
+        "source": "services/cerno-api/cerno/api/main.py FastAPI(version=…)",
+        "note": null,
+        "tag": "v0.1.0",
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "릴리즈 기록",
+              "grade": "주요",
+              "value": "0.1.8",
+              "where": "CHANGELOG.md 첫 버전 제목",
+              "differs": true
+            },
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v0.1.8",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "4f5c22b331fc2ce67969ac3a0e266d9e62af2597",
+        "date": "2026-08-04",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-07-30",
+        "method": "정본 버전의 태그 v0.1.0 가 가리키는 커밋의 날짜",
+        "commitsAfter": 46
+      },
+      "license": {
+        "declared": [
+          {
+            "where": null,
+            "kind": "표기 없음"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "파일럿",
+        "note": "섀도우 · 비임상",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.cerno"
+    },
+    "edu": {
+      "name": "edu",
+      "repoKey": "edu",
+      "version": {
+        "value": "2.7.0",
+        "source": "package.json version",
+        "note": null,
+        "tag": "v2.7.0",
+        "mismatches": {
+          "grade": "참고",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "0.1.0",
+              "where": "apps/api/package.json version",
+              "differs": true
+            },
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "0.1.0",
+              "where": "apps/web/package.json version",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "f8127e6ee278fd5d8e808ee75675d62e734e5a30",
+        "date": "2026-07-30",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-07-30",
+        "method": "정본 버전의 태그 v2.7.0 가 가리키는 커밋의 날짜",
+        "commitsAfter": 0
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "LICENSE",
+            "kind": "독점"
+          },
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "확인 필요",
+        "note": "운영 여부 재확인 전",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.edu"
+    },
+    "clinic": {
+      "name": "Clinic",
+      "repoKey": "clinic",
+      "version": {
+        "value": "1.4.0",
+        "source": "packages/hospital-web/package.json version",
+        "note": "모노레포 안의 병원 서비스 패키지만 대상 — 저장소 태그는 모노레포 전체의 것이라 tagForValue 를 찾지 않는다",
+        "tag": null,
+        "mismatches": {
+          "grade": "참고",
+          "items": [
+            {
+              "kind": "하위 패키지 선언",
+              "grade": "참고",
+              "value": "8.52.4",
+              "where": "package.json version",
+              "differs": true
+            },
+            {
+              "kind": "모노레포 태그",
+              "grade": "비교 안 함",
+              "value": "v8.42.1",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그 · 저장소 전체의 태그)",
+              "differs": null
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "2b20a89b7c3ab8128730f8aca5fea84cdb314658",
+        "date": "2026-09-09",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-08-19",
+        "method": "정본 위치(packages/hospital-web/package.json)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "commitsAfter": 0,
+        "commitsAfterScope": "packages/hospital-web"
+      },
+      "license": {
+        "declared": [
+          {
+            "where": "README.md",
+            "kind": "독점"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "통합",
+        "note": "모노레포 안의 병원 서비스만",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.clinic"
+    },
+    "jitsi": {
+      "name": "Jitsi",
+      "repoKey": "jitsi",
+      "version": {
+        "value": "1.0.0",
+        "source": "api/package.json version",
+        "note": null,
+        "tag": "v1.0.0",
+        "mismatches": {
+          "grade": "주요",
+          "items": [
+            {
+              "kind": "태그",
+              "grade": "주요",
+              "value": "v2.10.0",
+              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
+              "differs": true
+            }
+          ]
+        }
+      },
+      "baseCommit": {
+        "hash": "0984fbec7177796ed619f82348cba4e721695710",
+        "date": "2026-07-24",
+        "pinned": true
+      },
+      "releaseDate": {
+        "value": "2026-05-29",
+        "method": "정본 버전의 태그 v1.0.0 가 가리키는 커밋의 날짜",
+        "commitsAfter": 121
+      },
+      "license": {
+        "declared": [
+          {
+            "where": null,
+            "kind": "표기 없음"
+          }
+        ],
+        "target": "MIT",
+        "status": "정리 전 — 저장소 표기가 목표(MIT)와 다름"
+      },
+      "status": {
+        "value": "중단",
+        "note": "현재 설치본이 동작하지 않음 — 구축 기관은 새로 구성",
+        "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
+      },
+      "source": {
+        "link": null,
+        "note": "소스 링크 정리 중"
+      },
+      "scaleSnapshotKey": "data/scale-snapshot.json#systems.jitsi"
+    }
+  }
+}

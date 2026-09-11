@@ -19,6 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { PATTERNS, loadDenylist } from './lib/public-rules.mjs'; // 규칙의 정본 — 생성기와 같이 쓴다
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -28,36 +29,6 @@ const SKIP_DIRS = new Set(['.git', 'node_modules', '.next', 'dist', 'build', '.c
 const SKIP_FILES = new Set(['tools/.denylist.local']);
 const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp', '.pdf', '.svgz']);
 const LEDGER = 'assets/CAPTURE-LEDGER.md';
-
-const ALLOWED_DOMAINS = [/(^|\.)example\.(org|com|net)$/i, /(^|\.)shields\.io$/i, /(^|\.)github\.com$/i];
-const ALLOWED_IPS = new Set(['127.0.0.1', '0.0.0.0']);
-
-/** 패턴 — 각 항목은 {id, label, re, keep(match)→boolean(실제로 문제인가)} */
-const PATTERNS = [
-  { id: 'private-key', label: '개인키', re: /-----BEGIN [A-Z ]*PRIVATE KEY-----/g },
-  { id: 'token', label: '토큰·액세스 키', re: /\b(?:gh[pousr]_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|sk-[A-Za-z0-9_-]{20,}|xox[abprs]-[A-Za-z0-9-]{10,})\b/g },
-  {
-    id: 'secret-assign', label: '비밀값 대입',
-    // 🔴 앞에 \b 를 두지 않는다 — `DB_PASSWORD` 는 밑줄이 단어 문자라 경계가 없고, 한글은 JS \b 가 보지 못한다(자기 검증이 잡음)
-    re: /(?:\w*?(?:password|passwd|pwd|secret|api[_-]?key|access[_-]?key|auth[_-]?token|token)|비밀번호)\s*[:=]\s*['"]?([^\s'"<>{}()`,;]{4,})/gi,
-    keep: (m) => !/^(?:\*+|x+|\.{3}|changeme|example|placeholder|your[-_a-z]*|<.*>)$/i.test(m[1]),
-  },
-  { id: 'cred-url', label: '자격 포함 URL', re: /\b[a-z][a-z0-9+.-]*:\/\/[^\s:\/@]+:[^\s@\/]+@[^\s\/]+/gi },
-  { id: 'ssh', label: 'SSH 접속 정보', re: /\bssh\s+(?:-[a-zA-Z]\s*\S+\s+)*[\w.-]+@[\w.-]+/g },
-  {
-    id: 'ipv4', label: 'IP 주소', re: /\b(?:\d{1,3}\.){3}\d{1,3}\b/g,
-    keep: (m) => !ALLOWED_IPS.has(m[0]) && m[0].split('.').every((o) => Number(o) <= 255),
-  },
-  { id: 'local-path', label: '로컬·서버 경로', re: /(?:\/Users\/[^\/\s]+\/|\/home\/[^\/\s]+\/|[A-Z]:\\Users\\[^\\\s]+\\)/g },
-  {
-    id: 'email', label: '이메일', re: /\b[A-Za-z0-9._%+-]+@([A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/g,
-    keep: (m) => !ALLOWED_DOMAINS.some((d) => d.test(m[1])),
-  },
-  {
-    id: 'host-port', label: '호스트:포트', re: /\b((?:[a-z0-9-]+\.)+[a-z]{2,}):(\d{2,5})\b/gi,
-    keep: (m) => !ALLOWED_DOMAINS.some((d) => d.test(m[1])),
-  },
-];
 
 const mask = (s) => (s.length <= 2 ? '**' : `${s.slice(0, 2)}${'*'.repeat(Math.min(8, s.length - 2))}`);
 
@@ -70,12 +41,6 @@ function walk(dir, base = dir, out = []) {
     }
   }
   return out;
-}
-
-function loadDenylist(root) {
-  const file = process.env.DENYLIST_FILE || path.join(root, 'tools/.denylist.local');
-  if (!fs.existsSync(file)) return null;
-  return fs.readFileSync(file, 'utf8').split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
 }
 
 /** 저장소(root)를 검사해 {findings, imagesUnverified, denylistState} 를 돌려준다 */
@@ -146,6 +111,7 @@ function selfTest() {
   };
   for (const [k, v] of Object.entries(canaries)) w(`canary/${k}.md`, `line one\n${v}\n`);
   w('canary/secret-assign-ko.md', '관리자 비밀번호: Zx9rQ2pLm\n'); // 한글 키 — \b 로는 못 잡는다
+  w('canary/local-path-server.md', '배포 루트는 /opt/someapp/current 입니다\n'); // 서버 경로 — 사용자 홈이 아니어도 잡는다
   // 대조군 B: 걸리면 안 되는 것 — 자리표시·예시 도메인·허용 IP
   w('clean/ok.md', [
     '설치 후 https://example.org 에 접속합니다.',
@@ -154,6 +120,7 @@ function selfTest() {
     'localhost 는 127.0.0.1 입니다.',
     '문의는 noreply@example.org',
     '[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)',
+    '관리 화면은 `/admin/opening` 이고 문서는 https://example.org/docs/setup 에 있습니다.', // 앱 화면·URL 경로는 서버 경로가 아니다
   ].join('\n'));
   // 이미지: 대장에 없는 것 1 · 확인된 것 1
   w('assets/shot-a.png', Buffer.from([0x89, 0x50, 0x4e, 0x47, 0]));
@@ -173,6 +140,7 @@ function selfTest() {
     results.push([`잡아야 함: ${k}`, hit]);
   }
   results.push(['잡아야 함: secret-assign(한글 키)', byFile('canary/secret-assign-ko.md').some((x) => x.kind === 'secret-assign')]);
+  results.push(['잡아야 함: local-path(서버 경로)', byFile('canary/local-path-server.md').some((x) => x.kind === 'local-path')]);
   results.push(['대조군: 자리표시·예시 도메인은 걸리지 않음', byFile('clean/ok.md').length === 0]);
   results.push(['이미지: 대장에 없는 것은 미확인', res.imagesUnverified.includes('assets/shot-a.png')]);
   results.push(['이미지: 확인 기록이 있는 것은 통과', !res.imagesUnverified.includes('assets/shot-b.png')]);
