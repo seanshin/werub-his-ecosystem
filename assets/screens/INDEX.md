@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **43** / 266 |
+| 지금 들어온 캡처 | **45** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -98,7 +98,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 |---|---|---|---|
 | 협진 의뢰 | `/consultations` | `his-care-consultations.png` | ⬜ |
 | 의뢰서 문서 | `/consultations/letters` | `his-care-consultations-letters.png` | ⬜ |
-| 상담 데스크 | `/consult` | `his-care-consult.png` | ⬜ |
+| 상담 데스크 | `/consult` | `his-care-consult.png` | ✅ |
 | 고객의 소리(VoC) | `/admin/voc` | `his-care-admin-voc.png` | ⬜ |
 
 ## 진료지원 — `support` (62)
@@ -191,7 +191,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| CRM 대시보드 | `/crm` | `his-patient-crm.png` | ⬜ |
+| CRM 대시보드 | `/crm` | `his-patient-crm.png` | ✅ |
 | 검진 대상자 | `/crm/checkup/targets` | `his-patient-crm-checkup-targets.png` | ⬜ |
 | 검진 실적 | `/crm/checkup/analytics` | `his-patient-crm-checkup-analytics.png` | ⬜ |
 | 해외환자 케이스 | `/crm/international/cases` | `his-patient-crm-international-cases.png` | ⬜ |

@@ -53,3 +53,5 @@
 | `assets/screens/his-support-workstation-consent.png` | 동의서 워크스테이션(`/workstation/consent`) — 서명 대기 13 · 기기로 보내기·링크·PDF · DNR 유형 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-support-workstation-discharge.png` | 퇴원 워크스테이션(`/workstation/discharge`) — 🔧 **업무 목록 미연결 · 「비어 있는 것은 할 일이 없다는 뜻이 아닙니다」** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-support-workstation-certificates.png` | 진단서 워크스테이션(`/workstation/certificates`) — **의료법 §17** 인용 · 사망진단서는 창구 접수 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-patient-crm.png` | CRM 대시보드(`/crm`) — 검진·해외환자·캠페인·상담 네 축 · 이탈 위험 731 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 **테스트 계정·비밀번호 가림** | 확인 (2026-09-12) |
+| `assets/screens/his-care-consult.png` | 상담 데스크(`/consult`) — 직원 한국어 → 환자 언어 자동 번역 · 언어 배지 · 경과 시간 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
