@@ -5,6 +5,8 @@
 
 근거: [README 「최소한의 사양과 구현으로」](../README.md#최소한의-사양과-구현으로-쓸-수-있게)(서버 한 대 실측 기록 · 소비자용 GPU 한 장) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)(설치 전 주소 교체 · 외부 연결 차단) · [THIRD_PARTY §1 · §5](../THIRD_PARTY.md#5-구조--링크하지-않고-별도-컨테이너로-씁니다)(제3자 서버를 별도 컨테이너로 씀) · 시스템 구성은 각 [시스템 요약](../RELEASES/draft/systems/) §6
 
+> 📷 **화면으로 보기** — 이 구성이 실제로 어떻게 보이는지는 [HIS 「시스템 관리」](../screens/his.md#시스템-관리--system)(앱 서버가 GPU 서버를 어떻게 보고 있는지)과 [twin 「운영」](../screens/twin.md)에 있습니다.
+
 ```mermaid
 flowchart TB
   subgraph USERS["사용자"]

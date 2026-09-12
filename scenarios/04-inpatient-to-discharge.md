@@ -191,12 +191,12 @@ sequenceDiagram
 | 04-02 | 수술 동의서 서명 요청과 서명 완료 상태 | HIS `동의서` · sign 서명 화면 | sign 연결을 모의가 아닌 모드로 | ✅ 들어옴(HIS 쪽)<br>[`his-support-workstation-consent.png`](../assets/screens/his-support-workstation-consent.png) |
 | 04-03 | 수술 준비 | HIS `수술 준비` | — | 🟡 수술방 관리가 들어옴 · 수술 준비 워크스테이션은 아직<br>[`his-care-surgery.png`](../assets/screens/his-care-surgery.png) |
 | 04-04 | 병리 슬라이드 현미경 모드 | PACS 웹 뷰어 · LIS 병리 | — | ⬜ |
-| 04-05 | 회복실 | HIS `회복실(PACU)` | — | ⬜ |
+| 04-05 | 회복실 | HIS `회복실(PACU)` | — | 🟡 수술방 관리가 들어옴(회복실 PACU 탭이 보임) · 회복실 화면 자체는 아직<br>[`his-care-surgery.png`](../assets/screens/his-care-surgery.png) |
 | 04-06 | 바코드 투약 확인과 투약 기록(MAR) | HIS `간호(입원)` | — | 🟡 간호 워크스테이션이 들어옴 · 투약 관리 탭은 아직<br>[`his-care-nurse-station.png`](../assets/screens/his-care-nurse-station.png) |
-| 04-07 | 차트의 twin 위험 카드 | HIS 차트 · twin | twin 을 연결한 설치본 | ⬜ |
-| 04-08 | twin 의 AI 설명 초안(`machine-generated` 표시)과 "차트 저장" | twin 환자 화면 | AI 기능을 켠 설치본 | ⬜ |
+| 04-07 | 차트의 twin 위험 카드 | HIS 차트 · twin | twin 을 연결한 설치본 | ✅ 들어옴 — NEWS2 · 위험 점수 · eGFR 과 「트윈 파생」 배지<br>[`twin-patient-chart.png`](../assets/screens/twin-patient-chart.png) |
+| 04-08 | twin 의 AI 설명 초안(`machine-generated` 표시)과 "차트 저장" | twin 환자 화면 | AI 기능을 켠 설치본 | 🟡 추천 액션과 「규칙기반 파생·임상 판단 보조」는 보임 · "차트 저장"을 누른 장면은 아직<br>[`twin-patient-chart.png`](../assets/screens/twin-patient-chart.png) |
 | 04-09 | 퇴원 요약 초안 승인(AI 표기와 면책 문구가 보이게) | HIS `퇴원` | AI 기능을 켠 설치본 | ⬜ |
-| 04-10 | 중간정산 · 퇴원 수납 | HIS `수납` · `원무·수납 보드` | — | ⬜ |
+| 04-10 | 중간정산 · 퇴원 수납 | HIS `수납` · `원무·수납 보드` | — | ✅ 들어옴(수납 대기열·미수납) · 퇴원 수납 장면은 아직<br>[`his-ops-billing.png`](../assets/screens/his-ops-billing.png) |
 | 04-11 | 진단서 발급과 전자서명 | HIS `진단서 발급` | 발급 문서에 데모 병원 이름만 보이는지 확인 | ✅ 들어옴<br>[`his-support-workstation-certificates.png`](../assets/screens/his-support-workstation-certificates.png) |
 | 04-12 | 입원 여정 타임라인 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 

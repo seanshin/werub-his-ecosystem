@@ -163,12 +163,12 @@ sequenceDiagram
 | 02-01 | 신원 미확인 환자 등록 | HIS `응급 미확인 등록` | — | ⬜ |
 | 02-02 | 분류 화면과 AI 분류 보조 제안(AI 표기와 면책 문구가 보이게) | HIS `응급실` | AI 기능을 켠 설치본 | ✅ 들어옴 · AI 분류 보조 제안이 뜬 상태는 아직<br>[`his-care-emergency.png`](../assets/screens/his-care-emergency.png) |
 | 02-03 | 응급실 보드 | HIS `응급실 보드` | — | ✅ 들어옴<br>[`his-care-emergency-board.png`](../assets/screens/his-care-emergency-board.png) |
-| 02-04 | 위험치 통보 · 복창 기록 | LIS 위험치 | — | ⬜ |
-| 02-05 | 영상 자동 선별 알림과 응급 보드 | PACS 응급 보드 | AI 기능을 켠 설치본 | ⬜ |
+| 02-04 | 위험치 통보 · 복창 기록 | LIS 위험치 | — | ✅ 들어옴 — 판정 배지(HH·LL)와 통보 대기(발송 실패 표시 포함)<br>[`lis-verify-worklist.png`](../assets/screens/lis-verify-worklist.png) · [`lis-dashboard.png`](../assets/screens/lis-dashboard.png) |
+| 02-05 | 영상 자동 선별 알림과 응급 보드 | PACS 응급 보드 | AI 기능을 켠 설치본 | 🟡 PACS 대시보드가 들어옴(판독 대기·AI 분석) · 응급 보드와 자동 선별 알림은 아직<br>[`pacs-admin-dashboard.png`](../assets/screens/pacs-admin-dashboard.png) |
 | 02-06 | Code Blue · 신속대응팀 호출 | HIS `Code Blue / RRT` | — | ✅ 들어옴<br>[`his-care-code-blue.png`](../assets/screens/his-care-code-blue.png) |
 | 02-07 | 응급 열람 사유 입력과 사후 검토 목록 | HIS `응급 접근 검토` | — | ✅ 들어옴<br>[`his-system-admin-break-glass.png`](../assets/screens/his-system-admin-break-glass.png) |
 | 02-08 | 출고 전 수혈 동의 확인 | HIS `혈액은행` · LIS 수혈 | — | ⬜ |
-| 02-09 | 전원 의뢰 | HIS `전원 의뢰` | — | ⬜ |
+| 02-09 | 전원 의뢰 | HIS `전원 의뢰` | — | ✅ 들어옴(전원 관리 — 발신·수신·긴급도) · 의뢰 작성 화면은 아직<br>[`his-ops-transfer.png`](../assets/screens/his-ops-transfer.png) |
 
 ## 근거
 
