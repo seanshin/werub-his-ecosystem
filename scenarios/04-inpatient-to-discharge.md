@@ -199,6 +199,7 @@ sequenceDiagram
 | 04-10 | 중간정산 · 퇴원 수납 | HIS `수납` · `원무·수납 보드` | — | ✅ 들어옴(수납 대기열·미수납) · 퇴원 수납 장면은 아직<br>[`his-ops-billing.png`](../assets/screens/his-ops-billing.png) |
 | 04-11 | 진단서 발급과 전자서명 | HIS `진단서 발급` | 발급 문서에 데모 병원 이름만 보이는지 확인 | ✅ 들어옴<br>[`his-support-workstation-certificates.png`](../assets/screens/his-support-workstation-certificates.png) |
 | 04-12 | 입원 여정 타임라인 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
+| 04-13 | 퇴원 뒤 의무기록 사본 발급 | HIS `사본 발급` | — | ✅ 들어옴 — PDF 생성과 **발급 이력 등록**(신청자 · 관계 · 부수 · 발급목적 · 준 기록의 종류)이 나란히<br>[`his-support-medical-records-copy.png`](../assets/screens/his-support-medical-records-copy.png) |
 
 ## 근거
 

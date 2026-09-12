@@ -179,17 +179,20 @@ sequenceDiagram
 |---|---|---|---|---|
 | 01-01 | AI 예약 도우미 대화와 진료과 후보 | 공개 홈페이지 예약 | 데모 병원 이름 확정 뒤 | ⬜ |
 | 01-02 | 접수와 진료실 대기 | HIS `접수` · `진료실 대기` | — | ✅ 들어옴<br>[`his-care-reception.png`](../assets/screens/his-care-reception.png) · [`his-care-clinic-queue.png`](../assets/screens/his-care-clinic-queue.png) |
-| 01-03 | 진료 기록 초안과 승인 · 수정 · 거부 버튼(AI 표기와 면책 문구가 보이게) | HIS 진료과 화면 | AI 기능을 켠 설치본 | ⬜ |
+| 01-03 | 진료 기록 초안과 승인 · 수정 · 거부 버튼(AI 표기와 면책 문구가 보이게) | HIS 진료과 화면 | AI 기능을 켠 설치본 | 🟡 진료과 화면 골격은 들어옴(세부 분과 탭 · 내 환자 · 차트 열기) · AI 초안 패널은 아직<br>[`his-care-internal-medicine.png`](../assets/screens/his-care-internal-medicine.png) |
 | 01-04 | DUR 참고 정보가 붙은 처방 | HIS `처방(CPOE)` | AI 기능을 켠 설치본 | 🟡 화면은 들어옴 · DUR 패널을 연 상태는 아직<br>[`his-care-orders.png`](../assets/screens/his-care-orders.png) |
 | 01-05 | 결과 검증(자동 검증 · 델타 체크 · 2차 검증) | LIS 결과 · 검증 | — | ✅ 들어옴 — 위험치 · QC 실패 · 위탁 회신이 사유 우선순위로<br>[`lis-verify-worklist.png`](../assets/screens/lis-verify-worklist.png) |
-| 01-06 | 동의서 서명 요청과 서명 완료 상태 | HIS `동의서` · sign 서명 화면 | sign 연결을 모의가 아닌 모드로 | ✅ 들어옴(HIS 쪽) · sign 서명 화면은 아직<br>[`his-support-workstation-consent.png`](../assets/screens/his-support-workstation-consent.png) |
+| 01-06 | 동의서 서명 요청과 서명 완료 상태 | HIS `동의서` · sign 서명 화면 | sign 연결을 모의가 아닌 모드로 | ✅ 들어옴(HIS 쪽 둘 — 워크스테이션에서 **요청**하고, 동의서 관리에서 **서명대기/서명완료**를 봄) · sign 서명 화면은 아직<br>[`his-support-consent.png`](../assets/screens/his-support-consent.png) · [`his-support-workstation-consent.png`](../assets/screens/his-support-workstation-consent.png) |
 | 01-07 | 판독 모드의 AI 패널과 판독문 초안 | PACS 웹 뷰어 | AI 기능을 켠 설치본 | ⬜ |
-| 01-08 | 판독 서명 | PACS 판독 화면 | — | ⬜ |
+| 01-08 | 판독 서명 | PACS 판독 화면 | — | 🟡 판독 큐가 들어옴(**판독 대기 → 작성 중 → 예비 판독 → 완료** 로 서명 전후가 갈림) · 서명 장면 자체는 아직<br>[`pacs-reading-queue.png`](../assets/screens/pacs-reading-queue.png) |
 | 01-09 | 진료비 계산서(ERP 산정값)와 수납 | HIS `수납` | — | ✅ 들어옴(수납 대기열) · ERP 산정값이 뜬 계산서 상세는 아직<br>[`his-ops-billing.png`](../assets/screens/his-ops-billing.png) |
-| 01-10 | 청구 사전심사의 고시 근거 · 삭감 위험 보조 | ERP 청구 사전심사 | — | 🟡 ERP 대시보드가 들어옴(사전심사 미처리 · 삭감 통계) · 사전심사 상세 화면은 아직<br>[`erp-dashboard.png`](../assets/screens/erp-dashboard.png) |
+| 01-10 | 청구 사전심사의 고시 근거 · 삭감 위험 보조 | ERP 청구 사전심사 | — | ✅ 들어옴 — 케이스별 `BLOCK`/`WARN` · 위험액·청구액 병기 · 담당 `미배정` · AI 는 보조 버튼<br>[`erp-claim-precheck.png`](../assets/screens/erp-claim-precheck.png) · [`erp-dashboard.png`](../assets/screens/erp-dashboard.png) |
 | 01-11 | 결과 · 영상 · 판독 열람 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 | 01-12 | 환자용 약 설명 초안 감수 · 승인 | HIS `AI 약물설명 승인` | — | ⬜ |
 | 01-13 | 원격 상담 화상 | Jitsi | 화상 시스템을 새로 구성한 뒤 | ⬜ |
+| 01-14 | 검체 접수와 상태별 분모(9단계) | LIS 접수 | — | ✅ 들어옴 — 접수·라벨발행 · 거부/분주/정정 · 총 40 중 응급 3 · 접수 10 · 진행 20 · 완료 7 · 보고 2 · 취소 1<br>[`lis-order-receipt.png`](../assets/screens/lis-order-receipt.png) |
+| 01-15 | 영상 오더가 장비 워크리스트로 가는 자리(15·16단계) | PACS 워크리스트 | — | ✅ 들어옴 — **MWL 로 장비에 자동 제공 · MPPS 로 촬영 시작·완료 자동 보고** · 예약 9 · 취소 5<br>[`pacs-worklist.png`](../assets/screens/pacs-worklist.png) |
+| 01-16 | 수납이 회계 전표가 되는 자리(23단계) | ERP 재무 | — | ✅ 들어옴 — 전표마다 **출처 배지**(patient · claims · scm · manual)와 원 이벤트 참조<br>[`erp-accounting.png`](../assets/screens/erp-accounting.png) |
 
 ## 근거
 

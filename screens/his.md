@@ -134,6 +134,16 @@
 
 회진은 **의사별로** 오늘 돌 환자와 병실을 묶고 진행률을 셉니다. 환자 카드에는 입원 경위가 한 줄로 붙습니다(예: "응급 경유 입원 — 급성 복통(RLQ), 발열 38.5°C, 구토 2회").
 
+### 신원을 모르는 환자를 받는 자리
+
+![응급 미확인 환자 등록 — 최소 정보만](../assets/screens/his-care-patients-register-emergency.png)
+
+의식불명이거나 신원을 알 수 없는 환자가 오면, 이 화면이 **아는 것만 받습니다** — 추정 성별 · 추정 연령 · 손상 유형(교통사고 · 추락 · 외상 · 화상 · 중독/약물 · 익수 · 질식 · 자해 · 폭행 · 기타 · 미상) · 도착 상황 메모. 이름 칸도 주민등록번호 칸도 없습니다.
+
+**임시 ID 가 자동으로 붙고**, 화면이 다음에 할 일을 적습니다 — "신원 확인 시 환자 상세 페이지에서 `신원 확인` 버튼으로 정보를 갱신하세요."
+
+> **모르는 것을 빈칸으로 두거나 아무 값이나 넣지 않고, 「미상」이라는 값으로 받습니다** → [취지 1](../overview/02-principles.md). 응급 열람은 뒤에 사후 검토가 따라옵니다(응급 접근 사후 검토 — [`his-system-admin-break-glass.png`](../assets/screens/his-system-admin-break-glass.png)).
+
 ### 응급실 — 중증 우선으로 자리를 정한다
 
 ![응급실 — 미배정 재실과 구역별 베드](../assets/screens/his-care-emergency.png)
@@ -183,7 +193,9 @@
 | ✅ sup-3 | 판독 대기열 · 일반촬영 워크스테이션 | `/workstation/reading` · `/workstation/imaging` | [`…-reading.png`](../assets/screens/his-support-workstation-reading.png) · [`…-imaging.png`](../assets/screens/his-support-workstation-imaging.png) |
 | ✅ sup-4 | 워크스테이션 허브 — 부서별 전용 작업 화면 | `/workstation` | [`his-support-workstation.png`](../assets/screens/his-support-workstation.png) |
 | ✅ sup-5 | 건강검진센터 — 단계별 현황과 바로가기 | `/his-checkup` | [`his-support-his-checkup.png`](../assets/screens/his-support-his-checkup.png) |
-| 📷 sup-6 | 동의서 — 서명 요청과 완료 상태 | 의무기록 `동의서` | `his-support-consent.png` |
+| ✅ sup-6 | 동의서 — 서명 요청과 완료 상태 | 의무기록 `동의서` | [`his-support-consent.png`](../assets/screens/his-support-consent.png) |
+| ✅ sup-7 | 검진 — 프로그램 · 스테이션 · 동선 · 소견 · 추적 | `/his-checkup/*` | [`…-programs`](../assets/screens/his-support-his-checkup-programs.png) · [`…-station`](../assets/screens/his-support-his-checkup-station.png) · [`…-flow-board`](../assets/screens/his-support-his-checkup-flow-board.png) · [`…-review`](../assets/screens/his-support-his-checkup-review.png) · [`…-follow-ups`](../assets/screens/his-support-his-checkup-follow-ups.png) · [`…-schedule`](../assets/screens/his-support-his-checkup-schedule.png) |
+| ✅ sup-8 | 혈액은행 — 재고 · 수혈 · MTP | `/blood-bank` | [`his-support-blood-bank.png`](../assets/screens/his-support-blood-bank.png) |
 
 ### 워크스테이션 — 그 자리에서 할 일만
 
@@ -196,6 +208,40 @@
 약국은 **접수 → 조제 → 검수 → 불출** 네 단계로 움직입니다. 단계마다 대기 수가 있고, 행에서 바로 다음 단계로 넘깁니다. 성분명과 약품 코드가 함께 보이고, 오른쪽 위에 재고·부작용(ADR) 관리가 있습니다.
 
 > 이 화면은 **약사 계정**으로 찍었습니다. 의사 계정으로 열면 같은 화면이 **비어 보입니다** — 대기열이 그 역할의 것만 차기 때문입니다.
+
+### 건강검진센터 — 사람이 흐르는 하루를 화면이 따라간다
+
+검진은 **한 사람이 여러 방을 도는 일**이라, 화면도 그 흐름을 따라 17개로 나뉩니다. 캡처한 날이 토요일이라 **수검자가 0명**이었고, 그래서 오히려 **아무도 없을 때 화면이 무엇을 말하는지**가 잘 보입니다.
+
+![검진 프로그램 관리 — 14개 프로그램](../assets/screens/his-support-his-checkup-programs.png)
+
+먼저 **파는 것이 정의되어 있어야** 예약을 받습니다. 프로그램 14개가 등급별로(기본 · 플러스 · 정밀 · 프리미엄 · PET 정밀 · 특화 9) 있고, 카드마다 **가격 · 소요시간 · 항목 수 · 포함 검사 태그 · 선택옵션**이 붙습니다. 🔴 **국가암검진 6종은 가격이 `0원`** 입니다 — 공단이 부담하는 검진이라 기관이 환자에게 받지 않습니다. 0 이 "값을 안 정했다"가 아니라 **정말 0** 인 자리입니다.
+
+![검진 예약 관리 — 해당 날짜에 예약이 없습니다](../assets/screens/his-support-his-checkup-schedule.png)
+
+![검진 동선 현황판 — 0 수검자 × 11 스테이션](../assets/screens/his-support-his-checkup-flow-board.png)
+
+예약 화면과 동선 현황판은 **빈 화면을 빈 채로 보여 줍니다.** 동선 현황판은 머리에 **「0 수검자 × 11 스테이션 · 5초 갱신」** 이라고 적어, **화면이 멈춘 것이 아니라 올 사람이 없는 것**임을 구분해 줍니다.
+
+![검진 스테이션 — 스테이션 탭 9개](../assets/screens/his-support-his-checkup-station.png)
+
+스테이션은 **방마다 화면이 따로**입니다 — 채혈실 · 검체실 · 신체계측실 · 심전도실 · X-ray실 · 초음파실 · 내시경실 · 안과검사실 · 폐기능검사실. 8초마다 저절로 갱신되고, "접수한 수검자가 이 검사실에 배정되면 자동으로 표시됩니다"라고 **왜 비어 있는지**를 적습니다.
+
+![검진 소견 작성 대기 — 결과 진행 분모](../assets/screens/his-support-his-checkup-review.png)
+
+검사가 끝나면 **의사가 소견을 씁니다.** 총 16건이 **소견대기 10 · 검사완료 5 · 부분완료 1** 로 갈리고, 행마다 **결과 진행이 분모와 함께**(`1/1` · `4/5` · `13/14`) 붙습니다 — 14개 중 13개만 나온 검진을 "완료"로 올리지 않습니다 → [취지 5](../overview/02-principles.md).
+
+![검진 추적 관리 — 기한 초과를 맨 위에](../assets/screens/his-support-his-checkup-follow-ups.png)
+
+검진은 결과를 주고 끝나는 일이 아닙니다. 추적 관리는 **기한이 지난 6건을 맨 위로 끌어올리고**, 추적 사유(위용종 추적 · HbA1c 상승 · 안압 상승)와 **어느 검진 회차에서 나온 것인지**를 함께 적습니다. → [시나리오 03](../scenarios/03-health-checkup.md)
+
+> 🔴 수검자 이름과 연락처는 공개 자료에서 가렸습니다.
+
+### 혈액은행 — 재고가 0 이어도 구조는 보인다
+
+![혈액은행 — 혈액형 8종 재고와 탭 4개](../assets/screens/his-support-blood-bank.png)
+
+혈액형 **8종(A± · B± · AB± · O±)** 재고 표와 네 묶음(대시보드 · 재고 관리 · **수혈 관리** · 안전·MTP·발주)이 있습니다. 이 설치본은 **전체 재고 0 · 수혈 오더 0 · 교차시험 대기 0 · 유효기간 임박 0** 입니다. 출고 전 동의 확인 장면은 재고가 있어야 찍을 수 있습니다 → [시나리오 02](../scenarios/02-emergency.md).
 
 ### 동의서 · 진단서 · 퇴원 — 문서가 나가는 자리
 

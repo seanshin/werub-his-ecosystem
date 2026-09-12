@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **69** / 266 |
+| 지금 들어온 캡처 | **77** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -31,7 +31,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 진료실 대기 | `/clinic-queue` | `his-care-clinic-queue.png` | ✅ |
 | 환자 관리 | `/patients` | `his-care-patients.png` | ⬜ |
 | 외국인 환자 등록 | `/patients/register/foreign` | `his-care-patients-register-foreign.png` | ⬜ |
-| 응급 미확인 등록 | `/patients/register/emergency` | `his-care-patients-register-emergency.png` | ⬜ |
+| 응급 미확인 등록 | `/patients/register/emergency` | `his-care-patients-register-emergency.png` | ✅ |
 | 예약 | `/schedule` | `his-care-schedule.png` | ⬜ |
 | 처방(CPOE) | `/orders` | `his-care-orders.png` | ✅ |
 
@@ -114,7 +114,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 영상실 | `/imaging` | `his-support-imaging.png` | ⬜ |
 | 병리과 | `/pathology` | `his-support-pathology.png` | ⬜ |
 | 기초검사 | `/diagnostics` | `his-support-diagnostics.png` | ⬜ |
-| 혈액은행 | `/blood-bank` | `his-support-blood-bank.png` | ⬜ |
+| 혈액은행 | `/blood-bank` | `his-support-blood-bank.png` | ✅ |
 | 화상진료 | `/telehealth` | `his-support-telehealth.png` | ⬜ |
 | 비대면진료 | `/remote-consult` | `his-support-remote-consult.png` | ⬜ |
 | 만성질환 관리 | `/chronic` | `his-support-chronic.png` | ⬜ |
@@ -163,18 +163,18 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 검진 접수 | `/his-checkup/reception` | `his-support-his-checkup-reception.png` | ⬜ |
 | 검진 대기 | `/his-checkup/waiting` | `his-support-his-checkup-waiting.png` | ⬜ |
 | 검사실 허브 | `/his-checkup/ws` | `his-support-his-checkup-ws.png` | ⬜ |
-| 동선 현황판 | `/his-checkup/flow-board` | `his-support-his-checkup-flow-board.png` | ⬜ |
+| 동선 현황판 | `/his-checkup/flow-board` | `his-support-his-checkup-flow-board.png` | ✅ |
 | 동선 모니터(QR) | `/patient-flow` | `his-support-patient-flow.png` | ⬜ |
 | 대기 디스플레이 | `/display/checkup` | `his-support-display-checkup.png` | ⬜ |
-| 검진 스테이션 | `/his-checkup/station` | `his-support-his-checkup-station.png` | ⬜ |
+| 검진 스테이션 | `/his-checkup/station` | `his-support-his-checkup-station.png` | ✅ |
 | 문진표 관리 | `/his-checkup/questionnaires` | `his-support-his-checkup-questionnaires.png` | ⬜ |
-| 검진 프로그램 | `/his-checkup/programs` | `his-support-his-checkup-programs.png` | ⬜ |
+| 검진 프로그램 | `/his-checkup/programs` | `his-support-his-checkup-programs.png` | ✅ |
 | 검사항목 관리 | `/his-checkup/test-catalog` | `his-support-his-checkup-test-catalog.png` | ⬜ |
 | 검진 프로토콜 | `/his-checkup/protocols` | `his-support-his-checkup-protocols.png` | ⬜ |
-| 검진 예약 | `/his-checkup/schedule` | `his-support-his-checkup-schedule.png` | ⬜ |
-| 소견 대기 | `/his-checkup/review` | `his-support-his-checkup-review.png` | ⬜ |
+| 검진 예약 | `/his-checkup/schedule` | `his-support-his-checkup-schedule.png` | ✅ |
+| 소견 대기 | `/his-checkup/review` | `his-support-his-checkup-review.png` | ✅ |
 | 단체 검진 | `/his-checkup/contracts` | `his-support-his-checkup-contracts.png` | ⬜ |
-| 추적 관리 | `/his-checkup/follow-ups` | `his-support-his-checkup-follow-ups.png` | ⬜ |
+| 추적 관리 | `/his-checkup/follow-ups` | `his-support-his-checkup-follow-ups.png` | ✅ |
 | 검진 통계 | `/his-checkup/stats` | `his-support-his-checkup-stats.png` | ⬜ |
 
 ### 의무기록 (3)
