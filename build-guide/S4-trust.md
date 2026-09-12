@@ -24,8 +24,8 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 직원 · 환자 인�
 |---|---|
 | 구현 상태 | `통합` |
 | 운영 구성 | 서비스(API) · 웹 · PostgreSQL 컨테이너. 컨테이너가 기동할 때 DB 마이그레이션을 자동으로 적용합니다 |
-| 비밀값 | 마스터키 같은 비밀값은 **설치할 때 새로 만들어** 넣습니다. 암호 관련 환경 키 이름: `CRYPTO_MASTER_KEY` · `CRYPTO_PEPPER`(sign 저장소 README 기준). 전체 목록은 `확인 필요(따라가기)` |
-| 시작 안내 | sign 저장소 README 의 **"빠르게 시작하기(개발)"** 절 — 개발용입니다. 운영 설치 명령은 `확인 필요(따라가기)` |
+| 비밀값 | 마스터키 같은 비밀값은 **설치할 때 새로 만들어** 넣습니다. 설정 예시 파일(`.env.example` · `.env.prod.example`)의 키는 성격별로 이렇게 나뉩니다(2026-09-12 기준 커밋 확인) — 암호 재료 `CRYPTO_MASTER_KEY` · `CRYPTO_PEPPER` / 키를 프로세스 밖에 두는 구조 `KEY_SIGNER_DRIVER` · `CRYPTO_PROXY_URL` · `CRYPTO_PROXY_TOKEN` · `CRYPTO_PROXY_PORT` · `CRYPTO_PROXY_VAULT` / **하드웨어 보안 모듈** `HSM_PROVIDER` · `PKCS11_MODULE` · `PKCS11_PIN` · `PKCS11_TOKEN_LABEL` · `PKCS11_SLOT` / 타임스탬프 · 앵커 `TSA_PROVIDER` · `TSA_URL` · `ANCHOR_TSA_URLS` · `SCHEDULER_ANCHOR_MIN` / 관리 콘솔 · 세션 `SIGN_ADMIN_API_KEY` · `SIGN_ADMIN_USER` · `SIGN_ADMIN_PASSWORD` · `SESSION_SECRET` · `SESSION_TTL_MIN` · `SESSION_IDLE_TIMEOUT_MIN` · `SESSION_MAX_CONCURRENT` / 다른 시스템과의 연결 `HIS_API_URL` · `HIS_WEBHOOK_URL` · `HIS_WEBHOOK_SECRET` · `HIS_SSO_JWKS_URL` · `HIS_SSO_ISSUER` · `ERP_API_KEY` · `ERP_WEBHOOK_SECRET` / 나가는 요청 제한 `WEBHOOK_ALLOWED_HOSTS` · `WEBHOOK_INTERNAL_HOSTS`. 값은 전부 **설치할 때 새로 만들어** 넣습니다.<br>📌 **하드웨어 보안 모듈은 「쓸 자리가 없다」가 아니라 「아직 붙이지 않았다」입니다** — PKCS#11 설정 키가 이미 있고, 키 서명을 맡을 드라이버를 `KEY_SIGNER_DRIVER` 로 고르게 돼 있습니다([8장](../overview/08-status-and-preparation.md)) |
+| 시작 안내 | 개발은 sign 저장소 README 의 **"빠르게 시작하기(개발)"** 절입니다. 운영은 **빌드 → `prisma migrate deploy` → 빌드 산출물 실행**(작업 스크립트 이름 `build` · `prisma:deploy` · `start:prod`)이고, 🔴 **암호 프록시와 본인확인 프록시가 각각 별도 프로세스**입니다(`proxy` · `idv-proxy`). 서명 서버 하나만 띄우면 키 작업이 돌지 않습니다 |
 | 시드 | 개발 시드(상태별 더미 데이터)는 운영에서 차단된다고 저장소가 적습니다 |
 
 ## ③ 설정
