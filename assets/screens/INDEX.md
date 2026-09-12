@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **0** / 266 |
+| 지금 들어온 캡처 | **19** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -25,7 +25,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 통합 상황판 | `/command-center` | `his-care-command-center.png` | ⬜ |
+| 통합 상황판 | `/command-center` | `his-care-command-center.png` | ✅ |
 | 대시보드 | `/dashboard` | `his-care-dashboard.png` | ⬜ |
 | 접수 | `/reception` | `his-care-reception.png` | ⬜ |
 | 진료실 대기 | `/clinic-queue` | `his-care-clinic-queue.png` | ⬜ |
@@ -238,14 +238,14 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | QI | `/quality` | `his-quality-quality.png` | ⬜ |
 | 매핑 임상검토 | `/mapping-review` | `his-quality-mapping-review.png` | ⬜ |
 | 직원교육 | `/education` | `his-quality-education.png` | ⬜ |
-| 자격·교육(SQE) | `/admin/sqe` | `his-quality-admin-sqe.png` | ⬜ |
+| 자격·교육(SQE) | `/admin/sqe` | `his-quality-admin-sqe.png` | ✅ |
 | 위원회·정책(GLD) | `/admin/gld` | `his-quality-admin-gld.png` | ⬜ |
-| 안전 게이트 관제 | `/admin/safety-gates` | `his-quality-admin-safety-gates.png` | ⬜ |
-| 대외 발신 관제 | `/admin/outbound-channels` | `his-quality-admin-outbound-channels.png` | ⬜ |
+| 안전 게이트 관제 | `/admin/safety-gates` | `his-quality-admin-safety-gates.png` | ✅ |
+| 대외 발신 관제 | `/admin/outbound-channels` | `his-quality-admin-outbound-channels.png` | ✅ |
 | 기관 연동 | `/admin/agency-integrations` | `his-quality-admin-agency-integrations.png` | ⬜ |
-| 중요 결정 | `/admin/decisions` | `his-quality-admin-decisions.png` | ⬜ |
+| 중요 결정 | `/admin/decisions` | `his-quality-admin-decisions.png` | ✅ |
 | 감사 대시보드 | `/admin/audit-dashboard` | `his-quality-admin-audit-dashboard.png` | ⬜ |
-| 오더 서명 로그 | `/admin/order-sign-logs` | `his-quality-admin-order-sign-logs.png` | ⬜ |
+| 오더 서명 로그 | `/admin/order-sign-logs` | `his-quality-admin-order-sign-logs.png` | ✅ |
 | 단말 보안 | `/admin/terminal-security` | `his-quality-admin-terminal-security.png` | ⬜ |
 
 ## 운영 — `ops` (19)
@@ -263,8 +263,8 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 중앙공급 | `/cssd` | `his-ops-cssd.png` | ⬜ |
 | 장비 | `/equipment` | `his-ops-equipment.png` | ⬜ |
 | 인사 | `/hr` | `his-ops-hr.png` | ⬜ |
-| 생체등록·기기관리 | `/admin/staff-devices` | `his-ops-admin-staff-devices.png` | ⬜ |
-| 인증 관리 콘솔 | `/admin/identity` | `his-ops-admin-identity.png` | ⬜ |
+| 생체등록·기기관리 | `/admin/staff-devices` | `his-ops-admin-staff-devices.png` | ✅ |
+| 인증 관리 콘솔 | `/admin/identity` | `his-ops-admin-identity.png` | ✅ |
 | 승인 감사(서명·처방) | `/admin/stepup-approvals` | `his-ops-admin-stepup-approvals.png` | ⬜ |
 | 동선 스테이션 | `/admin/location-stations` | `his-ops-admin-location-stations.png` | ⬜ |
 
@@ -304,8 +304,8 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 소분류 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|---|
-| 개원 관제 | 개원·운영 단계 | `/admin/opening` | `his-system-admin-opening.png` | ⬜ |
-| 개원 관제 | 운영 전환(Go-Live) 관제 | `/admin/go-live` | `his-system-admin-go-live.png` | ⬜ |
+| 개원 관제 | 개원·운영 단계 | `/admin/opening` | `his-system-admin-opening.png` | ✅ |
+| 개원 관제 | 운영 전환(Go-Live) 관제 | `/admin/go-live` | `his-system-admin-go-live.png` | ✅ |
 | 개원 관제 | 연동 개통 게이트 | `/admin/integration-gates` | `his-system-admin-integration-gates.png` | ⬜ |
 | 개원 관제 | Phase0 컷오버 승인 | `/admin/phase0-cutover` | `his-system-admin-phase0-cutover.png` | ⬜ |
 | 개원 관제 | EMR 인증 | `/admin/emr-cert` | `his-system-admin-emr-cert.png` | ⬜ |
@@ -329,9 +329,9 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 시설·장비 | 응급실 베드 관리 | `/admin/er-beds` | `his-system-admin-er-beds.png` | ⬜ |
 | 시설·장비 | TV 디스플레이 관리 | `/admin/displays` | `his-system-admin-displays.png` | ⬜ |
 | 시설·장비 | 워크스테이션·디바이스 | `/admin/workstations` | `his-system-admin-workstations.png` | ⬜ |
-| 권한·보안 | 접근 권한 | `/admin/access-control` | `his-system-admin-access-control.png` | ⬜ |
-| 권한·보안 | 역할 권한 | `/admin/rbac` | `his-system-admin-rbac.png` | ⬜ |
-| 권한·보안 | 전자인증서 | `/admin/blockchain-cert` | `his-system-admin-blockchain-cert.png` | ⬜ |
+| 권한·보안 | 접근 권한 | `/admin/access-control` | `his-system-admin-access-control.png` | ✅ |
+| 권한·보안 | 역할 권한 | `/admin/rbac` | `his-system-admin-rbac.png` | ✅ |
+| 권한·보안 | 전자인증서 | `/admin/blockchain-cert` | `his-system-admin-blockchain-cert.png` | ✅ |
 | 권한·보안 | ERP 접근 설정 | `/admin/erp` | `his-system-admin-erp.png` | ⬜ |
 | 화면·표시 | 메뉴 관리 | `/admin/menus` | `his-system-admin-menus.png` | ⬜ |
 | 화면·표시 | 메뉴 구성·권한 | `/admin/menu-config` | `his-system-admin-menu-config.png` | ⬜ |
@@ -339,15 +339,15 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 화면·표시 | 대시보드 템플릿 | `/admin/dashboard-templates` | `his-system-admin-dashboard-templates.png` | ⬜ |
 | 화면·표시 | 수치 표시·반올림 정책 | `/admin/numeric-policy` | `his-system-admin-numeric-policy.png` | ⬜ |
 | 화면·표시 | 확장 슬롯 | `/admin/extensions` | `his-system-admin-extensions.png` | ⬜ |
-| 시스템 설정 | 시스템 설정 | `/admin/ai-settings` | `his-system-admin-ai-settings.png` | ⬜ |
+| 시스템 설정 | 시스템 설정 | `/admin/ai-settings` | `his-system-admin-ai-settings.png` | ✅ |
 
 ### 운영 시스템 관리 (33)
 
 | 소분류 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|---|
-| 인력·일정 | 직원 관리 | `/admin/staff-management` | `his-system-admin-staff-management.png` | ⬜ |
-| 인력·일정 | 신규 입사자 관리 | `/admin/onboarding` | `his-system-admin-onboarding.png` | ⬜ |
-| 인력·일정 | 의료팀 편성 | `/admin/care-teams` | `his-system-admin-care-teams.png` | ⬜ |
+| 인력·일정 | 직원 관리 | `/admin/staff-management` | `his-system-admin-staff-management.png` | ✅ |
+| 인력·일정 | 신규 입사자 관리 | `/admin/onboarding` | `his-system-admin-onboarding.png` | ✅ |
+| 인력·일정 | 의료팀 편성 | `/admin/care-teams` | `his-system-admin-care-teams.png` | ✅ |
 | 인력·일정 | 진료표 | `/admin/clinic-schedule` | `his-system-admin-clinic-schedule.png` | ⬜ |
 | 인력·일정 | 당직표 | `/admin/duty-schedule` | `his-system-admin-duty-schedule.png` | ⬜ |
 | 병원 운영 | 전자결재 대시보드 | `/admin/approvals-dashboard` | `his-system-admin-approvals-dashboard.png` | ⬜ |
@@ -365,7 +365,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 의료질·안전 | 마약류 관리 | `/admin/controlled-substance` | `his-system-admin-controlled-substance.png` | ⬜ |
 | 기록·감사·감시 | 미비기록(HIM) | `/admin/him` | `his-system-admin-him.png` | ⬜ |
 | 기록·감사·감시 | 감사 로그 | `/admin/audit` | `his-system-admin-audit.png` | ⬜ |
-| 기록·감사·감시 | 응급 접근 검토 | `/admin/break-glass` | `his-system-admin-break-glass.png` | ⬜ |
+| 기록·감사·감시 | 응급 접근 검토 | `/admin/break-glass` | `his-system-admin-break-glass.png` | ✅ |
 | 기록·감사·감시 | 보유·파기(Retention) | `/admin/retention` | `his-system-admin-retention.png` | ⬜ |
 | 기록·감사·감시 | UI 다국어 검수 | `/admin/ui-locale` | `his-system-admin-ui-locale.png` | ⬜ |
 | 기록·감사·감시 | 상시 감시 | `/admin/sentinel` | `his-system-admin-sentinel.png` | ⬜ |
@@ -377,7 +377,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | AI 운영·감수 | 회의 분석 | `/admin/ai-meeting` | `his-system-admin-ai-meeting.png` | ⬜ |
 | AI 운영·감수 | AI(WeRU.B) 상담 | `/admin/ai-counseling` | `his-system-admin-ai-counseling.png` | ⬜ |
 | AI 운영·감수 | AI(WeRU.B) 번역 | `/admin/ai-translate` | `his-system-admin-ai-translate.png` | ⬜ |
-| AI 운영·감수 | AI(WeRU.B) 감독 관제 | `/admin/ai-oversight` | `his-system-admin-ai-oversight.png` | ⬜ |
+| AI 운영·감수 | AI(WeRU.B) 감독 관제 | `/admin/ai-oversight` | `his-system-admin-ai-oversight.png` | ✅ |
 
 ### 검진권 (5)
 

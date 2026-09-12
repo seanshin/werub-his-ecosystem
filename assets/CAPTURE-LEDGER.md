@@ -4,3 +4,28 @@
 
 | 파일 | 내용 | 데모 병원명 사용 | 확인 |
 |---|---|---|---|
+| `assets/screens/his-care-command-center.png` | HIS 통합 상황판(`/command-center`) — 지표 카드 · 조치 필요 · 부서 보드 · 원내 여정 | 아니오(병원명 그대로 — 가상 병원이라는 확인 2026-09-12) | 확인 (2026-09-12) |
+| `assets/screens/flow-onboarding-01-login.png` | HIS 로그인 화면 — 브랜드 패널(인증 대응 · 모듈 · AI · 보안) · 로그인 폼 · 진입 버튼 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 테스트 계정 목록 · 자동완성 팝업 **가림** | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-onboarding.png` | 신규 입사자 관리(`/admin/onboarding`) — 입사예정자 등록 → 초대 발급 → 서류·계약·활성화 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-staff-management.png` | 직원 관리(`/admin/staff-management`) — 직원 목록 · 조직도 · 직원 등록 · Clinic 연동 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 직원 이메일 열 **가림**(기관 도메인) | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-rbac.png` | 역할 권한(`/admin/rbac`) — 권한 × 역할 14 매트릭스 · **판정 43/63** · 미집행 표시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-ops-admin-identity.png` | 인증 관리 콘솔(`/admin/identity`) — 직원 102 · 미등록 100 · 인증서 활성 0 · 승인 대기(4-eyes) 3 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-care-teams.png` | 의료팀 편성(`/admin/care-teams`) — 외래 · 입원 · 응급 탭(데이터 없음 · 구조만) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-opening.png` | 개원·운영 단계(`/admin/opening`) — 국가 축(KR · AE) · 기본값 출처 표시 · 항목별 `기록 없음` | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-go-live.png` | 운영 전환 관제(`/admin/go-live`) — 준비도 32% · **전환을 막는 항목 21** · 크리티컬 패스 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 보안 점검 항목 한 줄 **가림** | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-decisions.png` | 중요 결정(`/admin/decisions`) — 세 층 · 결정 대상 61 중 기록 0 · 개시 전 필수 0/15 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-sqe.png` | 자격·교육 SQE(`/admin/sqe`) — 등록 자격 0 · **표본 0 기준이라 안전을 의미하지 않는다** 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-access-control.png` | 접근 권한 관리(`/admin/access-control`) — 부서별 메뉴 · 역할별 데이터 · 외부 시스템 · 기능 접근 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-blockchain-cert.png` | sign 전자서명 인증서 현황(`/admin/blockchain-cert`) — 발급 serial **미러(읽기전용)** · 직원 29/102 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 인증서 일련번호 열 **가림** | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-break-glass.png` | 응급 접근 사후 검토(`/admin/break-glass`) — 시간제한 토큰의 의무 사후 검토 · 미검토 1건 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/flow-onboarding-my-certificate.png` | 내 전자서명 인증서(`/settings/my-certificate`) — **보유 여부를 표시하지 못한다(미발급이라는 뜻이 아니다)** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-ops-admin-staff-devices.png` | 생체등록·기기 관리(`/admin/staff-devices`) — 직원 102 역할별 · 기기 등록 상태 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 이메일 한 줄 **가림** | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-outbound-channels.png` | 대외 발신 관제(`/admin/outbound-channels`) — 통로 6 중 실제 발신 2 · 푸시 4종 중 0종 · SMS 조건 0/3 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-safety-gates.png` | 안전 게이트 관제(`/admin/safety-gates`) — 끔/경고/차단 · **BLOCK 인데 평가 모집단 미상** 판정 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-ai-oversight.png` | AI 감독 관제(`/admin/ai-oversight`) — 비율 전부 `산출 불가` · 호출 지연 실측(표본 12) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-config.png` | 시스템 설정(`/admin/config`) — 전역 구성 파라미터 키·값 · 「값이 어디서 왔는지 함께 표시」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-ai-settings.png` | 시스템 설정(`/admin/ai-settings`) — AI 서버 연결 · 브리핑 스위치 · **진료 보조 스킬 실측** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 AI 서버 주소 **가림** | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-order-sign-logs.png` | 오더 서명 로그(`/admin/order-sign-logs`) — 봉인 5201/5201 · 미기록 취소 10 · 복원 불가 63 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/flow-onboarding-02-role-doctor.png` | 역할 비교 ② **의사** — 같은 통합 상황판 · 접수/외국인등록 없음 · 「의사 진료 매뉴얼」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/flow-onboarding-03-role-nurse.png` | 역할 비교 ③ **간호사** — 접수·외국인등록 있음 · 「간호 매뉴얼」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/flow-onboarding-04-role-executive.png` | 역할 비교 ④ **경영진** — 첫 화면이 `/executive` 경영 대시보드로 바뀜 · 메뉴 축소 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
