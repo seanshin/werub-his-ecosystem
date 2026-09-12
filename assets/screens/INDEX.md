@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **19** / 266 |
+| 지금 들어온 캡처 | **22** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -28,12 +28,12 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 통합 상황판 | `/command-center` | `his-care-command-center.png` | ✅ |
 | 대시보드 | `/dashboard` | `his-care-dashboard.png` | ⬜ |
 | 접수 | `/reception` | `his-care-reception.png` | ⬜ |
-| 진료실 대기 | `/clinic-queue` | `his-care-clinic-queue.png` | ⬜ |
+| 진료실 대기 | `/clinic-queue` | `his-care-clinic-queue.png` | ✅ |
 | 환자 관리 | `/patients` | `his-care-patients.png` | ⬜ |
 | 외국인 환자 등록 | `/patients/register/foreign` | `his-care-patients-register-foreign.png` | ⬜ |
 | 응급 미확인 등록 | `/patients/register/emergency` | `his-care-patients-register-emergency.png` | ⬜ |
 | 예약 | `/schedule` | `his-care-schedule.png` | ⬜ |
-| 처방(CPOE) | `/orders` | `his-care-orders.png` | ⬜ |
+| 처방(CPOE) | `/orders` | `his-care-orders.png` | ✅ |
 
 ### 간호 (3)
 
@@ -107,7 +107,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 약국 | `/pharmacy` | `his-support-pharmacy.png` | ⬜ |
+| 약국 | `/pharmacy` | `his-support-pharmacy.png` | ✅ |
 | 약국 보드 | `/pharmacy-board` | `his-support-pharmacy-board.png` | ⬜ |
 | 약사 임상활동 | `/pharmacist-activity` | `his-support-pharmacist-activity.png` | ⬜ |
 | 검사실 | `/lab` | `his-support-lab.png` | ⬜ |
