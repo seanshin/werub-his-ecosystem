@@ -149,10 +149,10 @@ sequenceDiagram
 | 03-02 | 검진 예약 | HIS `검진 예약` | — | ✅ 들어옴(구조) — 날짜별 예약 목록 · 수검자 · 프로그램 · 금액 · 상태. **캡처한 날은 토요일이라 0건**(「해당 날짜에 예약이 없습니다」)<br>[`his-support-his-checkup-schedule.png`](../assets/screens/his-support-his-checkup-schedule.png) |
 | 03-03 | 문진표 작성 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 | 03-04 | QR 동선 안내와 동선 현황판 | HIS `동선 모니터(QR)` · `동선 현황판` | — | 🟡 동선 현황판이 들어옴 — **0 수검자 × 11 스테이션 · 5초 갱신** · 완료/진행/대기 범례. QR 모니터와 사람이 흐르는 장면은 아직<br>[`his-support-his-checkup-flow-board.png`](../assets/screens/his-support-his-checkup-flow-board.png) |
-| 03-05 | 대기 디스플레이 | HIS `대기 디스플레이` | 수검자 이름이 가상 데이터인지 확인 | ⬜ |
+| 03-05 | 대기 디스플레이 | HIS `대기 디스플레이` | 수검자 이름이 가상 데이터인지 확인 | ✅ 들어옴 — 대기실용 화면(어두운 바탕 · 4초 갱신) · **대기 · 검사중 · 검사완료 · 소견대기** 네 칸. 캡처한 날은 전부 0 이라 **이름이 뜨지 않은 상태**입니다<br>[`his-support-display-checkup.png`](../assets/screens/his-support-display-checkup.png) |
 | 03-06 | 검진 스테이션 | HIS `검진 스테이션` | — | ✅ 들어옴 — **스테이션 탭 9**(채혈 · 검체 · 신체계측 · 심전도 · X-ray · 초음파 · 내시경 · 안과 · 폐기능) · 8초 자동 갱신 · 대기 0<br>[`his-support-his-checkup-station.png`](../assets/screens/his-support-his-checkup-station.png) |
 | 03-07 | 소견 대기와 종합 판정 | HIS `소견 대기` | — | ✅ 들어옴 — 총 16 · **소견대기 10 · 검사완료 5 · 부분완료 1** · 행마다 프로그램과 **결과 진행 분모**(1/1 · 4/5 · 13/14)<br>[`his-support-his-checkup-review.png`](../assets/screens/his-support-his-checkup-review.png) |
-| 03-08 | 결과 설명 초안 감수 · 승인(AI 표기와 면책 문구가 보이게) | HIS `검진해석 콘텐츠(감수)` | AI 기능을 켠 설치본 | ⬜ |
+| 03-08 | 결과 설명 초안 감수 · 승인(AI 표기와 면책 문구가 보이게) | HIS `검진해석 콘텐츠(감수)` | AI 기능을 켠 설치본 | ✅ 들어옴(감수 구조) — 작성중 → 감수중 → 승인 → 반려 · 저장 시 **가드레일 자동 검증**(진단 확정 · 처방/용량 지시 금지) · 배지 `소비자 노출` 과 **`4-eyes(2인 승인): 비활성`**. AI 가 만든 초안이 실제로 뜬 장면은 아직<br>[`his-system-admin-checkup-explainer.png`](../assets/screens/his-system-admin-checkup-explainer.png) |
 | 03-09 | 검진 결과서 PDF | HIS `건강검진센터` | 결과서에 데모 병원 이름만 보이는지 확인 | 🟡 건강검진센터 허브가 들어옴(단계별 현황) · 결과서 PDF 는 아직<br>[`his-support-his-checkup.png`](../assets/screens/his-support-his-checkup.png) |
 | 03-10 | 결과 상세와 회차별 비교 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 | 03-11 | 추적 관리 목록 | HIS `추적 관리` | — | ✅ 들어옴 — **기한 초과 6건을 맨 위에** 올리고 추적 사유(위용종 추적 · HbA1c 상승 · 안압 상승)와 근거 검진 회차를 함께 적음<br>[`his-support-his-checkup-follow-ups.png`](../assets/screens/his-support-his-checkup-follow-ups.png) |

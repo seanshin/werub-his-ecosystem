@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **77** / 266 |
+| 지금 들어온 캡처 | **86** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -135,7 +135,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 치료실 | `/workstation/therapy` | `his-support-workstation-therapy.png` | ⬜ |
 | 검사항목 관리 | `/workstation/templates` | `his-support-workstation-templates.png` | ⬜ |
 | 약국 | `/workstation/pharmacy` | `his-support-workstation-pharmacy.png` | ⬜ |
-| 간호(입원) | `/workstation/nursing` | `his-support-workstation-nursing.png` | ⬜ |
+| 간호(입원) | `/workstation/nursing` | `his-support-workstation-nursing.png` | ✅ |
 | 간호(외래) | `/workstation/outpatient-nursing` | `his-support-workstation-outpatient-nursing.png` | ⬜ |
 | 접수 | `/workstation/reception` | `his-support-workstation-reception.png` | ⬜ |
 | 동의서 | `/workstation/consent` | `his-support-workstation-consent.png` | ✅ |
@@ -165,7 +165,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 검사실 허브 | `/his-checkup/ws` | `his-support-his-checkup-ws.png` | ⬜ |
 | 동선 현황판 | `/his-checkup/flow-board` | `his-support-his-checkup-flow-board.png` | ✅ |
 | 동선 모니터(QR) | `/patient-flow` | `his-support-patient-flow.png` | ⬜ |
-| 대기 디스플레이 | `/display/checkup` | `his-support-display-checkup.png` | ⬜ |
+| 대기 디스플레이 | `/display/checkup` | `his-support-display-checkup.png` | ✅ |
 | 검진 스테이션 | `/his-checkup/station` | `his-support-his-checkup-station.png` | ✅ |
 | 문진표 관리 | `/his-checkup/questionnaires` | `his-support-his-checkup-questionnaires.png` | ⬜ |
 | 검진 프로그램 | `/his-checkup/programs` | `his-support-his-checkup-programs.png` | ✅ |
@@ -352,7 +352,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 인력·일정 | 당직표 | `/admin/duty-schedule` | `his-system-admin-duty-schedule.png` | ⬜ |
 | 병원 운영 | 전자결재 대시보드 | `/admin/approvals-dashboard` | `his-system-admin-approvals-dashboard.png` | ⬜ |
 | 병원 운영 | 문진 대시보드 | `/admin/questionnaire-dashboard` | `his-system-admin-questionnaire-dashboard.png` | ⬜ |
-| 병원 운영 | HIRA 청구 | `/admin/hira-edi` | `his-system-admin-hira-edi.png` | ⬜ |
+| 병원 운영 | HIRA 청구 | `/admin/hira-edi` | `his-system-admin-hira-edi.png` | ✅ |
 | 병원 운영 | 환자 마킹(루비) | `/admin/patient-flags` | `his-system-admin-patient-flags.png` | ⬜ |
 | 관제·지표 | 통계/분석 | `/admin/analytics` | `his-system-admin-analytics.png` | ⬜ |
 | 관제·지표 | 환자여정 관제 | `/journey-console` | `his-system-journey-console.png` | ⬜ |
@@ -361,16 +361,16 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 의료질·안전 | 질관리 (QI) | `/admin/qi` | `his-system-admin-qi.png` | ⬜ |
 | 의료질·안전 | 기기 리콜 역추적 | `/admin/device-recall` | `his-system-admin-device-recall.png` | ⬜ |
 | 의료질·안전 | 낙상/욕창 재평가 | `/admin/risk-reassessment` | `his-system-admin-risk-reassessment.png` | ⬜ |
-| 의료질·안전 | 데이터 품질 | `/admin/data-quality` | `his-system-admin-data-quality.png` | ⬜ |
-| 의료질·안전 | 마약류 관리 | `/admin/controlled-substance` | `his-system-admin-controlled-substance.png` | ⬜ |
-| 기록·감사·감시 | 미비기록(HIM) | `/admin/him` | `his-system-admin-him.png` | ⬜ |
+| 의료질·안전 | 데이터 품질 | `/admin/data-quality` | `his-system-admin-data-quality.png` | ✅ |
+| 의료질·안전 | 마약류 관리 | `/admin/controlled-substance` | `his-system-admin-controlled-substance.png` | ✅ |
+| 기록·감사·감시 | 미비기록(HIM) | `/admin/him` | `his-system-admin-him.png` | ✅ |
 | 기록·감사·감시 | 감사 로그 | `/admin/audit` | `his-system-admin-audit.png` | ⬜ |
 | 기록·감사·감시 | 응급 접근 검토 | `/admin/break-glass` | `his-system-admin-break-glass.png` | ✅ |
-| 기록·감사·감시 | 보유·파기(Retention) | `/admin/retention` | `his-system-admin-retention.png` | ⬜ |
+| 기록·감사·감시 | 보유·파기(Retention) | `/admin/retention` | `his-system-admin-retention.png` | ✅ |
 | 기록·감사·감시 | UI 다국어 검수 | `/admin/ui-locale` | `his-system-admin-ui-locale.png` | ⬜ |
 | 기록·감사·감시 | 상시 감시 | `/admin/sentinel` | `his-system-admin-sentinel.png` | ✅ |
-| AI 운영·감수 | AI 약물설명 승인 | `/admin/drug-explain` | `his-system-admin-drug-explain.png` | ⬜ |
-| AI 운영·감수 | 검진해석 콘텐츠(감수) | `/admin/checkup-explainer` | `his-system-admin-checkup-explainer.png` | ⬜ |
+| AI 운영·감수 | AI 약물설명 승인 | `/admin/drug-explain` | `his-system-admin-drug-explain.png` | ✅ |
+| AI 운영·감수 | 검진해석 콘텐츠(감수) | `/admin/checkup-explainer` | `his-system-admin-checkup-explainer.png` | ✅ |
 | AI 운영·감수 | 봇 관리 | `/admin/bots` | `his-system-admin-bots.png` | ⬜ |
 | AI 운영·감수 | 의료법 AI(WeRU.B) | `/admin/medical-law` | `his-system-admin-medical-law.png` | ⬜ |
 | AI 운영·감수 | 영상 AI(WeRU.B) | `/admin/ai-vision` | `his-system-admin-ai-vision.png` | ⬜ |

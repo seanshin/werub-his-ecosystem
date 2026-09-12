@@ -113,7 +113,7 @@ sequenceDiagram
 | 25 | 회계 | 회계 담당A | ERP | 전표 · 일마감 · 결산으로 이어집니다 | `시스템 안` | ERP | — |
 | 26 | 보험 청구서 작성 | 원무A | HIS | 보험 청구서(EDI 서식)를 작성합니다 | `시스템 안` | `보험 청구`(`/claims`) | — |
 | 27 | 청구 사전심사 | 원무A | ERP → AI Server | ERP 가 청구 전 사전심사를 합니다 | `구현·미검증`<br>AI Server ⇄ ERP · 청구 사전심사 | ERP 청구 사전심사 | AI 가 고시 근거를 찾아 주고 **삭감 위험 평가를 보조**합니다 → **청구 내용의 확정은 원무A 가 합니다** |
-| 28 | 대외 청구 전송 | 원무A | HIS → 대외 기관 | 작성한 청구서를 심사 기관에 보냅니다 | `미구현`<br>README — 대외 기관 전송 모듈 없음(연결 표 밖) | — | — |
+| 28 | 대외 청구 전송 | 원무A | HIS → 대외 기관 | 작성한 청구서를 심사 기관에 보냅니다 | `미구현`<br>README — 대외 기관 전송 모듈 없음(연결 표 밖) | `HIRA 청구`(`/admin/hira-edi`) — 화면이 **「전송 연동 미구축 · 원내 접수까지」** 라고 적고 수기 제출 절차를 안내합니다 | — |
 | 29 | 결과 열람 | 환자A | 환자 앱 → HIS | 검사 결과 · 처방 · 수납 내역을 봅니다 | `구현·미검증`<br>HIS ⇄ 환자 앱 · 포털 기능 | 환자 앱 결과 · 수납 | — |
 | 30 | 영상 · 판독 열람 | 환자A | HIS(환자 포털) → PACS | 본인 영상 목록 · 판독 · 판독 PDF 를 봅니다 | `구현·미검증`<br>HIS ⇄ PACS · 환자 본인 영상 · 판독 조회 | 환자 앱 영상검사 | — |
 | 31 | 복약 설명 | 약사A · 환자A | HIS → AI Server | 환자용 약 설명을 앱에서 봅니다 | `구현·미검증`<br>HIS ⇄ AI Server · 생성형 소형 클라이언트(환자 약 설명) | `AI 약물설명 승인`(`/admin/drug-explain`) · 환자 앱 복약 관리 | AI 가 환자용 **약 설명 초안**을 만듭니다 → **약사A 가 `AI 약물설명 승인` 화면에서 감수 · 승인합니다** |
@@ -188,10 +188,11 @@ sequenceDiagram
 | 01-09 | 진료비 계산서(ERP 산정값)와 수납 | HIS `수납` | — | ✅ 들어옴(수납 대기열) · ERP 산정값이 뜬 계산서 상세는 아직<br>[`his-ops-billing.png`](../assets/screens/his-ops-billing.png) |
 | 01-10 | 청구 사전심사의 고시 근거 · 삭감 위험 보조 | ERP 청구 사전심사 | — | ✅ 들어옴 — 케이스별 `BLOCK`/`WARN` · 위험액·청구액 병기 · 담당 `미배정` · AI 는 보조 버튼<br>[`erp-claim-precheck.png`](../assets/screens/erp-claim-precheck.png) · [`erp-dashboard.png`](../assets/screens/erp-dashboard.png) |
 | 01-11 | 결과 · 영상 · 판독 열람 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
-| 01-12 | 환자용 약 설명 초안 감수 · 승인 | HIS `AI 약물설명 승인` | — | ⬜ |
+| 01-12 | 환자용 약 설명 초안 감수 · 승인 | HIS `AI 약물설명 승인` | — | ✅ 들어옴 — **약사 승인분만 환자에게 노출** · 검수 기준 4가 화면에 · 🔴 **공개 정보 개정으로 재생성되면 승인이 자동 해제**되어 다시 검수 목록에<br>[`his-system-admin-drug-explain.png`](../assets/screens/his-system-admin-drug-explain.png) |
 | 01-13 | 원격 상담 화상 | Jitsi | 화상 시스템을 새로 구성한 뒤 | ⬜ |
 | 01-14 | 검체 접수와 상태별 분모(9단계) | LIS 접수 | — | ✅ 들어옴 — 접수·라벨발행 · 거부/분주/정정 · 총 40 중 응급 3 · 접수 10 · 진행 20 · 완료 7 · 보고 2 · 취소 1<br>[`lis-order-receipt.png`](../assets/screens/lis-order-receipt.png) |
 | 01-15 | 영상 오더가 장비 워크리스트로 가는 자리(15·16단계) | PACS 워크리스트 | — | ✅ 들어옴 — **MWL 로 장비에 자동 제공 · MPPS 로 촬영 시작·완료 자동 보고** · 예약 9 · 취소 5<br>[`pacs-worklist.png`](../assets/screens/pacs-worklist.png) |
+| 01-17 | 대외 청구 전송이 막힌 자리(28단계)와 수기 대체 절차 | HIS `HIRA 청구` | — | ✅ 들어옴 — 🔴 **「심평원 전송 연동 미구축 — 이 화면의 제출은 원내 접수까지입니다」** · 상태 이름이 아예 `원내 접수(미전송)`<br>[`his-system-admin-hira-edi.png`](../assets/screens/his-system-admin-hira-edi.png) |
 | 01-16 | 수납이 회계 전표가 되는 자리(23단계) | ERP 재무 | — | ✅ 들어옴 — 전표마다 **출처 배지**(patient · claims · scm · manual)와 원 이벤트 참조<br>[`erp-accounting.png`](../assets/screens/erp-accounting.png) |
 
 ## 근거
