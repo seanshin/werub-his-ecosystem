@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **56** / 266 |
+| 지금 들어온 캡처 | **69** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -58,11 +58,11 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 내과 | `/internal-medicine` | `his-care-internal-medicine.png` | ⬜ |
+| 내과 | `/internal-medicine` | `his-care-internal-medicine.png` | ✅ |
 | 정형외과 | `/orthopedics` | `his-care-orthopedics.png` | ⬜ |
 | 신경외과 | `/neurosurgery` | `his-care-neurosurgery.png` | ⬜ |
 | 산부인과 | `/obgyn` | `his-care-obgyn.png` | ⬜ |
-| 소아청소년과 | `/pediatrics` | `his-care-pediatrics.png` | ⬜ |
+| 소아청소년과 | `/pediatrics` | `his-care-pediatrics.png` | ✅ |
 | 정신과 | `/psychiatry` | `his-care-psychiatry.png` | ⬜ |
 | 안과 | `/ophthalmology` | `his-care-ophthalmology.png` | ⬜ |
 | 이비인후과 | `/ent` | `his-care-ent.png` | ⬜ |
@@ -77,7 +77,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 |---|---|---|---|
 | 재활의학 | `/rehab` | `his-care-rehab.png` | ⬜ |
 | 방사선종양 | `/radiation` | `his-care-radiation.png` | ⬜ |
-| 항암 치료(사이클) | `/chemo` | `his-care-chemo.png` | ⬜ |
+| 항암 치료(사이클) | `/chemo` | `his-care-chemo.png` | ✅ |
 | 투석실 | `/dialysis` | `his-care-dialysis.png` | ⬜ |
 | 장기이식 | `/transplant` | `his-care-transplant.png` | ⬜ |
 
@@ -181,9 +181,9 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 동의서 | `/consent` | `his-support-consent.png` | ⬜ |
+| 동의서 | `/consent` | `his-support-consent.png` | ✅ |
 | 기록 검색 | `/medical-records/search` | `his-support-medical-records-search.png` | ⬜ |
-| 사본 발급 | `/medical-records/copy` | `his-support-medical-records-copy.png` | ⬜ |
+| 사본 발급 | `/medical-records/copy` | `his-support-medical-records-copy.png` | ✅ |
 
 ## 환자·고객 — `patient` (17)
 
@@ -207,7 +207,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 진료과 안내 | `/departments` | `his-patient-departments.png` | ⬜ |
+| 진료과 안내 | `/departments` | `his-patient-departments.png` | ✅ |
 | 의료진 소개 | `/doctors` | `his-patient-doctors.png` | ⬜ |
 | 시설 안내 | `/facility-info` | `his-patient-facility-info.png` | ⬜ |
 | 병원 소식 | `/his-news` | `his-patient-his-news.png` | ⬜ |
@@ -281,7 +281,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 경영 대시보드 | `/executive` | `his-ops-executive.png` | ⬜ |
+| 경영 대시보드 | `/executive` | `his-ops-executive.png` | ✅ |
 | 의료 품질 | `/executive/clinical` | `his-ops-executive-clinical.png` | ⬜ |
 
 ## 지능형 — `intel` (7)
@@ -385,7 +385,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 |---|---|---|---|
 | 검진권 발행·조회 | `/admin/voucher/issue` | `his-system-admin-voucher-issue.png` | ⬜ |
 | 검진권 목록 | `/admin/voucher/list` | `his-system-admin-voucher-list.png` | ⬜ |
-| 검진권 대시보드 | `/admin/voucher/dashboard` | `his-system-admin-voucher-dashboard.png` | ⬜ |
+| 검진권 대시보드 | `/admin/voucher/dashboard` | `his-system-admin-voucher-dashboard.png` | ✅ |
 | 검진권 딜러 | `/admin/voucher/distributors` | `his-system-admin-voucher-distributors.png` | ⬜ |
 | 검진권 정책 | `/admin/voucher/settings` | `his-system-admin-voucher-settings.png` | ⬜ |
 
@@ -396,9 +396,9 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 연동 신청 관리 | `/admin/partner-requests` | `his-system-admin-partner-requests.png` | ⬜ |
 | 연동 모니터링 | `/admin/partner-monitoring` | `his-system-admin-partner-monitoring.png` | ⬜ |
 | 연동 기관 | `/admin/organizations` | `his-system-admin-organizations.png` | ⬜ |
-| SMART 클라이언트 | `/admin/smart-clients` | `his-system-admin-smart-clients.png` | ⬜ |
+| SMART 클라이언트 | `/admin/smart-clients` | `his-system-admin-smart-clients.png` | ✅ |
 | 전원 통계 | `/admin/transfer-stats` | `his-system-admin-transfer-stats.png` | ⬜ |
-| 진료정보교류(HIE) | `/admin/hie-dashboard` | `his-system-admin-hie-dashboard.png` | ⬜ |
+| 진료정보교류(HIE) | `/admin/hie-dashboard` | `his-system-admin-hie-dashboard.png` | ✅ |
 
 ### 홈페이지 관리 (7)
 
@@ -410,7 +410,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 배너 관리 | `/admin/homepage/banners` | `his-system-admin-homepage-banners.png` | ⬜ |
 | 미디어 라이브러리 | `/admin/homepage/media` | `his-system-admin-homepage-media.png` | ⬜ |
 | SEO/메타데이터 | `/admin/homepage/seo` | `his-system-admin-homepage-seo.png` | ⬜ |
-| 홈페이지 배포 | `/admin/homepage/deploy` | `his-system-admin-homepage-deploy.png` | ⬜ |
+| 홈페이지 배포 | `/admin/homepage/deploy` | `his-system-admin-homepage-deploy.png` | ✅ |
 
 ## 개인 — `personal` (7)
 
@@ -425,11 +425,11 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
 | 내 행정(ESS) | `/ess` | `his-personal-ess.png` | ⬜ |
-| 내 전자인증서 | `/settings/my-certificate` | `his-personal-settings-my-certificate.png` | ⬜ |
+| 내 전자인증서 | `/settings/my-certificate` | `his-personal-settings-my-certificate.png` | ✅ |
 | 내 서명 등록 | `/settings/my-signature` | `his-personal-settings-my-signature.png` | ⬜ |
 | 나의 약속처방 | `/settings/my-codes` | `his-personal-settings-my-codes.png` | ⬜ |
 | 단축키·화면번호 | `/settings/shortcuts` | `his-personal-settings-shortcuts.png` | ⬜ |
-| 음성 설정 (VoiceEMR) | `/settings/voice` | `his-personal-settings-voice.png` | ⬜ |
+| 음성 설정 (VoiceEMR) | `/settings/voice` | `his-personal-settings-voice.png` | ✅ |
 
 ## 다시 만들기
 
