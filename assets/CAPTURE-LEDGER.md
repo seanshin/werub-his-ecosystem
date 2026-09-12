@@ -62,6 +62,13 @@
 | `assets/screens/pacs-admin-login.png` | PACS Admin 로그인 — 사용자명·비밀번호 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 **테스트 계정 5 · 비밀번호 평문 가림** | 확인 (2026-09-12) |
 | `assets/screens/pacs-admin-dashboard.png` | PACS Admin 대시보드 — 판독 대기 33 · **영상 출처 추적(AI 생성·익명화·테스트 데이터)** · HIS 연동 요청 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/pacs-admin-ai-models.png` | PACS AI 모델 관리 — 등록 29(의료 13·범용 16) · 용도 전부 「보조」 · 자체 모델 2종 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 AI 서버 주소 가림 | 확인 (2026-09-12) |
+| `assets/screens/his-intel-concierge.png` | AI 컨시어지(`/concierge`) — 환자 맞춤 안내 · 환자 선택 후 세션 시작 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-intel-ai-booking.png` | AI 예약 도우미(`/ai-booking`) — 증상에서 진료과·일정 추천 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-intel-interoperability.png` | 상호운용성(`/interoperability`) — **FHIR R4 리소스 17종** · 전원 4단계 · 환자 유형 6 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-intel-interoperability-test.png` | 연동 테스트 콘솔(`/interoperability/test`) — FHIR 엔드포인트 8종 실호출 버튼 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-intel-journey.png` | 환자 여정 대시보드(`/journey`) — 질관리 지표 · **분모 병기(공휴 3건 기준)** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-ops-billing.png` | 수납 관리(`/billing`) — 대기 80 · 본인부담금 · 대기시간 · 시드 환자 ID 노출 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-ops-claims.png` | 건강보험 청구(`/claims`) — **「전송 여부 확인 불가」 배지** · XML 생성 · 인정액 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/sign-admin-login.png` | sign 트러스트 서비스 관리 콘솔 로그인 — API 키 로그인(break-glass) · v1.25.0 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/twin-patient-chart.png` | twin 환자 차트 — NEWS2·위험·eGFR · **「트윈 파생」 배지** · 「규칙기반 파생·임상 판단 보조」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/twin-ops-console.png` | twin 운영 콘솔 — **「운영 모드 · 비PHI 집계」** · 환자는 UUID 로만 · 고위험/기기 알림 20 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |

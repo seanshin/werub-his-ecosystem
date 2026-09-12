@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **45** / 266 |
+| 지금 들어온 캡처 | **52** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -255,8 +255,8 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
 | 원무·수납 보드 | `/reception-billing-board` | `his-ops-reception-billing-board.png` | ⬜ |
-| 수납 | `/billing` | `his-ops-billing.png` | ⬜ |
-| 보험 청구 | `/claims` | `his-ops-claims.png` | ⬜ |
+| 수납 | `/billing` | `his-ops-billing.png` | ✅ |
+| 보험 청구 | `/claims` | `his-ops-claims.png` | ✅ |
 | 원가 분석 | `/cost-analysis` | `his-ops-cost-analysis.png` | ⬜ |
 | 환자 만족도 | `/satisfaction` | `his-ops-satisfaction.png` | ⬜ |
 | 자재/재고 | `/inventory` | `his-ops-inventory.png` | ⬜ |
@@ -290,13 +290,13 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| AI(WeRU.B) 컨시어지 | `/concierge` | `his-intel-concierge.png` | ⬜ |
-| AI(WeRU.B) 예약 도우미 | `/ai-booking` | `his-intel-ai-booking.png` | ⬜ |
+| AI(WeRU.B) 컨시어지 | `/concierge` | `his-intel-concierge.png` | ✅ |
+| AI(WeRU.B) 예약 도우미 | `/ai-booking` | `his-intel-ai-booking.png` | ✅ |
 | 시뮬레이터/플로어맵 | `/simulator` | `his-intel-simulator.png` | ⬜ |
 | 메타버스 뷰어 | `/metaverse` | `his-intel-metaverse.png` | ⬜ |
-| 환자 여정 | `/journey` | `his-intel-journey.png` | ⬜ |
-| 상호운용성 | `/interoperability` | `his-intel-interoperability.png` | ⬜ |
-| 연동 테스트 콘솔 | `/interoperability/test` | `his-intel-interoperability-test.png` | ⬜ |
+| 환자 여정 | `/journey` | `his-intel-journey.png` | ✅ |
+| 상호운용성 | `/interoperability` | `his-intel-interoperability.png` | ✅ |
+| 연동 테스트 콘솔 | `/interoperability/test` | `his-intel-interoperability-test.png` | ✅ |
 
 ## 시스템 관리 — `system` (87)
 
