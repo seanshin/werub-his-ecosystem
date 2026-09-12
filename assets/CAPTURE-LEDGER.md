@@ -57,3 +57,13 @@
 | `assets/screens/his-care-consult.png` | 상담 데스크(`/consult`) — 직원 한국어 → 환자 언어 자동 번역 · 언어 배지 · 경과 시간 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/flow-portal-01-login.png` | 환자 포털 로그인(`/portal`) — ⚠️ 리허설 배너(실환자 아님·전송 안 나감) · 휴대폰 번호 로그인 · AI 예약 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 테스트 계정 · 자동완성 팝업 **가림** | 확인 (2026-09-12) |
 | `assets/screens/homepage-booking.png` | 온라인 진료 예약(`/booking`) — 공개 홈페이지 상단 메뉴 · 본인 확인 후 AI 컨시어지 안내 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 **기관 주소·대표전화 가림** · 테스트 계정 가림 | 확인 (2026-09-12) |
+| `assets/screens/lis-dashboard.png` | LIS 대시보드 — 연계 상태(HIS FHIR·PACS·오더 폴링·Reflex) · 위험치 통보 대기 · MDRO/법정감염병 알림 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/lis-verify-worklist.png` | LIS 검증 워크리스트 — 위험치·QC 실패·위탁 회신 · HH/LL/N 판정 · **LIS 가 환자명 자체 마스킹** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/pacs-admin-login.png` | PACS Admin 로그인 — 사용자명·비밀번호 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 **테스트 계정 5 · 비밀번호 평문 가림** | 확인 (2026-09-12) |
+| `assets/screens/pacs-admin-dashboard.png` | PACS Admin 대시보드 — 판독 대기 33 · **영상 출처 추적(AI 생성·익명화·테스트 데이터)** · HIS 연동 요청 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/pacs-admin-ai-models.png` | PACS AI 모델 관리 — 등록 29(의료 13·범용 16) · 용도 전부 「보조」 · 자체 모델 2종 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 AI 서버 주소 가림 | 확인 (2026-09-12) |
+| `assets/screens/sign-admin-login.png` | sign 트러스트 서비스 관리 콘솔 로그인 — API 키 로그인(break-glass) · v1.25.0 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/twin-patient-chart.png` | twin 환자 차트 — NEWS2·위험·eGFR · **「트윈 파생」 배지** · 「규칙기반 파생·임상 판단 보조」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/twin-ops-console.png` | twin 운영 콘솔 — **「운영 모드 · 비PHI 집계」** · 환자는 UUID 로만 · 고위험/기기 알림 20 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/erp-dashboard.png` | 병원 ERP 대시보드(`/erp/dashboard`) — 사전심사 미처리 · 법정기한 · 삭감 통계 · 재무 건전성 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 도메인 한 줄 가림 | 확인 (2026-09-12) |
+| `assets/screens/edu-login.png` | edu 로그인 — **「HIS 계정으로 인증 · 운영 전환 시 HIS SSO 로 대체」** · 기관명이 HIS 와 다름 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 이메일 도메인 가림 | 확인 (2026-09-12) |

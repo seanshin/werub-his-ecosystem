@@ -11,17 +11,17 @@
 |---|---|---|---|
 | 코어 | **HIS** | [his.md](his.md) | **266**(코드 기본 메뉴 · [목록](../assets/screens/INDEX.md)) |
 | 흐름 | **사람을 넣고 빼는 일** | [by-onboarding.md](by-onboarding.md) | 로그인 · 인증서 · 채용 · 의료진 등록 · 퇴직 |
-| 환자 접점 | 공개 홈페이지 | [homepage.md](homepage.md) | 50(화면 수 계측값) |
-| 환자 접점 | 환자 앱 | [patient-app.md](patient-app.md) | 32 |
-| 임상 부서 | LIS | [lis.md](lis.md) | 41 |
-| 임상 부서 | PACS | [pacs.md](pacs.md) | 47(관리 화면 · 웹 뷰어 제외) |
-| 신뢰 | sign | [sign.md](sign.md) | 38 |
-| 경영 | ERP | [erp.md](erp.md) | 113 |
+| 환자 접점 | 공개 홈페이지 | [homepage.md](homepage.md) **1장** | 50(화면 수 계측값) |
+| 환자 접점 | 환자 앱 | [patient-app.md](patient-app.md) **1장** | 32 |
+| 임상 부서 | LIS | [lis.md](lis.md) **2장** | 41 |
+| 임상 부서 | PACS | [pacs.md](pacs.md) **2장** | 47(관리 화면 · 웹 뷰어 제외) |
+| 신뢰 | sign | [sign.md](sign.md) **1장** | 38 |
+| 경영 | ERP | [erp.md](erp.md) **1장** | 113 |
 | AI | AI Server | [ai-server.md](ai-server.md) | 관리 화면(계측값 없음) |
-| AI | twin | [twin.md](twin.md) | 15 |
+| AI | twin | [twin.md](twin.md) **2장** | 15 |
 | AI | cerno | [cerno.md](cerno.md) | 3 |
 | 협업·교육 | Clinic | [clinic.md](clinic.md) | 16(병원 서비스) |
-| 협업·교육 | edu | [edu.md](edu.md) | 41 |
+| 협업·교육 | edu | [edu.md](edu.md) **1장** | 41 |
 | 협업·교육 | Jitsi | [jitsi.md](jitsi.md) | — (`중단` — 현재 설치본이 동작하지 않습니다) |
 
 화면 수는 [계측 스냅샷](../data/scale-snapshot.json)(계측일 2026-09-11 · 기준 커밋 내용을 읽어 셈)에서 옮겼습니다. HIS 는 메뉴 구성표의 **메뉴 항목 수**(266)이고, 계측 스냅샷의 웹 화면 수(450)와 세는 대상이 다릅니다 — 메뉴에 걸리지 않은 화면이 있기 때문입니다.
