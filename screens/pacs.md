@@ -29,15 +29,32 @@
 - 아직 받는 중인 모델은 **비활성으로 흐리게** 표시됩니다.
 - 맨 위에 GPU AI 서버 연결 상태와 `연동 테스트` 가 있습니다(**주소는 공개 자료에서 가렸습니다**).
 
+![PACS 판독 큐 — 상태 · 모달리티 · 출처 배지](../assets/screens/pacs-reading-queue.png)
+
+판독 큐는 **전체 · 판독 대기 · 작성 중 · 예비 판독 · 완료**로 나뉩니다. 행마다 상태 · 환자번호 · **모달리티 배지와 영상 장수** · 검사 설명 · 검사일 · 접수번호 · 판독의가 붙고, 오른쪽 **`출처` 칸**에 이 영상이 어디서 왔는지가 배지로 섭니다(AI 생성 · 테스트 데이터 · 흉부 선별 등). 이 설치본은 전체 33건 · 대기 29건입니다.
+
+> 👤 **환자명은 공개 자료에서 가렸습니다.** 이 화면은 이름을 그대로 보여 줍니다 — [LIS 검증 워크리스트](lis.md)가 목록에서 이름을 스스로 가리는 것과 다릅니다. **가림은 시스템마다 다른 판단**이고, 구축 기관은 화면마다 무엇을 보여 줄지 자기 규정으로 정합니다.
+
+![PACS 워크리스트 관리 — MWL/MPPS](../assets/screens/pacs-worklist.png)
+
+**촬영 장비가 보는 목록**입니다. 화면 머리가 규칙을 그대로 적습니다 — "예약 검사는 **Modality Worklist(MWL)**로 촬영 장비에 자동 제공되어 환자정보 수기 입력을 예방합니다. 촬영 시작·완료는 **MPPS**로 자동 보고되어 상태(진행중→완료)와 수행 시작·장비가 갱신됩니다." 이 설치본의 워크리스트 SCP 는 **AE 타이틀 `OPENPACS-MWL`** 로 떠 있습니다(→ [S3 장비 등록](../build-guide/S3-clinical-departments.md)).
+
+상태는 예약 9 · 진행중 0 · 완료 0 · 취소 5 로 갈리고, 취소된 행에는 **`수정`·`취소` 버튼이 없습니다** — 끝난 것은 되돌리는 대신 기록으로 남습니다.
+
+![PACS 응급 영상 보드](../assets/screens/pacs-emergency-board.png)
+
+**15초마다 저절로 갱신되는** 응급 보드입니다(`전체` · `STAT/긴급` · `판독 대기` · `판독 완료`). 대기 29 · 전체 33 이 오른쪽 위에 분모와 함께 섭니다 → [취지 5 「분모를 함께」](../overview/02-principles.md).
+
 ## 캡처 자리
 
 | # | 담을 화면 | 파일 | 상태 |
 |---|---|---|---|
 | 📷 pacs-1 | 판독 모드의 AI 패널과 판독문 초안 | `pacs-reading-ai.png` | ⬜ |
 | 📷 pacs-2 | 판독 서명 | `pacs-reading-sign.png` | ⬜ |
-| 📷 pacs-3 | 영상 자동 선별 알림과 응급 보드 | `pacs-screening-board.png` | ⬜ |
+| ✅ pacs-3 | 응급 영상 보드 — 15초 자동 갱신 · 대기/전체 분모 | [`pacs-emergency-board.png`](../assets/screens/pacs-emergency-board.png) | 확인(2026-09-12) · 영상 자동 선별 알림은 남음 |
 | 📷 pacs-4 | 병리 슬라이드 현미경 모드 | `pacs-pathology-viewer.png` | ⬜ |
-| 📷 pacs-5 | 워크리스트 — 촬영 대기와 상태 | `pacs-worklist.png` | ⬜ |
+| ✅ pacs-5 | 워크리스트 — MWL 제공 · MPPS 자동 보고 · AE `OPENPACS-MWL` | [`pacs-worklist.png`](../assets/screens/pacs-worklist.png) | 확인(2026-09-12) |
+| ✅ pacs-6 | 판독 큐 — 상태 5단계 · 모달리티 배지 · **출처 배지** | [`pacs-reading-queue.png`](../assets/screens/pacs-reading-queue.png) | 확인(2026-09-12) |
 
 ## 알아 둘 것
 

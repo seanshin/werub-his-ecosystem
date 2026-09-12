@@ -79,3 +79,13 @@
 | `assets/screens/twin-ops-console.png` | twin 운영 콘솔 — **「운영 모드 · 비PHI 집계」** · 환자는 UUID 로만 · 고위험/기기 알림 20 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/erp-dashboard.png` | 병원 ERP 대시보드(`/erp/dashboard`) — 사전심사 미처리 · 법정기한 · 삭감 통계 · 재무 건전성 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 도메인 한 줄 가림 | 확인 (2026-09-12) |
 | `assets/screens/edu-login.png` | edu 로그인 — **「HIS 계정으로 인증 · 운영 전환 시 HIS SSO 로 대체」** · 기관명이 HIS 와 다름 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 이메일 도메인 가림 | 확인 (2026-09-12) |
+| `assets/screens/lis-order-receipt.png` | LIS 오더·검체 접수 — 접수·라벨발행 · 검체 처리(거부·분주·정정) · 상태별 분모 6(응급3·접수10·진행20·완료7·보고2·취소1) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 처방의 열 **가림** | 확인 (2026-09-12) |
+| `assets/screens/lis-qc-westgard.png` | LIS 정도관리(QC · Westgard) — 측정 등록 즉시 PASS/FAIL · 로그 75건 · FAIL 은 결과 확정 차단으로 이어짐 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/lis-signoff-worksheet.png` | LIS 개시 서명·결재 — 참고치·위험치 · 자동검증 델타 한계 · EDI 수가코드 매핑을 섹션별로 사람이 서명 · **「dev seed 대표값 · 임상 권위 값 아님」** 자기 고지 · 「서명 이후 변경됨」 표시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/erp-claim-precheck.png` | ERP 청구 사전심사 워크리스트(`/erp/claims/pre-review`) — BLOCK/WARN 심각도 · 위험액·청구액 병기 · 담당 `미배정` · AI 는 보조 버튼 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 도메인 한 줄 가림 | 확인 (2026-09-12) |
+| `assets/screens/erp-accounting.png` | ERP 재무 전표·예산·정산(`/erp/finance`) — 예실대비 · 수동 전표 초안→상신→승인 · **전표 출처 배지**(patient·claims·scm·manual) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 도메인 한 줄 가림 | 확인 (2026-09-12) |
+| `assets/screens/erp-daily-closing.png` | ERP 원무 수납·일마감(`/erp/patients/closing`) — 토요일이라 0건 · 「해당 일자 수납 없음」 · 현금 시재 계산식 병기 · **마감 후 정정 = 덮개 전표 + 재마감, 원 마감 보존** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 도메인 한 줄 가림 | 확인 (2026-09-12) |
+| `assets/screens/erp-inventory.png` | ERP 재고 품목·마약류·발주(`/erp/inventory`) — 입고 시 로트·유효기간 필수 · REQUESTED→APPROVED→RECEIVED · 안전재고 · 마약류 강조 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 도메인 한 줄 가림 | 확인 (2026-09-12) |
+| `assets/screens/pacs-worklist.png` | PACS 워크리스트 관리 — MWL 로 장비에 자동 제공 · MPPS 자동 보고 · AE `OPENPACS-MWL` · 예약9·진행0·완료0·취소5 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/pacs-emergency-board.png` | PACS 응급 영상 보드 — 15초 자동 갱신 · 대기 29 / 전체 33 · STAT/긴급·판독 대기·판독 완료 탭 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 환자명 열 **가림**(이 화면은 이름을 그대로 보여 줌) | 확인 (2026-09-12) |
+| `assets/screens/pacs-reading-queue.png` | PACS 판독 큐 — 상태 5단계 · 모달리티 배지와 영상 장수 · **출처 배지**(AI 생성·테스트 데이터 등) · 전체 33·대기 29 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 환자명 열 **가림** | 확인 (2026-09-12) |
