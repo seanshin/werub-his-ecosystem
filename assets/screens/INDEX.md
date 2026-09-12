@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **86** / 266 |
+| 지금 들어온 캡처 | **138** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -145,7 +145,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 입원 | `/workstation/admission` | `his-support-workstation-admission.png` | ⬜ |
 | 수술 준비 | `/workstation/surgery-prep` | `his-support-workstation-surgery-prep.png` | ⬜ |
 | 수술 후 회복 | `/workstation/post-op` | `his-support-workstation-post-op.png` | ⬜ |
-| 중환자실 | `/workstation/icu` | `his-support-workstation-icu.png` | ⬜ |
+| 중환자실 | `/workstation/icu` | `his-support-workstation-icu.png` | ✅ |
 | 주치의 | `/workstation/attending` | `his-support-workstation-attending.png` | ⬜ |
 | 응급실 | `/workstation/emergency` | `his-support-workstation-emergency.png` | ⬜ |
 | 혈액은행 | `/workstation/blood-bank` | `his-support-workstation-blood-bank.png` | ⬜ |
@@ -307,38 +307,38 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 개원 관제 | 개원·운영 단계 | `/admin/opening` | `his-system-admin-opening.png` | ✅ |
 | 개원 관제 | 운영 전환(Go-Live) 관제 | `/admin/go-live` | `his-system-admin-go-live.png` | ✅ |
 | 개원 관제 | 연동 개통 게이트 | `/admin/integration-gates` | `his-system-admin-integration-gates.png` | ✅ |
-| 개원 관제 | Phase0 컷오버 승인 | `/admin/phase0-cutover` | `his-system-admin-phase0-cutover.png` | ⬜ |
-| 개원 관제 | EMR 인증 | `/admin/emr-cert` | `his-system-admin-emr-cert.png` | ⬜ |
+| 개원 관제 | Phase0 컷오버 승인 | `/admin/phase0-cutover` | `his-system-admin-phase0-cutover.png` | ✅ |
+| 개원 관제 | EMR 인증 | `/admin/emr-cert` | `his-system-admin-emr-cert.png` | ✅ |
 | 코드·마스터 | 코드 마스터 | `/admin/codes` | `his-system-admin-codes.png` | ✅ |
-| 코드·마스터 | 비급여 관리 | `/admin/non-covered` | `his-system-admin-non-covered.png` | ⬜ |
-| 코드·마스터 | 약품 보험코드 매핑 | `/admin/drug-mapping` | `his-system-admin-drug-mapping.png` | ⬜ |
-| 코드·마스터 | 수가 계산기 | `/admin/billing-calc` | `his-system-admin-billing-calc.png` | ⬜ |
-| 코드·마스터 | 진료과 카탈로그 | `/admin/dept-catalog` | `his-system-admin-dept-catalog.png` | ⬜ |
+| 코드·마스터 | 비급여 관리 | `/admin/non-covered` | `his-system-admin-non-covered.png` | ✅ |
+| 코드·마스터 | 약품 보험코드 매핑 | `/admin/drug-mapping` | `his-system-admin-drug-mapping.png` | ✅ |
+| 코드·마스터 | 수가 계산기 | `/admin/billing-calc` | `his-system-admin-billing-calc.png` | ✅ |
+| 코드·마스터 | 진료과 카탈로그 | `/admin/dept-catalog` | `his-system-admin-dept-catalog.png` | ✅ |
 | 코드·마스터 | 카테고리 관리 | `/admin/categories` | `his-system-admin-categories.png` | ⬜ |
-| 임상 규칙·템플릿 | 약속처방(CP) | `/admin/order-sets` | `his-system-admin-order-sets.png` | ⬜ |
+| 임상 규칙·템플릿 | 약속처방(CP) | `/admin/order-sets` | `his-system-admin-order-sets.png` | ✅ |
 | 임상 규칙·템플릿 | 치료일정 템플릿 | `/admin/treatment-templates` | `his-system-admin-treatment-templates.png` | ⬜ |
-| 임상 규칙·템플릿 | 원내 처방집(위원회) | `/admin/formulary` | `his-system-admin-formulary.png` | ⬜ |
-| 임상 규칙·템플릿 | CDSS 규칙 | `/admin/cdss-rules` | `his-system-admin-cdss-rules.png` | ⬜ |
-| 임상 규칙·템플릿 | 여정 프로토콜 | `/admin/protocols` | `his-system-admin-protocols.png` | ⬜ |
+| 임상 규칙·템플릿 | 원내 처방집(위원회) | `/admin/formulary` | `his-system-admin-formulary.png` | ✅ |
+| 임상 규칙·템플릿 | CDSS 규칙 | `/admin/cdss-rules` | `his-system-admin-cdss-rules.png` | ✅ |
+| 임상 규칙·템플릿 | 여정 프로토콜 | `/admin/protocols` | `his-system-admin-protocols.png` | ✅ |
 | 임상 규칙·템플릿 | 처방의 지정 규칙 | `/admin/prescriber-rules` | `his-system-admin-prescriber-rules.png` | ⬜ |
 | 임상 규칙·템플릿 | 차트 에디터 | `/admin/chart-editor` | `his-system-admin-chart-editor.png` | ⬜ |
-| 임상 규칙·템플릿 | 폼 빌더 | `/admin/forms` | `his-system-admin-forms.png` | ⬜ |
+| 임상 규칙·템플릿 | 폼 빌더 | `/admin/forms` | `his-system-admin-forms.png` | ✅ |
 | 임상 규칙·템플릿 | 임상도구 검수 | `/admin/clinical-chart-verification` | `his-system-admin-clinical-chart-verification.png` | ⬜ |
 | 임상 규칙·템플릿 | 트리아지 관리 | `/admin/triage` | `his-system-admin-triage.png` | ✅ |
-| 시설·장비 | 시설 관리 | `/admin/facility` | `his-system-admin-facility.png` | ⬜ |
-| 시설·장비 | 응급실 베드 관리 | `/admin/er-beds` | `his-system-admin-er-beds.png` | ⬜ |
-| 시설·장비 | TV 디스플레이 관리 | `/admin/displays` | `his-system-admin-displays.png` | ⬜ |
+| 시설·장비 | 시설 관리 | `/admin/facility` | `his-system-admin-facility.png` | ✅ |
+| 시설·장비 | 응급실 베드 관리 | `/admin/er-beds` | `his-system-admin-er-beds.png` | ✅ |
+| 시설·장비 | TV 디스플레이 관리 | `/admin/displays` | `his-system-admin-displays.png` | ✅ |
 | 시설·장비 | 워크스테이션·디바이스 | `/admin/workstations` | `his-system-admin-workstations.png` | ⬜ |
 | 권한·보안 | 접근 권한 | `/admin/access-control` | `his-system-admin-access-control.png` | ✅ |
 | 권한·보안 | 역할 권한 | `/admin/rbac` | `his-system-admin-rbac.png` | ✅ |
 | 권한·보안 | 전자인증서 | `/admin/blockchain-cert` | `his-system-admin-blockchain-cert.png` | ✅ |
 | 권한·보안 | ERP 접근 설정 | `/admin/erp` | `his-system-admin-erp.png` | ⬜ |
-| 화면·표시 | 메뉴 관리 | `/admin/menus` | `his-system-admin-menus.png` | ⬜ |
+| 화면·표시 | 메뉴 관리 | `/admin/menus` | `his-system-admin-menus.png` | ✅ |
 | 화면·표시 | 메뉴 구성·권한 | `/admin/menu-config` | `his-system-admin-menu-config.png` | ⬜ |
-| 화면·표시 | 화면번호 레지스트리 | `/admin/screen-codes` | `his-system-admin-screen-codes.png` | ⬜ |
-| 화면·표시 | 대시보드 템플릿 | `/admin/dashboard-templates` | `his-system-admin-dashboard-templates.png` | ⬜ |
-| 화면·표시 | 수치 표시·반올림 정책 | `/admin/numeric-policy` | `his-system-admin-numeric-policy.png` | ⬜ |
-| 화면·표시 | 확장 슬롯 | `/admin/extensions` | `his-system-admin-extensions.png` | ⬜ |
+| 화면·표시 | 화면번호 레지스트리 | `/admin/screen-codes` | `his-system-admin-screen-codes.png` | ✅ |
+| 화면·표시 | 대시보드 템플릿 | `/admin/dashboard-templates` | `his-system-admin-dashboard-templates.png` | ✅ |
+| 화면·표시 | 수치 표시·반올림 정책 | `/admin/numeric-policy` | `his-system-admin-numeric-policy.png` | ✅ |
+| 화면·표시 | 확장 슬롯 | `/admin/extensions` | `his-system-admin-extensions.png` | ✅ |
 | 시스템 설정 | 시스템 설정 | `/admin/ai-settings` | `his-system-admin-ai-settings.png` | ✅ |
 
 ### 운영 시스템 관리 (33)
@@ -348,68 +348,68 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 인력·일정 | 직원 관리 | `/admin/staff-management` | `his-system-admin-staff-management.png` | ✅ |
 | 인력·일정 | 신규 입사자 관리 | `/admin/onboarding` | `his-system-admin-onboarding.png` | ✅ |
 | 인력·일정 | 의료팀 편성 | `/admin/care-teams` | `his-system-admin-care-teams.png` | ✅ |
-| 인력·일정 | 진료표 | `/admin/clinic-schedule` | `his-system-admin-clinic-schedule.png` | ⬜ |
-| 인력·일정 | 당직표 | `/admin/duty-schedule` | `his-system-admin-duty-schedule.png` | ⬜ |
-| 병원 운영 | 전자결재 대시보드 | `/admin/approvals-dashboard` | `his-system-admin-approvals-dashboard.png` | ⬜ |
-| 병원 운영 | 문진 대시보드 | `/admin/questionnaire-dashboard` | `his-system-admin-questionnaire-dashboard.png` | ⬜ |
+| 인력·일정 | 진료표 | `/admin/clinic-schedule` | `his-system-admin-clinic-schedule.png` | ✅ |
+| 인력·일정 | 당직표 | `/admin/duty-schedule` | `his-system-admin-duty-schedule.png` | ✅ |
+| 병원 운영 | 전자결재 대시보드 | `/admin/approvals-dashboard` | `his-system-admin-approvals-dashboard.png` | ✅ |
+| 병원 운영 | 문진 대시보드 | `/admin/questionnaire-dashboard` | `his-system-admin-questionnaire-dashboard.png` | ✅ |
 | 병원 운영 | HIRA 청구 | `/admin/hira-edi` | `his-system-admin-hira-edi.png` | ✅ |
-| 병원 운영 | 환자 마킹(루비) | `/admin/patient-flags` | `his-system-admin-patient-flags.png` | ⬜ |
-| 관제·지표 | 통계/분석 | `/admin/analytics` | `his-system-admin-analytics.png` | ⬜ |
-| 관제·지표 | 환자여정 관제 | `/journey-console` | `his-system-journey-console.png` | ⬜ |
-| 관제·지표 | 이탈·지연 분석 | `/flow-analytics` | `his-system-flow-analytics.png` | ⬜ |
-| 관제·지표 | 병원 현황 | `/admin/status` | `his-system-admin-status.png` | ⬜ |
-| 의료질·안전 | 질관리 (QI) | `/admin/qi` | `his-system-admin-qi.png` | ⬜ |
-| 의료질·안전 | 기기 리콜 역추적 | `/admin/device-recall` | `his-system-admin-device-recall.png` | ⬜ |
-| 의료질·안전 | 낙상/욕창 재평가 | `/admin/risk-reassessment` | `his-system-admin-risk-reassessment.png` | ⬜ |
+| 병원 운영 | 환자 마킹(루비) | `/admin/patient-flags` | `his-system-admin-patient-flags.png` | ✅ |
+| 관제·지표 | 통계/분석 | `/admin/analytics` | `his-system-admin-analytics.png` | ✅ |
+| 관제·지표 | 환자여정 관제 | `/journey-console` | `his-system-journey-console.png` | ✅ |
+| 관제·지표 | 이탈·지연 분석 | `/flow-analytics` | `his-system-flow-analytics.png` | ✅ |
+| 관제·지표 | 병원 현황 | `/admin/status` | `his-system-admin-status.png` | ✅ |
+| 의료질·안전 | 질관리 (QI) | `/admin/qi` | `his-system-admin-qi.png` | ✅ |
+| 의료질·안전 | 기기 리콜 역추적 | `/admin/device-recall` | `his-system-admin-device-recall.png` | ✅ |
+| 의료질·안전 | 낙상/욕창 재평가 | `/admin/risk-reassessment` | `his-system-admin-risk-reassessment.png` | ✅ |
 | 의료질·안전 | 데이터 품질 | `/admin/data-quality` | `his-system-admin-data-quality.png` | ✅ |
 | 의료질·안전 | 마약류 관리 | `/admin/controlled-substance` | `his-system-admin-controlled-substance.png` | ✅ |
 | 기록·감사·감시 | 미비기록(HIM) | `/admin/him` | `his-system-admin-him.png` | ✅ |
-| 기록·감사·감시 | 감사 로그 | `/admin/audit` | `his-system-admin-audit.png` | ⬜ |
+| 기록·감사·감시 | 감사 로그 | `/admin/audit` | `his-system-admin-audit.png` | ✅ |
 | 기록·감사·감시 | 응급 접근 검토 | `/admin/break-glass` | `his-system-admin-break-glass.png` | ✅ |
 | 기록·감사·감시 | 보유·파기(Retention) | `/admin/retention` | `his-system-admin-retention.png` | ✅ |
-| 기록·감사·감시 | UI 다국어 검수 | `/admin/ui-locale` | `his-system-admin-ui-locale.png` | ⬜ |
+| 기록·감사·감시 | UI 다국어 검수 | `/admin/ui-locale` | `his-system-admin-ui-locale.png` | ✅ |
 | 기록·감사·감시 | 상시 감시 | `/admin/sentinel` | `his-system-admin-sentinel.png` | ✅ |
 | AI 운영·감수 | AI 약물설명 승인 | `/admin/drug-explain` | `his-system-admin-drug-explain.png` | ✅ |
 | AI 운영·감수 | 검진해석 콘텐츠(감수) | `/admin/checkup-explainer` | `his-system-admin-checkup-explainer.png` | ✅ |
-| AI 운영·감수 | 봇 관리 | `/admin/bots` | `his-system-admin-bots.png` | ⬜ |
-| AI 운영·감수 | 의료법 AI(WeRU.B) | `/admin/medical-law` | `his-system-admin-medical-law.png` | ⬜ |
-| AI 운영·감수 | 영상 AI(WeRU.B) | `/admin/ai-vision` | `his-system-admin-ai-vision.png` | ⬜ |
-| AI 운영·감수 | 회의 분석 | `/admin/ai-meeting` | `his-system-admin-ai-meeting.png` | ⬜ |
-| AI 운영·감수 | AI(WeRU.B) 상담 | `/admin/ai-counseling` | `his-system-admin-ai-counseling.png` | ⬜ |
-| AI 운영·감수 | AI(WeRU.B) 번역 | `/admin/ai-translate` | `his-system-admin-ai-translate.png` | ⬜ |
+| AI 운영·감수 | 봇 관리 | `/admin/bots` | `his-system-admin-bots.png` | ✅ |
+| AI 운영·감수 | 의료법 AI(WeRU.B) | `/admin/medical-law` | `his-system-admin-medical-law.png` | ✅ |
+| AI 운영·감수 | 영상 AI(WeRU.B) | `/admin/ai-vision` | `his-system-admin-ai-vision.png` | ✅ |
+| AI 운영·감수 | 회의 분석 | `/admin/ai-meeting` | `his-system-admin-ai-meeting.png` | ✅ |
+| AI 운영·감수 | AI(WeRU.B) 상담 | `/admin/ai-counseling` | `his-system-admin-ai-counseling.png` | ✅ |
+| AI 운영·감수 | AI(WeRU.B) 번역 | `/admin/ai-translate` | `his-system-admin-ai-translate.png` | ✅ |
 | AI 운영·감수 | AI(WeRU.B) 감독 관제 | `/admin/ai-oversight` | `his-system-admin-ai-oversight.png` | ✅ |
 
 ### 검진권 (5)
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 검진권 발행·조회 | `/admin/voucher/issue` | `his-system-admin-voucher-issue.png` | ⬜ |
-| 검진권 목록 | `/admin/voucher/list` | `his-system-admin-voucher-list.png` | ⬜ |
+| 검진권 발행·조회 | `/admin/voucher/issue` | `his-system-admin-voucher-issue.png` | ✅ |
+| 검진권 목록 | `/admin/voucher/list` | `his-system-admin-voucher-list.png` | ✅ |
 | 검진권 대시보드 | `/admin/voucher/dashboard` | `his-system-admin-voucher-dashboard.png` | ✅ |
-| 검진권 딜러 | `/admin/voucher/distributors` | `his-system-admin-voucher-distributors.png` | ⬜ |
-| 검진권 정책 | `/admin/voucher/settings` | `his-system-admin-voucher-settings.png` | ⬜ |
+| 검진권 딜러 | `/admin/voucher/distributors` | `his-system-admin-voucher-distributors.png` | ✅ |
+| 검진권 정책 | `/admin/voucher/settings` | `his-system-admin-voucher-settings.png` | ✅ |
 
 ### 외부 연동 (6)
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
 | 연동 신청 관리 | `/admin/partner-requests` | `his-system-admin-partner-requests.png` | ⬜ |
-| 연동 모니터링 | `/admin/partner-monitoring` | `his-system-admin-partner-monitoring.png` | ⬜ |
+| 연동 모니터링 | `/admin/partner-monitoring` | `his-system-admin-partner-monitoring.png` | ✅ |
 | 연동 기관 | `/admin/organizations` | `his-system-admin-organizations.png` | ⬜ |
 | SMART 클라이언트 | `/admin/smart-clients` | `his-system-admin-smart-clients.png` | ✅ |
-| 전원 통계 | `/admin/transfer-stats` | `his-system-admin-transfer-stats.png` | ⬜ |
+| 전원 통계 | `/admin/transfer-stats` | `his-system-admin-transfer-stats.png` | ✅ |
 | 진료정보교류(HIE) | `/admin/hie-dashboard` | `his-system-admin-hie-dashboard.png` | ✅ |
 
 ### 홈페이지 관리 (7)
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 홈페이지 대시보드 | `/admin/homepage` | `his-system-admin-homepage.png` | ⬜ |
-| 콘텐츠 관리(CMS) | `/admin/hospital-info` | `his-system-admin-hospital-info.png` | ⬜ |
-| 공지/팝업 | `/admin/homepage/popups` | `his-system-admin-homepage-popups.png` | ⬜ |
-| 배너 관리 | `/admin/homepage/banners` | `his-system-admin-homepage-banners.png` | ⬜ |
-| 미디어 라이브러리 | `/admin/homepage/media` | `his-system-admin-homepage-media.png` | ⬜ |
-| SEO/메타데이터 | `/admin/homepage/seo` | `his-system-admin-homepage-seo.png` | ⬜ |
+| 홈페이지 대시보드 | `/admin/homepage` | `his-system-admin-homepage.png` | ✅ |
+| 콘텐츠 관리(CMS) | `/admin/hospital-info` | `his-system-admin-hospital-info.png` | ✅ |
+| 공지/팝업 | `/admin/homepage/popups` | `his-system-admin-homepage-popups.png` | ✅ |
+| 배너 관리 | `/admin/homepage/banners` | `his-system-admin-homepage-banners.png` | ✅ |
+| 미디어 라이브러리 | `/admin/homepage/media` | `his-system-admin-homepage-media.png` | ✅ |
+| SEO/메타데이터 | `/admin/homepage/seo` | `his-system-admin-homepage-seo.png` | ✅ |
 | 홈페이지 배포 | `/admin/homepage/deploy` | `his-system-admin-homepage-deploy.png` | ✅ |
 
 ## 개인 — `personal` (7)

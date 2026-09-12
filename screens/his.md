@@ -781,6 +781,108 @@ AI(WeRU.B) 진단보조·시뮬레이션·디지털 트윈.
 
 검진 해석문도 같은 구조입니다(작성중 → 감수중 → 승인 → 반려). 다만 여기는 **저장할 때 가드레일이 자동으로 검증**합니다 — **진단 확정 · 처방/용량 지시 표현을 막습니다.** 화면 위 배지가 두 가지 사실을 동시에 말합니다 — `소비자 노출` 대상이라는 것과, **`4-eyes(2인 승인): 비활성`** 이라는 것. 켜지지 않은 통제를 **켜진 척하지 않습니다** → [시나리오 03](../scenarios/03-health-checkup.md).
 
+### 「0」이 아니라고 먼저 말하는 설정 화면들
+
+개원 전에 기관이 채우는 기준 화면들은, 비어 있는 값을 **0 으로 읽지 말라**고 화면이 먼저 적습니다. 네 화면이 같은 말을 다른 자리에서 합니다.
+
+![약품 보험코드 매핑 — 0원이 아닙니다](../assets/screens/his-system-admin-drug-mapping.png)
+
+> **약가·수가 미등재 2,041건** — "0원으로 표시되나 **금액 0원이 아닙니다**."
+
+후보가 없는 약품은 `NONE` 으로 남기고 억지로 코드를 붙이지 않습니다. `AI 대체품 조회` 는 보조 버튼입니다.
+
+![수가 계산기 — 자격 미확인은 산출 불가](../assets/screens/his-system-admin-billing-calc.png)
+
+> 실제 적용 요율은 **환자별 자격조회 결과**로 정해집니다. 자격조회 기록이 없는 환자는 **단정하지 않고 「자격 미확인 — 산출 불가」** 로 표시합니다.
+
+![낙상/욕창 재평가 — 스케줄이 없으면 지연을 판정할 수 없다](../assets/screens/his-system-admin-risk-reassessment.png)
+
+> 재평가 스케줄이 등록되지 않았습니다 — **지연 여부를 판정할 수 없습니다.** 지연 건수는 **"0건"이 아니라 산출 불가**입니다.
+
+![연동 모니터링 — 측정되지 않고 있습니다](../assets/screens/his-system-admin-partner-monitoring.png)
+
+> 파트너 API 호출이 **측정되지 않고 있습니다** … 이 화면의 **"알림 없음"은 연동이 건강하다는 뜻이 아닙니다.**
+
+→ [취지 3 「화면이 모른다고 말하는 아홉 가지 방식」](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식)
+
+### 배선되지 않은 기능은, 배선되지 않았다고 말한다
+
+화면은 있는데 뒤가 아직 연결되지 않은 기능이 있습니다. 이 설치본은 그런 자리마다 **"동작하는 것처럼 보이지만 동작하지 않는다"** 를 먼저 적습니다.
+
+![Bots — 액션 엔진이 배선되어 있지 않습니다](../assets/screens/his-system-admin-bots.png)
+
+> **액션 엔진이 배선되어 있지 않습니다.** 트리거는 기록되지만 봇의 동작은 수행되지 않습니다. **"트리거 횟수"는 봇이 실제로 무엇을 수행한 횟수가 아닙니다.**
+
+![Extension/Slot — 등재 3건 중 실제 설치 0건](../assets/screens/his-system-admin-extensions.png)
+
+> **슬롯 렌더러가 배선되어 있지 않습니다** … 등재 3건 중 **실제 설치 0건**. 이 목록은 저장되지 않습니다(메모리 상태).
+
+![SEO — 저장해도 검색엔진에 반영되지 않습니다](../assets/screens/his-system-admin-homepage-seo.png)
+
+홈페이지 관리의 SEO · 배너 화면은 **「공개 홈페이지 미배선 — 저장해도 공개 사이트에 반영되지 않습니다」** 띠를 겁니다([배너 화면](../assets/screens/his-system-admin-homepage-banners.png)). 메뉴 관리는 "등록된 메뉴가 없습니다. **현재 코드에 하드코딩된 메뉴가 사용됩니다**"라고 적고([메뉴 관리](../assets/screens/his-system-admin-menus.png)), UI 다국어 검수는 "**이 화면은 현황 관측용입니다 — 화면에서 코드 정본을 쓰지 않습니다**"라고 적습니다([다국어 검수](../assets/screens/his-system-admin-ui-locale.png) · 검수 완료 **0 / 14,234**).
+
+> **저장 버튼이 눌린다는 것과 그 값이 어디에 쓰인다는 것은 다른 사실입니다** → [DESIGN-HISTORY 「만들었다 ≠ 동작한다」](../DESIGN-HISTORY.md)
+
+### 인증 · 규정 화면은 자기 수치의 쓰임새를 제한한다
+
+![EMR 인증 체크리스트 — 심사 제출 자료가 아닙니다](../assets/screens/his-system-admin-emr-cert.png)
+
+EMR 인증 체크리스트는 **8 / 8 (100.0%)** 이지만, 바로 아래에 두 줄을 답니다 — "**자동 집계로 판정한 8개 지표 기준** · 등재된 지표 10개 중 자동 집계 8개 · 미측정 2개", 그리고 **"이 화면의 수치는 심사 제출 자료가 아닙니다."** 판정 근거 칸에는 실집계(환자 원장 874건 · 진료 기록 769건 · 감사 로그 10,583건)가 붙고, 집계로 판정할 수 없는 두 항목(접근통제 · 진료정보교류)은 **`미측정`** 입니다. 100% 를 **분모와 쓰임새까지** 붙여서 말합니다.
+
+![비급여 항목 — 고지가와 실청구가가 어긋납니다](../assets/screens/his-system-admin-non-covered.png)
+
+비급여 관리는 맨 위에 **"고지가와 실청구가가 어긋납니다 — 가격 불일치 1건 · 청구코드 없음 15건"** 을 겁니다. 환자에게 알린 가격과 실제 청구 코드가 다른 자리를 **숨기지 않고 먼저 셉니다.**
+
+![Phase0 가명화 컷오버 — 대사 자동 검증 불가](../assets/screens/his-system-admin-phase0-cutover.png)
+
+환자식별번호를 가명 토큰으로 바꾸는 컷오버는 **"대사 자동 검증 불가 — 아래 확인은 승인자의 외부 확인입니다"** 라고 적고, 체크리스트 6개와 법무/CPO 승인 근거를 필수로 받습니다. **시스템이 확인하지 못하는 것을 사람의 확인으로 대체한다는 사실을 화면에 적습니다.**
+
+### 개원 전 기준 — 처방 규칙 · 프로토콜 · 시설
+
+![원내 처방집 — OFF · WARN · BLOCK](../assets/screens/his-system-admin-formulary.png)
+
+원내 처방집은 위원회가 승인한 코드만 처방 화면에 올리고, 시행 모드를 **`OFF` · `WARN` · `BLOCK`** 세 단계로 둡니다(이 설치본은 `WARN`). [안전 게이트](#안전-게이트--끔--경고--차단-그리고-위반-0을-읽는-법)와 같은 세 단계입니다. [CDSS 규칙](../assets/screens/his-system-admin-cdss-rules.png)은 17개가 모두 활성인데 **규칙마다 이번달 적용 횟수 0** 을 그대로 보여 주고, [약속처방](../assets/screens/his-system-admin-order-sets.png)은 26개를 초안 → 승인대기 → 승인 → 활성 → 폐기로 나눕니다.
+
+![환자여정 프로토콜 — 게이트에서 차단된 인스턴스](../assets/screens/his-system-admin-protocols.png)
+
+환자여정 프로토콜은 응급 · 입원 · 외래 · 수술 단계마다 **게이트**(🔒 표시 — 수술 전 체크리스트 · 진료 서명 · 입원 간호 사정)를 둡니다. 위쪽 진행 모니터에 **5건 중 4건이 `차단`** 으로 떠 있고, 무엇에 막혔는지(0/7 입원/수술전 체크리스트 없음)와 경과 시간이 붙습니다. 발행은 새 버전을 만들며, **진행 중 환자는 영향받지 않습니다.**
+
+![응급실 베드 — 삭제는 없습니다](../assets/screens/his-system-admin-er-beds.png)
+
+응급실 베드 관리의 부제는 한 줄로 원칙을 적습니다 — **"삭제는 없습니다(이력 보존) — 미사용 베드는 정비로 전환."** [시설 관리](../assets/screens/his-system-admin-facility.png)는 57병상과 수술실 5를 그리면서도 "시설 마스터가 등록되어 있지 않습니다 — **등록 기능이 만들어지지 않아 빈자리가 보이는 것이 정상입니다**"라고 적습니다.
+
+![화면번호 레지스트리 — 고정 308 · 중복 0](../assets/screens/his-system-admin-screen-codes.png)
+
+화면번호는 **308개 전부 고정(freeze)** · 미고정 0 · 중복 0 · 메뉴 밖 42 이고, 무결성은 CI 가 봅니다. [수치 표시·반올림 정책](../assets/screens/his-system-admin-numeric-policy.png)은 활력징후 단위를 **UCUM 과 LOINC 코드**로 묶고, 🔒 법정 · 안전 정책(검사 · 용량)은 **화면에서 바꿀 수 없게** 잠가 둡니다.
+
+### 관제 · 지표 — 조치가 필요한 것부터 센다
+
+![환자여정 관제 — 조치 필요 2346](../assets/screens/his-system-journey-console.png)
+
+환자여정 관제는 외래 활성 2,321명 위에 **조치 필요 2,346** 을 사유별로 쪼갭니다 — 접수 지연 2,315 · 트리아지 지연 · 호출 지연 · 진료 지연 · 수납 지연 · 정산 지연 · 장기 재원 · 고객 미수. 그리고 "**현장 화면(접수)은 다른 기준을 씁니다**"라고 기준이 다르다는 것을 머리에 밝힙니다.
+
+![환자 이탈·지연 분석 — 목표 미설정은 산출 불가](../assets/screens/his-system-flow-analytics.png)
+
+이탈·지연 분석은 단계별 체류시간을 **p50 · p90 · 최대**로 내고 SLA 위반율을 `2 / 4 (50.0%)` 처럼 분모와 함께 적습니다. **목표가 정해지지 않은 구간은 위반율을 `산출 불가(목표 미설정)`** 로 둡니다.
+
+그 밖에 [질관리 QI](../assets/screens/his-system-admin-qi.png)(7탭 · 지표마다 분모) · [감사 로그](../assets/screens/his-system-admin-audit.png)(전체 143,036 = **내부 10,610 + 외부 앱 132,426** 으로 나눠 셈) · [병원 현황](../assets/screens/his-system-admin-status.png) · [통계/분석](../assets/screens/his-system-admin-analytics.png) · [전자결재](../assets/screens/his-system-admin-approvals-dashboard.png) · [문진 대시보드](../assets/screens/his-system-admin-questionnaire-dashboard.png)(작성률 **0 / 2** · 만료 2)가 들어왔습니다.
+
+> 🔴 가림: 감사 로그의 **접속 IP 열** · 환자여정 관제의 환자명 16건 · 환자 마킹의 환자명 · 진료표의 의사 열 · 전원 통계의 **협력 기관명 2건**. 워크스테이션·디바이스 설정 화면은 **원내 프린터 · 장비의 주소와 포트가 화면 전체에 있어** 공개 자료에 싣지 않았습니다.
+
+### AI 화면이 스스로 긋는 선
+
+![의료 영상 AI 분석 — 추정 입력 금지 · 최종 판독은 전문의](../assets/screens/his-system-admin-ai-vision.png)
+
+영상 AI 화면에는 세 가지 선이 있습니다 — ① 외부 AI 서버로 보내기 전 **환자 동의 확인 체크박스**가 없으면 요청 버튼이 켜지지 않고 ② 환자 UUID 칸은 **"모르면 비워 두세요 (추정 입력 금지)"** 이며 ③ 결과 칸에 **"최종 판독은 반드시 영상의학과 전문의가 수행해야 합니다."**
+
+[AI 상담](../assets/screens/his-system-admin-ai-counseling.png)은 "보조 도구입니다 — 전문 상담이 필요하면 정신건강의학과 전문의 또는 **자살예방상담전화(1393)**", [의료법 AI](../assets/screens/his-system-admin-medical-law.png)는 "법률 분석은 **참고용** — 실제 법적 판단은 전문 법률가에게", [회의 분석](../assets/screens/his-system-admin-ai-meeting.png)은 "**이 병원이 제출한 작업만** 표시 — 공용 AI 의 다른 출처 작업 47건은 이 화면에서 제외"라고 적습니다. [AI 번역](../assets/screens/his-system-admin-ai-translate.png)은 7개 언어입니다. → [취지 1 「AI 는 보조, 판단은 사람」](../overview/02-principles.md#1-ai-는-보조-판단은-사람)
+
+### 검진권과 홈페이지 — 운영 화면의 나머지
+
+[검진권 정책](../assets/screens/his-system-admin-voucher-settings.png)은 "**법정 하한/상한 내에서만 조정 — 위반 시 저장 거부, 변경은 4-eyes**", [검진권 딜러](../assets/screens/his-system-admin-voucher-distributors.png)는 "모두 **외국인환자 한정**"과 "비밀번호는 딜러가 **인증코드로 직접 설정**(관리자가 정하지 않음)"을 적습니다. [목록](../assets/screens/his-system-admin-voucher-list.png) · [발행·조회](../assets/screens/his-system-admin-voucher-issue.png)(시리얼 · 해시체인 · 앵커)도 들어왔습니다.
+
+[홈페이지 대시보드](../assets/screens/his-system-admin-homepage.png)는 콘텐츠 133건 가운데 **"공개 화면이 읽는 값이 비어 있는 9건 — 그 자리는 폴백으로 그려집니다"** 를 따로 셉니다. [CMS](../assets/screens/his-system-admin-hospital-info.png) · [팝업](../assets/screens/his-system-admin-homepage-popups.png) · [미디어](../assets/screens/his-system-admin-homepage-media.png) · [위원회 GLD](../assets/screens/his-system-admin-gld.png)(재검토 기한 경과 2) · [진료과 카탈로그](../assets/screens/his-system-admin-dept-catalog.png) · [폼 빌더](../assets/screens/his-system-admin-forms.png) · [TV 디스플레이](../assets/screens/his-system-admin-displays.png)(28일 무접속 단말 경고) · [대시보드 템플릿](../assets/screens/his-system-admin-dashboard-templates.png)(위젯마다 볼 수 있는 역할) · [당직표](../assets/screens/his-system-admin-duty-schedule.png) · [진료표](../assets/screens/his-system-admin-clinic-schedule.png) · [기기 리콜 역추적](../assets/screens/his-system-admin-device-recall.png)(GTIN · 로트 · 일련번호) · [환자 마킹](../assets/screens/his-system-admin-patient-flags.png)(비표준 내부 표시임을 부제에) · [전원 통계](../assets/screens/his-system-admin-transfer-stats.png) · [중환자실 워크스테이션](../assets/screens/his-support-workstation-icu.png)("비어 있는 것은 할 일이 없다는 뜻이 아닙니다")도 함께 있습니다.
+
 ### 코드 마스터 — 기관이 받아 와서 채우는 자리
 
 ![코드 마스터 — 진단코드 목록과 분류별 건수](../assets/screens/his-system-admin-codes.png)
