@@ -657,7 +657,7 @@ AI(WeRU.B) 진단보조·시뮬레이션·디지털 트윈.
 | ✅ sys-3 | 중요 결정(결정 등록부) — 세 층 · 결정권자 | `/admin/decisions` | [`his-quality-admin-decisions.png`](../assets/screens/his-quality-admin-decisions.png) |
 | ✅ sys-4a | 시스템 설정 — 전역 구성 파라미터 키·값 | `/admin/config` | [`his-system-admin-config.png`](../assets/screens/his-system-admin-config.png) |
 | ✅ sys-4b | 시스템 설정 — AI 서버 연결 · 브리핑 · 스킬 실측 | `/admin/ai-settings` | [`his-system-admin-ai-settings.png`](../assets/screens/his-system-admin-ai-settings.png) |
-| 📷 sys-5 | AI 감독 관제 — 제안과 승인 이력 | `/admin/ai-oversight` | `his-system-admin-ai-oversight.png` |
+| ✅ sys-5 | AI 감독 관제 — 제안과 승인 이력 | `/admin/ai-oversight` | [`his-system-admin-ai-oversight.png`](../assets/screens/his-system-admin-ai-oversight.png) |
 | 📷 sys-6 | 상시 감시 — 판정하지 못한 것을 "관측 불가"로 | 상시 감시 | `his-system-monitor.png` |
 | ✅ sys-7 | 코드 마스터 — 기관이 반입한 진단 · 수가 · 약품 코드 | `/admin/codes` | [`his-system-admin-codes.png`](../assets/screens/his-system-admin-codes.png) |
 
