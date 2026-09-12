@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **25** / 266 |
+| 지금 들어온 캡처 | **28** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -127,11 +127,11 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
 | 접수 워크스테이션 | `/workstation/front-desk` | `his-support-workstation-front-desk.png` | ⬜ |
-| 워크스테이션 | `/workstation` | `his-support-workstation.png` | ⬜ |
+| 워크스테이션 | `/workstation` | `his-support-workstation.png` | ✅ |
 | 검사실 | `/workstation/lab` | `his-support-workstation-lab.png` | ⬜ |
-| 영상실 | `/workstation/imaging` | `his-support-workstation-imaging.png` | ⬜ |
+| 영상실 | `/workstation/imaging` | `his-support-workstation-imaging.png` | ✅ |
 | 기초검사 | `/workstation/diagnostic` | `his-support-workstation-diagnostic.png` | ⬜ |
-| 판독 대기 | `/workstation/reading` | `his-support-workstation-reading.png` | ⬜ |
+| 판독 대기 | `/workstation/reading` | `his-support-workstation-reading.png` | ✅ |
 | 치료실 | `/workstation/therapy` | `his-support-workstation-therapy.png` | ⬜ |
 | 검사항목 관리 | `/workstation/templates` | `his-support-workstation-templates.png` | ⬜ |
 | 약국 | `/workstation/pharmacy` | `his-support-workstation-pharmacy.png` | ⬜ |

@@ -117,12 +117,42 @@
 
 | # | 담을 화면 | 화면 경로 | 파일 |
 |---|---|---|---|
-| 📷 sup-1 | 약국 — 조제와 복약 지도 | `/pharmacy` 계열 | `his-support-pharmacy.png` |
+| ✅ sup-1 | 약국 조제 — 접수 → 조제 → 검수 → 불출 | `/pharmacy` | [`his-support-pharmacy.png`](../assets/screens/his-support-pharmacy.png) |
 | 📷 sup-2 | 검사실 — 검체와 진행 상태 | `/lab` 계열 | `his-support-lab.png` |
-| 📷 sup-3 | 영상실 · 판독 대기 | `/radiology` 계열 | `his-support-radiology.png` |
-| 📷 sup-4 | 워크스테이션 — 역할별 할 일 모음 | 워크스테이션 계열 | `his-support-workstation.png` |
+| ✅ sup-3 | 판독 대기열 · 일반촬영 워크스테이션 | `/workstation/reading` · `/workstation/imaging` | [`…-reading.png`](../assets/screens/his-support-workstation-reading.png) · [`…-imaging.png`](../assets/screens/his-support-workstation-imaging.png) |
+| ✅ sup-4 | 워크스테이션 허브 — 부서별 전용 작업 화면 | `/workstation` | [`his-support-workstation.png`](../assets/screens/his-support-workstation.png) |
 | 📷 sup-5 | 검진 동선 현황판 — QR 로 따라가는 수검자 동선 | 클리닉 센터 계열 | `his-support-checkup-flow.png` |
 | 📷 sup-6 | 동의서 — 서명 요청과 완료 상태 | 의무기록 `동의서` | `his-support-consent.png` |
+
+### 워크스테이션 — 그 자리에서 할 일만
+
+![워크스테이션 허브 — 부서별 카드와 대기 수](../assets/screens/his-support-workstation.png)
+
+부서·역할마다 **그 자리에서 할 일만** 모아 둔 화면이 28개 있고, 이 허브가 그 입구입니다. 위에 검사실 · 영상실 · 기초검사 · 치료실 · 판독의 대기 수가 서고, 아래 카드마다 그 부서의 세부 작업이 붙습니다(예: 영상실 = 일반촬영 · CT · MRI · 초음파 · 유방촬영 · 중재시술 · 핵의학).
+
+![약국 조제 — 접수에서 불출까지](../assets/screens/his-support-pharmacy.png)
+
+약국은 **접수 → 조제 → 검수 → 불출** 네 단계로 움직입니다. 단계마다 대기 수가 있고, 행에서 바로 다음 단계로 넘깁니다. 성분명과 약품 코드가 함께 보이고, 오른쪽 위에 재고·부작용(ADR) 관리가 있습니다.
+
+> 이 화면은 **약사 계정**으로 찍었습니다. 의사 계정으로 열면 같은 화면이 **비어 보입니다** — 대기열이 그 역할의 것만 차기 때문입니다.
+
+### 판독 대기 — 안 되는 것을 안 된다고 적는 자리
+
+![판독 대기열 — AI 사전판독 사용 불가 경고](../assets/screens/his-support-workstation-reading.png)
+
+판독을 기다리는 검사가 환자 · 모달리티(CT · CR · US) · 경과 시간과 함께 서고, 행마다 `PACS 뷰어` · `AI(WeRU.B) 사전판독` · `판독 소견 입력` 이 붙습니다. 그런데 가운데 버튼은 **회색이고 `(사용 불가)`** 입니다. 화면이 그 이유를 맨 위에 적습니다.
+
+> **AI(WeRU.B) 사전판독 사용 불가 — 영상 식별자(StudyInstanceUID)가 HIS 에 기록되지 않아 AI 에 보낼 영상을 지목할 수 없습니다.**
+
+[HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단)이 적은 「영상 AI 사전판독은 사용 불가」의 실물이고, **왜 안 되는지까지** 화면이 밝힙니다. 판독은 [PACS](pacs.md) 의 판독 흐름으로 합니다.
+
+![일반촬영 워크스테이션 — 설정 불일치 경고와 촬영 목록](../assets/screens/his-support-workstation-imaging.png)
+
+같은 원칙이 설정에도 적용됩니다. 이 스테이션은 자기 설정이 틀렸다는 것을 스스로 알립니다.
+
+> ⚠️ **이 스테이션의 검사항목 설정이 실제 코드와 맞지 않습니다 — 부서 전체를 표시하는 중입니다.** 설정된 6개 항목이 `CBC` 같은 명칭이라 실제 처방코드와 맞지 않습니다. **이 설정을 고칠 화면은 아직 없습니다** — 목록을 이 스테이션 몫으로 좁히려면 시스템 담당자에게 검사항목 재등록을 요청해 주세요.
+
+**틀린 설정으로 걸러 놓고 "이게 전부"라고 하지 않고**, 부서 전체를 보여 주면서 그 사실과 조치 방법, 그리고 **고칠 화면이 아직 없다는 것까지** 적습니다 → [취지 2](../overview/02-principles.md#2-출처를-말한다) · [취지 3](../overview/02-principles.md#3-모르는-것을-아는-척하지-않는다)
 
 ---
 

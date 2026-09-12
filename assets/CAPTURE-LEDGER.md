@@ -35,3 +35,6 @@
 | `assets/screens/his-care-nurse-station.png` | 간호 워크스테이션(`/nurse-station`) — 투약·활력징후·I/O·간호기록·인계·병동보드 탭 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-bed-board.png` | 병상·입원 보드(`/bed-board`) — 병동별 가동률 · 장기재원 5 · 평균 재원 91일 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-support-pharmacy.png` | 약국 조제(`/pharmacy`) — **약사 계정** · 접수→조제→검수→불출 · 전체 6(접수 대기 2 · 검수 대기 4) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-workstation.png` | 워크스테이션 허브(`/workstation`) — **판독의 계정** · 검사실 8 · 영상실 8 · 부서별 13 카드 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-workstation-reading.png` | 판독 대기열(`/workstation/reading`) — 🔴 **AI 사전판독 사용 불가**(StudyInstanceUID 미기록) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-workstation-imaging.png` | 일반촬영 워크스테이션(`/workstation/imaging`) — ⚠️ 검사항목 설정이 실제 코드와 불일치 경고 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
