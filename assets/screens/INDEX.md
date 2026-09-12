@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **138** / 266 |
+| 지금 들어온 캡처 | **180** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -59,17 +59,17 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
 | 내과 | `/internal-medicine` | `his-care-internal-medicine.png` | ✅ |
-| 정형외과 | `/orthopedics` | `his-care-orthopedics.png` | ⬜ |
-| 신경외과 | `/neurosurgery` | `his-care-neurosurgery.png` | ⬜ |
-| 산부인과 | `/obgyn` | `his-care-obgyn.png` | ⬜ |
+| 정형외과 | `/orthopedics` | `his-care-orthopedics.png` | ✅ |
+| 신경외과 | `/neurosurgery` | `his-care-neurosurgery.png` | ✅ |
+| 산부인과 | `/obgyn` | `his-care-obgyn.png` | ✅ |
 | 소아청소년과 | `/pediatrics` | `his-care-pediatrics.png` | ✅ |
-| 정신과 | `/psychiatry` | `his-care-psychiatry.png` | ⬜ |
-| 안과 | `/ophthalmology` | `his-care-ophthalmology.png` | ⬜ |
-| 이비인후과 | `/ent` | `his-care-ent.png` | ⬜ |
-| 피부과 | `/dermatology` | `his-care-dermatology.png` | ⬜ |
-| 치과 | `/dental` | `his-care-dental.png` | ⬜ |
-| 성형외과 | `/plastic` | `his-care-plastic.png` | ⬜ |
-| 비뇨의학과 | `/urology` | `his-care-urology.png` | ⬜ |
+| 정신과 | `/psychiatry` | `his-care-psychiatry.png` | ✅ |
+| 안과 | `/ophthalmology` | `his-care-ophthalmology.png` | ✅ |
+| 이비인후과 | `/ent` | `his-care-ent.png` | ✅ |
+| 피부과 | `/dermatology` | `his-care-dermatology.png` | ✅ |
+| 치과 | `/dental` | `his-care-dental.png` | ✅ |
+| 성형외과 | `/plastic` | `his-care-plastic.png` | ✅ |
+| 비뇨의학과 | `/urology` | `his-care-urology.png` | ✅ |
 
 ### 특수 치료 (5)
 
@@ -108,52 +108,52 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
 | 약국 | `/pharmacy` | `his-support-pharmacy.png` | ✅ |
-| 약국 보드 | `/pharmacy-board` | `his-support-pharmacy-board.png` | ⬜ |
-| 약사 임상활동 | `/pharmacist-activity` | `his-support-pharmacist-activity.png` | ⬜ |
-| 검사실 | `/lab` | `his-support-lab.png` | ⬜ |
-| 영상실 | `/imaging` | `his-support-imaging.png` | ⬜ |
-| 병리과 | `/pathology` | `his-support-pathology.png` | ⬜ |
-| 기초검사 | `/diagnostics` | `his-support-diagnostics.png` | ⬜ |
+| 약국 보드 | `/pharmacy-board` | `his-support-pharmacy-board.png` | ✅ |
+| 약사 임상활동 | `/pharmacist-activity` | `his-support-pharmacist-activity.png` | ✅ |
+| 검사실 | `/lab` | `his-support-lab.png` | ✅ |
+| 영상실 | `/imaging` | `his-support-imaging.png` | ✅ |
+| 병리과 | `/pathology` | `his-support-pathology.png` | ✅ |
+| 기초검사 | `/diagnostics` | `his-support-diagnostics.png` | ✅ |
 | 혈액은행 | `/blood-bank` | `his-support-blood-bank.png` | ✅ |
-| 화상진료 | `/telehealth` | `his-support-telehealth.png` | ⬜ |
-| 비대면진료 | `/remote-consult` | `his-support-remote-consult.png` | ⬜ |
-| 만성질환 관리 | `/chronic` | `his-support-chronic.png` | ⬜ |
-| 임상 도구(점수·계산) | `/clinical-tools` | `his-support-clinical-tools.png` | ⬜ |
-| 검사·영상 보드 | `/diagnostics-board` | `his-support-diagnostics-board.png` | ⬜ |
-| PACS 주치의 포털 | `/pacs-portal` | `his-support-pacs-portal.png` | ⬜ |
+| 화상진료 | `/telehealth` | `his-support-telehealth.png` | ✅ |
+| 비대면진료 | `/remote-consult` | `his-support-remote-consult.png` | ✅ |
+| 만성질환 관리 | `/chronic` | `his-support-chronic.png` | ✅ |
+| 임상 도구(점수·계산) | `/clinical-tools` | `his-support-clinical-tools.png` | ✅ |
+| 검사·영상 보드 | `/diagnostics-board` | `his-support-diagnostics-board.png` | ✅ |
+| PACS 주치의 포털 | `/pacs-portal` | `his-support-pacs-portal.png` | ✅ |
 
 ### 워크스테이션 (28)
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 접수 워크스테이션 | `/workstation/front-desk` | `his-support-workstation-front-desk.png` | ⬜ |
+| 접수 워크스테이션 | `/workstation/front-desk` | `his-support-workstation-front-desk.png` | ✅ |
 | 워크스테이션 | `/workstation` | `his-support-workstation.png` | ✅ |
-| 검사실 | `/workstation/lab` | `his-support-workstation-lab.png` | ⬜ |
+| 검사실 | `/workstation/lab` | `his-support-workstation-lab.png` | ✅ |
 | 영상실 | `/workstation/imaging` | `his-support-workstation-imaging.png` | ✅ |
-| 기초검사 | `/workstation/diagnostic` | `his-support-workstation-diagnostic.png` | ⬜ |
+| 기초검사 | `/workstation/diagnostic` | `his-support-workstation-diagnostic.png` | ✅ |
 | 판독 대기 | `/workstation/reading` | `his-support-workstation-reading.png` | ✅ |
-| 치료실 | `/workstation/therapy` | `his-support-workstation-therapy.png` | ⬜ |
-| 검사항목 관리 | `/workstation/templates` | `his-support-workstation-templates.png` | ⬜ |
-| 약국 | `/workstation/pharmacy` | `his-support-workstation-pharmacy.png` | ⬜ |
+| 치료실 | `/workstation/therapy` | `his-support-workstation-therapy.png` | ✅ |
+| 검사항목 관리 | `/workstation/templates` | `his-support-workstation-templates.png` | ✅ |
+| 약국 | `/workstation/pharmacy` | `his-support-workstation-pharmacy.png` | ✅ |
 | 간호(입원) | `/workstation/nursing` | `his-support-workstation-nursing.png` | ✅ |
-| 간호(외래) | `/workstation/outpatient-nursing` | `his-support-workstation-outpatient-nursing.png` | ⬜ |
-| 접수 | `/workstation/reception` | `his-support-workstation-reception.png` | ⬜ |
+| 간호(외래) | `/workstation/outpatient-nursing` | `his-support-workstation-outpatient-nursing.png` | ✅ |
+| 접수 | `/workstation/reception` | `his-support-workstation-reception.png` | ✅ |
 | 동의서 | `/workstation/consent` | `his-support-workstation-consent.png` | ✅ |
-| 서류 발급 | `/workstation/documents` | `his-support-workstation-documents.png` | ⬜ |
+| 서류 발급 | `/workstation/documents` | `his-support-workstation-documents.png` | ✅ |
 | 진단서 발급 | `/workstation/certificates` | `his-support-workstation-certificates.png` | ✅ |
 | 퇴원 | `/workstation/discharge` | `his-support-workstation-discharge.png` | ✅ |
-| 입원 | `/workstation/admission` | `his-support-workstation-admission.png` | ⬜ |
-| 수술 준비 | `/workstation/surgery-prep` | `his-support-workstation-surgery-prep.png` | ⬜ |
-| 수술 후 회복 | `/workstation/post-op` | `his-support-workstation-post-op.png` | ⬜ |
+| 입원 | `/workstation/admission` | `his-support-workstation-admission.png` | ✅ |
+| 수술 준비 | `/workstation/surgery-prep` | `his-support-workstation-surgery-prep.png` | ✅ |
+| 수술 후 회복 | `/workstation/post-op` | `his-support-workstation-post-op.png` | ✅ |
 | 중환자실 | `/workstation/icu` | `his-support-workstation-icu.png` | ✅ |
-| 주치의 | `/workstation/attending` | `his-support-workstation-attending.png` | ⬜ |
-| 응급실 | `/workstation/emergency` | `his-support-workstation-emergency.png` | ⬜ |
-| 혈액은행 | `/workstation/blood-bank` | `his-support-workstation-blood-bank.png` | ⬜ |
-| 영양 | `/workstation/nutrition` | `his-support-workstation-nutrition.png` | ⬜ |
-| 장비 | `/workstation/equipment` | `his-support-workstation-equipment.png` | ⬜ |
-| 중앙공급 | `/workstation/cssd` | `his-support-workstation-cssd.png` | ⬜ |
-| 감염관리 | `/workstation/infection-control` | `his-support-workstation-infection-control.png` | ⬜ |
-| 재활 | `/workstation/rehab-station` | `his-support-workstation-rehab-station.png` | ⬜ |
+| 주치의 | `/workstation/attending` | `his-support-workstation-attending.png` | ✅ |
+| 응급실 | `/workstation/emergency` | `his-support-workstation-emergency.png` | ✅ |
+| 혈액은행 | `/workstation/blood-bank` | `his-support-workstation-blood-bank.png` | ✅ |
+| 영양 | `/workstation/nutrition` | `his-support-workstation-nutrition.png` | ✅ |
+| 장비 | `/workstation/equipment` | `his-support-workstation-equipment.png` | ✅ |
+| 중앙공급 | `/workstation/cssd` | `his-support-workstation-cssd.png` | ✅ |
+| 감염관리 | `/workstation/infection-control` | `his-support-workstation-infection-control.png` | ✅ |
+| 재활 | `/workstation/rehab-station` | `his-support-workstation-rehab-station.png` | ✅ |
 
 ### 클리닉 센터 (17)
 

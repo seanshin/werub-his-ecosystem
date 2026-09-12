@@ -65,6 +65,12 @@
 
 소아청소년과에는 서지 않습니다. **분과가 있는 과에만 탭이 생깁니다.**
 
+12과를 모두 열어 보면 골격이 두 가지입니다 — 환자가 많은 과(정형외과 · 신경외과 · 정신과 · 성형외과 · 비뇨의학과)는 **내 환자 목록**이 길게 서고, 외래 시술이 중심인 과(안과 · 이비인후과 · 피부과 · 치과)는 **오늘 환자 목록(검사/시술 · 치료 내용)과 개별 환자 조회**가 붙습니다.
+
+![산부인과 — 분만장 보드와 식별밴드 경고](../assets/screens/his-care-obgyn.png)
+
+산부인과만 공통 골격 위에 **분만장 보드(L&D)** 가 하나 더 섭니다 — 진통중 · 분만완료 · 산욕, Apgar 점수, 태아 심박(FHR). 그리고 신생아 행마다 🔴 **「식별밴드 미등록 — 모아 대조 불가」** 배지가 붙습니다. 엄마와 아기를 대조할 수 없는 상태를 **따로 표시해 두는** 자리입니다.
+
 ![항암 치료 — 사이클 엔진](../assets/screens/his-care-chemo.png)
 
 특수 치료 5개는 성격이 다릅니다 — **주기와 프로토콜이 있는 치료**라서, 항암은 코스를 사이클로 관리합니다(레지멘 기반 코스 · 체표면적 용량계산 · **nadir 게이트** · 무균조제 자동 연계). 화면이 `4/4 사이클 · 감량 20%` 처럼 **그 환자가 지금 어디까지 왔는지**를 한 줄로 말합니다.
@@ -213,6 +219,36 @@
 > **비어 있는 것은 할 일이 없다는 뜻이 아닙니다.** 해당 업무는 각 도메인 화면(대기열 · 입원 · 수납 등)에서 처리해 주세요.
 
 **빈 화면을 「없음」으로 읽지 말라고 화면이 먼저 말합니다.** 그리고 그동안 어디서 일하면 되는지를 적어 둡니다 → [취지 1](../overview/02-principles.md) · [화면이 「모른다」고 말하는 아홉 가지 방식](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식).
+
+### 워크스테이션 28개 — 연결된 것, 연결되지 않은 것, 설정이 어긋난 것
+
+워크스테이션을 전부 열어 보면 **세 부류**로 갈립니다. 화면이 스스로 어느 부류인지 말합니다.
+
+**① 업무 목록이 연결된 워크스테이션** — [약국](../assets/screens/his-support-workstation-pharmacy.png)(접수 → 조제 → 검수 → 불출 · STAT/URGENT) · [응급실](../assets/screens/his-support-workstation-emergency.png)(처분 407 · 코드블루/레드/화이트) · [접수](../assets/screens/his-support-workstation-front-desk.png)(빠른 접수 · QR 스캔) · [서류 발급](../assets/screens/his-support-workstation-documents.png)(**의료법 §21** 을 부제에 · 발급완료 2 · 반려 1) · [주치의](../assets/screens/his-support-workstation-attending.png) · [물리치료](../assets/screens/his-support-workstation-therapy.png) · [영양](../assets/screens/his-support-workstation-nutrition.png) · [외래 간호](../assets/screens/his-support-workstation-outpatient-nursing.png) · [검사항목 템플릿](../assets/screens/his-support-workstation-templates.png).
+
+**② 아직 연결되지 않았다고 말하는 워크스테이션** — 수술 준비 · 입원 · 접수 · 중앙공급 · 장비 · 감염관리 · 재활 · 혈액은행 · 중환자실 · 간호(입원) 이 모두 같은 띠를 겁니다: **"비어 있는 것은 할 일이 없다는 뜻이 아닙니다."** ([수술 준비](../assets/screens/his-support-workstation-surgery-prep.png) · [입원](../assets/screens/his-support-workstation-admission.png) · [중앙공급](../assets/screens/his-support-workstation-cssd.png) · [혈액은행](../assets/screens/his-support-workstation-blood-bank.png) · [감염관리](../assets/screens/his-support-workstation-infection-control.png))
+
+**③ 설정이 어긋났다고 말하는 워크스테이션** — 가장 드문 부류입니다.
+
+![혈액검사 워크스테이션 — 설정이 실제 코드와 맞지 않습니다](../assets/screens/his-support-workstation-lab.png)
+
+> **이 스테이션의 검사항목 설정이 실제 코드와 맞지 않습니다 — 부서 전체를 표시하는 중입니다.** 설정된 5개 항목이 `CBC` 같은 명칭이며, 실제 처방코드(`E6591`)와 맞지 않습니다. **이 설정을 고칠 화면은 아직 없습니다** — 목록을 이 스테이션 위주로 좁히려면 시스템 담당자에게 검사항목 재등록을 요청해 주세요.
+
+설정이 틀렸을 때 **조용히 빈 목록을 보여 주지 않고, 더 넓게(부서 전체) 보여 주면서 그 사실을 알립니다.** 그리고 고칠 화면이 없다는 것까지 말합니다. [기초검사](../assets/screens/his-support-workstation-diagnostic.png)도 같은 모양입니다 — "담당 자리가 지정되지 않은 검사 종류 7종 … **어느 자리의 대기 목록에도 뜨지 않습니다**", 그리고 목표 소요시간 미설정이라 **지연 판정 불가**.
+
+![수술 후 회복 — 원내 정책 미설정](../assets/screens/his-support-workstation-post-op.png)
+
+회복실 워크스테이션은 기준값(재측정 15분 · 재실 초과 2시간 · 저체온 36°C 미만)을 부제에 적으면서 **"(원내 정책 미설정)"** 을 붙입니다 — 기본값으로 돌고 있다는 뜻입니다. 그리고 "이 보드는 회복실 기록을 **읽어서** 보여 줍니다 … 퇴실은 회복실 화면에서"라고 **어디가 쓰는 곳인지** 밝힙니다.
+
+### 진료 지원 — 보드와 포털
+
+![검사·영상 보드 — 30분 초과 미보고](../assets/screens/his-support-diagnostics-board.png)
+
+검사·영상 보드는 위험값 미보고 2건 옆에 **"30분 초과 미보고 2"** 를 따로 세고, **"경보 미생성(원자료 위급) 6"** — 원자료는 위급인데 경보가 만들어지지 않은 건을 별도 칸으로 둡니다. TAT 초과 60건은 **경과 시간 / 목표** 로 적습니다.
+
+[비대면 진료](../assets/screens/his-support-remote-consult.png)는 SLA 준수와 평균 응답을 **「산출 불가 — 이번 달 답변 없음」** 으로, [PACS 주치의 포털](../assets/screens/his-support-pacs-portal.png)은 "**이 화면은 HIS 계정으로 로그인되지 않습니다** — 계정이 없다면 HIS 영상실이나 환자 차트에서 같은 영상을 볼 수 있습니다"라고 대체 경로를 적습니다. [임상 도구](../assets/screens/his-support-clinical-tools.png)는 89개 점수표 · 계산식 위에 "**모든 산출은 보조도구이며 최종 임상판단은 의사에게 귀속**"을 겁니다.
+
+그 밖에 [검사실](../assets/screens/his-support-lab.png)(9탭) · [영상실](../assets/screens/his-support-imaging.png)(PACS ON · 촬영 대기 8 · 판독 대기 4) · [병리과](../assets/screens/his-support-pathology.png) · [기초검사](../assets/screens/his-support-diagnostics.png)(담당 `미배정` 을 주황으로) · [원격진료](../assets/screens/his-support-telehealth.png) · [만성질환](../assets/screens/his-support-chronic.png)(조절 불량 26 / 62) · [약국 보드](../assets/screens/his-support-pharmacy-board.png) · [약사 임상활동](../assets/screens/his-support-pharmacist-activity.png).
 
 ### 워크스테이션 — 그 자리에서 할 일만
 
