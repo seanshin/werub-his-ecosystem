@@ -38,3 +38,6 @@
 | `assets/screens/his-support-workstation.png` | 워크스테이션 허브(`/workstation`) — **판독의 계정** · 검사실 8 · 영상실 8 · 부서별 13 카드 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-support-workstation-reading.png` | 판독 대기열(`/workstation/reading`) — 🔴 **AI 사전판독 사용 불가**(StudyInstanceUID 미기록) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-support-workstation-imaging.png` | 일반촬영 워크스테이션(`/workstation/imaging`) — ⚠️ 검사항목 설정이 실제 코드와 불일치 경고 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-his-checkup.png` | 건강검진센터(`/his-checkup`) — **검진 원무 계정** · 예약→접수→검사중→검사완료→소견대기→완료(당일 0) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-codes.png` | 코드 마스터(`/admin/codes`) — 총 18,199 · 코드체계 `KCD-8` · ICD-10/11 매핑 열 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-audit-dashboard.png` | 감사 대시보드(`/admin/audit-dashboard`) — ⚠️ **BTG 0건은 '없었다'는 뜻이 아님** · 집계 범위 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |

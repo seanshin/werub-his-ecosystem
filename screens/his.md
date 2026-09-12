@@ -121,7 +121,7 @@
 | 📷 sup-2 | 검사실 — 검체와 진행 상태 | `/lab` 계열 | `his-support-lab.png` |
 | ✅ sup-3 | 판독 대기열 · 일반촬영 워크스테이션 | `/workstation/reading` · `/workstation/imaging` | [`…-reading.png`](../assets/screens/his-support-workstation-reading.png) · [`…-imaging.png`](../assets/screens/his-support-workstation-imaging.png) |
 | ✅ sup-4 | 워크스테이션 허브 — 부서별 전용 작업 화면 | `/workstation` | [`his-support-workstation.png`](../assets/screens/his-support-workstation.png) |
-| 📷 sup-5 | 검진 동선 현황판 — QR 로 따라가는 수검자 동선 | 클리닉 센터 계열 | `his-support-checkup-flow.png` |
+| ✅ sup-5 | 건강검진센터 — 단계별 현황과 바로가기 | `/his-checkup` | [`his-support-his-checkup.png`](../assets/screens/his-support-his-checkup.png) |
 | 📷 sup-6 | 동의서 — 서명 요청과 완료 상태 | 의무기록 `동의서` | `his-support-consent.png` |
 
 ### 워크스테이션 — 그 자리에서 할 일만
@@ -222,7 +222,20 @@ CRM·예약·병원 안내 등 환자/고객 관리. **병원이 환자에게 �
 
 **100%를 100%라고만 말하지 않습니다.** 그 100% 밖에 무엇이 있는지, 왜 채울 수 없는지, 언제부터 괜찮아지는지를 함께 적습니다 → [취지 3](../overview/02-principles.md#3-모르는-것을-아는-척하지-않는다)
 
-**캡처 자리** — 📷 qua-4 `감사 대시보드` · 📷 qua-5 `환자안전(사고 보고)`
+### 감사 대시보드 — 무엇을 세지 않았는지 먼저 말한다
+
+![감사 대시보드 — 접근 집계와 BTG 경고](../assets/screens/his-quality-admin-audit-dashboard.png)
+
+기간을 정해 접근 기록을 셉니다 — 총 접근, 내부 감사, 외부 앱(SMART), 비상열람(BTG), 그리고 UPDATE · DELETE · READ · CREATE. 아래에 리소스별 접근 수와 최근 비상열람이 섭니다.
+
+그런데 숫자보다 먼저 두 개의 상자가 나옵니다.
+
+> ⚠️ **비상열람(BTG)은 아직 계측되지 않습니다 — 위 0건은 "비상열람이 없었다"는 뜻이 아닙니다.**
+> ℹ️ 외부 앱 접근 중 상당수가 환자 지목 조회입니다. **아래 목록·리소스별 집계는 내부 감사(AuditLog)만 대상으로 합니다** — 외부 앱 접근 상세는 SMART 클라이언트 화면에서 봅니다.
+
+앞은 **계측되지 않은 0**을 0으로 읽지 말라는 것이고, 뒤는 **이 표의 분모가 무엇인지**를 밝히는 것입니다 → [취지 2](../overview/02-principles.md#2-출처를-말한다) · [취지 3](../overview/02-principles.md#3-모르는-것을-아는-척하지-않는다)
+
+**캡처 자리** — 📷 qua-5 `환자안전(사고 보고)`
 
 ---
 
@@ -302,7 +315,7 @@ AI(WeRU.B) 진단보조·시뮬레이션·디지털 트윈.
 | ✅ sys-4b | 시스템 설정 — AI 서버 연결 · 브리핑 · 스킬 실측 | `/admin/ai-settings` | [`his-system-admin-ai-settings.png`](../assets/screens/his-system-admin-ai-settings.png) |
 | 📷 sys-5 | AI 감독 관제 — 제안과 승인 이력 | `/admin/ai-oversight` | `his-system-admin-ai-oversight.png` |
 | 📷 sys-6 | 상시 감시 — 판정하지 못한 것을 "관측 불가"로 | 상시 감시 | `his-system-monitor.png` |
-| 📷 sys-7 | 코드 마스터 — 기관이 반입한 약품 · 진단 · 수가 코드 | 코드 마스터 | `his-system-code-master.png` |
+| ✅ sys-7 | 코드 마스터 — 기관이 반입한 진단 · 수가 · 약품 코드 | `/admin/codes` | [`his-system-admin-codes.png`](../assets/screens/his-system-admin-codes.png) |
 
 
 ### 구축을 진행하는 세 화면
@@ -333,6 +346,16 @@ AI(WeRU.B) 진단보조·시뮬레이션·디지털 트윈.
 - 세 층이 각각 칸을 가집니다 — **허가권자(법적 요건) · 원내 위원회(정책) · 직원(건별 판단)**. 층마다 `지금 가능` 과 `선행 대기` 를 나눠 셉니다. 선행 결정이 안 되면 그 아래 결정은 열리지 않습니다.
 - 각 항목에 **법적 검토 근거와 허가권 근거를 함께 기록**하고, `설명자료`(검토 요청서·안건 자료)를 인쇄할 수 있습니다.
 - 🔴 화면이 자기 한계를 적습니다 — **"이 시스템은 결정자의 정책·허가권을 검증하지 못한다. 본인이 밝힌 권한 근거를 기록할 뿐이다."** 그리고 **"세 층은 별개이며 하위가 상위를 대체하지 못한다."** → [취지 5 「사람이 정할 것은 화면에서」](../overview/02-principles.md#5-사람이-정할-것은-화면에서)
+
+### 코드 마스터 — 기관이 받아 와서 채우는 자리
+
+![코드 마스터 — 진단코드 목록과 분류별 건수](../assets/screens/his-system-admin-codes.png)
+
+진단코드(KCD/ICD) · 수가코드(EDI) · 약품코드 · 간호코드와 그 사이의 표준 매핑을 관리합니다. 이 설치본에는 진단코드가 **18,199건** 들어 있고, 분류(감염성·기생충성 질환 · 신생물 · 순환계통 …)마다 건수가 붙습니다.
+
+행마다 **코드체계 배지**가 있습니다. 대부분 **`KCD-8`** 이고, 일부 **`ICD-11`**(예: `5A11` 제2형 당뇨병)이 ICD-10 매핑(`E11`)과 함께 있습니다. [9장 「코드 마스터」](../overview/09-terms.md)가 적은 **"KCD 제9차 개정이 2026-01-01 부터 시행 중인데 기준 버전 코드의 표기는 제8차"** 가 화면에서 그대로 확인됩니다.
+
+> 🔴 **코드 마스터는 이 저장소에도 생태계 소스에도 없습니다.** 나라마다 다르고 각 나라 공공기관이 배포 조건을 정하므로, **구축 기관이 직접 받아 반입합니다**([THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터)). 이 화면은 그 반입물을 넣고 관리하는 자리입니다.
 
 > ### ⚠️ 이 설치본의 결정 수가 체크리스트와 다릅니다
 > [사람 결정 체크리스트](../checklist/decisions.md)는 기준 커밋(HIS `v4.18.0` · `e9d3039...` · 2026-09-11 추출)에서 **합계 56**(허가권자 17 · 원내 위원회 38 · 직원 1) · 개시 전 필수 11 을 읽었습니다.
