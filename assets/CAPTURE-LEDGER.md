@@ -47,3 +47,6 @@
 | `assets/screens/his-quality-safety.png` | 환자안전 IPSG(`/safety`) — 사고 보고 폼 · **보고자 신원 비표시(환자안전법 §17)** 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-code-blue.png` | Code Blue / RRT(`/code-blue`) — 경과 기록 27건 · 팀도착(분) · 제세동 · 결과 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-emergency.png` | 응급실(`/emergency`) — 미배정 재실 중증 우선 · 구역별 베드 25 · 끌어다 배정 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-surgery.png` | 수술방 관리(`/surgery`) — 예정 4·완료 46 · OR Board · 마취기록·PACU·안전체크리스트 탭 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-icu.png` | 중환자실(`/icu`) — 병상 8·사용 3 · 활력징후 · GCS·APACHE · 입실사유 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-rounds.png` | 회진(`/rounds`) — 의사별 담당 환자와 진행률 · 입원 경위 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
