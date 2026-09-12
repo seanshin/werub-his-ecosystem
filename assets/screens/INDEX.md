@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **55** / 266 |
+| 지금 들어온 캡처 | **56** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -306,7 +306,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 |---|---|---|---|---|
 | 개원 관제 | 개원·운영 단계 | `/admin/opening` | `his-system-admin-opening.png` | ✅ |
 | 개원 관제 | 운영 전환(Go-Live) 관제 | `/admin/go-live` | `his-system-admin-go-live.png` | ✅ |
-| 개원 관제 | 연동 개통 게이트 | `/admin/integration-gates` | `his-system-admin-integration-gates.png` | ⬜ |
+| 개원 관제 | 연동 개통 게이트 | `/admin/integration-gates` | `his-system-admin-integration-gates.png` | ✅ |
 | 개원 관제 | Phase0 컷오버 승인 | `/admin/phase0-cutover` | `his-system-admin-phase0-cutover.png` | ⬜ |
 | 개원 관제 | EMR 인증 | `/admin/emr-cert` | `his-system-admin-emr-cert.png` | ⬜ |
 | 코드·마스터 | 코드 마스터 | `/admin/codes` | `his-system-admin-codes.png` | ✅ |

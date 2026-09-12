@@ -72,6 +72,8 @@
 | `assets/screens/his-ops-transfer.png` | 전원 관리(`/transfer`) — 발신·수신 대시보드 · 긴급도 · 상태 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 **협력 기관명 가림** | 확인 (2026-09-12) |
 | `assets/screens/his-quality-infection.png` | 감염관리(`/infection`) — 격리 21(집계 기준 병기) · **KONIS 자동 전송 없음 · 수기 보고 안내** · 미보고 29 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-quality-omop-cdm.png` | OMOP CDM 변환(`/omop-cdm`) — **「변환 미구현」** · 8개 테이블 전부 미생성 · **API 501 Not Implemented** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-agency-integrations.png` | 기관 연동(`/admin/agency-integrations`) — **채널 7 중 전송 구현 0** · 채널별 수기 대체 수단 · 법적 근거 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-integration-gates.png` | 연동 개통 게이트(`/admin/integration-gates`) — 게이트 3 충족 시 개통 · **`개발 시드(DEV-SEED)`** 배지 · 실결재 교체 4단계 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/sign-admin-login.png` | sign 트러스트 서비스 관리 콘솔 로그인 — API 키 로그인(break-glass) · v1.25.0 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/twin-patient-chart.png` | twin 환자 차트 — NEWS2·위험·eGFR · **「트윈 파생」 배지** · 「규칙기반 파생·임상 판단 보조」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/twin-ops-console.png` | twin 운영 콘솔 — **「운영 모드 · 비PHI 집계」** · 환자는 UUID 로만 · 고위험/기기 알림 20 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
