@@ -11,10 +11,10 @@
 
 | 역할 | 들고 오는 질문 | 개요서에서 먼저 볼 장 | 다음 문서 |
 |---|---|---|---|
-| **병원장 · CIO** | 왜 이 구조인가? 무엇을 얻고 무엇을 감수하나? 구축 규모와 비용은? | [2](02-principles.md) · [3](03-layers-and-systems.md) · [8](08-status-and-preparation.md) · [9](09-terms.md) | [구축 가이드 개요](../build-guide/README.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [통합 릴리즈 매니페스트](../RELEASES/draft/manifest.md) |
+| **병원장 · CIO** | 왜 이 구조인가? 무엇을 얻고 무엇을 감수하나? 구축 규모와 비용은? | [2](02-principles.md) · [3](03-layers-and-systems.md) · [8](08-status-and-preparation.md) · [9](09-terms.md) | [F 발표 덱](../deck/) · [구축 가이드 개요](../build-guide/README.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [통합 릴리즈 매니페스트](../RELEASES/draft/manifest.md) |
 | **전산 · 인프라팀** | 무엇을 어디에 설치하나? 서버 · GPU · DB 요구사항은? | [3](03-layers-and-systems.md) · [6](06-ai.md) · [7](07-build-path.md) · [8](08-status-and-preparation.md) | [구축 가이드 S0 준비](../build-guide/S0-prepare.md) · [S1 코어 HIS](../build-guide/S1-core-his.md) · [시스템 구성서](../systems/)의 「설치 요구사항 · 주요 설정」 · [배포 구성 도식](../diagrams/deployment.md) · [THIRD_PARTY.md](../THIRD_PARTY.md) |
-| **의료정보 · 임상 리더** | 진료 흐름이 시스템 사이를 어떻게 지나가나? 병원 규정은 어디서 설정하나? | [2](02-principles.md) · [4](04-patient-journey.md) · [5](05-identity-trust-standards.md) | [환자 여정 스윔레인](../diagrams/patient-journey.md) · [HIS 구성서](../systems/his.md) · [HIS 도메인 목록](../systems/his-domains.md) · [개원 · 운영 단계 체크리스트](../checklist/opening.md) · 데모 시나리오([`scenarios/`](../scenarios/) · 준비 중) |
-| **AI · 거버넌스 위원회 · 법무** | AI 가 어디서 무엇을 하나? 어디까지 켜도 되나? 누가 승인하고 무엇이 남나? | [6](06-ai.md) · [9](09-terms.md) · [2 취지 1 · 5 · 7](02-principles.md) | [구축 가이드 S6 AI 계층](../build-guide/S6-ai.md) · [AI 호출 지도](../diagrams/ai-map.md) · [AI Server 구성서](../systems/ai-server.md) · [THIRD_PARTY §3 모델 가중치](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책 고지](../DISCLAIMER.md) |
+| **의료정보 · 임상 리더** | 진료 흐름이 시스템 사이를 어떻게 지나가나? 병원 규정은 어디서 설정하나? | [2](02-principles.md) · [4](04-patient-journey.md) · [5](05-identity-trust-standards.md) | [환자 여정 스윔레인](../diagrams/patient-journey.md) · [HIS 구성서](../systems/his.md) · [HIS 도메인 목록](../systems/his-domains.md) · [개원 · 운영 단계 체크리스트](../checklist/opening.md) · [데모 시나리오](../scenarios/) · **[화면으로 보는 생태계](../screens/)** |
+| **AI · 거버넌스 위원회 · 법무** | AI 가 어디서 무엇을 하나? 어디까지 켜도 되나? 누가 승인하고 무엇이 남나? | [6](06-ai.md) · [9](09-terms.md) · [2 취지 1 · 5 · 7](02-principles.md) | [구축 가이드 S6 AI 계층](../build-guide/S6-ai.md) · [AI 호출 지도](../diagrams/ai-map.md) · **[AI 감독 화면](../screens/his.md)** · [AI Server 구성서](../systems/ai-server.md) · [THIRD_PARTY §3 모델 가중치](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책 고지](../DISCLAIMER.md) |
 | **연동 개발자 · 파트너** | 시스템끼리 무슨 프로토콜 · 인증으로 붙나? 무엇이 검증됐나? | [4](04-patient-journey.md) · [5](05-identity-trust-standards.md) · [8](08-status-and-preparation.md) | [연결 상태](../RELEASES/draft/compatibility.md) · [연결 지도](../diagrams/connections.md) · [표준 층](../diagrams/standards.md) · [신원 허브](../diagrams/identity-hub.md) · 연동 계약 지도([`integration/`](../integration/) · 준비 중) |
 | **보건 당국 · 국제 협력 기관** | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [1](01-one-sentence.md) · [3](03-layers-and-systems.md) · [8](08-status-and-preparation.md) · [9](09-terms.md) | [README 「개발도상국에서도 세울 수 있는 수준으로」](../README.md#개발도상국에서도-세울-수-있는-수준으로) · [구축 가이드 「시작 전에 알아야 할 것」](../build-guide/README.md#시작-전에-알아야-할-것--요구사항-요약) · [THIRD_PARTY §4 코드 마스터](../THIRD_PARTY.md#4-코드-마스터기준-데이터) |
 
@@ -30,7 +30,8 @@
 | [C 시스템 구성서](../systems/) | 시스템 13개를 같은 틀로 | 🟡 초안 |
 | D 연동 계약 지도([`integration/`](../integration/)) | 시스템 × 시스템: 방향 · 프로토콜 · 인증 · 구현 상태 · 확인일 | 준비 중 |
 | E 데모 시나리오([`scenarios/`](../scenarios/)) | 가상 병원으로 환자 여정 · 응급 · 검진 · 입원 → 퇴원 | 준비 중 |
-| [F 발표 덱](../deck/) | A · E 시각 요약 — 내용 29장 | 🟡 초안 |
+| [F 발표 덱](../deck/) | A · E 시각 요약 — 내용 32장(화면 9장 포함) | 🟡 초안 |
+| [화면으로 보는 생태계](../screens/) | 시스템 13장 + 「사람을 넣고 빼는 일」 — **화면 63장**과 설명 | 🟡 초안 |
 | [G 구축 체크리스트](../checklist/) | 개원 단계 · Go-Live · 사람 결정 — HIS 레지스트리에서 자동 생성 | ✅ 1차 생성 |
 | [H 용어집](../glossary.md) | FHIR · SMART · MWL · TSA · PAdES · DUR · KCD 등 | 🟡 초안 |
 | [도식](../diagrams/) | 도식 8종 + 연결 지도(자동 생성) | 🟡 초안 |

@@ -215,13 +215,13 @@
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 리허설 전 초안 |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
 | `integration/` | 연동 계약 지도(시스템 × 시스템) | 준비 중 |
-| [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안(화면 캡처 전) |
-| [`deck/`](deck/) | 발표 덱(내용 29장 · A·E 시각 요약) | 🟡 초안(화면 캡처 전) |
+| [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안 · 캡처 자리 45 중 12 |
+| [`deck/`](deck/) | 발표 덱(내용 32장 · A·E 시각 요약 + 화면 9장) | 🟡 초안 |
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |
 | [`data/`](data/) | 규모 계측 스냅샷(계측일 · 기준 커밋 포함) | ✅ 1차 계측 |
 | [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈(버전 조합 매니페스트 · 시스템별 릴리즈 요약 13) | 🟡 초안 |
-| [`screens/`](screens/) | **화면으로 보는 생태계**(시스템 13장 · 캡처와 설명) | 🟡 초안(캡처 넣는 중) |
-| [`assets/screens/`](assets/screens/) | 화면 캡처 이미지 + [캡처 목록 266](assets/screens/INDEX.md)(자동 생성) | 🟡 0 / 266 |
+| [`screens/`](screens/) | **화면으로 보는 생태계**(시스템 13장 + 흐름 1장 · 캡처와 설명) | 🟡 초안 · 63장 |
+| [`assets/screens/`](assets/screens/) | 화면 캡처 이미지 63장 + [캡처 목록](assets/screens/INDEX.md)(자동 생성) | 🟡 HIS 45 / 266 · 형제 시스템 6 |
 | [`diagrams/`](diagrams/) | 도식 8종 + 연결 지도(연결 상태 표에서 자동 생성) | 🟡 초안 |
 | [`glossary.md`](glossary.md) | 용어집 | 🟡 초안 |
 | `tools/` | 공개 검사기 · 규모 계측기 · 체크리스트 추출기 · 매니페스트 생성기 · 연결 지도 생성기 · HIS 메뉴 추출기 | ✅ |
