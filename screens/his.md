@@ -44,12 +44,12 @@
 
 | # | 담을 화면 | 화면 경로 | 파일 |
 |---|---|---|---|
-| 📷 care-1 | 접수 — 대기 목록과 접수 처리 | `/reception` | `his-care-reception.png` |
+| ✅ care-1 | 접수 — AI 접수 어시스턴트 · 곧 도착 예약 | `/reception` | [`his-care-reception.png`](../assets/screens/his-care-reception.png) |
 | ✅ care-2 | 진료실 대기 — 진료 순서와 호출 | `/clinic-queue` | [`his-care-clinic-queue.png`](../assets/screens/his-care-clinic-queue.png) |
 | ✅ care-3 | 처방(CPOE) — 오더 추적 · 부서별 대기열 | `/orders` | [`his-care-orders.png`](../assets/screens/his-care-orders.png) |
 | ✅ care-4 | 통합 상황판 — 그날의 전체 흐름 | `/command-center` | [`his-care-command-center.png`](../assets/screens/his-care-command-center.png) |
-| 📷 care-5 | 간호 워크스테이션 — 투약 · 활력징후 | `/nursing` 계열 | `his-care-nursing.png` |
-| 📷 care-6 | 병상 현황 — 병동 배치와 재원 | `/beds` 계열 | `his-care-beds.png` |
+| ✅ care-5 | 간호 워크스테이션 — 투약 · 활력징후 · 인계 | `/nurse-station` | [`his-care-nurse-station.png`](../assets/screens/his-care-nurse-station.png) |
+| ✅ care-6 | 병상·입원 보드 — 병동별 가동률 | `/bed-board` | [`his-care-bed-board.png`](../assets/screens/his-care-bed-board.png) |
 
 ### 통합 상황판 — 그날의 병원이 한 화면에
 
@@ -58,6 +58,26 @@
 왼쪽에 도메인 메뉴, 위쪽에 그날의 지표 카드(재원 · 병상 가동률 · 응급 재실 · 접수 대기 · 미수금 · QI 달성률)가 서고, **「지금 조치 필요」** 가 눌러야 할 일을 건수와 함께 모읍니다. 아래는 부서별 보드(간호 스테이션 · 응급실(KTAS) · 병상·입원 · 약국 · 원무·수납 · 검사·영상 위험값 · 감염·질안전)와 **「원내 여정」**(접수 → 호출 → 진료중 → 수납대기 → 완료 단계별 인원과 지연)입니다.
 
 > 화면의 병원 · 환자 · 수치는 모두 **가상 데이터**입니다.
+
+### 접수 — 환자가 병원에 들어오는 자리
+
+![접수 데스크 — AI 접수 어시스턴트와 곧 도착 예약](../assets/screens/his-care-reception.png)
+
+`예약 접수` · `당일 접수` · `신규 환자 등록` · `대기 현황` 네 탭입니다. 환자를 찾아 진료과와 의사를 고르고, 초진·재진과 증상을 적어 접수합니다. 오른쪽에 **AI(WeRU.B) 접수 어시스턴트**가 있어 "이름 · 전화번호 · 증상"을 자유롭게 적으면 접수를 돕고, 증상 칸에는 `AI(WeRU.B) 추천` 버튼이 붙습니다. **AI 는 접수를 돕고 제안할 뿐이고 접수 확정은 사람이 누릅니다.**
+
+오른쪽 세로줄에 지금 대기 수 · **곧 도착 예약**(시각 · 환자 · 진료과와 `호출` 버튼 · 지각 표시) · 진료실 현황이 섭니다.
+
+> 이 화면은 **간호사 계정**으로 찍었습니다. 접수 메뉴는 관리자 · 간호사 · 원무에게 보이고 **의사에게는 보이지 않습니다** → [역할 비교](by-onboarding.md#역할이-바뀌면-화면이-바뀐다)
+
+### 간호 워크스테이션과 병상 보드
+
+![간호 워크스테이션 — 병동 입원 환자와 간호 업무 탭](../assets/screens/his-care-nurse-station.png)
+
+병동을 고르면 그 병동의 입원 환자 · 낙상 위험 · 욕창 위험 · **투약 대기** 수가 먼저 서고, 아래 탭으로 간호 업무가 나뉩니다 — `내 환자` · `투약 관리` · `활력징후` · `I/O 기록` · `간호 기록` · **`인계(상·하반)`** · `병동 보드`. 환자마다 병실 · 입원 며칠째 · 투약 건수 · **마지막 활력징후와 마지막 기록이 얼마나 지났는지**가 붙습니다.
+
+![병상·입원 보드 — 병동별 가동률](../assets/screens/his-care-bed-board.png)
+
+병동별 병상 가동률과 재원 · 가용 · 예약 · 청소 · 격리 · 점검 상태를 한 판에 봅니다. **장기재원(14일 이상)** 을 따로 세고, 평균 재원일을 함께 적습니다. 병동 벽에 띄우는 용도입니다.
 
 ### 진료실 대기 — 없는 값을 그리지 않는 자리
 

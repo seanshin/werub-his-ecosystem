@@ -31,4 +31,7 @@
 | `assets/screens/flow-onboarding-04-role-executive.png` | 역할 비교 ④ **경영진** — 첫 화면이 `/executive` 경영 대시보드로 바뀜 · 메뉴 축소 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-orders.png` | 처방 관리 CPOE(`/orders`) — 전체 133(약물 71·검사 47·영상 7·치료 8) · 긴급 17 · 상태별 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-clinic-queue.png` | 진료실 대기(`/clinic-queue`) — 예상 대기 `산출 불가` · 🔒 약국 탭 권한 안내 · 대기 11명 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
-| `assets/screens/his-support-pharmacy.png` | 약국 조제(`/pharmacy`) — 접수→조제→검수→불출 4단계(대기 없음 · 구조만) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-reception.png` | 접수 데스크(`/reception`) — **간호사 계정** · AI 접수 어시스턴트 동작 · 곧 도착 예약 · 진료실 현황 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-nurse-station.png` | 간호 워크스테이션(`/nurse-station`) — 투약·활력징후·I/O·간호기록·인계·병동보드 탭 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-bed-board.png` | 병상·입원 보드(`/bed-board`) — 병동별 가동률 · 장기재원 5 · 평균 재원 91일 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-pharmacy.png` | 약국 조제(`/pharmacy`) — **약사 계정** · 접수→조제→검수→불출 · 전체 6(접수 대기 2 · 검수 대기 4) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
