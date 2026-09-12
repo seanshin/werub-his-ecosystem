@@ -41,3 +41,6 @@
 | `assets/screens/his-support-his-checkup.png` | 건강검진센터(`/his-checkup`) — **검진 원무 계정** · 예약→접수→검사중→검사완료→소견대기→완료(당일 0) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-codes.png` | 코드 마스터(`/admin/codes`) — 총 18,199 · 코드체계 `KCD-8` · ICD-10/11 매핑 열 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-quality-admin-audit-dashboard.png` | 감사 대시보드(`/admin/audit-dashboard`) — ⚠️ **BTG 0건은 '없었다'는 뜻이 아님** · 집계 범위 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-emergency-board.png` | 응급실 보드(`/emergency-board`) — KTAS 분포 · 구역 점유 · NEDOCS 과밀도 · 119 사전통보 · 골든타임 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-sentinel.png` | 상시 감시(`/admin/sentinel`) — 네 축 · **관측 불가 3** · 「데이터를 고치지 않는다」 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-system-admin-triage.png` | 트리아지 관리(`/admin/triage`) — 증상→진료과 매핑(순위·가중치)·별칭·응급 · AI 예약의 근거 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
