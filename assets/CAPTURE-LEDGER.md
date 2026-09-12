@@ -50,3 +50,6 @@
 | `assets/screens/his-care-surgery.png` | 수술방 관리(`/surgery`) — 예정 4·완료 46 · OR Board · 마취기록·PACU·안전체크리스트 탭 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-icu.png` | 중환자실(`/icu`) — 병상 8·사용 3 · 활력징후 · GCS·APACHE · 입실사유 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-care-rounds.png` | 회진(`/rounds`) — 의사별 담당 환자와 진행률 · 입원 경위 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-workstation-consent.png` | 동의서 워크스테이션(`/workstation/consent`) — 서명 대기 13 · 기기로 보내기·링크·PDF · DNR 유형 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-workstation-discharge.png` | 퇴원 워크스테이션(`/workstation/discharge`) — 🔧 **업무 목록 미연결 · 「비어 있는 것은 할 일이 없다는 뜻이 아닙니다」** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-support-workstation-certificates.png` | 진단서 워크스테이션(`/workstation/certificates`) — **의료법 §17** 인용 · 사망진단서는 창구 접수 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
