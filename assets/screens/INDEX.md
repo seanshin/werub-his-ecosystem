@@ -13,7 +13,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
 | 메뉴 항목 | 266 |
 | 캡처할 화면(경로 기준) | **266** |
-| 지금 들어온 캡처 | **34** / 266 |
+| 지금 들어온 캡처 | **37** / 266 |
 
 - **메뉴에 있다는 것은 화면이 있다는 뜻**이고, 실운영에서 검증됐다는 뜻이 아닙니다.
 - 같은 화면 경로가 두 묶음에 걸려 있으면 **파일은 하나만** 둡니다(목록에는 첫 묶음에 적습니다).
@@ -49,10 +49,10 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 |---|---|---|---|
 | 수술 | `/surgery` | `his-care-surgery.png` | ⬜ |
 | 회복실(PACU) | `/pacu` | `his-care-pacu.png` | ⬜ |
-| 응급실 | `/emergency` | `his-care-emergency.png` | ⬜ |
+| 응급실 | `/emergency` | `his-care-emergency.png` | ✅ |
 | 응급실 보드 | `/emergency-board` | `his-care-emergency-board.png` | ✅ |
 | 중환자실 | `/icu` | `his-care-icu.png` | ⬜ |
-| Code Blue / RRT | `/code-blue` | `his-care-code-blue.png` | ⬜ |
+| Code Blue / RRT | `/code-blue` | `his-care-code-blue.png` | ✅ |
 
 ### 전문 진료 (12)
 
@@ -231,7 +231,7 @@ HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니�
 
 | 메뉴 | 화면 경로 | 파일 | 상태 |
 |---|---|---|---|
-| 환자안전(사고 보고) | `/safety` | `his-quality-safety.png` | ⬜ |
+| 환자안전(사고 보고) | `/safety` | `his-quality-safety.png` | ✅ |
 | 감염·질·안전 보드 | `/safety-quality-board` | `his-quality-safety-quality-board.png` | ⬜ |
 | 감염관리 | `/infection` | `his-quality-infection.png` | ⬜ |
 | 직원 노출 사고 | `/infection/staff-exposure` | `his-quality-infection-staff-exposure.png` | ⬜ |

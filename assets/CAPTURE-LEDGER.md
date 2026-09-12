@@ -44,3 +44,6 @@
 | `assets/screens/his-care-emergency-board.png` | 응급실 보드(`/emergency-board`) — KTAS 분포 · 구역 점유 · NEDOCS 과밀도 · 119 사전통보 · 골든타임 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-sentinel.png` | 상시 감시(`/admin/sentinel`) — 네 축 · **관측 불가 3** · 「데이터를 고치지 않는다」 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-triage.png` | 트리아지 관리(`/admin/triage`) — 증상→진료과 매핑(순위·가중치)·별칭·응급 · AI 예약의 근거 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-safety.png` | 환자안전 IPSG(`/safety`) — 사고 보고 폼 · **보고자 신원 비표시(환자안전법 §17)** 명시 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-code-blue.png` | Code Blue / RRT(`/code-blue`) — 경과 기록 27건 · 팀도착(분) · 제세동 · 결과 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-care-emergency.png` | 응급실(`/emergency`) — 미배정 재실 중증 우선 · 구역별 베드 25 · 끌어다 배정 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
