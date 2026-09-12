@@ -1,0 +1,137 @@
+{
+  "measuredAt": "2026-09-12",
+  "tool": {
+    "name": "tools/count-releases.mjs",
+    "rulesVersion": 1
+  },
+  "conventions": {
+    "countUnit": "count 는 \"릴리즈 기록이 몇 건 남았나\"이지 \"릴리즈를 몇 번 했나\"가 아니다. 한 문서에 여러 판이 묶인 경우(예: v11.4-v11.8)도 한 건으로 센다.",
+    "comparability": "기록 형식이 시스템마다 다르므로(파일 · 변경이력 절 · 보고서 · 태그) **시스템 사이의 크고 작음 비교에 쓰지 않는다.** 각 시스템이 무엇을 한 건으로 보는지가 다르다.",
+    "versions": "first · last 는 파일 이름 또는 절 제목에서 뽑은 버전을 숫자로 정렬한 양 끝이다. 버전이 없는 형식(보고서 · 태그 없음)은 null.",
+    "state": "기준 커밋은 data/base-commits.json 에 고정된 해시(pinned=true) 또는 계측 시점의 HEAD.",
+    "nullValue": "셀 수 없으면 count=null 과 reason 을 적는다."
+  },
+  "systems": {
+    "his": {
+      "name": "HIS (+공개 홈페이지 · 환자 앱)",
+      "repoKey": "his",
+      "form": "릴리즈 문서 파일",
+      "where": "docs/04-report/RELEASE-v*.md",
+      "commit": "e9d303984f80eda8271f29064a326bedad766815",
+      "pinned": true,
+      "count": 107,
+      "first": "3.11.0",
+      "last": "4.18.0"
+    },
+    "sign": {
+      "name": "sign",
+      "repoKey": "sign",
+      "form": "변경이력 절",
+      "where": "CHANGELOG.md `## [x.y.z]`",
+      "commit": "93f56d839c3f5a0bc7ca8ed6b1b0404f006423d5",
+      "pinned": true,
+      "count": 52,
+      "first": "0.1.0",
+      "last": "1.30.1"
+    },
+    "lis": {
+      "name": "LIS",
+      "repoKey": "lis",
+      "form": "변경이력 절",
+      "where": "CHANGELOG.md `## [x.y.z]`",
+      "commit": "ffb34e9d1dbc6aecaf7c99c4e9ed0063e54c27b4",
+      "pinned": true,
+      "count": 108,
+      "first": "1.0.0",
+      "last": "1.56.18"
+    },
+    "erp": {
+      "name": "ERP",
+      "repoKey": "erp",
+      "form": "세션 · 마일스톤 보고서",
+      "where": "docs/04-report/*.report.md",
+      "commit": "0e1f54c5b90213806615a865a38494e22abcab92",
+      "pinned": true,
+      "count": 38,
+      "first": null,
+      "last": null
+    },
+    "pacs": {
+      "name": "PACS",
+      "repoKey": "pacs",
+      "form": "릴리즈 문서 파일",
+      "where": "docs/releases/v*.md",
+      "commit": "532a8ed13e872941ab478caed63a02824258f181",
+      "pinned": true,
+      "count": 60,
+      "first": "11.0",
+      "last": "13.48"
+    },
+    "ai-server": {
+      "name": "AI Server",
+      "repoKey": "ai-server",
+      "form": "릴리즈 문서 파일",
+      "where": "docs/RELEASE_v*.md",
+      "commit": "55acaee900688326683bc0c2f17827ae9d099d0e",
+      "pinned": true,
+      "count": 218,
+      "first": "2.71.0",
+      "last": "2.125.41"
+    },
+    "twin": {
+      "name": "twin",
+      "repoKey": "twin",
+      "form": "보고서 + 핸드오프",
+      "where": "docs/04-report/*.md",
+      "commit": "526b4f9a4d3fdad5c7ada4b76855367d58c00b0b",
+      "pinned": true,
+      "count": 27,
+      "first": null,
+      "last": null
+    },
+    "cerno": {
+      "name": "cerno",
+      "repoKey": "cerno",
+      "form": "변경이력 절",
+      "where": "CHANGELOG.md `## vx.y.z`",
+      "commit": "4f5c22b331fc2ce67969ac3a0e266d9e62af2597",
+      "pinned": true,
+      "count": 9,
+      "first": "0.1.0",
+      "last": "0.1.8"
+    },
+    "edu": {
+      "name": "edu",
+      "repoKey": "edu",
+      "form": "변경이력 절",
+      "where": "CHANGELOG.md `## vx.y.z`",
+      "commit": "f8127e6ee278fd5d8e808ee75675d62e734e5a30",
+      "pinned": true,
+      "count": 17,
+      "first": "1.0.0",
+      "last": "2.7.0"
+    },
+    "clinic": {
+      "name": "Clinic (병원 서비스만)",
+      "repoKey": "clinic",
+      "form": "릴리즈 문서 파일",
+      "where": "docs/04-report/release-hospital*.md",
+      "commit": "2b20a89b7c3ab8128730f8aca5fea84cdb314658",
+      "pinned": true,
+      "count": 7,
+      "first": null,
+      "last": null
+    },
+    "jitsi": {
+      "name": "Jitsi",
+      "repoKey": "jitsi",
+      "form": "태그",
+      "where": "git tag",
+      "commit": "0984fbec7177796ed619f82348cba4e721695710",
+      "pinned": true,
+      "count": 23,
+      "first": "v1.0.0",
+      "last": "v2.10.0"
+    }
+  }
+}

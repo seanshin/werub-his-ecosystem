@@ -10,6 +10,7 @@
 | 파일 | 내용 |
 |---|---|
 | `scale-snapshot.json` | 시스템별 기준 커밋 · 버전 선언 · 규모 수치(값과 센 방법) · 계측일 |
+| `release-records.json` | 시스템별 **릴리즈 기록의 형식과 건수**(파일 · 변경이력 절 · 보고서 · 태그) · 버전 범위 · 계측일 |
 | `base-commits.json` | 저장소별 **기준 커밋 고정값** — 모든 도구가 이 커밋의 내용만 읽습니다 |
 
 ## 수치를 읽는 법
@@ -28,6 +29,9 @@ HIS · 공개 홈페이지 · 환자 앱의 수치는 HIS 저장소의 정본 �
 ## 다시 만들기
 
 ```bash
+node tools/count-releases.mjs         # 다시 세어 release-records.json 을 새로 씁니다
+node tools/count-releases.mjs --check # 다시 세어 지금 스냅샷과 비교만 합니다
+
 node tools/measure-scale.mjs          # 다시 세어 scale-snapshot.json 을 새로 씁니다
 node tools/measure-scale.mjs --check  # 다시 세어 지금 스냅샷과 비교만 합니다(아무것도 쓰지 않습니다)
 node tools/measure-scale.mjs --repin  # 기준 커밋 고정을 각 저장소의 지금 커밋으로 옮기고 다시 셉니다
@@ -45,3 +49,10 @@ node tools/measure-scale.mjs --repin  # 기준 커밋 고정을 각 저장소의
 | 1 | `--check` 불일치 |
 | 2 | 계측기 오류(고정된 기준 커밋을 저장소에서 찾지 못함 포함) |
 | 3 | 미실행(로컬 설정 또는 저장소 없음) |
+
+## 릴리즈 기록 계수(`release-records.json`)를 읽는 법
+
+- `systems.<시스템>.form` · `where` — 그 시스템이 **자기 작업을 어떤 형식으로 어디에 남기는지**. 형식이 네 가지(릴리즈 문서 파일 · 변경이력 절 · 세션 보고서 · 태그)이고, 시스템마다 합의된 적이 없습니다.
+- `systems.<시스템>.count` — 기준 커밋에 들어 있는 **기록의 건수**. 🔴 "릴리즈를 몇 번 했나"가 아니고, **시스템 사이의 크고 작음 비교에 쓰지 않습니다**(한 건이 뜻하는 것이 시스템마다 다릅니다).
+- `systems.<시스템>.first` · `last` — 파일 이름 · 절 제목에서 뽑은 버전을 숫자로 정렬한 양 끝. 버전이 없는 형식은 `null`.
+- 이 수치를 읽은 결과는 [형제 시스템은 어떻게 자랐나](../DESIGN-HISTORY-SYSTEMS.md)에 있습니다.
