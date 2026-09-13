@@ -1,6 +1,6 @@
 # HIS 화면 — 병원 하나가 돌아가는 자리
 
-> 🟡 **초안 — 캡처 넣는 중**(0 / 266) · [화면 소개 목차](README.md) · 캡처 목록: [assets/screens/INDEX.md](../assets/screens/INDEX.md)
+> 🟡 **초안** · 캡처 **264 / 266**(제외 2 — 인프라 주소 · 외부 기관 정보가 화면 전체에 걸림) · [화면 소개 목차](README.md) · 캡처 목록: [assets/screens/INDEX.md](../assets/screens/INDEX.md)
 > 근거: [HIS 메뉴 구성 — 도메인별](../systems/his-domains.md)(HIS `v4.18.0` · 기준 커밋 2026-09-11 · 자동 추출) · [HIS 시스템 구성서](../systems/his.md)
 
 **EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**0 verified**).
@@ -22,7 +22,7 @@
 | | | **26** | **266** |
 
 - 화면 경로와 기본 사용 역할은 [메뉴 구성표](../systems/his-domains.md)에 전부 있습니다. 이 장은 **무엇을 하는 화면인지**를 설명합니다.
-- 📷 표시는 **캡처 자리**입니다. 아직 이미지가 들어오지 않았습니다.
+- 📷 표시는 아직 이 장에 넣지 않은 **캡처 자리**입니다. 찍어 둔 화면 전부는 [캡처 목록](../assets/screens/INDEX.md)에 있습니다.
 - 이 장에서 되풀이해 나오는 **"모른다"고 말하는 아홉 가지 방식**은 [개요서 취지 3](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식)에 표로 모아 두었습니다.
 
 ---
@@ -185,6 +185,22 @@
 
 ---
 
+### 비어 있는 칸이 하는 말 — 대시보드 · 예약 · 급식
+
+![대시보드 — ICU NEWS2 산출 불가](../assets/screens/his-care-dashboard.png)
+
+직원 첫 화면의 **ICU NEWS2 경고** 칸은 병상마다 점수 대신 **`산출 불가`** 와 까닭을 적습니다 — "체온 · 의식(ACVPU) 미기록", "보충산소(FiO₂ · 환기모드) 미기록". 입력이 빠진 점수를 0점(정상)으로 계산하지 않습니다 → [취지 3](../overview/02-principles.md#3-모르는-것을-아는-척하지-않는다)
+
+![예약 관리 — 노쇼율 100%](../assets/screens/his-care-schedule.png)
+
+예약 화면은 이번 달 241건 중 완료 0 · **노쇼 240 · 노쇼율 100%** 를 그대로 띄웁니다. 리허설 설치본이라 지난 예약에 도착 기록이 없기 때문이고, 화면은 그 숫자를 보기 좋게 고치지 않습니다. 개원 전에 시드 예약을 정리하는 일은 [Go-Live 체크리스트](../checklist/go-live.md)가 맡습니다.
+
+![영양/급식 — 원내 정책 미확정 기본값](../assets/screens/his-care-nutrition.png)
+
+영양 고급 관리의 할 일 목록 위에 노란 줄 하나가 있습니다 — **"원내 정책 미확정 — 기본값(스크리닝 48시간 · 재평가 7일) 기준으로 표시합니다."** 기한 초과 표시가 **기관이 정한 기준이 아니라 코드 기본값에서 나왔다**는 것을 먼저 밝힙니다 → [취지 5](../overview/02-principles.md#5-사람이-정할-것은-화면에서)
+
+---
+
 ## 진료지원 — `support`
 
 약국·검사·영상·의무기록·워크스테이션 등 진료 지원. 화면이 **62개로 가장 많은 축**이고, 부서마다 일하는 자리가 따로 있습니다.
@@ -201,7 +217,7 @@
 | # | 담을 화면 | 화면 경로 | 파일 |
 |---|---|---|---|
 | ✅ sup-1 | 약국 조제 — 접수 → 조제 → 검수 → 불출 | `/pharmacy` | [`his-support-pharmacy.png`](../assets/screens/his-support-pharmacy.png) |
-| 📷 sup-2 | 검사실 — 검체와 진행 상태 | `/lab` 계열 | `his-support-lab.png` |
+| ✅ sup-2 | 검사실 — 검체와 진행 상태 | `/lab` 계열 | [`his-support-lab.png`](../assets/screens/his-support-lab.png) |
 | ✅ sup-3 | 판독 대기열 · 일반촬영 워크스테이션 | `/workstation/reading` · `/workstation/imaging` | [`…-reading.png`](../assets/screens/his-support-workstation-reading.png) · [`…-imaging.png`](../assets/screens/his-support-workstation-imaging.png) |
 | ✅ sup-4 | 워크스테이션 허브 — 부서별 전용 작업 화면 | `/workstation` | [`his-support-workstation.png`](../assets/screens/his-support-workstation.png) |
 | ✅ sup-5 | 건강검진센터 — 단계별 현황과 바로가기 | `/his-checkup` | [`his-support-his-checkup.png`](../assets/screens/his-support-his-checkup.png) |
@@ -369,7 +385,19 @@ CRM 은 네 축으로 나뉩니다 — **검진 CRM**(대상자 관리 · 이상
 
 > 아래쪽 회색 자리는 **테스트 계정과 비밀번호가 화면에 표시되는 블록**이라 공개 자료에서 가렸습니다.
 
-**캡처 자리** — 📷 pat-2 검진 대상자와 캠페인 · 📷 pat-3 병원 안내(홈페이지에 나가는 내용)
+### 어느 값이 정본이고 어느 값이 예시인가
+
+![시설 안내 — 정본 값과 예시를 나누는 안내](../assets/screens/his-patient-facility-info.png)
+
+시설 안내 화면은 맨 위에 **어느 칸이 원내 정본에서 온 값이고 어느 칸이 예시인지**를 나눠 적습니다. 기관명 · 주소 · 대표/응급 연락처는 정본에서 오고, 아래 층별 안내와 시설 상세는 **시스템에 등재된 정보가 아니라 예시이며 실제와 다를 수 있다**고 밝힙니다. 이 내용이 홈페이지로 나가기 전에 무엇을 채워야 하는지가 화면에 드러납니다 → [취지 2](../overview/02-principles.md#2-출처를-말한다)
+
+> 🔴 주소 · 전화 · 채용 연락처 · 의료진 이름은 공개 자료에서 가렸습니다(기관 식별 정보).
+
+![CRM 분석 — 데이터 부족 → 기본 추천 시간](../assets/screens/his-patient-crm-analytics.png)
+
+CRM 분석의 **AI(WeRU.B) 최적 발송 시간** 칸은 "추천: 9:00" 아래에 **"데이터 부족 — 기본 추천 시간 09:00"** 이라고 적습니다. 발송 실적이 0 인 상태에서 나온 추천이 **학습 결과가 아니라 기본값**이라는 뜻입니다. 코호트 리텐션 막대도 월마다 **분자/분모**(2/2 · 62/63 · 7/32 …)를 함께 적습니다 → [취지 5 「분모를 함께」](../overview/02-principles.md)
+
+**캡처 자리** — 검진 대상자 · 캠페인 · 세그먼트 · 자동화 · 해외환자 실적 등 CRM 나머지 10장은 [캡처 목록](../assets/screens/INDEX.md)에 있습니다.
 
 ### 병원 안내 — 환자가 보는 쪽
 
@@ -421,7 +449,7 @@ CRM 은 네 축으로 나뉩니다 — **검진 CRM**(대상자 관리 · 이상
 
 ### 기관 연동 — 안 되는 것을 일정으로 관리한다
 
-![기관 연동 — 채널 7개와 수기 대체 안내](../assets/screens/his-quality-agency-integrations.png)
+![기관 연동 — 채널 7개와 수기 대체 안내](../assets/screens/his-quality-admin-agency-integrations.png)
 
 법정 보고 · 청구 기관으로 나가는 전송 채널을 한 곳에 모읍니다. 이 설치본은 **채널 7개 중 전송 구현 0개**입니다 — 질병관리청 감염병 웹신고 · 전국의료관련감염감시체계(KONIS) · 건강보험심사평가원 EDI 청구 · 건강정보고속도로 진료정보교류 · 중앙암등록본부(KCCR) · 식약처 마약류통합관리시스템(NIMS) · 한국의약품안전관리원 이상사례보고(KAERS).
 
@@ -535,6 +563,37 @@ JCI 국제환자안전목표를 축으로 사고를 보고 · 통계 · 관리�
 
 ---
 
+### 비율을 내지 않는 자리들 — 안전 보드 · 직원교육 · 노출 사고 · 매핑 검토
+
+![감염·질·안전 보드 — 손위생 산출 불가](../assets/screens/his-quality-safety-quality-board.png)
+
+감염 · 질 · 안전 보드의 다섯 칸 중 **손위생 준수율(30일)은 `산출 불가`** 입니다 — "이 기간 손위생 관찰 기록 없음". 옆 칸은 **최근 30일 안전사건 1건**과 함께 **미종결 사건 70건(가장 오래된 건 2025-10-23)** 을 나란히 셉니다. 새로 생긴 것이 적다는 숫자만 보여 주지 않습니다.
+
+![직원교육 — 이수율 산출 불가](../assets/screens/his-quality-education.png)
+
+직원교육은 재직 90명 중 **기록 보유 56 · 기록 없음 34** 를 적고, 이수율 자리에 이렇게 씁니다.
+
+> **이수율 산출 불가 — 대상자 지정 모델 부재** — 교육 프로그램에 대상 직종 · 부서가 없어 **이수율의 분모(수강 대상자)를 정의할 수 없습니다**
+
+만료 목록도 "255건 중 10건 표시 · **서버 상한 200건까지만 전송됩니다**(전체 확인은 내보내기 필요)"라고 잘린 것을 밝힙니다 → [아홉 가지 방식](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식)
+
+![직원 노출 사고 — 미상 그대로 두십시오](../assets/screens/his-quality-infection-staff-exposure.png)
+
+니들스틱 · 체액 노출 신고 폼은 원환자 감염상태(HBsAg · anti-HCV · HIV)의 기본값이 **`미상`** 이고, 입력 안내가 그 까닭을 적습니다.
+
+> 원환자 감염상태를 모르면 **미상 그대로 두십시오 — 음성으로 접수되면 예방요법 판단이 뒤집힙니다.**
+> 원환자를 지정하지 않으면 무명 노출로 기록됩니다 — **검사 자체가 불가능하므로 음성으로 간주하지 마십시오.**
+
+아래 이력도 "(수기 서식 접수분은 포함되지 않습니다)"라고 분모의 범위를 밝힙니다. **모르는 값을 안심되는 값으로 채우지 않는다**는 규칙이 폼의 기본값에 들어가 있습니다 → [취지 3](../overview/02-principles.md#3-모르는-것을-아는-척하지-않는다)
+
+![표준 매핑 임상 검토 — AI 추천을 사람이 승인·반려](../assets/screens/his-quality-mapping-review.png)
+
+AI(WeRU.B)가 제안한 진단코드(KCD) → SNOMED CT 매핑을 **임상 적절 — 승인 / 부적절 — 반려** 로 사람이 가릅니다. 검토 대기 33 · 승인 0 · 반려 0 — 아직 아무것도 자동으로 확정되지 않았습니다.
+
+> ⚠️ **관찰** — 이 설치본의 추천 한 건은 용어 이름이 **중국어로 표기**돼 있습니다(`I66.0` 추천, 2026-09-13). 사람이 검토하는 자리가 왜 필요한지를 보여 주는 예로 그대로 적습니다 → [취지 1](../overview/02-principles.md#1-ai-는-보조-판단은-사람)
+
+---
+
 ## 운영 — `ops`
 
 원무·청구·인사·경영 대시보드·전원/연동.
@@ -588,7 +647,15 @@ JCI 국제환자안전목표를 축으로 사고를 보고 · 통계 · 관리�
 
 > 경로 칸을 가린 것은 이 설치본의 시드 데이터에 **실존 의료기관 이름**이 들어 있기 때문입니다. 공개 자료에는 협력 기관명을 싣지 않습니다.
 
-**캡처 자리** — 📷 ops-3 `경영 대시보드`(관리자 시점) · 📷 ops-5 `원가 분석` · 📷 ops-6 `자재/재고`
+### 원무·수납 보드 — 자격을 확인하지 못한 사람이 몇 명인가
+
+![원무·수납 보드 — 자격 미확인 = 접수 대기 전부](../assets/screens/his-ops-reception-billing-board.png)
+
+원무 · 수납 보드는 접수 대기 옆에 **보험 자격 미확인** 수를 따로 셉니다. 캡처 시점에 두 수가 **같았습니다(2,315 / 2,315)** — 대기 중인 사람 전원의 자격이 확인되지 않았다는 뜻입니다. 대외 자격조회 전송 모듈이 없기 때문이고, 화면은 이것을 "확인됨"으로 두지 않고 행마다 **`미확인`** 으로 적습니다. 목록도 "대기시간이 긴 50명만 표시 — 전체 N명"이라고 잘린 것을 밝힙니다 → [README](../README.md#지금-알고-시작해야-할-것)
+
+원가 분석 · 자재/재고 · 중앙공급 · 장비 · 인사 · 환자 만족도 · 승인 감사 · 동선 스테이션 · 전원 의뢰/수신/이력 · 의료 품질은 [캡처 목록](../assets/screens/INDEX.md)에 있습니다.
+
+> 🔴 전원 화면의 환자명과 협력 기관명, 의료 품질 화면의 작성자 이름은 가렸습니다.
 
 ---
 
@@ -645,7 +712,9 @@ AI(WeRU.B) 진단보조·시뮬레이션·디지털 트윈.
 
 **AI 컨시어지**는 환자를 고른 뒤 세션을 열어 진료 안내 · 검사 결과 안내 · 예약 확인을 돕습니다. **AI 예약 도우미**는 증상을 설명하면 진료과와 일정을 추천합니다 — 그 추천의 근거표가 [트리아지 관리](#트리아지-관리--ai-가-쓰는-표는-기관이-고친다)입니다.
 
-**캡처 자리** — 📷 int-5 `시뮬레이터/플로어맵` · 📷 int-6 `메타버스 뷰어`
+![병원 시뮬레이터 — 정지 상태와 이벤트 수동 주입](../assets/screens/his-intel-simulator.png)
+
+`시뮬레이터/플로어맵` 은 가상 환자 수와 시간 · 속도를 정해 외래 · 응급 · 입원 흐름을 돌려 보는 자리이고, 응급 환자 도착 같은 **이벤트를 사람이 넣습니다.** `메타버스 뷰어` 는 층별 평면도에 구역별 환자 수를 올립니다([캡처](../assets/screens/his-intel-metaverse.png)). 둘 다 **실제 운영 판단을 대신하는 화면이 아닙니다** — 흐름을 미리 보는 도구입니다.
 
 ---
 
@@ -917,7 +986,7 @@ EMR 인증 체크리스트는 **8 / 8 (100.0%)** 이지만, 바로 아래에 두
 
 [검진권 정책](../assets/screens/his-system-admin-voucher-settings.png)은 "**법정 하한/상한 내에서만 조정 — 위반 시 저장 거부, 변경은 4-eyes**", [검진권 딜러](../assets/screens/his-system-admin-voucher-distributors.png)는 "모두 **외국인환자 한정**"과 "비밀번호는 딜러가 **인증코드로 직접 설정**(관리자가 정하지 않음)"을 적습니다. [목록](../assets/screens/his-system-admin-voucher-list.png) · [발행·조회](../assets/screens/his-system-admin-voucher-issue.png)(시리얼 · 해시체인 · 앵커)도 들어왔습니다.
 
-[홈페이지 대시보드](../assets/screens/his-system-admin-homepage.png)는 콘텐츠 133건 가운데 **"공개 화면이 읽는 값이 비어 있는 9건 — 그 자리는 폴백으로 그려집니다"** 를 따로 셉니다. [CMS](../assets/screens/his-system-admin-hospital-info.png) · [팝업](../assets/screens/his-system-admin-homepage-popups.png) · [미디어](../assets/screens/his-system-admin-homepage-media.png) · [위원회 GLD](../assets/screens/his-system-admin-gld.png)(재검토 기한 경과 2) · [진료과 카탈로그](../assets/screens/his-system-admin-dept-catalog.png) · [폼 빌더](../assets/screens/his-system-admin-forms.png) · [TV 디스플레이](../assets/screens/his-system-admin-displays.png)(28일 무접속 단말 경고) · [대시보드 템플릿](../assets/screens/his-system-admin-dashboard-templates.png)(위젯마다 볼 수 있는 역할) · [당직표](../assets/screens/his-system-admin-duty-schedule.png) · [진료표](../assets/screens/his-system-admin-clinic-schedule.png) · [기기 리콜 역추적](../assets/screens/his-system-admin-device-recall.png)(GTIN · 로트 · 일련번호) · [환자 마킹](../assets/screens/his-system-admin-patient-flags.png)(비표준 내부 표시임을 부제에) · [전원 통계](../assets/screens/his-system-admin-transfer-stats.png) · [중환자실 워크스테이션](../assets/screens/his-support-workstation-icu.png)("비어 있는 것은 할 일이 없다는 뜻이 아닙니다")도 함께 있습니다.
+[홈페이지 대시보드](../assets/screens/his-system-admin-homepage.png)는 콘텐츠 133건 가운데 **"공개 화면이 읽는 값이 비어 있는 9건 — 그 자리는 폴백으로 그려집니다"** 를 따로 셉니다. [CMS](../assets/screens/his-system-admin-hospital-info.png) · [팝업](../assets/screens/his-system-admin-homepage-popups.png) · [미디어](../assets/screens/his-system-admin-homepage-media.png) · [위원회 GLD](../assets/screens/his-quality-admin-gld.png)(재검토 기한 경과 2) · [진료과 카탈로그](../assets/screens/his-system-admin-dept-catalog.png) · [폼 빌더](../assets/screens/his-system-admin-forms.png) · [TV 디스플레이](../assets/screens/his-system-admin-displays.png)(28일 무접속 단말 경고) · [대시보드 템플릿](../assets/screens/his-system-admin-dashboard-templates.png)(위젯마다 볼 수 있는 역할) · [당직표](../assets/screens/his-system-admin-duty-schedule.png) · [진료표](../assets/screens/his-system-admin-clinic-schedule.png) · [기기 리콜 역추적](../assets/screens/his-system-admin-device-recall.png)(GTIN · 로트 · 일련번호) · [환자 마킹](../assets/screens/his-system-admin-patient-flags.png)(비표준 내부 표시임을 부제에) · [전원 통계](../assets/screens/his-system-admin-transfer-stats.png) · [중환자실 워크스테이션](../assets/screens/his-support-workstation-icu.png)("비어 있는 것은 할 일이 없다는 뜻이 아닙니다")도 함께 있습니다.
 
 ### 코드 마스터 — 기관이 받아 와서 채우는 자리
 
@@ -961,6 +1030,28 @@ EMR 인증 체크리스트는 **8 / 8 (100.0%)** 이지만, 바로 아래에 두
 
 ---
 
+### 검수하지 않은 도구를 막지 않는 까닭을 화면이 적는다
+
+![임상도구 검수 — 미검증 89/89, 사용은 차단되지 않음](../assets/screens/his-system-admin-clinical-chart-verification.png)
+
+GCS · NEWS2 · Morse · Braden · CHA₂DS₂-VASc 같은 임상도구의 수치 · 임계값을 **공식 가이드라인 원문과 대조해 승인**하는 자리입니다(4-eyes 2인 승인). 이 설치본은 **89개 전부 미검증**이고, 화면이 맨 위에 그 사실과 그 뒤의 판단을 함께 적습니다.
+
+> **미검증 임상도구 89개 / 전체 89개 — 사용은 차단되지 않습니다**
+> · 미검증 도구도 임상 화면에서 그대로 실행 · 산출됩니다. 「미검증 참조용」 배지만 표시됩니다.
+> · 어떤 도구의 사용을 차단할지는 **의료질향상 · 환자안전위원회 판단 영역**이며 이 화면에서 정하지 않습니다.
+
+승인 뒤 정의가 바뀌면 자동으로 `재검수 필요` 로 돌아갑니다. **막을지 말지를 코드가 정하지 않고 위원회로 넘깁니다** → [취지 5](../overview/02-principles.md#5-사람이-정할-것은-화면에서)
+
+![ERP 접근 설정 — 코드 매핑 현황](../assets/screens/his-system-admin-erp.png)
+
+ERP 접근 설정은 맨 위에 **"아직 아무도 정한 적 없는 값(코드 기본값) 3 / 7"** 을 적고, 아래 **ERP 코드 매핑 현황**을 분자/분모로 셉니다 — 품목(inventory) **1/18** · 멸균 품목(cssd) **0/16** · 거래처 0/5 · 고정자산 0/12 · 직원(hr) 78/90. 연동 이벤트는 보냈다(`SENT`)는 기록과 **마지막 발송 뒤 경과일**(94~95일)을 함께 보여 줍니다 → [ERP](erp.md)
+
+![연동 기관 — 런타임 오류](../assets/screens/his-system-admin-organizations.png)
+
+> ⚠️ **관찰** — `연동 기관` 화면은 이 설치본에서 **열리지 않고 오류 화면**을 냅니다(`Cannot read properties of undefined (reading 'lastIndexOf')`, 2026-09-13). 고쳐진 것을 확인하기 전까지 **그대로 적습니다** → [취지 1](../overview/02-principles.md)
+
+---
+
 ## 개인 — `personal`
 
 내 설정·복리후생·교육.
@@ -980,6 +1071,9 @@ EMR 인증 체크리스트는 **8 / 8 (100.0%)** 이지만, 바로 아래에 두
 |---|---|---|---|
 | ✅ per-1 | 내 전자서명 인증서 — **여기서는 확인할 수 없다고 말하는 화면** | `/settings/my-certificate` | [`his-personal-settings-my-certificate.png`](../assets/screens/his-personal-settings-my-certificate.png) |
 | ✅ per-2 | 음성 설정(VoiceEMR) — 성문 등록과 그 한계 | `/settings/voice` | [`his-personal-settings-voice.png`](../assets/screens/his-personal-settings-voice.png) |
+| ✅ per-3 | 내 서명 등록 — **자동 생성한 임시 이미지라고 밝히는 화면** | `/settings/my-signature` | [`his-personal-settings-my-signature.png`](../assets/screens/his-personal-settings-my-signature.png) |
+| ✅ per-4 | 내 행정(ESS) — 두 시스템의 연차 기록이 다를 때 | `/ess` | [`his-personal-ess.png`](../assets/screens/his-personal-ess.png) |
+| ✅ per-5 | 나의 약속처방 · 단축키·화면번호 · 직원 식단표 | `/settings/my-codes` · `/settings/shortcuts` · `/staff-meal` | [`…-my-codes`](../assets/screens/his-personal-settings-my-codes.png) · [`…-shortcuts`](../assets/screens/his-personal-settings-shortcuts.png) · [`…-staff-meal`](../assets/screens/his-personal-staff-meal.png) |
 
 ### 개인 화면 둘이 「모른다」고 말하는 방식
 
@@ -998,6 +1092,18 @@ EMR 인증 체크리스트는 **8 / 8 (100.0%)** 이지만, 바로 아래에 두
 > "이전에 **등록 완료로 기록**되었으나, 성문(음성 지문)이 AI 서버에 있지 않습니다 — **화자 인식은 동작하지 않습니다.** 표본 4개는 등록 **시도** 기록일 뿐 성문이 아닙니다."
 
 "등록했다"는 기록이 남아 있어도 **그것이 동작한다는 뜻은 아니라는 것**을 화면이 스스로 말합니다 → [DESIGN-HISTORY 「만들었다 ≠ 동작한다」](../DESIGN-HISTORY.md). 다자간 화자분리는 `실험` 배지를 달고 있습니다.
+
+![내 서명 등록 — 시스템이 자동 생성한 임시 이미지](../assets/screens/his-personal-settings-my-signature.png)
+
+서명 등록 화면은 지금 등록된 서명 아래에 경고를 붙입니다.
+
+> ⚠️ **본인이 그린 서명이 아닙니다 — 시스템이 자동 생성한 임시 이미지입니다.** 전자서명으로서의 효력을 주장할 수 없으며, 동의서 · 의무기록에 찍히기 전에 아래에서 직접 서명해 교체하세요.
+
+"서명이 있다"는 상태와 **"본인이 서명했다"는 사실을 섞지 않습니다.**
+
+![내 행정(ESS) — 연차 기록이 서로 다릅니다](../assets/screens/his-personal-ess.png)
+
+ESS 의 휴가 칸은 **연차 잔여 17일(급여시스템 ERP 기준)** 옆에 이렇게 적습니다 — **"HIS 연차잔여 12일 — 기록이 서로 다릅니다. 신청은 12일까지만 승인됩니다(인사팀 확인 필요)."** 두 시스템의 값이 다를 때 한쪽을 조용히 고르지 않고, **적은 쪽으로 막고 사람에게 확인을 넘깁니다** → [취지 2](../overview/02-principles.md#2-출처를-말한다)
 
 ---
 

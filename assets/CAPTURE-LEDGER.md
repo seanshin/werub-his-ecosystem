@@ -72,7 +72,7 @@
 | `assets/screens/his-ops-transfer.png` | 전원 관리(`/transfer`) — 발신·수신 대시보드 · 긴급도 · 상태 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 **협력 기관명 가림** | 확인 (2026-09-12) |
 | `assets/screens/his-quality-infection.png` | 감염관리(`/infection`) — 격리 21(집계 기준 병기) · **KONIS 자동 전송 없음 · 수기 보고 안내** · 미보고 29 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-quality-omop-cdm.png` | OMOP CDM 변환(`/omop-cdm`) — **「변환 미구현」** · 8개 테이블 전부 미생성 · **API 501 Not Implemented** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
-| `assets/screens/his-quality-agency-integrations.png` | 기관 연동(`/admin/agency-integrations`) — **채널 7 중 전송 구현 0** · 채널별 수기 대체 수단 · 법적 근거 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-agency-integrations.png` | 기관 연동(`/admin/agency-integrations`) — **채널 7 중 전송 구현 0** · 채널별 수기 대체 수단 · 법적 근거 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-integration-gates.png` | 연동 개통 게이트(`/admin/integration-gates`) — 게이트 3 충족 시 개통 · **`개발 시드(DEV-SEED)`** 배지 · 실결재 교체 4단계 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/sign-admin-login.png` | sign 트러스트 서비스 관리 콘솔 로그인 — API 키 로그인(break-glass) · v1.25.0 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/twin-patient-chart.png` | twin 환자 차트 — NEWS2·위험·eGFR · **「트윈 파생」 배지** · 「규칙기반 파생·임상 판단 보조」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
@@ -139,7 +139,7 @@
 | `assets/screens/his-system-admin-numeric-policy.png` | 수치 표시·반올림 정책(`/admin/numeric-policy`) — 도메인별 자릿수·반올림·**단위(UCUM)** · 표준 열에 FHIR/UCUM 코드와 LOINC · 🔒 **법정 안전 정책(검사·용량·재화일)은 화면에서 못 바꿈** · 미리보기 병기 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-dashboard-templates.png` | 대시보드 템플릿 관리(`/admin/dashboard-templates`) — 역할·부서별 기본 대시보드 위젯 구성 · 위젯마다 **볼 수 있는 역할이 배지로**(ALL · DOCTOR · NURSE,ADMIN 등) · 개인이 편집한 대시보드가 우선 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-extensions.png` | Extension / Slot(`/admin/extensions`) — 플러그인 확장 슬롯 3(차트 사이드바 · 환자 헤더 · 차트 본문) · ⚠️ **「슬롯 렌더러가 배선되어 있지 않습니다 … 등재 3건 중 실제 설치 0건」** · 목록은 저장되지 않는 메모리 상태 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
-| `assets/screens/his-system-admin-gld.png` | 거버넌스·위원회 GLD(`/admin/gld`) — JCI GLD 기준 위원회 15 · 이번달 회의 0 · 시행 정책 5 · **재검토 필요 2** 를 기한 경과 목록으로 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
+| `assets/screens/his-quality-admin-gld.png` | 거버넌스·위원회 GLD(`/admin/gld`) — JCI GLD 기준 위원회 15 · 이번달 회의 0 · 시행 정책 5 · **재검토 필요 2** 를 기한 경과 목록으로 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-audit.png` | 감사 로그(`/admin/audit`) — 전체 접근 143,036(내부 10,610 · **외부 앱 132,426**) · 최근 24시간 9,155 · 리소스 유형 159 · 액션 유형 4 · 내부/외부를 나눠 세고 외부 SMART 앱 접근은 별도 화면 안내 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 접속 IP 열 **가림** | 확인 (2026-09-12) |
 | `assets/screens/his-system-admin-analytics.png` | 통계/분석(`/admin/analytics`) — 경영·진료·운영 3탭 · 주간 매출 추이 · 월별 매출·진료건수 · 진료과별 실적 · 보험유형별 분포 · 미수납 금액에 **「80건 · 본인부담 잔액」** 분모 병기 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · — | 확인 (2026-09-12) |
 | `assets/screens/his-system-journey-console.png` | 환자여정 관제(`/journey-console`) — 외래 활성 2321 · **조치 필요 2346** 을 사유별로(접수 지연 2315 · 트리아지 지연 · 호출 지연 · 진료 지연 · 수납 지연 · 정산 지연 · 정기 재방 · 고객 미수) · 현장 화면과 다른 기준을 머리에 밝힘 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-12) · 🔴 환자명 16건 **가림** | 확인 (2026-09-12) |
@@ -215,3 +215,85 @@
 | `assets/screens/his-support-workstation-surgery-prep.png` | 수술 준비 워크스테이션(`/workstation/surgery-prep`) — 접수 → 수술 전 체크 → 이송 → 완료 · ⚠️ **「아직 업무 목록이 연결되지 않았습니다 — 비어 있는 것은 할 일이 없다는 뜻이 아닙니다」** | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
 | `assets/screens/his-support-workstation-templates.png` | 검사항목 템플릿 관리(`/workstation/templates`) — 검사 코드별 입력 항목(이름·단위·참고범위) · BMP·CBC·LFT·갑상선·당화혈색소 등 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
 | `assets/screens/his-support-workstation-therapy.png` | 물리치료 워크스테이션(`/workstation/therapy`) — 물리·작업·언어·투석·방사선 탭 · 날짜별 · 0건 예정 · 10초 갱신 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-admin-voc.png` | 고객의 소리(VoC)(`/admin/voc`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-beds.png` | 병상 현황(`/beds`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-consultations-letters.png` | 의뢰서 문서(`/consultations/letters`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-consultations.png` | 협진 의뢰(`/consultations`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-dashboard.png` | 대시보드(`/dashboard`) — ICU NEWS2 산출 불가 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-dialysis.png` | 투석실(`/dialysis`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-handoffs.png` | 인수인계(`/handoffs`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-inpatient.png` | 입원 환자(`/inpatient`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-nurse-station-imaging.png` | 환자 영상 조회(`/nurse-station/imaging`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-nursing-station.png` | 간호 스테이션 보드(`/nursing-station`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-nutrition.png` | 급식(`/nutrition`) — 원내 정책 미확정 기본값 안내 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-pacu.png` | 회복실(PACU)(`/pacu`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-patients-register-foreign.png` | 외국인 환자 등록(`/patients/register/foreign`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-patients.png` | 환자 관리(`/patients`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 환자 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-radiation.png` | 방사선종양(`/radiation`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-rehab.png` | 재활의학(`/rehab`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-care-schedule.png` | 예약(`/schedule`) — 노쇼율 100%(가상 데이터) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-care-transplant.png` | 장기이식(`/transplant`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-intel-metaverse.png` | 메타버스 뷰어(`/metaverse`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-intel-simulator.png` | 시뮬레이터/플로어맵(`/simulator`) — 정지 상태 · 이벤트 수동 주입 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-admin-location-stations.png` | 동선 스테이션(`/admin/location-stations`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-admin-stepup-approvals.png` | 승인 감사(서명·처방)(`/admin/stepup-approvals`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-cost-analysis.png` | 원가 분석(`/cost-analysis`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-cssd.png` | 중앙공급(`/cssd`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-equipment.png` | 장비(`/equipment`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-executive-clinical.png` | 의료 품질(`/executive/clinical`) — 작성자별 미완료 차트 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 작성자 이름 | 확인 (2026-09-13) |
+| `assets/screens/his-ops-hr.png` | 인사(`/hr`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 직원 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-ops-inventory.png` | 자재/재고(`/inventory`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-reception-billing-board.png` | 원무·수납 보드(`/reception-billing-board`) — ⚠️ 자격 미확인 2315/2315 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-ops-satisfaction.png` | 환자 만족도(`/satisfaction`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-ops-transfer-history.png` | 전원 이력(`/transfer/history`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 환자명·협력 기관명 | 확인 (2026-09-13) |
+| `assets/screens/his-ops-transfer-incoming.png` | 수신 전원(`/transfer/incoming`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 환자명·협력 기관명 | 확인 (2026-09-13) |
+| `assets/screens/his-ops-transfer-request.png` | 전원 의뢰(`/transfer/request`) — FHIR Bundle 전송 4단계 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-analytics.png` | CRM 분석(`/crm/analytics`) — 데이터 부족 → 기본 09:00 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-automation.png` | 자동화(`/crm/automation`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-campaigns.png` | 캠페인(`/crm/campaigns`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-checkup-analytics.png` | 검진 실적(`/crm/checkup/analytics`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-checkup-targets.png` | 검진 대상자(`/crm/checkup/targets`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-consultation.png` | CRM 상담(`/crm/consultation`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-international-analytics.png` | 해외환자 실적(`/crm/international/analytics`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-international-cases.png` | 해외환자 케이스(`/crm/international/cases`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 에이전시명·환자명 | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-segments.png` | 세그먼트(`/crm/segments`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-crm-templates.png` | 템플릿(`/crm/templates`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-doctors.png` | 의료진 소개(`/doctors`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 의료진 이름 | 확인 (2026-09-13) |
+| `assets/screens/his-patient-facility-info.png` | 시설 안내(`/facility-info`) — 「정본에서 온 값 vs 예시」 안내 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 주소·전화 | 확인 (2026-09-13) |
+| `assets/screens/his-patient-his-health-info.png` | 건강정보(`/his-health-info`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-his-news.png` | 병원 소식(`/his-news`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-patient-recruit.png` | 채용 안내(`/recruit`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 전화·메일 | 확인 (2026-09-13) |
+| `assets/screens/his-personal-ess.png` | 내 행정(ESS)(`/ess`) — 연차 잔여 HIS·ERP 기록 불일치 경고 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-personal-settings-my-codes.png` | 나의 약속처방(`/settings/my-codes`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-personal-settings-my-signature.png` | 내 서명 등록(`/settings/my-signature`) — ⚠️ 「본인이 그린 서명이 아닙니다 — 시스템이 자동 생성한 임시 이미지」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-personal-settings-shortcuts.png` | 단축키·화면번호(`/settings/shortcuts`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-personal-staff-meal.png` | 직원 식단표(`/staff-meal`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-admin-terminal-security.png` | 단말 보안(`/admin/terminal-security`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-quality-cancer-registry.png` | 암 등록(`/cancer-registry`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 환자명 | 확인 (2026-09-13) |
+| `assets/screens/his-quality-clinical-pathway.png` | 임상경로(`/clinical-pathway`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-duty-schedule.png` | 당직/근무(`/duty-schedule`) — 배정 0 / 30일 미배정 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-education.png` | 직원교육(`/education`) — ⚠️ 「이수율 산출 불가 — 분모 정의 불가」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-quality-infection-staff-exposure.png` | 직원 노출 사고(`/infection/staff-exposure`) — ⚠️ 「미상 그대로 두십시오 — 음성으로 접수되면 예방요법 판단이 뒤집힙니다」 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-mapping-review.png` | 매핑 임상검토(`/mapping-review`) — AI 추천 1건이 중국어로 표기됨(관찰) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-mdt.png` | 다학제진료(MDT)(`/mdt`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-quality.png` | QI(`/quality`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-quality-research.png` | 임상 연구(IRB)(`/research`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 연구자 이름 | 확인 (2026-09-13) |
+| `assets/screens/his-quality-safety-quality-board.png` | 감염·질·안전 보드(`/safety-quality-board`) — 손위생 산출 불가 · 미종결 70 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-contracts.png` | 단체 검진(`/his-checkup/contracts`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 계약사·담당자·전화 | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-protocols.png` | 검진 프로토콜(`/his-checkup/protocols`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-questionnaires.png` | 문진표 관리(`/his-checkup/questionnaires`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-reception.png` | 검진 접수(`/his-checkup/reception`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-stats.png` | 검진 통계(`/his-checkup/stats`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-test-catalog.png` | 검사항목 관리(`/his-checkup/test-catalog`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-waiting.png` | 검진 대기(`/his-checkup/waiting`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-his-checkup-ws.png` | 검사실 허브(`/his-checkup/ws`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-medical-records-search.png` | 기록 검색(`/medical-records/search`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-support-patient-flow.png` | 동선 모니터(QR)(`/patient-flow`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-categories.png` | 카테고리 관리(`/admin/categories`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-chart-editor.png` | 차트 에디터(`/admin/chart-editor`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-clinical-chart-verification.png` | 임상도구 검수(`/admin/clinical-chart-verification`) — 미검증 89/89 · 사용은 차단되지 않음(위원회 판단) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-erp.png` | ERP 접근 설정(`/admin/erp`) — 코드 매핑 1/18 · 0/16 | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · 가림 · 이름 등 식별 항목 | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-menu-config.png` | 메뉴 구성·권한(`/admin/menu-config`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-organizations.png` | 연동 기관(`/admin/organizations`) — ⚠️ 런타임 오류 화면 그대로(관찰) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-prescriber-rules.png` | 처방의 지정 규칙(`/admin/prescriber-rules`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |
+| `assets/screens/his-system-admin-treatment-templates.png` | 치료일정 템플릿(`/admin/treatment-templates`) | 아니오(병원명 그대로 — 가상 병원 확인 2026-09-13) · — | 확인 (2026-09-13) |

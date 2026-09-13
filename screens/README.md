@@ -9,7 +9,7 @@
 
 | 계층 | 시스템 | 화면 소개 | 캡처할 화면 |
 |---|---|---|---|
-| 코어 | **HIS** | [his.md](his.md) **180장** | **266**(코드 기본 메뉴 · [목록](../assets/screens/INDEX.md)) |
+| 코어 | **HIS** | [his.md](his.md) **264장** | **266**(코드 기본 메뉴 · [목록](../assets/screens/INDEX.md)) |
 | 흐름 | **사람을 넣고 빼는 일** | [by-onboarding.md](by-onboarding.md) | 로그인 · 인증서 · 채용 · 의료진 등록 · 퇴직 |
 | 환자 접점 | 공개 홈페이지 | [homepage.md](homepage.md) **1장** | 50(화면 수 계측값) |
 | 환자 접점 | 환자 앱 | [patient-app.md](patient-app.md) **1장** | 32 |
