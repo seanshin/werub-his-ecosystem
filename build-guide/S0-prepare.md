@@ -44,7 +44,7 @@ MIT 가 덮지 않는 것 가운데 먼저 볼 것([THIRD_PARTY.md](../THIRD_PAR
 | GPU(선택) | 기준은 NVIDIA RTX 5080(VRAM 16GB) 한 장입니다. 가속기는 CUDA · Apple Silicon(Metal) · CPU 중에서 자동으로 고릅니다. GPU 없는 환경의 속도는 아직 계측이 없습니다 → [S6](S6-ai.md) |
 | 저장 공간 | 영상(PACS) · 녹화(Jitsi) · 교육 콘텐츠(edu) · 백업이 커집니다. 필요한 크기는 `확인 필요(따라가기)` |
 | 백업 보관 위치 | **서버 밖**에 둘 곳을 정합니다. 암호화 백업의 비밀값도 서버 밖에 보관해야 서버를 잃었을 때 백업을 풀 수 있습니다(PACS · sign 릴리즈 요약) |
-| 컨테이너 실행 환경 | 각 시스템이 compose 구성으로 올라갑니다. HIS 기준 커밋의 compose 는 **PostgreSQL 16 · Redis 7**(알파인 이미지)을 띄우고, 애플리케이션은 **Node 20 이상 · npm 10.8**을 요구합니다(`package.json` `engines`). 다른 시스템의 판본은 `확인 필요(따라가기)` |
+| 컨테이너 실행 환경 | 각 시스템이 compose 구성으로 올라갑니다. HIS 기준 커밋의 compose 는 **PostgreSQL 16 · Redis 7**(알파인 이미지)을 띄우고, 애플리케이션은 **Node 20 이상 · npm 10.8**을 요구합니다(`package.json` `engines`). 다른 시스템은 아래 표(각 기준 커밋의 Dockerfile `FROM` · compose `image` · 2026-09-13 확인) |
 
 ### 첫 기동용 격리 네트워크
 
@@ -52,6 +52,24 @@ MIT 가 덮지 않는 것 가운데 먼저 볼 것([THIRD_PARTY.md](../THIRD_PAR
 
 - 첫 기동은 **외부로 나가는 연결을 막은 상태**에서 합니다. 시스템끼리의 내부 연결만 열어 둡니다.
 - 주소 교체(S1 · 각 단계 ③)를 끝내고 확인한 뒤에, 필요한 외부 연결만 하나씩 엽니다.
+**시스템별 실행 판본**(기준 커밋의 컨테이너 정의에 적힌 값 · 설치본에서 실제로 도는 판본과 다를 수 있습니다)
+
+| 시스템 | 애플리케이션 | DB · 캐시 · 그 밖 |
+|---|---|---|
+| sign | Node 22(API · 웹) | PostgreSQL 16 · 같은 이미지를 암호 프록시 · 신원 확인 프록시가 재사용 |
+| LIS | Node 20(API · 웹) | PostgreSQL 16 · Redis 7(개발 compose) |
+| ERP | Python 3.12(core · 워커 2) · Node 22(웹) | PostgreSQL 15 · Redis 7 · BI 는 별도 compose |
+| PACS | Python 3.12(백엔드) · Node 22(관리 화면) · nginx(뷰어) | PostgreSQL 16 · Redis 7 · Orthanc 24.12.2 · Prometheus · Grafana 11.2 |
+| twin | Python 3.12 · Node 22(웹) | PostgreSQL 16 · Redis 7 |
+| cerno | **Python 3.13** · **Node 24**(웹) | **PostgreSQL 없음** — 문서 등록부는 SQLite 파일(볼륨) · Redis 7 |
+| edu | Node 20(API · 웹) | PostgreSQL 16 · Redis 7 |
+| Clinic | (저장소 공용 API 와 함께) | PostgreSQL 15(pgvector 이미지) · Redis 7 |
+| Jitsi | Node 20(연동 API) | Jitsi `stable-9823` 이미지 묶음 · coturn 4.6 · Prometheus · Grafana 11.2 |
+| AI Server | Python(`requirements.txt`) | **컨테이너 정의가 저장소에 없습니다** — 설치 방식은 [S6](S6-ai.md) |
+
+- 한 서버에 올릴 때 **Node 가 20 · 22 · 24 세 판본**, **PostgreSQL 이 15 · 16 두 판본**입니다. 컨테이너로 올리면 서로 부딪치지 않지만, 호스트에 직접 설치하면 판본 관리 도구가 필요합니다.
+- `latest` 태그로 적힌 이미지(PACS 의 exporter 2개 등)는 받는 날에 따라 판본이 달라집니다. 리허설 때 받은 판본을 기록해 둡니다.
+
 - 모델 가중치 · 코드 마스터 · 공공 데이터처럼 밖에서 받아야 하는 것은 **격리 구간 밖에서 받아 반입**하는 방식을 먼저 정합니다. 시스템별 반입 방법은 `확인 필요(따라가기)`.
 - 격리를 어떤 수단(방화벽 · 호스트 규칙 등)으로 할지는 기관의 망 구성에 따릅니다. 시스템별로 막아야 할 나가는 연결 목록은 `확인 필요(따라가기)`.
 

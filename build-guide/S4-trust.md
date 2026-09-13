@@ -46,11 +46,14 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 직원 · 환자 인�
 - 서명 모드 `sign.mode` 를 `EXTERNAL` 로 둡니다(Go-Live `integ.sign` 이 이 값을 직접 읽습니다).
 - HIS 가 의료진 서명용 토큰을 발급하고, sign 은 **HIS 공개키(JWKS)로 검증**합니다. 공개키 검증 방식이라 공유 비밀키를 나눠 가질 필요가 없습니다.
 - HIS 자체 인증서 발급 게이트 `blockchain.selfIssuanceEnabled` 를 끕니다(Go-Live 목표 모드 `OFF`).
-- sign 이 보내는 서명 이벤트를 HIS 가 받는 웹훅 경로 · 서명 검증 비밀값의 설정 절차는 `확인 필요(따라가기)`.
+- sign 이 보내는 서명 이벤트는 HIS 의 **`POST /api/v1/sign-integration/webhook`** 으로 들어오고, HIS 는 원문(raw body) HMAC 으로 검증합니다. 비밀값은 양쪽에 같은 값을 넣습니다.
+  - HIS: 설정 키 **`sign.webhookSecret`**(`/admin/config` · 설정 설명 "openssl rand -hex 32, admin 주입") · 바꿀 때는 직전 값을 **`sign.webhookSecretPrev`** 에 두어 무중단으로 넘기고, 넘긴 뒤 비웁니다.
+  - sign: 환경 변수 **`HIS_WEBHOOK_SECRET`** · 수신 주소 `HIS_WEBHOOK_URL`(요청마다 콜백 주소를 주지 않을 때 쓰는 기본값) · HIS 호출 주소 `HIS_API_URL`.
+  - ERP 는 **따로** `ERP_WEBHOOK_SECRET` 을 씁니다(소비자별 분리 · HIS 와 공유하지 않음). PACS 등 다른 소비자는 전용 값이 없으면 `HIS_WEBHOOK_SECRET` 으로 서명됩니다.
 
 ### 다른 시스템 쪽
 
-- **PACS**: 판독의 본인 서명은 PACS 화면이 HIS 서명용 토큰을 받아 sign 에 제출하는 구간입니다. PACS 쪽 설정은 `확인 필요(따라가기)`.
+- **PACS**: 판독의 본인 서명은 PACS 화면이 HIS 서명용 토큰을 받아 sign 에 제출하는 구간입니다. PACS 쪽 설정(환경 예시 기준): 외부 서명 **`SIGN_SERVICE_ENABLED`(기본 꺼짐 — "서비스가 있을 때 켠다")** · `SIGN_SERVICE_URL` · `SIGN_SERVICE_API_KEY` · `SIGN_PORTAL_BASE_URL`, HIS 공통 로그인 검증 `HIS_JWKS_URL` · `HIS_JWT_AUDIENCE` · `HIS_JWT_ISSUER`. 이 값을 비워 두면 PACS 는 자기 로그인만 씁니다.
 - **edu**: 이수증 봉인 · 폐기 규칙 → [S5](S5-management.md).
 - **ERP**: 거래처 계약 서명(트랙 A) · 감사 이벤트 → [S5](S5-management.md).
 

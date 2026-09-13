@@ -37,7 +37,7 @@ SEED_PROFILE=starter npm run db:seed     # 운영 설치용 시드(기본값 all
 
 - **관리자 초기 비밀번호**는 환경 변수로 주지 않으면 **무작위로 만들어 한 번만 출력**합니다. 출력된 값을 놓치면 다시 볼 수 없습니다.
 - `starter` 에 들어가는 것은 역할 · 관리자 계정 한 개 · 검사 마스터 · 참고치 · 코드 매핑 · QC 기준값입니다. **직무 계정(검사자 · 검증자 등)은 `demo` 쪽**이라 운영 설치에는 들어가지 않습니다 — 실제 직원 계정은 기관이 만듭니다.
-- 근거: LIS 기준 커밋의 시드 스크립트 머리말과 작업 스크립트 선언 · 2026-09-12 확인. 설치 스크립트를 쓸 때의 인자는 `확인 필요(따라가기)`.
+- 근거: LIS 기준 커밋의 시드 스크립트 머리말과 작업 스크립트 선언 · 2026-09-12 확인. 설치 스크립트의 인자(스크립트 머리말 기준): `--site-code <코드>` · `--origin https://<도메인>`(필수) · 선택 `--trust-proxy-hops`(기본 1) · `--with-demo`(평가 · 교육용 합성 데이터 — **운영 설치에는 쓰지 않음**) · `--no-backup-cron`(백업 일정을 시스템 스케줄러에서 따로 관리할 때). 사전 점검은 docker · compose v2 · **디스크 여유 10GB 이상** · 포트 점유이고, 스크립트는 **DB 에 데이터가 있으면 시드를 건너뛰고**, OS · Docker 설치 · 방화벽 · TLS 인증서 · DNS · 백업 저장소는 하지 않습니다(호스트 준비 몫).
 
 ### PACS
 
@@ -56,7 +56,11 @@ docker compose up -d     # 전체 서비스 기동
 docker compose ps        # 컨테이너 상태 확인
 ```
 
-뷰어는 위 기동 **전에** `werub-viewer/build.sh` 로 만들어 둡니다. 운영용 설정과 모니터링 프로필을 포함한 전체 순서는 `확인 필요(따라가기)`.
+뷰어는 위 기동 **전에** `werub-viewer/build.sh` 로 만들어 둡니다.
+
+- **운영용 compose 파일이 따로 없습니다** — 기준 커밋의 compose 는 `docker-compose.yml` 한 벌이고(그 밖에는 AI 모델 서버용 추가 파일 하나), 운영과 개발의 차이는 `.env` 값으로 냅니다.
+- **모니터링은 `docker compose --profile monitoring up -d`** 로 켭니다. 이 프로필에 묶인 것은 Prometheus · Alertmanager · PostgreSQL exporter · Redis exporter · node exporter · Grafana 여섯입니다. 프로필 없이 올리면 이 여섯은 뜨지 않습니다.
+- 기동 뒤 관리자 계정 · 기관 정보 · 판독 템플릿을 넣는 순서는 `확인 필요(따라가기)`.
 
 ### 장비 · 주변기기
 
@@ -70,7 +74,10 @@ docker compose ps        # 컨테이너 상태 확인
 ### LIS
 
 - 설치 뒤 기관이 넣는 사이트 값(외부 통보 채널 · 오프사이트 백업 경로 등)은 LIS 의 **개시 전환 센터** 체크리스트로 입력 순서와 완료를 확인합니다.
-- HIS 와의 검사 오더 경로는 **FHIR 폴링**(LIS 가 HIS 의 검사 오더를 5분 주기로 증분 조회)입니다. LIS 가 HIS 를 조회하는 데 쓰는 계정 · 권한의 준비 절차는 `확인 필요(따라가기)`.
+- HIS 와의 검사 오더 경로는 **FHIR 폴링**(LIS 가 HIS 의 검사 오더를 5분 주기로 증분 조회)입니다. LIS 는 **SMART Backend Services(client_credentials)** 로 HIS 에 붙습니다 — HIS `SMART 클라이언트`(`/admin/smart-clients`)에 LIS 를 클라이언트로 등록하고, 받은 값을 LIS 운영 환경 파일에 넣습니다.
+  - LIS 쪽 키(운영 환경 예시 기준): `HIS_FHIR_BASE` · `HIS_FHIR_TOKEN_URL` · `HIS_CLIENT_ID` · `HIS_CLIENT_SECRET` · `HIS_FHIR_SCOPES` · `HIS_ORDER_POLL`(자격증명을 넣은 뒤 켬) · `HIS_REFLEX_POLL` · `HIS_REFLEX_RETRY` · `HIS_INTEGRATION_BASE` · `HIS_INTEGRATION_KEY`.
+  - 스코프를 비워 두면 코드 기본값 `system/DiagnosticReport.write` · `system/Observation.write` · `system/ServiceRequest.read` · `system/Patient.read` 를 요청합니다. HIS 에 등록할 때 이 네 가지만 허용합니다.
+  - 🔴 `HIS_FHIR_TOKEN_URL` 을 비우면 코드 기본값이 **특정 설치본의 토큰 주소**입니다. 반드시 채웁니다.
 - Reflex 추가검사 오더의 전송 방식 키 `HIS_ORDER_TRANSPORT` 가 있습니다. HL7(ORM) 쪽 경로는 `미구현` 이므로 FHIR 경로를 씁니다.
 - HL7 MLLP 구간은 원내 폐쇄망인지 확인하거나, 상대 시스템과 전송 구간 보호(TLS · 전용 VPN)를 합의합니다(LIS 저장소 문서).
 - 지표 엔드포인트의 접근 범위는 앞단 프록시에서 기관 망 정책에 맞춰 좁힙니다.
@@ -87,7 +94,7 @@ docker compose ps        # 컨테이너 상태 확인
 ### HIS 쪽
 
 - HIS 는 영상 오더를 만들 때 PACS 워크리스트에 자동 등록하고, 실패분을 다시 등록합니다.
-- PACS 는 HIS DB 를 **읽기 전용**으로 조회해 워크리스트를 동기화합니다(관리자 요청 시). 읽기 전용 계정 준비 절차는 `확인 필요(따라가기)`.
+- PACS 는 HIS DB 를 **읽기 전용**으로 조회해 워크리스트를 동기화합니다(관리자 요청 시). 이 연결 문자열은 PACS 환경 변수 **`HOSPITALRUN_DB_URL`** 이고, 조회문은 코드에 "검증된 읽기 전용 조회"로 적혀 있습니다(`SELECT` 만). HIS DB 에 이 용도의 **읽기 전용 역할을 만드는 스크립트는 두 저장소의 기준 커밋에서 찾지 못했습니다** — 역할과 권한 범위(어느 테이블까지)는 기관 DBA 가 만들고, 그 SQL 은 `확인 필요(따라가기)`.
 - 영상 바이트 중계(WADO)는 배포 구성(주소 · 앞단 프록시)에 따라 달라져 코드만으로 판정하지 못했습니다(`판정 불가`).
 
 ## ④ 사람이 정할 것 (2)
