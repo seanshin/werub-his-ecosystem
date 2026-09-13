@@ -32,7 +32,7 @@ const OUT = path.join(ROOT, OUT_REL);
 const fail = (msg) => { console.error(`✗ ${msg}`); process.exit(2); };
 
 // ── 상태 — 나쁜 정도(클수록 나쁨)와 선 모양 ─────────────────────────────────────────
-// 표기 순서는 compatibility.md 의 합계 표 순서를 따른다(검증됨은 초안에 없지만 자리를 둔다).
+// 표기 순서는 compatibility.md 의 합계 표 순서를 따른다(검증됨 = 새 설치본 실호출 확인 · 굵은 실선).
 const STATUS = [
   { key: '검증됨', rank: 0, line: '실선(굵게)', style: 'stroke:#2e7d32,stroke-width:3px' },
   { key: '구현·미검증', rank: 1, line: '실선', style: 'stroke:#4a6fa5,stroke-width:2px' },

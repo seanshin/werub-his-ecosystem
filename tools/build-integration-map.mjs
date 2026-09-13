@@ -79,24 +79,25 @@ try {
   L.push('');
   L.push(`| 기준 | 값 |`);
   L.push('|---|---|');
-  L.push(`| 원본 | [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음) |`);
+  const nv = count(all, '검증됨');
+  L.push(`| 원본 | [연결 상태 표](../RELEASES/draft/compatibility.md)(코드 대조 2026-09-11${nv ? ` · 새 설치본 실호출 확인 ${nv}` : ' · 실제 호출 확인 없음'}) |`);
   L.push(`| 실은 연결 | ${all.length} |`);
   L.push(`| 시스템 쌍 | ${pairs.length} |`);
   L.push('');
 
   L.push('## 시스템 쌍별');
   L.push('');
-  L.push('| 쌍 | 연결 | 구현·미검증 | 설계만 | 미구현 | 중단 | 판정 불가 |');
-  L.push('|---|---:|---:|---:|---:|---:|---:|');
+  L.push('| 쌍 | 연결 | 검증됨 | 구현·미검증 | 설계만 | 미구현 | 중단 | 판정 불가 |');
+  L.push('|---|---:|---:|---:|---:|---:|---:|---:|');
   const sorted = [...pairs].sort((a, b) => b.rows.length - a.rows.length);
   for (const p of sorted) {
     if (!p.rows.length) continue;
     const c = (st) => count(p.rows, st) || '·';
-    L.push(`| ${p.title} | ${p.rows.length} | ${c('구현·미검증')} | ${c('설계만')} | ${c('미구현')} | ${c('중단')} | ${c('판정 불가')} |`);
+    L.push(`| ${p.title} | ${p.rows.length} | ${c('검증됨')} | ${c('구현·미검증')} | ${c('설계만')} | ${c('미구현')} | ${c('중단')} | ${c('판정 불가')} |`);
   }
-  L.push(`| **합계** | **${all.length}** | ${count(all, '구현·미검증')} | ${count(all, '설계만')} | ${count(all, '미구현')} | ${count(all, '중단')} | ${count(all, '판정 불가')} |`);
+  L.push(`| **합계** | **${all.length}** | ${count(all, '검증됨')} | ${count(all, '구현·미검증')} | ${count(all, '설계만')} | ${count(all, '미구현')} | ${count(all, '중단')} | ${count(all, '판정 불가')} |`);
   L.push('');
-  L.push('> `검증됨` 열은 **0 이라 싣지 않았습니다.** 실제로 호출해 확인한 연결이 아직 없습니다.');
+  L.push(nv ? `> \`검증됨\` ${nv} — 기준 커밋으로 새로 세운 설치본끼리 실제로 호출해 확인한 연결(확인일은 연결 상태 표의 확인일 칸).` : '> `검증됨` 열은 **0 입니다.** 실제로 호출해 확인한 연결이 아직 없습니다.');
   L.push('');
 
   L.push('## 시스템별 — 몇 개의 연결에 걸려 있나');
@@ -114,13 +115,13 @@ try {
 
   L.push('## 프로토콜별');
   L.push('');
-  L.push('| 묶음 | 연결 | 구현·미검증 | 미구현 | 중단 | 판정 불가 | 설계만 |');
-  L.push('|---|---:|---:|---:|---:|---:|---:|');
+  L.push('| 묶음 | 연결 | 검증됨 | 구현·미검증 | 미구현 | 중단 | 판정 불가 | 설계만 |');
+  L.push('|---|---:|---:|---:|---:|---:|---:|---:|');
   for (const f of famOrder) {
     const rows = fam.get(f);
     if (!rows?.length) continue;
     const c = (st) => count(rows, st) || '·';
-    L.push(`| ${f} | ${rows.length} | ${c('구현·미검증')} | ${c('미구현')} | ${c('중단')} | ${c('판정 불가')} | ${c('설계만')} |`);
+    L.push(`| ${f} | ${rows.length} | ${c('검증됨')} | ${c('구현·미검증')} | ${c('미구현')} | ${c('중단')} | ${c('판정 불가')} | ${c('설계만')} |`);
   }
   L.push('');
   L.push('- 묶음은 연결 상태 표의 **프로토콜 칸 문자열**에서 기계적으로 나눈 것입니다(`FHIR` · `HL7` · `DICOM`/`DIMSE`/`MWL`/`MPPS` · `ASTM` · `SMART`/`OAuth`/`SSO`/토큰 · 웹훅 · 그 밖의 HTTP). **표준 프로파일을 쓴다는 인증이 아닙니다.**');
