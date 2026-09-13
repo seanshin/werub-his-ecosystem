@@ -168,7 +168,7 @@ sequenceDiagram
 | 02-06 | Code Blue · 신속대응팀 호출 | HIS `Code Blue / RRT` | — | ✅ 들어옴<br>[`his-care-code-blue.png`](../assets/screens/his-care-code-blue.png) |
 | 02-07 | 응급 열람 사유 입력과 사후 검토 목록 | HIS `응급 접근 검토` | — | ✅ 들어옴<br>[`his-system-admin-break-glass.png`](../assets/screens/his-system-admin-break-glass.png) |
 | 02-08 | 출고 전 수혈 동의 확인 | HIS `혈액은행` · LIS 수혈 | — | 🟡 혈액은행 화면이 들어옴(대시보드 · 재고 관리 · **수혈 관리** · 안전·MTP·발주 탭 · 혈액형 8종 재고) · **재고가 0 이라 출고 전 확인 장면은 아직**<br>[`his-support-blood-bank.png`](../assets/screens/his-support-blood-bank.png) |
-| 02-09 | 전원 의뢰 | HIS `전원 의뢰` | — | ✅ 들어옴(전원 관리 — 발신·수신·긴급도) · 의뢰 작성 화면은 아직<br>[`his-ops-transfer.png`](../assets/screens/his-ops-transfer.png) |
+| 02-09 | 전원 의뢰 | HIS `전원 의뢰` | — | ✅ 들어옴 — 전원 관리(발신·수신·긴급도)와 **의뢰 작성 4단계**(환자 선택 → 수신 병원 → 임상 정보 → 전송 확인 · "FHIR Bundle로 전송") · 수신 전원 · 전원 이력(기관별 통계). 실제로 보내는 장면은 아직<br>[`his-ops-transfer.png`](../assets/screens/his-ops-transfer.png) · [`his-ops-transfer-request.png`](../assets/screens/his-ops-transfer-request.png) · [`his-ops-transfer-history.png`](../assets/screens/his-ops-transfer-history.png) |
 
 ## 근거
 

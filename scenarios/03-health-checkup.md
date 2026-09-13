@@ -148,7 +148,7 @@ sequenceDiagram
 | 03-01 | 검진 프로그램 목록 · 수용 현황 | 공개 홈페이지 건강검진 | 데모 병원 이름 확정 뒤 | ⬜ |
 | 03-02 | 검진 예약 | HIS `검진 예약` | — | ✅ 들어옴(구조) — 날짜별 예약 목록 · 수검자 · 프로그램 · 금액 · 상태. **캡처한 날은 토요일이라 0건**(「해당 날짜에 예약이 없습니다」)<br>[`his-support-his-checkup-schedule.png`](../assets/screens/his-support-his-checkup-schedule.png) |
 | 03-03 | 문진표 작성 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
-| 03-04 | QR 동선 안내와 동선 현황판 | HIS `동선 모니터(QR)` · `동선 현황판` | — | 🟡 동선 현황판이 들어옴 — **0 수검자 × 11 스테이션 · 5초 갱신** · 완료/진행/대기 범례. QR 모니터와 사람이 흐르는 장면은 아직<br>[`his-support-his-checkup-flow-board.png`](../assets/screens/his-support-his-checkup-flow-board.png) |
+| 03-04 | QR 동선 안내와 동선 현황판 | HIS `동선 모니터(QR)` · `동선 현황판` | — | ✅ 둘 다 들어옴 — 동선 현황판(**0 수검자 × 11 스테이션 · 5초 갱신**)과 **동선 모니터(QR 체크인 기반 구역별 인원 · 환자별 동선 조회)**. 검진 수검자가 스테이션을 흐르는 장면은 아직<br>[`his-support-his-checkup-flow-board.png`](../assets/screens/his-support-his-checkup-flow-board.png) · [`his-support-patient-flow.png`](../assets/screens/his-support-patient-flow.png) |
 | 03-05 | 대기 디스플레이 | HIS `대기 디스플레이` | 수검자 이름이 가상 데이터인지 확인 | ✅ 들어옴 — 대기실용 화면(어두운 바탕 · 4초 갱신) · **대기 · 검사중 · 검사완료 · 소견대기** 네 칸. 캡처한 날은 전부 0 이라 **이름이 뜨지 않은 상태**입니다<br>[`his-support-display-checkup.png`](../assets/screens/his-support-display-checkup.png) |
 | 03-06 | 검진 스테이션 | HIS `검진 스테이션` | — | ✅ 들어옴 — **스테이션 탭 9**(채혈 · 검체 · 신체계측 · 심전도 · X-ray · 초음파 · 내시경 · 안과 · 폐기능) · 8초 자동 갱신 · 대기 0<br>[`his-support-his-checkup-station.png`](../assets/screens/his-support-his-checkup-station.png) |
 | 03-07 | 소견 대기와 종합 판정 | HIS `소견 대기` | — | ✅ 들어옴 — 총 16 · **소견대기 10 · 검사완료 5 · 부분완료 1** · 행마다 프로그램과 **결과 진행 분모**(1/1 · 4/5 · 13/14)<br>[`his-support-his-checkup-review.png`](../assets/screens/his-support-his-checkup-review.png) |
