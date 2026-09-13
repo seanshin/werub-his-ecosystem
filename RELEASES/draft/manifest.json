@@ -2,7 +2,7 @@
   "releaseId": null,
   "releaseIdNote": "번호 체계 미정 — 정해지면 폴더 이름과 이 값을 함께 바꾼다",
   "draft": true,
-  "measuredAt": "2026-09-11",
+  "measuredAt": "2026-09-13",
   "generator": "tools/build-manifest.mjs",
   "conventions": {
     "mismatchGrades": "주요 = 태그·릴리즈 기록이 정본과 다름 · 표면 = 화면·API 에 보이는 버전 상수가 다름 · 참고 = 하위 패키지 선언만 다름 · 없음",
@@ -17,9 +17,9 @@
         "value": "v4.18.0",
         "source": "packages/shared/src/constants.ts HIS_VERSION",
         "note": null,
-        "tag": null,
+        "tag": "v4.18.0",
         "mismatches": {
-          "grade": "주요",
+          "grade": "참고",
           "items": [
             {
               "kind": "하위 패키지 선언",
@@ -41,13 +41,6 @@
               "value": "1.5.0",
               "where": "apps/web/package.json version",
               "differs": true
-            },
-            {
-              "kind": "태그",
-              "grade": "주요",
-              "value": "v3.46.0",
-              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
-              "differs": true
             }
           ]
         }
@@ -59,7 +52,7 @@
       },
       "releaseDate": {
         "value": "2026-09-10",
-        "method": "정본 위치(packages/shared/src/constants.ts)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "method": "정본 버전의 태그 v4.18.0 가 가리키는 커밋의 날짜",
         "commitsAfter": 3
       },
       "license": {
@@ -90,22 +83,15 @@
         "value": "v4.18.0",
         "source": "packages/shared/src/constants.ts HIS_VERSION",
         "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다",
-        "tag": null,
+        "tag": "v4.18.0",
         "mismatches": {
-          "grade": "주요",
+          "grade": "참고",
           "items": [
             {
               "kind": "하위 패키지 선언",
               "grade": "참고",
               "value": "1.0.0",
               "where": "apps/homepage/package.json version",
-              "differs": true
-            },
-            {
-              "kind": "태그",
-              "grade": "주요",
-              "value": "v3.46.0",
-              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
               "differs": true
             }
           ]
@@ -118,7 +104,7 @@
       },
       "releaseDate": {
         "value": "2026-09-10",
-        "method": "정본 위치(packages/shared/src/constants.ts)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "method": "정본 버전의 태그 v4.18.0 가 가리키는 커밋의 날짜",
         "commitsAfter": 3
       },
       "license": {
@@ -149,9 +135,9 @@
         "value": "v4.18.0",
         "source": "packages/shared/src/constants.ts HIS_VERSION",
         "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다",
-        "tag": null,
+        "tag": "v4.18.0",
         "mismatches": {
-          "grade": "주요",
+          "grade": "표면",
           "items": [
             {
               "kind": "하위 패키지 선언",
@@ -166,13 +152,6 @@
               "value": "1.0.0",
               "where": "apps/mobile/app.json expo.version",
               "differs": true
-            },
-            {
-              "kind": "태그",
-              "grade": "주요",
-              "value": "v3.46.0",
-              "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)",
-              "differs": true
             }
           ]
         }
@@ -184,7 +163,7 @@
       },
       "releaseDate": {
         "value": "2026-09-10",
-        "method": "정본 위치(packages/shared/src/constants.ts)에 이 버전 문자열이 들어간 가장 최근 커밋의 날짜 — 태그 없음",
+        "method": "정본 버전의 태그 v4.18.0 가 가리키는 커밋의 날짜",
         "commitsAfter": 3
       },
       "license": {

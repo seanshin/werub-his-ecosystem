@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-09-11",
+  "measuredAt": "2026-09-13",
   "tool": {
     "name": "tools/measure-scale.mjs",
     "rulesVersion": 1
@@ -18,7 +18,7 @@
       "state": {
         "head": "e9d303984f80eda8271f29064a326bedad766815",
         "headDate": "2026-09-11",
-        "lastTag": "v3.46.0",
+        "lastTag": "v4.18.0",
         "pinned": true
       },
       "version": {
@@ -38,7 +38,7 @@
             "where": "apps/web/package.json version"
           },
           {
-            "value": "v3.46.0",
+            "value": "v4.18.0",
             "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
           }
         ],
@@ -46,10 +46,9 @@
         "mismatchWith": [
           "package.json version",
           "apps/api/package.json version",
-          "apps/web/package.json version",
-          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          "apps/web/package.json version"
         ],
-        "tagForValue": null
+        "tagForValue": "v4.18.0"
       },
       "counts": {
         "dataModels": {
@@ -76,7 +75,7 @@
       "state": {
         "head": "e9d303984f80eda8271f29064a326bedad766815",
         "headDate": "2026-09-11",
-        "lastTag": "v3.46.0",
+        "lastTag": "v4.18.0",
         "pinned": true
       },
       "version": {
@@ -88,16 +87,15 @@
             "where": "apps/homepage/package.json version"
           },
           {
-            "value": "v3.46.0",
+            "value": "v4.18.0",
             "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
           }
         ],
         "mismatch": true,
         "mismatchWith": [
-          "apps/homepage/package.json version",
-          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          "apps/homepage/package.json version"
         ],
-        "tagForValue": null,
+        "tagForValue": "v4.18.0",
         "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다"
       },
       "counts": {
@@ -113,7 +111,7 @@
       "state": {
         "head": "e9d303984f80eda8271f29064a326bedad766815",
         "headDate": "2026-09-11",
-        "lastTag": "v3.46.0",
+        "lastTag": "v4.18.0",
         "pinned": true
       },
       "version": {
@@ -129,17 +127,16 @@
             "where": "apps/mobile/app.json expo.version"
           },
           {
-            "value": "v3.46.0",
+            "value": "v4.18.0",
             "where": "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
           }
         ],
         "mismatch": true,
         "mismatchWith": [
           "apps/mobile/package.json version",
-          "apps/mobile/app.json expo.version",
-          "git describe --tags --abbrev=0 (HEAD 에서 가장 가까운 태그)"
+          "apps/mobile/app.json expo.version"
         ],
-        "tagForValue": null,
+        "tagForValue": "v4.18.0",
         "note": "HIS 저장소 안에서 HIS 와 함께 릴리즈된다 — 버전 정본은 HIS 와 같다"
       },
       "counts": {

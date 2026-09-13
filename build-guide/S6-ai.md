@@ -74,9 +74,20 @@ AI Server 는 **소비자용 GPU 한 장(NVIDIA RTX 5080 · VRAM 16GB)** 을 기
 
 | 시스템 | 설정 | 코드 기본값 | 할 일 |
 |---|---|---|---|
-| HIS | `ai.server.enabled` — AI 기능 전체 스위치 | 켜짐 | 🔴 끕니다(`/admin/config`) |
+| HIS | `ai.server.enabled` — AI 기능 전체 스위치 | 켜짐 · **기본 시드도 켜고 주소를 덮어씀** | 🔴 끕니다(`/admin/config`) · 시드를 다시 돌렸으면 다시 확인 |
 | PACS | 영상 자동 선별 | 켜짐 | 🔴 끕니다 — PACS 백엔드 설정 `screening_enabled`(환경 변수 `SCREENING_ENABLED`) |
 | HIS | `ai.greeting.enabled` — AI 인사 | 켜짐(기준 커밋 설정 목록) | 끄고 필요하면 결정 뒤에 켭니다 |
+
+**기본 시드가 켜는 것**(따라가기 2026-09-13 · 시드 직후 DB 확인) — 코드 기본값과 별개로, 시드를 돌리면 아래가 **켜진 채로** 시작합니다. 결정 전이면 끕니다.
+
+| 키 | 기능 |
+|---|---|
+| `ai.server.enabled` · `mapping.ai.enabled` | AI 전체 · AI 표준 코드 매핑 제안(자동 승인은 꺼짐) |
+| 🔴 `portal.aiDrugExplain` | **환자 포털의 AI 복약 설명** — 환자에게 보이는 AI |
+| `portal.selfBooking` · `portal.medicationReminder` · `treatmentSchedule.reminder` · `portal.insuranceDocBundle` | 환자 셀프 예약 · 복약 · 치료일정 알림 · 보험 서류 발급 |
+| `fhir.serviceRequestInbound.enabled` | 외부(LIS)에서 검사 오더를 받는 경로 |
+| `pharmacy.durGate.enforce` | DUR 미해결 조제 차단 |
+| 연동 게이트 `LIS_REFLEX` A-1~3 | `CONFIRMED` 로 들어가되 **"개발 시드 — 실운영 전 실제 결재로 교체 필요"** 라고 표시됨 |
 
 `ai.server.url`(AI Server 주소)의 값과 출처를 먼저 확인합니다. 특정 설치본의 주소가 기본값으로 남아 있을 수 있으므로, **자기 기관 AI Server 주소를 넣기 전에는 AI 를 켜지 않습니다.**
 
