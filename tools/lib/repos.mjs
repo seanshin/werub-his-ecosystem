@@ -24,7 +24,7 @@ export const PINS_REL = 'data/base-commits.json';
 const PINS = path.join(ROOT, PINS_REL);
 
 /** git 서브커맨드 허용 목록 — 쓰기 명령이 섞여 들어오지 않게 */
-const GIT_READ = new Set(['rev-parse', 'log', 'status', 'describe', 'tag', 'ls-files', 'ls-tree', 'show', 'cat-file', 'for-each-ref']);
+const GIT_READ = new Set(['rev-parse', 'log', 'status', 'describe', 'tag', 'ls-files', 'ls-tree', 'show', 'cat-file', 'for-each-ref', 'grep']);
 
 /** {key: 절대경로} — 설정 파일이 없으면 null(호출 쪽이 "미실행"으로 보고한다) */
 export function loadRepos() {

@@ -32,7 +32,7 @@ export const PATTERNS = [
   {
     // 로컬·서버 절대 경로 — 경로 전체. 앱 화면 경로(/admin/…)·URL 경로는 걸리지 않는다(앞 글자가 / . 단어 문자면 제외).
     id: 'local-path', label: '로컬·서버 경로',
-    re: /(?<![\w/.~-])(?:~|\/(?:Users|home|root|var|opt|srv|etc|mnt))\/[^\s'"`()<>|,]+|[A-Z]:\\Users\\[^\s'"`]+/g,
+    re: /(?<![\w/.~)-])(?:~|\/(?:Users|home|root|var|opt|srv|etc|mnt))\/[^\s'"`()<>|,]+|[A-Z]:\\Users\\[^\s'"`]+/g,
   },
   {
     id: 'email', label: '이메일', re: /\b[A-Za-z0-9._%+-]+@([A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/g,

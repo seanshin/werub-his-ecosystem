@@ -3,7 +3,7 @@
 > 🟡 **초안** · 캡처 **264 / 266**(제외 2 — 인프라 주소 · 외부 기관 정보가 화면 전체에 걸림) · [화면 소개 목차](README.md) · 캡처 목록: [assets/screens/INDEX.md](../assets/screens/INDEX.md)
 > 근거: [HIS 메뉴 구성 — 도메인별](../systems/his-domains.md)(HIS `v4.18.0` · 기준 커밋 2026-09-11 · 자동 추출) · [HIS 시스템 구성서](../systems/his.md) · ⚠️ 캡처한 설치본은 **v4.19.0**([까닭](README.md#장))
 
-**EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**0 verified**).
+**EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**0 verified**). Captured so far: **264 of 266** menu screens (2 withheld — infrastructure addresses / partner details), on a rehearsal install running v4.19.0 (base commit: v4.18.0).
 
 ---
 

@@ -121,6 +121,7 @@ function selfTest() {
     '문의는 noreply@example.org',
     '[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)',
     '관리 화면은 `/admin/opening` 이고 문서는 https://example.org/docs/setup 에 있습니다.', // 앱 화면·URL 경로는 서버 경로가 아니다
+    '라우트 그룹 파일은 `apps/web/src/app/(site)/home/page.tsx` 입니다.', // 라우트 그룹 괄호 바로 뒤의 home 폴더는 서버 경로가 아니다
   ].join('\n'));
   // 이미지: 대장에 없는 것 1 · 확인된 것 1
   w('assets/shot-a.png', Buffer.from([0x89, 0x50, 0x4e, 0x47, 0]));

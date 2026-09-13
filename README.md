@@ -223,7 +223,7 @@
 ## 지금 알고 시작해야 할 것
 **Know this before you start**
 
-> **EN** — So that an institution does not plan around things that are not there. Items needing a workaround today: **external-agency transmission** (claims, eligibility, notifiable disease reporting) is **not implemented**; **no SMS provider** is registered, so patient identity-verification texts are simulated; **signing keys are held in software** (no HSM), and a qualified timestamp authority and identity-verification vendor are the institution's to arrange; **the Jitsi telehealth install does not currently work** and must be rebuilt; **login** uses public-key verification for five systems (sign, PACS, edu, twin, cerno), a **shared secret** for two (ERP, Jitsi — separate key management required) and an API key for Clinic; **the hospital name is still hard-coded** in 118 HIS files (re-counted at the 2026-09-11 base commit), so changing it means editing code until that work lands; and **one specific installation's addresses are code defaults** in 245 files across 11 repositories (docs excluded, same base commit) — change them before installing and **bring the system up first with outbound network access blocked**, or requests may go to another installation.
+> **EN** — So that an institution does not plan around things that are not there. Items needing a workaround today: **external-agency transmission** (claims, eligibility, notifiable disease reporting) is **not implemented**; **no SMS provider** is registered, so patient identity-verification texts are simulated; **signing keys are held in software** (no HSM), and a qualified timestamp authority and identity-verification vendor are the institution's to arrange; **the Jitsi telehealth install does not currently work** and must be rebuilt; **login** uses public-key verification for five systems (sign, PACS, edu, twin, cerno), a **shared secret** for two (ERP, Jitsi — separate key management required) and an API key for Clinic; **the hospital name is still hard-coded** in 118 HIS files (re-counted at the 2026-09-11 base commit — [file list](build-guide/replace-list.md#his)), so changing it means editing code until that work lands; and **one specific installation's addresses are code defaults** in 245 files across 11 repositories (docs excluded, same base commit — [file list](build-guide/replace-list.md)) — change them before installing and **bring the system up first with outbound network access blocked**, or requests may go to another installation.
 
 구축 기관이 계획을 잘못 세우지 않도록, 현재 구현 상태에서 대체 수단을 준비해야 하는 것을 먼저 밝힙니다. 발행 전에 다시 확인해 확인일과 함께 갱신합니다.
 
@@ -232,8 +232,8 @@
 - **전자서명 키 보관** — 인증 기관 키를 소프트웨어로 보관합니다(하드웨어 보안 모듈 **미적용** — 다만 PKCS#11 설정 자리는 이미 있습니다). 공인 타임스탬프 기관 연결과 본인확인 업체 연동은 기관이 준비합니다.
 - **원격 화상(Jitsi)** — 현재 설치본은 동작하지 않습니다. 구축 기관이 새로 구성해야 합니다.
 - **로그인 방식** — HIS 가 발급한 토큰을 다섯 시스템(sign · PACS · edu · twin · cerno)은 공개키로 검증합니다. 두 시스템(ERP · Jitsi)은 공유 비밀키 방식이라 키 관리가 따로 필요하고, Clinic 은 API 키로 붙습니다.
-- **기관명 설정** — HIS 코드에 병원명이 고정 문자열로 남아 있는 파일이 있습니다(118개 · 2026-09-11 기준 커밋에서 다시 셈 · 09-10 값과 같음). 설정값으로 옮기는 작업이 진행 중이며, 끝나기 전까지는 자기 병원명을 넣으려면 코드를 고쳐야 합니다.
-- **기관 주소 설정** — 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있으므로**, 설치 전에 바꾸고 첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다. 바꿔야 할 설정 목록은 [구축 가이드](build-guide/)에 싣습니다.
+- **기관명 설정** — HIS 코드에 병원명이 고정 문자열로 남아 있는 파일이 있습니다(118개 · 2026-09-11 기준 커밋에서 다시 셈 · 09-10 값과 같음 · [파일 목록](build-guide/replace-list.md#his)). 설정값으로 옮기는 작업이 진행 중이며, 끝나기 전까지는 자기 병원명을 넣으려면 코드를 고쳐야 합니다.
+- **기관 주소 설정** — 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 — [파일 목록](build-guide/replace-list.md) · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있으므로**, 설치 전에 바꾸고 첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다. 바꿔야 할 설정 목록은 [구축 가이드](build-guide/)에 싣습니다.
 
 ## 저장소 구성
 **Repository layout**

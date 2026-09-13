@@ -1,7 +1,7 @@
 # E 데모 시나리오
 **E — Demo scenarios**
 
-> **EN** — Four walkthroughs at a fictional demo hospital — outpatient, emergency, health checkup, and admission through discharge — following one patient across system boundaries. Each step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI assists. People appear by role only (Doctor A, Nurse A …); all data is synthetic. Because no connection has yet been verified by an actual call, **no step is marked `검증됨`**.
+> **EN** — Four walkthroughs at a fictional demo hospital — outpatient, emergency, health checkup, and admission through discharge — following one patient across system boundaries. Each step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI assists. People appear by role only (Doctor A, Nurse A …); all data is synthetic. Because no connection has yet been verified by an actual call, **no step is marked `검증됨`**. Screenshot slots: **44 of 52** filled (36 complete, 8 showing the screen but not yet the exact moment); the remaining 8 wait on a patient-app build, the demo hospital name, an AI-enabled install, or a rebuilt Jitsi.
 
 
 가상 데모 병원에서 환자 한 명이 시스템 사이를 어떻게 지나가는지 봅니다 — 외래 · 응급 · 검진 · 입원→퇴원.

@@ -3,7 +3,7 @@
 시스템 13개가 실제로 어떤 화면으로 되어 있는지 봅니다. 각 장은 **화면 캡처와 그 화면이 하는 일**을 함께 싣습니다.
 
 > 🟡 **초안 — 캡처 넣는 중** · 기준: [통합 릴리즈 초안 매니페스트](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
-> **EN** — A screen-by-screen tour of the ecosystem: what each screen does, with screenshots. All captures are taken on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication (see the [capture rules](../assets/screens/README.md)).
+> **EN** — A screen-by-screen tour of the ecosystem: what each screen does, with screenshots. All captures are taken on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication (see the [capture rules](../assets/screens/README.md)). 293 captures so far (HIS: 264 of 266 menu screens + 2 off-menu; 2 withheld because infrastructure addresses or partner details fill the screen). ⚠️ The HIS screens come from a rehearsal install running **v4.19.0**, one release after the **v4.18.0** base commit these materials describe.
 
 ## 장
 

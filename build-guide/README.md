@@ -1,7 +1,7 @@
 # B AI 기반 HIS 구축 가이드
 **B — Build guide for an AI-assisted HIS**
 
-> **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is a pre-rehearsal draft**: nothing here has been walked through on a fresh install yet, and anything we could not confirm from public material is marked `확인 필요(따라가기)` rather than filled in with invented steps.
+> **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is a pre-rehearsal draft**: nothing here has been walked through on a fresh install yet, and anything we could not confirm from public material is marked `확인 필요(따라가기)` rather than filled in with invented steps (69 such marks as of 2026-09-13, after checking the pinned base commits' code). A generated appendix, [replace-list.md](replace-list.md), lists the code files that still carry another installation's address or institution-identifying strings — paths only, never the strings.
 
 
 > ⚠️ **리허설 전 초안 — 새 설치본으로 따라가 보기 전입니다. 단계마다 `확인 필요(따라가기)`로 표시한 곳은 따라가기에서 확정합니다.**
@@ -77,6 +77,8 @@ S2~S6 은 필요한 것만, 필요한 순서로 붙입니다. 13개를 다 세�
 
 항목을 단계에 나눈 것은 이 가이드의 배정입니다. HIS 화면에는 단계 구분이 없습니다. 결정 등록부의 `개시 전 필수` 11개는 S0 · S1 · S2 · S5 · S6 · S8 에 흩어져 있고, [S8](S8-go-real.md)에서 한 번에 다시 확인합니다.
 
+**부록** — [바꿔야 할 코드 기본값](replace-list.md)(자동 생성): 11개 저장소의 기준 커밋에서 **특정 설치본의 주소**(245파일)와 **기관 식별 문자열**(254파일)이 코드에 박힌 파일의 경로. S0 · S1 · S3 에서 씁니다. 문구는 싣지 않습니다.
+
 ### 시스템 밖에서 병행하는 개원 준비
 
 다음 21개 개원 단계 항목은 정보시스템 구축과 별도로 기관이 진행합니다. 시스템은 기록만 받습니다. 🔴 **시스템이 신고 · 허가를 대신 내지 않습니다.** 모두 `사람 기록` 항목이며, [개원 단계 체크리스트](../checklist/opening.md)에 제출처와 선행 관계가 있습니다.
@@ -99,7 +101,7 @@ S2~S6 은 필요한 것만, 필요한 순서로 붙입니다. 13개를 다 세�
 | 데이터베이스 · 캐시 | **PostgreSQL 16**: HIS · sign · LIS · PACS · twin · edu · Clinic(주 DB) — **PostgreSQL 15**: ERP · Clinic 의 벡터 DB(`pgvector`). **Redis 7**: HIS · LIS · ERP · PACS · twin · cerno · edu · Clinic(sign 은 compose 에 캐시를 두지 않습니다). ⚠️ **한 서버에 다 올리면 PostgreSQL 판본이 두 가지 필요합니다.** **Redis 는 7.4 부터 약관이 달라집니다**(`7-alpine` 태그가 기준일에 7.4.11 을 받음) | 각 저장소 compose 의 이미지 태그를 기준 커밋에서 읽음(2026-09-12) · [THIRD_PARTY.md §1](../THIRD_PARTY.md#1-별도-서비스로-쓰는-제3자-서버) |
 | 서버 규모 | 8개 시스템(HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi)이 **8코어 · 16GB 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용 · 스왑 여유 없음). **권장 사양이 아니라 하한에 가까운 기록**입니다. 시스템별 권장 사양은 `확인 필요(따라가기)` — 따라가기에서 측정해 싣습니다 | [README](../README.md#최소한의-사양과-구현으로-쓸-수-있게) |
 | GPU(선택) | AI 를 쓸 때만 필요합니다. 기준 GPU 는 **소비자용 한 장(NVIDIA RTX 5080 · VRAM 16GB)** 입니다. AI Server 없이도 HIS 는 동작하도록 설계했습니다. GPU 없는 환경의 속도 · 동시 사용자 처리량 · 모델별 응답 시간은 아직 계측이 없습니다 | [S6](S6-ai.md) |
-| 네트워크 | 🔴 **첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다.** 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있습니다** | [S0](S0-prepare.md) · [S1](S1-core-his.md) |
+| 네트워크 | 🔴 **첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다.** 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 — [파일 목록](replace-list.md) · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있습니다** | [S0](S0-prepare.md) · [S1](S1-core-his.md) |
 | 기관명 | HIS 코드에 병원명이 고정 문자열로 남은 파일이 118개 있습니다(2026-09-11 기준 커밋에서 다시 셈 · 09-10 값과 같음). 설정값으로 옮기는 작업이 끝나기 전까지는 **코드를 고쳐야** 자기 병원명이 나옵니다 | [S1](S1-core-his.md) |
 | 코드 마스터 · 모델 가중치 | 이 저장소에도 생태계 소스에도 들어 있지 않습니다. **기관이 배포 기관 · 모델 제공처에서 직접 받아 반입**합니다 | [THIRD_PARTY.md §3 · §4](../THIRD_PARTY.md) |
 | 대외 기관 전송 | 청구 · 자격조회 · 법정 보고 전송 모듈은 **구현돼 있지 않습니다**. 기관이 모듈을 붙이거나 기존 청구 소프트웨어와 함께 씁니다 | [README](../README.md#지금-알고-시작해야-할-것) |

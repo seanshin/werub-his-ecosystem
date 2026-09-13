@@ -19,6 +19,7 @@ const CHECKS = [
   ['HIS 메뉴 추출기 자기 검증', 'extract-his-nav.mjs', ['--self-test']],
   ['계측 스냅샷 = 기준 커밋', 'measure-scale.mjs', ['--check']],
   ['릴리즈 기록 계수 = 기준 커밋', 'count-releases.mjs', ['--check']],
+  ['바꿔야 할 코드 기본값 목록 = 기준 커밋', 'list-install-defaults.mjs', ['--check']],
   ['체크리스트 = 레지스트리', 'extract-checklist.mjs', ['--check']],
   ['HIS 메뉴 목록 = 코드', 'extract-his-nav.mjs', ['--check']],
   ['매니페스트 = 저장소·스냅샷·입력 · 요약 머리 대조', 'build-manifest.mjs', ['--check']],
