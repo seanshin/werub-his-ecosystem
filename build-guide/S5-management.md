@@ -21,7 +21,7 @@
 |---|---|---|---|
 | **ERP** | 매니페스트 기준(저장소 문서마다 표기가 엇갈려 재확인 대상) | API(core) · 웹 · 워커 2종(배치 · 연동). BI 도구(Grafana · Metabase — AGPL 계열)는 별도 compose 파일로 선택해 붙입니다. Python 3.12 · PostgreSQL · Redis · Node.js(Next.js). PDF 출력은 운영체제 글꼴 · 렌더링 라이브러리가 필요합니다(Docker 이미지에는 있음) | 설치 스크립트는 없습니다 — 운영 compose 파일(`infra/docker-compose.prod.yml`) + 환경 파일(`infra/.env.example` 을 복사)로 올립니다. 아래 「ERP 따라가기에서 확인한 것」 |
 | **Clinic** | `통합` | 병원 서비스는 저장소의 공용 API(병원 · HIS 연동 경로) · 인증 구성요소와 **함께 있어야 동작**합니다. 함께 설치할 구성요소의 정확한 범위는 소스 링크를 정리할 때 확정합니다 | `확인 필요(따라가기)` |
-| **edu** | 확인 필요(운영 여부 재확인 전) | API(NestJS · Prisma) · 웹(Next.js) · PostgreSQL 16 · Redis 7 | LIS · HIS 와 **같은 네 단계**입니다 — `docker:up`(compose 기동) → `db:migrate` → `db:seed` → 빌드·기동. 작업 스크립트 이름이 세 저장소에서 같습니다 |
+| **edu** | 확인 필요(운영 여부 재확인 전) | API(NestJS · Prisma) · 웹(Next.js) · PostgreSQL 16 · Redis 7 | 개발용은 `docker:up` → `db:migrate` → `db:seed` 네 단계(LIS · HIS 와 스크립트 이름이 같음). **운영 설치는 순서가 다릅니다** — 아래 「edu 따라가기에서 확인한 것」 |
 
 설치 때 알아 둘 것:
 
@@ -34,6 +34,20 @@
   - 🔴 **ERP 에는 첫 관리자를 따로 만드는 절차가 없습니다.** 계정은 **HIS 로그인에서 넘어올 때 이메일로 자동 생성**됩니다(HIS `ADMIN` → ERP `ADMIN` · 그 밖의 역할 → `STAFF` · 이미 있는 계정은 역할 유지). 그래서 **HIS 를 먼저 세우고 아래 SSO 를 연결해야** ERP 를 쓸 수 있습니다.
   - JWT 비밀은 파일(`secrets/jwt_secret`)로 주입하고, 암호화 키 `DATA_ENC_KEY` · 전화번호 색인 키 `PHONE_BIDX_KEY` 는 서로 다른 값으로 새로 만듭니다.
 - **Clinic DB 변경** — 로컬 상태 저장 테이블은 저장소의 SQL 스크립트로 추가됩니다. 적용 순서를 확인합니다. 서비스 전용 태그가 없으므로 설치본은 커밋 해시로 고정합니다.
+- **edu 따라가기에서 확인한 것**(2026-09-14 · 기준 커밋 · 새 설치본 · 외부로 나가지 못하는 네트워크)
+  - 원본 파일 그대로 이미지 빌드(API · 웹)가 성공했습니다(약 3분 20초 · 이 PC).
+  - 운영 compose(`infra/docker/docker-compose.prod.yml`)는 **HIS · sign · AI 와 같은 호스트의 호스트 네트워크**를 전제로 하고, API · 웹이 코드에서 `127.0.0.1` 에만 붙습니다. 컨테이너 네트워크로 나눠 두려면 웹과 앞단 프록시가 API 와 네트워크를 함께 쓰게 구성해야 합니다.
+  - 🔴 **운영 설치 순서** — 기관 설치 안내 문서의 순서(기동 → 스키마 반영 → 콘텐츠 시드)만으로는 API 가 DB 에 붙지 못합니다. 운영 compose 는 앱 전용 DB 역할(`edu_app` · 행 단위 보안 적용 대상)로 접속하고, 기동 때 기관(테넌트) 목록을 읽기 때문입니다. 확인한 순서:
+    1. `.env.prod` 작성(`EDU_DB_PASSWORD` · `EDU_APP_PASSWORD` 새로 생성 · `HIS_JWT_SECRET` = HIS `AUTH_SECRET` · `HIS_SERVICE_SUB` = HIS 의 실제 관리자 사용자 id)
+    2. 기동 → `npx prisma db push --skip-generate`(스키마)
+    3. `node prisma/seed-tenants.js`(기관 행) → `node prisma/apply-rls.js`(앱 DB 역할 · 행 단위 보안 36개 테이블) → API 재기동
+    4. 콘텐츠 시드 `seed-curriculum` → `seed-legal-content` → `seed-pdf-summaries` → `seed-exam-questions` → `seed-onboarding`
+  - `seed-tenants.js` 는 **기관 식별자(slug)를 코드에 고정**해 만듭니다. 기관명은 `EDU_ORG_NAME` 으로 들어갑니다.
+  - `seed-pdf-summaries.js` 는 새 설치본에서 **차시(모듈)가 없는 과정 3개**를 만나면 그 자리에서 멈춥니다. 과정 코드를 하나씩 넘겨 돌리면 나머지 13개는 들어갑니다(16개 중 13).
+  - 연결 시험(새 설치본끼리 · `검증됨` 2026-09-14): HIS 화면의 **사내교육** 단추 → edu 관리자 홈 · edu 설정 화면 연결 점검 HIS = 공개키 1개 · **직원 명부 동기화 56명 = HIS 재직 직원 기록 56명** · edu 에서 이수 처리 → HIS 직원 교육 기록 생성.
+  - HIS 설정 **`edu.url`** 에 edu 주소를 넣은 뒤, HIS 통합 설정 목록(`/api/v1/config?category=integration`)에 `edu.url` 이 보이는지 **먼저 확인**합니다. 보이지 않으면 사내교육 단추를 누르기 전에 설정을 바로잡습니다(`확인 필요(따라가기)` — 화면에서 바로잡는 방법).
+  - 따라가기에서 확인한 직원 진입 경로는 **HIS 화면의 사내교육 단추**입니다. edu 자체 로그인 화면(아이디 · 비밀번호)은 `구현·미검증` 으로 둡니다.
+  - HIS → edu 직원 이벤트 웹훅은 HIS 가 리허설 모드에서 보내지 않아 따라가기에서 확인하지 못했습니다(리얼 전환 리허설 대상).
 - **edu DB 격리** — 새 테이블을 만들 때마다 행 단위 보안(RLS) 적용 절차를 따릅니다(스키마 반영 명령은 RLS 를 붙이지 않습니다). 운영에서 스키마 반영은 이미지를 다시 빌드한 뒤에 합니다.
 
 ## ③ 설정
@@ -42,7 +56,7 @@
 
 | 시스템 | HIS 신원을 확인하는 방식 | 관리할 것 |
 |---|---|---|
-| edu | HIS 가 발급한 토큰을 **공개키(JWKS)** 로 검증 | HIS 공개키 주소 |
+| edu | 직원 로그인은 HIS 가 발급한 토큰을 **공개키(JWKS)** 로 검증 · 직원 명부 조회와 이수 기록은 **HIS 서명 비밀키(`AUTH_SECRET`)를 공유**해 edu 가 만든 서비스 토큰으로 호출 | HIS 공개키 주소 · 🔴 공유 비밀키 보관 · 교체 |
 | ERP | **공유 비밀키** 서명 — HIS 와 ERP 가 같은 비밀키를 가짐 | 🔴 비밀키 보관 · 교체를 따로 관리 |
 | Clinic | **API 키** — Clinic 에서 범위를 지정해 발급한 키를 HIS 에 등록 | 키 발급 · 보관 · 교체 |
 

@@ -6,7 +6,7 @@
 
 | 기준 | 값 |
 |---|---|
-| 판정 방법 | 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조했습니다(2026-09-11). 그 가운데 **6개**는 기준 커밋으로 새로 세운 설치본끼리(격리 네트워크 · 운영 서버 호출 없음) 실제로 호출해 확인했고 확인일을 적었습니다 |
+| 판정 방법 | 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조했습니다(2026-09-11). 그 가운데 **10개**는 기준 커밋으로 새로 세운 설치본끼리(격리 네트워크 · 운영 서버 호출 없음) 실제로 호출해 확인했고 확인일을 적었습니다 |
 | 기준 커밋 | [`data/base-commits.json`](../../data/base-commits.json) (고정 2026-09-11) |
 | 사실 확인 | 시스템 담당 확인 전 — 생태계 자료 측 조사 기준 |
 | 싣지 않은 연결 | **7개** — 시스템 담당의 확인을 기다리는 연결입니다. 확인되면 이 표에 넣습니다 |
@@ -15,7 +15,7 @@
 
 | 상태 | 뜻 |
 |---|---|
-| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **이 초안에는 6개**(새 설치본끼리 · 확인일 칸) |
+| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **이 초안에는 10개**(새 설치본끼리 · 확인일 칸) |
 | `구현·미검증` | 양쪽 코드가 서로 맞물려 있음. 실제 호출로는 아직 확인하지 않음 |
 | `설계만` | 문서 · 규격만 있음 |
 | `미구현` | 한쪽 코드가 없음 — 이 연결이 필요하면 구축 기관이 대체 수단을 준비합니다 |
@@ -26,7 +26,7 @@
 
 | 실은 연결 | 검증됨 | 구현·미검증 | 설계만 | 미구현 | 중단 | 판정 불가 |
 |---:|---:|---:|---:|---:|---:|---:|
-| 113 | 6 | 82 | 1 | 15 | 7 | 2 |
+| 113 | 10 | 78 | 1 | 15 | 7 | 2 |
 
 연결은 방향과 목적별로 나눴습니다(같은 두 시스템 사이에도 여러 연결이 있습니다). 실제 호출로 `검증됨`을 붙이는 일은 새 설치본으로 구축 절차를 따라가며 합니다 — 지금까지 붙인 것은 확인일 칸에 날짜가 있는 행입니다.
 
@@ -113,15 +113,15 @@
 
 ### HIS ⇄ edu
 
-`구현·미검증` 6 · `미구현` 1
+`검증됨` 4 · `구현·미검증` 2 · `미구현` 1
 
 | 방향 | 목적 | 프로토콜 | 상태 | 확인일 |
 |---|---|---|---|---|
-| HIS → edu | 직원 SSO 핸드오프 — HIS 웹 '사내교육' 런처가 staff-token(aud=edu, RS256) 발급 → edu `/sso?token=` → edu API `POST /api/v1/auth… | 브라우저 새 창 리다이렉트 + edu 내부 REST | `구현·미검증` | — |
+| HIS → edu | 직원 SSO 핸드오프 — HIS 웹 '사내교육' 런처가 staff-token(aud=edu, RS256) 발급 → edu `/sso?token=` → edu API `POST /api/v1/auth… | 브라우저 새 창 리다이렉트 + edu 내부 REST | `검증됨` | 2026-09-14 |
 | edu → HIS | edu 자체 로그인 화면의 ID/PW 를 HIS `/api/v1/auth/login` 으로 중계 → HIS access 토큰으로 staff-token?aud=edu 교환 → JWKS 검증 → edu… | 서버간 REST(JSON) | `구현·미검증` | — |
-| edu → HIS | staff-token 검증용 공개 JWKS 조회(테넌트별 캐시 1시간 · kid 미스 시 재조회) | HTTPS GET JWKS | `구현·미검증` | — |
-| edu → HIS | 직원 디렉터리 조회(교육 대상자 자동 지정 · 야간 폴링 안전망) | REST GET `/api/v1/hr/staff?status=ACTIVE` | `구현·미검증` | — |
-| edu → HIS | 교육 이수기록 기록(법정·보수교육 → HIS 자격·교육 원장) · 카탈로그 이수 | REST POST `/api/v1/staff-qualification/education`(Idempotenc… | `구현·미검증` | — |
+| edu → HIS | staff-token 검증용 공개 JWKS 조회(테넌트별 캐시 1시간 · kid 미스 시 재조회) | HTTPS GET JWKS | `검증됨` | 2026-09-14 |
+| edu → HIS | 직원 디렉터리 조회(교육 대상자 자동 지정 · 야간 폴링 안전망) | REST GET `/api/v1/hr/staff?status=ACTIVE` | `검증됨` | 2026-09-14 |
+| edu → HIS | 교육 이수기록 기록(법정·보수교육 → HIS 자격·교육 원장) · 카탈로그 이수 | REST POST `/api/v1/staff-qualification/education`(Idempotenc… | `검증됨` | 2026-09-14 |
 | HIS → edu | 직원 이벤트 웹훅(staff.created·changed·schedule_changed·resigned 반영, qualification_changed 는 수신만) — 입사·변경·퇴직의 실시간 반영 | HTTPS POST 웹훅 {event_type,event_id,source_ref,payload} → edu… | `구현·미검증` | — |
 | edu → HIS | edu → HIS 직원 인앱 알림 인입 | REST POST `/api/v1/integration/edu/notifications` | `미구현` | — |
 

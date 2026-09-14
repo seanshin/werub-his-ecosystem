@@ -192,7 +192,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 ## 7. 연동
 
-아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **6개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · HIS → ERP 직원 SSO(새 설치본끼리 확인 2026-09-14).
+아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **10개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록(새 설치본끼리 확인 2026-09-14).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -227,7 +227,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 | HIS(환자 포털) → PACS | 환자 본인 영상·판독 목록·판독완료 알림·썸네일·판독 PDF 조회 | HTTPS REST JSON / 바이너리 | `구현·미검증` |
 | HIS(환자 포털) → PACS | 환자 외부 영상(DICOM) 업로드 멀티파트 중계 | HTTPS POST multipart | `미구현` |
 | HIS → PACS | 환자 인구정보·병합 HL7 ADT(IHE PIX Feed ITI-8 · Query ITI-9) | HL7 v2 ADT/QBP over MLLP | `미구현` |
-| HIS → edu | 직원 SSO 핸드오프 — HIS 웹 '사내교육' 런처가 staff-token(aud=edu, RS256) 발급 → edu `/sso?token=` → edu API `POST /api/v1/auth… | 브라우저 새 창 리다이렉트 + edu 내부 REST | `구현·미검증` |
+| HIS → edu | 직원 SSO 핸드오프 — HIS 웹 '사내교육' 런처가 staff-token(aud=edu, RS256) 발급 → edu `/sso?token=` → edu API `POST /api/v1/auth… | 브라우저 새 창 리다이렉트 + edu 내부 REST | `검증됨` |
 | HIS → edu | 직원 이벤트 웹훅(staff.created·changed·schedule_changed·resigned 반영, qualification_changed 는 수신만) — 입사·변경·퇴직의 실시간 반영 | HTTPS POST 웹훅 {event_type,event_id,source_ref,payload} → edu… | `구현·미검증` |
 | HIS → twin | 트윈 보기 — HMAC 서명 런치 URL(5분) 발급(구방식) | 브라우저 이동 URL(서명 토큰 쿼리) · twin-web 미들웨어가 검증 | `구현·미검증` |
 | HIS → twin | SMART on FHIR EHR launch — 의료진+환자 바인딩 launch 토큰 → twin-web authorize(PKCE) → token → id_token(RS256·JWKS) 검증으로… | SMART App Launch(EHR launch · authorization_code + PKCE) · O… | `구현·미검증` |
@@ -277,9 +277,9 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 | PACS → HIS | 영상 오더 → PACS 워크리스트 동기화(HIS DB 읽기 전용 · 관리자 온디맨드) · 환자 병합 재조정 | PostgreSQL 직접 접속(읽기) | `구현·미검증` |
 | PACS → HIS | 판독 결과 HL7 ORU^R01 송신 | HL7 v2 over MLLP | `미구현` |
 | edu → HIS | edu 자체 로그인 화면의 ID/PW 를 HIS `/api/v1/auth/login` 으로 중계 → HIS access 토큰으로 staff-token?aud=edu 교환 → JWKS 검증 → edu… | 서버간 REST(JSON) | `구현·미검증` |
-| edu → HIS | staff-token 검증용 공개 JWKS 조회(테넌트별 캐시 1시간 · kid 미스 시 재조회) | HTTPS GET JWKS | `구현·미검증` |
-| edu → HIS | 직원 디렉터리 조회(교육 대상자 자동 지정 · 야간 폴링 안전망) | REST GET `/api/v1/hr/staff?status=ACTIVE` | `구현·미검증` |
-| edu → HIS | 교육 이수기록 기록(법정·보수교육 → HIS 자격·교육 원장) · 카탈로그 이수 | REST POST `/api/v1/staff-qualification/education`(Idempotenc… | `구현·미검증` |
+| edu → HIS | staff-token 검증용 공개 JWKS 조회(테넌트별 캐시 1시간 · kid 미스 시 재조회) | HTTPS GET JWKS | `검증됨` |
+| edu → HIS | 직원 디렉터리 조회(교육 대상자 자동 지정 · 야간 폴링 안전망) | REST GET `/api/v1/hr/staff?status=ACTIVE` | `검증됨` |
+| edu → HIS | 교육 이수기록 기록(법정·보수교육 → HIS 자격·교육 원장) · 카탈로그 이수 | REST POST `/api/v1/staff-qualification/education`(Idempotenc… | `검증됨` |
 | edu → HIS | edu → HIS 직원 인앱 알림 인입 | REST POST `/api/v1/integration/edu/notifications` | `미구현` |
 | twin → HIS | 환자 트윈 FHIR 읽기(Patient·Condition·Observation·MedicationRequest·AllergyIntolerance·Encounter·Procedure) — 위험 점수 … | FHIR R4 REST 검색·단건 — 레거시(서비스 계정 직원 JWT → /fhir/R4/*) + SMART… | `구현·미검증` |
 | twin → HIS | 운영 트윈 REST(병상·병동·재원·운영통계·의료기기·ICU/ER/OR) + 트윈 전용 EP(AI 활용 동의·일반병동 활력·영상 study 목록) | HTTPS REST(JSON · {data,meta}) | `구현·미검증` |
