@@ -124,7 +124,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 sign 이 한쪽 끝인 행을 그대로 옮겼습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **3개**입니다 — HIS → sign 직원 신원 · 서명 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회(새 설치본끼리 확인 2026-09-14).
+[연결 상태](../RELEASES/draft/compatibility.md)에서 sign 이 한쪽 끝인 행을 그대로 옮겼습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **4개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회(새 설치본끼리 확인 2026-09-14).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -135,7 +135,7 @@ flowchart LR
 | 방향 | 목적 | 프로토콜 | 상태 |
 |---|---|---|---|
 | sign → ERP | 서명 완료 통지(트랙 A 계약 미러·발효) | HTTP POST 웹훅 → ERP /api/v1/integrations/sign/webhook (202) ·… | `구현·미검증` |
-| sign → HIS | 서명 이벤트 통지 — 동의서 상태 반영·개정(superseded)·서명자 인증서 일련번호 미러·ERP 로 sign.completed 재발행 | HTTP POST 웹훅 → HIS /api/v1/sign-integration/webhook (sign 기본… | `구현·미검증` |
+| sign → HIS | 서명 이벤트 통지 — 동의서 상태 반영·개정(superseded)·서명자 인증서 일련번호 미러·ERP 로 sign.completed 재발행 | HTTP POST 웹훅 → HIS /api/v1/sign-integration/webhook (sign 기본… | `검증됨` |
 | sign → edu | 이수증 서명 완료 통지(정합 확인·해시 교차검증) | HTTP POST 웹훅 → edu /api/v1/webhooks/sign[/{tenantSlug}] | `구현·미검증` |
 
 ### 들어오는 연결

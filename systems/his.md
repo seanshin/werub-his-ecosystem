@@ -192,7 +192,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 ## 7. 연동
 
-아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **3개**입니다 — HIS → sign 직원 신원 · 서명 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회(새 설치본끼리 확인 2026-09-14).
+아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **4개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회(새 설치본끼리 확인 2026-09-14).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -284,7 +284,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 | twin → HIS | 환자 트윈 FHIR 읽기(Patient·Condition·Observation·MedicationRequest·AllergyIntolerance·Encounter·Procedure) — 위험 점수 … | FHIR R4 REST 검색·단건 — 레거시(서비스 계정 직원 JWT → /fhir/R4/*) + SMART… | `구현·미검증` |
 | twin → HIS | 운영 트윈 REST(병상·병동·재원·운영통계·의료기기·ICU/ER/OR) + 트윈 전용 EP(AI 활용 동의·일반병동 활력·영상 study 목록) | HTTPS REST(JSON · {data,meta}) | `구현·미검증` |
 | twin → HIS | FHIR write-back — AI 생성 RiskAssessment · SBAR/SOAP DocumentReference 를 의료진 '차트 저장' 액션으로 HIS 에 저장 | FHIR R4 POST /fhir/R4/RiskAssessment · /fhir/R4/DocumentRefe… | `구현·미검증` |
-| sign → HIS | 서명 이벤트 통지 — 동의서 상태 반영·개정(superseded)·서명자 인증서 일련번호 미러·ERP 로 sign.completed 재발행 | HTTP POST 웹훅 → HIS /api/v1/sign-integration/webhook (sign 기본… | `구현·미검증` |
+| sign → HIS | 서명 이벤트 통지 — 동의서 상태 반영·개정(superseded)·서명자 인증서 일련번호 미러·ERP 로 sign.completed 재발행 | HTTP POST 웹훅 → HIS /api/v1/sign-integration/webhook (sign 기본… | `검증됨` |
 | cerno → HIS | 근거 질의용 환자 맥락 FHIR 읽기(Condition·Observation·DiagnosticReport·Procedure 필수 / MedicationRequest·AllergyIntoleranc… | FHIR R4 REST 검색·단건(리소스별 독립 수집 · 부분 실패 허용) | `구현·미검증` |
 | 공개 홈페이지 → HIS | 공개 정보 조회(병원 정보·진료과·의료진·센터·소식·건강정보·채용·팝업·검진 프로그램/수용량·비급여) 및 공개 접수(협력 신청·전원 요청) | REST(JSON) — SSR 은 INTERNAL_API_URL 로 서버에서 직접, 브라우저는 상대경로 `/… | `구현·미검증` |
 | 공개 홈페이지 → HIS | 예약 — AI 예약 상담 세션·증상 목록·향상 예약 · 환자 포털 로그인과 본인 정보(프로필·예약·결과·처방·수납) 조회 | REST(JSON) `/api/v1/booking/*` · `/api/v1/portal/{auth,profi… | `구현·미검증` |
