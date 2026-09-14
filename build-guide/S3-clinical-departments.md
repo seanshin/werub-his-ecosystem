@@ -61,7 +61,13 @@ docker compose ps        # 컨테이너 상태 확인
 
 - **운영용 compose 파일이 따로 없습니다** — 기준 커밋의 compose 는 `docker-compose.yml` 한 벌이고(그 밖에는 AI 모델 서버용 추가 파일 하나), 운영과 개발의 차이는 `.env` 값으로 냅니다.
 - **모니터링은 `docker compose --profile monitoring up -d`** 로 켭니다. 이 프로필에 묶인 것은 Prometheus · Alertmanager · PostgreSQL exporter · Redis exporter · node exporter · Grafana 여섯입니다. 프로필 없이 올리면 이 여섯은 뜨지 않습니다.
-- 기동 뒤 관리자 계정 · 기관 정보 · 판독 템플릿을 넣는 순서는 `확인 필요(따라가기)`.
+- **설치 스크립트** `scripts/install/install.sh`(멱등): 사전 점검 → `.env` 무작위 시크릿 → 빌드 → 기동 → 첫 관리자(비밀번호 1회 출력) → 기관 시드 → 검증(C-ECHO 포함).
+- 🔴 **따라가기(2026-09-14)에서 새 설치가 스크립트만으로는 끝나지 않았습니다.**
+  - 기준 커밋 compose 의 Orthanc 이미지 태그를 **레지스트리에서 받을 수 없어** 가장 가까운 판으로 바꿔 진행했습니다(판본 결정은 PACS 담당 확인 뒤).
+  - Orthanc 가 **DICOM TLS 를 꺼 둬도 설정에 적힌 인증서 파일이 없으면 멈췄습니다** — `scripts/install/gen-dicom-tls.sh <호스트>` 로 파일만 만들어 두면 뜹니다(TLS 는 계속 꺼짐).
+  - Orthanc 헬스체크가 이미지에 없는 도구(`curl`)를 써서 늘 실패하고, 그래서 nginx 가 뜨지 않았습니다(바꾼 이미지 판의 영향일 수 있음).
+  - **새 DB 에 기본 테이블을 만드는 단계가 스크립트 · 이미지 어디에도 없어** 첫 관리자 만들기에서 멈췄습니다. 따라가기에서는 백엔드 모델로 테이블을 만든 뒤 스크립트를 다시 돌려 끝냈습니다. 새 기관용 스키마 생성 절차는 `확인 필요(따라가기)`.
+  - 그 뒤로는 API · 뷰어 · DICOMweb · 관리 화면 · DICOM C-ECHO 까지 설계대로 응답했습니다.
 
 ### 장비 · 주변기기
 

@@ -3,7 +3,7 @@
 > 🟡 **초안** · 캡처 **264 / 266**(제외 2 — 인프라 주소 · 외부 기관 정보가 화면 전체에 걸림) · [화면 소개 목차](README.md) · 캡처 목록: [assets/screens/INDEX.md](../assets/screens/INDEX.md)
 > 근거: [HIS 메뉴 구성 — 도메인별](../systems/his-domains.md)(HIS `v4.18.0` · 기준 커밋 2026-09-11 · 자동 추출) · [HIS 시스템 구성서](../systems/his.md) · ⚠️ 캡처한 설치본은 **v4.19.0**([까닭](README.md#장))
 
-**EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**4 verified** — HIS → sign staff signature, sign → HIS signing-completed webhook, HIS → LIS lab-order delivery and LIS → HIS patient lookup, confirmed 2026-09-14 on fresh installs). Captured so far: **264 of 266** menu screens (2 withheld — infrastructure addresses / partner details), on a rehearsal install running v4.19.0 (base commit: v4.18.0).
+**EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**5 verified** — HIS → sign staff signature, sign → HIS signing-completed webhook, HIS → sign order-log sealing, HIS → LIS lab-order delivery and LIS → HIS patient lookup, confirmed 2026-09-14 on fresh installs). Captured so far: **264 of 266** menu screens (2 withheld — infrastructure addresses / partner details), on a rehearsal install running v4.19.0 (base commit: v4.18.0).
 
 ---
 
@@ -702,7 +702,7 @@ AI(WeRU.B) 진단보조·시뮬레이션·디지털 트윈.
 
 **연동이 실제로 응답하는지 눌러 보는 자리**입니다. 표준 엔드포인트 8종(`/fhir/R4/metadata` · Patient · Encounter · Condition · Practitioner · Organization · Medication · `/.well-known/smart-configuration`)을 한 번에 실행하거나, 아래 커스텀 요청으로 직접 질의합니다.
 
-> 📌 이 자료의 [연결 상태](../RELEASES/draft/compatibility.md)는 대부분 **코드 대조**로 판정한 것입니다(`검증됨` 은 새 설치본 따라가기에서 확인한 4개). 이 콘솔은 그 판정을 **실제 호출로 바꿀 수 있는 자리**입니다 — 구축 기관이 리허설(S7)에서 쓰는 도구이기도 합니다.
+> 📌 이 자료의 [연결 상태](../RELEASES/draft/compatibility.md)는 대부분 **코드 대조**로 판정한 것입니다(`검증됨` 은 새 설치본 따라가기에서 확인한 5개). 이 콘솔은 그 판정을 **실제 호출로 바꿀 수 있는 자리**입니다 — 구축 기관이 리허설(S7)에서 쓰는 도구이기도 합니다.
 
 ![환자 여정 대시보드 — 질관리 지표](../assets/screens/his-intel-journey.png)
 
@@ -1110,6 +1110,6 @@ ESS 의 휴가 칸은 **연차 잔여 17일(급여시스템 ERP 기준)** 옆에
 ## 이 장이 말하지 않는 것
 
 - **화면이 있다는 것이 동작한다는 뜻은 아닙니다.** 메뉴 구성표는 코드의 메뉴 정의를 읽은 것이고, 실운영 검증이 아닙니다.
-- **연결은 따로 봅니다.** 이 화면들이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에 있고, 지금 **`검증됨` 은 4**(HIS ⇄ sign 직원 서명 · 완료 통지 · HIS → LIS 검사 오더 · LIS → HIS 환자 조회 · 2026-09-14)입니다.
+- **연결은 따로 봅니다.** 이 화면들이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에 있고, 지금 **`검증됨` 은 5**(HIS ⇄ sign 직원 서명 · 완료 통지 · 오더 로그 봉인 · HIS → LIS 검사 오더 · LIS → HIS 환자 조회 · 2026-09-14)입니다.
 - **기관마다 보이는 메뉴가 다릅니다.** 관리자가 메뉴 관리 화면에서 숨기거나 바꾸거나 더할 수 있습니다.
 - 화면 안의 항목 하나하나(버튼 · 서식 · 규칙)는 이 장에서 다루지 않습니다. 캡처가 들어오면 화면마다 짧은 설명을 붙입니다.
