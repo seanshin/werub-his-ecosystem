@@ -192,7 +192,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 ## 7. 연동
 
-아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **1개**입니다 — HIS → sign 직원 신원 · 서명(새 설치본끼리 확인 2026-09-14).
+아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **3개**입니다 — HIS → sign 직원 신원 · 서명 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회(새 설치본끼리 확인 2026-09-14).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -208,7 +208,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 | HIS → ERP | 수납 화면·환자 포털의 중간/최종 진료비 계산서 조회(ERP 산정값) | HTTP GET /api/v1/integration/billing/invoice?chartNo=&encoun… | `구현·미검증` |
 | HIS → ERP | 마스터 — ERP 가 확정한 약품 코드 매핑을 HIS 가 가져와 보험코드 백필 | HTTP GET /api/v1/integration/regulatory/drug-map/confirmed | `구현·미검증` |
 | HIS → ERP | 전자결재 결과 콜백 — Clinic W.Sign 결재 결과를 HIS 가 ERP 로 전달 | HTTP POST (상신 때 받은 callback_url, ERP 기본 /api/v1/integrations… | `구현·미검증` |
-| HIS → LIS | 검사 오더 전달 — LIS가 HIS FHIR ServiceRequest(active)를 5분 주기 증분 폴링 | FHIR R4 REST 검색(searchset) · 폴링 | `구현·미검증` |
+| HIS → LIS | 검사 오더 전달 — LIS가 HIS FHIR ServiceRequest(active)를 5분 주기 증분 폴링 | FHIR R4 REST 검색(searchset) · 폴링 | `검증됨` |
 | HIS → LIS | 검사 오더 취소 전파 — LIS가 status=revoked 를 같은 워터마크로 폴링해 LIS 오더·병리 케이스 취소 | FHIR R4 REST 검색 · 폴링 | `구현·미검증` |
 | HIS → LIS | 검사 처방 HL7 OML^O21 수신(LIS inbound) — 대체 경로 | HL7 v2 메시지를 HTTP 본문으로(POST) | `미구현` |
 | HIS → LIS | Reflex 승인·반려 웹훅(HIS→LIS push · 폴링 대안) | HTTPS POST JSON | `미구현` |
@@ -259,7 +259,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 | ERP → HIS | 재고 입고(inventory·CSSD supply)·자산 코드 매핑·청구 심사결과 콜백·환자 조회 — HIS 가 받을 준비만 된 경로들 | HTTP POST /api/v1/integration/inventory/supply · /api/v1/int… | `미구현` |
 | ERP → HIS | 의료진 계약 전자서명 발의 — ERP 가 계약을 만들면 HIS 가 문서 발급·sign 제출·요청 ID 바인딩 | HTTP POST /api/v1/sign-integration/erp/request-sign {sourceI… | `구현·미검증` |
 | ERP → HIS | 서명 완료본(PDF) 회수 — sign.completed 이벤트에 실린 HIS 문서 다운로드 주소로 가져와 첨부 | HTTP GET (이벤트 payload.document 의 단기 토큰 URL) · ERP 아웃박스(2분 주기… | `구현·미검증` |
-| LIS → HIS | 환자 성명 조회(오더 폴링 중 subject Patient 읽기) | FHIR R4 REST read | `구현·미검증` |
+| LIS → HIS | 환자 성명 조회(오더 폴링 중 subject Patient 읽기) | FHIR R4 REST read | `검증됨` |
 | LIS → HIS | 검사 결과 전달 — 결과 확정 시 DiagnosticReport(contained Observation) POST → HIS 스테이징 큐 | FHIR R4 REST create | `구현·미검증` |
 | LIS → HIS | 검사 결과 HL7 ORU^R01 전송(MLLP) — 대체 경로 | HL7 v2.5.1 over MLLP(TCP) | `미구현` |
 | LIS → HIS | Reflex 추가검사 오더 — LIS 가 ServiceRequest(draft)를 transaction Bundle 로 보내 HIS PreOrder(의사 승인 대기)로 수용 | FHIR R4 transaction Bundle(POST fhir/R4) | `구현·미검증` |

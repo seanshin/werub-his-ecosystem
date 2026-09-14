@@ -19,7 +19,7 @@
 | **보건 당국 · 국제 협력 기관** | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [1](01-one-sentence.md) · [3](03-layers-and-systems.md) · [8](08-status-and-preparation.md) · [9](09-terms.md) | [README 「개발도상국에서도 세울 수 있는 수준으로」](../README.md#개발도상국에서도-세울-수-있는-수준으로) · [구축 가이드 「시작 전에 알아야 할 것」](../build-guide/README.md#시작-전에-알아야-할-것--요구사항-요약) · [THIRD_PARTY §4 코드 마스터](../THIRD_PARTY.md#4-코드-마스터기준-데이터) |
 
 - "구축 규모와 비용"은 아직 계측이 없어 수치로 답하지 못합니다. 지금 말할 수 있는 것은 [3장 「서버는 얼마나 필요한가」](03-layers-and-systems.md#서버는-얼마나-필요한가--지금-말할-수-있는-것)와 [8장](08-status-and-preparation.md)의 준비 목록입니다.
-- "무엇이 검증됐나"의 답은 지금 **`검증됨` 1**(HIS → sign 직원 서명 · 2026-09-14)입니다 → [8장](08-status-and-preparation.md#연결-상태-합계).
+- "무엇이 검증됐나"의 답은 지금 **`검증됨` 3**(HIS → sign 직원 서명 · HIS → LIS 검사 오더 · LIS → HIS 환자 조회 · 2026-09-14)입니다 → [8장](08-status-and-preparation.md#연결-상태-합계).
 
 ## 자료 전체 지도
 

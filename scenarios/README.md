@@ -1,7 +1,7 @@
 # E 데모 시나리오
 **E — Demo scenarios**
 
-> **EN** — Four walkthroughs at a fictional demo hospital — outpatient, emergency, health checkup, and admission through discharge — following one patient across system boundaries. Each step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI assists. People appear by role only (Doctor A, Nurse A …); all data is synthetic. One connection (HIS → sign staff identity and signature) has been verified by an actual call between fresh installs (2026-09-14); every other step is still `구현·미검증`. Screenshot slots: **44 of 52** filled (36 complete, 8 showing the screen but not yet the exact moment); the remaining 8 wait on a patient-app build, the demo hospital name, an AI-enabled install, or a rebuilt Jitsi.
+> **EN** — Four walkthroughs at a fictional demo hospital — outpatient, emergency, health checkup, and admission through discharge — following one patient across system boundaries. Each step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI assists. People appear by role only (Doctor A, Nurse A …); all data is synthetic. Three connections (HIS → sign staff signature, HIS → LIS lab-order delivery, LIS → HIS patient lookup) have been verified by an actual call between fresh installs (2026-09-14); every other step is still `구현·미검증`. Screenshot slots: **44 of 52** filled (36 complete, 8 showing the screen but not yet the exact moment); the remaining 8 wait on a patient-app build, the demo hospital name, an AI-enabled install, or a rebuilt Jitsi.
 
 
 가상 데모 병원에서 환자 한 명이 시스템 사이를 어떻게 지나가는지 봅니다 — 외래 · 응급 · 검진 · 입원→퇴원.
@@ -14,7 +14,7 @@
 
 - 병원은 **"데모 병원"** 이라고만 부릅니다. 데모 병원의 이름은 아직 정하지 않았고, 정해지면 화면 캡처와 함께 넣습니다. 주소 · 전화 · 기관 코드는 싣지 않습니다.
 - 등장 인물은 **역할로만** 적습니다(의사A · 간호사A · 원무A · 환자A …). 실존 인물이나 실제 환자가 아닙니다. 데모는 모두 가상 병원 데이터로 합니다.
-- 각 단계의 **연결 상태**는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 값만 옮겼습니다. 이 표는 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조한 것이며(2026-09-11), **실제로 호출해 확인한 연결은 1개**(HIS → sign 직원 신원 · 서명 · 2026-09-14)입니다. 이 시나리오의 단계 가운데 그 연결에 해당하는 것(동의서 · 판독 · 결재의 직원 서명)이 `검증됨` 후보이고, 나머지는 `구현·미검증` 그대로입니다.
+- 각 단계의 **연결 상태**는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 값만 옮겼습니다. 이 표는 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조한 것이며(2026-09-11), **실제로 호출해 확인한 연결은 3개**(HIS → sign 직원 신원 · 서명 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · 2026-09-14)입니다. 이 시나리오의 단계 가운데 그 연결에 해당하는 것(직원 서명 · 검사 오더가 LIS 로 넘어가는 단계)이 `검증됨` 후보이고, 나머지는 `구현·미검증` 그대로입니다.
 - 시나리오를 새 설치본으로 실제로 따라가 보는 일은 [ROADMAP](../ROADMAP.md) P1 에서 합니다. 따라가 본 뒤 단계 · 화면 · 상태를 고칩니다.
 
 | # | 시나리오 | 한 줄 | 단계 |
@@ -41,7 +41,7 @@
 
 | 표시 | 뜻 | 근거 |
 |---|---|---|
-| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **연결 표에 1개**(HIS → sign 직원 서명 · 2026-09-14) | 연결 상태 표 |
+| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **연결 표에 3개**(HIS → sign 직원 서명 · HIS ⇄ LIS 검사 오더 · 2026-09-14) | 연결 상태 표 |
 | `구현·미검증` | 양쪽 코드가 서로 맞물려 있음. 실제 호출로는 아직 확인하지 않음 | 연결 상태 표 |
 | `설계만` | 문서 · 규격만 있음 | 연결 상태 표 |
 | `미구현` | 한쪽 코드가 없음 — 이 연결이 필요하면 구축 기관이 대체 수단을 준비합니다 | 연결 상태 표. 대외 기관 전송 · 문자 발송처럼 연결 표 밖의 한계는 README 를 근거로 적고, 칸에 근거를 함께 밝혔습니다 |

@@ -79,6 +79,9 @@ docker compose ps        # 컨테이너 상태 확인
   - LIS 쪽 키(운영 환경 예시 기준): `HIS_FHIR_BASE` · `HIS_FHIR_TOKEN_URL` · `HIS_CLIENT_ID` · `HIS_CLIENT_SECRET` · `HIS_FHIR_SCOPES` · `HIS_ORDER_POLL`(자격증명을 넣은 뒤 켬) · `HIS_REFLEX_POLL` · `HIS_REFLEX_RETRY` · `HIS_INTEGRATION_BASE` · `HIS_INTEGRATION_KEY`.
   - 스코프를 비워 두면 코드 기본값 `system/DiagnosticReport.write` · `system/Observation.write` · `system/ServiceRequest.read` · `system/Patient.read` 를 요청합니다. HIS 에 등록할 때 이 네 가지만 허용합니다.
   - 🔴 `HIS_FHIR_TOKEN_URL` 을 비우면 코드 기본값이 **특정 설치본의 토큰 주소**입니다. 반드시 채웁니다.
+  - **따라가기(2026-09-14 · 새 설치본끼리) — `검증됨`**: HIS 에 LIS 를 SMART 클라이언트로 등록 → LIS 운영 환경 파일에 `HIS_FHIR_BASE`(HIS 의 `/fhir/R4`) · `HIS_FHIR_TOKEN_URL`(HIS 의 `/oauth2/token`) · `HIS_CLIENT_ID` · `HIS_CLIENT_SECRET` · `HIS_ORDER_POLL=on` → 다음 5분 주기에 **HIS 검사 오더가 LIS 오더로 적재**되고(HIS 오더 번호 그대로 · 검사 항목 · `RECEIVED`), 환자 이름도 HIS 에서 읽어 옵니다. 틀린 시크릿 · 허가하지 않은 스코프 · 토큰 없음은 401, 허가 범위 밖 리소스 읽기는 403 으로 막힙니다.
+  - 🔴 **새 설치본에서는 대부분의 검사 오더가 LIS 로 넘어가지 않습니다.** HIS 기본 시드의 검사 코드 15개 가운데 **LIS `starter` 코드 매핑에 있는 것은 3개**(갑상선기능 · 일반뇨 · 혈액배양)뿐이라, CBC · 전해질 · CRP · 간기능 · 신장기능 · 혈당 · 지질 · HbA1c · 혈액응고 오더는 LIS 가 **적재하지 않고 대기열에 보류**합니다 — LIS 는 이것을 조용히 넘기지 않고 **"미적재 HIS 오더 N건 대기 — 코드매핑 보정 후 재적재 필요(접수 누락)"** 경보를 냅니다. **개시 전에 LIS 의 HIS 검사코드 카탈로그 반입과 코드 매핑을 먼저 끝냅니다.**
+  - HIS 기본 시드의 검사 오더 12건은 **처방 코드가 연결돼 있지 않아 FHIR 에 노출되지 않습니다**(코드 없는 오더는 LIS 가 처리할 수 없어 HIS 가 일부러 뺌). 연결 시험에는 코드가 있는 오더를 새로 내야 합니다.
 - Reflex 추가검사 오더의 전송 방식 키 `HIS_ORDER_TRANSPORT` 가 있습니다. HL7(ORM) 쪽 경로는 `미구현` 이므로 FHIR 경로를 씁니다.
 - HL7 MLLP 구간은 원내 폐쇄망인지 확인하거나, 상대 시스템과 전송 구간 보호(TLS · 전용 VPN)를 합의합니다(LIS 저장소 문서).
 - 지표 엔드포인트의 접근 범위는 앞단 프록시에서 기관 망 정책에 맞춰 좁힙니다.
