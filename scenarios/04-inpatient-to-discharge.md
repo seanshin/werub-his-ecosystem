@@ -1,6 +1,6 @@
 # 시나리오 04 — 입원에서 퇴원까지
 
-> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원 이름을 쓰는 화면은 이름을 정한 뒤 · 새 설치본으로 따라가 보기 전
+> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본으로 따라가 보기 전
 > 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
 환자D 가 데모 병원 외과 병동에 입원해 수술을 받습니다. 수술에서 떼어 낸 조직은 병리로 가고, 병동에서는 간호 · 투약(MAR · 바코드 확인)이 이어지며, 주치의는 차트에서 위험 점수 카드를 봅니다. 퇴원 때는 퇴원 요약 · 약 설명 · 진단서가 나오고, 중간정산과 퇴원 수납 · 보험 청구로 끝납니다. [시나리오 02 응급](02-emergency.md)에서 입원이 결정된 경우도 여기로 이어집니다.
@@ -197,7 +197,7 @@ sequenceDiagram
 | 04-08 | twin 의 AI 설명 초안(`machine-generated` 표시)과 "차트 저장" | twin 환자 화면 | AI 기능을 켠 설치본 | 🟡 추천 액션과 「규칙기반 파생·임상 판단 보조」는 보임 · "차트 저장"을 누른 장면은 아직<br>[`twin-patient-chart.png`](../assets/screens/twin-patient-chart.png) |
 | 04-09 | 퇴원 요약 초안 승인(AI 표기와 면책 문구가 보이게) | HIS `퇴원` | AI 기능을 켠 설치본 | 🟡 퇴원 워크스테이션이 들어옴 — **업무 목록 미연결 · 「비어 있는 것은 할 일이 없다는 뜻이 아닙니다」**. AI 퇴원 요약 초안이 뜬 장면은 AI 켠 설치본 대기<br>[`his-support-workstation-discharge.png`](../assets/screens/his-support-workstation-discharge.png) |
 | 04-10 | 중간정산 · 퇴원 수납 | HIS `수납` · `원무·수납 보드` | — | ✅ 들어옴 — 수납 대기열 · 미수납과 **원무·수납 보드**(접수 대기 · 보험 자격 · 금일 수납 · 미수금 · 증명서 대기 — 캡처 시점 **자격 미확인 2,315 / 2,315**). 퇴원 수납 장면은 아직<br>[`his-ops-billing.png`](../assets/screens/his-ops-billing.png) · [`his-ops-reception-billing-board.png`](../assets/screens/his-ops-reception-billing-board.png) |
-| 04-11 | 진단서 발급과 전자서명 | HIS `진단서 발급` | 발급 문서에 데모 병원 이름만 보이는지 확인 | ✅ 들어옴<br>[`his-support-workstation-certificates.png`](../assets/screens/his-support-workstation-certificates.png) |
+| 04-11 | 진단서 발급과 전자서명 | HIS `진단서 발급` | 발급 문서에 데모 병원 이름(위루비병원)만 보이는지 확인 | ✅ 들어옴<br>[`his-support-workstation-certificates.png`](../assets/screens/his-support-workstation-certificates.png) |
 | 04-12 | 입원 여정 타임라인 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 | 04-13 | 퇴원 뒤 의무기록 사본 발급 | HIS `사본 발급` | — | ✅ 들어옴 — PDF 생성과 **발급 이력 등록**(신청자 · 관계 · 부수 · 발급목적 · 준 기록의 종류)이 나란히<br>[`his-support-medical-records-copy.png`](../assets/screens/his-support-medical-records-copy.png) |
 

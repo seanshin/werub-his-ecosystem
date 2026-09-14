@@ -15,17 +15,17 @@
 | 시스템 | 기준 커밋 | 파일 | 주소 | 식별 |
 |---|---|---:|---:|---:|
 | [HIS (+공개 홈페이지 · 환자 앱)](#his) | `e9d303984f80` | 236 | 73 | 183 |
-| [sign](#sign) | `93f56d839c3f` | 21 | 19 | 4 |
-| [LIS](#lis) | `ffb34e9d1dbc` | 23 | 16 | 8 |
+| [sign](#sign) | `93f56d839c3f` | 19 | 19 | 0 |
+| [LIS](#lis) | `ffb34e9d1dbc` | 19 | 16 | 4 |
 | [ERP](#erp) | `0e1f54c5b902` | 38 | 31 | 12 |
 | [PACS](#pacs) | `532a8ed13e87` | 34 | 31 | 6 |
-| [AI Server](#ai-server) | `55acaee90068` | 22 | 13 | 11 |
+| [AI Server](#ai-server) | `55acaee90068` | 21 | 13 | 10 |
 | [twin](#twin) | `526b4f9a4d3f` | 10 | 10 | 1 |
 | [cerno](#cerno) | `4f5c22b331fc` | 4 | 4 | 0 |
 | [edu](#edu) | `f8127e6ee278` | 42 | 20 | 26 |
-| [Clinic (병원 서비스 웹 · 병원 서비스 API 범위)](#clinic) | `2b20a89b7c3a` | 18 | 18 | 1 |
+| [Clinic (병원 서비스 웹 · 병원 서비스 API 범위)](#clinic) | `2b20a89b7c3a` | 18 | 18 | 0 |
 | [Jitsi](#jitsi) | `0984fbec7177` | 10 | 10 | 2 |
-| **합계** | | **458** | 245 | 254 |
+| **합계** | | **451** | 245 | 244 |
 
 ## his
 
@@ -272,7 +272,7 @@
 
 ## sign
 
-**sign** — 21개
+**sign** — 19개
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
@@ -281,7 +281,6 @@
 | `<가림 — 경로에 식별 문자열>` | ● |  |
 | `docker-compose.prod.yml` | ● |  |
 | `scripts/smoke.mjs` | ● |  |
-| `src/application/ops.service.ts` |  | ● |
 | `src/application/sign-request-facade.service.ts` | ● |  |
 | `src/application/signature-request.service.ts` | ● |  |
 | `src/swagger.ts` | ● |  |
@@ -289,18 +288,17 @@
 | `test/idle-admin-audit.e2e.mjs` | ● |  |
 | `test/rbac.e2e.mjs` | ● |  |
 | `test/webhook-internal-host.e2e.mjs` | ● |  |
-| `web/manual.source.html` | ● | ● |
+| `web/manual.source.html` | ● |  |
 | `web/src/app/admin/account/page.tsx` | ● |  |
-| `web/src/app/admin/manual/manualHtml.ts` | ● | ● |
+| `web/src/app/admin/manual/manualHtml.ts` | ● |  |
 | `web/src/app/admin/users/page.tsx` | ● |  |
-| `web/src/lib/version.ts` |  | ● |
 | `web/tests/e2e/account-idle.spec.ts` | ● |  |
 | `web/tests/e2e/contracts.spec.ts` | ● |  |
 | `web/tests/e2e/rbac-users.spec.ts` | ● |  |
 
 ## lis
 
-**LIS** — 23개
+**LIS** — 19개
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
@@ -315,9 +313,6 @@
 | `apps/api/src/modules/admin/user-admin.service.ts` | ● |  |
 | `apps/api/src/modules/health/metrics.controller.ts` | ● |  |
 | `apps/api/src/modules/settings/webhook-host.spec.ts` | ● |  |
-| `apps/web/src/app/help/page.tsx` |  | ● |
-| `apps/web/src/app/page.tsx` |  | ● |
-| `apps/web/src/components/Sidebar.tsx` |  | ● |
 | `infra/docker/.env.production.example` | ● |  |
 | `infra/docker/docker-compose.prod.yml` | ● |  |
 | `infra/scripts/backup.sh` |  | ● |
@@ -326,7 +321,6 @@
 | `infra/scripts/e2e-server.sh` |  | ● |
 | `infra/scripts/his-fhir-smoke.sh` | ● |  |
 | `infra/scripts/reflex-pilot-rehearsal.sh` | ● |  |
-| `LICENSE` |  | ● |
 
 ## erp
 
@@ -416,7 +410,7 @@
 
 ## ai-server
 
-**AI Server** — 22개
+**AI Server** — 21개
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
@@ -437,7 +431,6 @@
 | `templates/admin.html` | ● |  |
 | `templates/eval_monitor.html` | ● |  |
 | `templates/monitor.html` |  | ● |
-| `tests/batch_test.py` |  | ● |
 | `tests/test_csrf_origin.py` | ● |  |
 | `tests/test_ingress_mode.py` | ● |  |
 | `tests/test_s3_minio_migration.py` | ● |  |
@@ -535,7 +528,7 @@
 | `packages/hospital-web/src/app/profile/page.tsx` | ● |  |
 | `packages/hospital-web/src/app/register/page.tsx` | ● |  |
 | `packages/hospital-web/src/app/signup/page.tsx` | ● |  |
-| `packages/hospital-web/src/components/HospitalFooter.tsx` | ● | ● |
+| `packages/hospital-web/src/components/HospitalFooter.tsx` | ● |  |
 | `packages/hospital-web/src/components/HospitalHeader.tsx` | ● |  |
 | `packages/hospital-web/src/middleware.ts` | ● |  |
 | `src/app/api/clinic/his/health/route.ts` | ● |  |

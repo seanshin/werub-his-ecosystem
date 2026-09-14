@@ -1,6 +1,6 @@
 # 시나리오 03 — 건강검진
 
-> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원 이름을 쓰는 화면은 이름을 정한 뒤 · 새 설치본으로 따라가 보기 전
+> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본으로 따라가 보기 전
 > 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
 수검자C 가 데모 병원 건강검진센터에서 종합검진을 받습니다. 홈페이지에서 프로그램을 보고 예약하고, 앱으로 문진표를 쓰고, 검진 당일에는 QR 동선 안내를 따라 스테이션을 돕니다. 판정의가 종합 판정을 하고 AI 가 만든 결과 설명 초안을 감수한 뒤 결과서가 나갑니다. 재검이 필요한 항목은 추적 관리로 넘어가고, 진료가 필요하면 [시나리오 01 외래](01-outpatient-journey.md)로 이어집니다.
@@ -145,7 +145,7 @@ sequenceDiagram
 
 | 자리 | 담을 화면 | 시스템 · 화면 | 조건 | 캡처 |
 |---|---|---|---|---|
-| 03-01 | 검진 프로그램 목록 · 수용 현황 | 공개 홈페이지 건강검진 | 데모 병원 이름 확정 뒤 | ⬜ |
+| 03-01 | 검진 프로그램 목록 · 수용 현황 | 공개 홈페이지 건강검진 | 위루비병원으로 설정한 설치본 | ⬜ |
 | 03-02 | 검진 예약 | HIS `검진 예약` | — | ✅ 들어옴(구조) — 날짜별 예약 목록 · 수검자 · 프로그램 · 금액 · 상태. **캡처한 날은 토요일이라 0건**(「해당 날짜에 예약이 없습니다」)<br>[`his-support-his-checkup-schedule.png`](../assets/screens/his-support-his-checkup-schedule.png) |
 | 03-03 | 문진표 작성 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 | 03-04 | QR 동선 안내와 동선 현황판 | HIS `동선 모니터(QR)` · `동선 현황판` | — | ✅ 둘 다 들어옴 — 동선 현황판(**0 수검자 × 11 스테이션 · 5초 갱신**)과 **동선 모니터(QR 체크인 기반 구역별 인원 · 환자별 동선 조회)**. 검진 수검자가 스테이션을 흐르는 장면은 아직<br>[`his-support-his-checkup-flow-board.png`](../assets/screens/his-support-his-checkup-flow-board.png) · [`his-support-patient-flow.png`](../assets/screens/his-support-patient-flow.png) |
@@ -153,7 +153,7 @@ sequenceDiagram
 | 03-06 | 검진 스테이션 | HIS `검진 스테이션` | — | ✅ 들어옴 — **스테이션 탭 9**(채혈 · 검체 · 신체계측 · 심전도 · X-ray · 초음파 · 내시경 · 안과 · 폐기능) · 8초 자동 갱신 · 대기 0<br>[`his-support-his-checkup-station.png`](../assets/screens/his-support-his-checkup-station.png) |
 | 03-07 | 소견 대기와 종합 판정 | HIS `소견 대기` | — | ✅ 들어옴 — 총 16 · **소견대기 10 · 검사완료 5 · 부분완료 1** · 행마다 프로그램과 **결과 진행 분모**(1/1 · 4/5 · 13/14)<br>[`his-support-his-checkup-review.png`](../assets/screens/his-support-his-checkup-review.png) |
 | 03-08 | 결과 설명 초안 감수 · 승인(AI 표기와 면책 문구가 보이게) | HIS `검진해석 콘텐츠(감수)` | AI 기능을 켠 설치본 | ✅ 들어옴(감수 구조) — 작성중 → 감수중 → 승인 → 반려 · 저장 시 **가드레일 자동 검증**(진단 확정 · 처방/용량 지시 금지) · 배지 `소비자 노출` 과 **`4-eyes(2인 승인): 비활성`**. AI 가 만든 초안이 실제로 뜬 장면은 아직<br>[`his-system-admin-checkup-explainer.png`](../assets/screens/his-system-admin-checkup-explainer.png) |
-| 03-09 | 검진 결과서 PDF | HIS `건강검진센터` | 결과서에 데모 병원 이름만 보이는지 확인 | 🟡 건강검진센터 허브가 들어옴(단계별 현황) · 결과서 PDF 는 아직<br>[`his-support-his-checkup.png`](../assets/screens/his-support-his-checkup.png) |
+| 03-09 | 검진 결과서 PDF | HIS `건강검진센터` | 결과서에 데모 병원 이름(위루비병원)만 보이는지 확인 | 🟡 건강검진센터 허브가 들어옴(단계별 현황) · 결과서 PDF 는 아직<br>[`his-support-his-checkup.png`](../assets/screens/his-support-his-checkup.png) |
 | 03-10 | 결과 상세와 회차별 비교 | 환자 앱 | 앱 빌드 뒤 | ⬜ |
 | 03-11 | 추적 관리 목록 | HIS `추적 관리` | — | ✅ 들어옴 — **기한 초과 6건을 맨 위에** 올리고 추적 사유(위용종 추적 · HbA1c 상승 · 안압 상승)와 근거 검진 회차를 함께 적음<br>[`his-support-his-checkup-follow-ups.png`](../assets/screens/his-support-his-checkup-follow-ups.png) |
 | 03-12 | 검진 프로그램 구성(2단계의 「프로그램」이 어디서 오나) | HIS `검진 프로그램` | — | ✅ 들어옴 — 프로그램 14 · 가격 · 소요시간 · 항목수 · **국가암검진 6종은 0원**(공단 부담)<br>[`his-support-his-checkup-programs.png`](../assets/screens/his-support-his-checkup-programs.png) |
