@@ -1,10 +1,10 @@
 # B AI 기반 HIS 구축 가이드
 **B — Build guide for an AI-assisted HIS**
 
-> **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is a pre-rehearsal draft**: nothing here has been walked through on a fresh install yet, and anything we could not confirm from public material is marked `확인 필요(따라가기)` rather than filled in with invented steps (70 such marks as of 2026-09-15, after checking the pinned base commits' code). A generated appendix, [replace-list.md](replace-list.md), lists the code files that still carry another installation's address or institution-identifying strings — paths only, never the strings.
+> **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is a pre-rehearsal draft**: nothing here has been walked through on a fresh install yet, and anything we could not confirm from public material is marked `확인 필요(따라가기)` rather than filled in with invented steps (61 such marks as of 2026-09-15, after a first follow-along install on 2026-09-13~15 and after checking the pinned base commits' code). A generated appendix, [replace-list.md](replace-list.md), lists the code files that still carry another installation's address or institution-identifying strings — paths only, never the strings.
 
 
-> ⚠️ **리허설 전 초안 — 새 설치본으로 따라가 보기 전입니다. 단계마다 `확인 필요(따라가기)`로 표시한 곳은 따라가기에서 확정합니다.**
+> ⚠️ **초안 — 새 설치본으로 S0~S8 을 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~15 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 격리 네트워크). **남은 `확인 필요(따라가기)` 61곳**은 x86 · GPU 기준 장비 · 실데이터 규모 · 리얼 전환 · 사람 결정이 필요한 곳입니다.
 >
 > 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)의 버전 조합 · HIS v4.18.0(기준 커밋 `e9d303984f80`) · 작성 2026-09-11
 > 사실 확인: 생태계 자료 측 조사 기준입니다. 시스템 담당 확인 전입니다.
