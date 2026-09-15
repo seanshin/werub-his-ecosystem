@@ -9,7 +9,7 @@
 |---|---|
 | 선(시스템 쌍) | 33개 |
 | 노드 | 17개 — 생태계 시스템 13 · 그 밖 4(검사 장비 · 외부 시스템 · 공동 대상) |
-| 연결 | 113개 — 검증됨 18 · 구현·미검증 70 · 설계만 1 · 미구현 15 · 중단 7 · 판정 불가 2 |
+| 연결 | 113개 — 검증됨 19 · 구현·미검증 69 · 설계만 1 · 미구현 15 · 중단 7 · 판정 불가 2 |
 | 싣지 않은 연결 | 7개 — 연결 표에 아직 없어 이 도식에도 없습니다 |
 | 만든 방법 | 연결 표의 절(`### A ⇄ B`)마다 선 하나. 절 머리의 요약 줄 · 합계 표와 개수가 다르면 생성기가 멈춥니다 |
 
@@ -23,8 +23,8 @@
 | `미구현` | 파선(주황) | 10 |
 | `설계만` | 파선(회색) | 1 |
 | `판정 불가` | 점선(보라) | 0 |
-| `구현·미검증` | 실선 | 17 |
-| `검증됨` | 실선(굵게) | 1 |
+| `구현·미검증` | 실선 | 16 |
+| `검증됨` | 실선(굵게) | 2 |
 
 상태의 뜻은 [`compatibility.md` 의 "상태를 읽는 법"](../RELEASES/draft/compatibility.md#상태를-읽는-법)과 같습니다. 노드 색은 [계층 생태계 지도](layers.md)의 7계층을 따르고, 테두리가 파선인 노드는 생태계 시스템이 아닌 상대(검사 장비 · 외부 시스템)이거나 두 시스템을 함께 대상으로 하는 연결입니다.
 
@@ -74,7 +74,7 @@ flowchart LR
   X3 ---|"구현·미검증 1"| PACS
   X1 ---|"미구현 1"| LIS
   CLINIC ---|"구현·미검증 1"| SIGN
-  ERP ---|"구현·미검증 1"| LIS
+  ERP ---|"검증됨 1"| LIS
   AIS ---|"구현·미검증 1"| TWIN
   AIS ---|"구현·미검증 1"| CERNO
   AIS ---|"구현·미검증 1"| EDU
@@ -100,8 +100,8 @@ flowchart LR
   class CLINIC,EDU,JITSI collab
   class J1 composite
   class X1,X2,X3 external
-  linkStyle 12 stroke:#2e7d32,stroke-width:3px
-  linkStyle 5,8,10,11,15,17,18,19,20,21,22,24,25,26,27,28,32 stroke:#4a6fa5,stroke-width:2px
+  linkStyle 12,25 stroke:#2e7d32,stroke-width:3px
+  linkStyle 5,8,10,11,15,17,18,19,20,21,22,24,26,27,28,32 stroke:#4a6fa5,stroke-width:2px
   linkStyle 29 stroke:#7f8c8d,stroke-width:2px,stroke-dasharray:6 4
   linkStyle 0,1,2,3,4,6,7,13,14,23 stroke:#d68910,stroke-width:2px,stroke-dasharray:6 4
   linkStyle 9,16,30,31 stroke:#c0392b,stroke-width:2px,stroke-dasharray:6 4
@@ -138,7 +138,7 @@ flowchart LR
 | 23 | 외부 XDS-I.b 저장소 ⇄ PACS | 1 | PACS → 외부 XDS-I.b 저장소 1 | 구현·미검증 1 | `구현·미검증` |
 | 24 | 검사 장비 ⇄ LIS | 1 | 검사 장비 → LIS 1 | 미구현 1 | `미구현` |
 | 25 | Clinic ⇄ sign | 1 | Clinic → sign 1 | 구현·미검증 1 | `구현·미검증` |
-| 26 | ERP ⇄ LIS | 1 | LIS → ERP 1 | 구현·미검증 1 | `구현·미검증` |
+| 26 | ERP ⇄ LIS | 1 | LIS → ERP 1 | 검증됨 1 | `검증됨` |
 | 27 | AI Server ⇄ twin | 1 | twin → AI Server 1 | 구현·미검증 1 | `구현·미검증` |
 | 28 | AI Server ⇄ cerno | 1 | cerno → AI Server 1 | 구현·미검증 1 | `구현·미검증` |
 | 29 | AI Server ⇄ edu | 1 | edu → AI Server 1 | 구현·미검증 1 | `구현·미검증` |
