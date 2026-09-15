@@ -21,7 +21,7 @@
 첫 통합 릴리즈의 **초안**입니다. 릴리즈 번호 체계를 아직 정하지 않아 `draft` 라는 이름을 씁니다. 번호가 정해지면 폴더 이름을 바꿉니다.
 
 - [매니페스트(사람이 읽는 판)](draft/manifest.md)
-- [연결 상태](draft/compatibility.md) — 코드 대조 1차 + 새 설치본 실호출(연결 113개 실음 · `검증됨` 19 · 시스템 담당 확인을 기다리는 7개는 싣지 않음)
+- [연결 상태](draft/compatibility.md) — 코드 대조 1차 + 새 설치본 실호출(연결 113개 실음 · `검증됨` 20 · 시스템 담당 확인을 기다리는 7개는 싣지 않음)
 - 시스템별 요약(초안 · 시스템 담당 사실 확인 전): [HIS](draft/systems/his.md) · [공개 홈페이지](draft/systems/homepage.md) · [환자 앱](draft/systems/patient-app.md) · [sign](draft/systems/sign.md) · [LIS](draft/systems/lis.md) · [PACS](draft/systems/pacs.md) · [ERP](draft/systems/erp.md) · [AI Server](draft/systems/ai-server.md) · [twin](draft/systems/twin.md) · [cerno](draft/systems/cerno.md) · [edu](draft/systems/edu.md) · [Clinic](draft/systems/clinic.md) · [Jitsi](draft/systems/jitsi.md)
 - 기준 커밋: [`data/base-commits.json`](../data/base-commits.json) — 저장소에 새 커밋이 생겨도 이 초안은 고정을 옮기기 전까지 바뀌지 않습니다
 
