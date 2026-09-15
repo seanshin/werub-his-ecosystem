@@ -124,7 +124,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 sign 이 한쪽 끝인 행을 그대로 옮겼습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **12개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록(새 설치본끼리 확인 2026-09-14~15).
+[연결 상태](../RELEASES/draft/compatibility.md)에서 sign 이 한쪽 끝인 행을 그대로 옮겼습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **14개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지(새 설치본끼리 확인 2026-09-14~15).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -136,7 +136,7 @@ flowchart LR
 |---|---|---|---|
 | sign → ERP | 서명 완료 통지(트랙 A 계약 미러·발효) | HTTP POST 웹훅 → ERP /api/v1/integrations/sign/webhook (202) ·… | `구현·미검증` |
 | sign → HIS | 서명 이벤트 통지 — 동의서 상태 반영·개정(superseded)·서명자 인증서 일련번호 미러·ERP 로 sign.completed 재발행 | HTTP POST 웹훅 → HIS /api/v1/sign-integration/webhook (sign 기본… | `검증됨` |
-| sign → edu | 이수증 서명 완료 통지(정합 확인·해시 교차검증) | HTTP POST 웹훅 → edu /api/v1/webhooks/sign[/{tenantSlug}] | `구현·미검증` |
+| sign → edu | 이수증 서명 완료 통지(정합 확인·해시 교차검증) | HTTP POST 웹훅 → edu /api/v1/webhooks/sign[/{tenantSlug}] | `검증됨` |
 
 ### 들어오는 연결
 
@@ -150,7 +150,7 @@ flowchart LR
 | HIS → sign | 신뢰의 사슬 — 오더 서명 로그·거버넌스 결정의 감사 이벤트를 sign 스트림에 봉인(TSA 앵커)·체인 검증 | HTTP POST /v1/audit-events(stream his-orders 등, anchor) · GE… | `검증됨` |
 | PACS → sign | 판독보고서 STAFF 전자서명(판독의 본인 서명) — 판독 서명 구간 | PACS 화면이 HIS staff-token(aud=sign) 발급 → PACS 백엔드 POST /api/v… | `구현·미검증` |
 | PACS → sign | 영상·조영제 동의서 환자 서명(포털 링크·알림) | HTTP POST /v1/certificates/enroll(환자·대리인) · /v1/requests · /… | `구현·미검증` |
-| edu → sign | 법정교육 이수증 봉인(시스템 발급 서명)·폐기·철회 | HTTP POST /v1/certificates/enroll · /v1/sign-requests(DIRECT… | `구현·미검증` |
+| edu → sign | 법정교육 이수증 봉인(시스템 발급 서명)·폐기·철회 | HTTP POST /v1/certificates/enroll · /v1/sign-requests(DIRECT… | `검증됨` |
 | Clinic → sign | 신뢰의 사슬 — 그룹웨어 전자결재(W.Sign) 문서 인증: 결재 이벤트를 sign 감사 스트림에 앵커·검증 | HTTP POST {baseUrl}/audit-events(anchor) · GET {baseUrl}/aud… | `구현·미검증` |
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->

@@ -85,6 +85,13 @@
 
 - **배포 형태를 먼저 정합니다.** 단독 배포는 환경변수의 HIS 가 곧 인증원입니다. 멀티테넌트는 기관마다 자기 HIS 주소를 넣어야 로그인이 열리고, 새 기관 설정은 플랫폼 콘솔에서 넣습니다.
 - 연동 준비: HIS(로그인 공개키 · 인사 · 이수 기록 · 직원 웹훅 서명) · sign(이수증) · AI Server(문항 · 요약 · 학습 도우미 · 전사) · 알림 채널(Clinic 경유). 설정 화면의 **연결 점검**으로 확인합니다.
+- **edu → sign 이수증 서명 · sign → edu 완료 통지**(연결 표 `검증됨` 2026-09-15 · 새 설치본끼리) — 따라가기에서 확인한 순서:
+  1. sign 관리 API(`sign-admin` 키)로 **소비자 `edu` 를 등록**하고 `requests:write` · `certificates:write` 를 줍니다. edu 는 sign 환경변수로 심는 소비자가 아닙니다. 🔴 **이름을 `edu` 로** 둡니다 — sign 이 완료 통지를 서명할 비밀값을 `<소비자 이름>_WEBHOOK_SECRET` 규칙으로 찾으므로, 이름이 다르면 HIS 용 비밀값으로 서명돼 edu 가 받지 않습니다.
+  2. 같은 비밀값을 sign `EDU_WEBHOOK_SECRET` 과 edu `EDU_WEBHOOK_SECRET` 에 넣습니다(기관마다 새로 생성).
+  3. edu 소비자 키로 **등록자 인증서**를 발급받고(`POST /v1/certificates/enroll`) 그 일련번호를 edu `SIGN_REGISTRAR_SERIAL` 에, 키를 `SIGN_API_KEY` 에 넣습니다. 기관마다 따로 발급합니다.
+  4. 🔴 **sign 은 운영 설정에서 https 콜백만 받습니다.** edu 는 콜백 주소를 **`EDU_PUBLIC_URL` + `/api/v1/webhooks/sign`** 으로 만들므로, `EDU_PUBLIC_URL` 은 **sign 서버가 https 로 닿는 주소**여야 합니다. 원내 사설 인증서를 쓰면 sign 이 그 CA 를 신뢰하게 합니다(따라가기: 사설 CA 로 edu 앞에 TLS 중계를 두고 sign 에 `NODE_EXTRA_CA_CERTS`). 같은 값이 직원 화면 링크에도 쓰이므로 직원 브라우저와 sign 서버가 **같은 주소로 닿게** 구성합니다.
+  5. 확인 — 이수 처리(또는 관리자 재발급) → edu 이수증 `ISSUED` → sign 검증 주소에서 문서 무결성 `VALID` → sign 로그 `request.completed` 전송 성공 · edu 로그 "sign 통지로 인증서 확정". 틀린 서명의 통지는 edu 가 **받기만 하고 반영하지 않습니다**(2xx 로 답하므로 sign 쪽에는 실패가 보이지 않습니다 — edu 로그를 봅니다).
+  - edu 설정 화면의 sign **연결 점검**은 sign 이 404 를 돌려줘도 "정상"으로 표시했습니다(따라가기) — 점검 통과만 믿지 말고 위 5번으로 확인합니다.
 - 콘텐츠 저장: 기본값 `storage.archive` 가 `none` 이라 로컬에만 저장합니다. 수료증 · 이수 자료가 들어가므로 백업을 따로 준비하거나 아카이브를 설정합니다. 캐시 삭제는 기본 꺼짐(`storage.cacheMaxBytes` 0)입니다.
 - 기본 콘텐츠는 초안 · 검수 상태로 들어 있습니다. 병원의 임상 검수와 병원 고유 정보 입력(온보딩 자료의 자리표시)을 거친 뒤 노출합니다.
 
