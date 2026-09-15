@@ -75,6 +75,7 @@
   2. 🔴 ERP **`ATTACHMENT_DIR`**(계약 PDF 보관 경로 · 영속 볼륨)을 설정합니다 — 운영 compose 와 환경 예시에 없고, 없으면 서명 요청이 "첨부 저장소 미설정"으로 멈춥니다.
   3. ERP `SIGN_CALLBACK_URL` 은 **sign 서버가 https 로 닿는 ERP 주소**(`…/api/v1/integrations/sign/webhook`)이고, `SIGN_PORTAL_BASE` 는 거래처가 여는 sign 포털 주소입니다. 둘 다 기본값이 다른 설치본 주소이므로 반드시 바꿉니다.
   4. 확인 — ERP 계약 등록 → 서명 요청(계약 PDF) → 거래처 포털 링크 → 거래처 서명 → ERP 계약 서명 상태 `COMPLETED`. 틀린 서명의 완료 통지는 ERP 가 **403 으로 거부**합니다(따라가기 확인). 거래처 링크를 보내는 자동 발송은 없어 담당자가 전달합니다.
+- **HIS 직원 셀프서비스 → ERP 조회**(연차 잔여 · 급여명세 등 · 따라가기 2026-09-15 에서 **2개 조회만 확인** — 연결 전체는 `구현·미검증`) — HIS 설정 `erp.webhookUrl` 에 **ERP 기준 주소만**(`/api/v1` 없이 — HIS 가 경로를 붙입니다) · `erp.integrationKey` ↔ ERP `HIS_WEBHOOK_KEY` · HIS `ess.targetTokenSecret` ↔ ERP `ESS_TARGET_TOKEN_SECRET` 를 같은 값으로. ERP `ESS_TARGET_TOKEN_ENFORCE` 는 **기본 꺼짐**이라, 켜야 연동 키만으로 다른 직원의 급여를 조회할 수 없습니다(따라가기: 켠 상태에서 다른 직원 대상 · 만료 · 다른 키 서명 요청이 모두 거부됨). ERP 에 **HIS 와 같은 사번의 직원**이 있어야 값이 채워집니다.
 - 설치 뒤 재무 · 물류 등 **정기업무 담당 역할**을 배정합니다. 역할 보유자가 없으면 알림이 관리자에게 갑니다.
 
 ### Clinic
