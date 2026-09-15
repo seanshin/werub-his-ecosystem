@@ -19,7 +19,7 @@
 | **무엇** | 병원 하나를 돌리는 **13개 시스템**(HIS · 홈페이지 · 환자 앱 · LIS · PACS · sign · ERP · AI Server · twin · cerno · Clinic · edu · Jitsi)을 한 벌로 세우는 생태계 |
 | **어떻게** | 공개 구성요소로 짜고, **AI 는 기관 안 GPU 한 장**에서 돌리고, 필요한 것부터 붙입니다 |
 | **AI 는** | **보조합니다.** 초안과 제안을 만들고 **사람이 승인해야 정본**이 됩니다. 승인 이력이 남습니다 |
-| **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 27개**(`검증됨` · 새 설치본끼리 · 2026-09-14~15) · 코드만 맞물린 것 61개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과) |
+| **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 27개**(`검증됨` · 새 설치본끼리 · 2026-09-14~16) · 코드만 맞물린 것 61개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과) |
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
 
 **처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/08-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과) · [화면 293장](screens/)
@@ -221,7 +221,7 @@
 단계마다 ① 설치 ② 설정 ③ 사람이 정할 것 ④ 확인 화면·완료 조건 ⑤ **아직 안 되는 것과 대체 수단** ⑥ 흔한 함정을 [구축 가이드](build-guide/)에 적습니다. 가이드는 저장소와 릴리즈 기록을 읽고 쓴 뒤, **새 설치본으로 S0~S8 을 한 번 따라가 보며 고쳤습니다**(아래).
 
 ## 새 설치본으로 따라가 본 결과
-**What a first follow-along install showed (2026-09-13 ~ 2026-09-15)**
+**What a first follow-along install showed (2026-09-13 ~ 2026-09-16)**
 
 > **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **20 of 113 connections are now `검증됨` (verified)** with a date, each also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, duplicate results). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
 
@@ -317,6 +317,11 @@ ERP → AI 공시 검색도 AI 주소가 코드에 고정돼, 원내 AI 로 설�
 | Clinic 설치 · Jitsi 재구성 · 환자 앱 · 공개 홈페이지 · twin · cerno | 설치하지 않았습니다 |
 | 실데이터 규모의 이관 · 백업 시간 | 가상 데이터 규모만 재 봤습니다 |
 | 시스템 담당의 사실 확인 | 따라가기에서 나온 사실은 각 프로젝트에 전달했고 회신을 기다립니다 |
+| HIS 가 보내는 운영 이벤트의 실제 전달(수납 · 청구 · 재고 · 인사 이벤트 → ERP) · 서명 완료본 회수 | 리얼 모드에서만 나가는 경로라 리얼 전환 뒤에 확인합니다(대기열에 쌓이고 보류되는 것까지 확인) |
+| AI 학습 자료 · 보험 공시 **색인** 완료 | 임베딩 모델이 있는 기준 장비가 필요합니다(호출 경로와 실패 처리까지 확인) |
+| PACS 가 HIS 데이터베이스에 직접 쓰고 읽는 두 경로 | 전용 계정을 만들어야 확인할 수 있어, 이번에는 보내는 문장이 HIS 표와 맞는지까지만 대조했습니다 |
+
+이 따라가기는 **2026-09-16 에 여기까지 하고 멈췄습니다.** 남은 항목은 위 사유(기준 장비 · 사람 결정 · 미설치 시스템 · 담당 회신)에 묶여 있습니다.
 
 ## 지금 알고 시작해야 할 것
 **Know this before you start**
