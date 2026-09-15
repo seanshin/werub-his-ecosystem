@@ -19,7 +19,7 @@
 | **무엇** | 병원 하나를 돌리는 **13개 시스템**(HIS · 홈페이지 · 환자 앱 · LIS · PACS · sign · ERP · AI Server · twin · cerno · Clinic · edu · Jitsi)을 한 벌로 세우는 생태계 |
 | **어떻게** | 공개 구성요소로 짜고, **AI 는 기관 안 GPU 한 장**에서 돌리고, 필요한 것부터 붙입니다 |
 | **AI 는** | **보조합니다.** 초안과 제안을 만들고 **사람이 승인해야 정본**이 됩니다. 승인 이력이 남습니다 |
-| **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 14개**(`검증됨` · 새 설치본끼리 · 2026-09-14~15) · 코드만 맞물린 것 74개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과) |
+| **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 16개**(`검증됨` · 새 설치본끼리 · 2026-09-14~15) · 코드만 맞물린 것 72개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과) |
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
 
 **처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/08-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과) · [화면 293장](screens/)
@@ -223,7 +223,7 @@
 ## 새 설치본으로 따라가 본 결과
 **What a first follow-along install showed (2026-09-13 ~ 2026-09-15)**
 
-> **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **14 of 113 connections are now `검증됨` (verified)** with a date, each also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, duplicate results). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
+> **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **16 of 113 connections are now `검증됨` (verified)** with a date, each also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, duplicate results). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
 
 **어떻게 했나** — 11개 저장소의 **고정한 기준 커밋**을 풀어 각 저장소의 **운영용 설치 파일**로 올렸습니다. 장비는 개발 PC 한 대(Apple Silicon · arm64 · 가상 머신 8GB · **GPU 없음**)이고, 모든 컨테이너는 **외부로 나가지 못하는 네트워크**에 두었습니다. 시스템 사이 호출은 **새 설치본끼리만** 했고 운영 중인 서버는 부르지 않았습니다. 비밀값은 전부 새로 만들었고, 데이터는 가상 병원(위루비병원) 데이터입니다. 저장소 파일은 사본에서만 고쳤고, 고친 곳은 모두 해당 단계 장에 적었습니다.
 
@@ -237,14 +237,14 @@
 | [S4](build-guide/S4-trust.md) 신뢰(sign) | sign 코어 · 웹 · DB | ✅ 원본 이미지 그대로 빌드 · 기동. HIS 설정 `sign.url` 은 **`/v1` 까지** 넣어야 함 · HIS 경유 서명은 PDF 렌더 서비스가 전제 |
 | [S3](build-guide/S3-clinical-departments.md) LIS | LIS API · 웹 · DB(설치 스크립트) | 설치 스크립트가 성공을 실패로 판정하는 곳 · 운영 이미지로 시드 불가 · HIS 시드 검사 코드 15 중 LIS 기본 매핑 3 · 관리자 초기 비밀번호는 **한 번만 출력** |
 | [S3](build-guide/S3-clinical-departments.md) PACS | Orthanc · 백엔드 · 작업자 등 12 컨테이너 | 이미지 태그 · TLS 파일 · 헬스체크 · 기본 테이블 생성 단계를 우회해 설치. HIS 워크리스트 등록과 영상 조회는 **완료를 확인하지 못함** |
-| [S5](build-guide/S5-management.md) ERP | core · 작업자 2 · 웹 | ✅ 원본 빌드 · 기동 · 마이그레이션 247개. **ERP 안에서 첫 관리자를 만드는 경로가 없고** HIS SSO 로 들어올 때 자동 생성됨. `ENV` 는 정확히 `prod` · HIS 와 같은 호스트의 `/erp` 로 묶어야 SSO 가 됨 |
+| [S5](build-guide/S5-management.md) ERP | core · 작업자 2 · 웹 | ✅ 원본 빌드 · 기동 · 마이그레이션 247개. **ERP 안에서 첫 관리자를 만드는 경로가 없고** HIS SSO 로 들어올 때 자동 생성됨. `ENV` 는 정확히 `prod` · HIS 와 같은 호스트의 `/erp` 로 묶어야 SSO 가 됨 · 외주 계약 서명은 **첨부 저장소 설정(`ATTACHMENT_DIR`)이 있어야** 하는데 운영 compose · 환경 예시에 없음 |
 | [S5](build-guide/S5-management.md) edu | core · 웹 · DB · Redis | ✅ 원본 빌드. 운영 compose 는 **호스트 네트워크 전제** · 기관 설치 안내에 **기관(테넌트) 행 · 앱 DB 역할 생성 단계가 빠져** 있어 추가 · 시드 1개가 새 설치본에서 멈춤(16 중 13) |
 | [S5](build-guide/S5-management.md) Clinic | 설치하지 않음 | 설치형은 공용 API · 인증 서버까지 필요 → 운영 공개 소개 페이지로 **공급 형태(가입형 호스팅 · 설치형)** 와 화면 구성만 파악 |
 | [S6](build-guide/S6-ai.md) AI Server | 앱 + Ollama(CPU) · 대체 소형 모델 | **새 서버용 설치 정의가 없음** · 학습용 CUDA 전용 패키지 3개를 빼야 설치 · HIS 의 AI 서버 주소는 **설정 화면으로 바꿀 수 없음**(DB 로 바꿈) · 원내 호스트 이름은 전송 허용 목록 필요 · HIS → AI 요약 경로 끝까지 확인(스킬 묶음 연결이라 `검증됨` 은 올리지 않음) |
 | [S7](build-guide/S7-rehearsal.md) 리허설 | HIS · LIS · AI · sign · edu 조합 | ✅ 검사 흐름 한 줄(처방 → LIS 접수 · 결과 → HIS 적용 → **독립 이중검증** → 취소 전파) · DUR 안전 게이트 차단 / 경고 · 🔴 **상시 감시자가 운영 compose 에 없음**(따로 띄우니 네 축 스윕 정상) · 직원 흐름(명부 → 이수 → HIS 교육 기록 → 이수증 서명) |
 | [S8](build-guide/S8-go-real.md) 리얼 전환 | 드라이런 | ✅ **백업 → 다른 DB 복원 시험**(테이블 562개 행 수 일치) · HIS 백업은 **HIS DB 하나만** · LIS 리허설 데이터 정리 2단계 끝까지 · 리허설 때 보류된 연동 발송은 **리얼 전환 순간 그대로 나감** · **리얼 모드 전환 자체는 실행하지 않음** |
 
-### 실제로 호출해 `검증됨` 을 붙인 연결 (14)
+### 실제로 호출해 `검증됨` 을 붙인 연결 (16)
 
 | 연결 | 무엇을 확인했나 | 일부러 넣은 결함 → 결과 | 확인일 |
 |---|---|---|---|
@@ -262,8 +262,10 @@
 | edu → HIS 이수 기록 | edu 이수 → 연동 대기열 → HIS 직원 교육 기록 | — | 2026-09-14 |
 | edu → sign 이수증 봉인 | 이수증 `ISSUED` · sign 검증 문서 무결성 `VALID` | 틀린 소비자 키 → 401 · http 콜백 → sign 이 거부(https 만) | 2026-09-15 |
 | sign → edu 이수증 완료 통지 | 완료 통지 → edu 인증서 확정 | 위조 서명 · 서명 없는 통지 → 받기만 하고 반영 안 됨 | 2026-09-15 |
+| ERP → sign 외주 계약 서명 | ERP 계약 등록 → 계약 PDF 해시로 서명 요청 → 가상 거래처가 sign 포털에서 서명 → 모든 참가자 완료 | ERP 에 틀린 sign 키 → 401 | 2026-09-15 |
+| sign → ERP 계약 완료 통지 | 완료 통지(https) → ERP 계약 서명 상태 `COMPLETED` | 위조 서명 · 서명 없는 통지 → **403 으로 거부** | 2026-09-15 |
 
-전체 표는 [연결 상태](RELEASES/draft/compatibility.md)(확인일 칸)에 있습니다. 나머지 `구현·미검증` 74개는 **양쪽 코드가 맞물려 있다는 뜻이지 동작한다는 뜻이 아닙니다** — 기관이 [S7 리허설](build-guide/S7-rehearsal.md)에서 쓰는 연결마다 같은 방식으로 확인합니다.
+전체 표는 [연결 상태](RELEASES/draft/compatibility.md)(확인일 칸)에 있습니다. 나머지 `구현·미검증` 72개는 **양쪽 코드가 맞물려 있다는 뜻이지 동작한다는 뜻이 아닙니다** — 기관이 [S7 리허설](build-guide/S7-rehearsal.md)에서 쓰는 연결마다 같은 방식으로 확인합니다.
 
 ### 좋았던 것 — 가드가 실제로 막았다
 
@@ -312,7 +314,7 @@
 | [`overview/`](overview/) | 취지·구조 개요서(10장) | 🟡 초안 |
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~15) · 남은 확인 필요 61곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
-| [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 14 / 113 |
+| [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 16 / 113 |
 | [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안 · 캡처 자리 52 중 **44**(✅ 36 · 🟡 8) · 응급 시나리오는 9/9 |
 | [`deck/`](deck/) | 발표 덱(내용 32장 · A·E 시각 요약 + 화면 11장) | 🟡 초안 |
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |

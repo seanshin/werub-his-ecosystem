@@ -70,6 +70,11 @@
   - ERP `HIS_JWT_SECRET` 에 **HIS API 의 `AUTH_SECRET` 과 같은 값**을 넣습니다.
   - 따라가기에서 끝까지 확인한 조합: HIS 설정 **`erp.handoff` = `cookie`** + ERP **`HIS_JWT_AUDIENCE=erp-sso`**. HIS 화면의 `ERP` 단추 → ERP 대시보드로 들어가고, ERP 에 계정이 자동 생성됐습니다. 같은 SSO 토큰을 다시 쓰거나, 만료되거나, 서명이 틀린 토큰은 거부됐습니다.
   - ERP 에 들어갈 수 있는 사람 = HIS **`erp.allowedRoles`**(기본 `ADMIN`) ∪ **`erp.allowedUserIds`**(HIS `접근 권한 관리` → 외부 시스템 접근). 위 조합에서 허용 밖 사용자는 HIS 가 403 으로 막고, 개별 허용 목록에 넣으면 들어갑니다(따라가기 확인). ERP 명단을 이 목록으로 자동으로 보내는 호출은 아직 없어 사람이 넣습니다.
+- **ERP → sign 외주 계약 서명 · sign → ERP 완료 통지**(연결 표 `검증됨` 2026-09-15 · 새 설치본끼리) — 따라가기 순서:
+  1. sign 환경변수 `ERP_API_KEY`(소비자 `erp`) · `ERP_WEBHOOK_SECRET` 과 ERP `SIGN_API_KEY` · `SIGN_WEBHOOK_SECRET` 을 같은 값으로(기관마다 새로 생성). ERP `SIGN_INTERNAL_BASE` 는 `/v1` 까지.
+  2. 🔴 ERP **`ATTACHMENT_DIR`**(계약 PDF 보관 경로 · 영속 볼륨)을 설정합니다 — 운영 compose 와 환경 예시에 없고, 없으면 서명 요청이 "첨부 저장소 미설정"으로 멈춥니다.
+  3. ERP `SIGN_CALLBACK_URL` 은 **sign 서버가 https 로 닿는 ERP 주소**(`…/api/v1/integrations/sign/webhook`)이고, `SIGN_PORTAL_BASE` 는 거래처가 여는 sign 포털 주소입니다. 둘 다 기본값이 다른 설치본 주소이므로 반드시 바꿉니다.
+  4. 확인 — ERP 계약 등록 → 서명 요청(계약 PDF) → 거래처 포털 링크 → 거래처 서명 → ERP 계약 서명 상태 `COMPLETED`. 틀린 서명의 완료 통지는 ERP 가 **403 으로 거부**합니다(따라가기 확인). 거래처 링크를 보내는 자동 발송은 없어 담당자가 전달합니다.
 - 설치 뒤 재무 · 물류 등 **정기업무 담당 역할**을 배정합니다. 역할 보유자가 없으면 알림이 관리자에게 갑니다.
 
 ### Clinic
