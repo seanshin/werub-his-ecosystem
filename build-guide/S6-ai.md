@@ -38,7 +38,7 @@ AI 는 사람의 판단을 **보조하고 초안을 만듭니다.** AI 가 만�
 1. **Python 3.12 가상환경에 `requirements.txt` 설치** — 이 파일에는 **NVIDIA CUDA 가 있어야만 설치되는 패키지 3개**(`unsloth` · `unsloth_zoo` · `bitsandbytes` — 학습용)가 들어 있습니다. GPU 가 없는 곳에서는 이 셋을 빼고 설치합니다(따라가기: 8분 · 컨테이너 이미지 약 4.6GB). 음성 처리에 `ffmpeg` · `libsndfile` 이 필요합니다.
 2. **Ollama 를 같은 호스트에** — 앱이 모델 서버를 `localhost:11434` 로 부르도록 코드에 고정돼 있고, 앱 자신도 `127.0.0.1:8585`(gunicorn)에만 붙습니다. 다른 시스템이 부르려면 앞단 프록시를 둡니다.
 3. **모델 반입** — 격리 구간 밖에서 Ollama 로 모델을 받아 모델 저장소(볼륨 · 디렉터리)째 옮깁니다. 기본 라우팅이 부르는 모델 이름(범용 14B 급)이 없으면 요청이 실패합니다. 🔴 **디스크를 넉넉히** — 따라가기에서 모델 · 엔진 이미지를 받다가 가상 머신 디스크가 가득 차 **같은 호스트의 HIS DB 가 잠시 복구 모드로 들어갔습니다**.
-4. **기동** — `gunicorn -c gunicorn.conf.py app:app`. 상태 점검 `GET /api/health` 가 항목별로 답합니다. 기동 직후 `tunnel: down` 은 `ingress_mode` 기본값(`ssh_tunnel`) 때문입니다(아래 설정).
+4. **기동** — `gunicorn -c gunicorn.conf.py app:app`. 🔴 앞에 프록시를 두면 **`X-Forwarded-For` 헤더를 반드시 붙이도록** 설정합니다(따라가기에서 확인 — 설정 방법은 AI Server 저장소 운영 안내를 따릅니다). 상태 점검 `GET /api/health` 가 항목별로 답합니다. 기동 직후 `tunnel: down` 은 `ingress_mode` 기본값(`ssh_tunnel`) 때문입니다(아래 설정).
 5. **키 발급(서버 로컬에서)** — 다른 시스템용 API 키 `POST /api/keys`(Bearer) · 의료 기능용 병원 키 `POST /api/medical/tenant/register`(`X-Medical-Key`). 키는 발급 응답에서 한 번만 보입니다.
 6. **HIS 에 연결**
    - HIS 설정 `ai.server.apiKey`(병원 키) · `ai.server.gpuKey`(API 키).
