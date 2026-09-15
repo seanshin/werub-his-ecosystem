@@ -138,7 +138,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 PACS 가 한쪽 끝인 행을 그대로 옮겼습니다. HIS 쪽 웹 환자 포털(`HIS(환자 포털)`)에서 오는 행도 들어오는 연결에 넣었습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **26개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트 · LIS → ERP 검사 청구 · LIS → PACS 병리 뷰어 링크 · LIS → HIS 검사코드 카탈로그 반입 · HIS → ERP 약품 보험코드 매핑 반입 · ERP → HIS 청구 라인 · 재원 조회 · HIS → ERP 진료비 계산서 조회 · ERP → HIS 검진권 정산 지급 회신 · ERP → HIS 의료진 계약 서명 발의(새 설치본끼리 확인 2026-09-14~15).
+[연결 상태](../RELEASES/draft/compatibility.md)에서 PACS 가 한쪽 끝인 행을 그대로 옮겼습니다. HIS 쪽 웹 환자 포털(`HIS(환자 포털)`)에서 오는 행도 들어오는 연결에 넣었습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **27개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트 · LIS → ERP 검사 청구 · LIS → PACS 병리 뷰어 링크 · LIS → HIS 검사코드 카탈로그 반입 · HIS → ERP 약품 보험코드 매핑 반입 · ERP → HIS 청구 라인 · 재원 조회 · HIS → ERP 진료비 계산서 조회 · ERP → HIS 검진권 정산 지급 회신 · ERP → HIS 의료진 계약 서명 발의 · PACS → sign 조영제 동의서 환자 서명(새 설치본끼리 확인 2026-09-14~15).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -152,7 +152,7 @@ flowchart LR
 | PACS → HIS | 영상 오더 → PACS 워크리스트 동기화(HIS DB 읽기 전용 · 관리자 온디맨드) · 환자 병합 재조정 | PostgreSQL 직접 접속(읽기) | `구현·미검증` |
 | PACS → HIS | 판독 결과 HL7 ORU^R01 송신 | HL7 v2 over MLLP | `미구현` |
 | PACS → sign | 판독보고서 STAFF 전자서명(판독의 본인 서명) — 판독 서명 구간 | PACS 화면이 HIS staff-token(aud=sign) 발급 → PACS 백엔드 POST /api/v… | `검증됨` |
-| PACS → sign | 영상·조영제 동의서 환자 서명(포털 링크·알림) | HTTP POST /v1/certificates/enroll(환자·대리인) · /v1/requests · /… | `구현·미검증` |
+| PACS → sign | 영상·조영제 동의서 환자 서명(포털 링크·알림) | HTTP POST /v1/certificates/enroll(환자·대리인) · /v1/requests · /… | `검증됨` |
 | PACS → AI Server | 영상 AI 보조(판독 보조·사전점검·비교 판독·구조화 판독문) · 텍스트 보조(요약·분석·설명·초안·참고·자동기록) · 예측·코드매핑 · 오케스트레이션 파이프라인 관리 · 정규화 AI · 추론(/a… | HTTPS REST(JSON · multipart) | `구현·미검증` |
 | PACS → AI Server | AI 서버 가용성 감시(30분 주기 프로브 · 상태 전이 알림) | HTTPS GET /api/tags | `미구현` |
 | PACS → 검사 장비(모달리티) | Modality Worklist C-FIND 응답 · MPPS N-CREATE/N-SET 로 워크리스트 상태 갱신 · C-STORE 수신(Orthanc) | DICOM DIMSE(MWL SCP · MPPS · Storage Commitment · C-STORE) | `구현·미검증` |

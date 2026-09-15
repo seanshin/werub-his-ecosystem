@@ -13,7 +13,7 @@
 
 | 상태 | 뜻 |
 |---|---|
-| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **이 초안에는 26개**(HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트 · LIS → ERP 검사 청구 · LIS → PACS 병리 뷰어 링크 · LIS → HIS 검사코드 카탈로그 반입 · HIS → ERP 약품 보험코드 매핑 반입 · ERP → HIS 청구 라인 · 재원 조회 · HIS → ERP 진료비 계산서 조회 · ERP → HIS 검진권 정산 지급 회신 · ERP → HIS 의료진 계약 서명 발의 · 2026-09-14~15) |
+| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **이 초안에는 27개**(HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트 · LIS → ERP 검사 청구 · LIS → PACS 병리 뷰어 링크 · LIS → HIS 검사코드 카탈로그 반입 · HIS → ERP 약품 보험코드 매핑 반입 · ERP → HIS 청구 라인 · 재원 조회 · HIS → ERP 진료비 계산서 조회 · ERP → HIS 검진권 정산 지급 회신 · ERP → HIS 의료진 계약 서명 발의 · PACS → sign 조영제 동의서 환자 서명 · 2026-09-14~15) |
 | `구현·미검증` | 양쪽 코드가 서로 맞물려 있음. 실제 호출로는 아직 확인하지 않음 |
 | `설계만` | 문서 · 규격만 있음 |
 | `미구현` | 한쪽 코드가 없음 — 이 연결이 필요하면 구축 기관이 대체 수단을 준비 |
@@ -74,7 +74,7 @@
 | ⑫ 원격 상담 | 연결이 `중단`입니다 | Jitsi 를 새로 구성한 뒤 연결을 다시 확인합니다([Jitsi 요약](../RELEASES/draft/systems/jitsi.md)) |
 | ① 예약 · 본인확인 | 문자 발송 제공자가 등록돼 있지 않아 환자 본인확인 문자는 모의 발송입니다 | 문자 발송 제공자와 처리위탁 계약을 준비합니다([S2](../build-guide/S2-patient-access.md)) |
 | ④ · ⑥ 기존 장비 · 시스템 | HL7 v2 대체 경로 몇 개가 `미구현`입니다 | HL7 v2 만 쓰는 기존 장비 · 시스템을 붙이려면 연결 방식을 먼저 확인합니다([S3](../build-guide/S3-clinical-departments.md)) |
-| 전 구간 | `검증됨`인 연결이 26개(HIS ⇄ sign 직원 서명 · 완료 통지 · 오더 로그 봉인 · HIS ⇄ LIS 검사 오더 · 환자 조회 · 검사 결과 · 오더 취소 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트 · LIS → ERP 검사 청구 · LIS → PACS 병리 뷰어 링크 · LIS → HIS 검사코드 카탈로그 반입 · HIS → ERP 약품 보험코드 매핑 반입 · ERP → HIS 청구 라인 · 재원 조회 · HIS → ERP 진료비 계산서 조회 · ERP → HIS 검진권 정산 지급 회신 · ERP → HIS 의료진 계약 서명 발의)뿐입니다 | 리허설(S7)에서 가상 병원 데이터로 여정을 끝까지 돌려 연결마다 확인합니다([S7](../build-guide/S7-rehearsal.md)) |
+| 전 구간 | `검증됨`인 연결이 27개(HIS ⇄ sign 직원 서명 · 완료 통지 · 오더 로그 봉인 · HIS ⇄ LIS 검사 오더 · 환자 조회 · 검사 결과 · 오더 취소 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트 · LIS → ERP 검사 청구 · LIS → PACS 병리 뷰어 링크 · LIS → HIS 검사코드 카탈로그 반입 · HIS → ERP 약품 보험코드 매핑 반입 · ERP → HIS 청구 라인 · 재원 조회 · HIS → ERP 진료비 계산서 조회 · ERP → HIS 검진권 정산 지급 회신 · ERP → HIS 의료진 계약 서명 발의 · PACS → sign 조영제 동의서 환자 서명)뿐입니다 | 리허설(S7)에서 가상 병원 데이터로 여정을 끝까지 돌려 연결마다 확인합니다([S7](../build-guide/S7-rehearsal.md)) |
 
 ## 이 장이 말하지 않는 것
 
