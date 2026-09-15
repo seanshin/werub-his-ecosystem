@@ -138,7 +138,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 PACS 가 한쪽 끝인 행을 그대로 옮겼습니다. HIS 쪽 웹 환자 포털(`HIS(환자 포털)`)에서 오는 행도 들어오는 연결에 넣었습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **16개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지(새 설치본끼리 확인 2026-09-14~15).
+[연결 상태](../RELEASES/draft/compatibility.md)에서 PACS 가 한쪽 끝인 행을 그대로 옮겼습니다. HIS 쪽 웹 환자 포털(`HIS(환자 포털)`)에서 오는 행도 들어오는 연결에 넣었습니다. 실제 호출로 `검증됨` 을 붙인 연결은 **18개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트(새 설치본끼리 확인 2026-09-14~15).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -151,7 +151,7 @@ flowchart LR
 | PACS → HIS | 판독 결과 반영 — PACS 가 HIS DB 에 imaging_results UPSERT + orders.status=COMPLETED 직접 쓰기 | PostgreSQL 직접 접속(SQL) | `구현·미검증` |
 | PACS → HIS | 영상 오더 → PACS 워크리스트 동기화(HIS DB 읽기 전용 · 관리자 온디맨드) · 환자 병합 재조정 | PostgreSQL 직접 접속(읽기) | `구현·미검증` |
 | PACS → HIS | 판독 결과 HL7 ORU^R01 송신 | HL7 v2 over MLLP | `미구현` |
-| PACS → sign | 판독보고서 STAFF 전자서명(판독의 본인 서명) — 판독 서명 구간 | PACS 화면이 HIS staff-token(aud=sign) 발급 → PACS 백엔드 POST /api/v… | `구현·미검증` |
+| PACS → sign | 판독보고서 STAFF 전자서명(판독의 본인 서명) — 판독 서명 구간 | PACS 화면이 HIS staff-token(aud=sign) 발급 → PACS 백엔드 POST /api/v… | `검증됨` |
 | PACS → sign | 영상·조영제 동의서 환자 서명(포털 링크·알림) | HTTP POST /v1/certificates/enroll(환자·대리인) · /v1/requests · /… | `구현·미검증` |
 | PACS → AI Server | 영상 AI 보조(판독 보조·사전점검·비교 판독·구조화 판독문) · 텍스트 보조(요약·분석·설명·초안·참고·자동기록) · 예측·코드매핑 · 오케스트레이션 파이프라인 관리 · 정규화 AI · 추론(/a… | HTTPS REST(JSON · multipart) | `구현·미검증` |
 | PACS → AI Server | AI 서버 가용성 감시(30분 주기 프로브 · 상태 전이 알림) | HTTPS GET /api/tags | `미구현` |
@@ -171,7 +171,7 @@ flowchart LR
 | HIS(환자 포털) → PACS | 환자 본인 영상·판독 목록·판독완료 알림·썸네일·판독 PDF 조회 | HTTPS REST JSON / 바이너리 | `구현·미검증` |
 | HIS(환자 포털) → PACS | 환자 외부 영상(DICOM) 업로드 멀티파트 중계 | HTTPS POST multipart | `미구현` |
 | HIS → PACS | 환자 인구정보·병합 HL7 ADT(IHE PIX Feed ITI-8 · Query ITI-9) | HL7 v2 ADT/QBP over MLLP | `미구현` |
-| LIS → PACS | 병리 슬라이드 스캔 워크리스트 등록·취소(ORM^O01 NW/CA → PACS worklist → MWL) | HL7 v2.3 ORM^O01 over MLLP(TCP) | `구현·미검증` |
+| LIS → PACS | 병리 슬라이드 스캔 워크리스트 등록·취소(ORM^O01 NW/CA → PACS worklist → MWL) | HL7 v2.3 ORM^O01 over MLLP(TCP) | `검증됨` |
 | LIS → PACS | 병리 WSI 뷰어 링크 해소 · QIDO 로 영상 도착 확인 · 열람 확인 기록 | HTTPS REST(PACS 로그인) + DICOMweb QIDO-RS + 뷰어 런처 URL | `구현·미검증` |
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->

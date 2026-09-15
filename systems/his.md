@@ -192,7 +192,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 ## 7. 연동
 
-아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **16개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지(새 설치본끼리 확인 2026-09-14~15).
+아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 실제 호출로 `검증됨` 을 붙인 연결은 **18개**입니다 — HIS → sign 직원 신원 · 서명 · sign → HIS 서명 완료 통지 · HIS → sign 오더 서명 로그 봉인 · HIS → LIS 검사 오더 전달 · LIS → HIS 환자 조회 · LIS → HIS 검사 결과 전달 · HIS → LIS 오더 취소 전파 · HIS → ERP 직원 SSO · HIS ⇄ edu 직원 SSO · 공개키 조회 · 직원 명부 · 이수 기록 · edu ⇄ sign 이수증 서명 · 완료 통지 · ERP ⇄ sign 외주 계약 서명 · 완료 통지 · PACS → sign 판독 서명 · LIS → PACS 병리 워크리스트(새 설치본끼리 확인 2026-09-14~15).
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 

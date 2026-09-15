@@ -19,7 +19,7 @@
 | **무엇** | 병원 하나를 돌리는 **13개 시스템**(HIS · 홈페이지 · 환자 앱 · LIS · PACS · sign · ERP · AI Server · twin · cerno · Clinic · edu · Jitsi)을 한 벌로 세우는 생태계 |
 | **어떻게** | 공개 구성요소로 짜고, **AI 는 기관 안 GPU 한 장**에서 돌리고, 필요한 것부터 붙입니다 |
 | **AI 는** | **보조합니다.** 초안과 제안을 만들고 **사람이 승인해야 정본**이 됩니다. 승인 이력이 남습니다 |
-| **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 16개**(`검증됨` · 새 설치본끼리 · 2026-09-14~15) · 코드만 맞물린 것 72개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과) |
+| **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 18개**(`검증됨` · 새 설치본끼리 · 2026-09-14~15) · 코드만 맞물린 것 70개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과) |
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
 
 **처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/08-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과) · [화면 293장](screens/)
@@ -223,7 +223,7 @@
 ## 새 설치본으로 따라가 본 결과
 **What a first follow-along install showed (2026-09-13 ~ 2026-09-15)**
 
-> **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **16 of 113 connections are now `검증됨` (verified)** with a date, each also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, duplicate results). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
+> **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **18 of 113 connections are now `검증됨` (verified)** with a date, each also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, duplicate results). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
 
 **어떻게 했나** — 11개 저장소의 **고정한 기준 커밋**을 풀어 각 저장소의 **운영용 설치 파일**로 올렸습니다. 장비는 개발 PC 한 대(Apple Silicon · arm64 · 가상 머신 8GB · **GPU 없음**)이고, 모든 컨테이너는 **외부로 나가지 못하는 네트워크**에 두었습니다. 시스템 사이 호출은 **새 설치본끼리만** 했고 운영 중인 서버는 부르지 않았습니다. 비밀값은 전부 새로 만들었고, 데이터는 가상 병원(위루비병원) 데이터입니다. 저장소 파일은 사본에서만 고쳤고, 고친 곳은 모두 해당 단계 장에 적었습니다.
 
@@ -244,7 +244,7 @@
 | [S7](build-guide/S7-rehearsal.md) 리허설 | HIS · LIS · AI · sign · edu 조합 | ✅ 검사 흐름 한 줄(처방 → LIS 접수 · 결과 → HIS 적용 → **독립 이중검증** → 취소 전파) · DUR 안전 게이트 차단 / 경고 · 🔴 **상시 감시자가 운영 compose 에 없음**(따로 띄우니 네 축 스윕 정상) · 직원 흐름(명부 → 이수 → HIS 교육 기록 → 이수증 서명) |
 | [S8](build-guide/S8-go-real.md) 리얼 전환 | 드라이런 | ✅ **백업 → 다른 DB 복원 시험**(테이블 562개 행 수 일치) · HIS 백업은 **HIS DB 하나만** · LIS 리허설 데이터 정리 2단계 끝까지 · 리허설 때 보류된 연동 발송은 **리얼 전환 순간 그대로 나감** · **리얼 모드 전환 자체는 실행하지 않음** |
 
-### 실제로 호출해 `검증됨` 을 붙인 연결 (16)
+### 실제로 호출해 `검증됨` 을 붙인 연결 (18)
 
 | 연결 | 무엇을 확인했나 | 일부러 넣은 결함 → 결과 | 확인일 |
 |---|---|---|---|
@@ -264,8 +264,10 @@
 | sign → edu 이수증 완료 통지 | 완료 통지 → edu 인증서 확정 | 위조 서명 · 서명 없는 통지 → 받기만 하고 반영 안 됨 | 2026-09-15 |
 | ERP → sign 외주 계약 서명 | ERP 계약 등록 → 계약 PDF 해시로 서명 요청 → 가상 거래처가 sign 포털에서 서명 → 모든 참가자 완료 | ERP 에 틀린 sign 키 → 401 | 2026-09-15 |
 | sign → ERP 계약 완료 통지 | 완료 통지(https) → ERP 계약 서명 상태 `COMPLETED` | 위조 서명 · 서명 없는 통지 → **403 으로 거부** | 2026-09-15 |
+| PACS → sign 판독 서명 | PACS 보고서 확정 → 판독의(HIS 발급 서명용 토큰)로 sign 봉인 · 서명 `COMPLETED` · 문서 무결성 `VALID` | 확정 전 서명 → 409 · 토큰 없음 → 400 · 변조 토큰 → sign 이 서명 검증 실패로 거부 | 2026-09-15 |
+| LIS → PACS 병리 워크리스트 | HIS 병리 처방 → LIS 병리 케이스 → HL7 오더 자동 발송 → PACS 워크리스트 등록 · 취소 반영 | 없는 병리 번호 → 400 | 2026-09-15 |
 
-전체 표는 [연결 상태](RELEASES/draft/compatibility.md)(확인일 칸)에 있습니다. 나머지 `구현·미검증` 72개는 **양쪽 코드가 맞물려 있다는 뜻이지 동작한다는 뜻이 아닙니다** — 기관이 [S7 리허설](build-guide/S7-rehearsal.md)에서 쓰는 연결마다 같은 방식으로 확인합니다.
+전체 표는 [연결 상태](RELEASES/draft/compatibility.md)(확인일 칸)에 있습니다. 나머지 `구현·미검증` 70개는 **양쪽 코드가 맞물려 있다는 뜻이지 동작한다는 뜻이 아닙니다** — 기관이 [S7 리허설](build-guide/S7-rehearsal.md)에서 쓰는 연결마다 같은 방식으로 확인합니다.
 
 ### 좋았던 것 — 가드가 실제로 막았다
 
@@ -280,7 +282,7 @@
 |---|---|
 | x86 · GPU(RTX 5080) 기준 장비에서의 설치 · 처리량 · 응답 시간 · AI 품질 | 이 따라가기는 개발 PC(arm64 · GPU 없음)에서 했습니다 |
 | 리얼 모드 전환(개시 순간 나가는 것 · 달라지는 화면) | 운영 배포에 해당하는 동작이라 사람 결정 뒤에 합니다 |
-| PACS 워크리스트 등록 · 영상 조회 완료 · 판독 서명 | 설치는 됐지만 HIS 와의 연결을 끝까지 확인하지 못했습니다 |
+| HIS → PACS 영상 워크리스트 등록 · 영상 조회 완료 | 설치는 됐지만 HIS 와의 이 연결은 끝까지 확인하지 못했습니다(판독 서명 · 병리 워크리스트는 확인) |
 | Clinic 설치 · Jitsi 재구성 · 환자 앱 · 공개 홈페이지 · twin · cerno | 설치하지 않았습니다 |
 | 실데이터 규모의 이관 · 백업 시간 | 가상 데이터 규모만 재 봤습니다 |
 | 시스템 담당의 사실 확인 | 따라가기에서 나온 사실은 각 프로젝트에 전달했고 회신을 기다립니다 |
@@ -314,7 +316,7 @@
 | [`overview/`](overview/) | 취지·구조 개요서(10장) | 🟡 초안 |
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~15) · 남은 확인 필요 61곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
-| [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 16 / 113 |
+| [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 18 / 113 |
 | [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안 · 캡처 자리 52 중 **44**(✅ 36 · 🟡 8) · 응급 시나리오는 9/9 |
 | [`deck/`](deck/) | 발표 덱(내용 32장 · A·E 시각 요약 + 화면 11장) | 🟡 초안 |
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |
