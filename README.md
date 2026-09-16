@@ -279,7 +279,7 @@
 | [`deck/`](deck/) | 발표 덱(내용 32장 · A·E 시각 요약 + 화면 11장) | 🟡 초안 |
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |
 | [`data/`](data/) | 규모 계측 스냅샷(계측일 · 기준 커밋 포함) | ✅ 1차 계측 |
-| [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈(버전 조합 매니페스트 · 시스템별 릴리즈 요약 13 · [연결 상태](RELEASES/draft/compatibility.md) — 확인일 칸) | 🟡 초안 |
+| [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈([릴리즈 노트](RELEASES/draft/RELEASE.md) · 버전 조합 매니페스트 · 시스템별 릴리즈 요약 13 · [연결 상태](RELEASES/draft/compatibility.md) — 확인일 칸) | 🟡 초안 · 번호 미정 |
 | [`screens/`](screens/) | **화면으로 보는 생태계**(시스템 13장 + 흐름 1장 · 캡처와 설명) | 🟡 초안 · 293장 |
 | [`assets/screens/`](assets/screens/) | 화면 캡처 이미지 293장 + [캡처 목록](assets/screens/INDEX.md)(자동 생성) | 🟡 HIS 264 / 266 · 형제 시스템 29 |
 | [`diagrams/`](diagrams/) | 도식 8종 + 연결 지도(연결 상태 표에서 자동 생성) | 🟡 초안 |

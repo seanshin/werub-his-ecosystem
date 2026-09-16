@@ -67,15 +67,17 @@
 | Jitsi Videobridge | Jitsi | `stable-9823` | `Apache-2.0` | [LICENSE](https://github.com/jitsi/jitsi-videobridge/blob/stable/jitsi-meet_9823/LICENSE) | 2026-09-11 | 원문 확인 |
 | Jibri (녹화) | Jitsi | `stable-9823` | `Apache-2.0` | [LICENSE](https://github.com/jitsi/jibri/blob/master/LICENSE) (기본 브랜치) | 2026-09-11 | 원문 확인 |
 | Jigasi (전사 — 선택 구성) | Jitsi | `stable-9823` | `Apache-2.0` | [LICENSE](https://github.com/jitsi/jigasi/blob/master/LICENSE) (기본 브랜치) | 2026-09-11 | 원문 확인 |
-| Prosody (XMPP 서버) | Jitsi | `stable-9823` 이미지에 포함 · 판본 미확정 | `MIT` | [prosody.im](https://prosody.im/source/mit) (현행) | 2026-09-11 | 원문 확인 · 판본 확인 필요 |
+| Prosody (XMPP 서버) | Jitsi | `stable-9823` 이미지에 포함 · **이미지가 Prosody 판본을 고정하지 않습니다**(주 5) | `MIT` | [prosody.im](https://prosody.im/source/mit) (현행) | 2026-09-16 | 원문 확인 · 판본은 이미지 빌드 시점에 정해짐 |
 | coturn (TURN 서버) | Jitsi | 4.6 | `BSD-3-Clause` | [4.6.0 LICENSE](https://github.com/coturn/coturn/blob/4.6.0/LICENSE) | 2026-09-11 | 원문 확인 |
 | Pulse Physiology Engine | twin (시험 구성 · 기본 미기동) | 4.3.1 | `Apache-2.0` | [pulse.kitware.com](https://pulse.kitware.com/) (현행) | 2026-09-11 | 원문 확인 |
 | Ollama (모델 서버) | AI Server (cerno·twin 은 AI Server 를 거쳐 씀) | 고정 안 됨(호스트에 직접 설치) | `MIT` | [LICENSE](https://github.com/ollama/ollama/blob/main/LICENSE) (기본 브랜치) | 2026-09-11 | 원문 확인 |
 | ChromaDB | AI Server — 별도 서버가 아니라 **프로세스 안에 내장한 벡터 저장소** | 1.5.8 | `Apache-2.0` | [1.5.8 LICENSE](https://github.com/chroma-core/chroma/blob/1.5.8/LICENSE) | 2026-09-11 | 원문 확인 |
 
-**주 1 — Orthanc 판본.** 저장소는 이미지 태그 `24.12.2` 만 고정합니다. 이미지 제작처 [릴리즈 노트](https://github.com/orthanc-server/orthanc-builder/blob/master/release-notes-docker-images.md)에는 24.12.0(코어 1.12.5 · DICOMweb 1.18 · PostgreSQL 7.0)과 25.1.0 만 있고 24.12.2 항목이 없습니다. 그래서 표의 원문 링크는 24.12.0 판본 기준입니다. 실제 판본은 받은 이미지 안에서 확인해야 합니다. PACS 의 Orthanc 설정은 DICOMweb·PostgreSQL 플러그인을 쓰고, 플러그인 폴더를 통째로 읽습니다. 이미지에 든 다른 플러그인이 함께 켜지는지, 켜진다면 그 라이선스가 무엇인지도 확인이 필요합니다. Orthanc 안내 문서는 확장·클라우드 기능 플러그인을 AGPLv3+ 로 낸다고 적습니다.
+**주 1 — Orthanc 판본.** PACS 저장소의 기준 커밋(`532a8ed1`)은 `docker-compose.yml` 에서 이미지 태그 `24.12.2` 만 고정합니다. 이미지 제작처 [릴리즈 노트](https://github.com/orthanc-server/orthanc-builder/blob/master/release-notes-docker-images.md)에는 24.12.0(코어 1.12.5 · DICOMweb 1.18 · PostgreSQL 7.0)과 25.1.0 만 있고 24.12.2 항목이 없습니다(2026-09-16 에 다시 확인 · 같은 결과). 🔴 **그리고 그 태그는 공개 레지스트리에서 받을 수 없었습니다** — 2026-09-14 에 새 설치본으로 따라가 볼 때 `orthancteam/orthanc:24.12.2` 가 `no such manifest` 로 끝났고, 같은 계열에는 `24.12.0` · `24.12.0-full` 만 있었습니다. 따라가기에서는 사본의 compose 한 줄을 `24.12.0` 으로 바꿔 설치했습니다([따라가 본 결과](build-guide/follow-along-2026-09.md)). 태그가 지워졌는지 원래 사설 레지스트리에서 받던 것인지는 저장소 쪽이 확인할 일입니다. 같은 기준 커밋의 운영 문서 일부는 실제로 돌던 서버 이미지를 `orthancteam/orthanc:latest-full` 로 적습니다(`docs/regulatory/technical/TD-003-architecture.md` 등) — compose 의 태그와 실제로 돌린 이미지가 다를 수 있습니다. 그래서 표의 원문 링크는 24.12.0 판본 기준입니다. 실제 판본은 받은 이미지 안에서 확인해야 합니다. PACS 의 Orthanc 설정은 DICOMweb·PostgreSQL 플러그인을 쓰고, 플러그인 폴더를 통째로 읽습니다. 이미지에 든 다른 플러그인이 함께 켜지는지, 켜진다면 그 라이선스가 무엇인지도 확인이 필요합니다. Orthanc 안내 문서는 확장·클라우드 기능 플러그인을 AGPLv3+ 로 낸다고 적습니다.
 
 **주 2 — browserless.** Docker Hub 는 `browserless/chrome` 을 구판(v1)으로 표시하고 v2 를 권합니다. v2 원문은 `SSPL-1.0 OR` 상용 라이선스로 v1 과 다릅니다. 이미지 안의 Chromium 은 따로 라이선스가 있고, 이 문서에서는 확인하지 않았습니다.
+
+**주 5 — Prosody 판본.** Jitsi 저장소의 기준 커밋(`0984fbec`)은 `jitsi/prosody:stable-9823` 만 고정합니다. 그 이미지를 만드는 [docker-jitsi-meet `stable-9823` 의 `prosody/Dockerfile`](https://github.com/jitsi/docker-jitsi-meet/blob/stable-9823/prosody/Dockerfile)은 Prosody 를 **판본 지정 없이** 배포처 데비안 저장소(`packages.prosody.im/debian bookworm main`)에서 설치합니다(2026-09-16 확인). 즉 들어가는 판본은 **이미지를 만든 시점의 최신본**이고, 저장소 쪽에서 더 고정할 수 있는 값이 아닙니다. 판본은 받은 이미지 안에서 확인합니다.
 
 ---
 
