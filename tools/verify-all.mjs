@@ -27,6 +27,7 @@ const CHECKS = [
   ['화면 캡처 목록 = 메뉴 구성표 · 실제 파일', 'build-screen-index.mjs', ['--check']],
   ['연동 매트릭스 = 연결 상태 표', 'build-integration-map.mjs', ['--check']],
   ['구성서 = 매니페스트 · 연결 상태 표', 'check-consistency.mjs', []],
+  ['소스 받기 안내 = 주소 · 기준 커밋 · 실제 파일', 'build-sources.mjs', ['--check']],
   ['연결 카드 생성기 자기 검증', 'build-connection-cards.mjs', ['--self-test']],
   ['연결 카드 = 연결 기록 · 연결 상태 표', 'build-connection-cards.mjs', ['--check']],
   ['수치 주장 검사기 자기 검증', 'check-claims.mjs', ['--self-test']],
