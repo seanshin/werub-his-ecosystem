@@ -2,7 +2,7 @@
 
 **D — Integration contract map**
 
-> **EN** — System × system: direction, protocol, authentication, implementation status (with verification date), and the order in which to connect them during a build. Status values come from the [connection status table](../RELEASES/draft/compatibility.md) (code comparison as of 2026-09-11 — **nothing verified by an actual call yet**).
+> **EN** — System × system: direction, protocol, authentication, implementation status (with verification date), and the order in which to connect them during a build. Status values come from the [connection status table](../RELEASES/draft/compatibility.md) (code comparison as of 2026-09-11; **27 of them were then verified by real calls between fresh installs**, 2026-09-14~15, each with a date).
 
 시스템 × 시스템: **방향 · 프로토콜 · 인증 · 구현 상태 · 구축 시 연결 순서**.
 
