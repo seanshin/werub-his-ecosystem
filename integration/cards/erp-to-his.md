@@ -1,0 +1,63 @@
+# ERP → HIS
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — ERP 가 HIS 에서 청구 라인 · 미청구 진행분 · 재원 현황을 **가져오고**(전환 시 일괄 적재), 딜러 정산 결과와 의료진 계약 서명 요청을 HIS 로 보냅니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 청구 라인·미청구 진행분·비급여·재료·재원(census) 조회 — 전환 시 일괄 적재(backfill)와 간호 모니터 | HTTP GET /api/v1/integration/billing/{lines\|u | 정적 키 X-Integration-Key — lines 는 PII 전용 키(his_ | `검증됨` | 2026-09-15 |
+| 마스터 — HIS 직원 디렉터리 조회 후 ERP 사원코드를 HIS 직원에 매핑(전자서명 서명자 식별용) | HTTP GET /api/v1/integration/hr/staff · POST / | 정적 키 X-Integration-Key — 조회=PII 키(없으면 웹훅 키), 쓰 | `구현·미검증`(일부만 확인) | — |
+| 마스터 — 행위 수가·비급여·재료대 마스터를 ERP 에서 HIS 로 적재 | HTTP POST /api/v1/integration/fee/{procedure-c | 정적 키 X-Integration-Key (HIS erp.integrationKey | `구현·미검증`(일부만 확인) | — |
+| 전자결재 상신 릴레이 — ERP 결재 문서를 HIS 경유로 Clinic 그룹웨어 결재(W.Sign)에 올림 · 결재선 조회 · 상태 조회 | HTTP POST /api/v1/erp/eapproval/submit(Idempot | 정적 키 X-Integration-Key · 결재선 조회는 X-Target-Toke | `구현·미검증` | — |
+| 휴가 결재 결과를 HIS ESS 로 릴레이 | HTTP POST /api/v1/ess/leave/eapproval-callback | 정적 키 X-Integration-Key(ERP his_webhook_key 값)  | `구현·미검증` | — |
+| 검진권 딜러 정산 지급 회신(settlement.paid) | HTTP POST /api/v1/voucher/settlements/erp-call | 정적 키 X-Integration-Key + 본문 HMAC('{X-Timestamp | `검증됨` | 2026-09-15 |
+| 재고 입고(inventory·CSSD supply)·자산 코드 매핑·청구 심사결과 콜백·환자 조회 — HIS 가 받을 준비만 된 경로들 | HTTP POST /api/v1/integration/inventory/supply | 정적 키 X-Integration-Key (환자 단건은 X-Target-Token  | `미구현` | — |
+| 의료진 계약 전자서명 발의 — ERP 가 계약을 만들면 HIS 가 문서 발급·sign 제출·요청 ID 바인딩(→ B-21·B-22·B-01 sign.complet | HTTP POST /api/v1/sign-integration/erp/request | 전용 정적 키 X-Integration-Key (ERP his_sign_origin | `검증됨` | 2026-09-15 |
+| 서명 완료본(PDF) 회수 — sign.completed 이벤트에 실린 HIS 문서 다운로드 주소로 가져와 첨부 | HTTP GET (이벤트 payload.document 의 단기 토큰 URL) ·  | URL 안 단기 HMAC 토큰(HIS 발급) | `구현·미검증` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `erp: his_api_base`
+- `erp: his_pii_read_key`
+- `erp: his_webhook_key`
+- `his: erp.piiReadKey`
+- `his: erp.integrationKey`
+- `his: erp.piiReadStrict`
+- `erp: (스크립트 인자) integration key`
+- `erp: his_eapproval_base`
+- `erp: his_integration_key`
+- `erp: eapproval_submit_enabled`
+- `erp: eapproval_submit_path`
+- `erp: eapproval_status_path`
+- `erp: his_target_token_secret`
+- `his: erp.targetAuthEnforce`
+- `erp: dealer_settlement_callback_enabled`
+- `erp: his_finance_webhook_secret`
+- `erp: settlement_callback_path`
+- `his: erp.financeWebhookSecret`
+- `his: erp.financeWebhookEnforce`
+- `his: erp.financeWebhookLegacyAccept`
+- `erp: his_sign_origination_key`
+- `erp: his_sign_origination_path`
+- `his: erp.signOriginationKey`
+- `his: sign.mode`
+- `erp: env(prod 여부 — 루프백 허용 판정)`
+
+## 여는 순서
+
+1. HIS 에 ERP 용 연동 키를 등록하고, ERP 에 HIS 주소를 넣습니다.
+2. 🔴 **ERP 가 부를 수 있는 HIS 주소는 코드에 고정된 목록뿐입니다.** 다른 도메인이면 코드 수정이나 같은 호스트 배치가 필요합니다.
+3. 정산 회신을 쓰려면 송신 스위치 · 주소 · 키 · **본문 서명 비밀값 네 가지를 함께** 넣습니다. 서명이 없으면 HIS 가 모두 거절합니다.
+4. 기간을 정해 청구 라인을 한 번 당겨 보고, 금액이 HIS 수납과 같은지 봅니다.
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **3개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+
+일부만 확인한 연결이 **2개** 있습니다(표의 "일부만 확인").
+

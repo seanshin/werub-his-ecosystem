@@ -1,0 +1,45 @@
+# HIS → sign
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — HIS 가 만든 문서(동의서 · 발급 문서 · 계약)를 sign 에 올려 **서명을 받고**, 그 서명이 나중에도 부정되지 않도록 **봉인**합니다. 직원 신원은 HIS 가 발급한 토큰으로 증명하고, sign 은 HIS 의 공개키로 그 토큰을 검증합니다. 처방 · 오더 같은 진료 기록의 서명 로그도 같은 방식으로 봉인합니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 동의서·발급 문서·ERP 계약의 서명요청 제출(facade) 및 직원·환자 인증서 발급 | HTTP POST /v1/sign-requests(channel DIRECT\|PO | x-api-key (sign 소비자 'hospitalrun' — HIS sign.a | `구현·미검증` | — |
+| 직원 신원 — HIS 가 의료진 서명 전용 JWT(aud=sign) 발급, sign 이 HIS 공개 JWKS 로 검증(의료진 직접 서명 /v1/sign/staff | HIS GET /api/v1/sign-integration/staff-token(발 | JWT RS256 + JWKS (iss=sign.jwksIssuer 기본 hospi | `검증됨` | 2026-09-14 |
+| 신뢰의 사슬 — 오더 서명 로그·거버넌스 결정의 감사 이벤트를 sign 스트림에 봉인(TSA 앵커)·체인 검증 | HTTP POST /v1/audit-events(stream his-orders 등 | x-api-key (hospitalrun) + 가능하면 의료진 Bearer(aud= | `검증됨` | 2026-09-14 |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `his: sign.mode (기본 SIMULATION)`
+- `his: sign.url`
+- `his: sign.apiKey`
+- `his: sign.allowedHosts`
+- `his: sign.highRiskConsentTypes`
+- `sign env: HIS_INBOUND_API_KEY`
+- `his: sign.jwksIssuer`
+- `his: (키 수탁 keyRef sign.jwks)`
+- `sign env: HIS_SSO_JWKS_URL`
+- `sign env: HIS_SSO_ISSUER`
+- `sign env: HIS_SSO_AUDIENCE`
+- `sign env: HIS_SSO_ALLOWED_ROLES`
+- `his: sign.mode`
+
+## 여는 순서
+
+1. sign 관리 API 로 **소비자(consumer)** 를 등록하고 필요한 권한(요청 쓰기 · 인증서 쓰기)을 줍니다. 기관마다 새 값입니다.
+2. HIS 설정에 sign 주소(**끝에 판본 경로까지**) · 소비자 키 · 웹훅 비밀을 넣습니다.
+3. HIS 의 서명 모드를 외부(sign) 로 바꿉니다. 기본값은 시뮬레이션이라 실제로 나가지 않습니다.
+4. 직원 인증서를 한 번 발급받습니다(이후 재사용).
+5. 문서 하나로 끝까지 해 봅니다 — 요청 → 서명 → 완료 통지 반영 → 검증 주소에서 문서 무결성 확인.
+6. 🔴 HIS 가 문서를 PDF 로 만들지 못하면 서명 요청 자체가 실패합니다. **PDF 렌더 서비스가 떠 있어야 합니다**.
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **2개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+

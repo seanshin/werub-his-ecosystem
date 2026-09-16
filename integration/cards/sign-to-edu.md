@@ -1,0 +1,23 @@
+# sign → edu
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — `확인 필요`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 이수증 서명 완료 통지(정합 확인·해시 교차검증) | HTTP POST 웹훅 → edu /api/v1/webhooks/sign[/{ten | HMAC-SHA256(rawBody) X-Sign-Signature — sign 쪽 | `검증됨` | 2026-09-15 |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `sign env: EDU_WEBHOOK_SECRET`
+- `edu: EDU_WEBHOOK_SECRET (webhookSecret)`
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **1개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+

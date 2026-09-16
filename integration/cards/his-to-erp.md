@@ -1,0 +1,67 @@
+# HIS → ERP
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — 직원이 HIS 화면에서 ERP 로 **다시 로그인하지 않고** 넘어가고(SSO), 수납 화면이 ERP 가 계산한 진료비를 불러오며, 확정된 약품 보험코드를 HIS 가 가져옵니다. 수납 · 청구 · 재고 · 인사 이벤트도 이 방향으로 전달됩니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 수납·청구·재고·자산·인사·검진권·서명완료 운영 이벤트 전달(회계 전표·미러 적재) | HTTP POST 웹훅 · HIS outbox(20초 디스패처·지수 백오프·(dom | 정적 키 X-Integration-Key + 본문 HMAC-SHA256("{ts}. | `구현·미검증`(일부만 확인) | — |
+| 직원 SSO — HIS 로그인 사용자를 ERP 로 자동 로그인(JIT 계정 생성) | 브라우저 핸드오프 2방식: token(HIS 기본값 — 새 탭 URL 쿼리로 HIS | JWT HS256 공유 시크릿 — HIS 는 메인 JwtModule(AUTH_SEC | `검증됨` | 2026-09-14 |
+| 직원 셀프서비스(ESS) — 급여명세·연차 잔여·원천징수·공제코드·당직·성과·퇴직금·증명서 조회, 급여 신원 등록 | HTTP GET/POST /api/v1/integration/hr/{payslip\ | 정적 키 X-Integration-Key + 대상자 토큰 X-Target-Token | `구현·미검증`(일부만 확인) | — |
+| 수납 화면·환자 포털의 중간/최종 진료비 계산서 조회(ERP 산정값) | HTTP GET /api/v1/integration/billing/invoice?c | 정적 키 X-Integration-Key | `검증됨` | 2026-09-15 |
+| 마스터 — ERP 가 확정한 약품 코드 매핑을 HIS 가 가져와 보험코드 백필 | HTTP GET /api/v1/integration/regulatory/drug-m | 정적 키 X-Integration-Key | `검증됨` | 2026-09-15 |
+| 전자결재 결과 콜백 — Clinic W.Sign 결재 결과를 HIS 가 ERP 로 전달 | HTTP POST (상신 때 받은 callback_url, ERP 기본 /api/v | 본문 HMAC-SHA256 X-Signature='sha256=<hex>' (공유  | `구현·미검증` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `his: erp.webhookEnabled`
+- `his: erp.webhookUrl`
+- `his: erp.integrationKey`
+- `his: integration.inboundWebhookSecret (또는 env INBOUND_WEBHOOK_SECRET)`
+- `his: integration.pseudonymizeChartNo`
+- `his: integration.pseudonymKey`
+- `erp: his_webhook_key`
+- `erp: inbound_webhook_secret`
+- `erp: inbound_webhook_hmac_enforce`
+- `erp: inbound_webhook_max_skew`
+- `erp: his_pseudonym_enabled`
+- `erp: pseudonym_key`
+- `his: erp.enabled`
+- `his: erp.url`
+- `his: erp.ssoPath`
+- `his: erp.handoff`
+- `his: erp.allowedRoles`
+- `his: erp.allowedUserIds`
+- `his env: AUTH_SECRET`
+- `erp: his_jwt_secret (또는 his_jwt_secret_file)`
+- `erp: his_jwt_audience`
+- `erp: sso_allowed_email_domains`
+- `erp: trusted_hosts`
+- `his: erp.webhookUrl(ERP 기준 주소로 재사용)`
+- `his: ess.targetTokenSecret (또는 env ESS_TARGET_TOKEN_SECRET)`
+- `his: erp.payrollHmacKey (없으면 integration.inboundWebhookSecret)`
+- `erp: ess_target_token_secret`
+- `erp: ess_target_token_enforce`
+- `his env: EAPPROVAL_CALLBACK_SECRET`
+- `erp: eapproval_callback_secret`
+- `erp: eapproval_callback_max_skew`
+- `erp: eapproval_callback_url`
+
+## 여는 순서
+
+1. HIS 와 ERP 에 **같은 연동 키**를 넣고, ERP 주소를 HIS 설정에 넣습니다(경로 없이 기준 주소만).
+2. SSO 를 위해 HIS 엣지에서 ERP 로 가는 경로를 같은 출처로 둡니다.
+3. 🔴 이벤트 전달 스위치는 **설치 뒤 꺼져 있습니다.** 켜기 전에는 대기열에 쌓이지도 않습니다.
+4. 🔴 켠 뒤에도 HIS 가 리허설 모드면 **보내지 않고 보류**합니다. 보류분은 리얼 전환 순간 나가므로 전환 전에 정리합니다.
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **3개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+
+일부만 확인한 연결이 **2개** 있습니다(표의 "일부만 확인").
+

@@ -1,0 +1,48 @@
+# HIS → AI Server
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — `확인 필요`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 임상 보조 스킬 전반(요약·분석·초안·트리아지·약물상호작용·DUR·약가/대체약·수가코드·지식 RAG·예측·추론체인·자동기록·영상 판독 보조·FHIR 래퍼·의료법  | HTTPS REST(JSON · 일부 NDJSON 스트리밍 · multipart)  | X-Medical-Key(ai.server.apiKey) 항상 + Authoriza | `구현·미검증`(일부만 확인) | — |
+| VoiceEMR 실시간 STT(원음 PCM 청크 전사 · 모델 워밍 · 어휘 바이어싱 · 상태) | HTTPS REST — application/octet-stream(raw PCM  | Authorization Bearer(ai.server.gpuKey) + 브라우저형 | `구현·미검증` | — |
+| 앰비언트 진료 스크라이브 — 오디오 업로드 → 전사·화자분리 잡 제출 → 잡 폴링 | HTTPS REST(JSON) — 업로드 후 서명 URL 을 회의분석 잡에 전달,  | Authorization Bearer(ai.server.gpuKey) + 브라우저형 | `구현·미검증` | — |
+| 생성형 소형 클라이언트 — 환자 컨시어지 · 데이터 품질 AI · 약품집 · 거버넌스 문서 · VOC 초안 · 환자 약 설명 · 화면 번역 | HTTPS REST — Ollama 형식 /api/generate(JSON·stre | 대부분 Bearer(ai.server.gpuKey, 있을 때만). 번역은 gpuKe | `구현·미검증`(일부만 확인) | — |
+| 관리 화면 모델 레지스트리 — 상류 설치 모델 목록 대조(요구 태그 누락 판정) | HTTPS GET /api/tags(Ollama 표준 목록 형식 기대) | 없음(인증 헤더를 보내지 않는다) | `미구현` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `ai.server.url`
+- `ai.server.apiKey`
+- `ai.server.gpuKey`
+- `ai.server.enabled`
+- `ai.server.timeout`
+- `MEDICAL_AI_URL(env 폴백)`
+- `MEDICAL_AI_KEY(env 폴백)`
+- `GPU_API_KEY(env 폴백)`
+- `AI_EGRESS_ALLOWED_HOSTS(env · 목적지 허용목록)`
+- `AI_OCR_MODEL`
+- `voiceEmr.enabled`
+- `voiceEmr.ambient.enabled`
+- `voiceEmr.stt.chunkMs`
+- `voiceEmr.stt.confHold`
+- `scribe.enabled`
+- `scribe.transcription.enabled`
+- `scribe.audio.retention`
+- `scribe.audio.maxUploadMb`
+- `ai.model`
+- `MEDICAL_AI_URL(컨시어지 전용 env)`
+- `quality.ai.enabled`
+
+## 따라가기에서 확인한 것
+
+이 방향은 **아직 실제로 불러 보지 않았습니다.** 상태는 양쪽 코드를 대조한 판정입니다.
+
+일부만 확인한 연결이 **2개** 있습니다(표의 "일부만 확인").
+

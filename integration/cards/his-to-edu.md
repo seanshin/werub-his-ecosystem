@@ -1,0 +1,32 @@
+# HIS → edu
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — `확인 필요`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 직원 SSO 핸드오프 — HIS 웹 '사내교육' 런처가 staff-token(aud=edu, RS256) 발급 → edu `/sso?token=` → edu AP | 브라우저 새 창 리다이렉트 + edu 내부 REST | RS256 JWT(iss=sign.jwksIssuer · aud=edu · 10분) | `검증됨` | 2026-09-14 |
+| 직원 이벤트 웹훅(staff.created·changed·schedule_changed·resigned 반영, qualification_changed 는 수신만) | HTTPS POST 웹훅 {event_type,event_id,source_ref, | X-HIS-Signature = sha256 HMAC(rawBody) (+ X-HI | `구현·미검증` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `edu.enabled`
+- `edu.url`
+- `edu.ssoPath`
+- `sign.jwksIssuer(HIS)`
+- `HIS_JWKS_URL / his.baseUrl(edu)`
+- `HIS_TOKEN_ISSUER`
+- `HIS_TOKEN_AUDIENCE`
+- `EDU_API_URL(edu web)`
+- `his_webhooks(HIS DB 행)`
+- `HIS_WEBHOOK_SECRET(edu: hisWebhookSecret)`
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **1개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+

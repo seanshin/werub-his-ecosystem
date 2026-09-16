@@ -1,0 +1,36 @@
+# twin → HIS
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — `확인 필요`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 환자 트윈 FHIR 읽기(Patient·Condition·Observation·MedicationRequest·AllergyIntolerance·Encounter | FHIR R4 REST 검색·단건 — 레거시(서비스 계정 직원 JWT → /fhir | ① 서비스 계정 로그인 JWT(또는 정적 토큰) ② SMART client_cred | `구현·미검증` | — |
+| 운영 트윈 REST(병상·병동·재원·운영통계·의료기기·ICU/ER/OR) + 트윈 전용 EP(AI 활용 동의·일반병동 활력·영상 study 목록) | HTTPS REST(JSON · {data,meta}) | 서비스 계정 직원 JWT(POST /api/v1/auth/login) 또는 정적 토 | `구현·미검증` | — |
+| FHIR write-back — AI 생성 RiskAssessment · SBAR/SOAP DocumentReference 를 의료진 '차트 저장' 액션으로 HI | FHIR R4 POST /fhir/R4/RiskAssessment · /fhir/R | 의료진별 patient 스코프 SMART 토큰(C-TW-02 콜백이 보관) · 토큰 | `구현·미검증` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `HIS_BASE_URL`
+- `HIS_API_TOKEN`
+- `HIS_SERVICE_EMAIL`
+- `HIS_SERVICE_PASSWORD`
+- `HIS_FHIR_PUBLIC_BASE`
+- `HIS_OAUTH_TOKEN_URL`
+- `HIS_SMART_READ_CLIENT_ID`
+- `HIS_SMART_READ_CLIENT_SECRET`
+- `HIS_SMART_READ_SCOPES`
+- `security.fhir.staffRoles(HIS)`
+- `SmartClient.scopes(HIS DB)`
+- `TWIN_SMART_CLIENT_ID`
+- `TWIN_SMART_CLIENT_SECRET`
+
+## 따라가기에서 확인한 것
+
+이 방향은 **아직 실제로 불러 보지 않았습니다.** 상태는 양쪽 코드를 대조한 판정입니다.
+

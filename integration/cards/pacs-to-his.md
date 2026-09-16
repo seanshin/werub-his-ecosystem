@@ -1,0 +1,25 @@
+# PACS → HIS
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — `확인 필요`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 판독 결과 반영 — PACS 가 HIS DB 에 imaging_results UPSERT + orders.status=COMPLETED 직접 쓰기 | PostgreSQL 직접 접속(SQL) | DB 계정(접속 문자열이 PACS 코드 상수) | `구현·미검증` | — |
+| 영상 오더 → PACS 워크리스트 동기화(HIS DB 읽기 전용 · 관리자 온디맨드) · 환자 병합 재조정 | PostgreSQL 직접 접속(읽기) | DB 계정 | `구현·미검증` | — |
+| 판독 결과 HL7 ORU^R01 송신 | HL7 v2 over MLLP | 없음 | `미구현` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `PACS: 설정 키 없음 — hospitalrun_sync.py 의 코드 상수 HR_DB_URL`
+- `PACS: HOSPITALRUN_DB_URL(비우면 비활성)`
+
+## 따라가기에서 확인한 것
+
+이 방향은 **아직 실제로 불러 보지 않았습니다.** 상태는 양쪽 코드를 대조한 판정입니다.
+

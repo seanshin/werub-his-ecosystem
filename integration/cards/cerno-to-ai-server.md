@@ -1,0 +1,30 @@
+# cerno → AI Server
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — `확인 필요`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 의료진별 근거 RAG(검색·색인·삭제) · 근거 기반 답변 생성(챗) · 모델 워밍 · DUR 점검 · 충실도 평가 쌍 기록 | HTTPS REST(JSON) | Bearer — 의료진별 키 맵(CERNO_AI_KEYS) 또는 단일 키(CERNO | `구현·미검증` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `CERNO_AI_BASE`
+- `CERNO_AI_KEYS`
+- `CERNO_AI_KEY`
+- `CERNO_AI_KEY_EXPIRES`
+- `CERNO_AI_MODEL`
+- `CERNO_AI_TIMEOUT`
+- `CERNO_AI_KEEP_ALIVE`
+- `CERNO_MIN_EVIDENCE`
+- `CERNO_CONFIDENCE_MIN`
+
+## 따라가기에서 확인한 것
+
+이 방향은 **아직 실제로 불러 보지 않았습니다.** 상태는 양쪽 코드를 대조한 판정입니다.
+

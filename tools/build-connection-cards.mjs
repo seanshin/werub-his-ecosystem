@@ -1,0 +1,169 @@
+#!/usr/bin/env node
+/**
+ * 연동 연결 카드 생성 — 방향 있는 시스템 쌍(A → B)마다 한 장(기획서 §6-1 D).
+ *
+ *   node tools/build-connection-cards.mjs           # 생성
+ *   node tools/build-connection-cards.mjs --check   # 생성물이 원본과 같은지
+ *   node tools/build-connection-cards.mjs --self-test
+ *
+ * 입력
+ *   - 내부 연결 기록 `../planning/p1/connections-{A,B,C,D}.json` — **읽는 필드를 화이트리스트로 고정**한다.
+ *     🔴 `observations` · `relatedCandidate` · `liveEvidence` · `liveCheck` 는 **읽지 않는다**.
+ *        그 안에는 담당 회신 전 공개 금지인 연동 후보의 실질과 내부 항목 ID 가 섞여 있다.
+ *        "읽고 거른다" 가 아니라 **경로 자체를 막는다** — 거르는 코드는 언젠가 새 필드를 놓친다.
+ *   - 사람 글 `integration/cards/_inputs.json` — 카드마다 ①(한 문단) · ④(여는 순서). 생성기가 덮어쓰지 않는다.
+ *   - 공개 연결 표 `RELEASES/draft/compatibility.md` — 상태·확인일의 정본(연결 기록과 다르면 실패).
+ *
+ * 출력: `integration/cards/<from>-to-<to>.md` + `integration/cards/README.md`(목록)
+ * 종료 코드: 0 정상 · 1 불일치(--check) · 2 도구 오류
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const SRC = path.join(ROOT, '..', 'planning', 'p1');
+const OUT = path.join(ROOT, 'integration', 'cards');
+const INPUTS = path.join(OUT, '_inputs.json');
+const TABLE = path.join(ROOT, 'RELEASES/draft/compatibility.md');
+
+/** 카드에 쓸 수 있는 필드만 통과시킨다(화이트리스트) */
+const PICK = ['id', 'from', 'to', 'purpose', 'protocol', 'auth', 'configKeys', 'staticStatus', 'liveStatus', 'verifiedAt', 'livePartial'];
+const pick = (c) => Object.fromEntries(PICK.filter((k) => c[k] !== undefined).map((k) => [k, c[k]]));
+
+// 🔴 괄호 부기를 버리지 않는다 — 버리면 「HIS(환자 포털) → PACS」 와 「HIS → PACS」 가 같은 파일이 되어
+//    한 장이 다른 장을 덮어쓴다(실제로 2장이 사라졌다).
+const slug = (s) => s.trim().replace(/[()]/g, '-').replace(/[\s·]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+const statusOf = (c) => c.liveStatus ?? c.staticStatus;
+
+function load() {
+  const conns = [];
+  for (const f of ['A', 'B', 'C', 'D']) {
+    const j = JSON.parse(fs.readFileSync(path.join(SRC, `connections-${f}.json`), 'utf8'));
+    for (const c of j.connections) conns.push(pick(c));
+  }
+  // 🔴 **공개 표에 실린 연결만** 카드에 넣는다. 표에 싣지 않은 연결(담당 확인을 기다리는 것)은
+  //    카드에도 나오면 안 된다 — 표에서 뺀 이유가 그대로 카드에서 무너진다.
+  //    판단 기준은 relatedCandidate 가 아니라 **공개 표에 그 행이 있는가** 다(그 필드는 읽지 않는다).
+  const pub = publicRows();
+  const inTable = (c) => pub.has(`${c.from} → ${c.to}||${(c.purpose ?? '').slice(0, 20)}`);
+  return conns.filter(inTable);
+}
+
+/** 공개 표에 실린 (방향 · 목적 앞부분 · 상태 · 확인일) — 카드가 표와 어긋나지 않게 대조용 */
+function publicRows() {
+  const cells = (l) => l.replace(/\\\|/g, '§').split('|').map((x) => x.trim().replace(/§/g, '|'));
+  const rows = new Map();
+  for (const l of fs.readFileSync(TABLE, 'utf8').split('\n')) {
+    if (!l.startsWith('| ')) continue;
+    const c = cells(l);
+    if (c.length < 6 || !c[c.length - 3].startsWith('`')) continue;
+    const key = `${c[1]}||${c[2].slice(0, 20)}`;
+    rows.set(key, { status: c[c.length - 3].replace(/`/g, ''), date: c[c.length - 2] });
+  }
+  return rows;
+}
+
+function cardBody(from, to, list, human) {
+  const L = [];
+  L.push(`# ${from} → ${to}`, '');
+  L.push(`> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.`, '');
+  L.push(human?.intro ?? `**무엇을 주고받나** — \`확인 필요\`: 이 쌍을 한 문단으로 설명하는 글이 아직 없습니다.`, '');
+  L.push('## 연결', '', '| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |', '|---|---|---|---|---|');
+  for (const c of list) {
+    const st = statusOf(c);
+    const date = c.verifiedAt ?? '—';
+    const cell = (s, n) => (s ?? '—').replace(/\|/g, '\\|').replace(/\n/g, ' ').slice(0, n);
+    L.push(`| ${cell(c.purpose, 90)} | ${cell(c.protocol, 46)} | ${cell(c.auth, 46)} | \`${st}\`${c.livePartial ? '(일부만 확인)' : ''} | ${date} |`);
+  }
+  L.push('');
+  const keys = [...new Set(list.flatMap((c) => c.configKeys ?? []))];
+  if (keys.length) {
+    L.push('## 양쪽에 넣는 설정 — **키 이름만**', '', '값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.', '');
+    for (const k of keys) L.push(`- \`${k}\``);
+    L.push('');
+  }
+  if (human?.order?.length) {
+    L.push('## 여는 순서', '');
+    human.order.forEach((s, i) => L.push(`${i + 1}. ${s}`));
+    L.push('');
+  }
+  const verified = list.filter((c) => c.liveStatus === '검증됨');
+  const partial = list.filter((c) => c.livePartial);
+  L.push('## 따라가기에서 확인한 것', '');
+  if (verified.length) {
+    L.push(`새 설치본끼리 실제로 불러 확인한 연결 **${verified.length}개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).`, '');
+  } else {
+    L.push('이 방향은 **아직 실제로 불러 보지 않았습니다.** 상태는 양쪽 코드를 대조한 판정입니다.', '');
+  }
+  if (partial.length) L.push(`일부만 확인한 연결이 **${partial.length}개** 있습니다(표의 "일부만 확인").`, '');
+  return `${L.join('\n').replace(/\n{3,}/g, '\n\n')}\n`;
+}
+
+function build() {
+  const conns = load();
+  const pairs = new Map();
+  for (const c of conns) {
+    const k = `${c.from}→${c.to}`;
+    if (!pairs.has(k)) pairs.set(k, []);
+    pairs.get(k).push(c);
+  }
+  const human = fs.existsSync(INPUTS) ? JSON.parse(fs.readFileSync(INPUTS, 'utf8')) : { cards: {} };
+  const files = new Map();
+  const index = [['카드', '연결', '`검증됨`']];
+  for (const [k, list] of [...pairs].sort((a, b) => a[0].localeCompare(b[0], 'ko'))) {
+    const [from, to] = k.split('→');
+    const name = `${slug(from)}-to-${slug(to)}.md`;
+    files.set(name, cardBody(from, to, list, human.cards?.[k]));
+    index.push([`[${from} → ${to}](${name})`, String(list.length), String(list.filter((c) => c.liveStatus === '검증됨').length)]);
+  }
+  const head = ['# 연동 연결 카드', '',
+    `> 방향 있는 시스템 쌍마다 한 장입니다(**${files.size}장**). 상태·확인일의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)이고, 카드는 그 표를 쌍 단위로 풀어 **무엇에 어떻게 붙이는지**를 적습니다.`, '',
+    '| 카드 | 연결 | `검증됨` |', '|---|---:|---:|'];
+  for (const r of index.slice(1)) head.push(`| ${r.join(' | ')} |`);
+  head.push('');
+  files.set('README.md', `${head.join('\n')}\n`);
+  return files;
+}
+
+const args = process.argv.slice(2);
+try {
+  if (args.includes('--self-test')) {
+    const conns = load();
+    const fails = [];
+    if (!conns.length) fails.push('연결 기록을 읽지 못했습니다');
+    const leaked = conns.filter((c) => 'observations' in c || 'relatedCandidate' in c || 'liveEvidence' in c);
+    if (leaked.length) fails.push(`공개 금지 필드가 통과했습니다(${leaked.length}건)`);
+    const files = build();
+    const all = [...files.values()].join('\n');
+    if (/C\d{1,2}\b/.test(all.replace(/C5500|C-AI|CSSD/g, ''))) fails.push('카드에 후보 번호로 보이는 문자열이 있습니다');
+    console.log(`자기 검증 — 연결 ${conns.length} · 카드 ${files.size - 1}장 · 읽은 필드 ${PICK.join(',')}`);
+    if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
+    console.log('  ✓ 공개 금지 필드 차단 · 카드 생성 · 후보 번호 없음');
+    process.exit(0);
+  }
+
+  const files = build();
+  if (args.includes('--check')) {
+    const bad = [];
+    for (const [name, body] of files) {
+      const p = path.join(OUT, name);
+      if (!fs.existsSync(p)) { bad.push(`${name} — 없음`); continue; }
+      if (fs.readFileSync(p, 'utf8') !== body) bad.push(`${name} — 내용 다름`);
+    }
+    for (const f of fs.existsSync(OUT) ? fs.readdirSync(OUT) : []) {
+      if (f.endsWith('.md') && !files.has(f)) bad.push(`${f} — 원본에 없는 파일`);
+    }
+    if (bad.length) { console.log('✗ 카드가 원본과 다릅니다'); bad.forEach((b) => console.log(`  ${b}`)); process.exit(1); }
+    console.log(`일치 — 카드 ${files.size - 1}장`);
+    process.exit(0);
+  }
+
+  fs.mkdirSync(OUT, { recursive: true });
+  for (const [name, body] of files) fs.writeFileSync(path.join(OUT, name), body);
+  console.log(`썼음 — 카드 ${files.size - 1}장 + 목록`);
+  process.exit(0);
+} catch (e) {
+  console.error(`도구 오류: ${e.message}`);
+  process.exit(2);
+}

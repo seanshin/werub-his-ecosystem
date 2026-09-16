@@ -1,0 +1,35 @@
+# ERP → sign
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — ERP 가 만든 계약(외주 · 거래처)을 sign 으로 보내 **상대가 포털에서 서명**하게 합니다. 자금 결재 원장의 해시를 sign 에 시점봉인하는 경로도 있습니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 외부 거래처(외주) 계약 전자서명(트랙 A) — 증인 인증서 발급·포털 서명요청·포털 토큰 발급 | HTTP POST /v1/certificates/enroll · /v1/reques | x-api-key (sign 소비자 'erp' — ERP sign_api_key ↔ | `검증됨` | 2026-09-15 |
+| 신뢰의 사슬 — 자금 결재 등 ERP 감사 이벤트를 sign 감사 스트림에 기록·체인 검증 | HTTP POST /v1/audit-events · GET /v1/audit-eve | x-api-key (소비자 erp · requests:write) | `구현·미검증` | — |
+| 일반 전자계약(sign contracts API — 템플릿·주소록·발송) | HTTP /v1/contracts* (sign 에 구현) | x-api-key (sign 소비자 erp 에 contracts:write 스코프  | `미구현` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `erp: sign_internal_base`
+- `erp: sign_portal_base`
+- `erp: sign_api_key`
+- `erp: sign_callback_url`
+- `sign env: ERP_API_KEY`
+
+## 여는 순서
+
+1. sign 에 ERP 소비자를 등록하고 키를 받습니다.
+2. ERP 에 sign 내부 주소 · 키 · 웹훅 비밀을 넣습니다.
+3. 🔴 계약서 첨부를 저장할 자리가 운영 설정에 없으면 서명 요청이 거절됩니다 — 첨부 저장소를 먼저 둡니다.
+4. 가상 거래처로 계약 하나를 끝까지 서명해 봅니다.
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **1개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+

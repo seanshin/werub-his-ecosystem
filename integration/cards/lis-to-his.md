@@ -1,0 +1,56 @@
+# LIS → HIS
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — LIS 가 확정한 결과를 HIS 로 보내고, HIS 는 그것을 **바로 차트에 넣지 않고** 확인 대기 상태로 둡니다. 직원이 확인해야 정본이 됩니다. 환자 성명 조회 · 검사코드 카탈로그 반입 · 결재 상태 참조도 이 방향입니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 환자 성명 조회(오더 폴링 중 subject Patient 읽기) | FHIR R4 REST read | SMART client_credentials · scope system/Patien | `검증됨` | 2026-09-14 |
+| 검사 결과 전달 — 결과 확정 시 DiagnosticReport(contained Observation) POST → HIS 스테이징 큐 | FHIR R4 REST create | SMART client_credentials · scope system/Diagno | `검증됨` | 2026-09-15 |
+| 검사 결과 HL7 ORU^R01 전송(MLLP) — 대체 경로 | HL7 v2.5.1 over MLLP(TCP) | 없음(MLLP) | `미구현` | — |
+| Reflex 추가검사 오더 — LIS 가 ServiceRequest(draft)를 transaction Bundle 로 보내 HIS PreOrder(의사 승인 대 | FHIR R4 transaction Bundle(POST fhir/R4) | SMART client_credentials · 라우트 scope system/Bu | `구현·미검증` | — |
+| Reflex 추가검사 오더 HL7 ORM^O01(MLLP) — HIS_ORDER_TRANSPORT=ORM 선택 시 | HL7 v2 over MLLP | 없음(MLLP) | `미구현` | — |
+| Reflex PreOrder 승인·반려 상태 폴링(GET ServiceRequest/:id) | FHIR R4 REST read · 10분 폴링 | SMART client_credentials · ServiceRequest.read | `구현·미검증` | — |
+| 검사코드 카탈로그 반입(H1 · edi_code 정본 · 1:N 패널 · since 증분) | HTTPS GET JSON(커스텀) | x-integration-key(LIS HIS_INTEGRATION_KEY ↔ HI | `검증됨` | 2026-09-15 |
+| 조직 게이트 결재 상태 참조(HIS 전자결재 중계 EApprovalRelay) | HTTPS GET JSON(커스텀) | x-integration-key(A11 과 같음) | `구현·미검증` | — |
+| 수혈 동의 상태 참조(FHIR Consent 파생 상태 · 출고 전 확인) | HTTPS GET JSON(Consent 모양 · 커스텀 EP) | x-integration-key + X-Target-Token(HMAC-SHA256 | `구현·미검증` | — |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `LIS: HIS_FHIR_SCOPES(기본에 Patient.read 포함)`
+- `LIS: HIS_FHIR_BASE`
+- `LIS: HIS_CLIENT_ID`
+- `LIS: HIS_CLIENT_SECRET`
+- `LIS: HIS_FHIR_SCOPES`
+- `LIS: HIS_REFLEX_RETRY(결과 재시도 크론 겸용)`
+- `HIS: lab.fhirAutoApplyUserId(감사 명의 · 선택)`
+- `LIS: HIS_MLLP_HOST`
+- `LIS: HIS_MLLP_PORT`
+- `LIS: HIS_ORDER_TRANSPORT(기본 FHIR)`
+- `HIS: fhir.serviceRequestInbound.enabled(기본 OFF)`
+- `HIS: 연동 게이트 트랙 LIS_REFLEX(A-1·A-2·A-3)`
+- `LIS: HIS_ORDER_TRANSPORT=ORM`
+- `LIS: HIS_REFLEX_POLL`
+- `LIS: HIS_INTEGRATION_BASE(없으면 HIS_FHIR_BASE 오리진+/api/v1)`
+- `LIS: HIS_INTEGRATION_KEY`
+- `HIS: lis.integrationKey`
+- `LIS: HIS_TARGET_TOKEN_SECRET(없으면 통합 키로 폴백)`
+- `HIS: lis.targetTokenSecret(없으면 lis.integrationKey)`
+- `HIS: lis.targetAuthEnforce(기본 true)`
+
+## 여는 순서
+
+1. HIS → LIS 등록(위 카드)이 끝나 있어야 합니다. 같은 클라이언트로 결과를 씁니다.
+2. 커스텀 연동 키(카탈로그 · 결재 · 동의 참조용)를 HIS 와 LIS 양쪽에 같은 값으로 넣습니다.
+3. 카탈로그를 반입해 LIS 매핑 커버리지를 확인합니다.
+4. 결과 하나를 확정해 HIS 에 도착하는지, 같은 결과를 두 번 보내면 중복으로 막히는지 확인합니다.
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **3개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+

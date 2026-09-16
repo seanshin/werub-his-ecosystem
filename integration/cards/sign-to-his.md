@@ -1,0 +1,31 @@
+# sign → HIS
+
+> 연동 계약 카드 — [카드 목록](README.md) · [연동 지도](../README.md) · 상태의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)입니다.
+
+**무엇을 주고받나** — 서명이 끝나면 sign 이 HIS 로 **완료 통지**를 보냅니다. HIS 는 그 통지로 문서 상태를 바꾸고 참가자 · 인증서 일련번호 · 감사 증명 주소를 남깁니다. 통지는 본문 서명(HMAC)으로 진위를 확인합니다.
+
+## 연결
+
+| 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
+|---|---|---|---|---|
+| 서명 이벤트 통지 — 동의서 상태 반영·개정(superseded)·서명자 인증서 일련번호 미러·ERP 로 sign.completed 재발행 | HTTP POST 웹훅 → HIS /api/v1/sign-integration/we | HMAC-SHA256(rawBody) X-Sign-Signature (sign HI | `검증됨` | 2026-09-14 |
+
+## 양쪽에 넣는 설정 — **키 이름만**
+
+값은 기관이 새로 만듭니다. 이 자료는 값을 담지 않습니다.
+
+- `sign env: HIS_WEBHOOK_URL`
+- `sign env: HIS_WEBHOOK_SECRET`
+- `his: sign.webhookSecret`
+- `his: sign.webhookSecretPrev`
+
+## 여는 순서
+
+1. HIS 와 sign 에 **같은 웹훅 비밀값**을 넣습니다(기관마다 새로 생성).
+2. sign 이 부를 HIS 주소를 등록합니다. 🔴 운영 설정에서는 **https 주소만** 받습니다.
+3. 위조 통지가 반영되지 않는지 확인합니다 — 서명이 틀린 통지는 상태를 바꾸지 못해야 합니다.
+
+## 따라가기에서 확인한 것
+
+새 설치본끼리 실제로 불러 확인한 연결 **1개**(확인일은 위 표) — 자세한 것은 [따라가 본 결과](../../build-guide/follow-along-2026-09.md).
+
