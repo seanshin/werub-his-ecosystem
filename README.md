@@ -222,7 +222,7 @@
 ## 새 설치본으로 따라가 본 결과 — 요약
 **What the first follow-along install confirmed (2026-09-13 ~ 2026-09-16)**
 
-> **EN** — Seven systems were installed from their pinned base commits on one isolated development PC, and **27 connections were driven end to end between those fresh installs** — each one also re-tested with a tampered key, a forged signature, a replayed message or a mismatched target, to confirm the guard actually blocks. Details, including what did not work: [따라가 본 결과](build-guide/follow-along-2026-09.md).
+> **EN** — Seven systems were installed from their pinned base commits on one isolated development PC, and **27 connections were driven end to end between those fresh installs**; 23 of them were also re-tested with a tampered key, a forged signature, a replayed message or a mismatched target, to confirm the guard actually blocks. Details, including what did not work: [따라가 본 결과](build-guide/follow-along-2026-09.md).
 
 기준 커밋으로 새로 세운 설치본 **7개**(HIS · sign · LIS · PACS · ERP · edu · AI Server)를 외부로 나가지 못하는 네트워크에 올리고, 시스템 사이 연결을 **새 설치본끼리만** 실제로 불러 봤습니다. 아래는 그렇게 **확인된 것**입니다.
 
