@@ -64,7 +64,24 @@ function truth() {
     const cell = (l.split('|')[3] ?? '').trim();
     return cell && cell !== '—';
   }).length;
-  return { verified: count('검증됨'), impl: count('구현·미검증'), total: rows.length, fault, checked: vrows.length };
+  // 쌍별 집계 — 개요서의 「A ⇄ B | `검증됨` n · …」 줄을 표와 대조하기 위한 것
+  const NAMES = ['HIS', 'LIS', 'PACS', 'ERP', 'sign', 'edu', 'AI Server', 'Clinic', 'twin', 'cerno', 'Jitsi', '환자 앱', '공개 홈페이지'];
+  const norm = (x) => NAMES.find((n) => x.trim().startsWith(n)) ?? x.trim();
+  const pairs = new Map();
+  for (const l of rows) {
+    const c = cells(l);
+    const sides = c[1].split(/→|⇄/).map(norm);
+    if (sides.length < 2) continue;
+    const key = [sides[0], sides[1]].sort().join(' ⇄ ');
+    const m = pairs.get(key) ?? {};
+    m[statusOf(l)] = (m[statusOf(l)] ?? 0) + 1;
+    pairs.set(key, m);
+  }
+
+  // 발표 덱 내용 슬라이드 수 — `## ` 가 내용 슬라이드, `# ` 는 장 표지다
+  const deckSlides = read('deck/slides.md').split('\n').filter((l) => l.startsWith('## ')).length;
+
+  return { verified: count('검증됨'), impl: count('구현·미검증'), total: rows.length, fault, checked: vrows.length, pairs, deckSlides };
 }
 
 function walk(dir, out = []) {
@@ -98,6 +115,26 @@ function check(T) {
           if (n !== expect) problems.push(`${at} — ${what}: 문서 ${n} · 원본 ${expect}`);
         }
       }
+      // 쌍별 수치 — 「HIS ⇄ ERP | `검증됨` 6 · `구현·미검증` 8 · `미구현` 1 |」
+      const pm = line.match(/^\|\s*([A-Za-z가-힣 ]+?)\s*⇄\s*([A-Za-z가-힣 ]+?)\s*\|([^|]*)\|/);
+      if (pm) {
+        const key = [pm[1].trim(), pm[2].trim()].sort().join(' ⇄ ');
+        const actual = T.pairs.get(key);
+        const claim = {};
+        for (const c of pm[3].matchAll(/`([^`]+)`\s*(\d+)/g)) claim[c[1]] = Number(c[2]);
+        if (actual && Object.keys(claim).length) {
+          const same = Object.keys(claim).length === Object.keys(actual).length
+            && Object.entries(claim).every(([k, v]) => actual[k] === v);
+          if (!same) {
+            const fmt = (o) => Object.entries(o).map(([k, v]) => `${k} ${v}`).join(' · ');
+            problems.push(`${at} — ${key} 쌍 수치: 문서(${fmt(claim)}) · 연결 표(${fmt(actual)})`);
+          }
+        }
+      }
+      // 덱 내용 슬라이드 수
+      for (const m of line.matchAll(/(?:내용\s*슬라이드|덱)\s*\**\s*(\d+)\s*\**\s*장/g)) {
+        if (Number(m[1]) !== T.deckSlides) problems.push(`${at} — 덱 내용 슬라이드 수: 문서 ${m[1]} · 실제 ${T.deckSlides}`);
+      }
       // "27개 모두 … 결함" 류 과장 — 확인 수와 결함 재주입 수가 다르면 "모두" 를 쓸 수 없다
       if (T.fault !== T.verified && new RegExp(`${T.verified}개\\s*\\*{0,2}모두\\*{0,2}[^\\n]{0,40}(결함|변조|틀린 키|위조)`).test(line)) {
         problems.push(`${at} — 확인 ${T.verified}개 중 결함 재주입은 ${T.fault}개인데 "모두" 라고 적었습니다`);
@@ -116,7 +153,7 @@ if (process.argv.includes('--self-test')) {
   const probe = stripCode('본문 ```\n`검증됨` 999\n``` 과 `검증됨` 999 입니다');
   if (!probe.includes('999')) fails.push('코드 블록 제거가 본문까지 지웠습니다');
   const real = check(T);
-  console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault}`);
+  console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장`);
   if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
   console.log(`  ✓ 규칙 3개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
   process.exit(0);

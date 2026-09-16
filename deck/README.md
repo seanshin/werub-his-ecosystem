@@ -1,7 +1,7 @@
 # F 발표 덱
 **F — Presentation deck**
 
-> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 33 content slides (11 with screenshots from a rehearsal install on synthetic data) plus 6 section covers, in six parts — intent, structure, build, **current status** (including what a first follow-along install confirmed: 27 connections driven end to end; 23 of them also re-tested against a tampered key, a forged signature, a replay or a mismatched target), demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
+> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 32 content slides (11 with screenshots from a rehearsal install on synthetic data) plus 6 section covers, in six parts — intent, structure, build, **current status** (including what a first follow-along install confirmed: 27 connections driven end to end; 23 of them also re-tested against a tampered key, a forged signature, a replay or a mismatched target), demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
 
 
 A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태계로 AI 기반 HIS 를 세울지 정하는 **병원장 · CIO** 가 한 번에 볼 수 있게 썼습니다.
@@ -11,7 +11,7 @@ A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태�
 
 ## 본문
 
-**→ [slides.md](slides.md)** — 내용 슬라이드 **33장** + 장 표지 6장. GitHub 에서 그대로 읽히고, mermaid 도식과 **화면 캡처**가 함께 들어 있습니다.
+**→ [slides.md](slides.md)** — 내용 슬라이드 **32장** + 장 표지 6장. GitHub 에서 그대로 읽히고, mermaid 도식과 **화면 캡처**가 함께 들어 있습니다.
 
 ## 짜임
 

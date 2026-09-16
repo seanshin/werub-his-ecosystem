@@ -71,8 +71,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/werubyHIS"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.his"
     },
@@ -123,8 +122,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/werubyHIS"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.homepage"
     },
@@ -182,8 +180,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/werubyHIS"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.patient-app"
     },
@@ -234,8 +231,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/sign"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.sign"
     },
@@ -294,8 +290,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/lis"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.lis"
     },
@@ -346,8 +341,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/hospital-erp"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.erp"
     },
@@ -412,8 +406,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/openpacs"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.pacs"
     },
@@ -468,8 +461,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/WeRUBLLMManager"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.ai-server"
     },
@@ -527,8 +519,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/medical-digital-twin"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.twin"
     },
@@ -586,8 +577,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/cerno"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.cerno"
     },
@@ -649,8 +639,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/edu"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.edu"
     },
@@ -709,8 +698,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/weruby-co-kr/WeRUB"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.clinic"
     },
@@ -761,8 +749,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": null,
-        "note": "소스 링크 정리 중"
+        "link": "https://github.com/seanshin/hospital-jitsi"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.jitsi"
     }
