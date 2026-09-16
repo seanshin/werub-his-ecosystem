@@ -1,7 +1,7 @@
 # F 발표 덱
 **F — Presentation deck**
 
-> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 32 content slides (11 with screenshots from a rehearsal install on synthetic data) plus 6 section covers, in six parts — intent, structure, build, **current status**, demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
+> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 33 content slides (11 with screenshots from a rehearsal install on synthetic data) plus 6 section covers, in six parts — intent, structure, build, **current status** (including what a first follow-along install confirmed: 27 connections driven end to end, each re-tested against a tampered key or forged signature), demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
 
 
 A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태계로 AI 기반 HIS 를 세울지 정하는 **병원장 · CIO** 가 한 번에 볼 수 있게 썼습니다.
@@ -11,7 +11,7 @@ A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태�
 
 ## 본문
 
-**→ [slides.md](slides.md)** — 내용 슬라이드 **32장** + 장 표지 6장. GitHub 에서 그대로 읽히고, mermaid 도식과 **화면 캡처**가 함께 들어 있습니다.
+**→ [slides.md](slides.md)** — 내용 슬라이드 **33장** + 장 표지 6장. GitHub 에서 그대로 읽히고, mermaid 도식과 **화면 캡처**가 함께 들어 있습니다.
 
 ## 짜임
 
@@ -21,7 +21,7 @@ A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태�
 | **Ⅰ 왜 — 취지** | 5 | 한 문장 · 왜 만들었나 · 취지 8가지 · **원칙은 화면에 있다**(8가지 방식 + 안전 게이트) · 얻는 것과 감수하는 것 | [A 1 · 2장](../overview/) · [화면](../screens/) |
 | **Ⅱ 무엇으로 — 구조** | 10 | 계층 지도 · 시스템 13 · 규모와 서버 · 환자 여정 · 신원 · 신뢰 · 표준 · AI 3장 | [A 3~6장](../overview/) · [도식 ①③④⑤⑥⑦⑧](../diagrams/) |
 | **Ⅲ 어떻게 세우나 — 구축** | 5 | S0~S8 · 단계별 결정 수 · 체크리스트 셋 · **구축하는 세 화면**(개원 단계 · Go-Live · 결정 등록부) · 시작 전 세 가지 | [A 7장](../overview/07-build-path.md) · [화면](../screens/his.md) |
-| **Ⅳ 지금 상태** | 4 | **`검증됨` 27** · 시스템별 상태 · 알고 시작할 것 · 준비할 것 | [A 8장](../overview/08-status-and-preparation.md) · [연결 상태](../RELEASES/draft/compatibility.md) |
+| **Ⅳ 지금 상태** | 5 | **`검증됨` 27 / 113** · **따라가 보고 확인된 것**(설치본 7개 · 가드 재시험 · 백업 복원) · 시스템별 상태 · 알고 시작할 것 · 준비할 것 | [A 8장](../overview/08-status-and-preparation.md) · [연결 상태](../RELEASES/draft/compatibility.md) · [따라가 본 결과](../build-guide/follow-along-2026-09.md) |
 | **Ⅴ 데모로 보기** | 3 | 시나리오 4 합계 · **권한은 화면으로 드러난다**(역할 비교 3장) · 외래 34단계 한 장 | [E 시나리오](../scenarios/) · [화면](../screens/by-onboarding.md) |
 | **Ⅵ 조건과 다음** | 3 | MIT 세 겹 · 면책 · 남은 일 · 역할별 읽을 것 | [A 9 · 10장](../overview/) · [THIRD_PARTY](../THIRD_PARTY.md) |
 
@@ -60,4 +60,4 @@ npx @marp-team/marp-cli /tmp/deck.md --html  --allow-local-files -o deck.html
 | [매니페스트](../RELEASES/draft/manifest.md) | Ⅱ 시스템 13 · Ⅳ 시스템별 구현 상태 · Ⅵ 저장소 라이선스 표기 |
 | [계측 스냅샷](../data/) | Ⅱ 규모와 서버 |
 | [체크리스트](../checklist/) | Ⅲ 단계별 결정 수 · 체크리스트 셋 |
-| 새 설치본 따라가기 결과 | Ⅳ 「실제로 호출해 확인한 연결은 아직 없습니다」 전체 · Ⅵ 남은 일 |
+| 새 설치본 따라가기 결과 | Ⅳ 연결 상태 합계 · Ⅳ 「따라가 보고 확인된 것」 · Ⅱ 환자 여정 · Ⅵ 남은 일 · 마지막 장 |
