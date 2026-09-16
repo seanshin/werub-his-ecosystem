@@ -27,6 +27,8 @@ const CHECKS = [
   ['화면 캡처 목록 = 메뉴 구성표 · 실제 파일', 'build-screen-index.mjs', ['--check']],
   ['연동 매트릭스 = 연결 상태 표', 'build-integration-map.mjs', ['--check']],
   ['구성서 = 매니페스트 · 연결 상태 표', 'check-consistency.mjs', []],
+  ['수치 주장 검사기 자기 검증', 'check-claims.mjs', ['--self-test']],
+  ['문서의 수치 주장 = 연결 상태 표 · 따라가기 표', 'check-claims.mjs', []],
 ];
 const MEANING = { 0: '통과', 1: '실패', 2: '도구 오류', 3: '미실행' };
 
