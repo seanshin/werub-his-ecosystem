@@ -67,7 +67,7 @@
 | Jitsi Videobridge | Jitsi | `stable-9823` | `Apache-2.0` | [LICENSE](https://github.com/jitsi/jitsi-videobridge/blob/stable/jitsi-meet_9823/LICENSE) | 2026-09-11 | 원문 확인 |
 | Jibri (녹화) | Jitsi | `stable-9823` | `Apache-2.0` | [LICENSE](https://github.com/jitsi/jibri/blob/master/LICENSE) (기본 브랜치) | 2026-09-11 | 원문 확인 |
 | Jigasi (전사 — 선택 구성) | Jitsi | `stable-9823` | `Apache-2.0` | [LICENSE](https://github.com/jitsi/jigasi/blob/master/LICENSE) (기본 브랜치) | 2026-09-11 | 원문 확인 |
-| Prosody (XMPP 서버) | Jitsi | `stable-9823` 이미지에 포함 · **이미지가 Prosody 판본을 고정하지 않습니다**(주 5) | `MIT` | [prosody.im](https://prosody.im/source/mit) (현행) | 2026-09-16 | 원문 확인 · 판본은 이미지 빌드 시점에 정해짐 |
+| Prosody (XMPP 서버) | Jitsi | `stable-9823` 이미지에 포함 · **이미지가 Prosody 판본을 고정하지 않습니다**(아래 「Prosody 판본」) | `MIT` | [prosody.im](https://prosody.im/source/mit) (현행) | 2026-09-16 | 원문 확인 · 판본은 이미지 빌드 시점에 정해짐 |
 | coturn (TURN 서버) | Jitsi | 4.6 | `BSD-3-Clause` | [4.6.0 LICENSE](https://github.com/coturn/coturn/blob/4.6.0/LICENSE) | 2026-09-11 | 원문 확인 |
 | Pulse Physiology Engine | twin (시험 구성 · 기본 미기동) | 4.3.1 | `Apache-2.0` | [pulse.kitware.com](https://pulse.kitware.com/) (현행) | 2026-09-11 | 원문 확인 |
 | Ollama (모델 서버) | AI Server (cerno·twin 은 AI Server 를 거쳐 씀) | 고정 안 됨(호스트에 직접 설치) | `MIT` | [LICENSE](https://github.com/ollama/ollama/blob/main/LICENSE) (기본 브랜치) | 2026-09-11 | 원문 확인 |
@@ -77,7 +77,7 @@
 
 **주 2 — browserless.** Docker Hub 는 `browserless/chrome` 을 구판(v1)으로 표시하고 v2 를 권합니다. v2 원문은 `SSPL-1.0 OR` 상용 라이선스로 v1 과 다릅니다. 이미지 안의 Chromium 은 따로 라이선스가 있고, 이 문서에서는 확인하지 않았습니다.
 
-**주 5 — Prosody 판본.** Jitsi 저장소의 기준 커밋(`0984fbec`)은 `jitsi/prosody:stable-9823` 만 고정합니다. 그 이미지를 만드는 [docker-jitsi-meet `stable-9823` 의 `prosody/Dockerfile`](https://github.com/jitsi/docker-jitsi-meet/blob/stable-9823/prosody/Dockerfile)은 Prosody 를 **판본 지정 없이** 배포처 데비안 저장소(`packages.prosody.im/debian bookworm main`)에서 설치합니다(2026-09-16 확인). 즉 들어가는 판본은 **이미지를 만든 시점의 최신본**이고, 저장소 쪽에서 더 고정할 수 있는 값이 아닙니다. 판본은 받은 이미지 안에서 확인합니다.
+**참고 — Prosody 판본.** Jitsi 저장소의 기준 커밋(`0984fbec`)은 `jitsi/prosody:stable-9823` 만 고정합니다. 그 이미지를 만드는 [docker-jitsi-meet `stable-9823` 의 `prosody/Dockerfile`](https://github.com/jitsi/docker-jitsi-meet/blob/stable-9823/prosody/Dockerfile)은 Prosody 를 **판본 지정 없이** 배포처 데비안 저장소(`packages.prosody.im/debian bookworm main`)에서 설치합니다(2026-09-16 확인). 즉 들어가는 판본은 **이미지를 만든 시점의 최신본**이고, 저장소 쪽에서 더 고정할 수 있는 값이 아닙니다. 판본은 받은 이미지 안에서 확인합니다.
 
 ---
 
@@ -114,9 +114,20 @@
 | Whisper large-v3 · medium (CTranslate2 변환본) | 음성 인식 — 회의 일괄 처리(large-v3) · 실시간(medium) | faster-whisper 가 `large-v3` · `medium` 이름으로 받음 | Systran/faster-whisper-large-v3 · -medium (원 모델 OpenAI Whisper) | `MIT` | [large-v3](https://huggingface.co/Systran/faster-whisper-large-v3) · [medium](https://huggingface.co/Systran/faster-whisper-medium) · [OpenAI Whisper LICENSE](https://github.com/openai/whisper/blob/main/LICENSE) | 2026-09-11 | 원문 확인 (주 4) |
 | SpeechBrain ECAPA-TDNN | 화자 구분 · 화자 대조 | `speechbrain/spkrec-ecapa-voxceleb` | 동일 | `Apache-2.0` | [모델 카드](https://huggingface.co/speechbrain/spkrec-ecapa-voxceleb) | 2026-09-11 | 원문 확인 (학습 데이터 VoxCeleb 1·2 의 조건은 미확인) |
 | DeepSeek-OCR | 의료법·고시 문서 반입 시 글자 인식 | `deepseek-ocr` | deepseek-ai/DeepSeek-OCR | `MIT` | [모델 카드](https://huggingface.co/deepseek-ai/DeepSeek-OCR) | 2026-09-11 | 원문 확인 |
-| 자체 파인튜닝 의료 모델 2종 | 일부 의료 요약·초안 경로. 공개 모델로 바꾸는 설정이 있음 | 공개 배포하지 않음 | Qwen2.5-7B-Instruct 기반 QLoRA | 기반 모델 `Apache-2.0` · 파인튜닝 가중치의 제공 조건은 정하지 않음 | — | 2026-09-11 | 확인 필요 (제공 여부·조건 미정) |
+| 자체 파인튜닝 의료 모델 2종 | 일부 의료 요약·초안 경로. 공개 모델로 바꾸는 설정이 있음 | 공개 배포하지 않음 | Qwen2.5-7B-Instruct 기반 QLoRA | 기반 모델 `Apache-2.0` · 파인튜닝 가중치의 제공 조건은 정하지 않음 | — | 2026-09-16 | 확인 필요 — **제공 여부와 조건을 이 생태계를 내는 쪽이 정해야** 합니다. 정해지기 전에는 설정에서 공개 모델로 바꿔 씁니다 |
 
-**코드에 선택지로만 등록된 의료 모델.** MedGemma 27B · MedLlama2 7B · OpenBioLLM 8B · MediChat-Llama3 8B · GPT-OSS 20B · Phi-4-reasoning 과, MedGemma 1.5 4B 의 다른 재포장 태그가 있습니다. 모두 기본 경로가 아닙니다. MedGemma 27B 만 모델 카드에서 HAI-DEF 약관 표기를 봤고, 나머지는 원문을 보지 않았습니다(`확인 필요`). 켜기 전에 각 약관을 따로 확인해야 합니다. 비상업 라이선스(CC BY-NC 4.0)인 검증 모델 1종은 기본에서 빠졌고 설치본에서도 지웠습니다. 지금은 선택 설정에 이름만 남아 있습니다.
+**코드에 선택지로만 등록된 의료 모델.** 기준 커밋의 AI Server 는 아래 모델을 선택지로만 등록해 둡니다(태그는 `core/gpu_scheduler.py` · 기준 커밋 `55acaee9`). 모두 기본 경로가 아닙니다. 2026-09-16 에 각 원 모델 카드·배포 페이지를 확인한 결과는 이렇습니다.
+
+| 선택 모델(받는 이름) | 원 배포처 | 원문이 적는 라이선스 | 확인일 | 상태 |
+|---|---|---|---|---|
+| MedGemma 27B (`medgemma:27b`) | google/medgemma-27b | `LicenseRef-HAI-DEF-Terms` | 2026-09-11 | 원문 확인 |
+| GPT-OSS 20B (`gpt-oss:20b`) | [openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b) | 모델 카드가 `apache-2.0` 으로 적습니다 | 2026-09-16 | 원문 확인 |
+| Phi-4-reasoning (`phi4-reasoning`) | [microsoft/Phi-4-reasoning](https://huggingface.co/microsoft/Phi-4-reasoning) | 모델 카드가 `MIT` 로 적습니다 | 2026-09-16 | 원문 확인 |
+| OpenBioLLM 8B (`koesn/llama3-openbiollm-8b` · 재포장 · 주 3) | [aaditya/Llama3-OpenBioLLM-8B](https://huggingface.co/aaditya/Llama3-OpenBioLLM-8B) | 모델 카드가 "Meta-Llama License"(태그 `llama3`)로 적습니다. 같은 카드가 **지금은 직접적인 환자 진료 · 임상 의사결정 지원에 쓰지 말라**고 적습니다 | 2026-09-16 | 원문 확인(재포장본의 가중치 동일성은 주 3) |
+| MedLlama2 (`medllama2`) | [ollama.com/library/medllama2](https://ollama.com/library/medllama2) | 페이지는 "Llama 2 기반"만 적고 **라이선스를 적지 않습니다** | 2026-09-16 | 확인 필요 — 원 배포처의 약관을 찾아 확인해야 합니다 |
+| MediChat-Llama3 8B (`monotykamary/medichat-llama3` · 재포장 · 주 3) | [sethuiyer/Medichat-Llama3-8B](https://huggingface.co/sethuiyer/Medichat-Llama3-8B) | 모델 카드의 license 칸이 `other` 뿐이고 **약관 이름이 없습니다** | 2026-09-16 | 확인 필요 — 배포자에게 약관을 확인해야 합니다 |
+
+MedGemma 1.5 4B 의 다른 재포장 태그도 선택지에 있습니다(주 3). 켜기 전에 각 약관을 따로 확인해야 합니다. 비상업 라이선스(CC BY-NC 4.0)인 검증 모델 1종은 기본에서 빠졌고 설치본에서도 지웠습니다. 지금은 선택 설정에 이름만 남아 있습니다.
 
 **원문이 적은 조건** (요약이므로 반드시 원문 전문을 읽으십시오)
 
@@ -137,13 +148,13 @@
 
 | 데이터 | 쓰는 시스템 | 배포 기관 | 이용 조건 | 확인일 | 상태 |
 |---|---|---|---|---|---|
-| 약제급여목록·약가(의약품 표준코드 포함) · 저가약 대체조제 목록 | HIS(반입) · AI Server(조회) | 건강보험심사평가원 | 배포 기관·데이터셋마다 다름 | 2026-09-11 | 확인 필요 (원문 미확인) |
-| 수가 · 치료재료 코드(EDI 행위·검사 코드 포함) | HIS · AI Server | 건강보험심사평가원 · 보건복지부 고시 | 배포 기관·데이터셋마다 다름 | 2026-09-11 | 확인 필요 (원문 미확인) |
-| KCD(한국표준질병·사인분류) | HIS · AI Server | 국가데이터처(구 통계청) | 이용 조건 미확인. **제9차 개정**이 2025-07-01 고시되어(고시 제2025-299호) 2026-01-01 부터 시행 중입니다([고시](https://mods.go.kr/board.es?act=view&bid=107&list_no=437419&mid=a10403040000&nPage=1)). 생태계 코드의 KCD 표기는 기준일에 제8차입니다 | 2026-09-11 | 확인 필요 (이용 조건 · 제9차 반영) |
-| DUR 금기 정보 · 의약품 개요정보 | AI Server(DUR 점검·약 정보) · HIS | 식품의약품안전처(공공데이터포털 제공) | 데이터셋마다 다름 | 2026-09-11 | 확인 필요 (원문 미확인) |
-| 법정감염병 목록 | AI Server · HIS | 질병관리청 | 미확인 | 2026-09-11 | 확인 필요 |
-| 의료법 조문 · 고시 원문(RAG 코퍼스) | AI Server | 법제처 · 보건복지부 · 건강보험심사평가원 등 | 문서마다 다름 | 2026-09-11 | 확인 필요 |
-| LOINC | LIS · HIS(검사 코드 매핑) · twin | Regenstrief Institute | 로열티 없는 라이선스이며 조건이 있습니다([원문](https://loinc.org/kb/license)). 원문 페이지가 기준일에 자동 조회를 막아(403) 공식 사이트의 발췌만 봤습니다 | 2026-09-11 | 확인 필요 |
+| 약제급여목록·약가(의약품 표준코드 포함) · 저가약 대체조제 목록 | HIS(반입) · AI Server(조회) | 건강보험심사평가원 | 배포 기관·데이터셋마다 다름 | 2026-09-16 | 확인 필요 — **구축 기관이 심사평가원 배포본을 받을 때 그 배포본의 이용 조건**을 확인합니다(원무·보험 담당 + 법무) |
+| 수가 · 치료재료 코드(EDI 행위·검사 코드 포함) | HIS · AI Server | 건강보험심사평가원 · 보건복지부 고시 | 배포 기관·데이터셋마다 다름 | 2026-09-16 | 확인 필요 — **고시 원문과 배포본의 이용 조건**을 구축 기관이 각각 확인합니다(원무·보험 담당 + 법무) |
+| KCD(한국표준질병·사인분류) | HIS · AI Server | 국가데이터처(구 통계청) | 이용 조건 미확인. **제9차 개정**이 2025-07-01 고시되어(고시 제2025-299호) 2026-01-01 부터 시행 중입니다([고시](https://mods.go.kr/board.es?act=view&bid=107&list_no=437419&mid=a10403040000&nPage=1)). 생태계 코드의 KCD 표기는 기준일에 제8차입니다 | 2026-09-16 | 확인 필요 — **배포본의 이용 조건**은 구축 기관(의무기록 담당 + 법무)이, **제9차 반영 계획**은 각 시스템 담당이 정합니다 |
+| DUR 금기 정보 · 의약품 개요정보 | AI Server(DUR 점검·약 정보) · HIS | 식품의약품안전처(공공데이터포털 제공) | 데이터셋마다 다름 | 2026-09-16 | 확인 필요 — **쓰려는 데이터셋마다 공공데이터포털의 이용허락범위**를 구축 기관이 확인합니다(약제 담당 + 법무) |
+| 법정감염병 목록 | AI Server · HIS | 질병관리청 | 미확인 | 2026-09-16 | 확인 필요 — **질병관리청 배포본의 이용 조건**을 구축 기관이 확인합니다(감염관리 담당 + 법무) |
+| 의료법 조문 · 고시 원문(RAG 코퍼스) | AI Server | 법제처 · 보건복지부 · 건강보험심사평가원 등 | 문서마다 다름 | 2026-09-16 | 확인 필요 — **코퍼스에 넣는 문서마다 제공처의 이용 조건**을 구축 기관이 확인합니다(법무) |
+| LOINC | LIS · HIS(검사 코드 매핑) · twin | Regenstrief Institute | 로열티 없는 라이선스이며 조건이 있습니다([원문](https://loinc.org/kb/license)). 원문 페이지가 자동 조회를 막습니다 — 기준일에 이어 **2026-09-16 에 두 경로(`/license/` · `/kb/license/`)로 다시 시도했으나 모두 403** 이었습니다. 공식 사이트의 발췌만 봤습니다 | 2026-09-16 | 확인 필요 — **사람이 브라우저로 원문 전문을 읽어야** 합니다 |
 | SNOMED CT | HIS · LIS 등(코드 참조) | SNOMED International · 국내 국가 배포 센터 한국보건의료정보원 | 대한민국은 2020-08 회원국이 됐습니다([회원 안내](https://www.snomed.org/members/republic-of-korea)). 회원국 사용은 무료이고, 그 나라 NRC 에 사용을 등록하라고 적습니다([받는 법](https://www.snomed.org/get-snomed)) | 2026-09-11 | 원문 확인 (등록 절차는 NRC 에 확인) |
 | Synthea (합성 환자 데이터 생성기) | twin (위험 궤적 검증용 합성 코호트) | MITRE · SyntheticHealth | `Apache-2.0` ([LICENSE](https://github.com/synthetichealth/synthea/blob/master/LICENSE), 기본 브랜치) | 2026-09-11 | 원문 확인 |
 
@@ -171,12 +182,14 @@
 
 ## 남은 확인
 
-| 항목 | 할 일 |
-|---|---|
-| 버전 고정 | 첫 통합 릴리즈 매니페스트에서 이 표의 버전을 다시 고정합니다. `고정 안 됨`인 태그(PostgreSQL Exporter · Redis Exporter · browserless · nginx(HIS) · pgvector · Ollama)는 판본을 적습니다 |
-| Orthanc 판본 | 이미지 `24.12.2` 안의 코어·플러그인 판본과, 켜지는 플러그인 목록을 확인합니다 |
-| 코드 마스터 이용 조건 | 배포 기관별 원문(공공데이터포털 이용 허락 범위 등)을 확인해 이 표를 채웁니다 |
-| 라이브러리 의존성 | 시스템별 npm·pip 의존성과 PACS 뷰어 빌드 산출물의 고지 목록을 생성합니다 |
-| 선택 등록 모델 | 기본 경로가 아닌 의료 모델의 약관을 확인합니다 |
+| 항목 | 할 일 | 누가 |
+|---|---|---|
+| 버전 고정 | 첫 통합 릴리즈 매니페스트에서 이 표의 버전을 다시 고정합니다. `고정 안 됨`인 태그(PostgreSQL Exporter · Redis Exporter · browserless · nginx(HIS) · pgvector · Ollama)는 판본을 적습니다 | 이 자료 |
+| Orthanc 판본 | 🔴 고정된 태그 `24.12.2` 를 **공개 레지스트리에서 받지 못했습니다**(주 1). 그 태그를 계속 쓸지, 받을 수 있는 판본으로 옮길지를 정하고 — 정한 이미지 **안의** 코어·플러그인 판본과 켜지는 플러그인 목록을 확인합니다 | PACS 저장소 |
+| 코드 마스터 이용 조건 | 배포처마다 원문(배포본의 이용허락범위 · 이용 신청 조건)을 읽고 이 표를 채웁니다. 이 자료는 조건을 요약하거나 판단하지 않습니다 | 구축 기관 + 법무 |
+| LOINC 원문 | 라이선스 페이지가 자동 조회를 막습니다(2026-09-16 재시도도 403). 브라우저로 원문 전문을 읽어 조건을 옮깁니다 | 사람(이 자료) |
+| 라이브러리 의존성 | 시스템별 npm·pip 의존성과 PACS 뷰어 빌드 산출물의 고지 목록을 생성합니다 | 이 자료 |
+| 선택 등록 모델 | 2026-09-16 에 6종 중 4종을 원문으로 확인했습니다. 남은 **MedLlama2**(배포 페이지에 약관 표기 없음) · **MediChat-Llama3 8B**(license 칸이 `other` 뿐)의 약관을 배포자에게 확인합니다 | 이 자료 + 모델 배포자 |
+| 자체 파인튜닝 모델 | 공개 배포 여부와 조건을 정합니다. 정하기 전에는 설정에서 공개 모델로 대체합니다 | 이 생태계를 내는 쪽 |
 
 이 문서에서 틀린 곳을 찾으면 알려 주십시오(알리는 경로는 [README 의 참여](README.md#참여) 절에 안내합니다). 원문 링크와 확인일을 함께 적어 주시면 고치겠습니다.
