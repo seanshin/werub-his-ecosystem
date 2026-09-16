@@ -14,6 +14,10 @@
  *   2. `구현·미검증` N       — 같은 표의 `구현·미검증` 행 수
  *   3. N / 113 · 연결 113개  — 표에 실린 연결 수
  *   4. 결함 재주입 N         — 「따라가 본 결과」 확인 표에서 결함 칸이 비지 않은 행 수
+ *   5. 합계는 한 곳에만      — 연결 상태 표·따라가기 결과를 가리키는 줄의 `검증됨` N 은 전체 합계여야 한다
+ *                             (목록 자체는 `build-guide/follow-along-2026-09.md` 확인 표 한 곳에만 둔다 — 2026-09-16
+ *                              같은 27개 나열이 17곳에 복사돼 있던 것을 지우고 그 표를 가리키게 바꿨다)
+ *   6. 운영 기록 한 건        — 8코어 · 16GB 가상 서버 · 메모리 약 10GB 를 7곳이 손으로 적고 있어 서로 대조한다
  *
  * 세는 규칙: 본문 · 표 · 인용구 안의 숫자만 본다. 코드 블록과 생성물은 건너뛴다.
  * 종료 코드: 0 일치 · 1 불일치 · 2 도구 오류
@@ -115,6 +119,13 @@ function check(T) {
           if (n !== expect) problems.push(`${at} — ${what}: 문서 ${n} · 원본 ${expect}`);
         }
       }
+      // 🔴 합계는 한 곳에만 — 연결 상태 표나 따라가기 결과를 **가리키는 줄**에 적은 `검증됨` N 은
+      //    시스템·쌍 단위가 아니라 전체 합계다(그 줄은 전체를 가리키고 있으므로). 쌍 단위 줄(⇄ 포함)은 뺀다.
+      if (/compatibility\.md|follow-along-/.test(line) && !line.includes('⇄')) {
+        for (const m of line.matchAll(/`검증됨`\s*\**\s*(?:은|이)?\s*\**\s*(\d+)/g)) {
+          if (Number(m[1]) !== T.verified) problems.push(`${at} — 전체 \`검증됨\` 수: 문서 ${m[1]} · 원본 ${T.verified}`);
+        }
+      }
       // 쌍별 수치 — 「HIS ⇄ ERP | `검증됨` 6 · `구현·미검증` 8 · `미구현` 1 |」
       const pm = line.match(/^\|\s*([A-Za-z가-힣 ]+?)\s*⇄\s*([A-Za-z가-힣 ]+?)\s*\|([^|]*)\|/);
       if (pm) {
@@ -130,6 +141,15 @@ function check(T) {
             problems.push(`${at} — ${key} 쌍 수치: 문서(${fmt(claim)}) · 연결 표(${fmt(actual)})`);
           }
         }
+      }
+      // 🔴 운영 기록 한 건(8코어 · 16GB 가상 서버에 8개 시스템 · 메모리 약 10GB · 2026-08-25)은
+      //    7곳에 손으로 적혀 있다. 원본이 문서 밖(운영 기록)이라 값을 서로 대조하는 것으로 대신한다.
+      // 「… 가상 서버」 가 붙은 것만 본다 — 따라가기 가상 머신(6코어 · 8GB)은 다른 기록이다.
+      for (const m of line.matchAll(/(\d+)\s*코어\s*·\s*(\d+)\s*GB(?:\s*메모리)?\s*가상\s*서버/g)) {
+        if (m[1] !== '8' || m[2] !== '16') problems.push(`${at} — 운영 기록 서버: 문서 ${m[1]}코어 · ${m[2]}GB · 기록 8코어 · 16GB`);
+      }
+      for (const m of line.matchAll(/메모리\s*약\s*(\d+)\s*GB\s*사용/g)) {
+        if (m[1] !== '10') problems.push(`${at} — 운영 기록 메모리 사용: 문서 ${m[1]}GB · 기록 약 10GB`);
       }
       // 덱 내용 슬라이드 수
       for (const m of line.matchAll(/(?:내용\s*슬라이드|덱)\s*\**\s*(\d+)\s*\**\s*장/g)) {
@@ -155,7 +175,7 @@ if (process.argv.includes('--self-test')) {
   const real = check(T);
   console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장`);
   if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-  console.log(`  ✓ 규칙 3개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
+  console.log(`  ✓ 규칙 5개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
   process.exit(0);
 }
 
