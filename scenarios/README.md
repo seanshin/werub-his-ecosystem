@@ -103,4 +103,4 @@
 
 ## 근거
 
-[README](../README.md) · [ROADMAP §3 관통 흐름](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음) · [시스템별 릴리즈 요약](../RELEASES/draft/systems/) · [시스템 구성서](../systems/) · [HIS 메뉴 구성](../systems/his-domains.md) · [환자 여정 스윔레인](../diagrams/patient-journey.md) · [구축 체크리스트](../checklist/) · [용어집](../glossary.md)
+[README](../README.md) · [ROADMAP §3 관통 흐름](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · [시스템별 릴리즈 요약](../RELEASES/draft/systems/) · [시스템 구성서](../systems/) · [HIS 메뉴 구성](../systems/his-domains.md) · [환자 여정 스윔레인](../diagrams/patient-journey.md) · [구축 체크리스트](../checklist/) · [용어집](../glossary.md)

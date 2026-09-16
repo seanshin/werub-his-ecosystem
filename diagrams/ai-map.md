@@ -2,7 +2,7 @@
 
 > 이 생태계의 AI 연산은 **AI Server 한 곳**이 맡습니다. 각 시스템은 AI Server 를 불러 초안 · 분류 보조 · 근거 검색 · 음성 인식을 받고, AI 산출물은 사람이 승인해야 정본이 됩니다. 의료 · 개인건강정보 · 규제 관련 작업은 `local_only` 정책으로 묶여 **기관 밖 AI 제공자로 나가지 않습니다.**
 
-근거: 호출 연결과 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(AI Server 가 들어간 쌍 · 판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음) · `local_only` · 모델 · GPU 는 [README 「AI 는 소비자용 GPU 한 장으로」](../README.md#ai-는-소비자용-gpu-한-장으로--rtx-508016gb)와 [AI Server 요약](../RELEASES/draft/systems/ai-server.md) · 모델 약관은 [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치)
+근거: 호출 연결과 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(AI Server 가 들어간 쌍 · 판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · `local_only` · 모델 · GPU 는 [README 「AI 는 소비자용 GPU 한 장으로」](../README.md#ai-는-소비자용-gpu-한-장으로--rtx-508016gb)와 [AI Server 요약](../RELEASES/draft/systems/ai-server.md) · 모델 약관은 [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치)
 
 ```mermaid
 flowchart LR

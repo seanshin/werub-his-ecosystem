@@ -3,7 +3,7 @@
 > 환자 한 명이 예약부터 원격 상담까지 시스템 경계를 어떻게 건너는지 봅니다. 가로 칸(참여자) 하나가 시스템 하나이고, 화살표마다 [연결 상태](../RELEASES/draft/compatibility.md)를 괄호 안에 적었습니다.
 > 연결 표에 **없는** 구간은 지어내지 않고 `확인 중`으로 적었습니다. 시스템 안에서 끝나는 일(접수 · 회계)은 연결이 아니므로 메모로만 둡니다.
 
-근거: [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 · 실제 호출 확인 없음) · 대외 청구 전송은 [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+근거: [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 대외 청구 전송은 [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
 
 ```mermaid
 sequenceDiagram
