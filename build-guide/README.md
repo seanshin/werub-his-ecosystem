@@ -4,7 +4,7 @@
 > **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is still a draft**, but it now carries a first follow-along: S0–S8 were walked on fresh installs built from the pinned base commits (2026-09-13~16, one development PC, arm64, no GPU, on a network that could not reach the outside). Stages S1 · S3 · S4 · S5 · S6 · S7 · S8 were installed and called between the new installs; **S2 (public site, patient app, video) was not installed**. Anything we could not confirm is marked `확인 필요(따라가기)` rather than filled in with invented steps (60 such marks; what remains needs reference hardware with a GPU, real-data volume, the cutover to real mode, or a human decision). A generated appendix, [replace-list.md](replace-list.md), lists the code files that still carry another installation's address or institution-identifying strings — paths only, never the strings.
 
 
-> ⚠️ **초안 — 새 설치본으로 S0~S8 을 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 격리 네트워크). **남은 `확인 필요(따라가기)` 40곳**은 x86 · GPU 기준 장비 · 실데이터 규모 · 리얼 전환 · 사람 결정이 필요한 곳입니다.
+> ⚠️ **초안 — 새 설치본으로 S0~S8 을 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 격리 네트워크). **남은 `확인 필요(따라가기)` 24곳**은 x86 · GPU 기준 장비 · 실데이터 규모 · 리얼 전환 · 사람 결정이 필요한 곳입니다.
 >
 > 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)의 버전 조합 · HIS v4.18.0(기준 커밋 `e9d303984f80`) · 작성 2026-09-11
 > 사실 확인: 생태계 자료 측 조사 기준입니다. 시스템 담당 확인 전입니다.
@@ -33,7 +33,7 @@
 
 표기 약속:
 
-- `확인 필요(따라가기)` — 공개 자료로 확인하지 못한 명령 · 절차 · 수치입니다. 1차 따라가기(2026-09-13~16)에서 답이 나온 곳은 실측으로 채웠고, **남은 40곳**은 기준 장비 · 사람 결정 · 미설치 시스템 · 담당 회신에 묶여 있습니다. 이 표시가 붙은 곳을 **지어낸 절차로 채우지 않았습니다.**
+- `확인 필요(따라가기)` — 공개 자료로 확인하지 못한 명령 · 절차 · 수치입니다. 1차 따라가기(2026-09-13~16)에서 답이 나온 곳은 실측으로 채웠고, **남은 24곳**은 기준 장비 · 사람 결정 · 미설치 시스템 · 담당 회신에 묶여 있습니다. 이 표시가 붙은 곳을 **지어낸 절차로 채우지 않았습니다.**
 - **값은 싣지 않습니다.** 주소 · 비밀값 · 계정은 `<your-hospital>` · `example.org` · `<비밀값>` 같은 자리표시로 씁니다.
 - 연결 상태는 `검증됨`(확인일 필수) · `구현·미검증` · `설계만` · `미구현` · `중단` 으로 적습니다. 이 초안의 연결에는 `검증됨` 이 27개 있습니다 — 목록은 [따라가 본 결과](follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지는 코드 대조(2026-09-11)입니다.
 - AI 는 "보조한다 · 초안을 만든다"로 씁니다. 규제는 `대응 설계` · `자체 점검 완료` · `외부 인증·승인`(증빙이 있을 때만)으로 씁니다.
@@ -78,7 +78,7 @@ S2~S6 은 필요한 것만, 필요한 순서로 붙입니다. 13개를 다 세�
 
 항목을 단계에 나눈 것은 이 가이드의 배정입니다. HIS 화면에는 단계 구분이 없습니다. 결정 등록부의 `개시 전 필수` 11개는 S0 · S1 · S2 · S5 · S6 · S8 에 흩어져 있고, [S8](S8-go-real.md)에서 한 번에 다시 확인합니다.
 
-**부록** — [바꿔야 할 코드 기본값](replace-list.md)(자동 생성): 11개 저장소의 기준 커밋에서 **특정 설치본의 주소**(245파일)와 **기관 식별 문자열**(323파일 · 2026-09-16 거부 목록에 도메인 2건을 더해 다시 셈)이 코드에 박힌 파일의 경로. S0 · S1 · S3 에서 씁니다. 문구는 싣지 않습니다.
+**부록** — [바꿔야 할 코드 기본값](replace-list.md)(자동 생성): 11개 저장소의 기준 커밋에서 **특정 설치본의 주소**(299파일)와 **기관 식별 문자열**(323파일) · 2026-09-17 거부 목록에 도메인을 더해 다시 셈이 코드에 박힌 파일의 경로. S0 · S1 · S3 에서 씁니다. 문구는 싣지 않습니다.
 
 ### 시스템 밖에서 병행하는 개원 준비
 
@@ -102,8 +102,8 @@ S2~S6 은 필요한 것만, 필요한 순서로 붙입니다. 13개를 다 세�
 | 데이터베이스 · 캐시 | **PostgreSQL 16**: HIS · sign · LIS · PACS · twin · edu · Clinic(주 DB) — **PostgreSQL 15**: ERP · Clinic 의 벡터 DB(`pgvector`). **Redis 7**: HIS · LIS · ERP · PACS · twin · cerno · edu · Clinic(sign 은 compose 에 캐시를 두지 않습니다). ⚠️ **한 서버에 다 올리면 PostgreSQL 판본이 두 가지 필요합니다.** **Redis 는 7.4 부터 약관이 달라집니다**(`7-alpine` 태그가 기준일에 7.4.11 을 받음) | 각 저장소 compose 의 이미지 태그를 기준 커밋에서 읽음(2026-09-12) · [THIRD_PARTY.md §1](../THIRD_PARTY.md#1-별도-서비스로-쓰는-제3자-서버) |
 | 서버 규모 | 8개 시스템(HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi)이 **8코어 · 16GB 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용 · 스왑 여유 없음). **권장 사양이 아니라 하한에 가까운 기록**입니다. 따라가기(2026-09-13~16)에서 HIS · ERP · PACS 코어 · AI 를 함께 띄운 조합은 메모리 약 **2.9GB**(가상 데이터 · 사용자 없음 · 기준 장비 아님)였고, 🔴 **디스크가 먼저 모자랐습니다**(60GB 가상 머신이 두 번 가득 참 → **200GB 이상** 권장). 사용자 · 실데이터 규모를 반영한 시스템별 권장 사양은 `확인 필요(따라가기)` | [README](../README.md#최소한의-사양과-구현으로-쓸-수-있게) · [S0](S0-prepare.md) |
 | GPU(선택) | AI 를 쓸 때만 필요합니다. 기준 GPU 는 **소비자용 한 장(NVIDIA RTX 5080 · VRAM 16GB)** 입니다. AI Server 없이도 HIS 는 동작하도록 설계했습니다. GPU 없는 환경의 속도 · 동시 사용자 처리량 · 모델별 응답 시간은 아직 계측이 없습니다 | [S6](S6-ai.md) |
-| 네트워크 | 🔴 **첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다.** 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 — [파일 목록](replace-list.md) · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있습니다** | [S0](S0-prepare.md) · [S1](S1-core-his.md) |
-| 기관명 | HIS 코드에 병원명이 고정 문자열로 남은 파일이 118개 있습니다(2026-09-11 기준 커밋에서 다시 셈 · 09-10 값과 같음). 설정값으로 옮기는 작업이 끝나기 전까지는 **코드를 고쳐야** 자기 병원명이 나옵니다 | [S1](S1-core-his.md) |
+| 네트워크 | 🔴 **첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다.** 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 299개 — [파일 목록](replace-list.md) · 문서 제외 · 2026-09-17 기준 커밋에서 다시 셈). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있습니다** | [S0](S0-prepare.md) · [S1](S1-core-his.md) |
+| 기관명 | HIS 코드에 병원명이 고정 문자열로 남은 파일이 118개 있습니다(2026-09-17 기준 커밋에서 다시 셈에서 다시 셈 · 09-10 값과 같음). 설정값으로 옮기는 작업이 끝나기 전까지는 **코드를 고쳐야** 자기 병원명이 나옵니다 | [S1](S1-core-his.md) |
 | 코드 마스터 · 모델 가중치 | 이 저장소에도 생태계 소스에도 들어 있지 않습니다. **기관이 배포 기관 · 모델 제공처에서 직접 받아 반입**합니다 | [THIRD_PARTY.md §3 · §4](../THIRD_PARTY.md) |
 | 대외 기관 전송 | 청구 · 자격조회 · 법정 보고 전송 모듈은 **구현돼 있지 않습니다**. 기관이 모듈을 붙이거나 기존 청구 소프트웨어와 함께 씁니다 | [README](../README.md#지금-알고-시작해야-할-것) |
 

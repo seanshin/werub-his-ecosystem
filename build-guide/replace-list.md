@@ -14,10 +14,10 @@
 
 | 시스템 | 기준 커밋 | 파일 | 주소 | 식별 |
 |---|---|---:|---:|---:|
-| [HIS (+공개 홈페이지 · 환자 앱)](#his) | `e9d303984f80` | 236 | 73 | 211 |
+| [HIS (+공개 홈페이지 · 환자 앱)](#his) | `e9d303984f80` | 247 | 122 | 211 |
 | [sign](#sign) | `93f56d839c3f` | 19 | 19 | 3 |
 | [LIS](#lis) | `ffb34e9d1dbc` | 19 | 16 | 11 |
-| [ERP](#erp) | `0e1f54c5b902` | 38 | 31 | 18 |
+| [ERP](#erp) | `0e1f54c5b902` | 41 | 36 | 18 |
 | [PACS](#pacs) | `532a8ed13e87` | 34 | 31 | 28 |
 | [AI Server](#ai-server) | `55acaee90068` | 21 | 13 | 10 |
 | [twin](#twin) | `526b4f9a4d3f` | 10 | 10 | 4 |
@@ -25,17 +25,17 @@
 | [edu](#edu) | `f8127e6ee278` | 42 | 20 | 26 |
 | [Clinic (병원 서비스 웹 · 병원 서비스 API 범위)](#clinic) | `2b20a89b7c3a` | 18 | 18 | 3 |
 | [Jitsi](#jitsi) | `0984fbec7177` | 10 | 10 | 7 |
-| **합계** | | **451** | 245 | 323 |
+| **합계** | | **465** | 299 | 323 |
 
 ## his
 
-**HIS (+공개 홈페이지 · 환자 앱)** — 236개
+**HIS (+공개 홈페이지 · 환자 앱)** — 247개
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
 | `apps/api/prisma/manual/seed-integrity-recalibration-20260818.sql` | ● | ● |
 | `apps/api/prisma/seed.ts` | ● | ● |
-| `apps/api/prisma/seeds/consult-desk.seed.cjs` |  | ● |
+| `apps/api/prisma/seeds/consult-desk.seed.cjs` | ● | ● |
 | `apps/api/src/common/util/ai-egress-url.ts` | ● |  |
 | `apps/api/src/common/util/ai-phi-redact.ts` |  | ● |
 | `apps/api/src/common/util/public-url.ts` | ● |  |
@@ -47,7 +47,7 @@
 | `apps/api/src/modules/config/config-runtime.service.ts` | ● | ● |
 | `apps/api/src/modules/decision-registry/decision.registry.ts` | ● |  |
 | `apps/api/src/modules/document/document.service.ts` |  | ● |
-| `apps/api/src/modules/hospital-info/hospital-info.service.ts` |  | ● |
+| `apps/api/src/modules/hospital-info/hospital-info.service.ts` | ● | ● |
 | `apps/api/src/modules/medical-ai/medical-ai.service.ts` |  | ● |
 | `apps/api/src/modules/mobile/identity/identity.service.ts` | ● | ● |
 | `apps/api/src/modules/partner-request/partner-request.controller.ts` | ● |  |
@@ -57,18 +57,21 @@
 | `apps/api/src/modules/voucher/totp.ts` |  | ● |
 | `apps/api/src/modules/voucher/voucher-email.service.ts` | ● | ● |
 | `apps/api/src/modules/voucher/voucher.service.ts` |  | ● |
-| `apps/api/src/sentinel/pipe-registry.ts` |  | ● |
+| `apps/api/src/sentinel/pipe-registry.ts` | ● | ● |
 | `apps/api/test/ai-call-log/ai-call-log-sink.spec.ts` | ● |  |
 | `apps/api/test/ai-call-log/model-releases.spec.ts` | ● |  |
-| `apps/api/test/architecture/deploy-public-site-notice.spec.ts` |  | ● |
+| `apps/api/test/architecture/deploy-public-site-notice.spec.ts` | ● | ● |
 | `apps/api/test/document/document-download-token.spec.ts` | ● | ● |
 | `apps/api/test/e2e/core-workflows.e2e.spec.ts` | ● |  |
+| `apps/api/test/e2e/emergency-full-flow.spec.ts` | ● |  |
+| `apps/api/test/e2e/inpatient-full-flow.spec.ts` | ● |  |
+| `apps/api/test/e2e/outpatient-full-flow.spec.ts` | ● |  |
 | `apps/api/test/ess/clinical-certificate-approval.spec.ts` | ● | ● |
 | `apps/api/test/ess/consent-doctor-approval.spec.ts` | ● | ● |
 | `apps/api/test/ess/nursing-note-cosign.spec.ts` | ● | ● |
 | `apps/api/test/ess/record-copy-approval.spec.ts` | ● | ● |
 | `apps/api/test/evidence/evidence-extract.spec.ts` |  | ● |
-| `apps/api/test/hospital-info/homepage-live-freshness.spec.ts` |  | ● |
+| `apps/api/test/hospital-info/homepage-live-freshness.spec.ts` | ● | ● |
 | `apps/api/test/hospital-info/public-exposure.contract.spec.ts` | ● | ● |
 | `apps/api/test/integration/his-webhooks.service.spec.ts` | ● | ● |
 | `apps/api/test/medical-ai/ai-egress-canon.spec.ts` | ● |  |
@@ -122,18 +125,18 @@
 | `apps/homepage/src/app/guide/funeral/page.tsx` |  | ● |
 | `apps/homepage/src/app/health-info/[slug]/layout.tsx` |  | ● |
 | `apps/homepage/src/app/healthz/route.ts` |  | ● |
-| `apps/homepage/src/app/home/page.tsx` |  | ● |
-| `apps/homepage/src/app/international/insurance/page.tsx` |  | ● |
+| `apps/homepage/src/app/home/page.tsx` | ● | ● |
+| `apps/homepage/src/app/international/insurance/page.tsx` | ● | ● |
 | `apps/homepage/src/app/international/interoperability/page.tsx` | ● | ● |
-| `apps/homepage/src/app/international/page.tsx` |  | ● |
-| `apps/homepage/src/app/international/partners/page.tsx` |  | ● |
+| `apps/homepage/src/app/international/page.tsx` | ● | ● |
+| `apps/homepage/src/app/international/partners/page.tsx` | ● | ● |
 | `apps/homepage/src/app/ja/layout.tsx` | ● | ● |
 | `apps/homepage/src/app/ja/page.tsx` | ● | ● |
-| `apps/homepage/src/app/layout.tsx` |  | ● |
+| `apps/homepage/src/app/layout.tsx` | ● | ● |
 | `apps/homepage/src/app/news/[slug]/layout.tsx` |  | ● |
 | `apps/homepage/src/app/news/layout.tsx` |  | ● |
 | `apps/homepage/src/app/news/news-list-client.tsx` |  | ● |
-| `apps/homepage/src/app/news/recruit/recruit-list-client.tsx` |  | ● |
+| `apps/homepage/src/app/news/recruit/recruit-list-client.tsx` | ● | ● |
 | `apps/homepage/src/app/privacy/page.tsx` |  | ● |
 | `apps/homepage/src/app/search/search-client.tsx` |  | ● |
 | `apps/homepage/src/app/terms/page.tsx` |  | ● |
@@ -152,7 +155,8 @@
 | `apps/mobile/app/(tabs)/settings.tsx` | ● | ● |
 | `apps/mobile/app/(tabs)/telehealth.tsx` | ● | ● |
 | `apps/mobile/src/lib/api-client.ts` | ● | ● |
-| `apps/web/src/app/(auth)/login/page.tsx` |  | ● |
+| `apps/web/.env.development` | ● |  |
+| `apps/web/src/app/(auth)/login/page.tsx` | ● | ● |
 | `apps/web/src/app/(homepage)/about/csr/page.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/about/directions/page.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/about/facility/page.tsx` |  | ● |
@@ -173,31 +177,33 @@
 | `apps/web/src/app/(homepage)/guide/emergency/page.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/guide/funeral/page.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/health-info/[slug]/layout.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/home/page.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/international/insurance/page.tsx` |  | ● |
+| `apps/web/src/app/(homepage)/home/page.tsx` | ● | ● |
+| `apps/web/src/app/(homepage)/international/insurance/page.tsx` | ● | ● |
 | `apps/web/src/app/(homepage)/international/interoperability/page.tsx` | ● | ● |
-| `apps/web/src/app/(homepage)/international/page.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/international/partners/page.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/layout.tsx` |  | ● |
+| `apps/web/src/app/(homepage)/international/page.tsx` | ● | ● |
+| `apps/web/src/app/(homepage)/international/partners/page.tsx` | ● | ● |
+| `apps/web/src/app/(homepage)/layout.tsx` | ● | ● |
 | `apps/web/src/app/(homepage)/news/[slug]/layout.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/news/layout.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/news/news-list-client.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/news/recruit/recruit-list-client.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/privacy/page.tsx` |  | ● |
+| `apps/web/src/app/(homepage)/news/recruit/recruit-list-client.tsx` | ● | ● |
+| `apps/web/src/app/(homepage)/privacy/page.tsx` | ● | ● |
 | `apps/web/src/app/(homepage)/robots.ts` | ● | ● |
 | `apps/web/src/app/(homepage)/search/search-client.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/sitemap.ts` | ● | ● |
-| `apps/web/src/app/(homepage)/support/page.tsx` |  | ● |
+| `apps/web/src/app/(homepage)/support/page.tsx` | ● | ● |
 | `apps/web/src/app/(homepage)/terms/page.tsx` |  | ● |
 | `apps/web/src/app/(main)/admin/analytics/page.tsx` |  | ● |
 | `apps/web/src/app/(main)/admin/blockchain-cert/page.tsx` |  | ● |
-| `apps/web/src/app/(main)/admin/homepage/banners/page.tsx` |  | ● |
-| `apps/web/src/app/(main)/admin/homepage/deploy/page.tsx` |  | ● |
-| `apps/web/src/app/(main)/admin/homepage/page.tsx` |  | ● |
+| `apps/web/src/app/(main)/admin/homepage/banners/page.tsx` | ● | ● |
+| `apps/web/src/app/(main)/admin/homepage/deploy/page.tsx` | ● | ● |
+| `apps/web/src/app/(main)/admin/homepage/page.tsx` | ● | ● |
 | `apps/web/src/app/(main)/admin/homepage/seo/page.tsx` | ● | ● |
-| `apps/web/src/app/(main)/admin/hospital-info/page.tsx` |  | ● |
+| `apps/web/src/app/(main)/admin/hospital-info/page.tsx` | ● | ● |
 | `apps/web/src/app/(main)/admin/status/page.tsx` |  | ● |
+| `apps/web/src/app/(main)/admin/terminal-security/page.tsx` | ● |  |
 | `apps/web/src/app/(main)/consent/templates/page.tsx` |  | ● |
+| `apps/web/src/app/(main)/crm/page.tsx` | ● |  |
 | `apps/web/src/app/(main)/dashboard/components/SessionInfo.tsx` |  | ● |
 | `apps/web/src/app/(main)/departments/page.tsx` |  | ● |
 | `apps/web/src/app/(main)/doctors/page.tsx` |  | ● |
@@ -207,14 +213,14 @@
 | `apps/web/src/app/(main)/print/consent/[id]/page.tsx` |  | ● |
 | `apps/web/src/app/(main)/print/opinion/[encounterId]/page.tsx` |  | ● |
 | `apps/web/src/app/(main)/reception/components/ReceptionTicket.tsx` |  | ● |
-| `apps/web/src/app/(main)/recruit/page.tsx` |  | ● |
+| `apps/web/src/app/(main)/recruit/page.tsx` | ● | ● |
 | `apps/web/src/app/consent-device/page.tsx` |  | ● |
 | `apps/web/src/app/distributor/page.tsx` |  | ● |
-| `apps/web/src/app/en/layout.tsx` |  | ● |
-| `apps/web/src/app/en/page.tsx` |  | ● |
+| `apps/web/src/app/en/layout.tsx` | ● | ● |
+| `apps/web/src/app/en/page.tsx` | ● | ● |
 | `apps/web/src/app/guide/[id]/page.tsx` |  | ● |
-| `apps/web/src/app/ja/layout.tsx` |  | ● |
-| `apps/web/src/app/ja/page.tsx` |  | ● |
+| `apps/web/src/app/ja/layout.tsx` | ● | ● |
+| `apps/web/src/app/ja/page.tsx` | ● | ● |
 | `apps/web/src/app/layout.tsx` |  | ● |
 | `apps/web/src/app/manifest.ts` |  | ● |
 | `apps/web/src/app/portal/_auth/LoginForm.tsx` |  | ● |
@@ -229,9 +235,9 @@
 | `apps/web/src/app/tablet/layout.tsx` |  | ● |
 | `apps/web/src/app/tablet/page.tsx` |  | ● |
 | `apps/web/src/app/verify/page.tsx` |  | ● |
-| `apps/web/src/app/zh/layout.tsx` |  | ● |
-| `apps/web/src/app/zh/page.tsx` |  | ● |
-| `apps/web/src/components/admin/CategoryCmsPage.tsx` |  | ● |
+| `apps/web/src/app/zh/layout.tsx` | ● | ● |
+| `apps/web/src/app/zh/page.tsx` | ● | ● |
+| `apps/web/src/components/admin/CategoryCmsPage.tsx` | ● | ● |
 | `apps/web/src/components/document/lib/hospitalProfile.ts` |  | ● |
 | `apps/web/src/components/homepage/CenterIllustration.tsx` |  | ● |
 | `apps/web/src/components/homepage/CmsCategoryPage.tsx` |  | ● |
@@ -245,30 +251,35 @@
 | `apps/web/src/components/print/PrintGuard.tsx` |  | ● |
 | `apps/web/src/components/print/PrintLayout.tsx` |  | ● |
 | `apps/web/src/components/signature/ConsentSignView.tsx` |  | ● |
-| `apps/web/src/components/ui/rich-text-editor.tsx` |  | ● |
+| `apps/web/src/components/ui/rich-text-editor.tsx` | ● | ● |
 | `apps/web/src/components/voice-emr/BiometricConsentModal.tsx` | ● |  |
 | `apps/web/src/lib/crypto/webauthn.ts` |  | ● |
 | `apps/web/src/lib/hospital-contact.ts` |  | ● |
 | `apps/web/src/lib/public-fetch.ts` | ● | ● |
-| `apps/web/test/architecture/homepage-lib-copy-parity.spec.ts` |  | ● |
+| `apps/web/src/lib/test-accounts.ts` | ● |  |
+| `apps/web/test/architecture/homepage-lib-copy-parity.spec.ts` | ● | ● |
 | `apps/web/test/architecture/hospital-contact-canon.spec.ts` |  | ● |
-| `apps/web/test/ui/cms-editor-guard.spec.ts` |  | ● |
+| `apps/web/test/ui/cms-editor-guard.spec.ts` | ● | ● |
 | `apps/web/test/ui/homepage-w9-truthfulness.spec.ts` | ● | ● |
-| `apps/web/test/ui/public-site-w9-truthfulness.spec.ts` |  | ● |
+| `apps/web/test/ui/no-test-accounts-in-prod.spec.ts` | ● |  |
+| `apps/web/test/ui/public-site-w9-truthfulness.spec.ts` | ● | ● |
 | `infra/scripts/backup.sh` |  | ● |
 | `infra/scripts/build-homepage.sh` | ● | ● |
 | `infra/scripts/deploy.sh` | ● | ● |
 | `infra/scripts/e2e-flow-probe.sh` | ● | ● |
+| `infra/scripts/esign6-multisig-e2e.mjs` | ● |  |
 | `infra/scripts/postgres-watch.sh` |  | ● |
 | `infra/scripts/probe-chart-ai.py` | ● | ● |
 | `infra/scripts/smoke-e2e.sh` | ● | ● |
+| `infra/scripts/smoke-test.sh` | ● |  |
 | `packages/shared/src/i18n/messages/admin4.ts` |  | ● |
-| `packages/shared/src/i18n/messages/admin5.ts` |  | ● |
-| `packages/shared/src/i18n/messages/admin7.ts` |  | ● |
+| `packages/shared/src/i18n/messages/admin5.ts` | ● | ● |
+| `packages/shared/src/i18n/messages/admin7.ts` | ● | ● |
 | `packages/shared/src/i18n/messages/dashboard.ts` |  | ● |
 | `packages/shared/src/i18n/messages/layoutchrome.ts` |  | ● |
 | `scripts/generate-homepage-images.sh` | ● |  |
 | `scripts/i18n-draft.mjs` | ● | ● |
+| `scripts/seed-checkup-protocol.mjs` | ● |  |
 
 ## sign
 
@@ -324,13 +335,13 @@
 
 ## erp
 
-**ERP** — 38개
+**ERP** — 41개
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
 | `apps/web/scripts/esign-relay-e2e.mjs` | ● | ● |
 | `apps/web/scripts/smoke-e2e.mjs` | ● | ● |
-| `apps/web/src/app/(app)/admin/org/page.tsx` |  | ● |
+| `apps/web/src/app/(app)/admin/org/page.tsx` | ● | ● |
 | `apps/web/src/lib/app-info.ts` | ● |  |
 | `infra/.env.example` | ● | ● |
 | `infra/bi/metabase/provision.py` |  | ● |
@@ -353,13 +364,16 @@
 | `services/core/src/erp/integrations/his_sign_origination.py` | ● |  |
 | `services/core/src/erp/integrations/settlement_callback.py` | ● |  |
 | `services/core/src/erp/integrations/weve_rag.py` | ● |  |
+| `services/core/tests/test_bi_sso.py` | ● |  |
 | `services/core/tests/test_clinic_staff.py` |  | ● |
 | `services/core/tests/test_diagnose_endpoint.py` | ● |  |
 | `services/core/tests/test_eapproval.py` | ● | ● |
 | `services/core/tests/test_groupware_attendance.py` |  | ● |
 | `services/core/tests/test_his_fee_push.py` | ● | ● |
+| `services/core/tests/test_his_feeds.py` | ● |  |
 | `services/core/tests/test_his_sign_origination.py` | ● |  |
-| `services/core/tests/test_org_settings.py` |  | ● |
+| `services/core/tests/test_inbound_consumer.py` | ● |  |
+| `services/core/tests/test_org_settings.py` | ● | ● |
 | `services/core/tests/test_rendering.py` | ● | ● |
 | `services/core/tests/test_settlement_callback.py` | ● | ● |
 | `services/core/tests/test_sign_mirror.py` | ● | ● |
