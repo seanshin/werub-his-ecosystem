@@ -54,8 +54,8 @@ QC 측정을 등록하면 **그 자리에서 `PASS`/`FAIL` 판정**이 붙습니
 | ✅ lis-1 | 결과 검증 — 자동 검증 · 델타 · 2차 검증 | [`lis-verify-worklist.png`](../assets/screens/lis-verify-worklist.png) | 확인(2026-09-12) |
 | 🟡 lis-2 | 위험치 통보와 복창 기록 | `lis-critical-value.png` | 참고치·위험치 **기준값**은 [서명 워크시트](#화면)에 있음 · 통보·복창 기록 화면은 남음 |
 | ✅ lis-3 | 검체 접수와 진행 상태 — 상태별 분모 6가지 | [`lis-order-receipt.png`](../assets/screens/lis-order-receipt.png) | 확인(2026-09-12) |
-| ⬜ lis-4 | 병리 — 슬라이드와 스캔 워크리스트 | `lis-pathology.png` | 🟡 **이번에 쓴 계정의 왼쪽 메뉴에서는 보이지 않았습니다**(2026-09-12 · 분야 메뉴는 감염관리 · QC · 유전체). 역할에 따라 다를 수 있어 `확인 필요(따라가기)` |
-| ⬜ lis-5 | 수혈 — 출고 전 동의 확인 | `lis-transfusion.png` | 🟡 같은 이유로 확인하지 못했습니다(2026-09-12) · `확인 필요(따라가기)` |
+| ⬜ lis-4 | 병리 — 슬라이드와 스캔 워크리스트 | `lis-pathology.png` | 🟡 **이번에 쓴 계정의 왼쪽 메뉴에서는 보이지 않았습니다**(2026-09-12 · 분야 메뉴는 감염관리 · QC · 유전체). **원인을 코드에서 확인했습니다**(기준 커밋 · 2026-09-16) — 왼쪽 메뉴는 **역할별로 노출**되고 병리 메뉴는 **병리 역할 또는 관리자**에게만 보입니다. 캡처하려면 그 역할을 가진 계정으로 들어갑니다 |
+| ⬜ lis-5 | 수혈 — 출고 전 동의 확인 | `lis-transfusion.png` | 🟡 같은 이유입니다(2026-09-12) — 수혈 메뉴는 **혈액은행 역할 또는 관리자**에게만 보입니다(기준 커밋 확인 · 2026-09-16) |
 | ✅ lis-6 | 정도관리(QC · Westgard) — 즉시 판정 · 결과 확정 차단으로 이어짐 | [`lis-qc-westgard.png`](../assets/screens/lis-qc-westgard.png) | 확인(2026-09-12) |
 | ✅ lis-7 | **개시 서명·결재** — 참고치·델타 한계·EDI 매핑을 사람이 서명 | [`lis-signoff-worksheet.png`](../assets/screens/lis-signoff-worksheet.png) | 확인(2026-09-12) |
 

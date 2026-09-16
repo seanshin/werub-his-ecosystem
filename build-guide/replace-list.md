@@ -14,18 +14,18 @@
 
 | 시스템 | 기준 커밋 | 파일 | 주소 | 식별 |
 |---|---|---:|---:|---:|
-| [HIS (+공개 홈페이지 · 환자 앱)](#his) | `e9d303984f80` | 236 | 73 | 183 |
-| [sign](#sign) | `93f56d839c3f` | 19 | 19 | 0 |
-| [LIS](#lis) | `ffb34e9d1dbc` | 19 | 16 | 4 |
-| [ERP](#erp) | `0e1f54c5b902` | 38 | 31 | 12 |
-| [PACS](#pacs) | `532a8ed13e87` | 34 | 31 | 6 |
+| [HIS (+공개 홈페이지 · 환자 앱)](#his) | `e9d303984f80` | 236 | 73 | 211 |
+| [sign](#sign) | `93f56d839c3f` | 19 | 19 | 3 |
+| [LIS](#lis) | `ffb34e9d1dbc` | 19 | 16 | 11 |
+| [ERP](#erp) | `0e1f54c5b902` | 38 | 31 | 18 |
+| [PACS](#pacs) | `532a8ed13e87` | 34 | 31 | 28 |
 | [AI Server](#ai-server) | `55acaee90068` | 21 | 13 | 10 |
-| [twin](#twin) | `526b4f9a4d3f` | 10 | 10 | 1 |
-| [cerno](#cerno) | `4f5c22b331fc` | 4 | 4 | 0 |
+| [twin](#twin) | `526b4f9a4d3f` | 10 | 10 | 4 |
+| [cerno](#cerno) | `4f5c22b331fc` | 4 | 4 | 2 |
 | [edu](#edu) | `f8127e6ee278` | 42 | 20 | 26 |
-| [Clinic (병원 서비스 웹 · 병원 서비스 API 범위)](#clinic) | `2b20a89b7c3a` | 18 | 18 | 0 |
-| [Jitsi](#jitsi) | `0984fbec7177` | 10 | 10 | 2 |
-| **합계** | | **451** | 245 | 244 |
+| [Clinic (병원 서비스 웹 · 병원 서비스 API 범위)](#clinic) | `2b20a89b7c3a` | 18 | 18 | 3 |
+| [Jitsi](#jitsi) | `0984fbec7177` | 10 | 10 | 7 |
+| **합계** | | **451** | 245 | 323 |
 
 ## his
 
@@ -39,7 +39,7 @@
 | `apps/api/src/common/util/ai-egress-url.ts` | ● |  |
 | `apps/api/src/common/util/ai-phi-redact.ts` |  | ● |
 | `apps/api/src/common/util/public-url.ts` | ● |  |
-| `apps/api/src/main.ts` | ● |  |
+| `apps/api/src/main.ts` | ● | ● |
 | `apps/api/src/modules/agent-session/agent-session.service.ts` |  | ● |
 | `apps/api/src/modules/auth/passkey/passkey.service.ts` |  | ● |
 | `apps/api/src/modules/blockchain-cert/blockchain-cert.service.ts` |  | ● |
@@ -49,7 +49,7 @@
 | `apps/api/src/modules/document/document.service.ts` |  | ● |
 | `apps/api/src/modules/hospital-info/hospital-info.service.ts` |  | ● |
 | `apps/api/src/modules/medical-ai/medical-ai.service.ts` |  | ● |
-| `apps/api/src/modules/mobile/identity/identity.service.ts` | ● |  |
+| `apps/api/src/modules/mobile/identity/identity.service.ts` | ● | ● |
 | `apps/api/src/modules/partner-request/partner-request.controller.ts` | ● |  |
 | `apps/api/src/modules/pharmacy/pharmacy.service.ts` |  | ● |
 | `apps/api/src/modules/referral-letter/referral-letter.service.ts` |  | ● |
@@ -61,44 +61,44 @@
 | `apps/api/test/ai-call-log/ai-call-log-sink.spec.ts` | ● |  |
 | `apps/api/test/ai-call-log/model-releases.spec.ts` | ● |  |
 | `apps/api/test/architecture/deploy-public-site-notice.spec.ts` |  | ● |
-| `apps/api/test/document/document-download-token.spec.ts` | ● |  |
+| `apps/api/test/document/document-download-token.spec.ts` | ● | ● |
 | `apps/api/test/e2e/core-workflows.e2e.spec.ts` | ● |  |
-| `apps/api/test/ess/clinical-certificate-approval.spec.ts` | ● |  |
-| `apps/api/test/ess/consent-doctor-approval.spec.ts` | ● |  |
-| `apps/api/test/ess/nursing-note-cosign.spec.ts` | ● |  |
-| `apps/api/test/ess/record-copy-approval.spec.ts` | ● |  |
+| `apps/api/test/ess/clinical-certificate-approval.spec.ts` | ● | ● |
+| `apps/api/test/ess/consent-doctor-approval.spec.ts` | ● | ● |
+| `apps/api/test/ess/nursing-note-cosign.spec.ts` | ● | ● |
+| `apps/api/test/ess/record-copy-approval.spec.ts` | ● | ● |
 | `apps/api/test/evidence/evidence-extract.spec.ts` |  | ● |
 | `apps/api/test/hospital-info/homepage-live-freshness.spec.ts` |  | ● |
-| `apps/api/test/hospital-info/public-exposure.contract.spec.ts` | ● |  |
-| `apps/api/test/integration/his-webhooks.service.spec.ts` | ● |  |
+| `apps/api/test/hospital-info/public-exposure.contract.spec.ts` | ● | ● |
+| `apps/api/test/integration/his-webhooks.service.spec.ts` | ● | ● |
 | `apps/api/test/medical-ai/ai-egress-canon.spec.ts` | ● |  |
 | `apps/api/test/medical-ai/ai-egress-guard.spec.ts` | ● |  |
 | `apps/api/test/medical-ai/ai-egress-hosts-failclosed.spec.ts` | ● |  |
-| `apps/api/test/medical-ai/ai-grounding-guard.spec.ts` | ● |  |
+| `apps/api/test/medical-ai/ai-grounding-guard.spec.ts` | ● | ● |
 | `apps/api/test/medical-ai/auto-soap-proposal.spec.ts` | ● |  |
 | `apps/api/test/medical-ai/drug-generic-term-guard.spec.ts` | ● |  |
-| `apps/api/test/medical-ai/image-url-reachability.spec.ts` | ● |  |
+| `apps/api/test/medical-ai/image-url-reachability.spec.ts` | ● | ● |
 | `apps/api/test/medical-ai/medical-ai.service.spec.ts` | ● |  |
 | `apps/api/test/medical-ai/no-auto-key-reissue.spec.ts` |  | ● |
 | `apps/api/test/medical-record-copy/checkup-pdf-keys.spec.ts` |  | ● |
 | `apps/api/test/mobile/safety-switch-default.spec.ts` | ● |  |
 | `apps/api/test/patient/patient-field-mask.spec.ts` |  | ● |
-| `apps/api/test/pre-auth/pre-auth-portal.service.spec.ts` | ● |  |
-| `apps/api/test/pre-auth/pre-auth.service.spec.ts` | ● |  |
+| `apps/api/test/pre-auth/pre-auth-portal.service.spec.ts` | ● | ● |
+| `apps/api/test/pre-auth/pre-auth.service.spec.ts` | ● | ● |
 | `apps/api/test/prescription/fixtures/real-medication-vocabulary.ts` | ● |  |
 | `apps/api/test/quality/measurement-authz-and-limit.spec.ts` | ● |  |
 | `apps/api/test/setup-env.ts` | ● |  |
-| `apps/api/test/sign-integration/sign-completed-emit.spec.ts` | ● |  |
+| `apps/api/test/sign-integration/sign-completed-emit.spec.ts` | ● | ● |
 | `apps/api/test/sign-integration/sign-hardening.spec.ts` | ● |  |
 | `apps/api/test/smart-auth/ehr-launch.spec.ts` | ● |  |
 | `apps/api/test/transfer/transfer-snapshot-failure.spec.ts` |  | ● |
 | `apps/api/test/transfer/transfer.controller.spec.ts` |  | ● |
 | `apps/api/test/transfer/transfer.service.spec.ts` |  | ● |
 | `apps/homepage/.env.production.example` | ● | ● |
-| `apps/homepage/amplify.yml` | ● |  |
+| `apps/homepage/amplify.yml` | ● | ● |
 | `apps/homepage/Dockerfile` | ● | ● |
-| `apps/homepage/ecosystem.config.cjs` | ● |  |
-| `apps/homepage/next.config.ts` | ● |  |
+| `apps/homepage/ecosystem.config.cjs` | ● | ● |
+| `apps/homepage/next.config.ts` | ● | ● |
 | `apps/homepage/src/app/about/csr/page.tsx` |  | ● |
 | `apps/homepage/src/app/about/directions/page.tsx` |  | ● |
 | `apps/homepage/src/app/about/facility/page.tsx` |  | ● |
@@ -146,12 +146,12 @@
 | `apps/homepage/src/components/homepage/GNB.tsx` |  | ● |
 | `apps/homepage/src/components/homepage/HeroSlider.tsx` |  | ● |
 | `apps/homepage/src/components/homepage/NewsSlider.tsx` |  | ● |
-| `apps/homepage/src/lib/public-fetch.ts` | ● |  |
+| `apps/homepage/src/lib/public-fetch.ts` | ● | ● |
 | `apps/homepage/src/lib/site-info.ts` | ● | ● |
 | `apps/mobile/app/_layout.tsx` | ● |  |
-| `apps/mobile/app/(tabs)/settings.tsx` | ● |  |
-| `apps/mobile/app/(tabs)/telehealth.tsx` | ● |  |
-| `apps/mobile/src/lib/api-client.ts` | ● |  |
+| `apps/mobile/app/(tabs)/settings.tsx` | ● | ● |
+| `apps/mobile/app/(tabs)/telehealth.tsx` | ● | ● |
+| `apps/mobile/src/lib/api-client.ts` | ● | ● |
 | `apps/web/src/app/(auth)/login/page.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/about/csr/page.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/about/directions/page.tsx` |  | ● |
@@ -184,7 +184,7 @@
 | `apps/web/src/app/(homepage)/news/news-list-client.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/news/recruit/recruit-list-client.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/privacy/page.tsx` |  | ● |
-| `apps/web/src/app/(homepage)/robots.ts` | ● |  |
+| `apps/web/src/app/(homepage)/robots.ts` | ● | ● |
 | `apps/web/src/app/(homepage)/search/search-client.tsx` |  | ● |
 | `apps/web/src/app/(homepage)/sitemap.ts` | ● | ● |
 | `apps/web/src/app/(homepage)/support/page.tsx` |  | ● |
@@ -249,26 +249,26 @@
 | `apps/web/src/components/voice-emr/BiometricConsentModal.tsx` | ● |  |
 | `apps/web/src/lib/crypto/webauthn.ts` |  | ● |
 | `apps/web/src/lib/hospital-contact.ts` |  | ● |
-| `apps/web/src/lib/public-fetch.ts` | ● |  |
+| `apps/web/src/lib/public-fetch.ts` | ● | ● |
 | `apps/web/test/architecture/homepage-lib-copy-parity.spec.ts` |  | ● |
 | `apps/web/test/architecture/hospital-contact-canon.spec.ts` |  | ● |
 | `apps/web/test/ui/cms-editor-guard.spec.ts` |  | ● |
 | `apps/web/test/ui/homepage-w9-truthfulness.spec.ts` | ● | ● |
 | `apps/web/test/ui/public-site-w9-truthfulness.spec.ts` |  | ● |
 | `infra/scripts/backup.sh` |  | ● |
-| `infra/scripts/build-homepage.sh` | ● |  |
+| `infra/scripts/build-homepage.sh` | ● | ● |
 | `infra/scripts/deploy.sh` | ● | ● |
-| `infra/scripts/e2e-flow-probe.sh` | ● |  |
+| `infra/scripts/e2e-flow-probe.sh` | ● | ● |
 | `infra/scripts/postgres-watch.sh` |  | ● |
-| `infra/scripts/probe-chart-ai.py` | ● |  |
-| `infra/scripts/smoke-e2e.sh` | ● |  |
+| `infra/scripts/probe-chart-ai.py` | ● | ● |
+| `infra/scripts/smoke-e2e.sh` | ● | ● |
 | `packages/shared/src/i18n/messages/admin4.ts` |  | ● |
 | `packages/shared/src/i18n/messages/admin5.ts` |  | ● |
 | `packages/shared/src/i18n/messages/admin7.ts` |  | ● |
 | `packages/shared/src/i18n/messages/dashboard.ts` |  | ● |
 | `packages/shared/src/i18n/messages/layoutchrome.ts` |  | ● |
 | `scripts/generate-homepage-images.sh` | ● |  |
-| `scripts/i18n-draft.mjs` | ● |  |
+| `scripts/i18n-draft.mjs` | ● | ● |
 
 ## sign
 
@@ -276,10 +276,10 @@
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
-| `.env.example` | ● |  |
-| `.env.prod.example` | ● |  |
+| `.env.example` | ● | ● |
+| `.env.prod.example` | ● | ● |
 | `<가림 — 경로에 식별 문자열>` | ● |  |
-| `docker-compose.prod.yml` | ● |  |
+| `docker-compose.prod.yml` | ● | ● |
 | `scripts/smoke.mjs` | ● |  |
 | `src/application/sign-request-facade.service.ts` | ● |  |
 | `src/application/signature-request.service.ts` | ● |  |
@@ -303,13 +303,13 @@
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
 | `<가림 — 경로에 식별 문자열>` | ● |  |
-| `apps/api/.env.example` | ● |  |
-| `apps/api/src/integration/his-fhir-client.ts` | ● |  |
-| `apps/api/src/integration/his-fhir.spec.ts` | ● |  |
-| `apps/api/src/integration/his-integration-client.spec.ts` | ● |  |
-| `apps/api/src/integration/his-integration-client.ts` | ● |  |
-| `apps/api/src/integration/integration.service.ts` | ● |  |
-| `apps/api/src/integration/pacs-client.spec.ts` | ● |  |
+| `apps/api/.env.example` | ● | ● |
+| `apps/api/src/integration/his-fhir-client.ts` | ● | ● |
+| `apps/api/src/integration/his-fhir.spec.ts` | ● | ● |
+| `apps/api/src/integration/his-integration-client.spec.ts` | ● | ● |
+| `apps/api/src/integration/his-integration-client.ts` | ● | ● |
+| `apps/api/src/integration/integration.service.ts` | ● | ● |
+| `apps/api/src/integration/pacs-client.spec.ts` | ● | ● |
 | `apps/api/src/modules/admin/user-admin.service.ts` | ● |  |
 | `apps/api/src/modules/health/metrics.controller.ts` | ● |  |
 | `apps/api/src/modules/settings/webhook-host.spec.ts` | ● |  |
@@ -328,14 +328,14 @@
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
-| `apps/web/scripts/esign-relay-e2e.mjs` | ● |  |
-| `apps/web/scripts/smoke-e2e.mjs` | ● |  |
+| `apps/web/scripts/esign-relay-e2e.mjs` | ● | ● |
+| `apps/web/scripts/smoke-e2e.mjs` | ● | ● |
 | `apps/web/src/app/(app)/admin/org/page.tsx` |  | ● |
 | `apps/web/src/lib/app-info.ts` | ● |  |
 | `infra/.env.example` | ● | ● |
 | `infra/bi/metabase/provision.py` |  | ● |
 | `infra/deploy.sh` |  | ● |
-| `infra/docker-compose.bi.yml` | ● |  |
+| `infra/docker-compose.bi.yml` | ● | ● |
 | `infra/ops/host-health-check.py` | ● |  |
 | `infra/sync-to-prod.sh` |  | ● |
 | `services/core/alembic/versions/0226_pending_decisions.py` | ● |  |
@@ -357,12 +357,12 @@
 | `services/core/tests/test_diagnose_endpoint.py` | ● |  |
 | `services/core/tests/test_eapproval.py` | ● | ● |
 | `services/core/tests/test_groupware_attendance.py` |  | ● |
-| `services/core/tests/test_his_fee_push.py` | ● |  |
+| `services/core/tests/test_his_fee_push.py` | ● | ● |
 | `services/core/tests/test_his_sign_origination.py` | ● |  |
 | `services/core/tests/test_org_settings.py` |  | ● |
 | `services/core/tests/test_rendering.py` | ● | ● |
-| `services/core/tests/test_settlement_callback.py` | ● |  |
-| `services/core/tests/test_sign_mirror.py` | ● |  |
+| `services/core/tests/test_settlement_callback.py` | ● | ● |
+| `services/core/tests/test_sign_mirror.py` | ● | ● |
 | `services/core/tests/test_sign_track_a.py` | ● |  |
 | `services/core/tests/test_sso.py` | ● | ● |
 | `services/core/tests/test_weve_rag.py` | ● |  |
@@ -373,38 +373,38 @@
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
-| `admin/src/app/reading/view/ExternalEsign.tsx` | ● |  |
+| `admin/src/app/reading/view/ExternalEsign.tsx` | ● | ● |
 | `admin/src/app/reading/view/ReportEditor.tsx` | ● |  |
-| `backend/app/api/viewer_launch.py` | ● |  |
-| `backend/app/core/config.py` | ● |  |
-| `backend/app/main.py` | ● |  |
+| `backend/app/api/viewer_launch.py` | ● | ● |
+| `backend/app/core/config.py` | ● | ● |
+| `backend/app/main.py` | ● | ● |
 | `backend/app/scripts/create_service_account.py` | ● |  |
 | `backend/app/services/ai_health_monitor.py` | ● |  |
 | `backend/app/services/alert_service.py` | ● |  |
-| `backend/app/services/email_service.py` | ● |  |
+| `backend/app/services/email_service.py` | ● | ● |
 | `backend/app/services/ollama_inference.py` | ● |  |
 | `backend/app/services/sign_service.py` | ● |  |
 | `backend/scripts/deploy_phase4.sh` | ● | ● |
-| `backend/scripts/load_test.py` | ● |  |
+| `backend/scripts/load_test.py` | ● | ● |
 | `deploy/ml-server/pacs-edge.conf` | ● | ● |
 | `docker/nginx/server-nginx.conf` | ● | ● |
-| `e2e/helpers/session.ts` | ● |  |
-| `e2e/playwright.config.ts` | ● |  |
-| `e2e/tests/07-prefetch.spec.ts` | ● |  |
-| `e2e/tests/08-vrt.spec.ts` | ● |  |
-| `e2e/tests/09-patient-export.spec.ts` | ● |  |
-| `e2e/tests/12-xds-export.spec.ts` | ● |  |
-| `e2e/tests/20-viewer-ux.spec.ts` | ● |  |
-| `scripts/e2e-test.sh` | ● |  |
-| `scripts/patient_export_test.py` | ● |  |
+| `e2e/helpers/session.ts` | ● | ● |
+| `e2e/playwright.config.ts` | ● | ● |
+| `e2e/tests/07-prefetch.spec.ts` | ● | ● |
+| `e2e/tests/08-vrt.spec.ts` | ● | ● |
+| `e2e/tests/09-patient-export.spec.ts` | ● | ● |
+| `e2e/tests/12-xds-export.spec.ts` | ● | ● |
+| `e2e/tests/20-viewer-ux.spec.ts` | ● | ● |
+| `scripts/e2e-test.sh` | ● | ● |
+| `scripts/patient_export_test.py` | ● | ● |
 | `scripts/server/backup-openpacs.sh` |  | ● |
-| `scripts/server/cutover-monitor.sh` | ● |  |
-| `scripts/server/it-zip-extract-limits.sh` | ● |  |
-| `scripts/sr_poc.py` | ● |  |
-| `tests/load/locustfile.py` | ● |  |
-| `tests/load/run_all.sh` | ● |  |
-| `tests/load/study_upload_test.py` | ● |  |
-| `tests/load/websocket_test.py` | ● |  |
+| `scripts/server/cutover-monitor.sh` | ● | ● |
+| `scripts/server/it-zip-extract-limits.sh` | ● | ● |
+| `scripts/sr_poc.py` | ● | ● |
+| `tests/load/locustfile.py` | ● | ● |
+| `tests/load/run_all.sh` | ● | ● |
+| `tests/load/study_upload_test.py` | ● | ● |
+| `tests/load/websocket_test.py` | ● | ● |
 | `werub-viewer/dist/9195.bundle.82029ebaba76024e67c5.js` |  | ● |
 | `werub-viewer/patches/werub-source.patch` |  | ● |
 
@@ -442,15 +442,15 @@
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
-| `.env.example` | ● |  |
+| `.env.example` | ● | ● |
 | `deploy/nginx-twin.conf` | ● | ● |
 | `docker-compose.yml` | ● |  |
-| `services/twin-web/lib/__tests__/smart.test.ts` | ● |  |
+| `services/twin-web/lib/__tests__/smart.test.ts` | ● | ● |
 | `services/twin-web/lib/smart.ts` | ● |  |
 | `services/twin/tests/test_cardiac_ep.py` | ● |  |
 | `services/twin/tests/test_organ_mesh.py` | ● |  |
 | `services/twin/tests/test_wchannel.py` | ● |  |
-| `services/twin/twin/config.py` | ● |  |
+| `services/twin/twin/config.py` | ● | ● |
 | `services/twin/twin/writeback.py` | ● |  |
 
 ## cerno
@@ -459,9 +459,9 @@
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
-| `.env.example` | ● |  |
+| `.env.example` | ● | ● |
 | `deploy/nginx-cerno.conf` | ● |  |
-| `docker-compose.yml` | ● |  |
+| `docker-compose.yml` | ● | ● |
 | `services/cerno-web/lib/smart.ts` | ● |  |
 
 ## edu
@@ -529,14 +529,14 @@
 | `packages/hospital-web/src/app/register/page.tsx` | ● |  |
 | `packages/hospital-web/src/app/signup/page.tsx` | ● |  |
 | `packages/hospital-web/src/components/HospitalFooter.tsx` | ● |  |
-| `packages/hospital-web/src/components/HospitalHeader.tsx` | ● |  |
+| `packages/hospital-web/src/components/HospitalHeader.tsx` | ● | ● |
 | `packages/hospital-web/src/middleware.ts` | ● |  |
-| `src/app/api/clinic/his/health/route.ts` | ● |  |
+| `src/app/api/clinic/his/health/route.ts` | ● | ● |
 | `src/app/api/clinic/his/sso-login/route.ts` | ● |  |
 | `src/app/api/clinic/his/sso-ticket/route.ts` | ● |  |
 | `src/app/api/clinic/his/wsign/request/route.ts` | ● |  |
 | `src/app/api/clinic/register/route.ts` | ● |  |
-| `src/app/api/clinic/sso/token/route.ts` | ● |  |
+| `src/app/api/clinic/sso/token/route.ts` | ● | ● |
 
 ## jitsi
 
@@ -544,13 +544,13 @@
 
 | 파일 | 주소 | 식별 |
 |---|:-:|:-:|
-| `.env.example` | ● |  |
-| `api/src/env.ts` | ● |  |
-| `api/src/services/url-guard.test.ts` | ● |  |
+| `.env.example` | ● | ● |
+| `api/src/env.ts` | ● | ● |
+| `api/src/services/url-guard.test.ts` | ● | ● |
 | `coturn/turnserver.conf` | ● |  |
 | `docker-compose.yml` | ● | ● |
 | `nginx/meet-locations.conf` | ● | ● |
-| `scripts/integration-test.sh` | ● |  |
-| `scripts/load-test.sh` | ● |  |
+| `scripts/integration-test.sh` | ● | ● |
+| `scripts/load-test.sh` | ● | ● |
 | `stt-bridge/transcriber.py` | ● |  |
 | `web/head.html` | ● |  |

@@ -82,10 +82,25 @@ function truth() {
     pairs.set(key, m);
   }
 
+  // 🔴 `확인 필요(따라가기)` 표시 수 — 이 수치가 4곳에 손으로 적혀 있고 훑을 때마다 어긋났다.
+  //    센 방법을 여기 고정한다: **구축 가이드 S0~S8 + screens/** 안의 표시. 각 장 머리글(`> ⚠️`)은
+  //    "남은 표시가 있다"는 안내이지 표시 자체가 아니므로 뺀다.
+  const pendingFiles = [
+    ...fs.readdirSync(path.join(ROOT, 'build-guide')).filter((f) => /^S\d.*\.md$/.test(f)).map((f) => `build-guide/${f}`),
+    ...fs.readdirSync(path.join(ROOT, 'screens')).filter((f) => f.endsWith('.md')).map((f) => `screens/${f}`),
+  ];
+  let pending = 0;
+  for (const rel of pendingFiles) {
+    for (const l of stripCode(read(rel)).split('\n')) {
+      if (l.trimStart().startsWith('> ⚠️')) continue;
+      pending += (l.match(/확인 필요\(따라가기\)/g) ?? []).length;
+    }
+  }
+
   // 발표 덱 내용 슬라이드 수 — `## ` 가 내용 슬라이드, `# ` 는 장 표지다
   const deckSlides = read('deck/slides.md').split('\n').filter((l) => l.startsWith('## ')).length;
 
-  return { verified: count('검증됨'), impl: count('구현·미검증'), total: rows.length, fault, checked: vrows.length, pairs, deckSlides };
+  return { verified: count('검증됨'), impl: count('구현·미검증'), total: rows.length, fault, checked: vrows.length, pairs, deckSlides, pending };
 }
 
 function walk(dir, out = []) {
@@ -151,6 +166,15 @@ function check(T) {
       for (const m of line.matchAll(/메모리\s*약\s*(\d+)\s*GB\s*사용/g)) {
         if (m[1] !== '10') problems.push(`${at} — 운영 기록 메모리 사용: 문서 ${m[1]}GB · 기록 약 10GB`);
       }
+      // `확인 필요(따라가기)` 표시 수 — 「남은 40곳」 · 「92곳 → 40곳」 류
+      // 🔴 「92곳 → 40곳」 처럼 **줄어든 것을 보여주는 줄**은 앞 숫자가 옛 값이다. 마지막 값만 본다.
+      if (/확인 필요/.test(line)) {
+        const nums = [...line.matchAll(/(\d+)\s*곳/g)].map((m) => Number(m[1]));
+        if (nums.length) {
+          const claimed = nums[nums.length - 1];
+          if (claimed !== T.pending) problems.push(`${at} — \`확인 필요(따라가기)\` 표시 수: 문서 ${claimed} · 실제 ${T.pending}`);
+        }
+      }
       // 덱 내용 슬라이드 수
       for (const m of line.matchAll(/(?:내용\s*슬라이드|덱)\s*\**\s*(\d+)\s*\**\s*장/g)) {
         if (Number(m[1]) !== T.deckSlides) problems.push(`${at} — 덱 내용 슬라이드 수: 문서 ${m[1]} · 실제 ${T.deckSlides}`);
@@ -173,9 +197,9 @@ if (process.argv.includes('--self-test')) {
   const probe = stripCode('본문 ```\n`검증됨` 999\n``` 과 `검증됨` 999 입니다');
   if (!probe.includes('999')) fails.push('코드 블록 제거가 본문까지 지웠습니다');
   const real = check(T);
-  console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장`);
+  console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장 · 확인 필요 표시 ${T.pending}곳`);
   if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-  console.log(`  ✓ 규칙 5개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
+  console.log(`  ✓ 규칙 6개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
   process.exit(0);
 }
 
