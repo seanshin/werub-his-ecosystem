@@ -4,7 +4,7 @@
 > **EN** — The first document to read: it explains **why** the ecosystem is designed this way, **what** it is made of, and **in what order** to build it — in one pass. Written so a hospital director or CIO can read it end to end, with each chapter handing off to the role-specific documents. Every statement is a fact about one version combination (measured 2026-09-11); base commits are pinned in `data/base-commits.json`.
 
 
-> 🟡 **초안 — 시스템 담당 확인 전 · 새 설치본 따라가기 전**
+> 🟡 **초안 — 시스템 담당 확인 전 · 새 설치본 따라가기 1차 완료**(2026-09-13~16)
 > **기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)** — 이 개요서의 모든 설명은 그 버전 조합(계측일 2026-09-11 · 기준 커밋은 [`data/base-commits.json`](../data/base-commits.json)에 고정)에서의 사실입니다.
 
 AI 기반 HIS 를 세우려는 의료기관이 **취지(왜) · 구조(무엇으로) · 구축(어떤 순서로)** 을 한 벌로 이해하도록 쓴 첫 문서입니다. 병원장 · CIO 가 처음부터 끝까지 읽을 수 있게 썼고, 각 장 끝에서 역할별 상세 문서로 이어집니다.

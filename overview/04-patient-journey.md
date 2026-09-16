@@ -1,6 +1,6 @@
 # 4. 환자 한 명의 여정
 
-> 🟡 초안 — 시스템 담당 확인 전 · 새 설치본 따라가기 전 · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [3. 계층 구조와 시스템 13](03-layers-and-systems.md) · 다음 → [5. 신원 · 신뢰 · 표준](05-identity-trust-standards.md)
 
 ---

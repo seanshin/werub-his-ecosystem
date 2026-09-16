@@ -1,7 +1,7 @@
 # B AI 기반 HIS 구축 가이드
 **B — Build guide for an AI-assisted HIS**
 
-> **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is a pre-rehearsal draft**: nothing here has been walked through on a fresh install yet, and anything we could not confirm from public material is marked `확인 필요(따라가기)` rather than filled in with invented steps (61 such marks as of 2026-09-15, after a first follow-along install on 2026-09-13~16 and after checking the pinned base commits' code). A generated appendix, [replace-list.md](replace-list.md), lists the code files that still carry another installation's address or institution-identifying strings — paths only, never the strings.
+> **EN** — A stage-by-stage playbook, S0 (preparation) through S8 (cutover to real operation). It does not invent a new process: it walks the management screens the HIS already has — opening stages, go-live control, the decision registry, safety gates, outbound-channel control, the continuous monitor and system settings — in build order. ⚠️ **This is still a draft**, but it now carries a first follow-along: S0–S8 were walked on fresh installs built from the pinned base commits (2026-09-13~16, one development PC, arm64, no GPU, on a network that could not reach the outside). Stages S1 · S3 · S4 · S5 · S6 · S7 · S8 were installed and called between the new installs; **S2 (public site, patient app, video) was not installed**. Anything we could not confirm is marked `확인 필요(따라가기)` rather than filled in with invented steps (60 such marks; what remains needs reference hardware with a GPU, real-data volume, the cutover to real mode, or a human decision). A generated appendix, [replace-list.md](replace-list.md), lists the code files that still carry another installation's address or institution-identifying strings — paths only, never the strings.
 
 
 > ⚠️ **초안 — 새 설치본으로 S0~S8 을 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 격리 네트워크). **남은 `확인 필요(따라가기)` 60곳**은 x86 · GPU 기준 장비 · 실데이터 규모 · 리얼 전환 · 사람 결정이 필요한 곳입니다.
@@ -99,7 +99,7 @@ S2~S6 은 필요한 것만, 필요한 순서로 붙입니다. 13개를 다 세�
 |---|---|---|
 | 컨테이너 실행 환경 | 각 시스템이 데이터베이스 · 캐시 · 서버를 **컨테이너 구성(compose)** 으로 올립니다. 저장소 11곳 가운데 **9곳이 compose 파일을 갖고 있습니다**(AI Server 는 compose 로 올리지 않고, Jitsi 는 Jitsi 자체 구성요소만 올립니다) | 각 저장소의 compose 파일(기준 커밋 · 2026-09-12 확인) |
 | 데이터베이스 · 캐시 | **PostgreSQL 16**: HIS · sign · LIS · PACS · twin · edu · Clinic(주 DB) — **PostgreSQL 15**: ERP · Clinic 의 벡터 DB(`pgvector`). **Redis 7**: HIS · LIS · ERP · PACS · twin · cerno · edu · Clinic(sign 은 compose 에 캐시를 두지 않습니다). ⚠️ **한 서버에 다 올리면 PostgreSQL 판본이 두 가지 필요합니다.** **Redis 는 7.4 부터 약관이 달라집니다**(`7-alpine` 태그가 기준일에 7.4.11 을 받음) | 각 저장소 compose 의 이미지 태그를 기준 커밋에서 읽음(2026-09-12) · [THIRD_PARTY.md §1](../THIRD_PARTY.md#1-별도-서비스로-쓰는-제3자-서버) |
-| 서버 규모 | 8개 시스템(HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi)이 **8코어 · 16GB 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용 · 스왑 여유 없음). **권장 사양이 아니라 하한에 가까운 기록**입니다. 시스템별 권장 사양은 `확인 필요(따라가기)` — 따라가기에서 측정해 싣습니다 | [README](../README.md#최소한의-사양과-구현으로-쓸-수-있게) |
+| 서버 규모 | 8개 시스템(HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi)이 **8코어 · 16GB 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용 · 스왑 여유 없음). **권장 사양이 아니라 하한에 가까운 기록**입니다. 따라가기(2026-09-13~16)에서 HIS · ERP · PACS 코어 · AI 를 함께 띄운 조합은 메모리 약 **2.9GB**(가상 데이터 · 사용자 없음 · 기준 장비 아님)였고, 🔴 **디스크가 먼저 모자랐습니다**(60GB 가상 머신이 두 번 가득 참 → **200GB 이상** 권장). 사용자 · 실데이터 규모를 반영한 시스템별 권장 사양은 `확인 필요(따라가기)` | [README](../README.md#최소한의-사양과-구현으로-쓸-수-있게) · [S0](S0-prepare.md) |
 | GPU(선택) | AI 를 쓸 때만 필요합니다. 기준 GPU 는 **소비자용 한 장(NVIDIA RTX 5080 · VRAM 16GB)** 입니다. AI Server 없이도 HIS 는 동작하도록 설계했습니다. GPU 없는 환경의 속도 · 동시 사용자 처리량 · 모델별 응답 시간은 아직 계측이 없습니다 | [S6](S6-ai.md) |
 | 네트워크 | 🔴 **첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다.** 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 245개 — [파일 목록](replace-list.md) · 문서 제외 · 2026-09-11 기준 커밋). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있습니다** | [S0](S0-prepare.md) · [S1](S1-core-his.md) |
 | 기관명 | HIS 코드에 병원명이 고정 문자열로 남은 파일이 118개 있습니다(2026-09-11 기준 커밋에서 다시 셈 · 09-10 값과 같음). 설정값으로 옮기는 작업이 끝나기 전까지는 **코드를 고쳐야** 자기 병원명이 나옵니다 | [S1](S1-core-his.md) |
@@ -108,8 +108,9 @@ S2~S6 은 필요한 것만, 필요한 순서로 붙입니다. 13개를 다 세�
 
 ## 이 가이드가 아직 말하지 않는 것
 
-- **따라가 본 기록.** 이 초안은 저장소와 릴리즈 기록을 읽고 쓴 것입니다. 새 설치본에서 S0~S8 을 실제로 따라가 본 기록이 붙기 전에는 발행본이 아닙니다([ROADMAP](../ROADMAP.md) P1).
-- **권장 사양과 성능 수치.** 계측하지 않은 것을 "충분하다"고 쓰지 않습니다.
+- **따라가 보지 못한 단계.** S0~S8 을 새 설치본으로 한 번 따라갔지만(2026-09-13~16), **S2(공개 홈페이지 · 환자 앱 · 원격 화상)는 설치하지 않았고** Clinic · twin · cerno 도 세우지 않았습니다. 그 장은 여전히 코드와 저장소 문서를 읽고 쓴 것입니다([ROADMAP](../ROADMAP.md) P1).
+- **권장 사양과 성능 수치.** 따라가기에서 잰 것은 메모리 사용 · 이미지 크기 · 디스크뿐이고, 개발 PC(arm64 · GPU 없음)라 **기준 장비가 아닙니다.** 처리량 · 응답 시간 · AI 품질은 계측하지 않았고, 계측하지 않은 것을 "충분하다"고 쓰지 않습니다.
+- **리얼 전환 뒤의 동작.** 개시 순간 밖으로 나가는 것과 그때 달라지는 화면은 사람 결정을 기다리느라 확인하지 않았습니다.
 - **법령 근거와 처리 기한.** 개원 · 인허가 항목의 법령 근거는 기관이 확인해 채웁니다.
 - **보안 설계의 상세.** 인증 방식의 계열과 키 관리 책임까지만 적습니다. 운영 보안 점검은 기관이 설치 형태에 맞춰 따로 합니다.
 
