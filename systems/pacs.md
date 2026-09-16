@@ -1,7 +1,7 @@
 # PACS — 시스템 구성서
 
 > 기준 버전 **v13.48** · 기준 커밋 `532a8ed13e87` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
-> 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-14 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../README.md#새-설치본으로-따라가-본-결과))
+> 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-14 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/pacs.md)에 있습니다.
 
@@ -226,4 +226,4 @@ flowchart LR
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — Orthanc(GPL · AGPL) · OHIF · Cornerstone3D(MIT) · PostgreSQL · Redis · nginx · Prometheus · Grafana · exporter |
 | 기준 커밋 | `532a8ed13e87` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 compose · 환경 변수 예시 · 백엔드 설정 모듈에서 **키 이름과 기본값의 성격만** 읽었습니다 |
-| 사실 확인 | 시스템 담당 확인 전 · 새 설치본으로 한 번 따라가 봄(2026-09-14 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../README.md#새-설치본으로-따라가-본-결과)) |
+| 사실 확인 | 시스템 담당 확인 전 · 새 설치본으로 한 번 따라가 봄(2026-09-14 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md)) |
