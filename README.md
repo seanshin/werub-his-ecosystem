@@ -350,7 +350,7 @@ ERP → AI 공시 검색도 AI 주소가 코드에 고정돼, 원내 AI 로 설�
 | [`DESIGN-HISTORY.md`](DESIGN-HISTORY.md) | **설계 기준은 어떻게 생겼나** — 코어 HIS 릴리즈 108개와 판정 규칙 9축 | 🟡 초안 |
 | [`DESIGN-HISTORY-SYSTEMS.md`](DESIGN-HISTORY-SYSTEMS.md) | **형제 시스템은 어떻게 자랐나** — 나머지 12개의 릴리즈 기록 666건 · 되풀이된 장면 다섯 | 🟡 초안 |
 | [`overview/`](overview/) | 취지·구조 개요서(10장) | 🟡 초안 |
-| [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~15) · 남은 확인 필요 61곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
+| [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~16) · 남은 확인 필요 60곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
 | [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 27 / 113 |
 | [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안 · 캡처 자리 52 중 **44**(✅ 36 · 🟡 8) · 응급 시나리오는 9/9 |
