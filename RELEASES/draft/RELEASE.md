@@ -63,5 +63,5 @@ node tools/extract-checklist.mjs      # 체크리스트 3종
 node tools/extract-his-nav.mjs        # HIS 메뉴
 node tools/build-diagrams.mjs         # 도식·연결 지도
 node tools/build-integration-map.mjs  # 연동 매트릭스
-node tools/verify-all.mjs             # 발행 전 검사 19개 — 전부 통과해야 올립니다
+node tools/verify-all.mjs             # 발행 전 검사 21개 — 전부 통과해야 올립니다
 ```
