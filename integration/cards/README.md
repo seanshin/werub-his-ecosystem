@@ -1,5 +1,7 @@
 # 연동 연결 카드
 
+> **EN** — One card per **directed system pair** (A → B). Each card lists what the pair exchanges, the protocol and auth, the config key **names** on both sides, and what was actually verified. The authoritative status is the [connection table](../../RELEASES/draft/compatibility.md); these cards unfold it pair by pair.
+
 > 방향 있는 시스템 쌍마다 한 장입니다(**48장**). 상태·확인일의 정본은 [연결 상태 표](../../RELEASES/draft/compatibility.md)이고, 카드는 그 표를 쌍 단위로 풀어 **무엇에 어떻게 붙이는지**를 적습니다.
 
 | 카드 | 연결 | `검증됨` |

@@ -2,6 +2,8 @@
 
 # 개원·운영 단계 체크리스트
 
+> **EN** — Extracted from the HIS opening registry at the base commit — not written by hand. Each row names what must be done, who decides, and how the system judges completion (self-declared vs. machine-verified). Rows the product itself cannot verify are marked as such.
+
 > 자동 생성 — 손으로 고치지 않습니다. 원본 레지스트리가 바뀌면 추출기를 다시 돌립니다.
 
 HIS 의 **개원·운영 단계** 화면(`/admin/opening`)이 쓰는 기본 항목입니다. 개원 전 단계 · 개원 · 개원 후 단계로 나뉘고, 항목마다 필요한 **국가**(KR 대한민국 · AE UAE)가 적혀 있습니다.
@@ -11,7 +13,7 @@ HIS 의 **개원·운영 단계** 화면(`/admin/opening`)이 쓰는 기본 항�
 | 원본 | HIS 저장소 `apps/api/src/modules/opening/opening.registry.ts` |
 | HIS 버전 | v4.18.0 |
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
-| 추출일 | 2026-09-11 |
+| 추출일 | 2026-09-17 |
 | 항목 수 | 60 (KR 45 · AE 48 — 두 나라 공통 항목은 양쪽에 셉니다) |
 | 확인 방식 | 파생 18 · 사람 기록 42 |
 

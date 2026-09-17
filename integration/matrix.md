@@ -2,6 +2,8 @@
 
 # 연동 매트릭스
 
+> **EN** — Generated matrix of every directed system pair and what it carries. Counts and dates come from the connection status table; this page only reshapes them.
+
 > 자동 생성 — 손으로 고치지 않습니다. [연결 상태 표](../RELEASES/draft/compatibility.md)가 바뀌면 다시 만듭니다.
 
 연결을 **시스템 쌍** · **프로토콜** 두 축으로 다시 셉니다. 각 연결의 방향 · 목적 · 프로토콜 · 상태는 연결 상태 표에 있고, 여기서는 **어디에 무엇이 몰려 있는지**를 봅니다.

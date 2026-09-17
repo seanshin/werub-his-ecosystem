@@ -220,7 +220,8 @@ function render({ meta, pairs }, { total, grand }) {
   const out = [];
   out.push(`<!-- 생성물 — 직접 수정 금지. \`node tools/build-diagrams.mjs\` 로 ${SRC_REL} 에서 다시 만듭니다. -->`);
   out.push('');
-  out.push('# 연결 지도 (초안 · 생성물)');
+  out.push('# 연결 지도 (초안 · 생성물)', '',
+    '> **EN** — Generated from the connection status table: a map of which system talks to which, drawn so the line style carries the status (verified by real calls / wired in code only / not implemented / undecidable from code). Do not edit by hand.');
   out.push('');
   out.push('> 시스템 사이 연결이 **코드상 어디까지 준비돼 있는지**를 한 장으로 봅니다. 쌍 하나를 선 하나로 그리고, 선 위에 상태별 연결 수를 적습니다.');
   out.push(`> 근거: [\`${SRC_REL}\`](../${SRC_REL}) — 판정일 ${meta.judgedAt ?? '(원문 참조)'} · 양쪽 코드를 대조한 판정이며, 실제 호출로 확인한 연결은 아직 없습니다.`);

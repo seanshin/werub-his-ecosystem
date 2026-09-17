@@ -2,6 +2,8 @@
 
 # 화면 캡처 목록 — HIS
 
+> **EN** — Generated inventory of the HIS screen captures: which menu entry each image belongs to, and which menu entries have no capture yet. Captures come from a running rehearsal install with synthetic hospital data.
+
 > 자동 생성 — 손으로 고치지 않습니다. [HIS 메뉴 구성표](../../systems/his-domains.md)가 바뀌면 다시 만듭니다.
 
 HIS 웹 화면의 **코드 기본 메뉴**를 캡처 목록으로 편 것입니다. 캡처 규칙은 [캡처 안내](README.md), 사람 확인은 [캡처 대장](../CAPTURE-LEDGER.md)에 있습니다.

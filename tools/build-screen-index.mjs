@@ -89,7 +89,8 @@ try {
   const L = [];
   L.push('<!-- 생성물 — 직접 수정 금지. `node tools/build-screen-index.mjs` 로 다시 만듭니다. -->');
   L.push('');
-  L.push('# 화면 캡처 목록 — HIS');
+  L.push('# 화면 캡처 목록 — HIS', '',
+    '> **EN** — Generated inventory of the HIS screen captures: which menu entry each image belongs to, and which menu entries have no capture yet. Captures come from a running rehearsal install with synthetic hospital data.');
   L.push('');
   L.push('> 자동 생성 — 손으로 고치지 않습니다. [HIS 메뉴 구성표](../../systems/his-domains.md)가 바뀌면 다시 만듭니다.');
   L.push('');

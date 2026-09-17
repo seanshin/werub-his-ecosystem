@@ -71,7 +71,8 @@ try {
   const L = [];
   L.push('<!-- 생성물 — 직접 수정 금지. `node tools/build-integration-map.mjs` 로 다시 만듭니다. -->');
   L.push('');
-  L.push('# 연동 매트릭스');
+  L.push('# 연동 매트릭스', '',
+    '> **EN** — Generated matrix of every directed system pair and what it carries. Counts and dates come from the connection status table; this page only reshapes them.');
   L.push('');
   L.push('> 자동 생성 — 손으로 고치지 않습니다. [연결 상태 표](../RELEASES/draft/compatibility.md)가 바뀌면 다시 만듭니다.');
   L.push('');

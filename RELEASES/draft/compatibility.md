@@ -2,6 +2,8 @@
 
 # 연결 상태 (초안)
 
+> **EN** — The authoritative connection status table. Each row is one directed purpose between two systems, with protocol, auth, status and — for `검증됨` (verified) — the date it was called end to end. Connections still waiting on the owning project are not listed here.
+
 > 이 통합 릴리즈 초안의 버전 조합에서, 시스템 사이 연결이 **코드상 어디까지 준비돼 있는지**를 적습니다.
 
 | 기준 | 값 |

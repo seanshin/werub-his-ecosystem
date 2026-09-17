@@ -2,6 +2,8 @@
 
 # 사람 결정 체크리스트 (결정 등록부)
 
+> **EN** — Decisions a person must make before go-live — licence holder, in-house committees, per-staff items — extracted from the base commit. Recording a decision is not the same as the system applying it; the “how it takes effect” column says which is which.
+
 > 자동 생성 — 손으로 고치지 않습니다. 원본 레지스트리가 바뀌면 추출기를 다시 돌립니다.
 
 HIS 의 **결정 등록부** 화면(`/admin/decisions`)에 올라 있는, 구축 기관의 **사람이 정해야 하는 것**입니다. 등록부는 결정을 대신하지 않습니다 — 무엇을, 누가 정하는지와 고를 수 있는 선택지를 적어 둡니다.
@@ -11,7 +13,7 @@ HIS 의 **결정 등록부** 화면(`/admin/decisions`)에 올라 있는, 구축
 | 원본 | HIS 저장소 `apps/api/src/modules/decision-registry/decision.registry.ts` |
 | HIS 버전 | v4.18.0 |
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
-| 추출일 | 2026-09-11 |
+| 추출일 | 2026-09-17 |
 | 결정 수 | 56 (허가권자 17 · 원내 위원회 38 · 직원 1) |
 | 개시 전 필수 | 11 |
 | 기록하면 시스템이 반영 | 6 (나머지는 기록 뒤 사람·위원회·배포가 이행) |

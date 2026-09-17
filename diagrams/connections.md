@@ -2,6 +2,8 @@
 
 # 연결 지도 (초안 · 생성물)
 
+> **EN** — Generated from the connection status table: a map of which system talks to which, drawn so the line style carries the status (verified by real calls / wired in code only / not implemented / undecidable from code). Do not edit by hand.
+
 > 시스템 사이 연결이 **코드상 어디까지 준비돼 있는지**를 한 장으로 봅니다. 쌍 하나를 선 하나로 그리고, 선 위에 상태별 연결 수를 적습니다.
 > 근거: [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md) — 판정일 2026-09-11 · 양쪽 코드를 대조한 판정이며, 실제 호출로 확인한 연결은 아직 없습니다.
 

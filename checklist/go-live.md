@@ -2,6 +2,8 @@
 
 # Go-Live(운영 전환) 체크리스트
 
+> **EN** — Go-Live gates extracted from the base commit. Items that **block** go-live are marked; several of them read implementation status directly, so marking them done by hand does not clear them.
+
 > 자동 생성 — 손으로 고치지 않습니다. 원본 레지스트리가 바뀌면 추출기를 다시 돌립니다.
 
 HIS 의 **Go-Live 관제** 화면(`/admin/go-live`)이 추적하는 개시 준비 항목입니다. 기술·보안·연동·법정 준비를 영역별로 나누고, 항목마다 **시스템이 직접 확인하는지(실검증)**, **사람이 표시하는지(자가신고)**를 구분합니다.
@@ -11,7 +13,7 @@ HIS 의 **Go-Live 관제** 화면(`/admin/go-live`)이 추적하는 개시 준�
 | 원본 | HIS 저장소 `apps/api/src/modules/go-live/go-live.registry.ts` |
 | HIS 버전 | v4.18.0 |
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
-| 추출일 | 2026-09-11 |
+| 추출일 | 2026-09-17 |
 | 항목 수 | 60 (A 8 · B 16 · C 1 · D 1 · E 11 · F 3 · G 5 · H 15) |
 | 판정 | 실검증 27 · 자가신고 33 |
 | 개시 차단 항목 | 31 (나머지는 개시를 막지 않는 추적 항목) |

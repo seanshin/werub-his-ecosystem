@@ -2,6 +2,8 @@
 
 # 통합 릴리즈 매니페스트 (초안)
 
+> **EN** — One pinned combination of the thirteen systems: the version each repository declares at its **base commit**, where that version is read from, how far it is implemented, the licence each repository states for itself, and the source address. Everything else in these materials is written against this combination.
+
 > 번호: **미정**(번호 체계 미정 — 정해지면 폴더 이름과 이 값을 함께 바꾼다) · 계측일 2026-09-13 · 기계 판독용 원본은 [manifest.json](manifest.json)입니다.
 
 이 자료의 모든 설명은 아래 버전 조합을 기준으로 합니다.

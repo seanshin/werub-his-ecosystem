@@ -256,7 +256,8 @@ function buildOpening(src, ctx, R) {
   const stats = { total: items.length, byCountry, derived: derivedN, manual: items.length - derivedN };
 
   const L = [];
-  L.push(GENERATED_NOTE, '', '# 개원·운영 단계 체크리스트', '');
+  L.push(GENERATED_NOTE, '', '# 개원·운영 단계 체크리스트', '',
+    '> **EN** — Extracted from the HIS opening registry at the base commit — not written by hand. Each row names what must be done, who decides, and how the system judges completion (self-declared vs. machine-verified). Rows the product itself cannot verify are marked as such.', '');
   L.push('> 자동 생성 — 손으로 고치지 않습니다. 원본 레지스트리가 바뀌면 추출기를 다시 돌립니다.', '');
   L.push('HIS 의 **개원·운영 단계** 화면(`/admin/opening`)이 쓰는 기본 항목입니다. 개원 전 단계 · 개원 · 개원 후 단계로 나뉘고, 항목마다 필요한 **국가**(KR 대한민국 · AE UAE)가 적혀 있습니다.', '');
   L.push(metaTable({ ...ctx.meta, file: SRC.opening }, [
@@ -372,7 +373,8 @@ function buildGoLive(src, ctx, R) {
   };
 
   const L = [];
-  L.push(GENERATED_NOTE, '', '# Go-Live(운영 전환) 체크리스트', '');
+  L.push(GENERATED_NOTE, '', '# Go-Live(운영 전환) 체크리스트', '',
+    '> **EN** — Go-Live gates extracted from the base commit. Items that **block** go-live are marked; several of them read implementation status directly, so marking them done by hand does not clear them.', '');
   L.push('> 자동 생성 — 손으로 고치지 않습니다. 원본 레지스트리가 바뀌면 추출기를 다시 돌립니다.', '');
   L.push('HIS 의 **Go-Live 관제** 화면(`/admin/go-live`)이 추적하는 개시 준비 항목입니다. 기술·보안·연동·법정 준비를 영역별로 나누고, 항목마다 **시스템이 직접 확인하는지(실검증)**, **사람이 표시하는지(자가신고)**를 구분합니다.', '');
   L.push(metaTable({ ...ctx.meta, file: SRC.goLive }, [
@@ -455,7 +457,8 @@ function buildDecisions(src, ctx, R) {
   };
 
   const L = [];
-  L.push(GENERATED_NOTE, '', '# 사람 결정 체크리스트 (결정 등록부)', '');
+  L.push(GENERATED_NOTE, '', '# 사람 결정 체크리스트 (결정 등록부)', '',
+    '> **EN** — Decisions a person must make before go-live — licence holder, in-house committees, per-staff items — extracted from the base commit. Recording a decision is not the same as the system applying it; the “how it takes effect” column says which is which.', '');
   L.push('> 자동 생성 — 손으로 고치지 않습니다. 원본 레지스트리가 바뀌면 추출기를 다시 돌립니다.', '');
   L.push('HIS 의 **결정 등록부** 화면(`/admin/decisions`)에 올라 있는, 구축 기관의 **사람이 정해야 하는 것**입니다. 등록부는 결정을 대신하지 않습니다 — 무엇을, 누가 정하는지와 고를 수 있는 선택지를 적어 둡니다.', '');
   L.push(metaTable({ ...ctx.meta, file: SRC.decision }, [
