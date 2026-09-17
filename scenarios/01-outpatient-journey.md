@@ -3,6 +3,8 @@
 > 🟡 **초안** — 화면 캡처 17 자리 중 ✅ 10 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
 > 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
+> **EN** — One outpatient's path through the demo hospital, from booking to a follow-up teleconsultation: reception, consultation with AI assistance, blood tests via the LIS, a contrast CT via PACS, the radiologist's signature through sign, consent, payment and claim preparation in the ERP, then results read in the patient portal. Every step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI **assists** rather than decides. Several things here do not work yet — eligibility checks and external claim transmission, video consultation (the current Jitsi install is discontinued), automatic analyser-to-LIS result capture, and SMS delivery, whose provider is still a mock. Screenshot slots: 17, of which 10 are complete and 3 show the screen but not yet the exact moment. People appear by role only and all data is synthetic.
+
 데모 병원 내과 외래에 처음 온 환자A 가 예약부터 원격 재진까지 가는 길입니다. 혈액검사와 조영 CT 를 받고, 결과를 앱으로 보고, 재진을 원격 상담으로 잡습니다. [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것)과 [환자 여정 스윔레인](../diagrams/patient-journey.md)을 사람과 화면 쪽에서 다시 읽은 것입니다.
 
 ## 등장 인물

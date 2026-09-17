@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S7 is the rehearsal: run the whole hospital on synthetic data before anything real exists, with outbound sending blocked by the operating mode rather than by configuration alone. This chapter lists what the follow-along actually exercised end to end, what the seeds create (only two systems create virtual patients), and how to watch the integrity monitors.
+
 ## ① 목적과 완료 조건
 
 실제 개시와 같은 흐름을 **가상 병원 데이터**로 끝까지 돌려 봅니다. 실환자 데이터는 필요 없습니다. 리허설은 세 가지를 확인하는 자리입니다 — 흐름이 시스템 경계를 넘어 끝까지 가는가 · 안전 게이트가 현장에서 견딜 만한가 · 감시자가 무엇을 판정하고 무엇을 "관측 불가"로 두는가.

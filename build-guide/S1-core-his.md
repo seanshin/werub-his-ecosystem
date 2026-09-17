@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 HIS v4.18.0(`e9d303984f80`) · 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S1 stands up the core HIS — the record of patients, encounters, orders and billing, and the identity hub that issues staff tokens for every sibling system. Walking it on a fresh install showed the repository's own container files do not run as-is (image build, schema apply and start-up all had to be worked around), and the default seed switches some AI and patient-notification features on. Both are written out here.
+
 ## ① 목적과 완료 조건
 
 생태계의 코어이자 **신원 허브**인 HIS 를 격리 네트워크 안에 세웁니다. 직원 로그인 토큰을 HIS 가 발급하고 다른 시스템이 검증하므로, 이후 모든 단계가 HIS 에 기댑니다.

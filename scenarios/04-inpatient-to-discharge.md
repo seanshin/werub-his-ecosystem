@@ -3,6 +3,8 @@
 > 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
 > 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
+> **EN** — A surgical inpatient from admission to discharge: consent, surgery and the pathology that follows it, ward nursing and barcode-checked medication administration, the risk-score card the attending sees in the chart, then discharge summary, medication counselling, certificates, interim settlement and final payment with claim preparation. Gaps worth knowing: external claim transmission is not implemented; the ERP-to-HIS return paths (claim adjudication, stock receipt, asset code mapping) are `미구현` while the HIS side is only ready to receive; the groupware ward, medication and surgery screens are `판정 불가` because they depend on how the deployment is arranged; and twin's medical-device classification is undecided, so its output is a reference draft that is not written into the record. Screenshot slots: 13, of which 9 are complete and 3 show the screen but not yet the exact moment; people appear by role only and all data is synthetic.
+
 환자D 가 데모 병원 외과 병동에 입원해 수술을 받습니다. 수술에서 떼어 낸 조직은 병리로 가고, 병동에서는 간호 · 투약(MAR · 바코드 확인)이 이어지며, 주치의는 차트에서 위험 점수 카드를 봅니다. 퇴원 때는 퇴원 요약 · 약 설명 · 진단서가 나오고, 중간정산과 퇴원 수납 · 보험 청구로 끝납니다. [시나리오 02 응급](02-emergency.md)에서 입원이 결정된 경우도 여기로 이어집니다.
 
 ## 등장 인물

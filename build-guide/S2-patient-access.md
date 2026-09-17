@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S2 is what patients touch: the public site and the patient app. Neither was installed on the follow-along, so this chapter is written from the code at the base commit. Note that institution details (name, contact, address) live in code constants in the public site, and the patient app is not published to any store.
+
 ## ① 목적과 완료 조건
 
 환자가 만나는 창구를 엽니다. 공개 홈페이지 · 웹 환자 포털(HIS 안) · 환자 앱 · 본인확인 · 알림 채널 · 원격진료 화상(Jitsi)입니다. 이 단계는 **밖으로 나가는 연결(문자 · 푸시 · 공개 사이트)** 이 처음 생기는 단계라, 결정이 설치보다 먼저입니다.

@@ -2,6 +2,8 @@
 
 > "**누가 · 언제 · 무엇에** 서명했고, 그 뒤로 **바뀌지 않았다**"를 제3자가 검증할 수 있게 하는 구조입니다. 전자서명 · 인증서 · 타임스탬프 · 감사 해시체인은 모두 **sign 한 곳**에서 만듭니다. 다른 시스템은 개인키를 갖지 않고, 서명 요청과 감사 이벤트를 sign 에 보냅니다.
 
+> **EN** — How a signature becomes evidence: certificate issuance, signing, time-stamping, and the append-only hash chain that is anchored so later tampering shows up. It also shows which systems write audit events into that chain.
+
 근거: [sign 릴리즈 요약 §1 · §2](../RELEASES/draft/systems/sign.md) · 연결과 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) — 감사 이벤트 연결은 목적 칸에 "신뢰의 사슬"이 적힌 세 행입니다
 
 ```mermaid

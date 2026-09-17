@@ -3,6 +3,8 @@
 > 기준 버전 **v4.18.0** · 기준 커밋 `e9d303984f80` · 구현 상태 `운영` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
+> **EN** — The hospital's public website: information about the hospital, its departments, health checkups and how to use them, with an AI booking assistant that helps patients make appointments. It has no database of its own — everything is drawn from HIS public APIs and from CMS content edited in HIS admin screens. It is a separate Next.js app inside the HIS repository and ships with HIS. Status at the base commit is `운영` (in production), but **it was not installed in the 2026-09 follow-along**.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/homepage.md)에 있습니다.
 
 ## 1. 정체성과 계층

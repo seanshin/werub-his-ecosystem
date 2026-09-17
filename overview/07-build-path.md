@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md) · 다음 → [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md)
 
+> **EN** — Building runs in **nine stages, S0 (preparation) through S8 (cutover to real operation)**. It does not invent a new process: it walks the management screens the HIS already has — opening-stage registry, Go-Live console, decision registry, safety gates, outbound-transmission console, the standing watcher, system settings — in stage order. Each stage lists what gets done, the decisions a person must make there, and how many registry items it carries (56 decisions, 60 opening items and 60 Go-Live items in total). Progress is tracked by three checklists rather than by prose, and the chapter is explicit that the walkthrough behind it was done once, on one developer machine.
+
 ---
 
 ## 한 장으로
@@ -47,12 +49,12 @@ flowchart LR
 | — | 시스템 밖 병행 준비(시설 · 인허가 · 법정 인력 · 정기 운영 · 인증) | — | 0 | 21 | 0 |
 | | **합계** | | **56** | **60** | **60** |
 
-- 결정 · 개원 단계 · Go-Live 칸의 수는 [구축 가이드](../build-guide/README.md#단계)가 HIS 레지스트리 항목을 단계에 나눠 배정한 것입니다(HIS v4.18.0 · 2026-09-11 추출). HIS 화면에는 단계 구분이 없습니다.
+- 결정 · 개원 단계 · Go-Live 칸의 수는 [구축 가이드](../build-guide/README.md#단계)가 HIS 레지스트리 항목을 단계에 나눠 배정한 것입니다(HIS v4.18.0 · 기준 커밋에서 추출). HIS 화면에는 단계 구분이 없습니다.
 - "사람이 정할 것" 칸은 [구축 단계 로드맵](../diagrams/build-roadmap.md#사람이-정할-것--도식의-육각형)의 안내입니다. 1차 따라가기 결과를 각 단계 장에 반영했고, 아직 확정하지 못한 자리는 `확인 필요(따라가기)` 로 남겨 두었습니다(23곳).
 
 ## 무엇으로 진행을 확인하나 — 체크리스트 셋
 
-진행은 사람의 기억이 아니라 HIS 화면의 항목으로 확인합니다. 세 화면의 항목은 [구축 체크리스트](../checklist/)에 코드에서 그대로 뽑아 두었습니다(HIS v4.18.0 · 기준 커밋 2026-09-11 · 추출일 2026-09-11).
+진행은 사람의 기억이 아니라 HIS 화면의 항목으로 확인합니다. 세 화면의 항목은 [구축 체크리스트](../checklist/)에 코드에서 그대로 뽑아 두었습니다(HIS v4.18.0 · 기준 커밋 2026-09-11 · 기준 커밋에서 추출(추출일은 생성물에 있음)).
 
 | 체크리스트 | HIS 화면 | 항목 수 | 구성 |
 |---|---|---:|---|

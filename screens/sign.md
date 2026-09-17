@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [sign 시스템 구성서](../systems/sign.md)
 > 계층 신뢰 · 버전 `1.30.1` · 구현 상태 `통합` · 화면 38 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — PKI, timestamping and e-signature. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — The trust layer: an in-house PKI, RFC 3161 timestamping and PAdES-LTA signatures. Its job is to let a third party verify **who signed what, when, and that it has not changed since** — consents (HIS), reading reports (PACS), completion certificates (edu) and contracts (ERP) all call it. One screen is captured, the trust-service admin console login, with four further slots **not filled yet**. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

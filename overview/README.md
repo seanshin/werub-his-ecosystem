@@ -41,7 +41,7 @@ AI 기반 HIS 를 세우려는 의료기관이 **취지(왜) · 구조(무엇으
 | 버전 조합 | [통합 릴리즈 초안 매니페스트](../RELEASES/draft/manifest.md) · 번호 미정 · 계측일 2026-09-11 |
 | 연결 상태 | [연결 상태](../RELEASES/draft/compatibility.md) · 코드 대조 2026-09-11 · **그중 27개는 새 설치본끼리 실제 호출 확인**(`검증됨` · HIS ⇄ sign · HIS ⇄ LIS · HIS ⇄ ERP · HIS ⇄ edu · edu ⇄ sign · ERP ⇄ sign · PACS → sign · LIS → PACS · LIS → ERP · 2026-09-14~15 → [따라가 본 결과](../build-guide/follow-along-2026-09.md)) |
 | 규모 수치 | [계측 스냅샷](../data/scale-snapshot.json) · 계측일 2026-09-11 · 값 · 센 방법(`rule`) · 기준 커밋 |
-| 체크리스트 수치 | [구축 체크리스트](../checklist/) · HIS v4.18.0 레지스트리 · 추출일 2026-09-11 |
+| 체크리스트 수치 | [구축 체크리스트](../checklist/) · HIS v4.18.0 레지스트리 · 기준 커밋에서 추출(추출일은 생성물에 있음) |
 | 사실 확인 | 생태계 자료 측 조사 기준 · 시스템 담당 확인 전 |
 | 구축 절차 | [구축 가이드](../build-guide/) 초안 · **새 설치본으로 한 번 따라가 봄**(2026-09-13~16 · 개발 PC · GPU 없음) · 남은 확인 필요 23곳 |
 

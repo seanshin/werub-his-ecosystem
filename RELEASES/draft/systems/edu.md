@@ -4,6 +4,8 @@
 > 요약 범위: v1.0.0 ~ v2.7.0 중 최근 8개(v2.3.0 ~ v2.7.0 · 2026-07-28 ~ 2026-07-30) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **edu** runs staff e-learning, statutory mandatory training and electronic certificates of completion: login, HR data and completion records flow to and from HIS, certificates are sealed by sign, and AI features are provided by the AI server, while edu owns delivery and the “complete → record → issue” chain. At base commit `f8127e6ee278` the declared version is **2.7.0**; the implementation status is `확인 필요` — we are not stating a stage until operation is re-confirmed. Recent releases added a multi-tenant authentication boundary (an institution without its own HIS address configured cannot log in), let a platform console configure per-tenant integration and show its state, and exchange tokens against each tenant's own HIS address. The repository files **built as they were**, but the production compose assumes host networking with every service bound to itself, so an isolated network needs a changed configuration, and the institution install guide was missing the tenant row and app DB role steps; **6 connections** where edu is one end were verified by real calls (2026-09-14~15). Straight after install the AI address and key are empty — they can be set per tenant, taking up to a minute to take effect — AI question drafting worked, and indexing learning material needs a reference machine with an embedding model. Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 의료기관 직원의 이러닝 · 법정의무교육 관리 · 전자 이수증 발급 시스템입니다. 로그인 · 인사 · 이수 기록은 HIS 와, 이수증 서명은 sign 과, AI 기능은 AI Server 와 연동하고, edu 는 학습 전달과 "이수 → 기록 → 발급" 흐름을 맡습니다.

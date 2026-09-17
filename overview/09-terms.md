@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md) · 다음 → [10. 다음 읽을 것](10-next.md)
 
+> **EN** — What you may do with this, in three layers: ① **this repository is MIT**; ② the ecosystem's own code is **intended** to be MIT, but the individual source repositories have not finished sorting out their licence statements; ③ **MIT does not cover** the third-party servers, modified third-party code, AI model weights and national code masters the ecosystem runs alongside — each carries its own terms. The medical disclaimer is summarised in five points, beginning with **this is not a medical device in any jurisdiction** and **conformity assessment and regulatory approval are the deploying institution's responsibility**. 🔴 This chapter is not a legal review: it repeats licence names, what the upstream text itself says, and where to find it — nothing further.
+
 ---
 
 > **이 장은 법률 검토가 아닙니다.** 라이선스 이름 · 원문이 적은 사실 · 원문 위치만 옮깁니다. 의무가 생기는지, 생긴다면 어떻게 이행할지는 **구축 기관과 법무가** 설치 형태에 맞춰 확인합니다.

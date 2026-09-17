@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S0, before anything is installed: read the supply terms (licences of the servers, model weights and code masters you must obtain yourself), size the machine and disk, decide the institution profile (country axis, locale, retention), and name who decides what. It also tells you to block outbound connections for the first boot — several systems ship with another installation's addresses as defaults.
+
 ## ① 목적과 완료 조건
 
 설치를 시작하기 전에 **무엇을 받는지(제공 조건)**, **어디에 세우는지(인프라)**, **누가 정하는지(결정 권한자)** 를 먼저 정합니다. 이 단계에서는 소프트웨어를 설치하지 않습니다.

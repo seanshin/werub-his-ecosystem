@@ -3,6 +3,8 @@
 > 기준 버전 **2.7.0** · 기준 커밋 `f8127e6ee278` · 구현 상태 `확인 필요` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — Staff e-learning, statutory training management and electronic completion certificates. edu handles course delivery and the completion → record → certificate flow, while sign-in and staff roster come from HIS, certificate signing from sign, and AI features from the AI Server. Status at the base commit is `확인 필요` (needs confirmation) — whether it is in production has not been re-checked, and the repository's last release record and last commit are both from 2026-07-30. Its SSO, public-key lookup, roster and completion-record connections with HIS were verified by real calls in the 2026-09 follow-along.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/edu.md)에 있습니다.
 
 ## 1. 정체성과 계층

@@ -4,6 +4,8 @@
 > 요약 범위: `CHANGELOG.md` 의 1.0.0 ~ 1.56.18 중 최근 8개(1.56.11 ~ 1.56.18 · 2026-08-03 ~ 2026-09-09) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **LIS** is the laboratory information system — specimen receipt, result entry and verification, reporting, microbiology, pathology, transfusion, molecular diagnostics and send-out testing — and it pulls test orders from HIS rather than being pushed to. At base commit `ffb34e9d1dbc` the declared version is **1.56.18**, status `파일럿` (pilot). Recent releases had the web app emit its own HSTS header instead of relying on an upstream proxy, and fixed how the metrics endpoint decides what counts as internal so host-local collection through a published container port works while public addresses stay blocked. Standing up a fresh install exposed an install script that **judges a step that succeeded as a failure**, a production image that cannot be seeded, and an admin password printed only once at install time; **8 connections** where LIS is one end were verified by real calls (2026-09-14~15). Of the 15 test codes in the HIS demo seed, only **3** had a mapping in the LIS starter codes — catalogue import and code mapping have to be finished before go-live or orders pile up in a queue. Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 진단검사 · 미생물 · 병리 · 수혈 · 유전체(분자진단 · NGS 포함)의 검사 전 과정을 다루는 검사정보시스템입니다. HIS 에서 검사 처방을 받아 결과를 돌려주고, 병리 영상은 PACS 와, 청구는 ERP 와 주고받습니다.

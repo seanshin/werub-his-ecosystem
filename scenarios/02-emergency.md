@@ -3,6 +3,8 @@
 > 🟡 **초안** — 화면 캡처 9 자리 중 ✅ 8 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
 > 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
+> **EN** — An unconscious patient arrives by ambulance at the demo hospital: registration before the identity is known, triage assistance, urgent labs and imaging, a critical lab value and a critical imaging finding, a Code Blue, transfusion, then transfer or admission. Because emergency care turns on **time and alerting**, this walkthrough tracks which connection each alert travels over and marks the ones the connection table cannot confirm. 🔴 **None of the connections in this scenario have been verified by real calls** — whether an alert arrives in time cannot be established by reading code, so it is left for a rehearsal. Screenshot slots: 9, of which 8 are complete and 1 shows the screen but not yet the exact moment; people appear by role only and all data is synthetic.
+
 의식이 흐린 환자B 가 구급차로 데모 병원 응급실에 옵니다. 신원을 모르는 채로 등록하고, 분류 · 긴급 검사 · 긴급 영상을 거치는 동안 위급값과 위급 소견이 나오고, 상태가 나빠져 Code Blue 가 호출됩니다. 수혈을 받은 뒤 전원하거나 입원합니다(입원은 [시나리오 04](04-inpatient-to-discharge.md)로 이어집니다).
 
 응급에서는 **시간과 알림**이 중요합니다. 그래서 이 시나리오는 "알림이 어느 연결로 가는가"를 따로 적었고, 연결 상태 표에서 확인되지 않는 알림 경로는 `확인 중`으로 두었습니다.

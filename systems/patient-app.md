@@ -3,6 +3,8 @@
 > 기준 버전 **v4.18.0** · 기준 커밋 `e9d303984f80` · 구현 상태 `개발` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
+> **EN** — The mobile app through which a patient sees their own appointments, encounter records, tests, images, checkup results, medication, payments and consent forms, and handles booking, questionnaires, signing and delegation to a guardian. It is a client of the HIS patient-portal API and has no server or database of its own; it lives inside the HIS repository (Expo / React Native) and ships with HIS. Status at the base commit is `개발` (in development) — it is not published to app stores — and **it was not installed in the 2026-09 follow-along**.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/patient-app.md)에 있습니다.
 
 ## 1. 정체성과 계층

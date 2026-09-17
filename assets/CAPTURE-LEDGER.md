@@ -1,5 +1,7 @@
 # 캡처 대장
 
+> **EN** — Ledger of every screenshot in these materials: what it shows, which install and date it came from, and whether a person has checked it for institution-identifying text. Text checks cannot read images, so this ledger is the only guard for what appears inside a screenshot.
+
 이미지 속 글자는 문자열 검사로 볼 수 없습니다. 저장소에 올리는 모든 이미지(스크린샷·PDF)는 여기에 한 줄씩 적고, 사람이 **기관 식별 정보·비밀값·서버 정보가 없음**을 확인한 뒤 `확인` 을 표시합니다. 이 표에 `확인` 이 없는 이미지는 공개 검사기가 "미확인"으로 보고합니다.
 
 | 파일 | 내용 | 데모 병원명 사용 | 확인 |

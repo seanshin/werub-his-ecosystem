@@ -4,6 +4,8 @@
 > 요약 범위: v0.1.0 ~ v0.1.8 중 최근 9개(전체 · 2026-07-30 ~ 2026-08-04) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **cerno** answers clinical questions for an individual clinician: it uses the hospital's own AI server to find supporting documents and **draft** an answer, and **generates nothing when there is no evidence**. At base commit `4f5c22b331fc` the version declared in code is **0.1.0** while the release records and tags read v0.1.8 (see §7); status is `파일럿` — shadow mode, non-clinical scope. Retrieval, embedding, generation and drug-interaction checking are done by the AI server; cerno owns identity binding, the document library, HIS FHIR lookups and the query screens. The releases in scope are the first release and a security pass that moved safety signalling out of the evidence gate so it is always evaluated, blocked prompt-structure forgery, and refused ingestion of documents carrying identifiers. cerno was **not installed** in the follow-along, so every connection status here comes from **code comparison only** (2026-09-11). Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 의료진별로 개인화된 임상 지식 질의 서비스입니다. 병원 안의 AI Server 를 써서 근거 문서를 찾아 답변 초안을 만들고, **근거가 없으면 생성하지 않습니다.**

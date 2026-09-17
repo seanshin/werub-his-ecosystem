@@ -263,6 +263,7 @@ function render(x, meta, R) {
   const L = [];
   L.push(GENERATED_NOTE, '', '# HIS 메뉴 구성 — 도메인별', '');
   L.push('> 자동 생성 — 손으로 고치지 않습니다. HIS 코드의 메뉴 정의가 바뀌면 추출기를 다시 돌립니다.', '');
+  L.push('> **EN** — Generated from the HIS web sidebar definition at the base commit: every left-menu entry grouped by domain, with the roles each entry is shown to. It is the evidence table behind §4 of the [HIS system reference sheet](his.md). Do not edit by hand.', '');
   L.push('HIS 웹 화면 왼쪽 메뉴의 **코드 기본 구성**입니다. [HIS 시스템 구성서](his.md) §4 의 근거 표입니다.', '');
   L.push(table(['기준', '값'], [
     ['원본', `HIS 저장소 ${code(SRC.sidebar)} 의 ${code('NAV_SECTIONS')} · ${code('MENU_DOMAINS')} · ${code('SECTION_META')} (역할 이름은 ${code(SRC.constants)} 의 ${code('USER_ROLE_LABEL')})`],

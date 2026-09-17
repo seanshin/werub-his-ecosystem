@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · 다음 → [2. 취지 8가지](02-principles.md)
 
+> **EN** — The one-sentence version: **thirteen systems that together run one hospital, wired so that AI assists and people decide, published openly so an institution can stand it up with modest resources.** This chapter unpacks that sentence phrase by phrase, then says why it was built — licence fees, dedicated hardware and vendor lock-in still leave institutions running on paper and spreadsheets. It also draws the line between what this repository holds (the materials: this overview, the build guide, system briefs, checklists, diagrams, glossary, and measured scale snapshots) and what it does not (source code, which is linked per system; AI model weights; national code masters; and anything identifying a real institution).
+
 ---
 
 ## 한 문장

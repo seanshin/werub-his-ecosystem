@@ -3,6 +3,8 @@
 > 기준 버전 **v4.18.0** · 기준 커밋 `e9d303984f80` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — The core system: outpatient, inpatient, surgery, emergency, clinical support (pharmacy, lab, imaging, pathology, blood), health checkups, front desk, billing and management support in one codebase. It holds the authoritative record for patients, encounters, orders, nursing, front desk and billing, and acts as the ecosystem's **identity hub** — it issues the staff token that sibling systems verify, though the method differs per system (public-key verification for sign, PACS, edu, twin and cerno; a shared secret for ERP and Jitsi; an API key for Clinic). Status at the base commit is `통합` (integrated), and one fresh install was followed through in 2026-09 on a developer PC. §10 states the limits plainly: transmission to external agencies is not implemented, no SMS provider is registered, and the hospital name is still a literal string in part of the code.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/his.md)에 있습니다.
 
 ## 1. 정체성과 계층

@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [twin 시스템 구성서](../systems/twin.md)
 > 계층 AI · 버전 `1.20.88` · 구현 상태 `통합` · 화면 15 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Digital twin. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — The digital twin — risk-score cards, SBAR drafts and simulation. It opens from the chart over SMART on FHIR and raises risk cards through CDS Hooks; what it produces is a **draft for a clinician to read**, not a decision. Two screens are captured: the twin-derived badges on chart metrics, and the operations console showing non-PHI aggregates. Three further slots are **not filled yet**; captures are taken on **synthetic hospital data**, with identifying information masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

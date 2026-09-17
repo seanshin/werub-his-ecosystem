@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [PACS 시스템 구성서](../systems/pacs.md)
 > 계층 임상 부서 · 버전 `v13.48` · 구현 상태 `통합` · 화면 47(관리 화면 · 웹 뷰어 제외) · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Web PACS. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — Web PACS — image server, viewer, reading workflow and AI integration. Imaging orders from the HIS arrive as a worklist and reading results return to the HIS; the radiologist's own signature is made by [sign](sign.md). Five screens are captured: the admin dashboard with reading backlog and image provenance, AI model management, the reading queue with status, modality and provenance badges, modality worklist and MPPS management, and the emergency imaging board. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

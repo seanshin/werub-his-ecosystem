@@ -3,6 +3,8 @@
 > 기준 버전 **1.30.1** · 기준 커밋 `93f56d839c3f` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — The trust layer: an independent electronic signature service that makes "who signed what, when, and it has not changed since" verifiable for medical documents (consent forms, radiology reports, training certificates) and ordinary contracts. It is built from its own two-tier PKI, RFC 3161 timestamps, PAdES-LTA, CMS/CAdES and an audit hash chain. **Private keys live only in sign** — HIS, PACS, ERP and edu hold none; certificate issuance and signing happen here alone. Status at the base commit is `통합` (integrated), and several signing paths were verified by real calls in the 2026-09 follow-along.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/sign.md)에 있습니다.
 
 ## 1. 정체성과 계층

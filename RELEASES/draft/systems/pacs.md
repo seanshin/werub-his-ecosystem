@@ -4,6 +4,8 @@
 > 요약 범위: `docs/releases/` 의 v11.0 ~ v13.48 중 최근 8개(v13.41 ~ v13.48 · 2026-08-03 ~ 2026-09-10) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **PACS** is a web PACS — image server (Orthanc), web viewer, reading workflow, admin screens and AI integration — joined to the examination flow by modality worklist and HL7 v2 order intake, with report signing delegated to sign. At base commit `532a8ed13e87` the declared version is **v13.48** (read from the highest-numbered release file, since the repository carries no version constant), status `통합` (integration). v13.48 changed **no backend, admin or viewer code** — the changed files were one installation's deployment config, operations scripts and documents — while v13.47 normalised audit action names to uppercase and made queries case-insensitive, leaving the append-only history untouched. Standing up a fresh install took **four attempts**: the image server tag could not be fetched, and TLS files, the health check and base table creation each stalled in turn; **4 connections** where PACS is one end were verified by real calls (2026-09-15). 🔴 The paths where a HIS screen calls PACS (image lookup, report writing, report signing, image byte relay, viewer entry) **could not be completed** — they need code changes or agreement between the two projects. Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 영상 서버(Orthanc) · 웹 뷰어 · 판독 워크플로 · 관리 화면 · AI 연동을 갖춘 웹 PACS 입니다. 모달리티 워크리스트와 HL7 v2 오더 수신으로 검사 흐름을 잇고, 판독 서명은 sign 에 맡깁니다.

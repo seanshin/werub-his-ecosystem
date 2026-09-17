@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [9. 제공 조건](09-terms.md)
 
+> **EN** — Where to go after the overview, by role — hospital director and CIO, IT and infrastructure, clinical informatics, AI governance and legal, integration developers and partners, health authorities and international cooperation agencies. Each row pairs the question that role arrives with, the overview chapters to read first, and the documents to continue into. The chapter also carries a map of every document in this repository with its draft status, points to the glossary for unfamiliar terms, and says what to do on finding something wrong.
+
 ---
 
 이 개요서는 전 역할이 함께 읽는 첫 문서입니다. 여기서부터는 역할마다 들고 온 질문에 따라 갈 곳이 갈립니다. 역할과 질문은 [README 「누가 읽나」](../README.md#누가-읽나)의 표를 따릅니다.

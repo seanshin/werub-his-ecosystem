@@ -4,6 +4,8 @@
 
 > 자동 생성 — 손으로 고치지 않습니다. HIS 코드의 메뉴 정의가 바뀌면 추출기를 다시 돌립니다.
 
+> **EN** — Generated from the HIS web sidebar definition at the base commit: every left-menu entry grouped by domain, with the roles each entry is shown to. It is the evidence table behind §4 of the [HIS system reference sheet](his.md). Do not edit by hand.
+
 HIS 웹 화면 왼쪽 메뉴의 **코드 기본 구성**입니다. [HIS 시스템 구성서](his.md) §4 의 근거 표입니다.
 
 | 기준 | 값 |
@@ -11,7 +13,7 @@ HIS 웹 화면 왼쪽 메뉴의 **코드 기본 구성**입니다. [HIS 시스�
 | 원본 | HIS 저장소 `apps/web/src/components/layout/Sidebar.tsx` 의 `NAV_SECTIONS` · `MENU_DOMAINS` · `SECTION_META` (역할 이름은 `packages/shared/src/constants.ts` 의 `USER_ROLE_LABEL`) |
 | HIS 버전 | v4.18.0 |
 | 기준 커밋 | `e9d303984f80eda8271f29064a326bedad766815` (2026-09-11) |
-| 추출일 | 2026-09-11 |
+| 추출일 | 2026-09-17 |
 | 규모 | 도메인 8 · 메뉴 묶음 26 · 메뉴 항목 266(서로 다른 화면 경로 266) |
 | 센 방법 | 메뉴 항목 = `NAV_SECTIONS` 각 묶음의 `items` 원소 수. 같은 화면 경로가 두 묶음에 걸려 있으면 항목은 둘로, 화면 경로는 하나로 셉니다. 관리자가 화면에서 추가한 메뉴는 코드에 없으므로 세지 않습니다 |
 | 리터럴로 읽지 못한 칸 | 0 |

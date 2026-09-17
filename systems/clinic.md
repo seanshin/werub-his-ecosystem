@@ -3,6 +3,8 @@
 > 기준 버전 **1.4.0** · 기준 커밋 `2b20a89b7c3a` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(설치형은 공용 API · 인증 서버까지 필요합니다. 대신 운영 중인 공개 소개 페이지로 공급 형태와 화면 구성만 확인했습니다 · 2026-09-15)
 
+> **EN** — The hospital groupware: handover, duty rosters, ward status, medication, the surgery board and alerts in one screen set, drawing on data HIS sends and receiving approval requests from HIS. HIS connects to it with a **scoped API key** issued by Clinic — unlike the systems that verify a HIS token by public key, this key must be issued, stored and rotated separately. This chapter covers only the **hospital service** inside a repository that holds several services, plus the HIS integration API it needs. **It was not installed in the 2026-09 follow-along** (the installable form also needs the shared API and authentication components); only its public introduction page was read, to see the supply model and screen layout.
+
 Clinic 은 여러 서비스가 함께 든 저장소 안에 있습니다. 이 장은 그중 **병원 서비스**(병원 화면 패키지)와, 그 서비스가 HIS 와 주고받는 데 필요한 **HIS 연동 API** 만 다룹니다. 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/clinic.md)에 있습니다.
 
 ## 1. 정체성과 계층

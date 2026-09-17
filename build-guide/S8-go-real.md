@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S8 is the cutover to real operation. The mode switch is the most restrictive state, not the loosest: seed logins and development fallbacks close. Two things bite here — everything queued during rehearsal goes out the moment the mode flips, and an unset mode variable already counts as real. The cutover itself was not performed on the follow-along.
+
 ## ① 목적과 완료 조건
 
 리허설을 끝내고 실환자를 받습니다. 순서는 **가상 데이터 격리 → 키 · 인증서 새로 만들기 → 실데이터 이관 → 리얼 빌드 배포 → 개시 확인**입니다. 리얼 전환 뒤에는 시험용 통로가 원천적으로 없어야 합니다.

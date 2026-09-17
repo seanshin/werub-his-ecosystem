@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [Clinic 시스템 구성서](../systems/clinic.md)
 > 계층 협업·교육 · 버전 `1.4.0` · 구현 상태 `통합` — 병원 서비스만 · 화면 16(병원 서비스) · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Hospital groupware. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — Hospital groupware — handover, rosters, notifications and electronic approval. It attaches using an API key issued by the HIS and receives staff records in bulk from it; only the **hospital service** inside the monorepo is in scope for this ecosystem. Four capture slots (handover, roster, approval, notifications) are **not filled yet** — this system was not installed during the first build walkthrough. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

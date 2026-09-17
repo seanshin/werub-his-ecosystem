@@ -4,6 +4,8 @@
 > 요약 범위: RELEASE-v3.11.0 ~ RELEASE-v4.18.0 중 최근 7개(v4.12.0 ~ v4.18.0 · 2026-09-01 ~ 2026-09-10) + 마지막 릴리즈 기록 이후 기준 커밋까지의 커밋 3개(2026-09-10 ~ 09-11 · 릴리즈 기록 없음) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **HIS (Hospital RUN)** is the core system — outpatient, inpatient, surgery, emergency, clinical support (pharmacy, lab, imaging, pathology, blood), health screening, front desk, billing and management in one codebase — and it is the ecosystem's **identity hub**: it issues the staff login token that sibling systems verify. At base commit `e9d303984f80` the declared version is **v4.18.0**, status `통합` (integration) in rehearsal mode with synthetic hospital data. Recent releases widened the UI translation catalogue with placeholder interpolation (unfilled placeholders are shown, not dropped), made the human translation-review flow usable, and changed the deploy script to judge success only by a completion marker file. Standing up a fresh install from the repository's own container files **did not work as-is** — the build ran out of memory, a dependency was undeclared, the schema command differed from the docs, and the API bound only to itself; the first admin account can only be created by the demo seed. **18 connections** where HIS is one end were verified by real calls (2026-09-14~15), while the paths where a HIS screen calls PACS could not be completed and need code changes or agreement between the two projects. Nothing here has been confirmed by the owning project yet.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 외래 · 입원 · 수술 · 응급 · 진료지원(약제 · 검사 · 영상 · 병리 · 혈액) · 검진 · 원무 · 청구 · 경영지원을 한 코드베이스에서 다루는 통합 병원정보시스템입니다. 환자 · 진료 · 오더 · 간호 · 원무 · 청구 정보의 정본을 가집니다.

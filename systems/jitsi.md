@@ -3,6 +3,8 @@
 > 기준 버전 **1.0.0** · 기준 커밋 `0984fbec7177` · 구현 상태 `중단` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
+> **EN** — The telemedicine video server: a self-hosted Jitsi Meet stack (web, XMPP signalling, conference management, media relay) plus TURN, recording, a conference-management REST API and monitoring. **The current install does not work and an institution must build it anew** — this chapter records what to know when doing so, read from the code and records at the base commit. Status at the base commit is `중단` (discontinued), and every Jitsi connection in the connection table is `중단` as well, apart from one still at design stage.
+
 > **현재 설치본은 동작하지 않으며, 구축 기관은 새로 구성해야 합니다.** 이 장은 기준 커밋의 코드와 기록을 바탕으로 **새로 구성할 때 알아야 할 것**을 적습니다. 이 버전의 변경 내용은 [릴리즈 요약](../RELEASES/draft/systems/jitsi.md)에 있습니다.
 
 ## 1. 정체성과 계층

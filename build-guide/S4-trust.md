@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S4 stands up sign, the trust layer: its own two-tier CA, time-stamping, signature envelopes and an append-only audit chain that sibling systems anchor into. This chapter also covers the master key (the service refuses to start without it in production) and the backup encryption secret — lose it and no backup can be opened.
+
 ## ① 목적과 완료 조건
 
 **sign** 을 세워 "누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다"를 증명할 수 있게 합니다. sign 은 자체 PKI(2단 CA) · RFC 3161 타임스탬프 · PAdES-LTA · CMS(CAdES) · 감사 해시체인으로 이루어집니다. HIS · PACS 같은 연동 시스템은 개인키를 갖지 않고, **인증서 발급은 sign 한 곳에서만** 합니다.

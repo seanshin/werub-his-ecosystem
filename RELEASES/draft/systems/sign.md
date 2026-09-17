@@ -4,6 +4,8 @@
 > 요약 범위: `CHANGELOG.md` 의 0.1.0 ~ 1.30.1 중 최근 7개(1.27.0 ~ 1.30.1 · 2026-07-29 ~ 2026-09-10) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **sign** is a standalone electronic-signature service that makes “who signed what, when, and that it has not changed since” verifiable for medical documents (consent forms, radiology reports) and ordinary contracts, built on its own two-tier PKI, RFC 3161 timestamps, PAdES-LTA, CMS (CAdES) and an audit hash chain. At base commit `93f56d839c3f` the declared version is **1.30.1**, status `통합` (integration); connected systems hold no private keys — certificate issuance happens only in sign. In 1.30.0 signing was serialised per request so concurrent signatures cannot overwrite each other, send a completion callback twice, or let expiry overwrite a signature that has just completed; 1.30.1 changed **no application code** (the backup success signal moved so that an off-site transfer failure no longer looks like “no backup”). In the follow-along the repository's production images **built and came up as they were** — uncommon in this ecosystem — though the production compose expects an external network to already exist, and **9 connections** where sign is one end were verified by real calls (2026-09-14~15); completion callbacks are accepted over https only, and before a contract is in place identity verification runs as a mock provider that the portal labels as a demo. Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 의료 문서(동의서 · 판독 보고서)와 일반 계약서에 대해 "누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다"를 검증할 수 있게 만드는 독립 전자서명 서비스입니다. 자체 PKI(2단 CA) · RFC 3161 타임스탬프 · PAdES-LTA · CMS(CAdES) · 감사 해시체인으로 이루어집니다.

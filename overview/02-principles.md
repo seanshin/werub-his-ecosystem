@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [1. 한 문장](01-one-sentence.md) · 다음 → [3. 계층 구조와 시스템 13](03-layers-and-systems.md)
 
+> **EN** — The eight design principles, each written with four things: what it means, where it shows up in the shipped product, what an institution **gains**, and what it **gives up** — a principle always costs something. The eight: AI assists while people decide; say where a value came from; do not pretend to know what you do not; one source of truth per fact; decisions a person must make belong on screen and in a registry; independent systems joined by standards; outbound transmission needs implementation plus configuration (off by default) plus approval; and development / rehearsal / real are separate modes. These were not designed up front — they came out of 108 core-HIS releases that kept teaching the difference between "built" and "works".
+
 ---
 
 [README 「설계 취지」](../README.md#설계-취지)의 여덟 줄을 풀어 씁니다. 취지마다 네 가지를 적습니다.

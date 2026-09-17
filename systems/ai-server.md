@@ -3,6 +3,8 @@
 > 기준 버전 **2.125.41** · 기준 커밋 `55acaee90068` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — One on-premise GPU server that carries the ecosystem's AI computation: it **assists** by drafting clinical documents, supporting symptom triage and drug-interaction (DUR) checks, answering questions over source documents (RAG), transcribing speech and drafting imaging findings — all exposed to other systems as APIs. twin and cerno keep no GPU of their own and call this server instead, so model loading and GPU sharing happen in one place. This chapter covers **only the medical functions** used in the hospital ecosystem. Status at the base commit is `통합` (integrated); in the 2026-09 follow-along the call paths were exercised with a small substitute model, so quality was not judged.
+
 이 장은 병원 생태계에 쓰이는 **의료 기능만** 다룹니다. 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/ai-server.md)에 있습니다.
 
 ## 1. 정체성과 계층

@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S6 turns AI on, deliberately last and in five steps. All inference runs on one AI Server inside the institution, developed against a single consumer GPU. Model weights are **not** in any repository — the institution obtains them under their own terms — and the embedding model is required separately: without it every indexing path fails while generation still appears to work.
+
 ## ① 목적과 완료 조건
 
 생태계의 AI 연산은 **AI Server** 한 곳이 맡습니다. 각 시스템(HIS · PACS · twin · cerno · edu · ERP)은 AI Server 를 부릅니다. 이 단계의 원칙은 하나입니다.

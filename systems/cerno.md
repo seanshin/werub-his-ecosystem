@@ -3,6 +3,8 @@
 > 기준 버전 **0.1.0** · 기준 커밋 `4f5c22b331fc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
+> **EN** — A per-clinician personalised clinical knowledge service. It uses the hospital's own AI Server to retrieve source documents and **draft** an answer, and **produces nothing when it finds no supporting evidence**. Status at the base commit is `파일럿` (pilot), in shadow and non-clinical scope; the repository's release record and last commit stop at 2026-08-04 when the pilot began, so pilot outcomes are not in this chapter. **This system was not installed in the 2026-09 follow-along**, so its connections remain `구현·미검증` — wired in code, not verified by real calls.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/cerno.md)에 있습니다.
 
 ## 1. 정체성과 계층

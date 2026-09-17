@@ -3,6 +3,8 @@
 > 기준 버전 **1.287.3** · 기준 커밋 `0e1f54c5b902` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — The back-office ERP: financial accounting, costing, HR and payroll, purchasing and materials, front-desk settlement, insurance claims and tax, tied together on a single voucher ledger. The authoritative record for patients and encounters stays in HIS; ERP receives the settlement, claim, materials and HR events HIS sends and moves them into accounting. It is a FastAPI modular monolith with a Next.js web front end and two asynchronous workers (batch and integration) — the repository states it invests in consistency rather than a distributed design. Status at the base commit is `파일럿` (pilot).
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/erp.md)에 있습니다.
 
 ## 1. 정체성과 계층

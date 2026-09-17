@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [3. 계층 구조와 시스템 13](03-layers-and-systems.md) · 다음 → [5. 신원 · 신뢰 · 표준](05-identity-trust-standards.md)
 
+> **EN** — One patient's path — booking, reception, consultation, tests, imaging, reading and signature, payment and claim, results, teleconsultation — and **what is actually known about each boundary the information crosses**. Status is copied from the connection table, never restated here: most rows were judged by reading both sides' code at the base commit, and 27 of them were additionally called end to end between fresh installs and carry a `검증됨` (verified) date. The chapter names the points where an institution should keep a manual fallback ready, and closes by stating plainly what it does not cover.
+
 ---
 
 환자 한 명이 예약부터 원격 상담까지 가는 동안, 정보는 여러 시스템의 경계를 건넙니다. 이 장은 그 경계마다 **연결이 코드상 어디까지 준비돼 있는지**를 적습니다. 그림은 [환자 여정 스윔레인](../diagrams/patient-journey.md)에 있습니다.

@@ -3,6 +3,8 @@
 > 기준 버전 **1.20.88** · 기준 커밋 `526b4f9a4d3f` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
+> **EN** — A digital twin service that models hospital operations, equipment and patients to offer risk-score cards, SBAR summaries, what-if simulation and 3D visualisation. It **reads** from HIS rather than owning clinical data: patient detail is fetched from HIS on demand and the twin database keeps only derived indicators and aggregates. What it writes back to HIS is limited to risk assessments, SBAR and clinician-authored SOAP notes, sent with that user's own permissions when the clinician presses save. Status at the base commit is `통합` (integrated), but **this system was not installed in the 2026-09 follow-along**, so its connections remain `구현·미검증` — wired in code, not verified by real calls.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/twin.md)에 있습니다.
 
 ## 1. 정체성과 계층

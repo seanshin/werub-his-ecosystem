@@ -2,6 +2,8 @@
 
 > 병원 하나를 돌리는 시스템 13개를 **7개 계층**으로 나눠 봅니다. 가운데의 코어 HIS 가 환자 · 진료 · 오더 · 원무의 정본을 갖고, 직원 로그인 토큰을 발급하는 **신원 허브**입니다. 나머지 계층은 필요한 것부터 차례로 붙입니다.
 
+> **EN** — The thirteen systems arranged in seven layers, with the core HIS at the centre holding the record of patients, encounters, orders and billing, and issuing staff tokens. The layers are meant to be added one at a time — an institution does not have to stand up all thirteen.
+
 근거: [README 「시스템 13」](../README.md#시스템-13)(계층 · 한 줄 정의) · [통합 릴리즈 매니페스트](../RELEASES/draft/manifest.md)(구현 상태 · 2026-09-11 · 시스템 담당 확인 전)
 
 > 📷 **화면으로 보기** — 이 계층 구조는 HIS 왼쪽 메뉴의 **도메인 8개**로 그대로 드러납니다([통합 상황판](../screens/his.md#통합-상황판--그날의-병원이-한-화면에)). 형제 시스템은 [화면으로 보는 생태계](../screens/)에 시스템별로 있습니다.

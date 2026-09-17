@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [2. 취지 8가지](02-principles.md) · 다음 → [4. 환자 한 명의 여정](04-patient-journey.md)
 
+> **EN** — The thirteen systems arranged in **seven layers**, with the core HIS in the middle holding the source of truth for patients, encounters, orders and billing, and issuing the staff login token the others verify. For each system: a one-line definition, the version its repository declares at the base commit, and how far it is implemented — `운영` in production use, `통합` integrated, `파일럿` pilot, `개발` in development, `중단` discontinued. Each layer also says **what happens if you do not build it**, because layers are meant to be added one at a time rather than all at once. Scale figures are read from a measured snapshot of the base commits (2026-09-11), not copied from repository READMEs.
+
 ---
 
 ## 7계층 한 장

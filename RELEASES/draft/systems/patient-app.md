@@ -4,6 +4,8 @@
 > 요약 범위: RELEASE-v3.11.0 ~ RELEASE-v4.18.0 중 최근 14개(v4.6.0 ~ v4.18.0 · 2026-08-20 ~ 2026-09-10)에서 이 앱에 닿는 기록 4개(v4.6.0 · v4.12.0 · v4.15.0 · v4.17.0) + 같은 기간 `apps/mobile` 커밋 이력 · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **The patient app** lets a patient see their own appointments, records, lab and imaging results, screening results, medication, payments and consent forms, and handle booking, questionnaires, signatures and guardian delegation — a client of the HIS patient-portal API. It lives in the HIS repository (`apps/mobile`, Expo/React Native) and is released with HIS, so at base commit `e9d303984f80` it carries **v4.18.0**; status is `개발` (in development) — **not published to any app store**. Recent work raised store publication to a licence-holder decision in the decision registry, wired three existing server features into app screens, carried over wording that refuses to state “no record” when vaccination data simply does not load, and reconciled the app's screens against the real API responses (two screens were reading the wrong fields). The app was **not built or installed** in the follow-along, so every connection status here comes from **code comparison only** (2026-09-11). Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 환자가 자기 예약 · 진료 기록 · 검사 · 영상 · 검진 결과 · 복약 · 수납 · 동의서를 보고, 예약 · 문진 · 서명 · 보호자 위임을 처리하는 모바일 앱입니다. HIS 의 환자 포털 API 를 쓰는 클라이언트입니다.

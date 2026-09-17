@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S3 adds the clinical departments — laboratory (LIS) and imaging (PACS) — and the links back to the HIS. Several of those links were verified by real calls between fresh installs; several others could not be completed and are named as such, together with what the two projects would need to agree on.
+
 ## ① 목적과 완료 조건
 
 검사(LIS)와 영상(PACS)을 HIS 에 붙이고, 검사 장비 · 영상 장비 · 라벨 프린터를 연결합니다. 이미 쓰는 PACS 가 있으면 표준 프로토콜(DICOM · HL7 v2)로 연결하는 선택도 있습니다. 약제 · 감염관리 · 암등록 · 응급 같은 **부서별 대외 보고**의 준비 상태도 이 단계에서 확인합니다.

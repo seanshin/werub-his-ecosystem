@@ -4,6 +4,8 @@
 > 요약 범위: v1.1.0 ~ v1.4.0 중 최근 7개(병원 서비스 릴리즈 기록 전부 · 2026-08-10 ~ 2026-08-19) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **Clinic** is hospital groupware — handover, rosters, ward status, medication, the surgery board and alerts in one set of screens — displaying data it receives from HIS and accepting the approval requests HIS sends. At base commit `2b20a89b7c3a` the declared version is **1.4.0**, status `통합` (integration); this summary covers only the **hospital service** inside that repository. Recent releases were largely a retroactive tidy-up of earlier changes (floor layout persistence, roster views, handover notes, medication completion, the surgery board, alert acknowledgement, shift requests) plus remembering which hospital a user logged into and gating screens that require a login. Clinic was **not installed** in the follow-along — a deliberate decision, since it needs the whole main application — so every connection status here comes from **code comparison only** (2026-09-11). Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 병원 그룹웨어입니다. 인수인계 · 근무표 · 병동 현황 · 투약 · 수술판 · 알림을 한 화면 묶음으로 제공하고, HIS 의 자료를 받아 보여줍니다. HIS 가 보내는 결재 요청도 받습니다.

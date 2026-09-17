@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [ERP 시스템 구성서](../systems/erp.md)
 > 계층 경영 · 버전 `1.287.3` · 구현 상태 `파일럿` — 문서마다 표기가 엇갈려 재확인 대상 · 화면 113 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Enterprise resource planning. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — Finance, costing, payroll, materials, insurance claiming and tax. Payment events from the HIS arrive as journal entries, and the calculated amounts on a patient bill are returned to the HIS. Five screens are captured — the ERP dashboard, the pre-claim review worklist (BLOCK / WARN), finance (vouchers, budget, settlement), front-desk cash and day-close, and inventory including controlled substances and ordering. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

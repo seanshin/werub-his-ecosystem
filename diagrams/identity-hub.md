@@ -2,6 +2,8 @@
 
 > 직원 한 명의 신원은 **HIS 한 곳**에서 나옵니다. HIS 가 직원 로그인 토큰을 발급하고, 형제 시스템은 그 토큰을 검증해 같은 사람으로 받아들입니다. 검증 방식은 시스템마다 세 가지로 나뉩니다.
 
+> **EN** — Staff sign-in is issued in one place (the HIS) and verified by the sibling systems against its published keys. This diagram shows which system trusts which, by what token format, and where the shared-secret path is used instead.
+
 근거: [README 「지금 알고 시작해야 할 것」 — 로그인 방식](../README.md#지금-알고-시작해야-할-것) · [HIS 릴리즈 요약 §1](../RELEASES/draft/systems/his.md) · 방식 이름(RS256 · JWKS · HS256)은 각 시스템 요약([sign](../RELEASES/draft/systems/sign.md) · [PACS](../RELEASES/draft/systems/pacs.md) · [edu](../RELEASES/draft/systems/edu.md) · [twin](../RELEASES/draft/systems/twin.md) · [cerno](../RELEASES/draft/systems/cerno.md) · [ERP](../RELEASES/draft/systems/erp.md) · [Jitsi](../RELEASES/draft/systems/jitsi.md) · [Clinic](../RELEASES/draft/systems/clinic.md))
 
 ```mermaid

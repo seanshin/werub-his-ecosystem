@@ -3,6 +3,8 @@
 > 기준 버전 **1.56.18** · 기준 커밋 `ffb34e9d1dbc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — The laboratory information system: clinical chemistry, microbiology, pathology, transfusion and molecular/genomic testing across the whole pre- to post-analytic path. It receives test orders from HIS and returns results over FHIR R4 (the HL7 v2 path remains only as an alternative and is `미구현` — not implemented), sends pathology imaging to PACS, and sends billing to ERP. Status at the base commit is `파일럿` (pilot). Several LIS ↔ HIS connections were verified by real calls during the 2026-09 follow-along; the connection table and its dates are authoritative.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/lis.md)에 있습니다.
 
 ## 1. 정체성과 계층

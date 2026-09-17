@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [AI Server 시스템 구성서](../systems/ai-server.md)
 > 계층 AI · 버전 `2.125.41` · 구현 상태 `통합` — 의료 기능 기준 · 화면 관리 화면(계측값 없음) · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — On-premise GPU AI server. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — The on-premise AI server that every other system calls. Callers ask for a **role name** (summarise, classify, DUR, retrieval, speech) rather than a model name, and a role-to-model routing table picks the model; the AI here **assists and drafts**, it does not decide. The capture slots below cover the admin dashboard (loaded models and VRAM), the routing table, time-of-day operating profiles, and quality measurement — **none are filled yet**. Admin screens can expose hosts, ports, model file paths and tokens, so those are masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

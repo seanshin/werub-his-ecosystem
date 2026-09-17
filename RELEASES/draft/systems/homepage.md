@@ -4,6 +4,8 @@
 > 요약 범위: RELEASE-v3.11.0 ~ RELEASE-v4.18.0 중 최근 14개(v4.6.0 ~ v4.18.0 · 2026-08-20 ~ 2026-09-10)에서 이 앱에 닿는 기록 5개(v4.6.0 · v4.12.0 · v4.13.0 · v4.14.0 · v4.15.0) + 같은 기간 `apps/homepage` 커밋 이력 · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **The public homepage** is the hospital's public website — hospital, clinic, screening and visitor information, plus an AI booking assistant that **assists** with appointments; it renders content read from the HIS public API and from CMS content edited in HIS admin screens. It lives inside the HIS repository as a separate Next.js app and is released with HIS, so at base commit `e9d303984f80` it carries **v4.18.0**; status is `운영` (in production as a public site). Recent work moved publish detection from a page-body sample to a **build stamp file** shared by the admin screen, the deploy script and the watcher — absence of the stamp reads as stale, while a connection failure is reported as no judgement at all; a partner application form was wired to a real intake API and a social-contribution figure whose basis could not be confirmed was taken down. This app was **not stood up separately** in the follow-along, so every connection status here comes from **code comparison only** (2026-09-11). Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 병원의 공개 웹사이트입니다. 병원 · 진료 · 검진 · 이용 안내를 보여주고, AI 예약 도우미로 진료 예약을 돕습니다. 내용은 HIS 의 공개 API 와 HIS 관리 화면에서 편집한 CMS 콘텐츠를 읽어 그립니다.

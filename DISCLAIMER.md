@@ -1,5 +1,7 @@
 # 의료 면책 고지 (Medical Disclaimer)
 
+> **EN** — This software is **not a medical device** and has not been cleared or approved as one in any country. Deciding whether and how far to use it clinically — including medical-device classification, regulatory clearance and privacy obligations — is the responsibility of the institution that adopts it. AI features assist and draft; a person approves. Provided AS IS, without warranty, under the MIT licence.
+
 이 저장소와 이 저장소가 소개하는 소프트웨어는 [MIT 라이선스](LICENSE)에 따라 **"있는 그대로(AS IS)" · 무보증**으로 제공됩니다. 의료 현장에서 쓰일 수 있는 소프트웨어이므로 다음을 따로 밝힙니다.
 
 1. **의료기기가 아닙니다.** 이 소프트웨어는 어느 국가에서도 의료기기(SaMD 포함)로 인허가를 받지 않았습니다.

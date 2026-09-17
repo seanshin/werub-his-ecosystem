@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [7. 구축은 이렇게 진행된다](07-build-path.md) · 다음 → [9. 제공 조건](09-terms.md)
 
+> **EN** — Where things actually stand, written so an institution does not plan around something that is not there. Of the 113 connections listed, **27 were called end to end between fresh installs** and carry a verification date, while 61 are wired in code but unverified; the rest are not implemented, discontinued, undecidable from code, or design only. The chapter then gives per-system implementation status, the things worth knowing **before** starting rather than discovering mid-build, and a single consolidated list of what the institution must prepare — hardware, accounts, code masters, decisions, and the connections that need a manual fallback. It ends by saying what would have to change for this chapter to change.
+
 ---
 
 구축 기관이 계획을 잘못 세우지 않도록, 지금 상태를 있는 그대로 적습니다. 모든 내용은 [통합 릴리즈 초안](../RELEASES/draft/manifest.md)의 버전 조합(계측일 2026-09-11)에서의 사실이고, **시스템 담당 확인 전 · 생태계 자료 측 조사 기준**입니다.

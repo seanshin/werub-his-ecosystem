@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [환자 앱 시스템 구성서](../systems/patient-app.md)
 > 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `개발` — 스토어 미배포 · 화면 32 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Patient app. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — The patient app — booking, viewing results, consent, questionnaires and delegating access to a family member. Its implementation status is `개발` (in development) and it is **not published to any app store**, so this chapter also covers the **web patient portal**, which is where patients enter today. One screen is captured, the portal login showing the rehearsal banner and phone-number sign-in, with four further slots **not filled yet**. Captures are taken on **synthetic hospital data**, with identifying information masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

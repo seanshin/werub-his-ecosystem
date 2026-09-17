@@ -4,6 +4,8 @@
 > 기준: [통합 릴리즈 초안 매니페스트](../RELEASES/draft/manifest.md)(계측일 2026-09-11) · 근거는 [A 개요서](../overview/) · [E 데모 시나리오](../scenarios/)
 > 읽는 법 · 변환 방법은 [덱 안내](README.md)
 
+> **EN** — Presentation deck: intent, structure, build path, current status, demo scenarios and the conditions an institution should know before starting. Status slides carry the same numbers as the connection status table — verified connections are counted against the full denominator, and screenshots come from a rehearsal install with synthetic hospital data.
+
 **병원 하나를 돌리는 13개 시스템을, AI 는 보조하고 판단은 사람이 하는 구조로 엮어, 적은 자원으로도 세울 수 있게 오픈 형태로 내놓는 생태계입니다.**
 
 | | |
@@ -365,7 +367,7 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 인증서 발급 · �
 4. HIS 를 AI Server 에 연결하고 전체 스위치를 켭니다(개별 기능은 아직 꺼짐).
 5. **기능을 하나씩** — 결정 기록 → 스위치 → Go-Live 표시 → 감독 화면 확인 → 다음. 켠 순서와 날짜를 남기고, 되돌릴 때도 같은 순서로 끕니다.
 
-AI 계층의 사람 결정 **10개** · 이 단계를 닫는 Go-Live 항목 **15개**(모두 개시를 막지 않는 추적 항목 · HIS v4.18.0 레지스트리 2026-09-11 추출).
+AI 계층의 사람 결정 **10개** · 이 단계를 닫는 Go-Live 항목 **15개**(모두 개시를 막지 않는 추적 항목 · HIS v4.18.0 레지스트리 기준 커밋에서 추출).
 
 근거: [A 6장](../overview/06-ai.md) · [S6 AI 계층](../build-guide/S6-ai.md)
 
@@ -453,7 +455,7 @@ flowchart LR
 | — | **시스템 밖 병행**(시설 · 인허가 · 법정 인력 · 정기 운영 · 인증) | — | 0 | 21 | 0 |
 | | **합계** | | **56** | **60** | **60** |
 
-수치: [구축 가이드](../build-guide/README.md#단계)가 HIS 레지스트리 항목을 단계에 배정(HIS v4.18.0 · 2026-09-11 추출). **HIS 화면에는 단계 구분이 없습니다.**
+수치: [구축 가이드](../build-guide/README.md#단계)가 HIS 레지스트리 항목을 단계에 배정(HIS v4.18.0 · 기준 커밋에서 추출). **HIS 화면에는 단계 구분이 없습니다.**
 
 ---
 
@@ -471,7 +473,7 @@ flowchart LR
 - 이 목록은 **전수가 아닙니다.** 종별 · 지역 · 특례에 따라 늘거나 빠지고, 법령 근거와 처리 기한은 기관이 확인해 채웁니다.
 - **개원 단계 항목 21개는 시스템 밖에서 병행합니다** — 설립 · 시설 · 인허가 · 법정 인력 · 정기 운영 · 인증 준비. **시스템은 기록만 받고 신고 · 허가를 대신 내지 않습니다.**
 
-세 목록은 HIS 코드에서 그대로 뽑았습니다(HIS v4.18.0 · 기준 커밋 2026-09-11 · 추출일 2026-09-11).
+세 목록은 HIS 코드에서 그대로 뽑았습니다(HIS v4.18.0 · 기준 커밋 2026-09-11 · 기준 커밋에서 추출(추출일은 생성물에 있음)).
 
 ---
 

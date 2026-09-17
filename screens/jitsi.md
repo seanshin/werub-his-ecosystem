@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 없음** · [화면 소개 목차](README.md) · [Jitsi 시스템 구성서](../systems/jitsi.md)
 > 계층 협업·교육 · 버전 `1.0.0` · 구현 상태 **`중단`** · 화면 — · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Self-hosted telehealth video. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — Self-hosted telehealth video. Its status is `중단` (discontinued) — the current installation does not run, so there are **no captures**, and an institution that needs video consultation has to build it anew. Any future captures would be taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

@@ -3,7 +3,7 @@
 > 🟡 **초안** · 캡처 **264 / 266**(제외 2 — 인프라 주소 · 외부 기관 정보가 화면 전체에 걸림) · [화면 소개 목차](README.md) · 캡처 목록: [assets/screens/INDEX.md](../assets/screens/INDEX.md)
 > 근거: [HIS 메뉴 구성 — 도메인별](../systems/his-domains.md)(HIS `v4.18.0` · 기준 커밋 2026-09-11 · 자동 추출) · [HIS 시스템 구성서](../systems/his.md) · ⚠️ 캡처한 설치본은 **v4.19.0**([까닭](README.md#장))
 
-**EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**27 verified** with a date — 23 of them also re-tested with a deliberately injected fault). Captured so far: **264 of 266** menu screens (2 withheld — infrastructure addresses / partner details), on a rehearsal install running v4.19.0 (base commit: v4.18.0).
+> **EN** — The HIS ships **266 screens** in its default menu, grouped into 8 domains and 26 menu clusters. This chapter walks the domains and shows what each screen is for. Menu names and default roles are **code defaults** — an administrator can rename, reorder, hide or add menus. A screen existing is not the same as a connection being verified: see [connection status](../RELEASES/draft/compatibility.md) (**27 verified** with a date — 23 of them also re-tested with a deliberately injected fault). Captured so far: **264 of 266** menu screens (2 withheld — infrastructure addresses / partner details), on a rehearsal install running v4.19.0 (base commit: v4.18.0).
 
 ---
 
@@ -999,7 +999,7 @@ EMR 인증 체크리스트는 **8 / 8 (100.0%)** 이지만, 바로 아래에 두
 > 🔴 **코드 마스터는 이 저장소에도 생태계 소스에도 없습니다.** 나라마다 다르고 각 나라 공공기관이 배포 조건을 정하므로, **구축 기관이 직접 받아 반입합니다**([THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터)). 이 화면은 그 반입물을 넣고 관리하는 자리입니다.
 
 > ### ⚠️ 이 설치본의 결정 수가 체크리스트와 다릅니다
-> [사람 결정 체크리스트](../checklist/decisions.md)는 기준 커밋(HIS `v4.18.0` · `e9d3039...` · 2026-09-11 추출)에서 **합계 56**(허가권자 17 · 원내 위원회 38 · 직원 1) · 개시 전 필수 11 을 읽었습니다.
+> [사람 결정 체크리스트](../checklist/decisions.md)는 기준 커밋(HIS `v4.18.0` · `e9d3039...` · 기준 커밋에서 추출)에서 **합계 56**(허가권자 17 · 원내 위원회 38 · 직원 1) · 개시 전 필수 11 을 읽었습니다.
 > 캡처한 설치본 화면(2026-09-12)은 같은 `v4.18.0` 표기인데 **합계 61**(허가권자 19 · 원내 위원회 41 · 직원 1) · 개시 전 필수 15 입니다.
 > **어느 쪽이 맞다고 정하지 않습니다.** 버전 문자열이 같아도 설치본의 커밋이 기준 커밋보다 나중일 수 있고, 기관이 항목을 더했을 수도 있습니다. 원인을 확인한 뒤 고칩니다.
 > — 같은 화면의 Go-Live 필수 항목 수(31)는 [Go-Live 체크리스트](../checklist/go-live.md)의 `개시 차단 31` 과 **일치합니다.**

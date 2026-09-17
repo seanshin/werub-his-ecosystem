@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [cerno 시스템 구성서](../systems/cerno.md)
 > 계층 AI · 버전 `0.1.0` · 구현 상태 `파일럿` — 섀도우 · 비임상 · 화면 3 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
 
-**EN** — Clinician-personalized clinical AI. Screens are captured on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication ([capture rules](../assets/screens/README.md)).
+> **EN** — Clinician-personalised clinical AI, retrieval-grounded so that it **does not generate without a source** — a draft answer arrives together with the documents it was built from. It runs **shadow and non-clinical only** and is not used for clinical judgement. Two capture slots (a grounded answer with its sources, and the per-clinician document corpus) are **not filled yet**. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
 ---
 

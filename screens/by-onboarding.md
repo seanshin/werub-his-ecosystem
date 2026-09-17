@@ -3,7 +3,7 @@
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md)
 > 화면은 **가상 병원 데이터가 든 리허설 설치본**에서 2026-09-12 에 찍었습니다. 화면 상단에 `리허설 · 시드 데이터 · 대외 발신 차단` 배너가 그대로 보입니다.
 
-**EN** — How people enter and leave the system: first login, certificate enrolment, hiring, clinician registration, emergency access, and offboarding. Captured 2026-09-12 on a rehearsal installation running synthetic data (the header badge reads "rehearsal · seed data · outbound blocked").
+> **EN** — How people enter and leave the system: first login, certificate enrolment, hiring, clinician registration, emergency access, and offboarding. Captured 2026-09-12 on a rehearsal installation running synthetic data (the header badge reads "rehearsal · seed data · outbound blocked").
 
 구축 기관이 **가장 먼저** 하는 일입니다. 병원을 세우려면 사람이 먼저 들어가야 하기 때문입니다.
 

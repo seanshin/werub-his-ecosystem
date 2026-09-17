@@ -3,6 +3,8 @@
 > 가장 작은 출발점은 **앱 서버 한 대 + GPU 서버 한 대**입니다. HIS 와 형제 시스템은 앱 서버에 컨테이너로 올리고, AI Server 는 GPU 가 있는 서버에 둡니다. 영상이 많아지면 PACS 영상 저장소를 따로 둘 수 있습니다.
 > 이 그림은 **일반형**입니다. 특정 설치본의 주소 · 포트 · 호스팅 업체는 적지 않습니다.
 
+> **EN** — How the systems are laid out on machines and networks: what runs where, which surfaces face outside, and what the one recorded operating deployment looked like. The figures are a measured record, not a recommended specification — reference-machine numbers do not exist yet.
+
 근거: [README 「최소한의 사양과 구현으로」](../README.md#최소한의-사양과-구현으로-쓸-수-있게)(서버 한 대 실측 기록 · 소비자용 GPU 한 장) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)(설치 전 주소 교체 · 외부 연결 차단) · [THIRD_PARTY §1 · §5](../THIRD_PARTY.md#5-구조--링크하지-않고-별도-컨테이너로-씁니다)(제3자 서버를 별도 컨테이너로 씀) · 시스템 구성은 각 [시스템 요약](../RELEASES/draft/systems/) §6
 
 > 📷 **화면으로 보기** — 이 구성이 실제로 어떻게 보이는지는 [HIS 「시스템 관리」](../screens/his.md#시스템-관리--system)(앱 서버가 GPU 서버를 어떻게 보고 있는지)과 [twin 「운영」](../screens/twin.md)에 있습니다.

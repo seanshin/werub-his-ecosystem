@@ -3,6 +3,8 @@
 > 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
 > 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
+> **EN** — A person goes through a comprehensive health check at the demo hospital: browsing and booking the programme on the public website, completing the questionnaire in the app, following QR wayfinding between stations on the day, then the examining physician's overall assessment, an AI-drafted explanation that a person reviews before it is issued, the result report, and follow-up for anything needing a repeat test. Known gaps: results and repeat-test notices cannot be sent by SMS or app push (the SMS provider is a mock, app push does not receive, server-side push is off by default), and the route the AI explanation draft travels is not confirmed in the connection table. Screen translations are all AI drafts with no completed human review, and the patient app is Korean only. Screenshot slots: 13, of which 9 are complete and 1 shows the screen but not yet the exact moment; people appear by role only and all data is synthetic.
+
 수검자C 가 데모 병원 건강검진센터에서 종합검진을 받습니다. 홈페이지에서 프로그램을 보고 예약하고, 앱으로 문진표를 쓰고, 검진 당일에는 QR 동선 안내를 따라 스테이션을 돕니다. 판정의가 종합 판정을 하고 AI 가 만든 결과 설명 초안을 감수한 뒤 결과서가 나갑니다. 재검이 필요한 항목은 추적 관리로 넘어가고, 진료가 필요하면 [시나리오 01 외래](01-outpatient-journey.md)로 이어집니다.
 
 ## 등장 인물

@@ -4,6 +4,8 @@
 > 요약 범위: v1.20.73 ~ v1.20.88 중 최근 16개(2026-08-26 ~ 2026-09-03 · 기준 커밋 이전 30일) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **twin** is a digital-twin service that models hospital operations, devices and patients to provide risk-score cards, SBAR, what-if simulation and 3D visualisation; it **reads** from HIS, PACS and the AI server, and the only thing it writes back to HIS is a risk assessment, an SBAR or a clinician-authored SOAP note, sent with a per-user token. At base commit `526b4f9a4d3f` the declared version is **1.20.88**, status `통합` (integration). Recent releases added risk areas (pulmonary embolism severity, gastrointestinal bleeding, acute pancreatitis), broke evidence display down to variable, grade, scope and source-paper level with a model catalogue enforced in CI, cut HIS calls by fetching risk cards in one go while keeping failed cards visible with a retry prompt, and fixed 10 calculation defects found in a risk-engine review — for example, eGFR that had been computed with the male coefficient when sex was unknown now reports “not calculable”. twin was **not installed** in the follow-along, so every connection status here comes from **code comparison only** (2026-09-11). Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 병원 운영 · 기기 · 환자를 모델로 옮겨 위험 점수 카드 · SBAR · What-if 시뮬레이션 · 3D 시각화를 제공하는 디지털 트윈 서비스입니다. HIS · PACS · AI Server 의 자료를 **읽어서** 쓰는 별도 서비스입니다. HIS 에 쓰는 것은 write-back(위험 평가 · SBAR · 임상의가 작성한 SOAP)뿐이며, 사용자별 토큰으로 보냅니다.

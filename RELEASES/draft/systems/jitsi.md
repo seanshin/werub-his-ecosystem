@@ -4,6 +4,8 @@
 > 요약 범위: v1.0.0 ~ v2.10.0 태그 중 최근 5개(v2.7.0 ~ v2.10.0 · 2026-06-18 ~ 2026-07-23) + 마지막 태그 이후 커밋(2026-07-23 ~ 2026-07-24) · 작성 2026-09-11
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전)
 
+> **EN** — **Jitsi** is the tele-consultation video server: a self-hosted Jitsi Meet stack (web, XMPP signalling, conference management, media relay) plus TURN, recording, a conference-management REST API and monitoring. At base commit `0984fbec7177` the version declared in code is **1.0.0** while the tags read v2.10.0 (see §7), and the status is 🔴 `중단` (discontinued) — **the current installation does not work and a building institution has to stand it up afresh**; everything below describes the code and records at that commit, not a running system. The releases in scope added a trial implementation of live speech recognition and translated subtitles, wiring the transcription component to the AI server as an optional component, with the viewer choosing between the Korean original and the translation. Jitsi was **not rebuilt** in the follow-along, so every connection status here comes from **code comparison only** (2026-09-11). Not yet confirmed by the owning project.
+
 ## 1. 한 줄 정의와 계층
 
 - **정의**: 원격진료 화상 서버입니다. 자체 호스팅하는 Jitsi Meet 구성(웹 · XMPP 시그널링 · 회의 관리 · 미디어 중계)에 TURN · 녹화 · 회의 관리 REST API · 모니터링을 더한 묶음입니다.

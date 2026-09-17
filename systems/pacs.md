@@ -3,6 +3,8 @@
 > 기준 버전 **v13.48** · 기준 커밋 `532a8ed13e87` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
+> **EN** — The imaging system: an Orthanc-backed image server with a web viewer, reading workflow, admin screens and AI hooks. It joins the examination flow through modality worklist and HL7 v2 order intake, and hands report signing to sign. Staff sign in with the HIS-issued token verified by public key; service accounts (for the LIS link, for example) use PACS's own login, and role-based access confines patient-returning queries to clinical roles. Status at the base commit is `통합` (integrated); an institution that already runs a PACS may connect that one over standard protocols instead.
+
 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/pacs.md)에 있습니다.
 
 ## 1. 정체성과 계층

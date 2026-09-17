@@ -2,7 +2,9 @@
 
 > 이 생태계는 9단계(S0 준비 ~ S8 리얼 전환)로 세웁니다. 단계마다 **사람이 정할 것**(육각형)이 있고, 시스템은 그 결정을 대신하지 않습니다. S6 에서는 **설치 직후 AI 기능을 끄고, 기관 결정에 따라 하나씩 켭니다** — 코드 기본값이 켜진 기능이 있기 때문입니다.
 
-근거: [README 「구축은 이렇게 진행됩니다」](../README.md#구축은-이렇게-진행됩니다) · [ROADMAP §4](../ROADMAP.md#4-구축-가이드의-단계-b) · 사람이 정할 것은 [결정 등록부 체크리스트](../checklist/decisions.md)(HIS v4.18.0 · 2026-09-11 추출)와 [sign 릴리즈 요약 §5](../RELEASES/draft/systems/sign.md)
+> **EN** — The build path S0 → S8 as one picture, with the human decisions that gate each stage marked as hexagons. It shows what can be stood up independently and what has to wait for a decision rather than for code.
+
+근거: [README 「구축은 이렇게 진행됩니다」](../README.md#구축은-이렇게-진행됩니다) · [ROADMAP §4](../ROADMAP.md#4-구축-가이드의-단계-b) · 사람이 정할 것은 [결정 등록부 체크리스트](../checklist/decisions.md)(HIS v4.18.0 · 기준 커밋에서 추출)와 [sign 릴리즈 요약 §5](../RELEASES/draft/systems/sign.md)
 
 ```mermaid
 flowchart TB

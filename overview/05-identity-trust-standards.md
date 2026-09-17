@@ -3,6 +3,8 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
 > [개요서 목차](README.md) · ← [4. 환자 한 명의 여정](04-patient-journey.md) · 다음 → [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md)
 
+> **EN** — Three things must line up for thirteen systems to behave like one hospital: **who this person is**, **whether this document can be trusted**, and **whether the systems speak the same language**. Staff identity is issued once by the HIS and verified by the others in three different ways — public-key verification (five systems), a shared secret (two, which means key management becomes the institution's job), and a scoped API key (one). Trust — certificates, RFC 3161 timestamps, PAdES-LTA signatures, append-only audit chains — is concentrated in sign. Standards (FHIR R4, SMART on FHIR, CDS Hooks, DICOM, DICOMweb, HL7 v2) carry what they can, but **many connections are plain HTTPS REST or webhooks**, and every row says which it is.
+
 ---
 
 시스템이 13개여도 한 병원처럼 움직이려면 세 가지가 맞아야 합니다.

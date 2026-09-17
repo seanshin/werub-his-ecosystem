@@ -2,6 +2,8 @@
 
 > ⚠️ 초안 — **새 설치본으로 한 번 따라가 본 결과를 반영했습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · 8GB 가상 머신 · GPU 없음 · 외부로 나가지 못하는 네트워크). 남은 `확인 필요(따라가기)` 표시는 x86 · GPU 기준 장비나 사람 결정이 필요한 곳입니다. · 기준 2026-09-11 · [가이드 목차](README.md)
 
+> **EN** — Stage S5 adds the management side — ERP, staff education (edu), the clinical collaboration service (Clinic), the digital twin, cerno and video consultation (Jitsi). Several links between these and the HIS were verified by real calls; Clinic was not installed on the follow-along, so everything that needs it is marked unverified.
+
 ## ① 목적과 완료 조건
 
 진료 뒤의 일 — 수납 · 청구 · 회계 · 인사급여 · 자재(ERP), 인수인계 · 근무표 · 결재(Clinic), 직원 교육 · 이수증(edu) — 을 HIS 에 붙입니다. 세 시스템 모두 **HIS 직원 명부와 로그인**에 기대므로, 직원 한 명의 입사 → 변경 → 퇴직이 여러 시스템에 어떻게 전해지는지 이 단계에서 맞춥니다.
