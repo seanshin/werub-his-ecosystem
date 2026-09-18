@@ -15,7 +15,7 @@
 | **ERP** | 경로마다 | `{ error: { code, message, details } }` | `body.error.code` |
 | **sign** | 경로마다 | 입력 검증 실패는 **400** `{ error: { code: "VALIDATION", … } }` | `body.error.code` |
 | **PACS** | 경로마다 | 표준 형식 `{ "detail": "…" }` | `body.detail` (**코드가 없습니다** — 문자열입니다) |
-| **edu**(웹훅 수신) | `{ data: { ok, applied, event, reason? } }` | 서명 불일치는 **401** | 아래 [5절](#5-2xx-가-반영됨-을-뜻하지-않는-자리) |
+| **edu**(웹훅 수신) | `{ data: { ok, applied, event, reason? } }` | 서명 불일치는 **401** | 아래 [5절](#5-2xx-가-반영됨을-뜻하지-않는-자리) |
 | **AI Server** | — | — | 🔴 이 자료는 공통 오류 모양을 **확인하지 않았습니다** |
 
 🔴 **한 시스템에 맞춰 만든 오류 처리기를 다른 시스템에 그대로 쓰면 메시지가 사라집니다.** `body.error.code` 를 읽는 코드로 PACS 응답을 받으면 `undefined` 가 나옵니다(PACS 는 `detail` 문자열 하나입니다).

@@ -35,7 +35,7 @@
 
 | 무엇 | 어디 |
 |---|---|
-| 시스템 구성서 13장 · 구축 가이드 S0~S8 · 개요서 10장 · 데모 시나리오 4 · 발표 덱 · 화면 14장 | [저장소 목차](../../README.md#문서-지도) |
+| 시스템 구성서 13장 · 구축 가이드 S0~S8 · 개요서 10장 · 데모 시나리오 4 · 발표 덱 · 화면 14장 | [저장소 목차](../../README.md#저장소-구성) |
 | **연결 카드 48장** — 방향 있는 시스템 쌍마다 한 장(무엇을 주고받나 · 여는 순서 · 설정 키 이름 · 확인한 범위) | [`integration/cards/`](../../integration/cards/) |
 | **연동 계약의 공통 규약** — 오류 봉투 · 서명 대상 · 멱등 · 재시도 · 2xx 가 반영됨이 아닌 자리 | [`integration/contracts.md`](../../integration/contracts.md) |
 | **소스 받기 안내** — 저장소 주소와 기준 커밋으로 받는 법 | [`SOURCES.md`](../../SOURCES.md) |
@@ -77,5 +77,5 @@ node tools/build-connection-cards.mjs # 연결 카드 48장
 node tools/build-sources.mjs          # 소스 받기 안내
 node tools/list-install-defaults.mjs  # 바꿔야 할 코드 기본값 목록
 node tools/count-releases.mjs         # 릴리즈 기록 계수
-node tools/verify-all.mjs             # 발행 전 검사 22개 — 전부 통과해야 올립니다
+node tools/verify-all.mjs             # 발행 전 검사 24개 — 전부 통과해야 올립니다
 ```
