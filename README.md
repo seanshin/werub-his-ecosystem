@@ -22,7 +22,7 @@
 | **지금 상태** | 연결 113개 중 **실제로 호출해 확인한 것은 27개**(`검증됨` · 새 설치본끼리 · 2026-09-14~15) · 코드만 맞물린 것 61개 · 구축 가이드 S0~S8 은 **한 번 따라가 봤습니다**(개발 PC · GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) |
 | **규모 · 비용** | 개발 PC 한 대에 7개 시스템이 함께 떴습니다(메모리 약 2.9GB · 가상 데이터 · 디스크는 **200GB 이상** 권장). **금액은 적지 않습니다** — 기관 조건이 정합니다 → [규모 — 지금 말할 수 있는 것](#규모--지금-말할-수-있는-것) |
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
-| **소스는** | 시스템마다 **저장소가 따로** 있습니다(11곳). 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일은 → **[소스 받기](SOURCES.md)**. 🔴 저장소는 **하나씩 공개되는 중**이라 아직 열리지 않는 주소가 있습니다 |
+| **소스는** | 시스템마다 **저장소가 따로** 있습니다(11곳). 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일은 → **[소스 받기](SOURCES.md)**. 🟢 **모두 공개할 예정**이고 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 주소가 있지만 **주소는 바뀌지 않습니다** |
 
 **처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/08-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) · [화면 293장](screens/)
 
@@ -42,7 +42,7 @@
 
 이 생태계는 그 문턱을 낮추려고 만들었습니다.
 
-- **오픈 형태로 제공합니다.** 생태계의 자체 코드는 [MIT 라이선스](LICENSE)로 제공합니다. 쓰고, 고치고, 다시 배포할 수 있습니다. 다만 **지금 공개된 것은 이 소개 · 구축 자료뿐입니다** — 소스 저장소는 프로젝트마다 정리가 끝나는 대로 열립니다([지금 받을 수 있는 것](#지금-받을-수-있는-것)).
+- **오픈 형태로 제공합니다.** 생태계의 자체 코드는 [MIT 라이선스](LICENSE)로 제공합니다. 쓰고, 고치고, 다시 배포할 수 있습니다. **소스 저장소도 모두 공개할 예정**이고, 프로젝트마다 정리가 끝나는 대로 하나씩 열립니다 — 주소는 이미 정해져 있고 바뀌지 않습니다([지금 받을 수 있는 것](#지금-받을-수-있는-것) · [소스 받기](SOURCES.md)).
 - **병원 하나를 돌리는 데 필요한 시스템을 한 벌로 갖춥니다.** HIS 한 개가 아니라, 검사·영상·전자서명·경영·AI·협업·교육까지 13개 시스템이 서로 맞물린 생태계입니다.
 - **많은 곳에서 폭넓게 쓰이기를 바랍니다.** 큰 병원만이 아니라 중소 병원, 의원급 기관, 공공 보건기관, 그리고 **의료 인프라가 부족한 개발도상국의 의료기관**도 자기 손으로 세우고 운영할 수 있는 것이 목표입니다.
 
@@ -252,7 +252,7 @@
 ## 지금 받을 수 있는 것
 **What you can actually get today**
 
-> **EN** — Today this repository gives you the **materials**: the build playbook, 13 system briefs, the connection status table with verification dates, 293 screenshots, and three checklists. The **source repositories are listed by address but not yet open** — each project is opened once its own cleanup is done. Nothing here hides that.
+> **EN** — Today this repository gives you the **materials**: the build playbook, 13 system briefs, the connection status table with verification dates, 293 screenshots, and three checklists. The source repositories are **listed by their final addresses and are all to be made public** — each is opened once its own cleanup is done, and the address does not change in the process. Some links will not open yet; nothing here hides that.
 
 | 지금 있는 것 | 어디에 |
 |---|---|
@@ -270,7 +270,7 @@
 | AI 모델 가중치 | 저장소에도 소스에도 담지 않습니다. 기관이 약관을 읽고 직접 받습니다([THIRD_PARTY](THIRD_PARTY.md)) |
 | 코드 마스터(수가 · 약가 · 상병 등) | 공공기관이 배포합니다. 기관이 이용 조건을 확인하고 받습니다 |
 
-**소스는 시스템마다 저장소가 따로 있고, [소스 받기](SOURCES.md)에 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일을 한 장으로 정리해 두었습니다.** 저장소는 **각 프로젝트의 정리가 끝나는 대로 하나씩 공개**되는 중이라, 아직 열리지 않은 주소가 있습니다 — 그 안내는 **열리는 순간 그대로 동작합니다**(주소도 커밋도 바뀌지 않습니다).
+**소스는 시스템마다 저장소가 따로 있고, [소스 받기](SOURCES.md)에 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일을 한 장으로 정리해 두었습니다.** 저장소는 **모두 공개할 예정**이고 각 프로젝트의 정리가 끝나는 대로 하나씩 열립니다. 아직 열리지 않은 주소가 있지만, 그 안내는 **열리는 순간 그대로 동작합니다**(주소도 커밋도 바뀌지 않습니다). 🔴 다만 **열렸다고 라이선스 표기가 MIT 로 정리됐다는 뜻은 아닙니다** — 저장소마다 지금 적힌 표기를 [매니페스트](RELEASES/2026.09/manifest.md)에 그대로 싣고 있습니다.
 
 ## 규모 — 지금 말할 수 있는 것
 **Sizing: what we can say, and what we cannot**
