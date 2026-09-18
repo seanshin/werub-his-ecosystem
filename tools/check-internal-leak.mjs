@@ -77,9 +77,9 @@ function walk(dir, out = []) {
 try {
   if (process.argv.includes('--self-test')) {
     const fails = [];
-    const sample = '## 부록 G — x\n| ID | 시스템 | 한 줄 |\n|---|---|---|\n| X9 | HIS | 어떤경로가무언가 아무런검사없이그냥 통과해버린다 |\n## 다음\n';
+    const sample = '## 부록 G — x\n| ID | 시스템 | 한 줄 |\n|---|---|---|\n| 예시 | HIS | 어떤경로가무언가 아무런검사없이그냥 통과해버린다 |\n## 다음\n';
     const it = items(sample);
-    if (it.length !== 1 || it[0].id !== 'X9') fails.push('부록 표를 읽지 못합니다');
+    if (it.length !== 1 || it[0].id !== '예시') fails.push('부록 표를 읽지 못합니다');
     const ps = prints(it[0].text);
     if (!ps.length) fails.push('지문을 만들지 못합니다');
     if (ps.some((p) => p.length !== N)) fails.push('n-그램 길이가 다릅니다');
@@ -89,8 +89,11 @@ try {
     if (prints('어떤값을 설정하지 않으면 코드 기본값으로 동작한다').length < 3) fails.push('한국어 서술에서 지문이 거의 만들어지지 않습니다');
     // 부록 D 모양 — 서술이 **가운데** 칸이고 마지막 칸은 근거(「—」)다
     {
-      const d = '## 부록 D — x\n| # | 연결 | 후보 한 줄 | 판정 | 근거 |\n|---|---|---|---|---|\n| C9 | 가 → 나 | 어떤식별자가서로 달라서요청이거부된다 | 코드상 사실 | — |\n## 다음\n';
+      const d = '## 부록 D — x\n| # | 연결 | 후보 한 줄 | 판정 | 근거 |\n|---|---|---|---|---|\n| 예시 | 가 → 나 | 어떤식별자가서로 달라서요청이거부된다 | 코드상 사실 | — |\n## 다음\n';
       const it2 = items(d);
+      // 🔴 예시 ID 는 **실제 번호처럼 보이지 않는 것**을 쓴다 — 도구 소스도 공개되므로
+      //    후보 번호와 같은 **모양**을 예시로 두면 진짜 번호로 읽히고, 이력 검사에도 걸린다
+      //    (2026-09-18 에 두 번 고쳤다). 그래서 예시 ID 는 한국어 낱말을 쓴다.
       if (it2.length !== 1) fails.push('부록 D 표를 읽지 못합니다');
       else if (!prints(it2[0].text).length) fails.push('부록 D 에서 서술이 아닌 칸을 읽습니다(지문 0개)');
     }
