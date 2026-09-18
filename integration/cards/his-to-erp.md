@@ -11,7 +11,7 @@
 | 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
 |---|---|---|---|---|
 | 수납·청구·재고·자산·인사·검진권·서명완료 운영 이벤트 전달(회계 전표·미러 적재) | HTTP POST 웹훅 · HIS outbox(20초 디스패처·지수 백오프·(dom | 정적 키 X-Integration-Key + 본문 HMAC-SHA256("{ts}. | `구현·미검증`(일부만 확인) | — |
-| 직원 SSO — HIS 로그인 사용자를 ERP 로 자동 로그인(JIT 계정 생성) | 브라우저 핸드오프 2방식: token(HIS 기본값 — 새 탭 URL 쿼리로 HIS | JWT HS256 공유 시크릿 — HIS 는 메인 JwtModule(AUTH_SEC | `검증됨` | 2026-09-14 |
+| 직원 SSO — HIS 로그인 사용자를 ERP 로 자동 로그인(JIT 계정 생성) | 브라우저 SSO 핸드오프(공유 비밀키 서명 토큰) | JWT HS256 공유 시크릿 — HIS 는 메인 JwtModule(AUTH_SEC | `검증됨` | 2026-09-14 |
 | 직원 셀프서비스(ESS) — 급여명세·연차 잔여·원천징수·공제코드·당직·성과·퇴직금·증명서 조회, 급여 신원 등록 | HTTP GET/POST /api/v1/integration/hr/{payslip\ | 정적 키 X-Integration-Key + 대상자 토큰 X-Target-Token | `구현·미검증`(일부만 확인) | — |
 | 수납 화면·환자 포털의 중간/최종 진료비 계산서 조회(ERP 산정값) | HTTP GET /api/v1/integration/billing/invoice?c | 정적 키 X-Integration-Key | `검증됨` | 2026-09-15 |
 | 마스터 — ERP 가 확정한 약품 코드 매핑을 HIS 가 가져와 보험코드 백필 | HTTP GET /api/v1/integration/regulatory/drug-m | 정적 키 X-Integration-Key | `검증됨` | 2026-09-15 |

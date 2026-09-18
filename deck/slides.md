@@ -1,7 +1,7 @@
 # AI 기반 HIS 생태계 — 발표 덱
 
 > 🟡 **초안** — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16 · 연결 `검증됨` 27) · 화면 캡처 11장(가상 병원 데이터 · 리허설 설치본)
-> 기준: [통합 릴리즈 초안 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11) · 근거는 [A 개요서](../overview/) · [E 데모 시나리오](../scenarios/)
+> 기준: [통합 릴리즈 `2026.09` 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11) · 근거는 [A 개요서](../overview/) · [E 데모 시나리오](../scenarios/)
 > 읽는 법 · 변환 방법은 [덱 안내](README.md)
 
 > **EN** — Presentation deck: intent, structure, build path, current status, demo scenarios and the conditions an institution should know before starting. Status slides carry the same numbers as the connection status table — verified connections are counted against the full denominator, and screenshots come from a rehearsal install with synthetic hospital data.
@@ -215,7 +215,7 @@ flowchart TB
 
 **소스를 받을 때는 태그 이름이 아니라 매니페스트의 정본 버전 · 기준 커밋을 기준으로 삼습니다** — 13행 중 8행이 태그 · 릴리즈 기록과 어긋납니다.
 
-근거: [통합 릴리즈 초안 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11) · [A 3장](../overview/03-layers-and-systems.md)
+근거: [통합 릴리즈 `2026.09` 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11) · [A 3장](../overview/03-layers-and-systems.md)
 
 ---
 

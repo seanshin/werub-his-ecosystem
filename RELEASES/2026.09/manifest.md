@@ -1,6 +1,6 @@
 <!-- 생성물 — 직접 수정 금지. `node tools/build-manifest.mjs` 로 다시 만듭니다. -->
 
-# 통합 릴리즈 매니페스트 (초안)
+# 통합 릴리즈 매니페스트 `2026.09`
 
 > **EN** — One pinned combination of the thirteen systems: the version each repository declares at its **base commit**, where that version is read from, how far it is implemented, the licence each repository states for itself, and the source address. Everything else in these materials is written against this combination.
 

@@ -1,7 +1,7 @@
 # edu 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [edu 시스템 구성서](../systems/edu.md)
-> 계층 협업·교육 · 버전 `2.7.0` · 구현 상태 `확인 필요` — 운영 여부 재확인 전 · 화면 41 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
+> 계층 협업·교육 · 버전 `2.7.0` · 구현 상태 `확인 필요` — 운영 여부 재확인 전 · 화면 41 · 기준: [통합 릴리즈 `2026.09`](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — Staff e-learning, mandatory training and electronic completion certificates, which [sign](sign.md) seals; joiners, changes and leavers arrive over the HIS staff-event webhook. The one captured screen is the login page, and it states the constraint plainly: **edu keeps no accounts of its own** — you sign in with an HIS account, so edu cannot be used without the HIS. That same capture also shows the institution name in edu differing from the one configured in the HIS, because each system is configured separately. Three further slots (courses, mandatory-training status, sealed certificate) are **not filled yet**; captures are taken on **synthetic hospital data** with identifying information masked ([capture rules](../assets/screens/README.md)).
 

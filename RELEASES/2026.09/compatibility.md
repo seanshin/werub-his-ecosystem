@@ -1,10 +1,10 @@
 <!-- 생성물 — 직접 수정 금지. 연결 판정 기록에서 만듭니다. -->
 
-# 연결 상태 (초안)
+# 연결 상태 — 통합 릴리즈 `2026.09`
 
 > **EN** — The authoritative connection status table. Each row is one directed purpose between two systems, with protocol, auth, status and — for `검증됨` (verified) — the date it was called end to end. Connections still waiting on the owning project are not listed here.
 
-> 이 통합 릴리즈 초안의 버전 조합에서, 시스템 사이 연결이 **코드상 어디까지 준비돼 있는지**를 적습니다.
+> 통합 릴리즈 `2026.09` 의 버전 조합에서, 시스템 사이 연결이 **코드상 어디까지 준비돼 있는지**를 적습니다.
 
 | 기준 | 값 |
 |---|---|
@@ -17,7 +17,7 @@
 
 | 상태 | 뜻 |
 |---|---|
-| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **이 초안에는 27개**(새 설치본끼리 · 확인일 칸) |
+| `검증됨` | 실제로 호출해 동작을 확인함(확인일 필수) — **이 릴리즈에는 27개**(새 설치본끼리 · 확인일 칸) |
 | `구현·미검증` | 양쪽 코드가 서로 맞물려 있음. 실제 호출로는 아직 확인하지 않음 |
 | `설계만` | 문서 · 규격만 있음 |
 | `미구현` | 한쪽 코드가 없음 — 이 연결이 필요하면 구축 기관이 대체 수단을 준비합니다 |

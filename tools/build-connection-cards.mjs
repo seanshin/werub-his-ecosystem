@@ -26,10 +26,17 @@ const SRC = path.join(ROOT, '..', 'planning', 'p1');
 const OUT = path.join(ROOT, 'integration', 'cards');
 const INPUTS = path.join(OUT, '_inputs.json');
 const TABLE = path.join(ROOT, 'RELEASES/2026.09/compatibility.md');
+// 🔴 공개 표가 일부러 **바꿔 쓴 문구**. 카드도 반드시 같은 값을 써야 한다 —
+//    2026-09-18 에 카드가 원문(끝점 경로·토큰 전달 방식)을 그대로 싣고 있었고, 공개 표 생성기의
+//    누출 검사가 그것을 잡았다. 「읽고 거른다」 가 아니라 **처음부터 대체 문구로 바꿔** 넣는다.
+const OVERRIDES = JSON.parse(fs.readFileSync(path.join(SRC, 'public-text.json'), 'utf8')).overrides;
 
 /** 카드에 쓸 수 있는 필드만 통과시킨다(화이트리스트) */
 const PICK = ['id', 'from', 'to', 'purpose', 'protocol', 'auth', 'configKeys', 'staticStatus', 'liveStatus', 'verifiedAt', 'livePartial'];
-const pick = (c) => Object.fromEntries(PICK.filter((k) => c[k] !== undefined).map((k) => [k, c[k]]));
+const pick = (c) => {
+  const o = Object.fromEntries(PICK.filter((k) => c[k] !== undefined).map((k) => [k, c[k]]));
+  return { ...o, ...(OVERRIDES[o.id] ?? {}) };
+};
 
 // 🔴 괄호 부기를 버리지 않는다 — 버리면 「HIS(환자 포털) → PACS」 와 「HIS → PACS」 가 같은 파일이 되어
 //    한 장이 다른 장을 덮어쓴다(실제로 2장이 사라졌다).
@@ -143,6 +150,19 @@ try {
     if (!conns.length) fails.push('연결 기록을 읽지 못했습니다');
     const leaked = conns.filter((c) => 'observations' in c || 'relatedCandidate' in c || 'liveEvidence' in c);
     if (leaked.length) fails.push(`공개 금지 필드가 통과했습니다(${leaked.length}건)`);
+    // 🔴 대체 문구가 실제로 적용됐는가 — 원문이 한 글자라도 카드에 남으면 실패
+    {
+      const raw = [];
+      for (const f of ['A', 'B', 'C', 'D']) raw.push(...JSON.parse(fs.readFileSync(path.join(SRC, `connections-${f}.json`), 'utf8')).connections);
+      const body = [...build().values()].join('\n');
+      for (const [id, o] of Object.entries(OVERRIDES)) {
+        const c = raw.find((x) => x.id === id);
+        for (const field of Object.keys(o)) {
+          const needle = String(c?.[field] ?? '').slice(0, 30);
+          if (needle && body.includes(needle)) fails.push(`대체하지 않은 원문이 카드에 있습니다(${id}.${field})`);
+        }
+      }
+    }
     const files = build();
     const all = [...files.values()].join('\n');
     if (/C\d{1,2}\b/.test(all.replace(/C5500|C-AI|CSSD/g, ''))) fails.push('카드에 후보 번호로 보이는 문자열이 있습니다');

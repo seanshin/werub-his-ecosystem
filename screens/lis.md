@@ -1,7 +1,7 @@
 # LIS 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [LIS 시스템 구성서](../systems/lis.md)
-> 계층 임상 부서 · 버전 `1.56.18` · 구현 상태 `파일럿` · 화면 41 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
+> 계층 임상 부서 · 버전 `1.56.18` · 구현 상태 `파일럿` · 화면 41 · 기준: [통합 릴리즈 `2026.09`](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — The laboratory information system — chemistry, microbiology, pathology, transfusion and genomics. It pulls test orders from the HIS over FHIR R4 and returns results once verified. Five screens are captured: the dashboard with interface status and system alerts, the verification worklist showing critical values and QC failures, order and specimen reception, quality control (Westgard rules), and the go-live signature worksheet. Two slots — pathology and transfusion — are **not filled**: the left-hand menu is role-gated and the account used did not hold those roles. Captures are taken on **synthetic hospital data**, with identifying information masked before publication ([capture rules](../assets/screens/README.md)).
 

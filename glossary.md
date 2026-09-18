@@ -6,7 +6,7 @@
 
 이 자료에 나오는 표준 · 기술 · 임상 용어를 한 줄로 풉니다. **"이 생태계에서 쓰이는 곳"** 칸은 그 용어가 어느 시스템에 나오는지를 적은 것이며, 그 표준의 인증 · 적합성 · 준수를 뜻하지 않습니다. 연결별 구현 상태는 [연결 지도](diagrams/connections.md)와 [`compatibility.md`](RELEASES/2026.09/compatibility.md)에서 봅니다.
 
-- 근거: [README](README.md) · [통합 릴리즈 초안의 시스템별 요약](RELEASES/2026.09/systems/) · [`compatibility.md`](RELEASES/2026.09/compatibility.md) · [THIRD_PARTY.md](THIRD_PARTY.md) · [checklist/](checklist/) (모두 2026-09-11 기준)
+- 근거: [README](README.md) · [통합 릴리즈 `2026.09` 의 시스템별 요약](RELEASES/2026.09/systems/) · [`compatibility.md`](RELEASES/2026.09/compatibility.md) · [THIRD_PARTY.md](THIRD_PARTY.md) · [checklist/](checklist/) (모두 2026-09-11 기준)
 - 뜻풀이는 일반적인 정의를 짧게 옮긴 것입니다. 정확한 정의는 각 표준 원문을 따릅니다.
 
 ## 1. 상호운용 표준

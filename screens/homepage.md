@@ -1,7 +1,7 @@
 # 공개 홈페이지 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [공개 홈페이지 시스템 구성서](../systems/homepage.md)
-> 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `운영` · 화면 50 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
+> 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `운영` · 화면 50 · 기준: [통합 릴리즈 `2026.09`](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — The hospital's public website: hospital, clinic and health-checkup information, with an **AI booking helper** that proposes candidate departments from symptoms — it proposes, people decide. The patient portal is entered from here, and the content (notices, banners, media, SEO) is managed from inside the HIS. One screen is captured, online appointment booking, with four further slots **not filled yet**. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
