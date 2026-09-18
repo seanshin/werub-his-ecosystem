@@ -184,7 +184,9 @@ function renderMd(m) {
     '',
     '> **EN** — One pinned combination of the thirteen systems: the version each repository declares at its **base commit**, where that version is read from, how far it is implemented, the licence each repository states for itself, and the source address. Everything else in these materials is written against this combination.',
     '',
-    `> 번호: **미정**(${m.releaseIdNote}) · 계측일 ${m.measuredAt} · 기계 판독용 원본은 [manifest.json](manifest.json)입니다.`,
+    // 번호의 정본은 `inputs.json` 의 releaseId 하나다 — 비어 있으면 「미정」, 채워지면 그 값을 적는다.
+    // 🔴 이 분기가 없으면 릴리즈를 자른 뒤 다시 만들 때마다 번호가 「미정」 으로 되돌아간다(cut-release 참조).
+    `> 번호: ${m.releaseId ? `**${m.releaseId}**` : `**미정**(${m.releaseIdNote})`} · 계측일 ${m.measuredAt} · 기계 판독용 원본은 [manifest.json](manifest.json)입니다.`,
     '',
     '이 자료의 모든 설명은 아래 버전 조합을 기준으로 합니다.',
     '',

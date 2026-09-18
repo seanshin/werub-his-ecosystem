@@ -32,6 +32,7 @@ const CHECKS = [
   ['연결 카드 = 연결 기록 · 연결 상태 표', 'build-connection-cards.mjs', ['--check']],
   ['한 / 영 혼용 검사기 자기 검증', 'check-bilingual.mjs', ['--self-test']],
   ['문서마다 영문 요약이 있는가', 'check-bilingual.mjs', []],
+  ['릴리즈 자르기 도구 자기 검증', 'cut-release.mjs', ['--self-test']],
   ['수치 주장 검사기 자기 검증', 'check-claims.mjs', ['--self-test']],
   ['문서의 수치 주장 = 연결 상태 표 · 따라가기 표', 'check-claims.mjs', []],
 ];
