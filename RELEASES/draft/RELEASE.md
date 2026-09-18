@@ -1,7 +1,7 @@
 # 통합 릴리즈 노트 (초안)
 **Integrated ecosystem release notes (draft)**
 
-> 번호: **미정**(번호 체계가 정해지면 이 값과 폴더 이름을 함께 바꿉니다) · 기준 커밋 고정 2026-09-11 · 이 노트 작성 2026-09-16
+> 번호: **미정**(번호 체계가 정해지면 이 값과 폴더 이름을 함께 바꿉니다) · 기준 커밋 고정 2026-09-11 · 이 노트 작성 2026-09-16(마지막 갱신 2026-09-18)
 > **EN** — What this release combination is, what was verified by real calls, and what a hospital should know before building on it. Every number here points at a generated file; nothing is restated from a repository README.
 
 이 노트는 **한 벌로 묶은 버전 조합**([매니페스트](manifest.md))이 무엇이고, 그 조합에서 **무엇이 실제로 확인됐는지**를 한 장에 모읍니다. 자세한 것은 각 문서로 이어집니다.
@@ -27,9 +27,19 @@
 | 그중 결함을 일부러 넣어 가드까지 확인한 것 | **23** |
 | 일부만 확인해 상태를 올리지 않은 연결 | 8 |
 | 코드만 맞물린 연결(`구현·미검증`) | 61 |
-| 구축 가이드의 `확인 필요(따라가기)` | 92 → **60** |
+| 구축 가이드의 `확인 필요(따라가기)` | 92 → **22** |
 
 자세한 기록: [따라가 본 결과](../../build-guide/follow-along-2026-09.md) · 연결별 확인일: [연결 상태](compatibility.md)
+
+## 2-1. 이 릴리즈와 함께 나가는 자료
+
+| 무엇 | 어디 |
+|---|---|
+| 시스템 구성서 13장 · 구축 가이드 S0~S8 · 개요서 10장 · 데모 시나리오 4 · 발표 덱 · 화면 14장 | [저장소 목차](../../README.md#문서-지도) |
+| **연결 카드 48장** — 방향 있는 시스템 쌍마다 한 장(무엇을 주고받나 · 여는 순서 · 설정 키 이름 · 확인한 범위) | [`integration/cards/`](../../integration/cards/) |
+| **연동 계약의 공통 규약** — 오류 봉투 · 서명 대상 · 멱등 · 재시도 · 2xx 가 반영됨이 아닌 자리 | [`integration/contracts.md`](../../integration/contracts.md) |
+| **소스 받기 안내** — 저장소 주소와 기준 커밋으로 받는 법 | [`SOURCES.md`](../../SOURCES.md) |
+| 문서는 한국어로 쓰고 **문서마다 영문 요약**을 함께 싣습니다 | 전 문서 |
 
 ## 3. 시스템별 요약
 
@@ -63,5 +73,9 @@ node tools/extract-checklist.mjs      # 체크리스트 3종
 node tools/extract-his-nav.mjs        # HIS 메뉴
 node tools/build-diagrams.mjs         # 도식·연결 지도
 node tools/build-integration-map.mjs  # 연동 매트릭스
+node tools/build-connection-cards.mjs # 연결 카드 48장
+node tools/build-sources.mjs          # 소스 받기 안내
+node tools/list-install-defaults.mjs  # 바꿔야 할 코드 기본값 목록
+node tools/count-releases.mjs         # 릴리즈 기록 계수
 node tools/verify-all.mjs             # 발행 전 검사 21개 — 전부 통과해야 올립니다
 ```

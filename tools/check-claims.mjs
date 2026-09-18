@@ -168,8 +168,16 @@ function check(T) {
       }
       // `확인 필요(따라가기)` 표시 수 — 「남은 40곳」 · 「92곳 → 40곳」 류
       // 🔴 「92곳 → 40곳」 처럼 **줄어든 것을 보여주는 줄**은 앞 숫자가 옛 값이다. 마지막 값만 본다.
+      // 🔴 2026-09-18: 「92 → **60**」 처럼 **'곳' 없이 화살표로만** 적은 자리(릴리즈 노트 표)를
+      //    놓쳐 옛 값이 그대로 남아 있었다. '곳' 이 없으면 화살표 뒤의 마지막 수를 본다.
       if (/확인 필요/.test(line)) {
-        const nums = [...line.matchAll(/(\d+)\s*곳/g)].map((m) => Number(m[1]));
+        let nums = [...line.matchAll(/(\d+)\s*곳/g)].map((m) => Number(m[1]));
+        // 🔴 화살표 앞에도 **수**가 있어야 하고(「92 → 60」), 뒤의 수에 단위가 붙으면 다른 이야기다
+        //    (「60GB … → **200GB 이상**」 을 표시 수로 잘못 읽던 것).
+        if (!nums.length) {
+          nums = [...line.matchAll(/(\d+)\s*\*{0,2}\s*→\s*\*{0,2}\s*(\d+)\s*\*{0,2}(?!\s*(?:GB|MB|TB|개|장|명|건|%|시간|분|초|코어))/g)]
+            .map((m) => Number(m[2]));
+        }
         if (nums.length) {
           const claimed = nums[nums.length - 1];
           if (claimed !== T.pending) problems.push(`${at} — \`확인 필요(따라가기)\` 표시 수: 문서 ${claimed} · 실제 ${T.pending}`);
@@ -196,10 +204,23 @@ if (process.argv.includes('--self-test')) {
   if (T.fault > T.verified) fails.push('결함 재주입 수가 확인 수보다 큽니다');
   const probe = stripCode('본문 ```\n`검증됨` 999\n``` 과 `검증됨` 999 입니다');
   if (!probe.includes('999')) fails.push('코드 블록 제거가 본문까지 지웠습니다');
+  // 「92 → **60**」 처럼 '곳' 없이 화살표로만 적은 자리를 잡는지(2026-09-18 실제로 놓쳤던 모양)
+  {
+    const bad = `| 구축 가이드의 \`확인 필요(따라가기)\` | 92 → **${T.pending + 38}** |`;
+    const good = `| 구축 가이드의 \`확인 필요(따라가기)\` | 92 → **${T.pending}** |`;
+    const run = (l) => { const p = []; const at = 'x:1';
+      if (/확인 필요/.test(l)) {
+        let nums = [...l.matchAll(/(\d+)\s*곳/g)].map((m) => Number(m[1]));
+        if (!nums.length) nums = [...l.matchAll(/→\s*\*{0,2}\s*(\d+)\s*\*{0,2}/g)].map((m) => Number(m[1]));
+        if (nums.length && nums[nums.length - 1] !== T.pending) p.push(at);
+      } return p; };
+    if (run(bad).length !== 1) fails.push('화살표만 쓴 옛 값을 잡지 못합니다');
+    if (run(good).length !== 0) fails.push('맞는 값을 틀렸다고 합니다');
+  }
   const real = check(T);
   console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장 · 확인 필요 표시 ${T.pending}곳`);
   if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-  console.log(`  ✓ 규칙 6개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
+  console.log(`  ✓ 규칙 7개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
   process.exit(0);
 }
 
