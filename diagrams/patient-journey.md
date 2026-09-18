@@ -1,11 +1,11 @@
 # ③ 환자 여정 스윔레인 (초안)
 
-> 환자 한 명이 예약부터 원격 상담까지 시스템 경계를 어떻게 건너는지 봅니다. 가로 칸(참여자) 하나가 시스템 하나이고, 화살표마다 [연결 상태](../RELEASES/draft/compatibility.md)를 괄호 안에 적었습니다.
+> 환자 한 명이 예약부터 원격 상담까지 시스템 경계를 어떻게 건너는지 봅니다. 가로 칸(참여자) 하나가 시스템 하나이고, 화살표마다 [연결 상태](../RELEASES/2026.09/compatibility.md)를 괄호 안에 적었습니다.
 > 연결 표에 **없는** 구간은 지어내지 않고 `확인 중`으로 적었습니다. 시스템 안에서 끝나는 일(접수 · 회계)은 연결이 아니므로 메모로만 둡니다.
 
 > **EN** — One patient's path from booking to remote follow-up, and which system carries each step. It is drawn so you can see where a step crosses a system boundary — those crossings are the connections the status table judges.
 
-근거: [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 대외 청구 전송은 [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+근거: [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · 상태는 [`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 대외 청구 전송은 [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
 
 ```mermaid
 sequenceDiagram
@@ -93,5 +93,5 @@ sequenceDiagram
 | ⑫ | 원격 상담 | HIS → Jitsi · 환자 앱 → Jitsi | `중단` | HIS ⇄ Jitsi · 환자 화상 입장 / 환자 앱 ⇄ Jitsi · 원격진료 입장 |
 
 - 2026-09-11 연결 표 갱신(싣지 않은 연결 16 → 7)으로 결과 회신 · 판독 반영 두 구간이 실렸습니다. 연결 표가 바뀌면 이 도식도 함께 고칩니다.
-- 원격 상담은 Jitsi 현재 설치본이 동작하지 않아 `중단`입니다. 구축 기관은 Jitsi 를 새로 구성합니다([Jitsi 요약](../RELEASES/draft/systems/jitsi.md)).
+- 원격 상담은 Jitsi 현재 설치본이 동작하지 않아 `중단`입니다. 구축 기관은 Jitsi 를 새로 구성합니다([Jitsi 요약](../RELEASES/2026.09/systems/jitsi.md)).
 - 이 도식은 손으로 그린 것입니다. 연결 표가 바뀌면 [연결 지도](connections.md)(자동 생성)와 대조해 함께 고칩니다.

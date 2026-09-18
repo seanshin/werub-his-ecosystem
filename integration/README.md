@@ -2,17 +2,17 @@
 
 **D — Integration contract map**
 
-> **EN** — System × system: direction, protocol, authentication, implementation status (with verification date), and the order in which to connect them during a build. Status values come from the [connection status table](../RELEASES/draft/compatibility.md) (code comparison as of 2026-09-11; **27 of them were then verified by real calls between fresh installs**, 2026-09-14~15, each with a date).
+> **EN** — System × system: direction, protocol, authentication, implementation status (with verification date), and the order in which to connect them during a build. Status values come from the [connection status table](../RELEASES/2026.09/compatibility.md) (code comparison as of 2026-09-11; **27 of them were then verified by real calls between fresh installs**, 2026-09-14~15, each with a date).
 
 시스템 × 시스템: **방향 · 프로토콜 · 인증 · 구현 상태 · 구축 시 연결 순서**.
 
-> 🟡 **초안** — 상태는 [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · **코드 대조** + 새 설치본 실호출 2026-09-14~15)에서만 옮깁니다. 🔴 **`검증됨` 은 27 입니다** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다.
+> 🟡 **초안** — 상태는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · **코드 대조** + 새 설치본 실호출 2026-09-14~15)에서만 옮깁니다. 🔴 **`검증됨` 은 27 입니다** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다.
 
 ## 어디를 보나
 
 | 보고 싶은 것 | 문서 |
 |---|---|
-| **연결 하나하나** — 방향 · 목적 · 프로토콜 · 상태 | [연결 상태 표](../RELEASES/draft/compatibility.md) (시스템 쌍별 113개) |
+| **연결 하나하나** — 방향 · 목적 · 프로토콜 · 상태 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) (시스템 쌍별 113개) |
 | **A 를 B 에 어떻게 붙이나** — 설정 키 이름 · 여는 순서 · 확인된 범위 | **[연결 카드 48장](cards/)** (방향 있는 시스템 쌍마다 한 장 · 자동 생성 + 사람 글) |
 | **어디에 무엇이 몰려 있나** — 쌍별 · 시스템별 · 프로토콜별 집계 | [연동 매트릭스](matrix.md) (자동 생성) |
 | **그림으로** | [연결 지도](../diagrams/connections.md) · [표준 층](../diagrams/standards.md) · [신원 허브](../diagrams/identity-hub.md) |
@@ -33,7 +33,7 @@
 | **API 키로 연결** | Clinic (**1곳**) | Clinic 이 범위를 지정한 키를 발급하고, HIS 가 그 키로 Clinic 을 부릅니다 | Clinic 에서 키를 폐기하고 다시 발급합니다 |
 
 - 근거: [신원 허브 도식](../diagrams/identity-hub.md) · [5장 「신원」](../overview/05-identity-trust-standards.md)
-- 이 밖에 **시스템 대 시스템** 인증이 따로 있는 연결이 있습니다 — 예: PACS 가 HIS 인바운드를 받을 때 쓰는 API 키, ERP 웹훅의 서명. 연결별 세부는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 프로토콜 칸에 적혀 있습니다.
+- 이 밖에 **시스템 대 시스템** 인증이 따로 있는 연결이 있습니다 — 예: PACS 가 HIS 인바운드를 받을 때 쓰는 API 키, ERP 웹훅의 서명. 연결별 세부는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 프로토콜 칸에 적혀 있습니다.
 - 🔴 **키 · 비밀값은 설치할 때 새로 만들어 넣습니다.** 저장소의 예시 값을 그대로 쓰지 않습니다([S0](../build-guide/S0-prepare.md)).
 
 ### 환자 쪽 인증은 따로입니다
@@ -82,7 +82,7 @@
 
 ### 붙이기 전에 확인할 것 (연결마다)
 
-1. **상태** — [연결 상태 표](../RELEASES/draft/compatibility.md)에서 `구현·미검증` 인지 `미구현` 인지. `미구현` 이면 **대체 수단을 먼저 정합니다**
+1. **상태** — [연결 상태 표](../RELEASES/2026.09/compatibility.md)에서 `구현·미검증` 인지 `미구현` 인지. `미구현` 이면 **대체 수단을 먼저 정합니다**
 2. **주소** — 🔴 코드 기본값에 **특정 설치본의 주소**가 들어 있는 파일이 11개 저장소 합계 299개 — [파일 목록](../build-guide/replace-list.md) 있습니다. 자기 기관 주소로 바꾸고 **첫 기동은 외부 연결을 막은 상태**에서 합니다([S0](../build-guide/S0-prepare.md))
 3. **인증** — 위 [1절](#1-인증--시스템이-서로를-믿는-세-가지-방식)의 세 방식 중 어느 것인지. 공유 비밀키면 교체 절차를 함께 정합니다
 4. **게이트** — 조직 결재가 필요한 연결인지([2절](#2-연결을-여는-절차--스위치-하나가-아닙니다))

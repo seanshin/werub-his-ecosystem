@@ -1,7 +1,7 @@
 {
   "_note": "사람이 적는 입력 — 코드에서 뽑을 수 없는 판단만 둔다(구현 상태 · 소스 링크 · 모노레포의 시스템 범위 pathScope). 나머지는 tools/build-manifest.mjs 가 저장소에서 읽는다. 상태 어휘: 개발 · 통합 · 파일럿 · 운영 · 중단 · 확인 필요",
-  "releaseId": null,
-  "releaseIdNote": "번호 체계 미정 — 정해지면 폴더 이름과 이 값을 함께 바꾼다",
+  "releaseId": "2026.09",
+  "releaseIdNote": "번호 2026.09 — 폴더 이름과 이 값이 같아야 한다",
   "statusBasis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전",
   "systems": {
     "his": {

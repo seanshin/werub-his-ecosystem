@@ -1,19 +1,19 @@
 # 8. 지금 구현 상태와 구축 기관이 준비할 것
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [7. 구축은 이렇게 진행된다](07-build-path.md) · 다음 → [9. 제공 조건](09-terms.md)
 
 > **EN** — Where things actually stand, written so an institution does not plan around something that is not there. Of the 113 connections listed, **27 were called end to end between fresh installs** and carry a verification date, while 61 are wired in code but unverified; the rest are not implemented, discontinued, undecidable from code, or design only. The chapter then gives per-system implementation status, the things worth knowing **before** starting rather than discovering mid-build, and a single consolidated list of what the institution must prepare — hardware, accounts, code masters, decisions, and the connections that need a manual fallback. It ends by saying what would have to change for this chapter to change.
 
 ---
 
-구축 기관이 계획을 잘못 세우지 않도록, 지금 상태를 있는 그대로 적습니다. 모든 내용은 [통합 릴리즈 초안](../RELEASES/draft/manifest.md)의 버전 조합(계측일 2026-09-11)에서의 사실이고, **시스템 담당 확인 전 · 생태계 자료 측 조사 기준**입니다.
+구축 기관이 계획을 잘못 세우지 않도록, 지금 상태를 있는 그대로 적습니다. 모든 내용은 [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)의 버전 조합(계측일 2026-09-11)에서의 사실이고, **시스템 담당 확인 전 · 생태계 자료 측 조사 기준**입니다.
 
 ## 한눈에
 
 | 질문 | 지금의 답 | 근거 |
 |---|---|---|
-| 실제로 호출해 확인한 연결이 있나 | **27개입니다**(새 설치본끼리 · 격리 네트워크 · 2026-09-14~15). 어떤 연결을 어떻게 확인했고 어떤 결함을 일부러 넣었는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다. 나머지 연결 상태는 양쪽 코드를 읽어 대조한 결과입니다 | [연결 상태](../RELEASES/draft/compatibility.md) · 코드 대조 2026-09-11 · 첫 실호출 2026-09-14 |
+| 실제로 호출해 확인한 연결이 있나 | **27개입니다**(새 설치본끼리 · 격리 네트워크 · 2026-09-14~15). 어떤 연결을 어떻게 확인했고 어떤 결함을 일부러 넣었는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다. 나머지 연결 상태는 양쪽 코드를 읽어 대조한 결과입니다 | [연결 상태](../RELEASES/2026.09/compatibility.md) · 코드 대조 2026-09-11 · 첫 실호출 2026-09-14 |
 | 코드상 맞물린 연결은 | 연결 표에 실은 113개 가운데 `구현·미검증` 61 | 같은 곳 |
 | 대체 수단이 필요한 연결은 | `미구현` 15 · `중단` 7 · `판정 불가` 2 · `설계만` 1 | 같은 곳 |
 | 구축 가이드는 따라가 봤나 | **한 번 따라가 봤습니다**(2026-09-13~16 · 개발 PC 한 대 · arm64 · GPU 없음 · 격리 네트워크). 막힌 곳과 우회를 각 단계에 반영했고, x86 · GPU 기준 장비 · 실데이터 규모 · 리얼 전환은 아직입니다 | [구축 가이드](../build-guide/) · [README 따라가기 결과](../build-guide/follow-along-2026-09.md) |
@@ -25,7 +25,7 @@
 |---:|---:|---:|---:|---:|---:|---:|
 | 113 | **27** | 61 | 1 | 15 | 7 | 2 |
 
-- 센 방법: [연결 상태](../RELEASES/draft/compatibility.md)의 합계 표 — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다. 연결은 방향과 목적별로 나눴습니다. 같은 두 시스템 사이에도 여러 연결이 있습니다.
+- 센 방법: [연결 상태](../RELEASES/2026.09/compatibility.md)의 합계 표 — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다. 연결은 방향과 목적별로 나눴습니다. 같은 두 시스템 사이에도 여러 연결이 있습니다.
 - 이 밖에 **싣지 않은 연결이 7개** 있습니다. 시스템 담당의 확인을 기다리는 연결이고, 확인되면 표에 넣습니다.
 - `중단` 7 은 모두 Jitsi 가 걸린 연결입니다(HIS ⇄ Jitsi 3 · AI Server ⇄ Jitsi 2 · 환자 앱 ⇄ Jitsi 1 · Clinic ⇄ Jitsi 1).
 - **`구현·미검증`은 "동작한다"는 뜻이 아닙니다.** 기관은 리허설(S7)에서 가상 병원 데이터로 흐름을 끝까지 돌려, 쓰려는 연결마다 확인합니다. `검증됨`(확인일 필수)은 새 설치본끼리 실제로 불러 확인한 것에만 붙입니다 — 1차에서 27개에 붙였고, 나머지는 기준 장비 · 사람 결정 · 미설치 시스템 · 담당 회신에 묶여 다음 차수로 남았습니다([ROADMAP](../ROADMAP.md) P1).
@@ -41,7 +41,7 @@
 | `확인 필요` | edu(운영 여부 재확인 전) | 1 |
 | `중단` | Jitsi(현재 설치본이 동작하지 않음 · 구축 기관은 새로 구성) | 1 |
 
-센 방법: [매니페스트](../RELEASES/draft/manifest.md) 13행의 구현 상태 칸을 상태별로 셈(근거: 2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전). 기능군마다 상태가 다를 수 있어 자세한 것은 [시스템별 릴리즈 요약](../RELEASES/draft/systems/)을 봅니다.
+센 방법: [매니페스트](../RELEASES/2026.09/manifest.md) 13행의 구현 상태 칸을 상태별로 셈(근거: 2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전). 기능군마다 상태가 다를 수 있어 자세한 것은 [시스템별 릴리즈 요약](../RELEASES/2026.09/systems/)을 봅니다.
 
 **버전 표기에 관해** — 저장소마다 태그 · 문서 · 코드의 버전 표기가 서로 다른 곳이 있습니다. 매니페스트 13행 가운데 8행이 `주요`(태그 · 릴리즈 기록이 정본과 다름 — 같은 저장소에서 릴리즈되는 HIS · 공개 홈페이지 · 환자 앱 세 행 포함)입니다. 소스를 받을 때는 태그 이름이 아니라 매니페스트의 **정본 버전과 기준 커밋**을 기준으로 삼습니다.
 
@@ -101,7 +101,7 @@
 
 - 새 설치본으로 연결을 실제 호출해 확인하면 `검증됨`과 확인일이 붙습니다(1차에서 27개 · 다음 차수에서 더 붙습니다).
 - 시스템 담당이 사실을 확인하면 "시스템 담당 확인 전" 표시가 빠지고, 싣지 않은 연결 7개가 표에 들어옵니다.
-- 통합 릴리즈 번호가 정해지면 기준이 `RELEASES/draft` 에서 번호 붙은 릴리즈로 옮겨 갑니다.
+- 통합 릴리즈 번호가 정해지면 기준이 `RELEASES/2026.09` 에서 번호 붙은 릴리즈로 옮겨 갑니다.
 
 ---
 

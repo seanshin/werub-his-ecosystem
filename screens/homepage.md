@@ -1,7 +1,7 @@
 # 공개 홈페이지 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [공개 홈페이지 시스템 구성서](../systems/homepage.md)
-> 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `운영` · 화면 50 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
+> 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `운영` · 화면 50 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — The hospital's public website: hospital, clinic and health-checkup information, with an **AI booking helper** that proposes candidate departments from symptoms — it proposes, people decide. The patient portal is entered from here, and the content (notices, banners, media, SEO) is managed from inside the HIS. One screen is captured, online appointment booking, with four further slots **not filled yet**. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
@@ -35,6 +35,6 @@
 
 공개 사이트이므로 **기관 식별 정보가 화면 전체에 나옵니다.** 캡처는 데모 병원 이름(**위루비병원**)으로 설정하고 가상 내용으로 찍습니다.
 
-- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 - 설치 요구사항 · 주요 설정 · 한계는 [공개 홈페이지 시스템 구성서](../systems/homepage.md)에 있습니다.
 - 캡처를 넣는 규칙은 [캡처 안내](../assets/screens/README.md), 사람 확인은 [캡처 대장](../assets/CAPTURE-LEDGER.md)에 있습니다.

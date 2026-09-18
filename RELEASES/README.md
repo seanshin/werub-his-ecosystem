@@ -16,14 +16,16 @@
 | `RELEASE.md` | 통합 릴리즈 노트 — 이 조합이 무엇이고 무엇이 실제로 확인됐는지 한 장에 | 시스템별 요약 · 연결 상태 · 따라가기 결과에서 모읍니다 |
 | `compatibility.md` | 이 조합에서 시스템 사이 연결별 상태(`검증됨`(확인일) · `구현·미검증` · `설계만` · `미구현` · `중단` · `판정 불가`) | 1차는 양쪽 코드를 대조해 씁니다. `검증됨`은 실제 호출로 확인한 뒤에만 붙입니다 |
 
-## 지금 있는 것 — [`draft/`](draft/)
+## 지금 있는 것 — [`2026.09/`](2026.09/)
 
-첫 통합 릴리즈의 **초안**입니다. 릴리즈 번호 체계를 아직 정하지 않아 `draft` 라는 이름을 씁니다. 번호가 정해지면 폴더 이름을 바꿉니다.
+첫 통합 릴리즈 **`2026.09`** 입니다(번호 체계 = 날짜형 · 2026-09-18 결정). 기준 커밋 고정일(2026-09-11)이 속한 달을 번호로 씁니다 — 시스템별 버전(HIS v4.18.0 등)과 헷갈리지 않게 하려는 것입니다.
 
-- [매니페스트(사람이 읽는 판)](draft/manifest.md)
-- [통합 릴리즈 노트](draft/RELEASE.md) — 이 조합이 고정하는 것 · 실제로 확인된 것 · 구축 기관이 알아야 할 것 · 아직 정하지 않은 것
-- [연결 상태](draft/compatibility.md) — 코드 대조 1차 + 새 설치본 실호출(연결 113개 실음 · `검증됨` 27 · 시스템 담당 확인을 기다리는 7개는 싣지 않음)
-- 시스템별 요약(초안 · 시스템 담당 사실 확인 전): [HIS](draft/systems/his.md) · [공개 홈페이지](draft/systems/homepage.md) · [환자 앱](draft/systems/patient-app.md) · [sign](draft/systems/sign.md) · [LIS](draft/systems/lis.md) · [PACS](draft/systems/pacs.md) · [ERP](draft/systems/erp.md) · [AI Server](draft/systems/ai-server.md) · [twin](draft/systems/twin.md) · [cerno](draft/systems/cerno.md) · [edu](draft/systems/edu.md) · [Clinic](draft/systems/clinic.md) · [Jitsi](draft/systems/jitsi.md)
+🔴 **번호가 붙었다고 「담당 확인이 끝났다」는 뜻은 아닙니다.** 시스템 담당의 사실 확인과 규제 문구 법무 확인은 아직 남아 있고, 그 사실은 [릴리즈 노트 §5](2026.09/RELEASE.md)에 적혀 있습니다.
+
+- [매니페스트(사람이 읽는 판)](2026.09/manifest.md)
+- [통합 릴리즈 노트](2026.09/RELEASE.md) — 이 조합이 고정하는 것 · 실제로 확인된 것 · 구축 기관이 알아야 할 것 · 아직 정하지 않은 것
+- [연결 상태](2026.09/compatibility.md) — 코드 대조 1차 + 새 설치본 실호출(연결 113개 실음 · `검증됨` 27 · 시스템 담당 확인을 기다리는 7개는 싣지 않음)
+- 시스템별 요약(초안 · 시스템 담당 사실 확인 전): [HIS](2026.09/systems/his.md) · [공개 홈페이지](2026.09/systems/homepage.md) · [환자 앱](2026.09/systems/patient-app.md) · [sign](2026.09/systems/sign.md) · [LIS](2026.09/systems/lis.md) · [PACS](2026.09/systems/pacs.md) · [ERP](2026.09/systems/erp.md) · [AI Server](2026.09/systems/ai-server.md) · [twin](2026.09/systems/twin.md) · [cerno](2026.09/systems/cerno.md) · [edu](2026.09/systems/edu.md) · [Clinic](2026.09/systems/clinic.md) · [Jitsi](2026.09/systems/jitsi.md)
 - 기준 커밋: [`data/base-commits.json`](../data/base-commits.json) — 저장소에 새 커밋이 생겨도 이 초안은 고정을 옮기기 전까지 바뀌지 않습니다
 
 ## 검사

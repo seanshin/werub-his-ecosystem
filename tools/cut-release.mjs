@@ -27,6 +27,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OLD = 'RELEASES/draft';
 const SKIP_DIRS = new Set(['.git', 'node_modules', 'assets']);
+// 🔴 이 파일 자신은 건드리지 않는다 — 안에 옛 이름이 상수와 자기 검증 예시로 들어 있어서,
+//    치환하면 **도구가 자기 검증을 통과하지 못하게 된다**(2026-09-18 에 실제로 그랬다).
+const SKIP_FILES = new Set(['tools/cut-release.mjs']);
 const EXT = new Set(['.md', '.mjs', '.json']);
 
 /** 번호로 쓸 수 있는 글자만 — 경로가 되고 링크가 되므로 좁게 잡는다 */
@@ -41,9 +44,16 @@ function walk(dir, out = []) {
   return out;
 }
 
-/** 경로 문자열만 바꾼다 — 「draft」 라는 낱말이 본문에 있어도 건드리지 않는다 */
-export function rewrite(text, number) {
-  return text.split(OLD).join(`RELEASES/${number}`);
+/**
+ * 경로 문자열만 바꾼다 — 「draft」 라는 낱말이 본문에 있어도 건드리지 않는다.
+ * 🔴 `inRoot` 는 **RELEASES/ 안에 있는 문서**다. 그 안에서는 `RELEASES/` 접두 없이 `draft/…` 로 가리키므로
+ *    링크 모양(`](draft/` · `(./draft/`)일 때만 함께 바꾼다. 안 하면 그 폴더의 목차 링크가 통째로 깨진다
+ *    (2026-09-18 에 실제로 13개가 깨졌고 링크 검사기가 잡았다).
+ */
+export function rewrite(text, number, inRoot = false) {
+  let out = text.split(OLD).join(`RELEASES/${number}`);
+  if (inRoot) out = out.replace(/\]\((\.\/)?draft\//g, `](${number}/`);
+  return out;
 }
 
 /** 노트·매니페스트 머리의 「번호: **미정**(…)」 */
@@ -67,9 +77,11 @@ function plan(number) {
   const hits = [];
   for (const rel of walk('.')) {
     if (rel.startsWith(`${OLD}/`)) continue; // 폴더 안쪽은 ③ 에서 통째로 옮겨진다
+    if (SKIP_FILES.has(rel)) continue;
     const t = fs.readFileSync(path.join(ROOT, rel), 'utf8');
-    const n = t.split(OLD).length - 1;
-    if (n) hits.push({ rel, n });
+    const inRoot = path.dirname(rel) === 'RELEASES';
+    const n = (t.split(OLD).length - 1) + (inRoot ? (t.match(/\]\((\.\/)?draft\//g) ?? []).length : 0);
+    if (n) hits.push({ rel, n, inRoot });
   }
   return hits;
 }
@@ -84,6 +96,12 @@ try {
     const r = rewrite(t, '2026.09');
     if (r.includes('RELEASES/draft')) fails.push('경로를 바꾸지 못했습니다');
     if (!r.includes('draft 초안이라는 낱말')) fails.push('본문의 「draft」 낱말까지 바꿨습니다');
+    // RELEASES/ 안의 목차 링크(접두 없는 `draft/`) — 2026-09-18 에 13개가 깨졌던 모양
+    const inRoot = rewrite('- [노트](draft/RELEASE.md) · [표](./draft/compatibility.md) · draft 라는 낱말', '2026.09', true);
+    if (inRoot.includes('](draft/') || inRoot.includes('](./draft/')) fails.push('RELEASES/ 안의 목차 링크를 바꾸지 못했습니다');
+    if (!inRoot.includes('draft 라는 낱말')) fails.push('RELEASES/ 안에서 본문 낱말까지 바꿨습니다');
+    if (rewrite('](draft/x.md)', '2026.09').includes('2026.09')) fails.push('RELEASES/ 밖에서까지 접두 없는 draft 를 바꿉니다');
+    if (SKIP_FILES.has('tools/cut-release.mjs') === false) fails.push('자기 자신을 건너뛰지 않습니다');
     if (stampNumber('> 번호: **미정**(체계가 정해지면 …) · 기준', 'v1') !== '> 번호: **v1** · 기준') fails.push('번호 표기를 바꾸지 못했습니다');
     for (const bad of ['draft', '', 'a'.repeat(21), '../x', 'v 1']) if (okNumber(bad)) fails.push(`번호로 받아서는 안 되는 값을 받았습니다: ${bad}`);
     for (const good of ['2026.09', 'v0.1', '1.0.0']) if (!okNumber(good)) fails.push(`번호로 받아야 할 값을 막았습니다: ${good}`);
@@ -136,7 +154,7 @@ try {
   // ④ 경로 치환
   for (const h of hits) {
     const p = path.join(ROOT, h.rel);
-    fs.writeFileSync(p, rewrite(fs.readFileSync(p, 'utf8'), number));
+    fs.writeFileSync(p, rewrite(fs.readFileSync(p, 'utf8'), number, h.inRoot));
   }
 
   console.log(`잘랐습니다 — RELEASES/${number} · 경로 치환 파일 ${hits.length}개 · ${total}곳`);

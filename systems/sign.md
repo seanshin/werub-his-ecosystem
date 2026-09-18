@@ -1,11 +1,11 @@
 # sign — 시스템 구성서
 
-> 기준 버전 **1.30.1** · 기준 커밋 `93f56d839c3f` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **1.30.1** · 기준 커밋 `93f56d839c3f` · 구현 상태 `통합` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — The trust layer: an independent electronic signature service that makes "who signed what, when, and it has not changed since" verifiable for medical documents (consent forms, radiology reports, training certificates) and ordinary contracts. It is built from its own two-tier PKI, RFC 3161 timestamps, PAdES-LTA, CMS/CAdES and an audit hash chain. **Private keys live only in sign** — HIS, PACS, ERP and edu hold none; certificate issuance and signing happen here alone. Status at the base commit is `통합` (integrated), and several signing paths were verified by real calls in the 2026-09 follow-along.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/sign.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/sign.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -91,7 +91,7 @@ flowchart LR
 | 운영 구성 | 서명 서비스 · 웹 · PostgreSQL 컨테이너. 키 연산 프록시 · 본인확인 프록시는 compose 프로필로 켜는 선택 구성입니다. 컨테이너가 기동할 때 DB 마이그레이션을 자동으로 적용합니다 | `docker-compose.prod.yml` |
 | 저장소(디스크) | DB 볼륨과 **키 볼트 볼륨**. 둘 다 백업 대상이며, 백업 암호화 비밀은 서버 밖에도 보관합니다 | 운영 compose · 저장소 운영 문서 |
 | 네트워크 | 앞단에 TLS 를 거는 역방향 프록시를 둡니다(저장소에 nginx 예시). 운영 하드닝을 켠 상태에서 콘솔 · API 를 다른 출처에서 부르면 허용 출처 목록을 넣어야 합니다 | 저장소 README · 1.30.0 기록 |
-| 외부 서비스(선택) | 외부 RFC 3161 TSA(교차 앵커) · 본인확인 사업자 · 문자 · 메시지 사업자 · HSM 또는 클라우드 KMS — 모두 기관이 계약해 붙입니다 | [릴리즈 요약](../RELEASES/draft/systems/sign.md) |
+| 외부 서비스(선택) | 외부 RFC 3161 TSA(교차 앵커) · 본인확인 사업자 · 문자 · 메시지 사업자 · HSM 또는 클라우드 KMS — 모두 기관이 계약해 붙입니다 | [릴리즈 요약](../RELEASES/2026.09/systems/sign.md) |
 | 함께 설치해야 하는 것 | 의료진 SSO 서명을 쓰려면 HIS(토큰 발급 · 공개키 목록). 그 밖의 연동 시스템은 필요할 때 붙입니다 | — |
 
 - **실운영 전환 전** — 저장소 문서는 테스트 데이터와 CA 를 새로 만드는 초기화 절차를 둡니다. 이때 연동 시스템이 보관한 인증서도 다시 발급받아야 합니다. HSM 전환 · 본인확인 사업자 연결 · 연동 키 회전도 이 시점에 함께 하도록 짜여 있습니다.
@@ -130,7 +130,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 sign 이 한쪽 끝인 행을 그대로 옮겼습니다. 이 가운데 **9개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/draft/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+[연결 상태](../RELEASES/2026.09/compatibility.md)에서 sign 이 한쪽 끝인 행을 그대로 옮겼습니다. 이 가운데 **9개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -161,7 +161,7 @@ flowchart LR
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -202,7 +202,7 @@ AI 기능이 없습니다. 설정 키에도 AI 연결 항목이 없습니다(202
 | 항목 | 값 |
 |---|---|
 | 소스 링크 | 정리 중 |
-| 저장소 라이선스 표기 | UNLICENSED(비공개 선언 · `package.json`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/draft/manifest.md)) |
+| 저장소 라이선스 표기 | UNLICENSED(비공개 선언 · `package.json`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL |
 | 기준 커밋 | `93f56d839c3f` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 compose · 환경 변수 예시에서 **키 이름만** 읽었습니다 |

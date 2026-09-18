@@ -1,11 +1,11 @@
 # twin — 시스템 구성서
 
-> 기준 버전 **1.20.88** · 기준 커밋 `526b4f9a4d3f` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **1.20.88** · 기준 커밋 `526b4f9a4d3f` · 구현 상태 `통합` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
 > **EN** — A digital twin service that models hospital operations, equipment and patients to offer risk-score cards, SBAR summaries, what-if simulation and 3D visualisation. It **reads** from HIS rather than owning clinical data: patient detail is fetched from HIS on demand and the twin database keeps only derived indicators and aggregates. What it writes back to HIS is limited to risk assessments, SBAR and clinician-authored SOAP notes, sent with that user's own permissions when the clinician presses save. Status at the base commit is `통합` (integrated), but **this system was not installed in the 2026-09 follow-along**, so its connections remain `구현·미검증` — wired in code, not verified by real calls.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/twin.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/twin.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -99,7 +99,7 @@ flowchart LR
 | PACS | `ORTHANC_DICOMWEB_URL` · `ORTHANC_USERNAME` · `ORTHANC_PASSWORD` | 영상 조회 주소 · 계정(연결 상태는 확인 중) | 쓰면 **반드시 바꿀 것** |
 | 운영 | `INGEST_INTERVAL_SEC` · `SIM_MAX_CONCURRENT` · `TWIN_LOG_LEVEL` · `TWIN_ALERT_WEBHOOK` | HIS 수집 주기 · 동시 시뮬레이션 수 · 로그 수준 · 알림 웹훅(선택) | 정할 것 |
 
-**기본값이 꺼져 있어 운영 전에 켤지 정해야 하는 스위치**([릴리즈 요약](../RELEASES/draft/systems/twin.md) 기준)
+**기본값이 꺼져 있어 운영 전에 켤지 정해야 하는 스위치**([릴리즈 요약](../RELEASES/2026.09/systems/twin.md) 기준)
 
 | 키 | 뜻 | 기본 |
 |---|---|---|
@@ -112,7 +112,7 @@ flowchart LR
 
 ## 7. 연동
 
-연결 상태는 [연결 상태](../RELEASES/draft/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
+연결 상태는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
 
 **들어오는 연결 3 · 나가는 연결 4** — 모두 `구현·미검증`
 
@@ -127,7 +127,7 @@ flowchart LR
 | twin → AI Server | 위험 예측 보조 · 약물 상호작용 · DUR · 서술형 요약 · 의료법 질의 · 영상 연산 | `구현·미검증` |
 
 - 표에 없는 연결: twin → PACS — 확인 중.
-- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -158,6 +158,6 @@ flowchart LR
 ## 11. 소스 · 라이선스 표기 · 확인일
 
 - **소스 링크**: 정리 중
-- **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/draft/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
+- **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis(판본에 따라 약관이 다름) · Pulse Physiology Engine(선택) · Synthea(검증용 합성 데이터)
 - **확인일**: 2026-09-11 — 기준 커밋 `526b4f9a4d3f` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

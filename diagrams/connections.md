@@ -1,11 +1,11 @@
-<!-- 생성물 — 직접 수정 금지. `node tools/build-diagrams.mjs` 로 RELEASES/draft/compatibility.md 에서 다시 만듭니다. -->
+<!-- 생성물 — 직접 수정 금지. `node tools/build-diagrams.mjs` 로 RELEASES/2026.09/compatibility.md 에서 다시 만듭니다. -->
 
 # 연결 지도 (초안 · 생성물)
 
 > **EN** — Generated from the connection status table: a map of which system talks to which, drawn so the line style carries the status (verified by real calls / wired in code only / not implemented / undecidable from code). Do not edit by hand.
 
 > 시스템 사이 연결이 **코드상 어디까지 준비돼 있는지**를 한 장으로 봅니다. 쌍 하나를 선 하나로 그리고, 선 위에 상태별 연결 수를 적습니다.
-> 근거: [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md) — 판정일 2026-09-11 · 양쪽 코드를 대조한 판정이며, 실제 호출로 확인한 연결은 아직 없습니다.
+> 근거: [`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md) — 판정일 2026-09-11 · 양쪽 코드를 대조한 판정이며, 실제 호출로 확인한 연결은 아직 없습니다.
 
 | 기준 | 값 |
 |---|---|
@@ -28,7 +28,7 @@
 | `구현·미검증` | 실선 | 14 |
 | `검증됨` | 실선(굵게) | 4 |
 
-상태의 뜻은 [`compatibility.md` 의 "상태를 읽는 법"](../RELEASES/draft/compatibility.md#상태를-읽는-법)과 같습니다. 노드 색은 [계층 생태계 지도](layers.md)의 7계층을 따르고, 테두리가 파선인 노드는 생태계 시스템이 아닌 상대(검사 장비 · 외부 시스템)이거나 두 시스템을 함께 대상으로 하는 연결입니다.
+상태의 뜻은 [`compatibility.md` 의 "상태를 읽는 법"](../RELEASES/2026.09/compatibility.md#상태를-읽는-법)과 같습니다. 노드 색은 [계층 생태계 지도](layers.md)의 7계층을 따르고, 테두리가 파선인 노드는 생태계 시스템이 아닌 상대(검사 장비 · 외부 시스템)이거나 두 시스템을 함께 대상으로 하는 연결입니다.
 
 ## 도식
 
@@ -111,7 +111,7 @@ flowchart LR
 
 ## 쌍별 표
 
-연결 표와 같은 순서입니다. 연결 하나하나의 목적 · 프로토콜은 [`compatibility.md`](../RELEASES/draft/compatibility.md)에서 봅니다.
+연결 표와 같은 순서입니다. 연결 하나하나의 목적 · 프로토콜은 [`compatibility.md`](../RELEASES/2026.09/compatibility.md)에서 봅니다.
 
 | # | 쌍 | 연결 수 | 방향별 | 상태별 | 가장 나쁜 상태 |
 |---:|---|---:|---|---|---|

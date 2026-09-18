@@ -4,7 +4,7 @@
 
 > **EN** — Which interoperability standards are used where (FHIR R4, SMART on FHIR, CDS Hooks, HL7 v2, DICOM and DICOMweb, IHE profiles). Using a standard is not the same as being certified against it; line styles carry the verification status, and the authoritative status is the connection table.
 
-근거: [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)의 **프로토콜 칸**(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 코드 체계는 [THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터)와 [LIS 요약](../RELEASES/draft/systems/lis.md) · 표준 목록은 [ROADMAP §3 관통 흐름 4](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것)
+근거: [`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md)의 **프로토콜 칸**(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 코드 체계는 [THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터)와 [LIS 요약](../RELEASES/2026.09/systems/lis.md) · 표준 목록은 [ROADMAP §3 관통 흐름 4](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것)
 
 ```mermaid
 flowchart LR

@@ -4,7 +4,7 @@
 
 > **EN** — The thirteen systems arranged in seven layers, with the core HIS at the centre holding the record of patients, encounters, orders and billing, and issuing staff tokens. The layers are meant to be added one at a time — an institution does not have to stand up all thirteen.
 
-근거: [README 「시스템 13」](../README.md#시스템-13)(계층 · 한 줄 정의) · [통합 릴리즈 매니페스트](../RELEASES/draft/manifest.md)(구현 상태 · 2026-09-11 · 시스템 담당 확인 전)
+근거: [README 「시스템 13」](../README.md#시스템-13)(계층 · 한 줄 정의) · [통합 릴리즈 매니페스트](../RELEASES/2026.09/manifest.md)(구현 상태 · 2026-09-11 · 시스템 담당 확인 전)
 
 > 📷 **화면으로 보기** — 이 계층 구조는 HIS 왼쪽 메뉴의 **도메인 8개**로 그대로 드러납니다([통합 상황판](../screens/his.md#통합-상황판--그날의-병원이-한-화면에)). 형제 시스템은 [화면으로 보는 생태계](../screens/)에 시스템별로 있습니다.
 
@@ -60,7 +60,7 @@ flowchart TB
 ```
 
 - 계층 사이에 선을 긋지 않았습니다. 시스템끼리 실제로 어떻게 이어지는지는 [연결 지도](connections.md)에서 봅니다(연결 표에서 자동 생성).
-- 노드 아래 글자는 매니페스트의 **구현 상태**입니다(`개발` · `통합` · `파일럿` · `운영`, 단계 밖의 `중단` · `확인 필요`). 기능군마다 다를 수 있으며, 자세한 것은 [시스템별 릴리즈 요약](../RELEASES/draft/systems/)을 봅니다.
+- 노드 아래 글자는 매니페스트의 **구현 상태**입니다(`개발` · `통합` · `파일럿` · `운영`, 단계 밖의 `중단` · `확인 필요`). 기능군마다 다를 수 있으며, 자세한 것은 [시스템별 릴리즈 요약](../RELEASES/2026.09/systems/)을 봅니다.
 - 공개 홈페이지와 환자 앱은 HIS 저장소 안에서 HIS 와 함께 릴리즈됩니다. 계층으로는 환자 접점에 둡니다.
 - 색은 [연결 지도](connections.md)의 노드 색과 같습니다.
 

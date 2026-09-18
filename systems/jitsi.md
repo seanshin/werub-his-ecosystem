@@ -1,11 +1,11 @@
 # Jitsi — 시스템 구성서
 
-> 기준 버전 **1.0.0** · 기준 커밋 `0984fbec7177` · 구현 상태 `중단` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **1.0.0** · 기준 커밋 `0984fbec7177` · 구현 상태 `중단` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
 > **EN** — The telemedicine video server: a self-hosted Jitsi Meet stack (web, XMPP signalling, conference management, media relay) plus TURN, recording, a conference-management REST API and monitoring. **The current install does not work and an institution must build it anew** — this chapter records what to know when doing so, read from the code and records at the base commit. Status at the base commit is `중단` (discontinued), and every Jitsi connection in the connection table is `중단` as well, apart from one still at design stage.
 
-> **현재 설치본은 동작하지 않으며, 구축 기관은 새로 구성해야 합니다.** 이 장은 기준 커밋의 코드와 기록을 바탕으로 **새로 구성할 때 알아야 할 것**을 적습니다. 이 버전의 변경 내용은 [릴리즈 요약](../RELEASES/draft/systems/jitsi.md)에 있습니다.
+> **현재 설치본은 동작하지 않으며, 구축 기관은 새로 구성해야 합니다.** 이 장은 기준 커밋의 코드와 기록을 바탕으로 **새로 구성할 때 알아야 할 것**을 적습니다. 이 버전의 변경 내용은 [릴리즈 요약](../RELEASES/2026.09/systems/jitsi.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -115,7 +115,7 @@ flowchart LR
 
 ## 7. 연동
 
-연결 상태는 [연결 상태](../RELEASES/draft/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
+연결 상태는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
 
 **들어오는 연결 6 · 나가는 연결 2** — `중단` 7 · `설계만` 1
 
@@ -130,7 +130,7 @@ flowchart LR
 | Jitsi → AI Server | 원격 상담 녹화 회의록 분석 | `중단` |
 | Jitsi → AI Server | 원격 상담 실시간 자막 · 자막 번역 | `중단` |
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 새로 구성한 뒤에는 위 연결을 하나씩 실제로 호출해 상태를 다시 판정합니다.
 
@@ -155,11 +155,11 @@ flowchart LR
 | 로그인이 공유 비밀키(HS256) 방식이라 HIS · Jitsi · 회의 관리 API 세 곳이 같은 비밀키를 가져야 합니다 | 비밀키 보관 · 교체 절차와 담당자를 정해 둡니다 |
 | 모바일 웹 지원이 보류돼 있고 차단된 상태입니다 | 모바일 환자 입장 방법은 새로 구성할 때 정합니다(환자 앱 → Jitsi 연결도 `중단`) |
 | 실시간 자막 · 번역은 시험 구현에서 시작한 선택 구성입니다. 무음 구간 오인식 완화가 남은 과제로 적혀 있습니다 | 자막은 보조로만 씁니다 |
-| README 의 릴리즈 표가 v2.3.0 에서 멈춰 있습니다 | 버전은 태그와 [릴리즈 요약](../RELEASES/draft/systems/jitsi.md)을 기준으로 봅니다 |
+| README 의 릴리즈 표가 v2.3.0 에서 멈춰 있습니다 | 버전은 태그와 [릴리즈 요약](../RELEASES/2026.09/systems/jitsi.md)을 기준으로 봅니다 |
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
 - **소스 링크**: 정리 중
-- **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/draft/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
+- **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — Jitsi Meet · Jicofo · Videobridge · Jibri · Jigasi(Apache-2.0) · Prosody(MIT) · coturn(BSD-3-Clause) · Prometheus(Apache-2.0) · Grafana(AGPL-3.0-only)
 - **확인일**: 2026-09-11 — 기준 커밋 `0984fbec7177` 의 설정 예시 · 구성 파일 · 저장소 문서를 읽어 작성했습니다

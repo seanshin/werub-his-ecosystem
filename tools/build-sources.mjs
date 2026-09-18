@@ -5,7 +5,7 @@
  *   node tools/build-sources.mjs            # 다시 만든다
  *   node tools/build-sources.mjs --check    # 다시 만들어 현재 파일과 비교(다르면 실패)
  *
- * 왜 생성기인가 — 주소는 `RELEASES/draft/inputs.json`, 커밋은 `data/base-commits.json`,
+ * 왜 생성기인가 — 주소는 `RELEASES/2026.09/inputs.json`, 커밋은 `data/base-commits.json`,
  * 진입점 파일은 **그 커밋에 실제로 있는지** 형제 저장소에서 확인한다. 손으로 적으면 셋이 어긋난다.
  *
  * 🔴 이 도구는 형제 저장소의 **파일이 있는지만** 본다(`git cat-file -e`). 내용을 읽지 않고,
@@ -51,7 +51,7 @@ function entries(dir, commit) {
 }
 
 function build() {
-  const inputs = read('RELEASES/draft/inputs.json');
+  const inputs = read('RELEASES/2026.09/inputs.json');
   const base = read('data/base-commits.json');
   let local;
   try { local = read('tools/.local.json'); } catch { return null; } // 미실행
@@ -104,7 +104,7 @@ function build() {
   L.push('');
   L.push('- **기준 커밋을 쓰는 이유** — 이 자료의 수치(데이터 모델 수 · 화면 수 · 연결 상태 · 체크리스트 항목 수)는 전부 그 커밋에서 기계로 읽은 것입니다. 최신 커밋을 받으면 **자료와 숫자가 달라집니다**(틀린 것이 아니라 시점이 다른 것입니다).');
   L.push('- **최신으로 세우고 싶다면** 그렇게 해도 됩니다. 다만 이 자료의 「막힌 곳」과 「우회」는 기준 커밋에서 겪은 것이므로, 최신에서는 이미 고쳐졌거나 다른 자리에서 막힐 수 있습니다.');
-  L.push('- 저장소마다 **라이선스 표기가 다릅니다**(일부는 독점 · 일부는 표기 없음). 받기 전에 [통합 릴리즈 매니페스트](RELEASES/draft/manifest.md)의 「저장소 라이선스 표기」 칸을 보십시오. **이 소개 저장소의 MIT 는 이 자료에만 적용됩니다.**');
+  L.push('- 저장소마다 **라이선스 표기가 다릅니다**(일부는 독점 · 일부는 표기 없음). 받기 전에 [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)의 「저장소 라이선스 표기」 칸을 보십시오. **이 소개 저장소의 MIT 는 이 자료에만 적용됩니다.**');
   L.push('');
   L.push('## 3. 받은 뒤 처음 여는 파일');
   L.push('');

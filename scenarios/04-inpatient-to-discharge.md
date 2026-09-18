@@ -1,7 +1,7 @@
 # 시나리오 04 — 입원에서 퇴원까지
 
-> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
-> 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
+> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 `검증됨` 으로 봅니다
+> 연결 상태: [연결 상태 표](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
 > **EN** — A surgical inpatient from admission to discharge: consent, surgery and the pathology that follows it, ward nursing and barcode-checked medication administration, the risk-score card the attending sees in the chart, then discharge summary, medication counselling, certificates, interim settlement and final payment with claim preparation. Gaps worth knowing: external claim transmission is not implemented; the ERP-to-HIS return paths (claim adjudication, stock receipt, asset code mapping) are `미구현` while the HIS side is only ready to receive; the groupware ward, medication and surgery screens are `판정 불가` because they depend on how the deployment is arranged; and twin's medical-device classification is undecided, so its output is a reference draft that is not written into the record. Screenshot slots: 13, of which 9 are complete and 3 show the screen but not yet the exact moment; people appear by role only and all data is synthetic.
 
@@ -129,7 +129,7 @@ sequenceDiagram
 
 - 5: 한 행에 HIS → LIS(검사 오더 전달)와 LIS → HIS(검사 결과 전달) 두 연결을 함께 적었습니다. 둘 다 `구현·미검증`입니다.
 - 9 · 12: 연결 표의 검사 오더 · 결과 연결은 검사 종류를 나눠 적지 않습니다. 병리 오더와 병리 보고가 이 연결로 오가는지는 새 설치본으로 따라가 보며 확인합니다(오더 취소 연결의 목적 칸에는 병리 케이스 취소가 적혀 있습니다).
-- 18: 투약 기록(MAR)과 바코드 투약 확인은 [HIS 릴리즈 요약](../RELEASES/draft/systems/his.md)의 기능 목록에 있습니다. 메뉴 이름으로 따로 있지 않아 간호 워크스테이션 화면으로 적었고, 정확한 화면은 새 설치본으로 확인합니다.
+- 18: 투약 기록(MAR)과 바코드 투약 확인은 [HIS 릴리즈 요약](../RELEASES/2026.09/systems/his.md)의 기능 목록에 있습니다. 메뉴 이름으로 따로 있지 않아 간호 워크스테이션 화면으로 적었고, 정확한 화면은 새 설치본으로 확인합니다.
 - 28: 진단서를 연결 표 목적 칸의 "발급 문서"로 읽었습니다. 새 설치본으로 따라가 보며 확인합니다.
 - 36: `미비기록(HIM)` 메뉴의 기본 사용 역할은 관리자입니다. 의무기록사에게 열지는 기관이 역할 권한으로 정합니다.
 
@@ -179,7 +179,7 @@ sequenceDiagram
 | **분석 장비 → LIS 자동 수집**이 `미구현`입니다 | 연결 상태 표 | 결과 파일 입력 · 수기 입력 또는 인터페이스 중계 장치 |
 | **환자 앱** — 스토어 미배포 · 앱 신규 가입 불가 · 푸시 수신 미동작 | [환자 앱 구성서 §10](../systems/patient-app.md#10-한계와-대체-수단) | 배포 결정 전에는 HIS 의 웹 환자 포털을 씁니다 |
 | **오프라인 동기화**는 범위 밖입니다 — 망 장애 때 병동이 계속 쓸 수 있는 오프라인 기능이 없습니다 | [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) | 기관의 다운타임 절차를 준비합니다 |
-| **실제 호출로 확인된 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지 `구현·미검증`은 코드가 맞물려 있다는 뜻입니다 | [연결 상태 표](../RELEASES/draft/compatibility.md) | 새 설치본으로 따라가 보며 `검증됨`과 확인일을 붙여 갑니다 |
+| **실제 호출로 확인된 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지 `구현·미검증`은 코드가 맞물려 있다는 뜻입니다 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) | 새 설치본으로 따라가 보며 `검증됨`과 확인일을 붙여 갑니다 |
 
 ## 화면 캡처 자리
 
@@ -205,4 +205,4 @@ sequenceDiagram
 
 ## 근거
 
-[연결 상태 표](../RELEASES/draft/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [ERP](../systems/erp.md) · [twin](../systems/twin.md) · [Clinic](../systems/clinic.md) · [AI Server](../systems/ai-server.md) · [환자 앱](../systems/patient-app.md) · 릴리즈 요약 [HIS](../RELEASES/draft/systems/his.md) · [twin](../RELEASES/draft/systems/twin.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [구축 가이드 S6](../build-guide/S6-ai.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+[연결 상태 표](../RELEASES/2026.09/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [ERP](../systems/erp.md) · [twin](../systems/twin.md) · [Clinic](../systems/clinic.md) · [AI Server](../systems/ai-server.md) · [환자 앱](../systems/patient-app.md) · 릴리즈 요약 [HIS](../RELEASES/2026.09/systems/his.md) · [twin](../RELEASES/2026.09/systems/twin.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [구축 가이드 S6](../build-guide/S6-ai.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)

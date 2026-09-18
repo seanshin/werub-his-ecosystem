@@ -1,7 +1,7 @@
 # ERP 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [ERP 시스템 구성서](../systems/erp.md)
-> 계층 경영 · 버전 `1.287.3` · 구현 상태 `파일럿` — 문서마다 표기가 엇갈려 재확인 대상 · 화면 113 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
+> 계층 경영 · 버전 `1.287.3` · 구현 상태 `파일럿` — 문서마다 표기가 엇갈려 재확인 대상 · 화면 113 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — Finance, costing, payroll, materials, insurance claiming and tax. Payment events from the HIS arrive as journal entries, and the calculated amounts on a patient bill are returned to the HIS. Five screens are captured — the ERP dashboard, the pre-claim review worklist (BLOCK / WARN), finance (vouchers, budget, settlement), front-desk cash and day-close, and inventory including controlled substances and ordering. Captures are taken on **synthetic hospital data**, with institution-identifying information, secrets and infrastructure details masked before publication ([capture rules](../assets/screens/README.md)).
 
@@ -17,7 +17,7 @@
 
 오늘 마감 · 연동 실패(DLQ) · 결제 · **사전심사 미처리** · 세금계산서 · 결재 대기 · **법정기한 임박** · 간호등급이 위에 서고, 아래에 최근 알림(정기업무 지연 · 결제 슬롯 점유 임계 초과) · **이의신청 기한 임박** · **삭감 통계(진료과별 건수와 삭감액, 자동 매칭률)** · 안전재고 경고 · **재무 건전성**(유동비율 · 부채비율 · 의료이익률 · 당기순이익) · IT 구독 비용이 놓입니다.
 
-> ⚠️ **화면과 문서의 버전이 어긋납니다.** 이 자료의 머리는 저장소 정본 표기 `1.287.3` 을 적었는데, 화면 왼쪽 아래는 **`병원 ERP v1.9.0`** 이라고 말합니다(2026-09-12 확인). 어느 쪽이 맞는지 **한쪽을 고르지 않고 둘 다 적습니다** — 매니페스트가 13행 중 8행에서 이런 어긋남을 표시하는 것과 같은 경우입니다 → [매니페스트](../RELEASES/draft/manifest.md) · [취지 1](../overview/02-principles.md).
+> ⚠️ **화면과 문서의 버전이 어긋납니다.** 이 자료의 머리는 저장소 정본 표기 `1.287.3` 을 적었는데, 화면 왼쪽 아래는 **`병원 ERP v1.9.0`** 이라고 말합니다(2026-09-12 확인). 어느 쪽이 맞는지 **한쪽을 고르지 않고 둘 다 적습니다** — 매니페스트가 13행 중 8행에서 이런 어긋남을 표시하는 것과 같은 경우입니다 → [매니페스트](../RELEASES/2026.09/manifest.md) · [취지 1](../overview/02-principles.md).
 
 > 이 설치본은 HIS 와 **같은 주소 아래 `/erp/` 경로**로 열립니다. [시스템 구성서](../systems/erp.md)의 배포 형태와 함께 봅니다.
 
@@ -56,6 +56,6 @@
 
 청구 사전심사에서도 **신고 금액 확정은 AI 에 넘기지 않습니다.** BI 도구(Grafana · Metabase)는 AGPL 계열이라 별도 compose 로 선택해 붙입니다([THIRD_PARTY](../THIRD_PARTY.md)).
 
-- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 - 설치 요구사항 · 주요 설정 · 한계는 [ERP 시스템 구성서](../systems/erp.md)에 있습니다.
 - 캡처를 넣는 규칙은 [캡처 안내](../assets/screens/README.md), 사람 확인은 [캡처 대장](../assets/CAPTURE-LEDGER.md)에 있습니다.

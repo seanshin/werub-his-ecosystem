@@ -1,11 +1,11 @@
 # HIS (Hospital RUN) — 시스템 구성서
 
-> 기준 버전 **v4.18.0** · 기준 커밋 `e9d303984f80` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **v4.18.0** · 기준 커밋 `e9d303984f80` · 구현 상태 `통합` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — The core system: outpatient, inpatient, surgery, emergency, clinical support (pharmacy, lab, imaging, pathology, blood), health checkups, front desk, billing and management support in one codebase. It holds the authoritative record for patients, encounters, orders, nursing, front desk and billing, and acts as the ecosystem's **identity hub** — it issues the staff token that sibling systems verify, though the method differs per system (public-key verification for sign, PACS, edu, twin and cerno; a shared secret for ERP and Jitsi; an API key for Clinic). Status at the base commit is `통합` (integrated), and one fresh install was followed through in 2026-09 on a developer PC. §10 states the limits plainly: transmission to external agencies is not implemented, no SMS provider is registered, and the hospital name is still a literal string in part of the code.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/his.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/his.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -198,7 +198,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 ## 7. 연동
 
-아래 표는 [연결 상태](../RELEASES/draft/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 이 가운데 **18개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/draft/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+아래 표는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 HIS 가 한쪽 끝인 행을 그대로 옮긴 것입니다. 웹 환자 포털(`HIS(환자 포털)` · `HIS 환자 포털(웹)`)과 웹(`HIS 웹`)은 HIS 로 셉니다. 이 가운데 **18개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -298,7 +298,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -355,7 +355,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 | 항목 | 값 |
 |---|---|
 | 소스 링크 | 정리 중 |
-| 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/draft/manifest.md)) |
+| 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · nginx · browserless · Prometheus · Grafana |
 | 기준 커밋 | `e9d303984f80` (2026-09-11 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 compose · 환경 변수 예시 · 설정 모듈에서 **키 이름만** 읽었습니다. 메뉴 구성은 [추출기](../tools/extract-his-nav.mjs)로 뽑았습니다 |

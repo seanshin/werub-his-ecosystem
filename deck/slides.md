@@ -1,7 +1,7 @@
 # AI 기반 HIS 생태계 — 발표 덱
 
 > 🟡 **초안** — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16 · 연결 `검증됨` 27) · 화면 캡처 11장(가상 병원 데이터 · 리허설 설치본)
-> 기준: [통합 릴리즈 초안 매니페스트](../RELEASES/draft/manifest.md)(계측일 2026-09-11) · 근거는 [A 개요서](../overview/) · [E 데모 시나리오](../scenarios/)
+> 기준: [통합 릴리즈 초안 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11) · 근거는 [A 개요서](../overview/) · [E 데모 시나리오](../scenarios/)
 > 읽는 법 · 변환 방법은 [덱 안내](README.md)
 
 > **EN** — Presentation deck: intent, structure, build path, current status, demo scenarios and the conditions an institution should know before starting. Status slides carry the same numbers as the connection status table — verified connections are counted against the full denominator, and screenshots come from a rehearsal install with synthetic hospital data.
@@ -29,7 +29,7 @@
 | `설계만` · `미구현` · `중단` · `판정 불가` | 문서만 있음 · 한쪽 코드 없음 · 지금 동작 안 함 · 배포 구성에 따라 달라 코드만으로 판정 불가 |
 | `대응 설계` / `자체 점검 완료` / `외부 인증·승인` | 규제 표기 3단계. **지금은 모두 `대응 설계`** 이고 인증 · 승인 기록은 없습니다 |
 
-- 연결 상태는 [연결 상태 표](../RELEASES/draft/compatibility.md)에서만 옮겼습니다(코드 대조 2026-09-11 · 그 가운데 **27개는 새 설치본끼리 실제로 호출해 확인** 2026-09-14~15 · 확인일 칸).
+- 연결 상태는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에서만 옮겼습니다(코드 대조 2026-09-11 · 그 가운데 **27개는 새 설치본끼리 실제로 호출해 확인** 2026-09-14~15 · 확인일 칸).
 - 데모는 **가상 병원 데이터**입니다. 실존 기관 · 환자 · 직원이 아닙니다.
 - **AI 는 보조하고 초안을 만듭니다.** 진단 · 처방을 확정하지 않습니다.
 
@@ -215,7 +215,7 @@ flowchart TB
 
 **소스를 받을 때는 태그 이름이 아니라 매니페스트의 정본 버전 · 기준 커밋을 기준으로 삼습니다** — 13행 중 8행이 태그 · 릴리즈 기록과 어긋납니다.
 
-근거: [통합 릴리즈 초안 매니페스트](../RELEASES/draft/manifest.md)(계측일 2026-09-11) · [A 3장](../overview/03-layers-and-systems.md)
+근거: [통합 릴리즈 초안 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11) · [A 3장](../overview/03-layers-and-systems.md)
 
 ---
 
@@ -517,7 +517,7 @@ flowchart LR
 |---:|---:|---:|---:|---:|---:|---:|
 | **113** | **27** | **61** | 1 | **15** | **7** | 2 |
 
-- 센 방법: [연결 상태 표](../RELEASES/draft/compatibility.md)의 합계. 코드 대조는 2026-09-11, **`검증됨` 27 은 기준 커밋으로 새로 세운 설치본끼리 실제로 호출해 확인**(확인일 2026-09-14~15 · 확인일 칸). 연결은 방향과 목적별로 나눴습니다.
+- 센 방법: [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 합계. 코드 대조는 2026-09-11, **`검증됨` 27 은 기준 커밋으로 새로 세운 설치본끼리 실제로 호출해 확인**(확인일 2026-09-14~15 · 확인일 칸). 연결은 방향과 목적별로 나눴습니다.
 - **일부만 확인한 연결이 8개** 더 있습니다 — 불러 봤지만 연결 전체를 끝내지 못해 `검증됨` 을 붙이지 않았습니다(상태는 `구현·미검증`).
 - 이 밖에 **싣지 않은 연결이 7개** 있습니다 — 시스템 담당의 확인을 기다리는 연결입니다.
 - **`중단` 7 은 모두 Jitsi 가 걸린 연결**입니다(HIS ⇄ Jitsi 3 · AI Server ⇄ Jitsi 2 · 환자 앱 ⇄ Jitsi 1 · Clinic ⇄ Jitsi 1).
@@ -560,7 +560,7 @@ flowchart LR
 | `확인 필요` | edu(운영 여부 재확인 전) | 1 |
 | `중단` | Jitsi(현재 설치본이 동작하지 않음 · 구축 기관은 새로 구성) | 1 |
 
-센 방법: [매니페스트](../RELEASES/draft/manifest.md) 13행의 구현 상태 칸을 상태별로 셈(근거: **2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전**). 기능군마다 상태가 다를 수 있습니다.
+센 방법: [매니페스트](../RELEASES/2026.09/manifest.md) 13행의 구현 상태 칸을 상태별로 셈(근거: **2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전**). 기능군마다 상태가 다를 수 있습니다.
 
 **버전 표기에 관해** — 매니페스트 13행 가운데 **8행**이 태그 · 릴리즈 기록과 정본이 다릅니다(같은 저장소에서 릴리즈되는 HIS · 공개 홈페이지 · 환자 앱 세 행 포함). 소스를 받을 때는 **정본 버전과 기준 커밋**을 기준으로 삼습니다.
 
@@ -741,18 +741,18 @@ sequenceDiagram
 | **기준 장비(x86 · GPU)에서 다시** | 권장 사양 · 처리량 · 응답 시간 · AI 품질 수치가 붙습니다 |
 | **리얼 전환까지 따라가 봄** · 남은 시스템 설치(Clinic · twin · cerno · Jitsi · 환자 앱 · 홈페이지) | 리얼 모드에서만 나가는 연결과, 이번에 세우지 않은 시스템의 연결이 확인됩니다 |
 | **시스템 담당의 사실 확인** | "시스템 담당 확인 전" 표시가 빠지고, 싣지 않은 연결 7개가 표에 들어옵니다 |
-| **통합 릴리즈 번호 확정** | 기준이 `RELEASES/draft` 에서 번호 붙은 릴리즈로 옮겨 갑니다 |
+| **통합 릴리즈 번호 확정** | 기준이 `RELEASES/2026.09` 에서 번호 붙은 릴리즈로 옮겨 갑니다 |
 | 위루비병원 설정 설치본 · **남은 화면 캡처** | 시나리오 캡처 8 자리가 채워집니다 |
 
 **역할별로 이어 읽을 것**
 
 | 역할 | 다음 문서 |
 |---|---|
-| 병원장 · CIO | [A 개요서 2 · 3 · 8 · 9장](../overview/) · [사람 결정 체크리스트](../checklist/decisions.md) · [통합 릴리즈 매니페스트](../RELEASES/draft/manifest.md) |
+| 병원장 · CIO | [A 개요서 2 · 3 · 8 · 9장](../overview/) · [사람 결정 체크리스트](../checklist/decisions.md) · [통합 릴리즈 매니페스트](../RELEASES/2026.09/manifest.md) |
 | 전산 · 인프라팀 | [B 구축 가이드 S0 · S1](../build-guide/) · [C 시스템 구성서](../systems/) · [⑧ 배포 구성](../diagrams/deployment.md) · [THIRD_PARTY.md](../THIRD_PARTY.md) |
 | 의료정보 · 임상 리더 | [E 데모 시나리오](../scenarios/) · [③ 환자 여정](../diagrams/patient-journey.md) · [HIS 구성서](../systems/his.md) · [개원 체크리스트](../checklist/opening.md) |
 | AI · 거버넌스 · 법무 | [S6 AI 계층](../build-guide/S6-ai.md) · [⑦ AI 호출 지도](../diagrams/ai-map.md) · [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책](../DISCLAIMER.md) |
-| 연동 개발자 · 파트너 | [연결 상태 표](../RELEASES/draft/compatibility.md) · [연결 지도](../diagrams/connections.md) · [⑥ 표준 층](../diagrams/standards.md) · [④ 신원 허브](../diagrams/identity-hub.md) |
+| 연동 개발자 · 파트너 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) · [연결 지도](../diagrams/connections.md) · [⑥ 표준 층](../diagrams/standards.md) · [④ 신원 허브](../diagrams/identity-hub.md) |
 
 모르는 말이 나오면 [용어집](../glossary.md). 제작 계획과 진행은 [ROADMAP](../ROADMAP.md).
 

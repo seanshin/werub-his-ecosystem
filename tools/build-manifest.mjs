@@ -2,14 +2,14 @@
 /**
  * 통합 릴리즈 매니페스트 생성기 — "이 자료가 설명하는 것은 정확히 어느 버전 조합인가"를 한 장으로 고정한다.
  *
- *   node tools/build-manifest.mjs            # RELEASES/draft/manifest.json · manifest.md 를 만든다
+ *   node tools/build-manifest.mjs            # RELEASES/2026.09/manifest.json · manifest.md 를 만든다
  *   node tools/build-manifest.mjs --check    # 다시 만들어 기존 파일과 비교만 한다(쓰지 않음 · 다르면 종료 코드 1)
  *
  * 무엇을 어디서 읽나
  *   - 버전 · 기준 커밋 · 다른 표기  ← data/scale-snapshot.json (계측기 생성물). 🔴 먼저 `measure-scale --check` 로
  *     스냅샷이 지금 저장소와 같은지 확인한다. 낡았으면 만들지 않는다.
  *   - 릴리즈일 · 라이선스 표기      ← 형제 저장소의 **기준 커밋**(스냅샷의 state.head = data/base-commits.json 고정값)을 읽기 전용으로 읽는다
- *   - 구현 상태 · 소스 링크         ← RELEASES/draft/inputs.json (사람이 적는 값 — 코드에서 뽑을 수 없는 판단)
+ *   - 구현 상태 · 소스 링크         ← RELEASES/2026.09/inputs.json (사람이 적는 값 — 코드에서 뽑을 수 없는 판단)
  *
  * 규약
  *   - 조용히 한쪽을 고르지 않는다. 버전 표기가 다르면 어긋남으로 적고 등급을 매긴다.
@@ -25,7 +25,7 @@ import { spawnSync } from 'node:child_process';
 import { ROOT, loadRepos, git, fingerprint, sameFingerprint, concurrentNote } from './lib/repos.mjs';
 
 const SNAPSHOT = path.join(ROOT, 'data/scale-snapshot.json');
-const DRAFT = path.join(ROOT, 'RELEASES/draft');
+const DRAFT = path.join(ROOT, 'RELEASES/2026.09');
 const INPUTS = path.join(DRAFT, 'inputs.json');
 const OUT_JSON = path.join(DRAFT, 'manifest.json');
 const OUT_MD = path.join(DRAFT, 'manifest.md');
@@ -164,7 +164,7 @@ function build(repos) {
     conventions: {
       mismatchGrades: '주요 = 태그·릴리즈 기록이 정본과 다름 · 표면 = 화면·API 에 보이는 버전 상수가 다름 · 참고 = 하위 패키지 선언만 다름 · 없음',
       license: `목표 = ${LICENSE_TARGET}(생태계 결정). declared 는 각 저장소 기준 커밋의 표기(종류·위치만 — 저작권자 문구는 옮기지 않음)`,
-      status: '구현 상태는 사람이 적는 입력(RELEASES/draft/inputs.json)이다. 연결별 상태는 compatibility.md(예정)',
+      status: '구현 상태는 사람이 적는 입력(RELEASES/2026.09/inputs.json)이다. 연결별 상태는 compatibility.md(예정)',
     },
     systems,
   };
@@ -258,5 +258,5 @@ fs.writeFileSync(OUT_MD, md);
 for (const [k, s] of Object.entries(manifest.systems)) {
   console.log(`${k.padEnd(12)} ${String(s.version.value).padEnd(10)} 어긋남 ${s.version.mismatches.grade.padEnd(3)} 릴리즈일 ${s.releaseDate.value ?? '—'}  라이선스 ${s.license.declared.map((d) => d.kind).join('·')}  상태 ${s.status.value}`);
 }
-console.log(`\n형제 저장소 실행 전후 동일: ${Object.keys(repos).length}/${Object.keys(repos).length} · 썼다: RELEASES/draft/manifest.json · manifest.md`);
+console.log(`\n형제 저장소 실행 전후 동일: ${Object.keys(repos).length}/${Object.keys(repos).length} · 썼다: RELEASES/2026.09/manifest.json · manifest.md`);
 reportSummaries();

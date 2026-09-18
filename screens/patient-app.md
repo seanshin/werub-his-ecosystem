@@ -1,7 +1,7 @@
 # 환자 앱 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [환자 앱 시스템 구성서](../systems/patient-app.md)
-> 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `개발` — 스토어 미배포 · 화면 32 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
+> 계층 환자 접점 · 버전 `v4.18.0` · 구현 상태 `개발` — 스토어 미배포 · 화면 32 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — The patient app — booking, viewing results, consent, questionnaires and delegating access to a family member. Its implementation status is `개발` (in development) and it is **not published to any app store**, so this chapter also covers the **web patient portal**, which is where patients enter today. One screen is captured, the portal login showing the rehearsal banner and phone-number sign-in, with four further slots **not filled yet**. Captures are taken on **synthetic hospital data**, with identifying information masked before publication ([capture rules](../assets/screens/README.md)).
 
@@ -38,6 +38,6 @@
 
 🔴 **스토어에 배포되지 않았고, 앱에서 신규 가입이 되지 않습니다.** 배포 결정 전에는 HIS 의 웹 환자 포털을 씁니다. 알림 푸시도 동작하지 않습니다([환자 앱 구성서 §10](../systems/patient-app.md#10-한계와-대체-수단)).
 
-- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 - 설치 요구사항 · 주요 설정 · 한계는 [환자 앱 시스템 구성서](../systems/patient-app.md)에 있습니다.
 - 캡처를 넣는 규칙은 [캡처 안내](../assets/screens/README.md), 사람 확인은 [캡처 대장](../assets/CAPTURE-LEDGER.md)에 있습니다.

@@ -1,11 +1,11 @@
 # LIS — 시스템 구성서
 
-> 기준 버전 **1.56.18** · 기준 커밋 `ffb34e9d1dbc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **1.56.18** · 기준 커밋 `ffb34e9d1dbc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — The laboratory information system: clinical chemistry, microbiology, pathology, transfusion and molecular/genomic testing across the whole pre- to post-analytic path. It receives test orders from HIS and returns results over FHIR R4 (the HL7 v2 path remains only as an alternative and is `미구현` — not implemented), sends pathology imaging to PACS, and sends billing to ERP. Status at the base commit is `파일럿` (pilot). Several LIS ↔ HIS connections were verified by real calls during the 2026-09 follow-along; the connection table and its dates are authoritative.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/lis.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/lis.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -78,7 +78,7 @@ flowchart LR
 | 런타임 | Node.js 20(컨테이너 이미지) · NestJS 11 · Prisma 6 · Next.js | Dockerfile · `package.json` |
 | 데이터베이스 | PostgreSQL 16. 운영 compose 는 PostgreSQL · API · 웹 세 컨테이너입니다(개발 compose 에는 Redis 도 있음) | 저장소 compose |
 | GPU | 필요 없습니다 | — |
-| 설치 스크립트가 하는 일 | 비밀값을 무작위로 만들고, 마이그레이션 적용을 확인하고, 백업 크론을 등록하고, 관리자 초기 비밀번호를 한 번만 출력합니다. 기존 환경 파일은 덮어쓰지 않고 멈춥니다. 사이트 코드와 https 공개 주소를 인자로 받고, http 주소는 거부합니다 | 설치 스크립트 · [릴리즈 요약](../RELEASES/draft/systems/lis.md) |
+| 설치 스크립트가 하는 일 | 비밀값을 무작위로 만들고, 마이그레이션 적용을 확인하고, 백업 크론을 등록하고, 관리자 초기 비밀번호를 한 번만 출력합니다. 기존 환경 파일은 덮어쓰지 않고 멈춥니다. 사이트 코드와 https 공개 주소를 인자로 받고, http 주소는 거부합니다 | 설치 스크립트 · [릴리즈 요약](../RELEASES/2026.09/systems/lis.md) |
 | 설치 스크립트가 하지 않는 일 | 운영체제 · Docker 설치, 방화벽, TLS 인증서, DNS, 백업 대상 스토리지 마련 — 기관이 준비합니다 | 설치 스크립트 머리말 |
 | 네트워크 | HL7 v2(MLLP) 구간(PACS 병리 워크리스트)은 원내 폐쇄망이나 상대 시스템과 합의한 전용 VPN 안에 두도록 설계돼 있습니다. 지표 엔드포인트는 루프백 · 사설 대역에서만 읽히므로, 더 좁혀야 하면 앞단 프록시에서 함께 제한합니다 | 저장소 수용 위험 문서 · 1.56.17 기록 |
 | 같은 호스트에 다른 시스템이 있을 때 | compose 프로젝트 이름을 고정해 충돌을 막습니다 | 저장소 배포 문서 |
@@ -118,7 +118,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 LIS 가 한쪽 끝인 행을 그대로 옮겼습니다. 이 가운데 **8개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/draft/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+[연결 상태](../RELEASES/2026.09/compatibility.md)에서 LIS 가 한쪽 끝인 행을 그대로 옮겼습니다. 이 가운데 **8개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -153,7 +153,7 @@ flowchart LR
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -199,7 +199,7 @@ flowchart LR
 | 항목 | 값 |
 |---|---|
 | 소스 링크 | 정리 중 |
-| 저장소 라이선스 표기 | 독점(`LICENSE`) · UNLICENSED(비공개 선언 · `package.json`) · 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/draft/manifest.md)) |
+| 저장소 라이선스 표기 | 독점(`LICENSE`) · UNLICENSED(비공개 선언 · `package.json`) · 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · 코드 마스터 |
 | 기준 커밋 | `ffb34e9d1dbc` (2026-09-09 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 compose · 환경 변수 예시 · 설치 스크립트 · API 가 읽는 키에서 **키 이름만** 읽었습니다 |

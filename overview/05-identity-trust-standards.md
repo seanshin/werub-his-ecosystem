@@ -1,6 +1,6 @@
 # 5. 신원 · 신뢰 · 표준
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [4. 환자 한 명의 여정](04-patient-journey.md) · 다음 → [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md)
 
 > **EN** — Three things must line up for thirteen systems to behave like one hospital: **who this person is**, **whether this document can be trusted**, and **whether the systems speak the same language**. Staff identity is issued once by the HIS and verified by the others in three different ways — public-key verification (five systems), a shared secret (two, which means key management becomes the institution's job), and a scoped API key (one). Trust — certificates, RFC 3161 timestamps, PAdES-LTA signatures, append-only audit chains — is concentrated in sign. Standards (FHIR R4, SMART on FHIR, CDS Hooks, DICOM, DICOMweb, HL7 v2) carry what they can, but **many connections are plain HTTPS REST or webhooks**, and every row says which it is.
@@ -15,7 +15,7 @@
 | **이 문서는 믿을 만한가** — 누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았는가 | 신뢰의 사슬(sign) | [⑤ 신뢰의 사슬](../diagrams/trust-chain.md) |
 | **서로 같은 말을 쓰는가** — 시스템끼리, 그리고 기관이 이미 쓰는 장비 · 시스템과 | 표준 층 | [⑥ 표준 층](../diagrams/standards.md) |
 
-연결 상태는 모두 [연결 상태](../RELEASES/draft/compatibility.md)에서 옮겼습니다(코드 대조 2026-09-11 · 그중 27개는 새 설치본끼리 실제로 불러 확인 2026-09-14~15).
+연결 상태는 모두 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 옮겼습니다(코드 대조 2026-09-11 · 그중 27개는 새 설치본끼리 실제로 불러 확인 2026-09-14~15).
 
 ---
 
@@ -36,7 +36,7 @@
 **기관에게 의미하는 것**
 
 - 직원 계정 · 역할을 **HIS 한 곳에서** 관리합니다. 형제 시스템마다 계정을 따로 만들고 지우는 일을 줄입니다.
-- 반대로 HIS 가 멈추면 HIS 신원에 기대는 형제 시스템의 로그인도 영향을 받습니다(예: edu 는 로그인이 HIS SSO 뿐이라 HIS 없이 따로 쓸 수 없습니다 — [edu 요약](../RELEASES/draft/systems/edu.md)). HIS 의 가용성과 키 관리가 생태계 전체의 기반입니다([2장 취지 4](02-principles.md#4-정본은-하나)).
+- 반대로 HIS 가 멈추면 HIS 신원에 기대는 형제 시스템의 로그인도 영향을 받습니다(예: edu 는 로그인이 HIS SSO 뿐이라 HIS 없이 따로 쓸 수 없습니다 — [edu 요약](../RELEASES/2026.09/systems/edu.md)). HIS 의 가용성과 키 관리가 생태계 전체의 기반입니다([2장 취지 4](02-principles.md#4-정본은-하나)).
 - 연결별 토큰 대상 · 교환 경로 같은 세부는 이 개요서가 다루지 않습니다. [연동 계약 지도](../integration/)(인증 3방식 · 개통 게이트 · 연결 순서)와 각 [시스템 구성서](../systems/)를 봅니다. 운영 보안 점검은 기관이 설치 형태에 맞춰 따로 합니다.
 
 ---
@@ -64,7 +64,7 @@
 | ERP → sign | 감사 이벤트 — 자금 결재 등 | `구현·미검증` |
 | Clinic → sign | 감사 이벤트 — 그룹웨어 전자결재 문서 | `구현·미검증` |
 
-이 밖에 sign 이 서명 완료를 알리는 웹훅(sign → HIS · ERP · edu)이 있고(셋 다 `검증됨` · 2026-09-14~15), ERP → sign 의 일반 전자계약 API 는 `미구현`입니다([연결 상태](../RELEASES/draft/compatibility.md) ERP ⇄ sign).
+이 밖에 sign 이 서명 완료를 알리는 웹훅(sign → HIS · ERP · edu)이 있고(셋 다 `검증됨` · 2026-09-14~15), ERP → sign 의 일반 전자계약 API 는 `미구현`입니다([연결 상태](../RELEASES/2026.09/compatibility.md) ERP ⇄ sign).
 
 **기관이 준비하는 것** — README 가 밝힌 대로, 기준 버전은 인증 기관 키를 **소프트웨어로 보관**합니다(하드웨어 보안 모듈 미적용). 하드웨어 보안 모듈 · 공인 타임스탬프 기관 연결 · 본인확인 사업자 연동은 구축 기관이 준비합니다. **전자서명의 법적 효력 판단은 구축 기관과 법무가 합니다.** 이 개요서는 구조를 설명할 뿐 법적 효력이나 인증을 말하지 않습니다([S4](../build-guide/S4-trust.md)).
 

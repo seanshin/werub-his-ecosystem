@@ -2,7 +2,7 @@
 /**
  * 연결 지도 생성기 — 도식의 노드·엣지가 연결 표와 기계적으로 같게 한다.
  *
- *   node tools/build-diagrams.mjs            # RELEASES/draft/compatibility.md 를 읽어 diagrams/connections.md 를 만든다
+ *   node tools/build-diagrams.mjs            # RELEASES/2026.09/compatibility.md 를 읽어 diagrams/connections.md 를 만든다
  *   node tools/build-diagrams.mjs --check    # 다시 만들어 기존 파일과 비교만 한다(쓰지 않음 · 다르면 종료 코드 1)
  *
  * 무엇을 어떻게 만드나
@@ -24,7 +24,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SRC_REL = 'RELEASES/draft/compatibility.md';
+const SRC_REL = 'RELEASES/2026.09/compatibility.md';
 const OUT_REL = 'diagrams/connections.md';
 const SRC = path.join(ROOT, SRC_REL);
 const OUT = path.join(ROOT, OUT_REL);
@@ -244,7 +244,7 @@ function render({ meta, pairs }, { total, grand }) {
     out.push(`| \`${s.key}\` | ${s.line} | ${pairs.filter((p) => p.worst.key === s.key).length} |`);
   }
   out.push('');
-  out.push('상태의 뜻은 [`compatibility.md` 의 "상태를 읽는 법"](../RELEASES/draft/compatibility.md#상태를-읽는-법)과 같습니다. 노드 색은 [계층 생태계 지도](layers.md)의 7계층을 따르고, 테두리가 파선인 노드는 생태계 시스템이 아닌 상대(검사 장비 · 외부 시스템)이거나 두 시스템을 함께 대상으로 하는 연결입니다.');
+  out.push('상태의 뜻은 [`compatibility.md` 의 "상태를 읽는 법"](../RELEASES/2026.09/compatibility.md#상태를-읽는-법)과 같습니다. 노드 색은 [계층 생태계 지도](layers.md)의 7계층을 따르고, 테두리가 파선인 노드는 생태계 시스템이 아닌 상대(검사 장비 · 외부 시스템)이거나 두 시스템을 함께 대상으로 하는 연결입니다.');
   out.push('');
   out.push('## 도식');
   out.push('');
@@ -266,7 +266,7 @@ function render({ meta, pairs }, { total, grand }) {
   out.push('');
   out.push('## 쌍별 표');
   out.push('');
-  out.push('연결 표와 같은 순서입니다. 연결 하나하나의 목적 · 프로토콜은 [`compatibility.md`](../RELEASES/draft/compatibility.md)에서 봅니다.');
+  out.push('연결 표와 같은 순서입니다. 연결 하나하나의 목적 · 프로토콜은 [`compatibility.md`](../RELEASES/2026.09/compatibility.md)에서 봅니다.');
   out.push('');
   out.push('| # | 쌍 | 연결 수 | 방향별 | 상태별 | 가장 나쁜 상태 |');
   out.push('|---:|---|---:|---|---|---|');

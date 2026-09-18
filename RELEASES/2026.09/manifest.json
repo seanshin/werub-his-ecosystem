@@ -1,13 +1,13 @@
 {
-  "releaseId": null,
-  "releaseIdNote": "번호 체계 미정 — 정해지면 폴더 이름과 이 값을 함께 바꾼다",
+  "releaseId": "2026.09",
+  "releaseIdNote": "번호 2026.09 — 폴더 이름과 이 값이 같아야 한다",
   "draft": true,
   "measuredAt": "2026-09-13",
   "generator": "tools/build-manifest.mjs",
   "conventions": {
     "mismatchGrades": "주요 = 태그·릴리즈 기록이 정본과 다름 · 표면 = 화면·API 에 보이는 버전 상수가 다름 · 참고 = 하위 패키지 선언만 다름 · 없음",
     "license": "목표 = MIT(생태계 결정). declared 는 각 저장소 기준 커밋의 표기(종류·위치만 — 저작권자 문구는 옮기지 않음)",
-    "status": "구현 상태는 사람이 적는 입력(RELEASES/draft/inputs.json)이다. 연결별 상태는 compatibility.md(예정)"
+    "status": "구현 상태는 사람이 적는 입력(RELEASES/2026.09/inputs.json)이다. 연결별 상태는 compatibility.md(예정)"
   },
   "systems": {
     "his": {

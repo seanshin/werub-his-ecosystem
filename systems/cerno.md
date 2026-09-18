@@ -1,11 +1,11 @@
 # cerno — 시스템 구성서
 
-> 기준 버전 **0.1.0** · 기준 커밋 `4f5c22b331fc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **0.1.0** · 기준 커밋 `4f5c22b331fc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
 > **EN** — A per-clinician personalised clinical knowledge service. It uses the hospital's own AI Server to retrieve source documents and **draft** an answer, and **produces nothing when it finds no supporting evidence**. Status at the base commit is `파일럿` (pilot), in shadow and non-clinical scope; the repository's release record and last commit stop at 2026-08-04 when the pilot began, so pilot outcomes are not in this chapter. **This system was not installed in the 2026-09 follow-along**, so its connections remain `구현·미검증` — wired in code, not verified by real calls.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/cerno.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/cerno.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -103,7 +103,7 @@ flowchart LR
 
 ## 7. 연동
 
-연결 상태는 [연결 상태](../RELEASES/draft/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
+연결 상태는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
 
 **들어오는 연결 1 · 나가는 연결 2** — 모두 `구현·미검증`
 
@@ -114,7 +114,7 @@ flowchart LR
 | cerno → AI Server | 의료진별 근거 RAG · 근거 기반 답변 생성 · 모델 예열 · DUR 점검 · 충실도 평가 표본 | `구현·미검증` |
 
 - 표에 없는 연결: cerno ⇄ twin — 확인 중.
-- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -144,6 +144,6 @@ flowchart LR
 ## 11. 소스 · 라이선스 표기 · 확인일
 
 - **소스 링크**: 정리 중
-- **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/draft/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
+- **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소 · 모델 약관**: [THIRD_PARTY.md](../THIRD_PARTY.md) — Redis(판본에 따라 약관이 다름) · AI 모델 가중치(AI Server 를 거쳐 씀)
 - **확인일**: 2026-09-11 — 기준 커밋 `4f5c22b331fc` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

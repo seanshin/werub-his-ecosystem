@@ -1,11 +1,11 @@
 # PACS — 시스템 구성서
 
-> 기준 버전 **v13.48** · 기준 커밋 `532a8ed13e87` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **v13.48** · 기준 커밋 `532a8ed13e87` · 구현 상태 `통합` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — The imaging system: an Orthanc-backed image server with a web viewer, reading workflow, admin screens and AI hooks. It joins the examination flow through modality worklist and HL7 v2 order intake, and hands report signing to sign. Staff sign in with the HIS-issued token verified by public key; service accounts (for the LIS link, for example) use PACS's own login, and role-based access confines patient-returning queries to clinical roles. Status at the base commit is `통합` (integrated); an institution that already runs a PACS may connect that one over standard protocols instead.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/pacs.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/pacs.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -143,7 +143,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 PACS 가 한쪽 끝인 행을 그대로 옮겼습니다. HIS 쪽 웹 환자 포털(`HIS(환자 포털)`)에서 오는 행도 들어오는 연결에 넣었습니다. 이 가운데 **4개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/draft/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+[연결 상태](../RELEASES/2026.09/compatibility.md)에서 PACS 가 한쪽 끝인 행을 그대로 옮겼습니다. HIS 쪽 웹 환자 포털(`HIS(환자 포털)`)에서 오는 행도 들어오는 연결에 넣었습니다. 이 가운데 **4개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -181,7 +181,7 @@ flowchart LR
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -227,7 +227,7 @@ flowchart LR
 | 항목 | 값 |
 |---|---|
 | 소스 링크 | 정리 중 |
-| 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/draft/manifest.md)) |
+| 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — Orthanc(GPL · AGPL) · OHIF · Cornerstone3D(MIT) · PostgreSQL · Redis · nginx · Prometheus · Grafana · exporter |
 | 기준 커밋 | `532a8ed13e87` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 compose · 환경 변수 예시 · 백엔드 설정 모듈에서 **키 이름과 기본값의 성격만** 읽었습니다 |

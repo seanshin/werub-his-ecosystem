@@ -148,7 +148,7 @@
 | 전산·인프라팀 | 무엇을 어디에 설치하나? 서버·GPU·DB 요구사항은? | [지금 받을 수 있는 것](#지금-받을-수-있는-것) → [구축 가이드 S0](build-guide/S0-prepare.md) → [규모](#규모--지금-말할-수-있는-것) → [시스템 구성서](systems/) |
 | 의료정보·임상 리더 | 진료 흐름이 시스템 사이를 어떻게 지나가나? 병원 규정은 어디서 설정하나? | [데모 시나리오](scenarios/) → [화면으로 보는 생태계](screens/) |
 | AI·거버넌스 위원회·법무 | AI 가 어디서 무엇을 하나? 어디까지 켜도 되나? 누가 승인하고 무엇이 남나? | [개요서 6장](overview/06-ai.md) → [S6 AI 계층](build-guide/S6-ai.md) → [AI 감독 화면](screens/his.md#ai-감독-관제--분모가-없으면-비율을-내지-않는다) |
-| 연동 개발자·파트너 | 시스템끼리 무슨 프로토콜·인증으로 붙나? 무엇이 검증됐나? | [연결 카드](integration/cards/)(붙이려는 쌍 한 장) → [공통 규약](integration/contracts.md)(오류 봉투 · 서명 · 멱등 · 재시도) → [연동 계약 지도](integration/) → [연결 상태 표](RELEASES/draft/compatibility.md) |
+| 연동 개발자·파트너 | 시스템끼리 무슨 프로토콜·인증으로 붙나? 무엇이 검증됐나? | [연결 카드](integration/cards/)(붙이려는 쌍 한 장) → [공통 규약](integration/contracts.md)(오류 봉투 · 서명 · 멱등 · 재시도) → [연동 계약 지도](integration/) → [연결 상태 표](RELEASES/2026.09/compatibility.md) |
 | 보건 당국·국제 협력 기관 | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [개발도상국에서도](#개발도상국에서도-세울-수-있는-수준으로) → [제공 조건](overview/09-terms.md) |
 
 ## 설계 취지
@@ -232,7 +232,7 @@
 
 | 무엇 | 확인 내용 |
 |---|---|
-| **연결 27개가 끝까지 동작** | 검사 오더 → 결과 → 재검 취소, 직원·환자 전자서명, 판독 서명, 진료비 계산서, 청구·정산, 사내교육 이수까지 **한 줄로 이어졌습니다**([연결 상태](RELEASES/draft/compatibility.md)의 확인일 칸) |
+| **연결 27개가 끝까지 동작** | 검사 오더 → 결과 → 재검 취소, 직원·환자 전자서명, 판독 서명, 진료비 계산서, 청구·정산, 사내교육 이수까지 **한 줄로 이어졌습니다**([연결 상태](RELEASES/2026.09/compatibility.md)의 확인일 칸) |
 | **가드가 실제로 막았다** | 27개 중 **23개**에 틀린 키 · 변조 토큰 · 위조 서명 · 재전송 · 다른 대상을 일부러 넣어 다시 시험했고, 전부 거부됐습니다(401 · 403 · 409). 나머지 4개(오더 취소 전파 · 공개키 조회 · 직원 명부 · 이수 기록)는 **거부를 시험할 자리가 없어** 정상 동작만 확인했습니다 |
 | **실패를 실패라고 말한다** | AI 주소가 허용 목록에 없으면 "설정이 없어 보내지 않았다", 감시자가 없으면 "스윕 기록 없음 · 정지 의심", 표본이 모자라면 "산출 불가(0 이 아닙니다)" |
 | **직무 분리가 코드에 있다** | 결과를 적용한 직원은 자기 결과를 검증할 수 없고, LIS 관리자는 검체 접수·결과 입력을 할 수 없으며, 정리 작업은 요청자 본인이 승인할 수 없습니다 |
@@ -256,10 +256,10 @@
 |---|---|
 | 구축 절차 S0~S8 · 따라가며 막힌 곳과 우회 | [구축 가이드](build-guide/) · [따라가 본 결과](build-guide/follow-along-2026-09.md) |
 | 시스템 13개가 무엇으로 이루어졌나 | [시스템 구성서](systems/) |
-| 무엇이 실제로 맞물려 도는가(확인일 포함) | [연결 상태 표](RELEASES/draft/compatibility.md) |
+| 무엇이 실제로 맞물려 도는가(확인일 포함) | [연결 상태 표](RELEASES/2026.09/compatibility.md) |
 | 화면이 실제로 어떻게 생겼나 | [화면 293장](screens/) |
 | 개원 · 개시 · 결정 체크리스트 | [checklist/](checklist/) |
-| 버전 조합 한 벌 | [통합 릴리즈 초안](RELEASES/draft/RELEASE.md) |
+| 버전 조합 한 벌 | [통합 릴리즈 `2026.09`](RELEASES/2026.09/RELEASE.md) |
 | **소스를 어디서 어떻게 받나** — 저장소 11곳 · 기준 커밋 · 받은 뒤 처음 여는 파일 | **[소스 받기](SOURCES.md)** |
 
 | 아직 없는 것 | 언제 |
@@ -329,12 +329,12 @@
 | [`deck/`](deck/) | 발표 덱(내용 32장 · A·E 시각 요약 + 화면 11장) | 🟡 초안 |
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |
 | [`data/`](data/) | 규모 계측 스냅샷(계측일 · 기준 커밋 포함) | ✅ 1차 계측 |
-| [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈([릴리즈 노트](RELEASES/draft/RELEASE.md) · 버전 조합 매니페스트 · 시스템별 릴리즈 요약 13 · [연결 상태](RELEASES/draft/compatibility.md) — 확인일 칸) | 🟡 초안 · 번호 미정 |
+| [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈([릴리즈 노트](RELEASES/2026.09/RELEASE.md) · 버전 조합 매니페스트 · 시스템별 릴리즈 요약 13 · [연결 상태](RELEASES/2026.09/compatibility.md) — 확인일 칸) | 🟢 **`2026.09`** · 담당 확인 전 |
 | [`screens/`](screens/) | **화면으로 보는 생태계**(시스템 13장 + 흐름 1장 · 캡처와 설명) | 🟡 초안 · 293장 |
 | [`assets/screens/`](assets/screens/) | 화면 캡처 이미지 293장 + [캡처 목록](assets/screens/INDEX.md)(자동 생성) | 🟡 HIS 264 / 266 · 형제 시스템 29 |
 | [`diagrams/`](diagrams/) | 도식 8종 + 연결 지도(연결 상태 표에서 자동 생성) | 🟡 초안 |
 | [`glossary.md`](glossary.md) | 용어집 | 🟡 초안 |
-| `tools/` | 공개 검사기 · 규모 계측기 · 체크리스트 추출기 · 매니페스트 생성기 · 연결 지도 · 연동 매트릭스 생성기 · HIS 메뉴 추출기 · 캡처 목록 생성기 · 릴리즈 기록 계수기 · 바꿔야 할 코드 기본값 목록 생성기 · 문서 간 일치 검사기 · **수치 주장 검사기**(문서에 적힌 「검증됨 N」 같은 수치가 연결 표와 같은지) · **릴리즈 자르기 도구**(번호가 정해지면 `RELEASES/draft/` 를 번호 폴더로 굳히고 링크를 한 번에 옮깁니다 — 기본이 미리보기) · **링크 검사기**(저장소 안 링크 2,541개가 실제 파일과 제목을 가리키는지) — 발행 전 한 번에 `node tools/verify-all.mjs`(검사 24개) | ✅ |
+| `tools/` | 공개 검사기 · 규모 계측기 · 체크리스트 추출기 · 매니페스트 생성기 · 연결 지도 · 연동 매트릭스 생성기 · HIS 메뉴 추출기 · 캡처 목록 생성기 · 릴리즈 기록 계수기 · 바꿔야 할 코드 기본값 목록 생성기 · 문서 간 일치 검사기 · **수치 주장 검사기**(문서에 적힌 「검증됨 N」 같은 수치가 연결 표와 같은지) · **릴리즈 자르기 도구**(번호가 정해지면 `RELEASES/2026.09/` 를 번호 폴더로 굳히고 링크를 한 번에 옮깁니다 — 기본이 미리보기) · **링크 검사기**(저장소 안 링크 2,541개가 실제 파일과 제목을 가리키는지) — 발행 전 한 번에 `node tools/verify-all.mjs`(검사 24개) | ✅ |
 
 ### 무엇부터 보면 되나
 
@@ -360,9 +360,9 @@
 ## 라이선스
 **License**
 
-> **EN** — This repository is [MIT](LICENSE), Copyright (c) 2026 Sean Shin. The ecosystem software is intended to be MIT as well, **but third-party servers run as separate services, AI model weights (each with its own terms) and government-distributed code master data follow their own conditions** — see [THIRD_PARTY.md](THIRD_PARTY.md). **The source repositories are not yet relabeled to MIT**; each repository's current declaration is carried verbatim in the [release manifest](RELEASES/draft/manifest.md), so check the label in the repository you obtain. And see the [medical disclaimer](DISCLAIMER.md): **this software is not an approved medical device**; AI output is supportive information, and clinical judgment and responsibility rest with the clinicians and the adopting institution.
+> **EN** — This repository is [MIT](LICENSE), Copyright (c) 2026 Sean Shin. The ecosystem software is intended to be MIT as well, **but third-party servers run as separate services, AI model weights (each with its own terms) and government-distributed code master data follow their own conditions** — see [THIRD_PARTY.md](THIRD_PARTY.md). **The source repositories are not yet relabeled to MIT**; each repository's current declaration is carried verbatim in the [release manifest](RELEASES/2026.09/manifest.md), so check the label in the repository you obtain. And see the [medical disclaimer](DISCLAIMER.md): **this software is not an approved medical device**; AI output is supportive information, and clinical judgment and responsibility rest with the clinicians and the adopting institution.
 
 - 이 저장소: [MIT](LICENSE) · Copyright (c) 2026 Sean Shin (신현묵)
 - 생태계 소프트웨어도 MIT 로 제공합니다. 다만 별도 서비스로 쓰는 제3자 서버, **AI 모델 가중치**(모델마다 별도 약관), 공공기관이 배포하는 코드 마스터 데이터는 **각자의 조건**을 따릅니다. 목록은 [THIRD_PARTY.md](THIRD_PARTY.md)에 정리합니다.
-- 각 소스 저장소의 라이선스 표기는 **아직 MIT 로 정리되지 않았습니다**. 저장소마다 현재 적힌 표기를 [통합 릴리즈 매니페스트](RELEASES/draft/manifest.md)에 그대로 싣고, 정리되는 대로 갱신합니다. 소스를 받을 때는 그 저장소에 적힌 표기를 확인하세요.
+- 각 소스 저장소의 라이선스 표기는 **아직 MIT 로 정리되지 않았습니다**. 저장소마다 현재 적힌 표기를 [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)에 그대로 싣고, 정리되는 대로 갱신합니다. 소스를 받을 때는 그 저장소에 적힌 표기를 확인하세요.
 - [의료 면책 고지](DISCLAIMER.md) — 이 소프트웨어는 인허가받은 의료기기가 아닙니다. AI 산출물은 보조 정보이며, 임상 판단과 책임은 의료진과 구축 기관에 있습니다.

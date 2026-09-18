@@ -1,7 +1,7 @@
 # twin 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [twin 시스템 구성서](../systems/twin.md)
-> 계층 AI · 버전 `1.20.88` · 구현 상태 `통합` · 화면 15 · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
+> 계층 AI · 버전 `1.20.88` · 구현 상태 `통합` · 화면 15 · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — The digital twin — risk-score cards, SBAR drafts and simulation. It opens from the chart over SMART on FHIR and raises risk cards through CDS Hooks; what it produces is a **draft for a clinician to read**, not a decision. Two screens are captured: the twin-derived badges on chart metrics, and the operations console showing non-PHI aggregates. Three further slots are **not filled yet**; captures are taken on **synthetic hospital data**, with identifying information masked before publication ([capture rules](../assets/screens/README.md)).
 
@@ -41,6 +41,6 @@
 
 **의료진이 "차트 저장"을 눌러야 HIS 에 저장됩니다.** AI 설명 초안에는 `machine-generated` 표시가 붙습니다. twin 은 안전 등급 분류 예비 단계입니다.
 
-- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 - 설치 요구사항 · 주요 설정 · 한계는 [twin 시스템 구성서](../systems/twin.md)에 있습니다.
 - 캡처를 넣는 규칙은 [캡처 안내](../assets/screens/README.md), 사람 확인은 [캡처 대장](../assets/CAPTURE-LEDGER.md)에 있습니다.

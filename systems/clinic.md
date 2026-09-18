@@ -1,11 +1,11 @@
 # Clinic — 시스템 구성서
 
-> 기준 버전 **1.4.0** · 기준 커밋 `2b20a89b7c3a` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **1.4.0** · 기준 커밋 `2b20a89b7c3a` · 구현 상태 `통합` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(설치형은 공용 API · 인증 서버까지 필요합니다. 대신 운영 중인 공개 소개 페이지로 공급 형태와 화면 구성만 확인했습니다 · 2026-09-15)
 
 > **EN** — The hospital groupware: handover, duty rosters, ward status, medication, the surgery board and alerts in one screen set, drawing on data HIS sends and receiving approval requests from HIS. HIS connects to it with a **scoped API key** issued by Clinic — unlike the systems that verify a HIS token by public key, this key must be issued, stored and rotated separately. This chapter covers only the **hospital service** inside a repository that holds several services, plus the HIS integration API it needs. **It was not installed in the 2026-09 follow-along** (the installable form also needs the shared API and authentication components); only its public introduction page was read, to see the supply model and screen layout.
 
-Clinic 은 여러 서비스가 함께 든 저장소 안에 있습니다. 이 장은 그중 **병원 서비스**(병원 화면 패키지)와, 그 서비스가 HIS 와 주고받는 데 필요한 **HIS 연동 API** 만 다룹니다. 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/clinic.md)에 있습니다.
+Clinic 은 여러 서비스가 함께 든 저장소 안에 있습니다. 이 장은 그중 **병원 서비스**(병원 화면 패키지)와, 그 서비스가 HIS 와 주고받는 데 필요한 **HIS 연동 API** 만 다룹니다. 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/clinic.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -102,7 +102,7 @@ flowchart LR
 
 ## 7. 연동
 
-연결 상태는 [연결 상태](../RELEASES/draft/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
+연결 상태는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 가져왔습니다(코드 대조 · 2026-09-11 · 실제 호출 확인 전).
 
 **들어오는 연결 11 · 나가는 연결 8** — `구현·미검증` 14 · `미구현` 2 · `설계만` 1 · `중단` 1 · `판정 불가` 1
 
@@ -129,7 +129,7 @@ flowchart LR
 | Clinic → Jitsi | 회의 녹화 제어 · 녹화 스트림 · 회의 분석 | `중단` |
 
 - `판정 불가` 는 배포 구성(주소 · 앞단 프록시 등)에 따라 달라져 코드만으로 정할 수 없다는 뜻입니다.
-- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -151,11 +151,11 @@ flowchart LR
 | 병원 코드 가입은 기본적으로 승인 없이 합류합니다. 승인제는 병원을 등록할 때만 켤 수 있고, 이미 등록된 병원은 설정 값을 직접 넣어야 합니다 | 병원 등록 때 승인제 사용 여부를 정합니다 |
 | 병원 서비스는 다른 서비스와 한 저장소에 있어, HIS 연동 API · 인증 · 알림 같은 공용 부분은 이 서비스 버전과 따로 바뀝니다. 공용 부분의 변경 이력은 이 자료 범위 밖입니다 | 설치본을 커밋 해시로 고정하고, 업그레이드 때 공용 부분의 변경을 따로 확인합니다 |
 | 연결별 동작은 코드 대조까지만 판정했습니다. 생태계 자료의 새 설치본 따라가기(2026-09-14~15)에서 Clinic 은 **설치하지 않았습니다**(설치형이 공용 API 전체를 요구) — 화면 구성은 리허설 캡처와 운영 공개 소개 페이지로 파악했습니다 | 기관이 리허설(S7)에서 쓰는 연결마다 실제 호출해 `검증됨` 을 붙입니다 |
-| 소개 페이지 · 저장소 문서에 적힌 규모 수치 · 인증 표기는 이 자료의 계측 · 표기 규칙과 다를 수 있습니다 | 규모는 [매니페스트](../RELEASES/draft/manifest.md) · 계측 스냅샷을, 규제 표기는 이 자료의 3단계를 기준으로 봅니다 |
+| 소개 페이지 · 저장소 문서에 적힌 규모 수치 · 인증 표기는 이 자료의 계측 · 표기 규칙과 다를 수 있습니다 | 규모는 [매니페스트](../RELEASES/2026.09/manifest.md) · 계측 스냅샷을, 규제 표기는 이 자료의 3단계를 기준으로 봅니다 |
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
 - **소스 링크**: 정리 중
-- **저장소 라이선스 표기**: 독점 — [매니페스트](../RELEASES/draft/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
+- **저장소 라이선스 표기**: 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL 15 · pgvector 확장 이미지 · Redis(판본에 따라 약관이 다름)
 - **확인일**: 2026-09-11 — 기준 커밋 `2b20a89b7c3a` 의 병원 서비스 패키지 · HIS 연동 API 코드 · 설정 예시 · 릴리즈 기록을 읽어 작성했습니다

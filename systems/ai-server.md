@@ -1,11 +1,11 @@
 # AI Server — 시스템 구성서
 
-> 기준 버전 **2.125.41** · 기준 커밋 `55acaee90068` · 구현 상태 `통합` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **2.125.41** · 기준 커밋 `55acaee90068` · 구현 상태 `통합` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — One on-premise GPU server that carries the ecosystem's AI computation: it **assists** by drafting clinical documents, supporting symptom triage and drug-interaction (DUR) checks, answering questions over source documents (RAG), transcribing speech and drafting imaging findings — all exposed to other systems as APIs. twin and cerno keep no GPU of their own and call this server instead, so model loading and GPU sharing happen in one place. This chapter covers **only the medical functions** used in the hospital ecosystem. Status at the base commit is `통합` (integrated); in the 2026-09 follow-along the call paths were exercised with a small substitute model, so quality was not judged.
 
-이 장은 병원 생태계에 쓰이는 **의료 기능만** 다룹니다. 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/ai-server.md)에 있습니다.
+이 장은 병원 생태계에 쓰이는 **의료 기능만** 다룹니다. 이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/ai-server.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -123,7 +123,7 @@ flowchart LR
 
 ## 7. 연동
 
-연결 상태는 [연결 상태](../RELEASES/draft/compatibility.md)에서 가져왔습니다(코드 대조 2026-09-11). AI Server 는 **불리는 쪽**이며, 나가는 연결로 따로 판정된 것은 없습니다.
+연결 상태는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 가져왔습니다(코드 대조 2026-09-11). AI Server 는 **불리는 쪽**이며, 나가는 연결로 따로 판정된 것은 없습니다.
 
 따라가기(2026-09-15~16)에서 HIS · edu · ERP · PACS 가 AI Server 를 부르는 경로를 실제로 불러 봤지만, 한 연결이 기능 수십 개의 묶음이거나 자료 색인이 임베딩 모델을 요구해 **연결 전체를 확인하지는 못했습니다.** 그래서 상태는 모두 `구현·미검증` 으로 둡니다 — 어디까지 확인했는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에 있습니다.
 
@@ -146,7 +146,7 @@ flowchart LR
 | Jitsi → AI Server | 원격 상담 녹화 회의록 분석 | `중단` |
 | Jitsi → AI Server | 원격 상담 실시간 자막 · 자막 번역 | `중단` |
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 **부르는 쪽이 알아 둘 것** — 응답 버전 헤더 중 `X-API-Contract` 는 하위 호환이 깨질 때만 오릅니다. 비용이 큰 경로에는 호출 한도가 있어 초과하면 429 를 돌려주므로, 부르는 쪽은 기다렸다 다시 시도하게 만듭니다. 의료 데이터 카탈로그(`GET /api/medical/catalog`)에서 쓸 수 있는 데이터셋과 API 를 먼저 확인합니다.
 
@@ -181,6 +181,6 @@ flowchart LR
 ## 11. 소스 · 라이선스 표기 · 확인일
 
 - **소스 링크**: 정리 중
-- **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/draft/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
+- **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소 · 모델 약관**: [THIRD_PARTY.md](../THIRD_PARTY.md) — Ollama(MIT) · ChromaDB(Apache-2.0) · 모델 가중치(모델마다 별도 약관)
 - **확인일**: 2026-09-11 — 기준 커밋 `55acaee90068` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

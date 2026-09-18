@@ -1,6 +1,6 @@
 # 4. 환자 한 명의 여정
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [3. 계층 구조와 시스템 13](03-layers-and-systems.md) · 다음 → [5. 신원 · 신뢰 · 표준](05-identity-trust-standards.md)
 
 > **EN** — One patient's path — booking, reception, consultation, tests, imaging, reading and signature, payment and claim, results, teleconsultation — and **what is actually known about each boundary the information crosses**. Status is copied from the connection table, never restated here: most rows were judged by reading both sides' code at the base commit, and 27 of them were additionally called end to end between fresh installs and carry a `검증됨` (verified) date. The chapter names the points where an institution should keep a manual fallback ready, and closes by stating plainly what it does not cover.
@@ -11,7 +11,7 @@
 
 ## 먼저 알아 둘 것 — 상태를 읽는 법
 
-상태는 모두 [연결 상태](../RELEASES/draft/compatibility.md)(코드 대조 2026-09-11)에서 옮겼습니다. **판정 방법은 두 가지입니다** — 기본은 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조한 것이고, 그중 **27개는 새 설치본끼리 실제로 불러 확인해 `검증됨` 과 확인일을 붙였습니다**(2026-09-14~15 · [따라가 본 결과](../build-guide/follow-along-2026-09.md)).
+상태는 모두 [연결 상태](../RELEASES/2026.09/compatibility.md)(코드 대조 2026-09-11)에서 옮겼습니다. **판정 방법은 두 가지입니다** — 기본은 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조한 것이고, 그중 **27개는 새 설치본끼리 실제로 불러 확인해 `검증됨` 과 확인일을 붙였습니다**(2026-09-14~15 · [따라가 본 결과](../build-guide/follow-along-2026-09.md)).
 
 | 상태 | 뜻 |
 |---|---|
@@ -47,7 +47,7 @@
 | ⑪ | 결과 열람 | 환자 앱 → HIS · HIS → PACS | 결과 · 처방 · 수납 보기, 환자 본인 영상 · 판독 조회 | `구현·미검증` |
 | ⑫ | 원격 상담 | HIS 환자 포털 → Jitsi · 환자 앱 → Jitsi | 환자 화상 입장 | `중단` |
 
-근거: [환자 여정 스윔레인 「구간별 상태」](../diagrams/patient-journey.md#구간별-상태) · [연결 상태](../RELEASES/draft/compatibility.md)의 해당 행.
+근거: [환자 여정 스윔레인 「구간별 상태」](../diagrams/patient-journey.md#구간별-상태) · [연결 상태](../RELEASES/2026.09/compatibility.md)의 해당 행.
 
 ## 여정에 걸린 시스템 쌍 — 연결 표 전체로 보면
 
@@ -73,7 +73,7 @@
 | 구간 | 상황 | 준비할 것 |
 |---|---|---|
 | ⑨ 수납 · 청구 | 청구서 작성까지는 HIS 가 합니다. **대외 기관 청구 · 자격조회 전송 모듈은 구현돼 있지 않습니다** | 전송 모듈을 붙이거나 기존 청구 소프트웨어와 함께 씁니다([README](../README.md#지금-알고-시작해야-할-것)) |
-| ⑫ 원격 상담 | 연결이 `중단`입니다 | Jitsi 를 새로 구성한 뒤 연결을 다시 확인합니다([Jitsi 요약](../RELEASES/draft/systems/jitsi.md)) |
+| ⑫ 원격 상담 | 연결이 `중단`입니다 | Jitsi 를 새로 구성한 뒤 연결을 다시 확인합니다([Jitsi 요약](../RELEASES/2026.09/systems/jitsi.md)) |
 | ① 예약 · 본인확인 | 문자 발송 제공자가 등록돼 있지 않아 환자 본인확인 문자는 모의 발송입니다 | 문자 발송 제공자와 처리위탁 계약을 준비합니다([S2](../build-guide/S2-patient-access.md)) |
 | ④ · ⑥ 기존 장비 · 시스템 | HL7 v2 대체 경로 몇 개가 `미구현`입니다 | HL7 v2 만 쓰는 기존 장비 · 시스템을 붙이려면 연결 방식을 먼저 확인합니다([S3](../build-guide/S3-clinical-departments.md)) |
 | 전 구간 | `검증됨`인 연결이 27개 — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 | 리허설(S7)에서 가상 병원 데이터로 여정을 끝까지 돌려 연결마다 확인합니다([S7](../build-guide/S7-rehearsal.md)) |
@@ -81,7 +81,7 @@
 ## 이 장이 말하지 않는 것
 
 - **실제로 동작한다는 뜻이 아닙니다.** `구현·미검증`은 "양쪽 코드가 맞물려 있다"까지입니다. 실제 호출 판정은 1차 따라가기에서 27개에 붙였고(2026-09-14~15), 나머지는 기준 장비 · 사람 결정 · 미설치 시스템 · 담당 회신에 묶여 다음 차수로 남았습니다([따라가 본 결과](../build-guide/follow-along-2026-09.md) · [ROADMAP](../ROADMAP.md) P1).
-- **연결 표에 아직 싣지 않은 연결이 7개 있습니다.** 시스템 담당의 확인을 기다리는 연결입니다([연결 상태](../RELEASES/draft/compatibility.md)). 확인되면 표와 이 장이 함께 바뀝니다.
+- **연결 표에 아직 싣지 않은 연결이 7개 있습니다.** 시스템 담당의 확인을 기다리는 연결입니다([연결 상태](../RELEASES/2026.09/compatibility.md)). 확인되면 표와 이 장이 함께 바뀝니다.
 - 연결별 인증 · 교환 경로의 세부는 [연동 계약 지도](../integration/)에서 다룹니다 — 인증 세 방식(공개키 5 · 공유 비밀키 2 · API 키 1) · 개통 게이트 · **구축 시 연결 순서**.
 
 ---

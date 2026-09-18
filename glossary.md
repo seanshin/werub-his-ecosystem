@@ -4,9 +4,9 @@
 
 > **EN** — Terms used across these materials — interoperability standards (FHIR, SMART on FHIR, CDS Hooks, HL7 v2, DICOM, IHE), imaging, code systems (LOINC, SNOMED CT, KCD), trust and PKI (TSA, PAdES, hash chain), identity, AI, clinical and management terms — plus this repository's own status labels (`구현·미검증` implemented-but-unverified, `대응 설계` designed-for-compliance, and so on).
 
-이 자료에 나오는 표준 · 기술 · 임상 용어를 한 줄로 풉니다. **"이 생태계에서 쓰이는 곳"** 칸은 그 용어가 어느 시스템에 나오는지를 적은 것이며, 그 표준의 인증 · 적합성 · 준수를 뜻하지 않습니다. 연결별 구현 상태는 [연결 지도](diagrams/connections.md)와 [`compatibility.md`](RELEASES/draft/compatibility.md)에서 봅니다.
+이 자료에 나오는 표준 · 기술 · 임상 용어를 한 줄로 풉니다. **"이 생태계에서 쓰이는 곳"** 칸은 그 용어가 어느 시스템에 나오는지를 적은 것이며, 그 표준의 인증 · 적합성 · 준수를 뜻하지 않습니다. 연결별 구현 상태는 [연결 지도](diagrams/connections.md)와 [`compatibility.md`](RELEASES/2026.09/compatibility.md)에서 봅니다.
 
-- 근거: [README](README.md) · [통합 릴리즈 초안의 시스템별 요약](RELEASES/draft/systems/) · [`compatibility.md`](RELEASES/draft/compatibility.md) · [THIRD_PARTY.md](THIRD_PARTY.md) · [checklist/](checklist/) (모두 2026-09-11 기준)
+- 근거: [README](README.md) · [통합 릴리즈 초안의 시스템별 요약](RELEASES/2026.09/systems/) · [`compatibility.md`](RELEASES/2026.09/compatibility.md) · [THIRD_PARTY.md](THIRD_PARTY.md) · [checklist/](checklist/) (모두 2026-09-11 기준)
 - 뜻풀이는 일반적인 정의를 짧게 옮긴 것입니다. 정확한 정의는 각 표준 원문을 따릅니다.
 
 ## 1. 상호운용 표준
@@ -166,8 +166,8 @@
 | **폴백 · 산출 불가** | AI 나 계산이 없을 때 화면이 정상인 척하지 않고 대체값(폴백)이나 "산출 불가"로 표시하는 것 | HIS · 생태계 전반 |
 | **상시 감시자** | 데이터 정합성 · 파이프 생존 · 연동 계약 어긋남 · 흐름 완결성을 따로 지켜보는 프로세스 | HIS |
 | **국가 축** | 나라별 규칙 · 코드 · 언어를 담는 설정 축(현재 한국 · UAE) | HIS |
-| **구현 상태** | `개발` · `통합` · `파일럿` · `운영` 과 단계 밖의 `중단` · `확인 필요` | [통합 릴리즈 매니페스트](RELEASES/draft/manifest.md) |
-| **연동 상태** | `검증됨`(확인일 필수) · `구현·미검증` · `설계만` · `미구현` · `중단`, 그리고 코드만으로 정할 수 없는 `판정 불가` | [`compatibility.md`](RELEASES/draft/compatibility.md) · [도식](diagrams/) |
+| **구현 상태** | `개발` · `통합` · `파일럿` · `운영` 과 단계 밖의 `중단` · `확인 필요` | [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md) |
+| **연동 상태** | `검증됨`(확인일 필수) · `구현·미검증` · `설계만` · `미구현` · `중단`, 그리고 코드만으로 정할 수 없는 `판정 불가` | [`compatibility.md`](RELEASES/2026.09/compatibility.md) · [도식](diagrams/) |
 | **규제 표기** | `대응 설계` · `자체 점검 완료` · `외부 인증·승인`(증빙이 있을 때만). "인증 · 준수"는 셋째 단계에서만 씁니다 | 이 자료 전체([ROADMAP §6](ROADMAP.md#6-표기-원칙)) |
 | **통합 릴리즈 · 매니페스트** | 13개 시스템의 버전 조합을 한 장으로 고정한 것. 이 자료의 모든 설명은 그 조합을 기준으로 합니다 | [RELEASES/](RELEASES/) |
 | **DRY-RUN** | 실제로 바꾸지 않고 **바뀔 것이 무엇인지만 세어 보는 실행**. 결과는 기록에 남고 데이터는 그대로입니다 | HIS(파기 후보 집계) · 이 저장소의 생성기 `--check`(다시 만들어 비교만 함) |

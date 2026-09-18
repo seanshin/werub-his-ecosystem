@@ -104,4 +104,4 @@ HMAC-SHA256 이라는 점은 같지만 **세 가지가 연결마다 다릅니다
 | **AI Server 의 공통 오류 모양** | 확인하지 않았습니다 |
 | **담당 확인** | 🔴 전부 기준 커밋 코드를 읽은 것입니다. 각 시스템 담당의 확인을 받지 않았습니다 |
 
-이어지는 문서 — [연결 카드](cards/) · [연동 계약 지도](README.md) · [연결 상태 표](../RELEASES/draft/compatibility.md)
+이어지는 문서 — [연결 카드](cards/) · [연동 계약 지도](README.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md)

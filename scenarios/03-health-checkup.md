@@ -1,7 +1,7 @@
 # 시나리오 03 — 건강검진
 
-> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
-> 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
+> 🟡 **초안** — 화면 캡처 13 자리 중 ✅ 9 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 `검증됨` 으로 봅니다
+> 연결 상태: [연결 상태 표](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
 > **EN** — A person goes through a comprehensive health check at the demo hospital: browsing and booking the programme on the public website, completing the questionnaire in the app, following QR wayfinding between stations on the day, then the examining physician's overall assessment, an AI-drafted explanation that a person reviews before it is issued, the result report, and follow-up for anything needing a repeat test. Known gaps: results and repeat-test notices cannot be sent by SMS or app push (the SMS provider is a mock, app push does not receive, server-side push is off by default), and the route the AI explanation draft travels is not confirmed in the connection table. Screen translations are all AI drafts with no completed human review, and the patient app is Korean only. Screenshot slots: 13, of which 9 are complete and 1 shows the screen but not yet the exact moment; people appear by role only and all data is synthetic.
 
@@ -99,7 +99,7 @@ sequenceDiagram
 
 - 8: 검진 검사 항목이 일반 검사 오더와 같은 연결(FHIR 검사 오더)로 LIS 에 가는지는 새 설치본으로 따라가 보며 확인합니다. 연결 자체는 연결 상태 표에 `구현·미검증`으로 있습니다.
 - 3: 앱의 셀프 예약 기능 스위치(`portal.selfBooking`)는 기본 꺼짐입니다.
-- 17: 검진 결과서 PDF 의 참고치 · 판정 표시는 HIS v4.15.0 에서 바로잡았습니다([HIS 릴리즈 요약](../RELEASES/draft/systems/his.md)).
+- 17: 검진 결과서 PDF 의 참고치 · 판정 표시는 HIS v4.15.0 에서 바로잡았습니다([HIS 릴리즈 요약](../RELEASES/2026.09/systems/his.md)).
 
 ## 사람이 결정 · 승인하는 지점
 
@@ -137,7 +137,7 @@ sequenceDiagram
 | **분석 장비 → LIS 자동 수집**이 `미구현`입니다 | 연결 상태 표 | 결과 파일 입력 · 수기 입력 또는 인터페이스 중계 장치 |
 | **외국어 수검자** — 화면 번역은 모두 AI 초안이고 사람 검수를 마친 것이 없습니다. 환자 앱은 한국어뿐입니다 | README · [환자 앱 구성서 §10](../systems/patient-app.md#10-한계와-대체-수단) | 검수자를 지정해 번역 검수 흐름으로 확정합니다(결정 등록부 `i18n.reviewOwnership`) |
 | **청구 · 자격조회 같은 대외 기관 전송**이 구현돼 있지 않습니다 | README | 전송 모듈을 붙이거나 기존 청구 소프트웨어와 함께 씁니다 |
-| **실제 호출로 확인된 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지 `구현·미검증`은 코드가 맞물려 있다는 뜻입니다 | [연결 상태 표](../RELEASES/draft/compatibility.md) | 새 설치본으로 따라가 보며 `검증됨`과 확인일을 붙여 갑니다 |
+| **실제 호출로 확인된 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지 `구현·미검증`은 코드가 맞물려 있다는 뜻입니다 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) | 새 설치본으로 따라가 보며 `검증됨`과 확인일을 붙여 갑니다 |
 
 ## 화면 캡처 자리
 
@@ -163,4 +163,4 @@ sequenceDiagram
 
 ## 근거
 
-[연결 상태 표](../RELEASES/draft/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [ERP](../systems/erp.md) · [환자 앱](../systems/patient-app.md) · [공개 홈페이지](../systems/homepage.md) · 릴리즈 요약 [HIS](../RELEASES/draft/systems/his.md) · [환자 앱](../RELEASES/draft/systems/patient-app.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+[연결 상태 표](../RELEASES/2026.09/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [ERP](../systems/erp.md) · [환자 앱](../systems/patient-app.md) · [공개 홈페이지](../systems/homepage.md) · 릴리즈 요약 [HIS](../RELEASES/2026.09/systems/his.md) · [환자 앱](../RELEASES/2026.09/systems/patient-app.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)

@@ -1,11 +1,11 @@
 # edu — 시스템 구성서
 
-> 기준 버전 **2.7.0** · 기준 커밋 `f8127e6ee278` · 구현 상태 `확인 필요` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **2.7.0** · 기준 커밋 `f8127e6ee278` · 구현 상태 `확인 필요` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — Staff e-learning, statutory training management and electronic completion certificates. edu handles course delivery and the completion → record → certificate flow, while sign-in and staff roster come from HIS, certificate signing from sign, and AI features from the AI Server. Status at the base commit is `확인 필요` (needs confirmation) — whether it is in production has not been re-checked, and the repository's last release record and last commit are both from 2026-07-30. Its SSO, public-key lookup, roster and completion-record connections with HIS were verified by real calls in the 2026-09 follow-along.
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/edu.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/edu.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -116,7 +116,7 @@ flowchart LR
 
 ## 7. 연동
 
-연결 상태는 [연결 상태](../RELEASES/draft/compatibility.md)에서 가져왔습니다(코드 대조 2026-09-11 + 새 설치본끼리 실제 호출 2026-09-14~15).
+연결 상태는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 가져왔습니다(코드 대조 2026-09-11 + 새 설치본끼리 실제 호출 2026-09-14~15).
 
 **들어오는 연결 4 · 나가는 연결 8** — `검증됨` 6 · `구현·미검증` 5 · `미구현` 1. `검증됨` 6 은 HIS 와의 SSO · 공개키 조회 · 직원 명부 · 이수 기록, sign 과의 이수증 봉인 · 완료 통지입니다(확인일은 연결 상태 표).
 
@@ -136,7 +136,7 @@ flowchart LR
 | edu → AI Server | 학습 도우미(과정 자료 RAG) · 문항 생성 · 요약 · 번역 · 집체교육 녹취 분석 | `구현·미검증` |
 
 - 표에 없는 연결: 외부 콘텐츠 제공업체 → edu(xAPI) — 확인 중.
-- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+- 시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -169,6 +169,6 @@ flowchart LR
 ## 11. 소스 · 라이선스 표기 · 확인일
 
 - **소스 링크**: 정리 중
-- **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/draft/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
+- **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL 16 · Redis(판본에 따라 약관이 다름)
 - **확인일**: 2026-09-11 — 기준 커밋 `f8127e6ee278` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

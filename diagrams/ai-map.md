@@ -4,7 +4,7 @@
 
 > **EN** — Where AI is called from and what it is allowed to do. Every call goes to one AI Server inside the institution; each caller is shown with the task it asks for and whether a person must approve the result. AI **assists and drafts** — it does not diagnose or decide.
 
-근거: 호출 연결과 상태는 [`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md)(AI Server 가 들어간 쌍 · 판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · `local_only` · 모델 · GPU 는 [README 「AI 는 소비자용 GPU 한 장으로」](../README.md#ai-는-소비자용-gpu-한-장으로--rtx-508016gb)와 [AI Server 요약](../RELEASES/draft/systems/ai-server.md) · 모델 약관은 [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치)
+근거: 호출 연결과 상태는 [`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md)(AI Server 가 들어간 쌍 · 판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · `local_only` · 모델 · GPU 는 [README 「AI 는 소비자용 GPU 한 장으로」](../README.md#ai-는-소비자용-gpu-한-장으로--rtx-508016gb)와 [AI Server 요약](../RELEASES/2026.09/systems/ai-server.md) · 모델 약관은 [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치)
 
 ```mermaid
 flowchart LR

@@ -1,11 +1,11 @@
 # ERP — 시스템 구성서
 
-> 기준 버전 **1.287.3** · 기준 커밋 `0e1f54c5b902` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/draft/manifest.md) 기준
+> 기준 버전 **1.287.3** · 기준 커밋 `0e1f54c5b902` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · 새 설치본으로 한 번 따라가 봄(2026-09-13~16 · 개발 PC · GPU 없음 · 격리 네트워크 — [결과](../build-guide/follow-along-2026-09.md))
 
 > **EN** — The back-office ERP: financial accounting, costing, HR and payroll, purchasing and materials, front-desk settlement, insurance claims and tax, tied together on a single voucher ledger. The authoritative record for patients and encounters stays in HIS; ERP receives the settlement, claim, materials and HR events HIS sends and moves them into accounting. It is a FastAPI modular monolith with a Next.js web front end and two asynchronous workers (batch and integration) — the repository states it invests in consistency rather than a distributed design. Status at the base commit is `파일럿` (pilot).
 
-이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/draft/systems/erp.md)에 있습니다.
+이 버전에서 무엇이 바뀌었는지는 [릴리즈 요약](../RELEASES/2026.09/systems/erp.md)에 있습니다.
 
 ## 1. 정체성과 계층
 
@@ -81,7 +81,7 @@ flowchart LR
 | 항목 | 내용 | 근거 |
 |---|---|---|
 | 런타임 | core API · 작업자 Python 3.12, 웹 Node.js 22 · Next.js | 각 Dockerfile |
-| 데이터베이스 | PostgreSQL. 저장소 개발 compose 는 15 를 쓰고, HIS 와 같은 서버에 함께 올리는 배치는 HIS 의 DB 서버를 함께 씁니다. 마이그레이션(Alembic)은 기동할 때 적용되며, 확장 `btree_gist`(수가 기간 겹침 방지) · `pg_trgm`(약품명 검색)을 만듭니다 — DB 계정에 확장 생성 권한을 주거나 미리 만들어 둡니다 | compose · [릴리즈 요약](../RELEASES/draft/systems/erp.md) |
+| 데이터베이스 | PostgreSQL. 저장소 개발 compose 는 15 를 쓰고, HIS 와 같은 서버에 함께 올리는 배치는 HIS 의 DB 서버를 함께 씁니다. 마이그레이션(Alembic)은 기동할 때 적용되며, 확장 `btree_gist`(수가 기간 겹침 방지) · `pg_trgm`(약품명 검색)을 만듭니다 — DB 계정에 확장 생성 권한을 주거나 미리 만들어 둡니다 | compose · [릴리즈 요약](../RELEASES/2026.09/systems/erp.md) |
 | 캐시 | Redis 7 | compose 이미지 태그 |
 | GPU | 필요 없습니다. AI 보조는 AI Server 가 합니다 | — |
 | 문서 출력 | PDF 출력(WeasyPrint)은 운영체제 글꼴 · 렌더링 라이브러리가 필요합니다(컨테이너 이미지에는 들어 있음) | 릴리즈 요약 |
@@ -128,7 +128,7 @@ flowchart LR
 
 ## 7. 연동
 
-[연결 상태](../RELEASES/draft/compatibility.md)에서 ERP 가 한쪽 끝인 행을 그대로 옮겼습니다. 이 가운데 **9개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/draft/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+[연결 상태](../RELEASES/2026.09/compatibility.md)에서 ERP 가 한쪽 끝인 행을 그대로 옮겼습니다. 이 가운데 **9개**는 새 설치본끼리 실제로 호출해 `검증됨` 을 붙였습니다(2026-09-14~15). 무엇을 어떻게 확인했고 어떤 결함을 일부러 넣어 봤는지는 [따라가 본 결과](../build-guide/follow-along-2026-09.md)에, 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md) 표의 확인일 칸에 있습니다. 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 
 <!-- 연결 상태 표에서 옮긴 부분: 시작 -->
 
@@ -170,7 +170,7 @@ flowchart LR
 
 <!-- 연결 상태 표에서 옮긴 부분: 끝 -->
 
-시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/draft/compatibility.md)).
+시스템 담당 확인을 기다리는 연결은 이 장에 싣지 않았습니다([연결 상태](../RELEASES/2026.09/compatibility.md)).
 
 ## 8. 표준과 규제
 
@@ -201,7 +201,7 @@ flowchart LR
 | 항목 | 값 |
 |---|---|
 | 소스 링크 | 정리 중 |
-| 저장소 라이선스 표기 | 표기 없음 — 목표는 MIT, 정리 전([매니페스트](../RELEASES/draft/manifest.md)) |
+| 저장소 라이선스 표기 | 표기 없음 — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · Grafana · Metabase |
 | 기준 커밋 | `0e1f54c5b902` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 compose · 환경 변수 예시 · core 설정 모듈에서 **키 이름과 기본값의 성격만** 읽었습니다 |

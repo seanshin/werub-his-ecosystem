@@ -1,6 +1,6 @@
 # 2. 취지 8가지
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [1. 한 문장](01-one-sentence.md) · 다음 → [3. 계층 구조와 시스템 13](03-layers-and-systems.md)
 
 > **EN** — The eight design principles, each written with four things: what it means, where it shows up in the shipped product, what an institution **gains**, and what it **gives up** — a principle always costs something. The eight: AI assists while people decide; say where a value came from; do not pretend to know what you do not; one source of truth per fact; decisions a person must make belong on screen and in a registry; independent systems joined by standards; outbound transmission needs implementation plus configuration (off by default) plus approval; and development / rehearsal / real are separate modes. These were not designed up front — they came out of 108 core-HIS releases that kept teaching the difference between "built" and "works".
@@ -36,9 +36,9 @@
 
 **제품에서 보이는 곳**
 
-- HIS 의 **AI 제안 원장**이 제안의 생성 → 승인 · 수정 · 거부를 기록합니다. 모델 릴리즈 기록 · AI 호출 기록 · 환자를 지목한 AI 조회의 감사 기록도 남습니다([HIS 릴리즈 요약 §2](../RELEASES/draft/systems/his.md)).
+- HIS 의 **AI 제안 원장**이 제안의 생성 → 승인 · 수정 · 거부를 기록합니다. 모델 릴리즈 기록 · AI 호출 기록 · 환자를 지목한 AI 조회의 감사 기록도 남습니다([HIS 릴리즈 요약 §2](../RELEASES/2026.09/systems/his.md)).
 - 화면의 AI 표기는 공용 상수 하나(`AI(WeRU.B)`)로 통일돼 있고, 면책 문구를 함께 보여 줍니다.
-- twin 이 만든 위험 평가 · SBAR 초안은 의료진이 '차트 저장'을 눌러야 HIS 에 저장됩니다([연결 상태](../RELEASES/draft/compatibility.md) twin → HIS write-back · `구현·미검증`).
+- twin 이 만든 위험 평가 · SBAR 초안은 의료진이 '차트 저장'을 눌러야 HIS 에 저장됩니다([연결 상태](../RELEASES/2026.09/compatibility.md) twin → HIS write-back · `구현·미검증`).
 - 음성 기록 · 앰비언트 기록 · 환자 약 설명 같은 AI 기능은 기능마다 스위치가 있고, 기관 결정으로 하나씩 켭니다 → [6장](06-ai.md).
 
 **기관이 얻는 것** — AI 를 들여도 의료진과 기관의 책임 구조가 그대로입니다. 나중에 "이 기록은 AI 초안을 누가 승인한 것인가"를 되짚을 수 있습니다.
@@ -52,8 +52,8 @@
 **제품에서 보이는 곳**
 
 - AI 서버가 없거나 멈추면 그 칸을 "폴백" 또는 "산출 불가"로 표시합니다([HIS 구성서 §9](../systems/his.md)).
-- 시스템 설정 화면이 값의 출처를 **DB / 기본값 / 미설정**으로 구분해 보여 줍니다. "기본값"으로 표시되는 값은 아직 아무도 정하지 않은 값입니다([HIS 릴리즈 요약 §6](../RELEASES/draft/systems/his.md)).
-- 이 자료도 같은 원칙을 따릅니다. 저장소마다 태그 · 문서 · 코드의 버전 표기가 다르면 한쪽을 조용히 고르지 않고 매니페스트에 **어긋남**으로 적습니다([매니페스트 「읽는 법」](../RELEASES/draft/manifest.md#읽는-법)).
+- 시스템 설정 화면이 값의 출처를 **DB / 기본값 / 미설정**으로 구분해 보여 줍니다. "기본값"으로 표시되는 값은 아직 아무도 정하지 않은 값입니다([HIS 릴리즈 요약 §6](../RELEASES/2026.09/systems/his.md)).
+- 이 자료도 같은 원칙을 따릅니다. 저장소마다 태그 · 문서 · 코드의 버전 표기가 다르면 한쪽을 조용히 고르지 않고 매니페스트에 **어긋남**으로 적습니다([매니페스트 「읽는 법」](../RELEASES/2026.09/manifest.md#읽는-법)).
 
 **기관이 얻는 것** — 화면을 믿을 수 있습니다. AI 가 채운 칸과 사람이 적은 칸을 섞어 읽지 않습니다. 설정이 누군가 정한 값인지, 코드가 깔아 둔 값인지 구분할 수 있습니다.
 
@@ -162,7 +162,7 @@
 
 **기관이 얻는 것** — 한꺼번에 들이지 않아도 됩니다. 기존 PACS 나 촬영 장비를 그대로 두고 표준으로 연결하는 선택이 있습니다(검사 분석기 → LIS 자동 수집은 아직 `미구현`). 한 시스템을 바꿔도 나머지를 다시 짜지 않습니다.
 
-**기관이 감수하는 것** — 시스템이 여럿이면 연결도 많습니다. 기준 조합의 연결 표에는 방향 · 목적별로 113개 연결이 실려 있고, 표준 프로파일보다 전용 HTTPS REST(JSON) · 웹훅 연결이 많습니다([연결 상태](../RELEASES/draft/compatibility.md) · [표준 층](../diagrams/standards.md)). 연결마다 리허설에서 확인하는 일이 기관 몫으로 남습니다 → [8장](08-status-and-preparation.md).
+**기관이 감수하는 것** — 시스템이 여럿이면 연결도 많습니다. 기준 조합의 연결 표에는 방향 · 목적별로 113개 연결이 실려 있고, 표준 프로파일보다 전용 HTTPS REST(JSON) · 웹훅 연결이 많습니다([연결 상태](../RELEASES/2026.09/compatibility.md) · [표준 층](../diagrams/standards.md)). 연결마다 리허설에서 확인하는 일이 기관 몫으로 남습니다 → [8장](08-status-and-preparation.md).
 
 ## 7. 대외 발신은 세 조건
 

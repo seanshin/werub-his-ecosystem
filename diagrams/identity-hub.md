@@ -4,7 +4,7 @@
 
 > **EN** — Staff sign-in is issued in one place (the HIS) and verified by the sibling systems against its published keys. This diagram shows which system trusts which, by what token format, and where the shared-secret path is used instead.
 
-근거: [README 「지금 알고 시작해야 할 것」 — 로그인 방식](../README.md#지금-알고-시작해야-할-것) · [HIS 릴리즈 요약 §1](../RELEASES/draft/systems/his.md) · 방식 이름(RS256 · JWKS · HS256)은 각 시스템 요약([sign](../RELEASES/draft/systems/sign.md) · [PACS](../RELEASES/draft/systems/pacs.md) · [edu](../RELEASES/draft/systems/edu.md) · [twin](../RELEASES/draft/systems/twin.md) · [cerno](../RELEASES/draft/systems/cerno.md) · [ERP](../RELEASES/draft/systems/erp.md) · [Jitsi](../RELEASES/draft/systems/jitsi.md) · [Clinic](../RELEASES/draft/systems/clinic.md))
+근거: [README 「지금 알고 시작해야 할 것」 — 로그인 방식](../README.md#지금-알고-시작해야-할-것) · [HIS 릴리즈 요약 §1](../RELEASES/2026.09/systems/his.md) · 방식 이름(RS256 · JWKS · HS256)은 각 시스템 요약([sign](../RELEASES/2026.09/systems/sign.md) · [PACS](../RELEASES/2026.09/systems/pacs.md) · [edu](../RELEASES/2026.09/systems/edu.md) · [twin](../RELEASES/2026.09/systems/twin.md) · [cerno](../RELEASES/2026.09/systems/cerno.md) · [ERP](../RELEASES/2026.09/systems/erp.md) · [Jitsi](../RELEASES/2026.09/systems/jitsi.md) · [Clinic](../RELEASES/2026.09/systems/clinic.md))
 
 ```mermaid
 flowchart LR
@@ -50,5 +50,5 @@ flowchart LR
 | 공유 비밀키 | ERP · Jitsi | HIS 와 상대 시스템이 같은 비밀키를 갖고, 그 키로 서명 · 검증합니다(Jitsi 요약에는 HS256 으로 고정했다고 적혀 있습니다). 키를 양쪽에 같은 값으로 두고 함께 교체합니다 |
 | API 키 | Clinic | Clinic 이 범위를 지정한 API 키를 발급하고, HIS 가 그 키로 Clinic API 를 부릅니다 |
 
-- **입사부터 퇴사까지** — HIS 가 직원 정보의 정본이라, 입사 · 변경 · 퇴직이 HIS 에서 형제 시스템으로 전해집니다. 예를 들어 edu 는 HIS 의 직원 이벤트 웹훅을, Clinic 은 HIS 의 직원 일괄 등록을 받습니다. 각 연결의 상태는 [연결 지도](connections.md)와 [`compatibility.md`](../RELEASES/draft/compatibility.md)에서 봅니다.
+- **입사부터 퇴사까지** — HIS 가 직원 정보의 정본이라, 입사 · 변경 · 퇴직이 HIS 에서 형제 시스템으로 전해집니다. 예를 들어 edu 는 HIS 의 직원 이벤트 웹훅을, Clinic 은 HIS 의 직원 일괄 등록을 받습니다. 각 연결의 상태는 [연결 지도](connections.md)와 [`compatibility.md`](../RELEASES/2026.09/compatibility.md)에서 봅니다.
 - 이 도식은 README 수준의 구조만 그립니다. 연결별 세부(토큰 대상 · 교환 경로)는 연동 계약 지도([`integration/`](../integration/))에서 다룹니다.

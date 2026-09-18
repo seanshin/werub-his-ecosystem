@@ -6,7 +6,7 @@
  *
  * 대조하는 것
  *   1. 시스템 구성서(systems/<키>.md) 머리의 버전 · 기준 커밋 · 구현 상태 = 매니페스트
- *   2. 시스템 구성서 §7 연동 표의 (방향 · 상태) 묶음 = 연결 상태 표(RELEASES/draft/compatibility.md)에서 그 시스템이 걸린 행
+ *   2. 시스템 구성서 §7 연동 표의 (방향 · 상태) 묶음 = 연결 상태 표(RELEASES/2026.09/compatibility.md)에서 그 시스템이 걸린 행
  *      — 목적 문구는 장마다 요약해 쓸 수 있으므로 비교하지 않는다. 행이 빠지거나 상태가 바뀐 것을 잡는다.
  *
  * 종료 코드: 0 일치 · 1 불일치 · 2 도구 오류
@@ -48,8 +48,8 @@ function tally(list) { const m = new Map(); for (const r of list) m.set(key(r), 
 const problems = [];
 let checked = 0;
 try {
-  const manifest = JSON.parse(read('RELEASES/draft/manifest.json'));
-  const compat = rows(read('RELEASES/draft/compatibility.md'));
+  const manifest = JSON.parse(read('RELEASES/2026.09/manifest.json'));
+  const compat = rows(read('RELEASES/2026.09/compatibility.md'));
   if (!compat.length) throw new Error('연결 상태 표에서 행을 읽지 못했다');
 
   for (const [k, name] of Object.entries(NAME)) {

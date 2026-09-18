@@ -4,7 +4,7 @@
 
 > **EN** — The build path S0 → S8 as one picture, with the human decisions that gate each stage marked as hexagons. It shows what can be stood up independently and what has to wait for a decision rather than for code.
 
-근거: [README 「구축은 이렇게 진행됩니다」](../README.md#구축은-이렇게-진행됩니다) · [ROADMAP §4](../ROADMAP.md#4-구축-가이드의-단계-b) · 사람이 정할 것은 [결정 등록부 체크리스트](../checklist/decisions.md)(HIS v4.18.0 · 기준 커밋에서 추출)와 [sign 릴리즈 요약 §5](../RELEASES/draft/systems/sign.md)
+근거: [README 「구축은 이렇게 진행됩니다」](../README.md#구축은-이렇게-진행됩니다) · [ROADMAP §4](../ROADMAP.md#4-구축-가이드의-단계-b) · 사람이 정할 것은 [결정 등록부 체크리스트](../checklist/decisions.md)(HIS v4.18.0 · 기준 커밋에서 추출)와 [sign 릴리즈 요약 §5](../RELEASES/2026.09/systems/sign.md)
 
 ```mermaid
 flowchart TB
@@ -78,10 +78,10 @@ flowchart TB
 | S1 | 요양기관 종별(수가 단가를 정함) · 코드 마스터를 배포 기관에서 직접 받아 반입 | `billing.institutionType`(개시 전 필수) · [THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터) |
 | S2 | 환자 앱 알림의 적법 근거 · 문자 처리위탁 계약 · 환자 앱 스토어 배포 여부 | `legal.patientPush.consentScope` · `legal.sms.entrustment`(둘 다 개시 전 필수) · `mobile.appStoreRelease` |
 | S3 | 이미 쓰는 PACS 를 표준 프로토콜로 연결할지, 새로 세울지 | README 「최소한의 사양과 구현으로」 |
-| S4 | 공인 타임스탬프 기관 · HSM · 본인확인 사업자 계약, 전자서명 법적 효력 판단 | [sign 요약 §2 · §5](../RELEASES/draft/systems/sign.md) · README 「지금 알고 시작해야 할 것」 |
+| S4 | 공인 타임스탬프 기관 · HSM · 본인확인 사업자 계약, 전자서명 법적 효력 판단 | [sign 요약 §2 · §5](../RELEASES/2026.09/systems/sign.md) · README 「지금 알고 시작해야 할 것」 |
 | S5 | ERP 로 나가는 환자번호(MRN) 가명화 여부 | `legal.erpMrn.pseudonymization` |
 | S6 | SaMD 해당성 · 임상데이터 처리 경계 · 진료 음성 녹음 근거 → AI 임상 기능 범위 | `legal.ai.deviceClassification` · `legal.phiBoundary.gpuTier` · `legal.voiceRecording.basis` → `policy.ai.clinicalFeatureScope` |
 | S7 | 개시 전 필수 결정 11건 · Go-Live 개시 차단 항목 | [checklist/README](../checklist/README.md)(결정 등록부 개시 전 필수 11 · Go-Live 개시 차단 31) |
-| S8 | 리얼 전환 시점 · 키 파생 통일과 키 교체 시점 · sign 의 실운영 전환 준비(CA 새로 만들기 · 연동 키 교체) | README S8 · [HIS 요약 §6](../RELEASES/draft/systems/his.md)(개발 → 리허설 → 리얼) · [sign 요약 §6](../RELEASES/draft/systems/sign.md) · `security.keyDerivationUnify`(개시 전 필수) |
+| S8 | 리얼 전환 시점 · 키 파생 통일과 키 교체 시점 · sign 의 실운영 전환 준비(CA 새로 만들기 · 연동 키 교체) | README S8 · [HIS 요약 §6](../RELEASES/2026.09/systems/his.md)(개발 → 리허설 → 리얼) · [sign 요약 §6](../RELEASES/2026.09/systems/sign.md) · `security.keyDerivationUnify`(개시 전 필수) |
 
 키(`country.institutionProfile` 등)는 HIS 결정 등록부의 항목 이름입니다. 선택지와 결정권자는 [checklist/decisions.md](../checklist/decisions.md)에 있습니다.

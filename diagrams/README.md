@@ -8,7 +8,7 @@
 
 > 📷 도식마다 **「화면으로 보기」** 줄이 있습니다 — 그림으로 그린 구조가 실제 화면에서 어떻게 보이는지 [화면으로 보는 생태계](../screens/)로 이어집니다.
 
-> 🟡 **초안** — 도식의 상태 표기는 [통합 릴리즈 초안](../RELEASES/draft/)(2026-09-11)을 따릅니다. 실제 호출로 `검증됨`을 붙이는 일은 새 설치본으로 구축 절차를 따라가며 합니다([ROADMAP](../ROADMAP.md) P1).
+> 🟡 **초안** — 도식의 상태 표기는 [통합 릴리즈 초안](../RELEASES/2026.09/)(2026-09-11)을 따릅니다. 실제 호출로 `검증됨`을 붙이는 일은 새 설치본으로 구축 절차를 따라가며 합니다([ROADMAP](../ROADMAP.md) P1).
 
 | # | 도식 | 한 줄 | 만든 방법 | 상태 |
 |---|---|---|---|---|
@@ -24,7 +24,7 @@
 
 ## 도식을 고칠 때
 
-- **연결 지도(`connections.md`)는 직접 고치지 않습니다.** 연결 표([`RELEASES/draft/compatibility.md`](../RELEASES/draft/compatibility.md))에서 만듭니다.
+- **연결 지도(`connections.md`)는 직접 고치지 않습니다.** 연결 표([`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md))에서 만듭니다.
 
   ```sh
   node tools/build-diagrams.mjs          # 다시 만들기

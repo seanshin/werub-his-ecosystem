@@ -3,7 +3,7 @@
 # 새 설치본으로 따라가 본 결과
 **What a first follow-along install showed (2026-09-13 ~ 2026-09-16)**
 
-> [구축 가이드 목차](README.md) · [README 요약](../README.md#새-설치본으로-따라가-본-결과--요약) · 연결별 확인일은 [연결 상태](../RELEASES/draft/compatibility.md)
+> [구축 가이드 목차](README.md) · [README 요약](../README.md#새-설치본으로-따라가-본-결과--요약) · 연결별 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md)
 
 > **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **27 of 113 connections are now `검증됨` (verified)** with a date; 23 of them were also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, replays, mismatched targets). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
 
@@ -61,7 +61,7 @@
 | ERP → HIS 의료진 계약 서명 발의 | ERP 계약 → HIS 가 계약 문서 발급 · PDF 렌더 → sign 서명 요청 생성 → ERP 계약 "서명 요청됨" · 다시 요청해도 새 봉투 안 만듦 | 틀린 발의 키 → 401 | 2026-09-15 |
 | PACS → sign 조영제 동의서 환자 서명 | PACS 동의서 요청 → sign 환자 서명 포털 → 서명 완료 → PACS 상태 "완료" · 서명 · 타임스탬프 · 문서 무결성 검증 통과 | PACS 로그인 없음 → 401 · 본인확인 없이 서명 → 403 · 같은 링크로 두 번 서명 → 403 · 위조 링크 → 404 | 2026-09-15 |
 
-전체 표는 [연결 상태](../RELEASES/draft/compatibility.md)(확인일 칸)에 있습니다. 나머지 `구현·미검증` 61개는 **양쪽 코드가 맞물려 있다는 뜻이지 동작한다는 뜻이 아닙니다** — 기관이 [S7 리허설](S7-rehearsal.md)에서 쓰는 연결마다 같은 방식으로 확인합니다.
+전체 표는 [연결 상태](../RELEASES/2026.09/compatibility.md)(확인일 칸)에 있습니다. 나머지 `구현·미검증` 61개는 **양쪽 코드가 맞물려 있다는 뜻이지 동작한다는 뜻이 아닙니다** — 기관이 [S7 리허설](S7-rehearsal.md)에서 쓰는 연결마다 같은 방식으로 확인합니다.
 
 ### 좋았던 것 — 가드가 실제로 막았다
 

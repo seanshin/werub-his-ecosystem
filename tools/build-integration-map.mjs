@@ -5,7 +5,7 @@
  *   node tools/build-integration-map.mjs          # 다시 만들기
  *   node tools/build-integration-map.mjs --check  # 연결 상태 표와 같은지 확인만
  *
- * 입력  RELEASES/draft/compatibility.md
+ * 입력  RELEASES/2026.09/compatibility.md
  * 출력  integration/matrix.md
  *
  * 종료 코드: 0 일치 · 1 불일치(--check) · 2 도구 오류
@@ -15,7 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SRC = 'RELEASES/draft/compatibility.md';
+const SRC = 'RELEASES/2026.09/compatibility.md';
 const OUT = 'integration/matrix.md';
 const check = process.argv.includes('--check');
 
@@ -74,14 +74,14 @@ try {
   L.push('# 연동 매트릭스', '',
     '> **EN** — Generated matrix of every directed system pair and what it carries. Counts and dates come from the connection status table; this page only reshapes them.');
   L.push('');
-  L.push('> 자동 생성 — 손으로 고치지 않습니다. [연결 상태 표](../RELEASES/draft/compatibility.md)가 바뀌면 다시 만듭니다.');
+  L.push('> 자동 생성 — 손으로 고치지 않습니다. [연결 상태 표](../RELEASES/2026.09/compatibility.md)가 바뀌면 다시 만듭니다.');
   L.push('');
   L.push('연결을 **시스템 쌍** · **프로토콜** 두 축으로 다시 셉니다. 각 연결의 방향 · 목적 · 프로토콜 · 상태는 연결 상태 표에 있고, 여기서는 **어디에 무엇이 몰려 있는지**를 봅니다.');
   L.push('');
   L.push(`| 기준 | 값 |`);
   L.push('|---|---|');
   const nv = count(all, '검증됨');
-  L.push(`| 원본 | [연결 상태 표](../RELEASES/draft/compatibility.md)(코드 대조 2026-09-11${nv ? ` · 새 설치본 실호출 확인 ${nv}` : ' · 실제 호출 확인 없음'}) |`);
+  L.push(`| 원본 | [연결 상태 표](../RELEASES/2026.09/compatibility.md)(코드 대조 2026-09-11${nv ? ` · 새 설치본 실호출 확인 ${nv}` : ' · 실제 호출 확인 없음'}) |`);
   L.push(`| 실은 연결 | ${all.length} |`);
   L.push(`| 시스템 쌍 | ${pairs.length} |`);
   L.push('');

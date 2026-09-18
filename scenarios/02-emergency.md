@@ -1,7 +1,7 @@
 # 시나리오 02 — 응급
 
-> 🟡 **초안** — 화면 캡처 9 자리 중 ✅ 8 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
-> 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
+> 🟡 **초안** — 화면 캡처 9 자리 중 ✅ 8 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 `검증됨` 으로 봅니다
+> 연결 상태: [연결 상태 표](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
 > **EN** — An unconscious patient arrives by ambulance at the demo hospital: registration before the identity is known, triage assistance, urgent labs and imaging, a critical lab value and a critical imaging finding, a Code Blue, transfusion, then transfer or admission. Because emergency care turns on **time and alerting**, this walkthrough tracks which connection each alert travels over and marks the ones the connection table cannot confirm. 🔴 **None of the connections in this scenario have been verified by real calls** — whether an alert arrives in time cannot be established by reading code, so it is left for a rehearsal. Screenshot slots: 9, of which 8 are complete and 1 shows the screen but not yet the exact moment; people appear by role only and all data is synthetic.
 
@@ -152,7 +152,7 @@ sequenceDiagram
 | **다른 기관으로의 전원 전송**(25)이 연결 상태 표에 없습니다. 감염병 신고 같은 대외 기관 전송은 구현돼 있지 않습니다(LIS 의 법정감염병 신고는 기록까지) | README · [LIS 구성서 §8](../systems/lis.md#8-표준과-규제) | 전원 서류는 기관의 기존 절차로 보냅니다 |
 | **문자 발송**이 모의 발송입니다 — 보호자에게 문자로 알릴 수 없습니다 | README | 문자 발송 제공자를 연동합니다 |
 | **영상 AI 사전판독** — HIS 사용 매뉴얼상 "사용 불가"입니다 | [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) | 판독은 PACS 의 판독 흐름으로 합니다 |
-| **실제 호출로 확인된 연결이 없습니다** — 응급에서 알림이 제시간에 가는지는 코드 대조로 알 수 없습니다 | [연결 상태 표](../RELEASES/draft/compatibility.md) | 리허설(구축 단계 S7)에서 가상 환자로 알림 경로를 끝까지 따라가 봅니다 |
+| **실제 호출로 확인된 연결이 없습니다** — 응급에서 알림이 제시간에 가는지는 코드 대조로 알 수 없습니다 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) | 리허설(구축 단계 S7)에서 가상 환자로 알림 경로를 끝까지 따라가 봅니다 |
 
 ## 화면 캡처 자리
 
@@ -174,4 +174,4 @@ sequenceDiagram
 
 ## 근거
 
-[연결 상태 표](../RELEASES/draft/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [Clinic](../systems/clinic.md) · [AI Server](../systems/ai-server.md) · 릴리즈 요약 [HIS](../RELEASES/draft/systems/his.md) · [AI Server](../RELEASES/draft/systems/ai-server.md) · [PACS](../RELEASES/draft/systems/pacs.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+[연결 상태 표](../RELEASES/2026.09/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [Clinic](../systems/clinic.md) · [AI Server](../systems/ai-server.md) · 릴리즈 요약 [HIS](../RELEASES/2026.09/systems/his.md) · [AI Server](../RELEASES/2026.09/systems/ai-server.md) · [PACS](../RELEASES/2026.09/systems/pacs.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)

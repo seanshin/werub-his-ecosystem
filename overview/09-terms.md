@@ -1,6 +1,6 @@
 # 9. 제공 조건 — MIT · 의료 면책 · MIT 가 덮지 않는 것
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md) · 다음 → [10. 다음 읽을 것](10-next.md)
 
 > **EN** — What you may do with this, in three layers: ① **this repository is MIT**; ② the ecosystem's own code is **intended** to be MIT, but the individual source repositories have not finished sorting out their licence statements; ③ **MIT does not cover** the third-party servers, modified third-party code, AI model weights and national code masters the ecosystem runs alongside — each carries its own terms. The medical disclaimer is summarised in five points, beginning with **this is not a medical device in any jurisdiction** and **conformity assessment and regulatory approval are the deploying institution's responsibility**. 🔴 This chapter is not a legal review: it repeats licence names, what the upstream text itself says, and where to find it — nothing further.
@@ -32,7 +32,7 @@ MIT 는 "있는 그대로(AS IS) · 무보증"으로 제공하고, 사본에 저
 | 독점 · UNLICENSED 혼재 | LIS |
 | 표기 없음 | ERP · twin · cerno · Jitsi |
 
-근거: [매니페스트](../RELEASES/draft/manifest.md) 「저장소 라이선스 표기」 칸(계측일 2026-09-11 · 한 저장소에 표기가 여럿이면 매니페스트는 모두 적습니다). 각 시스템의 소스 링크도 아직 "정리 중"입니다. **소스를 받을 때는 그 저장소에 적힌 표기를 확인하세요.** 표기가 정리되는 대로 매니페스트를 갱신합니다.
+근거: [매니페스트](../RELEASES/2026.09/manifest.md) 「저장소 라이선스 표기」 칸(계측일 2026-09-11 · 한 저장소에 표기가 여럿이면 매니페스트는 모두 적습니다). 각 시스템의 소스 링크도 아직 "정리 중"입니다. **소스를 받을 때는 그 저장소에 적힌 표기를 확인하세요.** 표기가 정리되는 대로 매니페스트를 갱신합니다.
 
 ## 의료 면책 — 다섯 가지
 

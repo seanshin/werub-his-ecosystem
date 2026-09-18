@@ -1,6 +1,6 @@
 # 3. 계층 구조와 시스템 13
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [2. 취지 8가지](02-principles.md) · 다음 → [4. 환자 한 명의 여정](04-patient-journey.md)
 
 > **EN** — The thirteen systems arranged in **seven layers**, with the core HIS in the middle holding the source of truth for patients, encounters, orders and billing, and issuing the staff login token the others verify. For each system: a one-line definition, the version its repository declares at the base commit, and how far it is implemented — `운영` in production use, `통합` integrated, `파일럿` pilot, `개발` in development, `중단` discontinued. Each layer also says **what happens if you do not build it**, because layers are meant to be added one at a time rather than all at once. Scale figures are read from a measured snapshot of the base commits (2026-09-11), not copied from repository READMEs.
@@ -84,7 +84,7 @@ flowchart TB
 | ⑦ 협업·교육 | **edu** | 직원 이러닝 · 법정교육 · 전자 이수증 | `2.7.0` | `확인 필요` — 운영 여부 재확인 전 | [edu.md](../systems/edu.md) |
 | ⑦ 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | `1.0.0` | `중단` — 현재 설치본이 동작하지 않음 · 구축 기관은 새로 구성 | [jitsi.md](../systems/jitsi.md) |
 
-버전 · 구현 상태: [통합 릴리즈 초안 매니페스트](../RELEASES/draft/manifest.md)(계측일 2026-09-11). 공개 홈페이지와 환자 앱은 HIS 저장소 안에서 HIS 와 함께 릴리즈되므로 버전이 같습니다. 태그 · 문서의 버전 표기가 정본과 다른 저장소가 여럿 있으니, 소스를 받을 때는 매니페스트의 **정본 버전과 기준 커밋**을 기준으로 삼습니다 → [8장](08-status-and-preparation.md).
+버전 · 구현 상태: [통합 릴리즈 초안 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11). 공개 홈페이지와 환자 앱은 HIS 저장소 안에서 HIS 와 함께 릴리즈되므로 버전이 같습니다. 태그 · 문서의 버전 표기가 정본과 다른 저장소가 여럿 있으니, 소스를 받을 때는 매니페스트의 **정본 버전과 기준 커밋**을 기준으로 삼습니다 → [8장](08-status-and-preparation.md).
 
 ## 계층마다 맡는 일
 

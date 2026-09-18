@@ -1,7 +1,7 @@
 # AI Server 화면
 
 > 🟡 **초안 — 캡처 넣는 중** · [화면 소개 목차](README.md) · [AI Server 시스템 구성서](../systems/ai-server.md)
-> 계층 AI · 버전 `2.125.41` · 구현 상태 `통합` — 의료 기능 기준 · 화면 관리 화면(계측값 없음) · 기준: [통합 릴리즈 초안](../RELEASES/draft/manifest.md)(계측일 2026-09-11)
+> 계층 AI · 버전 `2.125.41` · 구현 상태 `통합` — 의료 기능 기준 · 화면 관리 화면(계측값 없음) · 기준: [통합 릴리즈 초안](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
 
 > **EN** — The on-premise AI server that every other system calls. Callers ask for a **role name** (summarise, classify, DUR, retrieval, speech) rather than a model name, and a role-to-model routing table picks the model; the AI here **assists and drafts**, it does not decide. The capture slots below cover the admin dashboard (loaded models and VRAM), the routing table, time-of-day operating profiles, and quality measurement — **none are filled yet**. Admin screens can expose hosts, ports, model file paths and tokens, so those are masked before publication ([capture rules](../assets/screens/README.md)).
 
@@ -24,6 +24,6 @@
 
 🔴 관리 화면에는 **호스트 · 포트 · 모델 파일 경로 · 토큰**이 보일 수 있습니다. 캡처 전에 가립니다. GPU 모델명(RTX 5080)은 이미 공개한 사실이라 그대로 두어도 됩니다.
 
-- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/draft/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
+- 이 시스템이 다른 시스템과 실제로 맞물리는지는 [연결 상태](../RELEASES/2026.09/compatibility.md)에서 봅니다 — 어떤 연결이 `검증됨` 이고 언제 확인했는지는 그 표의 **상태 칸 · 확인일 칸**에 있습니다(합계도 그 표 한 곳에만 둡니다). 나머지 `구현·미검증` 은 "양쪽 코드가 맞물려 있다"는 뜻이지 동작한다는 뜻이 아닙니다.
 - 설치 요구사항 · 주요 설정 · 한계는 [AI Server 시스템 구성서](../systems/ai-server.md)에 있습니다.
 - 캡처를 넣는 규칙은 [캡처 안내](../assets/screens/README.md), 사람 확인은 [캡처 대장](../assets/CAPTURE-LEDGER.md)에 있습니다.

@@ -1,6 +1,6 @@
 # 7. 구축은 이렇게 진행된다
 
-> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/draft 매니페스트](../RELEASES/draft/manifest.md)
+> 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md) · 다음 → [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md)
 
 > **EN** — Building runs in **nine stages, S0 (preparation) through S8 (cutover to real operation)**. It does not invent a new process: it walks the management screens the HIS already has — opening-stage registry, Go-Live console, decision registry, safety gates, outbound-transmission console, the standing watcher, system settings — in stage order. Each stage lists what gets done, the decisions a person must make there, and how many registry items it carries (56 decisions, 60 opening items and 60 Go-Live items in total). Progress is tracked by three checklists rather than by prose, and the chapter is explicit that the walkthrough behind it was done once, on one developer machine.

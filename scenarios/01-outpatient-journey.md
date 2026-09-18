@@ -1,7 +1,7 @@
 # 시나리오 01 — 외래 환자 한 명의 여정
 
-> 🟡 **초안** — 화면 캡처 17 자리 중 ✅ 10 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/draft/compatibility.md)의 `검증됨` 으로 봅니다
-> 연결 상태: [연결 상태 표](../RELEASES/draft/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
+> 🟡 **초안** — 화면 캡처 17 자리 중 ✅ 10 · 🟡 3(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 `검증됨` 으로 봅니다
+> 연결 상태: [연결 상태 표](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
 > **EN** — One outpatient's path through the demo hospital, from booking to a follow-up teleconsultation: reception, consultation with AI assistance, blood tests via the LIS, a contrast CT via PACS, the radiologist's signature through sign, consent, payment and claim preparation in the ERP, then results read in the patient portal. Every step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI **assists** rather than decides. Several things here do not work yet — eligibility checks and external claim transmission, video consultation (the current Jitsi install is discontinued), automatic analyser-to-LIS result capture, and SMS delivery, whose provider is still a mock. Screenshot slots: 17, of which 10 are complete and 3 show the screen but not yet the exact moment. People appear by role only and all data is synthetic.
 
@@ -169,7 +169,7 @@ sequenceDiagram
 | **문자 발송** — 제공자가 등록돼 있지 않아 본인확인 문자가 모의 발송입니다. sign 의 본인확인 사업자 · 문자 사업자도 모의입니다 | README · [sign 구성서 §10](../systems/sign.md#10-한계와-대체-수단) | 기관이 계약해 연결합니다. 동의서 서명 방식(13)은 그에 맞춰 정합니다 |
 | **영상 AI 사전판독** — HIS 사용 매뉴얼상 "사용 불가"입니다 | [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) | 판독은 PACS 의 판독 흐름(17 ~ 19)으로 합니다 |
 | **오더세트 금기 조건**이 자동으로 평가되지 않고 "금기 수동 확인"으로 표시됩니다 | [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) | 처방(6) 때 사람이 확인합니다 |
-| **실제 호출로 확인된 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지 `구현·미검증`은 코드가 맞물려 있다는 뜻입니다 | [연결 상태 표](../RELEASES/draft/compatibility.md) | 새 설치본으로 따라가 보며 `검증됨`과 확인일을 붙여 갑니다 |
+| **실제 호출로 확인된 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 — 나머지 `구현·미검증`은 코드가 맞물려 있다는 뜻입니다 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) | 새 설치본으로 따라가 보며 `검증됨`과 확인일을 붙여 갑니다 |
 
 ## 화면 캡처 자리
 
@@ -199,4 +199,4 @@ sequenceDiagram
 
 ## 근거
 
-[연결 상태 표](../RELEASES/draft/compatibility.md) · [환자 여정 스윔레인](../diagrams/patient-journey.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [ERP](../systems/erp.md) · [AI Server](../systems/ai-server.md) · [환자 앱](../systems/patient-app.md) · [공개 홈페이지](../systems/homepage.md) · [Jitsi](../systems/jitsi.md) · [HIS 릴리즈 요약](../RELEASES/draft/systems/his.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+[연결 상태 표](../RELEASES/2026.09/compatibility.md) · [환자 여정 스윔레인](../diagrams/patient-journey.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [ERP](../systems/erp.md) · [AI Server](../systems/ai-server.md) · [환자 앱](../systems/patient-app.md) · [공개 홈페이지](../systems/homepage.md) · [Jitsi](../systems/jitsi.md) · [HIS 릴리즈 요약](../RELEASES/2026.09/systems/his.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
