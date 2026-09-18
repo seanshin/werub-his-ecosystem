@@ -180,7 +180,7 @@ flowchart LR
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
-- **소스 링크**: 정리 중
+- **소스 링크**: [seanshin/WeRUBLLMManager](https://github.com/seanshin/WeRUBLLMManager) — 공개 예정(정리가 끝나는 대로 열립니다 · 주소는 바뀌지 않습니다)
 - **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소 · 모델 약관**: [THIRD_PARTY.md](../THIRD_PARTY.md) — Ollama(MIT) · ChromaDB(Apache-2.0) · 모델 가중치(모델마다 별도 약관)
 - **확인일**: 2026-09-11 — 기준 커밋 `55acaee90068` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

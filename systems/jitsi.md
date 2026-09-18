@@ -159,7 +159,7 @@ flowchart LR
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
-- **소스 링크**: 정리 중
+- **소스 링크**: [seanshin/hospital-jitsi](https://github.com/seanshin/hospital-jitsi) — 공개 예정(정리가 끝나는 대로 열립니다 · 주소는 바뀌지 않습니다)
 - **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — Jitsi Meet · Jicofo · Videobridge · Jibri · Jigasi(Apache-2.0) · Prosody(MIT) · coturn(BSD-3-Clause) · Prometheus(Apache-2.0) · Grafana(AGPL-3.0-only)
 - **확인일**: 2026-09-11 — 기준 커밋 `0984fbec7177` 의 설정 예시 · 구성 파일 · 저장소 문서를 읽어 작성했습니다

@@ -155,7 +155,7 @@ flowchart LR
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
-- **소스 링크**: 정리 중
+- **소스 링크**: [weruby-co-kr/WeRUB](https://github.com/weruby-co-kr/WeRUB) — 공개 예정(정리가 끝나는 대로 열립니다 · 주소는 바뀌지 않습니다)
 - **저장소 라이선스 표기**: 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL 15 · pgvector 확장 이미지 · Redis(판본에 따라 약관이 다름)
 - **확인일**: 2026-09-11 — 기준 커밋 `2b20a89b7c3a` 의 병원 서비스 패키지 · HIS 연동 API 코드 · 설정 예시 · 릴리즈 기록을 읽어 작성했습니다

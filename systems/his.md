@@ -354,7 +354,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | 정리 중 |
+| 소스 링크 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) — 공개 예정(정리가 끝나는 대로 열립니다 · 주소는 바뀌지 않습니다) |
 | 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · nginx · browserless · Prometheus · Grafana |
 | 기준 커밋 | `e9d303984f80` (2026-09-11 · [`data/base-commits.json`](../data/base-commits.json)) |

@@ -186,20 +186,22 @@
 
 | 계층 · Layer | 시스템 · System | 한 줄 정의 · In one line | 소스 · Source |
 |---|---|---|---|
-| 코어 | **Hospital RUN (HIS)** | 외래·입원·수술·응급·검사·약제·검진·경영지원 통합 HIS · 생태계의 신원 허브 | 정리 중 |
-| 환자 접점 | 공개 홈페이지 · 환자 앱 | 예약·결과 열람·동의·문진 | 정리 중 |
-| 임상 부서 | **LIS** | 진단검사·미생물·병리·수혈·유전체 검사정보시스템 | 정리 중 |
-| 임상 부서 | **PACS** | 웹 PACS — 영상 서버·뷰어·판독 워크플로·AI 연동 | 정리 중 |
-| 신뢰 | **sign** | 자체 PKI·RFC 3161 타임스탬프·PAdES-LTA 전자서명 | 정리 중 |
-| 경영 | **ERP** | 재무회계·원가·인사급여·자재·보험청구·세무 | 정리 중 |
-| AI | **AI Server** | 온프레미스 GPU 통합 AI — 의료 분류·요약·DUR·RAG·음성 인식 보조 | 정리 중 |
-| AI | **cerno** | 의료진별 개인화 임상 AI(근거가 없으면 생성하지 않는 RAG) | 정리 중 |
-| AI | **twin** | 디지털 트윈 — 위험 점수 카드·SBAR·시뮬레이션 | 정리 중 |
-| 협업·교육 | **Clinic** | 병원 그룹웨어 — 인수인계·근무표·알림·결재 | 정리 중 |
-| 협업·교육 | **edu** | 직원 이러닝·법정교육·전자 이수증 | 정리 중 |
-| 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | 정리 중 |
+| 코어 | **Hospital RUN (HIS)** | 외래·입원·수술·응급·검사·약제·검진·경영지원 통합 HIS · 생태계의 신원 허브 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) |
+| 환자 접점 | 공개 홈페이지 · 환자 앱 | 예약·결과 열람·동의·문진 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) (HIS 와 같은 저장소) |
+| 임상 부서 | **LIS** | 진단검사·미생물·병리·수혈·유전체 검사정보시스템 | [seanshin/lis](https://github.com/seanshin/lis) |
+| 임상 부서 | **PACS** | 웹 PACS — 영상 서버·뷰어·판독 워크플로·AI 연동 | [seanshin/openpacs](https://github.com/seanshin/openpacs) |
+| 신뢰 | **sign** | 자체 PKI·RFC 3161 타임스탬프·PAdES-LTA 전자서명 | [seanshin/sign](https://github.com/seanshin/sign) |
+| 경영 | **ERP** | 재무회계·원가·인사급여·자재·보험청구·세무 | [seanshin/hospital-erp](https://github.com/seanshin/hospital-erp) |
+| AI | **AI Server** | 온프레미스 GPU 통합 AI — 의료 분류·요약·DUR·RAG·음성 인식 보조 | [seanshin/WeRUBLLMManager](https://github.com/seanshin/WeRUBLLMManager) |
+| AI | **cerno** | 의료진별 개인화 임상 AI(근거가 없으면 생성하지 않는 RAG) | [seanshin/cerno](https://github.com/seanshin/cerno) |
+| AI | **twin** | 디지털 트윈 — 위험 점수 카드·SBAR·시뮬레이션 | [seanshin/medical-digital-twin](https://github.com/seanshin/medical-digital-twin) |
+| 협업·교육 | **Clinic** | 병원 그룹웨어 — 인수인계·근무표·알림·결재 | [weruby-co-kr/WeRUB](https://github.com/weruby-co-kr/WeRUB) |
+| 협업·교육 | **edu** | 직원 이러닝·법정교육·전자 이수증 | [seanshin/edu](https://github.com/seanshin/edu) |
+| 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | [seanshin/hospital-jitsi](https://github.com/seanshin/hospital-jitsi) |
 
-> **EN** — A core HIS at the center (also the ecosystem's **identity hub**), with patient-facing, clinical-department, trust, management, AI, and collaboration/education layers around it. "정리 중" in the Source column means the source link is still being settled.
+> **EN** — A core HIS at the center (also the ecosystem's **identity hub**), with patient-facing, clinical-department, trust, management, AI, and collaboration/education layers around it. The Source column gives each repository's final address. **All of them are to be made public**, one at a time as each project finishes its clean-up — until then a link will not open, and the address will not change. See [Getting the source](SOURCES.md).
+
+🟢 **소스 칸의 주소는 확정된 것입니다.** 저장소는 **모두 공개할 예정**이고 각 프로젝트의 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 링크는 눌러도 열리지 않지만 **주소는 바뀌지 않습니다**. 받는 법과 기준 커밋은 [소스 받기](SOURCES.md)에 있습니다.
 
 버전·규모·구현 상태는 첫 [통합 릴리즈](RELEASES/)에서 매니페스트로 고정해 싣습니다. 이 자료의 모든 수치에는 **값 · 센 방법 · 계측일**을 함께 적습니다.
 
