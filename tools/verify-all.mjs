@@ -32,6 +32,8 @@ const CHECKS = [
   ['연결 카드 = 연결 기록 · 연결 상태 표', 'build-connection-cards.mjs', ['--check']],
   ['한 / 영 혼용 검사기 자기 검증', 'check-bilingual.mjs', ['--self-test']],
   ['문서마다 영문 요약이 있는가', 'check-bilingual.mjs', []],
+  ['내부 문구 누출 검사기 자기 검증', 'check-internal-leak.mjs', ['--self-test']],
+  ['공개 문서 = 내부 서술과 겹치지 않는가', 'check-internal-leak.mjs', []],
   ['링크 검사기 자기 검증', 'check-links.mjs', ['--self-test']],
   ['문서 링크 = 실제 파일 · 제목', 'check-links.mjs', []],
   ['릴리즈 자르기 도구 자기 검증', 'cut-release.mjs', ['--self-test']],

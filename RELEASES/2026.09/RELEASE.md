@@ -78,5 +78,5 @@ node tools/build-connection-cards.mjs # 연결 카드 48장
 node tools/build-sources.mjs          # 소스 받기 안내
 node tools/list-install-defaults.mjs  # 바꿔야 할 코드 기본값 목록
 node tools/count-releases.mjs         # 릴리즈 기록 계수
-node tools/verify-all.mjs             # 발행 전 검사 24개 — 전부 통과해야 올립니다
+node tools/verify-all.mjs             # 발행 전 검사 26개 — 전부 통과해야 올립니다
 ```
