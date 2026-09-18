@@ -74,9 +74,9 @@ function build() {
   L.push('');
   L.push('**Getting the source**');
   L.push('');
-  L.push('> **EN** — Each system lives in its own repository. This page maps the thirteen systems to their repositories, pins the **base commit** every number in these materials was read from, and names the file to open first. Repositories are being made public one at a time; until a given one is, its link will not open.');
+  L.push('> **EN** — Each system lives in its own repository. This page maps the thirteen systems to their repositories, pins the **base commit** every number in these materials was read from, and names the file to open first. **All of them are to be made public**, one at a time as each project finishes its clean-up; until a given one is, its link will not open. An open repository does not mean an MIT licence \u2014 each repository states its own, and they currently differ (\u00a72).');
   L.push('');
-  L.push('> 🔴 **저장소는 하나씩 공개되는 중입니다.** 아직 열리지 않은 주소는 눌러도 열리지 않습니다 — 접근 권한이 없다는 뜻이고, **이 안내는 열리는 순간 그대로 동작합니다**(주소도 커밋도 바뀌지 않습니다).');
+  L.push('> 🟢 **위 저장소는 모두 공개할 예정입니다.** 각 프로젝트의 정리가 끝나는 대로 **하나씩** 열립니다. 아직 열리지 않은 주소는 눌러도 열리지 않습니다 — 접근 권한이 없다는 뜻이고, **이 안내는 열리는 순간 그대로 동작합니다**(주소도 커밋도 바뀌지 않습니다).\n>\n> 🔴 **열린 저장소라고 라이선스가 MIT 라는 뜻은 아닙니다** — 저장소마다 표기가 다릅니다(§2).');
   L.push('');
   L.push('이 자료의 모든 수치 · 화면 · 연결 상태는 아래 **기준 커밋**에서 읽은 것입니다. 같은 것을 보려면 그 커밋을 받으십시오 — 최신 커밋은 이 자료보다 앞서 있을 수 있습니다.');
   L.push('');
