@@ -17,6 +17,7 @@
 | 동의서 | [동의서 전자서명](detail/consent-signature.md) · [간호 안내](../clinicians/nursing.md) |
 | 비상 열람(BTG) | [비상 열람](detail/emergency-access.md) · [진료하는 사람을 위한 안내 §5](../clinicians/README.md#5-내가-승인해야-하는-것--내-이름이-남는-곳) · [용어집](../glossary.md) |
 | 감사 기록 · 해시체인 | [오더 서명 봉인](detail/order-signature.md) · [개요서 5장](../overview/05-identity-trust-standards.md) |
+| 보유 기간 · 파기 · 보존명령 | 🔴 [보유·파기](detail/retention.md) — 세기는 하고 지우지는 않습니다 |
 
 ## 검사 · 영상
 
@@ -29,6 +30,7 @@
 | 수혈 · 교차시험 · ABO | [수혈 안전](detail/transfusion-safety.md) |
 | 유전체 · 이차 소견 | [이차 소견 게이트](detail/secondary-findings-gate.md) |
 | 병리 · 사인아웃 · 개정 | [병리 2단계 사인아웃](detail/pathology-signout.md) |
+| 환자에게 영상 주기 · CD | [환자에게 자기 영상을 주는 길](detail/patient-imaging-export.md) — 🔴 CD·USB 경로는 없습니다 |
 | 블록 · 슬라이드 · 디지털 슬라이드(WSI) | [병리 2단계 사인아웃](detail/pathology-signout.md) |
 | 검사코드 카탈로그 · 매핑 | [카탈로그 반입](detail/lab-code-catalog.md) · [전제와 파급 §1](dependencies.md) |
 | 장비 연결(ASTM · 결과 파일) | [전제와 파급 §3](dependencies.md) · [LIS 구성서 §10](../systems/lis.md) |
