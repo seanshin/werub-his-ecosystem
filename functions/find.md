@@ -18,6 +18,9 @@
 | 비상 열람(BTG) | [비상 열람](detail/emergency-access.md) · [진료하는 사람을 위한 안내 §5](../clinicians/README.md#5-내가-승인해야-하는-것--내-이름이-남는-곳) · [용어집](../glossary.md) |
 | 감사 기록 · 해시체인 | [오더 서명 봉인](detail/order-signature.md) · [개요서 5장](../overview/05-identity-trust-standards.md) |
 | 보유 기간 · 파기 · 보존명령 | 🔴 [보유·파기](detail/retention.md) — 세기는 하고 지우지는 않습니다 |
+| 미비기록 · 의무기록 완결도 | [미비기록](detail/incomplete-records.md) · [HIS 화면](../screens/his.md) |
+| 퇴원요약 · 미서명 차트 | [미비기록 §2](detail/incomplete-records.md) |
+| 상병(진단) 미입력 · 청구 삭감 | 🔴 [미비기록 §2](detail/incomplete-records.md) — 서명이 청구 방아쇠입니다 |
 
 ## 검사 · 영상
 
