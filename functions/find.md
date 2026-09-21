@@ -28,6 +28,8 @@
 | 위험치(critical value) | [위험치 폐루프](detail/critical-value.md) |
 | 수혈 · 교차시험 · ABO | [수혈 안전](detail/transfusion-safety.md) |
 | 유전체 · 이차 소견 | [이차 소견 게이트](detail/secondary-findings-gate.md) |
+| 병리 · 사인아웃 · 개정 | [병리 2단계 사인아웃](detail/pathology-signout.md) |
+| 블록 · 슬라이드 · 디지털 슬라이드(WSI) | [병리 2단계 사인아웃](detail/pathology-signout.md) |
 | 검사코드 카탈로그 · 매핑 | [카탈로그 반입](detail/lab-code-catalog.md) · [전제와 파급 §1](dependencies.md) |
 | 장비 연결(ASTM · 결과 파일) | [전제와 파급 §3](dependencies.md) · [LIS 구성서 §10](../systems/lis.md) |
 | 워크리스트(MWL) · 촬영 | [영상 안내](../clinicians/radiology.md) · [PACS 구성서](../systems/pacs.md) |
@@ -39,7 +41,8 @@
 | 낱말 | 어디를 보나 |
 |---|---|
 | DUR · 약물 상호작용 | [약제 안내](../clinicians/pharmacy.md) · [업무별 지도 §3](README.md#3-약과-물류) |
-| 마약류 수불 | [약제 안내](../clinicians/pharmacy.md) · [ERP 구성서](../systems/erp.md) |
+| 마약류 수불 | [마약류 수불 원장](detail/narcotics-ledger.md) · [약제 안내](../clinicians/pharmacy.md) · [ERP 구성서](../systems/erp.md) |
+| 법정 취급보고(마약류) | 🔴 [마약류 수불 원장 §2](detail/narcotics-ledger.md) — 전송은 `미구현`, 사람이 올리고 접수번호를 적습니다 |
 | 보험코드 매핑 | [약제 안내](../clinicians/pharmacy.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md) |
 | 수납 · 진료비 계산서 | [업무별 지도 §4](README.md#4-돈과-운영) |
 | 청구 · 대외 전송 | 🔴 [전제와 파급 §3](dependencies.md) — 전송은 `미구현`, 대체 수단이 있습니다 |
