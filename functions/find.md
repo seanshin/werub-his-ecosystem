@@ -21,6 +21,10 @@
 | 미비기록 · 의무기록 완결도 | [미비기록](detail/incomplete-records.md) · [HIS 화면](../screens/his.md) |
 | 퇴원요약 · 미서명 차트 | [미비기록 §2](detail/incomplete-records.md) |
 | 상병(진단) 미입력 · 청구 삭감 | 🔴 [미비기록 §2](detail/incomplete-records.md) — 서명이 청구 방아쇠입니다 |
+| 손위생 준수율 · WHO 다섯 순간 | [감염관리 §2](detail/infection-control.md) — 🔴 관측 0건이면 「산출 불가」 |
+| 격리 환자 수 · 접촉주의 | [감염관리 §2](detail/infection-control.md) — 네 출처를 환자 단위로 합칩니다 |
+| 법정감염병 신고 · 국가 감시체계 보고 | 🔴 [감염관리 §2](detail/infection-control.md) — 자동 전송은 `미구현`, 수기 보고입니다 |
+| 직원 노출 사고(자상 · 체액) | [감염관리 §2](detail/infection-control.md) — 0 은 「사고 없음」이 아닙니다 |
 
 ## 검사 · 영상
 
