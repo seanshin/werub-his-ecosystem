@@ -25,6 +25,8 @@
 | 격리 환자 수 · 접촉주의 | [감염관리 §2](detail/infection-control.md) — 네 출처를 환자 단위로 합칩니다 |
 | 법정감염병 신고 · 국가 감시체계 보고 | 🔴 [감염관리 §2](detail/infection-control.md) — 자동 전송은 `미구현`, 수기 보고입니다 |
 | 직원 노출 사고(자상 · 체액) | [감염관리 §2](detail/infection-control.md) — 0 은 「사고 없음」이 아닙니다 |
+| 안전 게이트 · 끔 · 경고 · 차단 | [안전 게이트](detail/safety-gates.md) · [S7](../build-guide/S7-rehearsal.md) |
+| 「위반 0건」을 읽는 법 · 평가 모집단 | 🔴 [안전 게이트 §2](detail/safety-gates.md) — 분모가 없으면 준수가 아닙니다 |
 
 ## 검사 · 영상
 
