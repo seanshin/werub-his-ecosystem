@@ -15,7 +15,7 @@
 | 진료 기록 초안(음성 · 대화) | [AI 초안 승인](detail/ai-draft-approval.md) · [개요서 6장](../overview/06-ai.md) |
 | 전자서명 | [동의서 전자서명](detail/consent-signature.md) · [sign 구성서](../systems/sign.md) · [신뢰의 사슬](../diagrams/trust-chain.md) |
 | 동의서 | [동의서 전자서명](detail/consent-signature.md) · [간호 안내](../clinicians/nursing.md) |
-| 비상 열람(BTG) | [진료하는 사람을 위한 안내 §5](../clinicians/README.md#5-내가-승인해야-하는-것--내-이름이-남는-곳) · [용어집](../glossary.md) |
+| 비상 열람(BTG) | [비상 열람](detail/emergency-access.md) · [진료하는 사람을 위한 안내 §5](../clinicians/README.md#5-내가-승인해야-하는-것--내-이름이-남는-곳) · [용어집](../glossary.md) |
 | 감사 기록 · 해시체인 | [오더 서명 봉인](detail/order-signature.md) · [개요서 5장](../overview/05-identity-trust-standards.md) |
 
 ## 검사 · 영상
