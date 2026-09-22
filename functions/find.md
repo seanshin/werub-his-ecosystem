@@ -50,6 +50,9 @@
 | 멸균 · 기구 세트 · BI/CI 지표 | [재고 · 장비 · 멸균 §2](detail/supply-equipment-sterile.md) |
 | 격리 · 강박 · 법정 최대시간 | [격리·강박과 비자의입원](detail/seclusion-restraint.md) |
 | 비자의입원 · 입원적합성심사 · 계속입원심사 | [격리·강박과 비자의입원 §2](detail/seclusion-restraint.md) — 기한 **전에** 알립니다 |
+| 조기경고 점수 · 활력징후 | 🔴 [환자 상태 점수](detail/clinical-scores.md) — 일곱이 다 있어야 냅니다 |
+| 중증도 점수(중환자실) | 🔴 [환자 상태 점수 §2](detail/clinical-scores.md) — **부분 산정**입니다 |
+| 낙상 위험도 | [환자 상태 점수 §2](detail/clinical-scores.md) — 등급은 서버가 점수에서 파생합니다 |
 
 ## 검사 · 영상
 

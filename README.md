@@ -327,7 +327,7 @@
 | [`SOURCES.md`](SOURCES.md) | **소스 받기** — 시스템 13 → 저장소 11 · 기준 커밋 · 받은 뒤 처음 여는 파일 · 저장소에 없는 것 | 🟢 생성물(주소 · 커밋 · 파일 존재를 기계로 대조) |
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~16) · 남은 확인 필요 22곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
-| [`functions/`](functions/) | **업무별 기능 지도** + [주요 기능 상세 28편](functions/detail/) · [전제와 파급](functions/dependencies.md) · [찾아보기](functions/find.md) — 시스템이 아니라 **하는 일**로 묶은 색인(외래 · 병동 · 검사 · 영상 · 약제 · 원무 · 질·안전 · AI · 교육 · 개원). 구성서 §4 를 업무로 다시 꿴 것 | 🟡 초안 |
+| [`functions/`](functions/) | **업무별 기능 지도** + [주요 기능 상세 29편](functions/detail/) · [전제와 파급](functions/dependencies.md) · [찾아보기](functions/find.md) — 시스템이 아니라 **하는 일**로 묶은 색인(외래 · 병동 · 검사 · 영상 · 약제 · 원무 · 질·안전 · AI · 교육 · 개원). 구성서 §4 를 업무로 다시 꿴 것 | 🟡 초안 |
 | [`clinicians/`](clinicians/) | **진료하는 사람을 위한 안내** — 공통 + 직역 5(의사 · 간호 · 임상병리 · 영상 · 약제). AI 가 하지 않는 일 · 시스템이 일부러 막는 것 · 내가 승인할 것 · 안 될 때의 대체 | 🟡 초안 |
 | [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · **[연결 카드 48장](integration/cards/)** · **[공통 규약](integration/contracts.md)**(오류 봉투 · 서명 대상 · 멱등 · 재시도) · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 27 / 113 |
 | [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안 · 캡처 자리 52 중 **44**(✅ 36 · 🟡 8) · 응급 시나리오는 9/9 |

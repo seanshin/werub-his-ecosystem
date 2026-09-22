@@ -20,7 +20,7 @@
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
 | **외래 진료** | HIS(진료 45항목) · AI Server · cerno · twin | 접수 · 진료 · 오더 · 처방 · 기록(음성·대화 **초안**) · 근거 질의 · 위험 점수 카드 | [HIS §4](../systems/his.md#4-핵심-기능) · [화면](../screens/his.md) · [의사 안내](../clinicians/physician.md) |
-| **입원 · 병동 간호** | HIS · Clinic | 입퇴원(**퇴원 게이트**) · 활력 · 조기경고 · **투약 시행(바코드 대조 · 2인 확인)** · 인수인계 · 병동 동선 | [투약](detail/medication-administration.md) · [퇴원 게이트](detail/discharge-gate.md) · [HIS §4](../systems/his.md#4-핵심-기능) · [Clinic §4](../systems/clinic.md#4-핵심-기능) · [간호 안내](../clinicians/nursing.md) |
+| **입원 · 병동 간호** | HIS · Clinic | 입퇴원(**퇴원 게이트**) · 활력 · **조기경고 점수** · **투약 시행(바코드 대조 · 2인 확인)** · 인수인계 · 병동 동선 | [투약](detail/medication-administration.md) · [퇴원 게이트](detail/discharge-gate.md) · [환자 상태 점수](detail/clinical-scores.md) · [HIS §4](../systems/his.md#4-핵심-기능) · [Clinic §4](../systems/clinic.md#4-핵심-기능) · [간호 안내](../clinicians/nursing.md) |
 | **수술 · 마취 · 중환자** | HIS(수술/중환자 6묶음) | 수술 일정 · 기록 · 중환자 관리 · **세 단계 체크리스트 · 좌우 판정 · 계수 대조** | [수술 안전](detail/surgery-safety.md) · [HIS 메뉴](../systems/his-domains.md) · [화면](../screens/his.md) |
 | **특수 치료** | HIS | 재활 · **방사선종양(계획 승인 · 분할 · 누적선량)** · 항암 사이클 · 투석 · 장기이식 | [방사선 치료](detail/radiation-therapy.md) · [화면](../screens/his.md) |
 | **정신건강** | HIS | 비자의입원 법정 기한 · 격리·강박 **법정 최대시간**·연장·관찰 | [격리·강박과 비자의입원](detail/seclusion-restraint.md) · [화면](../screens/his.md) |
