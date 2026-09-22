@@ -76,7 +76,7 @@
 
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
-| **교육 · 법정교육** | edu · sign | 과정 · 이수 · **전자 이수증 봉인** · 미이수 독촉 | [edu §4](../systems/edu.md#4-핵심-기능) |
+| **교육 · 법정교육** | edu · sign · HIS | 과정 · 이수 · **전자 이수증 봉인** · 미이수 독촉 · **HIS 자격·교육 원장 기록** | [직원 자격·교육](detail/staff-credentials.md) · [edu §4](../systems/edu.md#4-핵심-기능) |
 | **협업 · 결재** | Clinic | 인수인계 · 알림 · 채널 · 전자결재(W.Sign) · 근무표 | [Clinic §4](../systems/clinic.md#4-핵심-기능) |
 | **원격 상담** | Jitsi | 화상 진료 · 녹화 — 🔴 현재 설치본 `중단` | [Jitsi 구성서](../systems/jitsi.md) |
 

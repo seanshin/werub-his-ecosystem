@@ -36,6 +36,8 @@
 | 검체 접수 · 거부 사유 · 라벨 | [검체](detail/specimen-lifecycle.md) |
 | 용혈 · 황달 · 지질혈(HIL) · 재채취 | 🔴 [검체 §2](detail/specimen-lifecycle.md) — 표는 **스타터 규칙**이고 재채취는 사람이 정합니다 |
 | 검사 장비 연결(ASTM · CSV) | 🔴 [검체 §2](detail/specimen-lifecycle.md) — 저수준 전송은 `미구현`, 중계가 필요합니다 |
+| 면허 · 자격 등록 · 만료 | [직원 자격·교육](detail/staff-credentials.md) — 🔴 면허 원장이 **둘**입니다 |
+| 법정교육 이수 · 재이수 기한 | [직원 자격·교육 §2](detail/staff-credentials.md) — 기한 없는 기록을 따로 셉니다 |
 
 ## 검사 · 영상
 
