@@ -38,6 +38,8 @@
 | 검사 장비 연결(ASTM · CSV) | 🔴 [검체 §2](detail/specimen-lifecycle.md) — 저수준 전송은 `미구현`, 중계가 필요합니다 |
 | 면허 · 자격 등록 · 만료 | [직원 자격·교육](detail/staff-credentials.md) — 🔴 면허 원장이 **둘**입니다 |
 | 법정교육 이수 · 재이수 기한 | [직원 자격·교육 §2](detail/staff-credentials.md) — 기한 없는 기록을 따로 셉니다 |
+| 퇴원 · 퇴원요약 · 수납 잔액 | [퇴원 게이트](detail/discharge-gate.md) — 기준 커밋 기본은 **꺼짐**입니다 |
+| 전원 · 사망 퇴원 | 🔴 [퇴원 게이트 §2](detail/discharge-gate.md) — **면제**이고, 면제도 기록에 남습니다 |
 
 ## 검사 · 영상
 
