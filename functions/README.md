@@ -59,6 +59,7 @@
 | **전자서명 · 위변조 증거** | sign | 자체 PKI · 타임스탬프 · PAdES-LTA · 감사 이벤트 **봉인** · 검증 주소 | [sign §4](../systems/sign.md#4-핵심-기능) |
 | **감사 · 기록 보존** | 전 시스템 | 해시체인 · 변경 차단 · 보존 기간 정책 · 비상 열람 기록 | [비상 열람](detail/emergency-access.md) · 🔴 [보유·파기](detail/retention.md)(세기만 합니다) · [개요서 5장](../overview/05-identity-trust-standards.md) |
 | **의무기록 완결도** | HIS | 퇴원요약 · 미서명 진료·간호기록 · 🔴 **상병 미입력** 을 기한과 함께 세고 책임자에게 독촉 | [미비기록](detail/incomplete-records.md) · [화면](../screens/his.md) |
+| **위원회 · 정책 의결** | HIS | 위원회 9 · 안건 → 정족수 → 의결 번호 → **집행(배선함)** · 🔴 파기 실행은 바인딩 제외 | [위원회 의결](detail/governance-enactment.md) · [사람 결정 체크리스트](../checklist/decisions.md) |
 | **신원 · 권한** | HIS(신원 허브) | 토큰 발급 · 형제 시스템 검증(공개키 5 · 공유 비밀 2 · API 키 1) · 역할 · 단계 상승 | [신원 허브 도식](../diagrams/identity-hub.md) |
 
 ## 6. AI

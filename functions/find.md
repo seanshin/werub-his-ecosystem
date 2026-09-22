@@ -40,6 +40,9 @@
 | 법정교육 이수 · 재이수 기한 | [직원 자격·교육 §2](detail/staff-credentials.md) — 기한 없는 기록을 따로 셉니다 |
 | 퇴원 · 퇴원요약 · 수납 잔액 | [퇴원 게이트](detail/discharge-gate.md) — 기준 커밋 기본은 **꺼짐**입니다 |
 | 전원 · 사망 퇴원 | 🔴 [퇴원 게이트 §2](detail/discharge-gate.md) — **면제**이고, 면제도 기록에 남습니다 |
+| 위원회 · 의결 · 정족수 | [위원회 의결](detail/governance-enactment.md) |
+| 「의결 근거 없음」 · 「거버넌스 미등재」 | 🔴 [위원회 의결 §2](detail/governance-enactment.md) — **다른 두 상태**입니다 |
+| 정책 설정을 누가 바꾸나 | [위원회 의결 §2](detail/governance-enactment.md) · [사람 결정 체크리스트](../checklist/decisions.md) |
 
 ## 검사 · 영상
 
