@@ -45,6 +45,9 @@
 | 정책 설정을 누가 바꾸나 | [위원회 의결 §2](detail/governance-enactment.md) · [사람 결정 체크리스트](../checklist/decisions.md) |
 | 방사선 치료 계획 · 분할 · 누적선량 | [방사선 치료](detail/radiation-therapy.md) |
 | 셋업 검증(IGRT) | 🔴 [방사선 치료 §2](detail/radiation-therapy.md) — 기준 커밋 기본은 **꺼짐**입니다 |
+| 재고 불출 · 만료 · 리콜 LOT | 🔴 [재고 · 장비 · 멸균](detail/supply-equipment-sterile.md) — 만료품은 **모드와 무관하게** 막습니다 |
+| 장비 사용일지 · 교정 기한 | [재고 · 장비 · 멸균 §2](detail/supply-equipment-sterile.md) |
+| 멸균 · 기구 세트 · BI/CI 지표 | [재고 · 장비 · 멸균 §2](detail/supply-equipment-sterile.md) |
 
 ## 검사 · 영상
 
