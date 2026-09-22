@@ -97,10 +97,14 @@ function truth() {
     }
   }
 
+  // 🔴 기능 상세(F2) 편수 — 편이 늘 때마다 인용한 곳이 묵는다. 파일을 세어 고정한다(README.md 는 목차라 뺀다).
+  const detailArticles = fs.readdirSync(path.join(ROOT, 'functions/detail'))
+    .filter((f) => f.endsWith('.md') && f !== 'README.md').length;
+
   // 발표 덱 내용 슬라이드 수 — `## ` 가 내용 슬라이드, `# ` 는 장 표지다
   const deckSlides = read('deck/slides.md').split('\n').filter((l) => l.startsWith('## ')).length;
 
-  return { verified: count('검증됨'), impl: count('구현·미검증'), total: rows.length, fault, checked: vrows.length, pairs, deckSlides, pending };
+  return { verified: count('검증됨'), impl: count('구현·미검증'), total: rows.length, fault, checked: vrows.length, pairs, deckSlides, pending, detailArticles };
 }
 
 function walk(dir, out = []) {
@@ -183,6 +187,30 @@ function check(T) {
           if (claimed !== T.pending) problems.push(`${at} — \`확인 필요(따라가기)\` 표시 수: 문서 ${claimed} · 실제 ${T.pending}`);
         }
       }
+      // 🔴 기능 상세 편수 — 「주요 기능 상세 31편」 류. 파일 수가 정본이다.
+      for (const m of line.matchAll(/기능\s*상세\s*\**\s*(\d+)\s*\**\s*편/g)) {
+        if (Number(m[1]) !== T.detailArticles) problems.push(`${at} — 기능 상세 편수: 문서 ${m[1]} · 실제 ${T.detailArticles}`);
+      }
+      for (const m of line.matchAll(/(\d+)\s*(?:편|articles?)\s*(?:written\s*)?in\s*detail/gi)) {
+        if (Number(m[1]) !== T.detailArticles) problems.push(`${at} — EN 기능 상세 편수: 문서 ${m[1]} · 실제 ${T.detailArticles}`);
+      }
+      // 🔴 2026-09-22: **영문 요약의 계수 표현**을 어느 규칙도 보지 않고 있었다.
+      //    `build-guide/README.md` 의 EN 요약이 `60 such marks` 로 몇 차례 전 값을 그대로 달고 있었는데
+      //    규칙이 한국어 `N곳` 모양만 봐서 초록이 나왔다. 한/영 혼용을 적용한 이상 **영문도 같은 수를 말한다**.
+      for (const m of line.matchAll(/(\d+)\s+such\s+marks/gi)) {
+        if (Number(m[1]) !== T.pending) problems.push(`${at} — EN 「N such marks」: 문서 ${m[1]} · 실제 ${T.pending}`);
+      }
+      for (const m of line.matchAll(/(\d+)\s+connections?\s+were\s+driven\s+end\s+to\s+end/gi)) {
+        if (Number(m[1]) !== T.verified) problems.push(`${at} — EN 실제 호출로 확인한 연결 수: 문서 ${m[1]} · 원본 ${T.verified}`);
+      }
+      for (const m of line.matchAll(/(\d+)\s+of\s+them\s+were\s+also\s+re-tested/gi)) {
+        if (Number(m[1]) !== T.fault) problems.push(`${at} — EN 결함 재주입 수: 문서 ${m[1]} · 원본 ${T.fault}`);
+      }
+      // 영문 과장 — 확인 수와 결함 재주입 수가 다르면 "all" 로 묶을 수 없다(「each one」 을 고친 자리와 같은 모양)
+      if (T.fault !== T.verified && new RegExp(`\\ball\\s+(?:${T.verified}\\s+)?of\\s+them\\b`, 'i').test(line)
+          && /re-tested|tampered|forged|replayed/i.test(line)) {
+        problems.push(`${at} — EN: 확인 ${T.verified}개 중 결함 재주입은 ${T.fault}개인데 "all" 로 적었습니다`);
+      }
       // 덱 내용 슬라이드 수
       for (const m of line.matchAll(/(?:내용\s*슬라이드|덱)\s*\**\s*(\d+)\s*\**\s*장/g)) {
         if (Number(m[1]) !== T.deckSlides) problems.push(`${at} — 덱 내용 슬라이드 수: 문서 ${m[1]} · 실제 ${T.deckSlides}`);
@@ -217,10 +245,26 @@ if (process.argv.includes('--self-test')) {
     if (run(bad).length !== 1) fails.push('화살표만 쓴 옛 값을 잡지 못합니다');
     if (run(good).length !== 0) fails.push('맞는 값을 틀렸다고 합니다');
   }
+  if (!(T.detailArticles > 0)) fails.push('기능 상세 편수를 세지 못했습니다');
+  {
+    const runD = (l) => { const p = [];
+      for (const m of l.matchAll(/기능\s*상세\s*\**\s*(\d+)\s*\**\s*편/g)) if (Number(m[1]) !== T.detailArticles) p.push('x');
+      return p; };
+    if (runD(`주요 기능 상세 ${T.detailArticles - 4}편`).length !== 1) fails.push('기능 상세 옛 편수를 잡지 못합니다');
+    if (runD(`주요 기능 상세 ${T.detailArticles}편`).length !== 0) fails.push('기능 상세 맞는 편수를 틀렸다고 합니다');
+  }
+  // 🔴 영문 계수 표현을 잡는지 — 2026-09-22 에 실제로 놓쳤던 모양(`60 such marks`)
+  {
+    const runEn = (l) => { const p = [];
+      for (const m of l.matchAll(/(\d+)\s+such\s+marks/gi)) if (Number(m[1]) !== T.pending) p.push('x');
+      return p; };
+    if (runEn(`rather than invented steps (${T.pending + 41} such marks; what remains`).length !== 1) fails.push('EN 「N such marks」 옛 값을 잡지 못합니다');
+    if (runEn(`rather than invented steps (${T.pending} such marks; what remains`).length !== 0) fails.push('EN 「N such marks」 맞는 값을 틀렸다고 합니다');
+  }
   const real = check(T);
-  console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장 · 확인 필요 표시 ${T.pending}곳`);
+  console.log(`자기 검증 — 원본: 검증됨 ${T.verified} · 구현·미검증 ${T.impl} · 실은 연결 ${T.total} · 결함 재주입 ${T.fault} · 쌍 ${T.pairs.size} · 덱 ${T.deckSlides}장 · 확인 필요 표시 ${T.pending}곳 · 기능 상세 ${T.detailArticles}편`);
   if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-  console.log(`  ✓ 규칙 7개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
+  console.log(`  ✓ 규칙 9개 통과 · 현재 문서에서 찾은 불일치 ${real.length}건`);
   process.exit(0);
 }
 
