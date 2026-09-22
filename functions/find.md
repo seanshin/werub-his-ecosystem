@@ -33,6 +33,9 @@
 | 투약 시행 · 5 Rights | [투약](detail/medication-administration.md) |
 | 바코드 투약(BCMA) · 손목밴드 스캔 | 🔴 [투약 §2](detail/medication-administration.md) — 스캔 게이트는 기본 꺼짐입니다 |
 | 고위험약 2인 확인 · 독립 이중확인 | [투약 §2](detail/medication-administration.md) — 고위험약 **전부**는 아닙니다 |
+| 검체 접수 · 거부 사유 · 라벨 | [검체](detail/specimen-lifecycle.md) |
+| 용혈 · 황달 · 지질혈(HIL) · 재채취 | 🔴 [검체 §2](detail/specimen-lifecycle.md) — 표는 **스타터 규칙**이고 재채취는 사람이 정합니다 |
+| 검사 장비 연결(ASTM · CSV) | 🔴 [검체 §2](detail/specimen-lifecycle.md) — 저수준 전송은 `미구현`, 중계가 필요합니다 |
 
 ## 검사 · 영상
 
