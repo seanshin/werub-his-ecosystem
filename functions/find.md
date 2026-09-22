@@ -48,6 +48,8 @@
 | 재고 불출 · 만료 · 리콜 LOT | 🔴 [재고 · 장비 · 멸균](detail/supply-equipment-sterile.md) — 만료품은 **모드와 무관하게** 막습니다 |
 | 장비 사용일지 · 교정 기한 | [재고 · 장비 · 멸균 §2](detail/supply-equipment-sterile.md) |
 | 멸균 · 기구 세트 · BI/CI 지표 | [재고 · 장비 · 멸균 §2](detail/supply-equipment-sterile.md) |
+| 격리 · 강박 · 법정 최대시간 | [격리·강박과 비자의입원](detail/seclusion-restraint.md) |
+| 비자의입원 · 입원적합성심사 · 계속입원심사 | [격리·강박과 비자의입원 §2](detail/seclusion-restraint.md) — 기한 **전에** 알립니다 |
 
 ## 검사 · 영상
 
