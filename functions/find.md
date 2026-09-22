@@ -27,6 +27,9 @@
 | 직원 노출 사고(자상 · 체액) | [감염관리 §2](detail/infection-control.md) — 0 은 「사고 없음」이 아닙니다 |
 | 안전 게이트 · 끔 · 경고 · 차단 | [안전 게이트](detail/safety-gates.md) · [S7](../build-guide/S7-rehearsal.md) |
 | 「위반 0건」을 읽는 법 · 평가 모집단 | 🔴 [안전 게이트 §2](detail/safety-gates.md) — 분모가 없으면 준수가 아닙니다 |
+| 수술 체크리스트 · Time-Out · Sign-Out | [수술 안전](detail/surgery-safety.md) |
+| 좌우 구분(laterality) · 오부위수술 | 🔴 [수술 안전 §2](detail/surgery-safety.md) — 「모름」을 「해당 없음」으로 접지 않습니다 |
+| 기구·거즈 계수 · 잔류 이물 | [수술 안전 §2](detail/surgery-safety.md) |
 
 ## 검사 · 영상
 
