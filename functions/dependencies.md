@@ -2,7 +2,7 @@
 
 **Preconditions and knock-on effects**
 
-> **EN** — Two questions the system briefs answer only indirectly: *what has to exist before this feature works*, and *what stops if it does not*. This page pairs them. Preconditions are drawn from the build guide, the opening gates and the connection cards; the fallbacks are drawn from section 10 of each system brief, which already names an alternative for every limitation. 🔴 Where a feature is not implemented or discontinued, an alternative is always given — a limitation without an alternative is not an answer.
+> **EN** — Two questions the system briefs answer only indirectly: *what has to exist before this feature works*, and *what stops if it does not*. This page pairs them. Preconditions are drawn from the build guide, the opening gates, the connection cards and the feature pages themselves; the fallbacks are drawn from section 10 of each system brief, which already names an alternative for every limitation. Several preconditions are not technical at all — a legal retention period to be fixed, a committee to be constituted, a denominator of active clinical staff to be populated — and the page says so rather than listing only what can be configured. 🔴 Where a feature is not implemented or discontinued, an alternative is always given — a limitation without an alternative is not an answer.
 
 > 🟡 **초안** · 상태의 정본은 [연결 상태 표](../RELEASES/2026.09/compatibility.md)입니다. 여기서는 상태를 옮겨 적지 않고 **관계만** 적습니다.
 > 쌍 단위의 「여는 순서」는 [연결 카드 48장](../integration/cards/)에 있습니다. 이 문서는 **기능 단위**입니다.
@@ -38,6 +38,31 @@
 | 청구가 산정된다 | 수가·재료 코드 · HIS↔ERP 연결 · 수납 항목 |
 | 직원이 교육을 듣는다 | HIS↔edu 진입(주소 등록 · 공개키) · 직원 명부 동기화 |
 | AI 초안이 만들어진다 | AI 서버 · 모델 · 목적지 허용 목록 · **기관의 켜기 결정** |
+| 오더가 서명되고 봉인된다 | 직원 인증서 · sign 소비자 등록 · 봉인 앵커 경로 |
+| 비상 열람이 열린다 | **사후 검토 주체** · 통보 대상 명부 — 🔴 아무에게도 닿지 않으면 감시 없는 열람입니다 |
+| 투약 대조가 돈다 | 🔴 **손목밴드 인쇄 · 약품 바코드** · 스캔 게이트를 **켜는 결정**(기준 커밋 기본 꺼짐) |
+| 검체가 접수·거부된다 | 검사실이 확정한 **거부·판정 규칙**(자료의 표는 스타터) · 라벨 프린터 · 장비는 **중계** |
+| 수술 안전 단계가 강제된다 | 게이트를 **켜는 결정** · 좌우 필수를 부르는 **키워드 목록**(위원회가 개정) |
+| 퇴원이 조건부로 막힌다 | 게이트를 **켜는 결정**(기본 꺼짐) · 수납 정본 연결 · 퇴원요약 서명 · **면제 사유 체계** |
+| 조기경고 점수가 나온다 | 활력징후 **일곱 항목이 모두** 기록되는 운영 · 중증도 완전 산정은 **검사 연동** |
+| 항암 사이클이 시작된다 | 레지멘 정본 · **신체계측** · 검사 결과 연동 · 무균조제 **차폐 설비**와 **조제자≠검증자** 인력 |
+| 방사선 치료가 조사된다 | 처방 정본 · **처방자와 다른 승인자** · 셋업 검증을 **켜는 결정**(기본 꺼짐) |
+| 재고·기구가 환자에게 닿는다 | 로트·유효기간 데이터 · 장비 **교정 기한** 등록 · 멸균 지표 기록 |
+| 격리·강박이 기록된다 | 전문의 자격 등록 · 🔴 **법정 시간 값**(자료에 없습니다 — 기관이 관할 규정으로 확인) |
+| 환자가 두 식별자로 확인된다 | 팔찌 인쇄 · 확인 기록 입력 운영 · 신생아 밴드 게이트를 **켜는 결정** |
+| 자격·교육 현황이 나온다 | **면허 원장 구축** · **활성 임상직 분모** · HIS↔edu 연동 |
+| 파기가 실행된다 | 🔴 **법무가 정책별 기간을 확정**해야 합니다(설치 직후에는 확정 표시가 없습니다) |
+| 위원회가 정한 것이 반영된다 | 위원회 구성·정족수 · 집행을 **켜는 결정**(기본 꺼짐) · 🔴 **파기 실행은 대상에서 빠집니다** |
+| 미비기록 독촉이 나간다 | 기한 설정 · **책임자 지정**(없으면 독촉이 가지 않습니다) · 회수 알림 **켜는 결정** |
+| 손위생·감염 지표가 나온다 | **관측 입력 운영**(관측 0이면 산출 불가) · 🔴 법정 보고는 **수기 경로** |
+| 이차 소견을 다룬다 | 🔴 **환자의 동의** |
+| 투석 제수 속도가 판정된다 | 제수 목표 · 시간 · **건체중** 세 값 — 🔴 하나라도 없으면 **판정하지 않습니다** · 게이트를 켜는 결정 |
+| 투석 적절도가 집계된다 | 🔴 **실측 Kt/V 입력 운영** — 측정이 없으면 비율이 아니라 「산출 불가」입니다 |
+| 도착-분류 지표가 나온다 | 접수와 **분류 시각**이 다른 순간으로 기록되는 운영 · 분류자 기록 |
+| 사전통보(EMS)를 받는다 | 🔴 **전용 키 발급** — 기본이 빈 값이라 그대로 두면 받지 않습니다 |
+| 예약이 가능성 검증을 거친다 | **진료 시간표 · 휴진 등록 · 세션 정원** — 🔴 셋은 게이트가 **따로** 돌아 하나만 채워도 나머지는 판정하지 못합니다 |
+| 예약 알림이 나간다 | 🔴 **발송 채널**(설치본에서 `미구현`) · 켜는 결정(기본 꺼짐) |
+| 처방집이 실제로 막는다 | 등재 원장 · 영역별 시행 모드를 **올리는 결정**(설치 직후 전 영역 끔) — 🔴 **세 영역은 올려도 막히지 않습니다** |
 
 ## 3. 파급 — 못 쓰면 무엇이 멈추고, 무엇으로 대신하나
 
@@ -56,6 +81,16 @@
 | **AI 서버 가용성 감시** | 자동 감시 | AI Server 쪽 감시·모니터링으로 대신 봅니다 |
 | **AI 서버가 멈춤** | AI 보조 전부 | 화면이 「폴백」 또는 「산출 불가」로 적습니다 — **빈칸으로 두지 않습니다** |
 | **HL7 v2 대체 경로**(HIS↔LIS) | 이중화 | FHIR 주 경로를 쓰고, 다운타임에는 **다운타임 오더 절차** |
+| **손목밴드·약품 바코드** | 기계 대조 투약 | 🔴 사람이 확인하고, **우회를 원장에 남깁니다**. 스캔 게이트를 켜지 않은 상태와 구분해 기록합니다 |
+| **법무의 기간 확정** | 파기 실행 | **세는 것까지는 됩니다** — 대상 건수를 보면서 확정될 때까지 보관합니다 |
+| **위원회 구성** | 정책 변경의 근거 | 변경은 되지만 **「의결 근거 없음」으로 남습니다**. 구성 뒤 소급해 의결로 덮습니다 |
+| **면허 원장 · 활성 임상직 분모** | 자격 이수율 | 🔴 **비율을 내지 않고 「산출 불가」로 둡니다**. 원장부터 채웁니다 |
+| **차폐 설비 또는 조제자와 다른 검증자** | 항암 무균조제 | 🔴 **대체 없습니다** — 갖추기 전에는 원내 조제를 하지 않습니다 |
+| **활력징후 일곱 항목** | 조기경고 점수 | **빠진 항목을 적어** 「산출 불가」로 둡니다. 측정 운영을 먼저 정합니다 |
+| **건체중 기록** | 투석 제수 속도 판정 | 🔴 **판정하지 않고 넘깁니다** — 모르는 것을 통과로도 위반으로도 세지 않습니다. 침상의 기기 설정으로 관리합니다 |
+| **실측 Kt/V** | 적절도 지표 | 🔴 근사식으로 채우지 않습니다. 지표를 「산출 불가」로 두고 측정 운영을 세웁니다 |
+| **예약 알림 채널** | 예약 안내 · 대기자 호출 | 🔴 **자리가 나도 자동 연락이 가지 않습니다** — 전화·문자를 사람이 겁니다. 채널을 붙이기 전까지 운영 절차로 메웁니다 |
+| **처방집 등재 원장** | 비등재 처방 판정 | 코드 없는 자유기재와 마찬가지로 **「판정 불가」로 남기고 준수로 세지 않습니다** |
 
 ## 4. 이 표를 쓰는 법
 
@@ -66,5 +101,5 @@
 
 ## 5. 이 문서의 한계
 
-- 🔴 **기능 단위 전제를 전부 적지 못했습니다.** 지금은 자주 걸리는 것과 [자세히 쓴 11편](detail/)에 해당하는 것까지입니다.
+- 🔴 **기능 단위 전제를 전부 적지 못했습니다.** 지금은 자주 걸리는 것과 [자세히 쓴 편들](detail/)에 해당하는 것까지입니다. 🔴 **편수를 여기 적지 않습니다** — 편이 늘 때마다 이 줄이 묵기 때문입니다.
 - 상태는 여기서 말하지 않습니다 — [연결 상태 표](../RELEASES/2026.09/compatibility.md)와 각 구성서 §7 · §10 이 정본입니다.

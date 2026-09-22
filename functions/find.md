@@ -58,6 +58,23 @@
 | 신생아 식별밴드 · 모아 오식별 | 🔴 [환자 확인 §2](detail/patient-identification.md) — 기준 커밋 기본은 **꺼짐**입니다 |
 | 항암 레지멘 · 사이클 · 체표면적 용량 | [항암 치료](detail/chemotherapy.md) |
 | 사이클 시작 전 혈액 수치 확인 | 🔴 [항암 치료 §2](detail/chemotherapy.md) — 「결과 없음」은 **미통과**입니다 |
+| 투석 처방 · 건체중 · 제수(UF) 목표 | [투석](detail/dialysis.md) |
+| 제수 속도 상한 · 시간당 UF율 | 🔴 [투석 §2](detail/dialysis.md) — 세 값이 다 있을 때만 판정하고, 게이트 기본은 **꺼짐**입니다 |
+| 투석 후 체중 증가 · 건체중 하회 | [투석 §2](detail/dialysis.md) — 🔴 **설정과 무관하게 항상** 봅니다 |
+| 투석 적절도(Kt/V) | 🔴 [투석 §2](detail/dialysis.md) — **실측만** 원장에 남습니다 |
+| 응급 중증도 분류 · 등급(KTAS) | [응급 중증도 분류](detail/emergency-triage.md) |
+| 분류 시각 · 분류자 | 🔴 [응급 중증도 분류 §2](detail/emergency-triage.md) — 등급만으로는 분류한 사실이 남지 않습니다 |
+| 도착-분류 시간 지표 | 🔴 [응급 중증도 분류 §2](detail/emergency-triage.md) — **0분은 「빠름」이 아니라 「잴 수 없음」**입니다 |
+| 응급실 과밀도 · 재실 보드 | [응급 중증도 분류 §2](detail/emergency-triage.md) |
+| 응급 처분(귀가 · 입원 · 전원) · 처분 변경 | [응급 중증도 분류 §2](detail/emergency-triage.md) — 변경은 **이전 상태를 먼저 감사에 남기고** 바꿉니다 |
+| 사전통보(EMS) · 다수사상자 · 코드 방송 | [응급 중증도 분류 §2](detail/emergency-triage.md) — 🔴 사전통보 키는 기본 **빈 값(거부)**입니다 |
+| 외래 예약 · 슬롯 · 정원 | [외래 예약·대기](detail/outpatient-scheduling.md) |
+| 진료 시간표 · 휴진 · 예약 가능성 | 🔴 [외래 예약·대기 §2](detail/outpatient-scheduling.md) — 게이트 셋이 **따로** 돕니다 |
+| 접수 · 대기 번호 · 호출 | [외래 예약·대기 §2](detail/outpatient-scheduling.md) |
+| 미방문(노쇼) | 🔴 [외래 예약·대기 §2](detail/outpatient-scheduling.md) — 자동 처리는 기본 **꺼짐**입니다 |
+| 대기 시간 지표 | 🔴 [외래 예약·대기 §2](detail/outpatient-scheduling.md) — 표본이 없으면 수를 내지 않습니다 |
+| 대기실 전광판 | [외래 예약·대기 §2](detail/outpatient-scheduling.md) |
+| 예약 알림 발송 | 🔴 [외래 예약·대기 §2](detail/outpatient-scheduling.md) — 채널이 `미구현`입니다 |
 | 무균조제 · 항암 차폐 · 사용기한(BUD) | [항암 치료 §2](detail/chemotherapy.md) — 검증자는 조제자와 달라야 합니다 |
 
 ## 검사 · 영상
@@ -83,6 +100,9 @@
 
 | 낱말 | 어디를 보나 |
 |---|---|
+| 원내 처방집 · 등재 · 비등재 | [원내 처방집](detail/formulary.md) |
+| 처방집 시행 모드(영역별) | 🔴 [원내 처방집 §2](detail/formulary.md) — 설치 직후 **전 영역 끔**이고, 세 영역은 **켜도 막히지 않습니다** |
+| 처방집 예외 요청 · 심의 | [원내 처방집 §2](detail/formulary.md) |
 | DUR · 약물 상호작용 | [약제 안내](../clinicians/pharmacy.md) · [업무별 지도 §3](README.md#3-약과-물류) |
 | 마약류 수불 | [마약류 수불 원장](detail/narcotics-ledger.md) · [약제 안내](../clinicians/pharmacy.md) · [ERP 구성서](../systems/erp.md) |
 | 법정 취급보고(마약류) | 🔴 [마약류 수불 원장 §2](detail/narcotics-ledger.md) — 전송은 `미구현`, 사람이 올리고 접수번호를 적습니다 |

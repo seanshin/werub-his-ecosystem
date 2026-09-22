@@ -19,13 +19,13 @@
 
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
-| **외래 진료** | HIS(진료 45항목) · AI Server · cerno · twin | 접수 · 진료 · 오더 · 처방 · 기록(음성·대화 **초안**) · 근거 질의 · 위험 점수 카드 | [HIS §4](../systems/his.md#4-핵심-기능) · [화면](../screens/his.md) · [의사 안내](../clinicians/physician.md) |
+| **외래 진료** | HIS(진료 45항목) · AI Server · cerno · twin | **예약 · 접수 · 대기·호출** · 진료 · 오더 · 처방 · 기록(음성·대화 **초안**) · 근거 질의 · 위험 점수 카드 | [외래 예약·대기](detail/outpatient-scheduling.md) · [HIS §4](../systems/his.md#4-핵심-기능) · [화면](../screens/his.md) · [의사 안내](../clinicians/physician.md) |
 | **입원 · 병동 간호** | HIS · Clinic | 입퇴원(**퇴원 게이트**) · 활력 · **조기경고 점수** · **투약 시행(바코드 대조 · 2인 확인)** · 인수인계 · 병동 동선 | [투약](detail/medication-administration.md) · [퇴원 게이트](detail/discharge-gate.md) · [환자 상태 점수](detail/clinical-scores.md) · [HIS §4](../systems/his.md#4-핵심-기능) · [Clinic §4](../systems/clinic.md#4-핵심-기능) · [간호 안내](../clinicians/nursing.md) |
 | **수술 · 마취 · 중환자** | HIS(수술/중환자 6묶음) | 수술 일정 · 기록 · 중환자 관리 · **세 단계 체크리스트 · 좌우 판정 · 계수 대조** | [수술 안전](detail/surgery-safety.md) · [HIS 메뉴](../systems/his-domains.md) · [화면](../screens/his.md) |
-| **특수 치료** | HIS | 재활 · **방사선종양(계획 승인 · 분할 · 누적선량)** · **항암(레지멘 · 사이클 게이트 · 무균조제)** · 투석 · 장기이식 | [방사선 치료](detail/radiation-therapy.md) · [항암 치료](detail/chemotherapy.md) · [화면](../screens/his.md) |
+| **특수 치료** | HIS | 재활 · **방사선종양(계획 승인 · 분할 · 누적선량)** · **항암(레지멘 · 사이클 게이트 · 무균조제)** · **투석(제수 속도 상한 · 실측 적절도)** · 장기이식 | [방사선 치료](detail/radiation-therapy.md) · [항암 치료](detail/chemotherapy.md) · [투석](detail/dialysis.md) · [화면](../screens/his.md) |
 | **정신건강** | HIS | 비자의입원 법정 기한 · 격리·강박 **법정 최대시간**·연장·관찰 | [격리·강박과 비자의입원](detail/seclusion-restraint.md) · [화면](../screens/his.md) |
 | **물류 · 중앙공급 · 장비** | HIS · ERP | 재고·LOT 불출(FEFO) · 장비 사용일지·교정 · 기구 세트 멸균 | [재고 · 장비 · 멸균](detail/supply-equipment-sterile.md) · [ERP 구성서](../systems/erp.md) |
-| **응급** | HIS | 응급 접수 · 분류(triage) 보조 · 응급 처분 결정 | [응급 시나리오](../scenarios/02-emergency.md) |
+| **응급** | HIS | 응급 접수 · **중증도 분류(등급 · 분류 시각 · 분류자)** · 재평가 기한 · 과밀도 · 응급 처분 결정 | [응급 중증도 분류](detail/emergency-triage.md) · [응급 시나리오](../scenarios/02-emergency.md) |
 | **환자 접점** | 공개 홈페이지 · 환자 앱 · HIS 포털 | 예약 · 결과 열람 · 동의 · 문진 · 검진 프로그램 안내 | [홈페이지 §4](../systems/homepage.md#4-핵심-기능) · [환자 앱 §4](../systems/patient-app.md#4-핵심-기능) |
 
 ## 2. 검사하고 찍는 일
@@ -43,7 +43,7 @@
 
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
-| **약제** | HIS · AI Server · ERP | 처방 검토 · **상호작용·DUR(차단/경고 구분)** · 조제 · 복약 설명 **초안** · 마약류 수불 해시 원장 · 보험코드 매핑 | [약제 안내](../clinicians/pharmacy.md) · [AI Server §4](../systems/ai-server.md#4-핵심-기능) |
+| **약제** | HIS · AI Server · ERP | **원내 처방집(영역별 시행 모드)** · 처방 검토 · **상호작용·DUR(차단/경고 구분)** · 조제 · 복약 설명 **초안** · 마약류 수불 해시 원장 · 보험코드 매핑 | [원내 처방집](detail/formulary.md) · [약제 안내](../clinicians/pharmacy.md) · [AI Server §4](../systems/ai-server.md#4-핵심-기능) |
 | **구매 · 자재** | ERP | 구매 · 재고 · 자산 | [ERP §4](../systems/erp.md#4-핵심-기능) |
 
 ## 4. 돈과 운영
