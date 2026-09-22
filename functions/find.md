@@ -56,6 +56,9 @@
 | 환자 확인 · 두 가지 식별자 · 팔찌 | [환자 확인](detail/patient-identification.md) |
 | 동명이인 · 신원미상 | 🔴 [환자 확인 §2](detail/patient-identification.md) — 이름으로 특정하지 않습니다 |
 | 신생아 식별밴드 · 모아 오식별 | 🔴 [환자 확인 §2](detail/patient-identification.md) — 기준 커밋 기본은 **꺼짐**입니다 |
+| 항암 레지멘 · 사이클 · 체표면적 용량 | [항암 치료](detail/chemotherapy.md) |
+| 사이클 시작 전 혈액 수치 확인 | 🔴 [항암 치료 §2](detail/chemotherapy.md) — 「결과 없음」은 **미통과**입니다 |
+| 무균조제 · 항암 차폐 · 사용기한(BUD) | [항암 치료 §2](detail/chemotherapy.md) — 검증자는 조제자와 달라야 합니다 |
 
 ## 검사 · 영상
 
