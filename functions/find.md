@@ -43,6 +43,8 @@
 | 위원회 · 의결 · 정족수 | [위원회 의결](detail/governance-enactment.md) |
 | 「의결 근거 없음」 · 「거버넌스 미등재」 | 🔴 [위원회 의결 §2](detail/governance-enactment.md) — **다른 두 상태**입니다 |
 | 정책 설정을 누가 바꾸나 | [위원회 의결 §2](detail/governance-enactment.md) · [사람 결정 체크리스트](../checklist/decisions.md) |
+| 방사선 치료 계획 · 분할 · 누적선량 | [방사선 치료](detail/radiation-therapy.md) |
+| 셋업 검증(IGRT) | 🔴 [방사선 치료 §2](detail/radiation-therapy.md) — 기준 커밋 기본은 **꺼짐**입니다 |
 
 ## 검사 · 영상
 
