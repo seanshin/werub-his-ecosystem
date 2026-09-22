@@ -30,6 +30,9 @@
 | 수술 체크리스트 · Time-Out · Sign-Out | [수술 안전](detail/surgery-safety.md) |
 | 좌우 구분(laterality) · 오부위수술 | 🔴 [수술 안전 §2](detail/surgery-safety.md) — 「모름」을 「해당 없음」으로 접지 않습니다 |
 | 기구·거즈 계수 · 잔류 이물 | [수술 안전 §2](detail/surgery-safety.md) |
+| 투약 시행 · 5 Rights | [투약](detail/medication-administration.md) |
+| 바코드 투약(BCMA) · 손목밴드 스캔 | 🔴 [투약 §2](detail/medication-administration.md) — 스캔 게이트는 기본 꺼짐입니다 |
+| 고위험약 2인 확인 · 독립 이중확인 | [투약 §2](detail/medication-administration.md) — 고위험약 **전부**는 아닙니다 |
 
 ## 검사 · 영상
 

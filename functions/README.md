@@ -20,7 +20,7 @@
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
 | **외래 진료** | HIS(진료 45항목) · AI Server · cerno · twin | 접수 · 진료 · 오더 · 처방 · 기록(음성·대화 **초안**) · 근거 질의 · 위험 점수 카드 | [HIS §4](../systems/his.md#4-핵심-기능) · [화면](../screens/his.md) · [의사 안내](../clinicians/physician.md) |
-| **입원 · 병동 간호** | HIS · Clinic | 입퇴원 · 활력 · 조기경고 · 투약 시행(2인 확인) · 인수인계 · 병동 동선 | [HIS §4](../systems/his.md#4-핵심-기능) · [Clinic §4](../systems/clinic.md#4-핵심-기능) · [간호 안내](../clinicians/nursing.md) |
+| **입원 · 병동 간호** | HIS · Clinic | 입퇴원 · 활력 · 조기경고 · **투약 시행(바코드 대조 · 2인 확인)** · 인수인계 · 병동 동선 | [투약](detail/medication-administration.md) · [HIS §4](../systems/his.md#4-핵심-기능) · [Clinic §4](../systems/clinic.md#4-핵심-기능) · [간호 안내](../clinicians/nursing.md) |
 | **수술 · 마취 · 중환자** | HIS(수술/중환자 6묶음) | 수술 일정 · 기록 · 중환자 관리 · **세 단계 체크리스트 · 좌우 판정 · 계수 대조** | [수술 안전](detail/surgery-safety.md) · [HIS 메뉴](../systems/his-domains.md) · [화면](../screens/his.md) |
 | **응급** | HIS | 응급 접수 · 분류(triage) 보조 · 응급 처분 결정 | [응급 시나리오](../scenarios/02-emergency.md) |
 | **환자 접점** | 공개 홈페이지 · 환자 앱 · HIS 포털 | 예약 · 결과 열람 · 동의 · 문진 · 검진 프로그램 안내 | [홈페이지 §4](../systems/homepage.md#4-핵심-기능) · [환자 앱 §4](../systems/patient-app.md#4-핵심-기능) |
