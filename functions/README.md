@@ -58,7 +58,7 @@
 
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
-| **환자안전 · 질 지표** | HIS | 안전 사건 · 질 지표 · 감염관리 · **안전 게이트(끔 · 경고 · 차단)**. 🔴 표본이 없으면 **비율을 내지 않습니다** | [안전 게이트](detail/safety-gates.md) · [감염관리](detail/infection-control.md) · [개요서 2장](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식) |
+| **환자안전 · 질 지표** | HIS | 안전 사건 · 질 지표 · 감염관리 · **환자 확인** · **안전 게이트(끔 · 경고 · 차단)**. 🔴 표본이 없으면 **비율을 내지 않습니다** | [안전 게이트](detail/safety-gates.md) · [환자 확인](detail/patient-identification.md) · [감염관리](detail/infection-control.md) · [개요서 2장](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식) |
 | **전자서명 · 위변조 증거** | sign | 자체 PKI · 타임스탬프 · PAdES-LTA · 감사 이벤트 **봉인** · 검증 주소 | [sign §4](../systems/sign.md#4-핵심-기능) |
 | **감사 · 기록 보존** | 전 시스템 | 해시체인 · 변경 차단 · 보존 기간 정책 · 비상 열람 기록 | [비상 열람](detail/emergency-access.md) · 🔴 [보유·파기](detail/retention.md)(세기만 합니다) · [개요서 5장](../overview/05-identity-trust-standards.md) |
 | **의무기록 완결도** | HIS | 퇴원요약 · 미서명 진료·간호기록 · 🔴 **상병 미입력** 을 기한과 함께 세고 책임자에게 독촉 | [미비기록](detail/incomplete-records.md) · [화면](../screens/his.md) |

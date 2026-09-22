@@ -53,6 +53,9 @@
 | 조기경고 점수 · 활력징후 | 🔴 [환자 상태 점수](detail/clinical-scores.md) — 일곱이 다 있어야 냅니다 |
 | 중증도 점수(중환자실) | 🔴 [환자 상태 점수 §2](detail/clinical-scores.md) — **부분 산정**입니다 |
 | 낙상 위험도 | [환자 상태 점수 §2](detail/clinical-scores.md) — 등급은 서버가 점수에서 파생합니다 |
+| 환자 확인 · 두 가지 식별자 · 팔찌 | [환자 확인](detail/patient-identification.md) |
+| 동명이인 · 신원미상 | 🔴 [환자 확인 §2](detail/patient-identification.md) — 이름으로 특정하지 않습니다 |
+| 신생아 식별밴드 · 모아 오식별 | 🔴 [환자 확인 §2](detail/patient-identification.md) — 기준 커밋 기본은 **꺼짐**입니다 |
 
 ## 검사 · 영상
 
