@@ -70,6 +70,19 @@
 | 사전통보(EMS) · 다수사상자 · 코드 방송 | [응급 중증도 분류 §2](detail/emergency-triage.md) — 🔴 사전통보 키는 기본 **빈 값(거부)**입니다 |
 | 골든타임 프로토콜 · STEMI · 뇌졸중 · 패혈증 | [골든타임 프로토콜](detail/emergency-pathway.md) — 🔴 게이트가 아니라 **추적기**입니다 |
 | Door-to-Balloon · Door-to-Needle · 1시간 번들 | 🔴 [골든타임 프로토콜 §2](detail/emergency-pathway.md) — 핵심 단계가 안 찍히면 지표를 **비웁니다** |
+| 임상 경로(CP) · 표준 진료 경로 · 마일스톤 | [임상 경로](detail/clinical-pathway.md) — 🔴 골든타임 프로토콜과 다른 기능입니다 |
+| 경로 발행 · 의결 근거 | 🔴 [임상 경로 §2](detail/clinical-pathway.md) — 기본은 **경고**이고, 화면 발행은 의결번호를 보내지 않습니다 |
+| 경로 진행률 · 자동 완료 | 🔴 [임상 경로 §2](detail/clinical-pathway.md) — **「완료」만** 셉니다 · 건너뜀은 완료가 아닙니다 |
+| 경로 이탈(variance) · 이탈률 | 🔴 [임상 경로 §2](detail/clinical-pathway.md) — 이탈은 상태가 아니라 **수**입니다 |
+| 재활 평가 · Barthel · FIM · Berg | [재활](detail/rehabilitation.md) |
+| 재활 세션 시작 전 안전 판정 | 🔴 [재활 §2](detail/rehabilitation.md) — 기본 **꺼짐** · Berg 가 없으면 낙상 항목은 **표시 없음** |
+| 재활 세션 일괄 생성 · 빈도 | [재활 §2](detail/rehabilitation.md) |
+| 재활 수가 코드(물리 · 작업 · 언어) | 🔴 [재활 §2](detail/rehabilitation.md) — 표에 없는 이름은 물리치료 코드가 붙습니다 |
+| 장기이식 · 대기자 · 기증자 | [장기이식](detail/transplant.md) |
+| 이식 적합성(ABO · 교차시험) | 🔴 [장기이식 §2](detail/transplant.md) — 기본 **차단** · 교차시험은 **기증자-수혜자 쌍**으로만 판정 |
+| 간 점수(MELD · MELD-Na) | [장기이식 §2](detail/transplant.md) — 필수 결과가 없으면 **산출 거부** |
+| 면역억제제 혈중농도(TDM) · HLA | [장기이식 §2](detail/transplant.md) |
+| 국가 장기이식 기관 등록 | 🔴 [장기이식 §2](detail/transplant.md) — 등록은 `미구현` |
 | 프로토콜 시작 시각 · 도착 시각 | 🔴 [골든타임 프로토콜 §2](detail/emergency-pathway.md) — 시계는 **도착이 아니라 활성화**부터 갑니다 |
 | 진단서 · 소견서 · 입퇴원확인서 · 사망진단서 · 출생증명서 | [진단서 · 기록 사본 발급](detail/record-issuance.md) |
 | 의무기록 사본 · 스냅샷 동결 | [진단서 · 기록 사본 발급 §2](detail/record-issuance.md) |
