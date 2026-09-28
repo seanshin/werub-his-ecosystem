@@ -68,6 +68,16 @@
 | 응급실 과밀도 · 재실 보드 | [응급 중증도 분류 §2](detail/emergency-triage.md) |
 | 응급 처분(귀가 · 입원 · 전원) · 처분 변경 | [응급 중증도 분류 §2](detail/emergency-triage.md) — 변경은 **이전 상태를 먼저 감사에 남기고** 바꿉니다 |
 | 사전통보(EMS) · 다수사상자 · 코드 방송 | [응급 중증도 분류 §2](detail/emergency-triage.md) — 🔴 사전통보 키는 기본 **빈 값(거부)**입니다 |
+| 골든타임 프로토콜 · STEMI · 뇌졸중 · 패혈증 | [골든타임 프로토콜](detail/emergency-pathway.md) — 🔴 게이트가 아니라 **추적기**입니다 |
+| Door-to-Balloon · Door-to-Needle · 1시간 번들 | 🔴 [골든타임 프로토콜 §2](detail/emergency-pathway.md) — 핵심 단계가 안 찍히면 지표를 **비웁니다** |
+| 프로토콜 시작 시각 · 도착 시각 | 🔴 [골든타임 프로토콜 §2](detail/emergency-pathway.md) — 시계는 **도착이 아니라 활성화**부터 갑니다 |
+| 진단서 · 소견서 · 입퇴원확인서 · 사망진단서 · 출생증명서 | [진단서 · 기록 사본 발급](detail/record-issuance.md) |
+| 의무기록 사본 · 스냅샷 동결 | [진단서 · 기록 사본 발급 §2](detail/record-issuance.md) |
+| 사망진단서 · 시체검안서 48시간 | [진단서 · 기록 사본 발급 §2](detail/record-issuance.md) — 제안만 하고, 최종 진료가 없으면 **판정 불가**입니다 |
+| 증명서 서명 방식 | 🔴 [진단서 · 기록 사본 발급 §2](detail/record-issuance.md) — **내부 서명 기록**이고 sign 인증서 서명이 아닙니다 |
+| 발급번호 · 진위 확인(QR) · 재발급 | [진단서 · 기록 사본 발급 §2](detail/record-issuance.md) |
+| 실손보험 청구 서류 세트 | [진단서 · 기록 사본 발급 §2](detail/record-issuance.md) — 자동 발급은 기본 **꺼짐**입니다 |
+| 제증명 수수료 | 🔴 [진단서 · 기록 사본 발급 §4](detail/record-issuance.md) — 포털 신청 금액은 **설정을 읽지 않습니다** |
 | 외래 예약 · 슬롯 · 정원 | [외래 예약·대기](detail/outpatient-scheduling.md) |
 | 진료 시간표 · 휴진 · 예약 가능성 | 🔴 [외래 예약·대기 §2](detail/outpatient-scheduling.md) — 게이트 셋이 **따로** 돕니다 |
 | 접수 · 대기 번호 · 호출 | [외래 예약·대기 §2](detail/outpatient-scheduling.md) |
@@ -103,6 +113,12 @@
 | 원내 처방집 · 등재 · 비등재 | [원내 처방집](detail/formulary.md) |
 | 처방집 시행 모드(영역별) | 🔴 [원내 처방집 §2](detail/formulary.md) — 설치 직후 **전 영역 끔**이고, 세 영역은 **켜도 막히지 않습니다** |
 | 처방집 예외 요청 · 심의 | [원내 처방집 §2](detail/formulary.md) |
+| 약국 조제 · 검수 · 불출(교부) | [처방 조제](detail/pharmacy-dispensing.md) |
+| 조제자 ≠ 검수자 | 🔴 [처방 조제 §2](detail/pharmacy-dispensing.md) — 자기 조제는 검수할 수 없습니다 |
+| 고위험약 · 마약류 조제 2인 확인 | 🔴 [처방 조제 §2](detail/pharmacy-dispensing.md) — 기본 **차단**입니다 |
+| 원외 처방 · 원외 처방전 유효기간 | [처방 조제 §2](detail/pharmacy-dispensing.md) — 원내 조제는 거부 · 3일은 **코드 고정**입니다 |
+| 약물이상반응(ADR) 보고 | 🔴 [처방 조제 §2](detail/pharmacy-dispensing.md) — 보고 채널 `미구현` · 나가지 않은 보고를 「보고 완료」로 적지 않습니다 |
+| 약사 중재 · TDM · 항균제 사용 승인(ASP) | [처방 조제 §2](detail/pharmacy-dispensing.md) |
 | DUR · 약물 상호작용 | [약제 안내](../clinicians/pharmacy.md) · [업무별 지도 §3](README.md#3-약과-물류) |
 | 마약류 수불 | [마약류 수불 원장](detail/narcotics-ledger.md) · [약제 안내](../clinicians/pharmacy.md) · [ERP 구성서](../systems/erp.md) |
 | 법정 취급보고(마약류) | 🔴 [마약류 수불 원장 §2](detail/narcotics-ledger.md) — 전송은 `미구현`, 사람이 올리고 접수번호를 적습니다 |
