@@ -164,7 +164,7 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — ERP depends on HIS for sign-in and for the events it turns into accounting. It also talks to sign (contract signatures), LIS (lab billing), Clinic (staff roster) and the AI Server (notice search for claim review). Nine connections were called for real in September 2026 (HIS 6, sign 2, LIS 1); a connection means one caller, one purpose, so a contract signing and its completion notice count as two. HIS sign-in uses a shared secret, unlike the public-key check that sign and edu use; the repository does not say why.
+> **EN** — ERP depends on HIS for sign-in and for the events it turns into accounting. It also talks to sign (contract signatures), LIS (lab billing), Clinic (staff roster) and the AI Server (notice search for claim review). Nine connections were called for real in September 2026 (HIS 6, sign 2, LIS 1); a connection means one caller, one purpose, so a contract signing and its completion notice count as two. For staff sign-in, ERP shares a secret with HIS, whereas sign and edu check the HIS public key; the repository does not say why. (edu does share a separate value with HIS for its roster and training-record service tokens.)
 
 **ERP 는 HIS 없이는 쓸 수 없습니다.** 직원 로그인이 HIS 를 거치고, 회계로 옮길 사건도 HIS 에서 옵니다. 다른 시스템은 필요할 때 붙입니다.
 
@@ -197,7 +197,7 @@ HIS 와 확인한 6개를 부르는 방향으로 나누면 이렇습니다.
 |---|---|
 | HIS → ERP | 직원 로그인(HIS 에서 ERP 단추) · 진료비 계산서 조회 · 확정된 약품 보험 코드 가져오기 |
 | ERP → HIS | 청구 라인과 재원 환자 수 조회 · 검진권 정산 지급 회신 · 의료진 계약 서명 요청 |
-- **HIS 로그인이 공유 비밀키 방식인 까닭** — sign · edu 는 HIS 공개키로 직원 신원을 확인하는데, ERP 는 HIS 와 같은 비밀키를 나눠 가집니다. 왜 다르게 만들었는지는 저장소에서 설명을 찾지 못했습니다.
+- **HIS 로그인이 공유 비밀키 방식인 까닭** — 직원 로그인에서 sign · edu 는 HIS 공개키로 직원 신원을 확인하는데, ERP 는 HIS 와 같은 비밀키를 나눠 가집니다. edu 도 명부 · 이수 기록용 서비스 토큰에는 HIS 와 나눈 비밀값을 따로 씁니다. 왜 다르게 만들었는지는 저장소에서 설명을 찾지 못했습니다.
 - HIS 가 보내는 운영 이벤트는 **리얼 모드(실제 운영 단계)에서만 실제로 나갑니다.** 리허설 모드에서는 대기열에 쌓이고 보류되는 것까지 확인했습니다.
 
 연결마다의 자세한 내용: [ERP → HIS](../integration/cards/erp-to-his.md) · [HIS → ERP](../integration/cards/his-to-erp.md) · [ERP → sign](../integration/cards/erp-to-sign.md) · [LIS → ERP](../integration/cards/lis-to-erp.md) · [ERP → AI Server](../integration/cards/erp-to-ai-server.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md).

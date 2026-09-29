@@ -144,9 +144,9 @@
 | **S0 ~ S8** | 이 자료의 [구축 가이드](../build-guide/) 단계 번호(준비 → 코어 HIS → … → 리얼 전환) | Build-guide stages |
 | **README** · **THIRD_PARTY** | 저장소 첫 안내 문서 · 제3자 구성요소 목록 문서 | Repository readme; third-party list |
 
-## 7. 소개서를 읽으며 막힌 말 — 가상 독자 검토 뒤 추가
+## 7. 소개서별로 나오는 말
 
-> **EN** — Terms that proxy readers (hospital IT staff seeing these materials for the first time) stumbled on while reading the introductions, added after the 2026-09-29 review. Grouped by the introduction where they first appear.
+> **EN** — Terms specific to one introduction, grouped by the introduction where they first appear, followed by other terms used across the introductions. These are the words first-time readers from hospital IT most often stopped at.
 
 
 ### HIS
@@ -307,7 +307,7 @@
 | **XMPP** | 실시간 메시지 · 접속 상태를 주고받는 공개 규약. Jitsi 는 이것으로 방 입장 · 참가자 정보를 주고받습니다 | Extensible Messaging and Presence Protocol |
 | **Prosody · Jicofo · Videobridge · Jibri** | Jitsi 를 이루는 부품 — 각각 시그널링 서버 · 회의 조정자 · 미디어 중계 · 녹화기 | Jitsi components |
 
-### 3차 고치기에서 더한 말
+### 그 밖에 소개서에 나오는 말
 
 | 말 | 풀이 | English |
 |---|---|---|
@@ -331,11 +331,6 @@
 | **local only** | 기관 밖 AI 제공자로 보내지 못하게 묶은 역할 표시 — 의료 · 개인건강정보 · 규제 역할에 붙음 | Local-only data policy for a role |
 | **X-Forwarded-For** | 앞단 프록시가 원래 요청한 컴퓨터의 주소를 뒤쪽 서버에 알려 주는 헤더 | Proxy forwarding header |
 | **소비자 키** | sign 이 자기를 부르는 시스템(소비자)마다 따로 발급하는 호출 키. 어느 시스템이 서명을 요청했는지 가립니다 | Consumer key issued by sign |
-
-### 4차 조사에서 더한 말
-
-| 말 | 풀이 | English |
-|---|---|---|
 | **TSH** | 갑상선자극호르몬 검사. 갑상선기능을 보는 흔한 혈액검사 — 2026년 9월 시험 설치에서 HIS ↔ LIS 흐름을 끝까지 확인한 검사 | thyroid-stimulating hormone |
 | **CBC** | 일반혈액검사(혈구 수 · 혈색소 등). 가장 흔한 혈액검사 | complete blood count |
 | **CRP** | C 반응성 단백. 몸의 염증 정도를 보는 혈액검사 | C-reactive protein |

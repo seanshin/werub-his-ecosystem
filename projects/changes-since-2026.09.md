@@ -30,7 +30,7 @@
 
 ## 2. 참고 문서의 어느 문장이 달라졌나
 
-> **EN** — The sentences in the reference layer that no longer match the current code. Most concern installing HIS: there is now an install script and a first-administrator tool, the production compose file now includes schema setup and the sentinel, the AI server address can be set by environment variable, and backups now include uploaded files. Each affected sentence carries a note.
+> **EN** — The sentences in the reference layer that no longer match the current code. Most concern installing HIS: there is now an install script and a first-administrator tool, the production compose file now includes schema setup and the sentinel, the AI server address can be set by environment variable, and backups now include uploaded files. Outside HIS, a fresh AI Server install should use the current development line, and the patient app's message reply works only on the current development line. Each affected sentence carries a note.
 
 | 주제 | 참고 문서가 말하는 것(통합 릴리즈 기준) | 현재 개발본 | 참고 문서의 자리 |
 |---|---|---|---|
@@ -44,6 +44,8 @@
 | **HIS 리얼 모드** | (따로 적지 않음) | 보안 설정이 비어 있으면 **부팅 거부** · 운영 모드를 정하지 않으면 리얼 | — |
 | **공개 홈페이지 빌드** | 운영 중인 공개 사이트 | 기준 커밋의 홈페이지 앱은 **첫 화면 4장의 구문 오류로 빌드가 멈추는 상태**였고, 현재 개발본에서 고쳐졌습니다 | [홈페이지 구성서](../systems/homepage.md) |
 | **환자 앱 동의서 서명** | HIS 를 거쳐 sign 이 처리합니다 | 현재 개발본 코드를 읽은 결과, 앱의 동의서 서명은 **이름을 입력해 HIS 에 기록하는 방식**이고 sign 의 인증서 서명 경로가 아닙니다 | [환자 앱 구성서](../systems/patient-app.md) |
+| **환자 앱 메시지 답장** | 앱에서 담당의 메시지를 확인하고 답장합니다 | 기준 커밋에서는 앱이 보내는 답장의 필드 이름이 서버와 달라 **답장이 전부 거절**됐습니다. 현재 개발본에서 고쳐졌고, HIS 에 의사가 환자 메시지를 읽고 답하는 **직원 수신함**이 새로 생겼습니다 | [환자 앱 구성서](../systems/patient-app.md) |
+| **AI Server 새 설치** | [소스 받기](../SOURCES.md)가 가리키는 기준 커밋으로 세웁니다 | 새 데이터베이스에서 표가 만들어지는 순서를 고쳤습니다. 기준 커밋으로 새로 설치하면 **API 키 발급 · 검증이 실패할 수 있어**, AI Server 는 현재 개발본을 받습니다([AI Server 소개서](ai-server.md)) | [소스 받기](../SOURCES.md) · [S6](../build-guide/S6-ai.md) |
 | **AI Server 시간대 프로파일** | 시간대별 운영 프로파일을 적용할 수 있습니다 | **자동 적용이 기본 꺼짐**이 됐습니다(상주 모델 정책과 부딪혀 실제로 적용되지 않았음). 수동 적용은 그대로입니다 | [AI Server 구성서](../systems/ai-server.md) |
 | **형제 시스템 연동** | [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 상태 | HIS · AI Server 의 연동 코드가 여러 곳 고쳐졌습니다. **연결 상태 표는 바꾸지 않았습니다** — 다시 불러 확인하기 전에는 상태를 옮기지 않습니다 | 연결 상태 표 · 연결 카드 |
 

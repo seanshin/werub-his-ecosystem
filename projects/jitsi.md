@@ -14,7 +14,7 @@ Jitsi is the video server behind telemedicine in this ecosystem. It packages the
 
 **It is not usable today.** The installation used while building the ecosystem does not work (this material does not cover reviving it), and every connection to it in the ecosystem's connection table is marked "not usable now". An institution that needs video visits has to build it anew. This introduction therefore describes what the repository provides and what building it involves, not a running service.
 
-The design is straightforward. A doctor opens a telehealth session in HIS; HIS signs a short token with a secret it shares with the video server, and the browser opens the meeting room with that token — the doctor as host, the patient as guest from the patient portal or app. The signalling server checks the token before anyone enters. A separate REST API wraps Jitsi so other systems can schedule meetings, issue join links, control participants, start and stop recordings and receive webhooks.
+The design is straightforward. A doctor opens a telehealth session in HIS; HIS signs a short token with a secret it shares with the video server, and the browser opens the meeting room with that token — the doctor as host, the patient as guest from the patient portal. The patient app opens the room address in a browser without an entry token. The signalling server checks the token before anyone enters. A separate REST API wraps Jitsi so other systems can schedule meetings, issue join links, control participants, start and stop recordings and receive webhooks.
 
 Recording and AI are optional. Recordings carry a security level and an access log, and expire after a retention period. When the AI Server is connected, it can draft minutes, summaries and action items from a recording, and provide live Korean captions and English translated captions — drafts only; clinicians decide what, if anything, goes into the record.
 
@@ -142,7 +142,7 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — HIS signs entry tokens for doctors and patients with a shared secret; the patient portal and app open the room; HIS and Clinic manage recordings through the meeting API; recordings and live audio can go to the AI Server. The connection table lists eight: seven marked not usable now, and one (a short-lived token from an HIS identity provider) that exists only as a design.
+> **EN** — HIS signs entry tokens for doctors and for patients in the portal with a shared secret; the patient app opens the room address without an entry token; HIS and Clinic manage recordings through the meeting API; recordings and live audio can go to the AI Server. The connection table lists eight: seven marked not usable now, and one (a short-lived token from an HIS identity provider) that exists only as a design.
 
 연결 상태 표에 실린 Jitsi 의 연결은 **8개**입니다 — 7개는 지금은 쓸 수 없고, 1개는 설계만 있습니다. 새로 구성한 뒤 연결마다 실제로 불러 상태를 다시 판정합니다.
 
@@ -161,7 +161,7 @@ flowchart TB
 | 1 | HIS → Jitsi | 의사가 진행자로 입장 | HIS 가 **공유 비밀키**로 서명한 토큰 | 지금은 쓸 수 없음 |
 | 2 | HIS 환자 포털 → Jitsi | 환자가 게스트로 입장 — 원격진료 · 원격협진 · 상담 | HIS 가 서명한 토큰 | 지금은 쓸 수 없음 |
 | 3 | HIS 웹 → Jitsi | 녹화 목록 · 메모 · 삭제 · 내려받기 | 회의 관리 API | 지금은 쓸 수 없음 |
-| 4 | 환자 앱 → Jitsi | 대기실 입장을 기록한 뒤 화상 주소를 브라우저로 엶 | HIS 가 서명한 토큰 | 지금은 쓸 수 없음 |
+| 4 | 환자 앱 → Jitsi | 대기실 입장을 기록한 뒤 화상 주소를 브라우저로 엶 | 없음 — 입장 토큰이 붙지 않은 방 주소만 엶 | 지금은 쓸 수 없음 |
 | 5 | Clinic → Jitsi | 회의 녹화 제어 · 녹화 스트림 · 회의 분석 | 회의 관리 API 키 | 지금은 쓸 수 없음 |
 | 6 | Jitsi → AI Server | 녹화로 회의록 · 요약 초안 | 발급된 API 키 | 지금은 쓸 수 없음 |
 | 7 | Jitsi → AI Server | 실시간 음성 조각으로 자막 · 번역 | 발급된 API 키 | 지금은 쓸 수 없음 |

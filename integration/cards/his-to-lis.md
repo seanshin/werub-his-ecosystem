@@ -11,7 +11,7 @@
 | 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
 |---|---|---|---|---|
 | 검사 오더 전달 — LIS가 HIS FHIR ServiceRequest(active)를 5분 주기 증분 폴링 | FHIR R4 REST 검색(searchset) · 폴링 | SMART Backend Services client_credentials(clie | `검증됨` | 2026-09-14 |
-| 검사 오더 취소 전파 — LIS가 status=revoked 를 같은 워터마크로 폴링해 LIS 오더·병리 케이스 취소 | FHIR R4 REST 검색 · 폴링 | A01과 같음(SMART client_credentials · ServiceRequ | `검증됨` | 2026-09-15 |
+| 검사 오더 취소 전파 — LIS가 status=revoked 를 같은 워터마크로 폴링해 LIS 오더·병리 케이스 취소 | FHIR R4 REST 검색 · 폴링 | 다른 연결과 같음(SMART client_credentials · ServiceRe | `검증됨` | 2026-09-15 |
 | 검사 처방 HL7 OML^O21 수신(LIS inbound) — 대체 경로 | HL7 v2 메시지를 HTTP 본문으로(POST) | LIS JWT(ADM 역할) — 기계 간 키 아님 | `미구현` | — |
 | Reflex 승인·반려 웹훅(HIS→LIS push · 폴링 대안) | HTTPS POST JSON | 공유 토큰 헤더 x-reflex-webhook-token(상수시간 비교 · 미설정  | `미구현` | — |
 

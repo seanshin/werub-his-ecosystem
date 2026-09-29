@@ -10,7 +10,7 @@
 
 | 목적 | 프로토콜 | 인증 | 상태 | 확인일 |
 |---|---|---|---|---|
-| 근거 질의용 환자 맥락 FHIR 읽기(Condition·Observation·DiagnosticReport·Procedure 필수 / MedicationReque | FHIR R4 REST 검색·단건(리소스별 독립 수집 · 부분 실패 허용) | 의료진별 patient 스코프 SMART 토큰(Redis 보관 · C-CE-01 에 | `구현·미검증` | — |
+| 근거 질의용 환자 맥락 FHIR 읽기(Condition·Observation·DiagnosticReport·Procedure 필수 / MedicationReque | FHIR R4 REST 검색·단건(리소스별 독립 수집 · 부분 실패 허용) | 의료진별 patient 스코프 SMART 토큰(Redis 보관 · 에서 획득) | `구현·미검증` | — |
 
 ## 양쪽에 넣는 설정 — **키 이름만**
 

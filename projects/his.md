@@ -100,7 +100,7 @@ What is not there yet, stated plainly: transmission to external agencies (insura
 | ![외래 접수](../assets/screens/his-care-reception.png) **외래 접수** — 오늘 온 환자와 대기 상태 | ![오더](../assets/screens/his-care-orders.png) **오더** — 검사 · 처방 · 처치 오더 |
 | ![개원 관제](../assets/screens/his-system-admin-opening.png) **개원 관제** — 개원 전 · 개원 · 개원 후 단계의 항목 | ![상시 감시자](../assets/screens/his-system-admin-sentinel.png) **상시 감시자** — 네 축의 최근 판정 |
 
-화면은 가상 병원 데이터가 든 리허설 설치본에서 찍었습니다(2026-09-12~13). 293장 전체는 [화면으로 보는 생태계](../screens/his.md)에 있습니다.
+화면은 가상 병원 데이터가 든 리허설 설치본에서 찍었습니다(2026-09-12~13). HIS 화면 264장은 [HIS 화면](../screens/his.md)에, 생태계 전체 293장은 [화면 목차](../screens/README.md)에 있습니다.
 
 ## 4. 어떻게 만들어졌나
 
@@ -151,19 +151,20 @@ flowchart LR
 - **메시지 브로커가 없습니다.** 다른 시스템으로 보낼 이벤트는 DB 의 outbox 테이블에 쌓입니다. 정해진 시각마다 도는 예약 작업(크론 · 59개)이 이것을 보내고, 실패하면 다시 시도합니다(최대 6회).
 - 같은 이벤트가 두 번 나가지 않게 대기열의 이벤트마다 **멱등키**(같은 요청이 여러 번 와도 한 번만 처리되게 하는 식별값)를 붙입니다. 키는 업무 종류와 대상 번호를 이어 붙인 값이라, 같은 업무 · 같은 대상이면 같은 키가 됩니다.
 - **API 모양** — REST 는 모듈 220개 · 핸들러 약 3,300개입니다. 형제 시스템 연결은 대부분 이 REST 로 오갑니다.
-- **표준 표면** — FHIR R4(의료 데이터 국제 표준 · 리소스 17종)는 LIS 와 차트에서 여는 앱들이 씁니다. 검사 오더는 LIS 가 FHIR 로 읽어 가고, 결과는 FHIR 로 넣습니다. FHIR 표면으로 받는 쓰기는 이 검사 결과뿐입니다.
+- **표준 표면** — FHIR R4(의료 데이터 국제 표준 · 리소스 17종)는 LIS 와 차트에서 여는 앱들이 씁니다. 검사 오더는 LIS 가 FHIR 로 읽어 가고, 결과는 FHIR 로 넣습니다. FHIR 로 받는 쓰기는 검사 결과 말고도 세 가지가 더 있습니다. LIS 의 반사 검사 추가 오더는 의사 승인 대기로 들어가고, 받는 설정은 기본 꺼짐입니다. twin 의 위험 평가 · 기록 초안은 의료진이 저장할 때만 들어옵니다. 직원 권한으로 하는 환자 생성도 FHIR 로 받습니다.
 - **SMART on FHIR** — 의사가 환자 차트를 연 채로 외부 앱 단추를 누르면, 그 환자와 로그인 정보가 앱으로 넘어가 다시 로그인하지 않고 열립니다. 사람이 아니라 서버가 HIS 에 접속할 때(예: LIS)도 이 표준의 토큰 발급 방식을 씁니다.
 - **권한** — 역할 14개(의사 · 간호 · 약사 · 임상병리 · 원무 · 의무기록 · 검진 · 경영 · 관리자 등)와 세부 권한 63개. 화면 메뉴와 API 양쪽에서 역할을 확인합니다.
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — HIS works alone, and the other systems attach to it one at a time. It issues the staff identity that the others accept (verified by public key in sign, PACS, edu, twin and cerno; by a shared secret in ERP and Jitsi; by an API key in Clinic). Not every system uses the HIS login — LIS staff sign in to LIS itself. Lab orders and results move over FHIR R4, AI requests go to the AI Server, signatures go to sign, and billing lines go to ERP. Parts of the lab, signature, billing and e-learning links were called for real between fresh installs of the September 2026 release; AI Server paths were partly called but none end to end; nothing has been re-called on the current development line.
+> **EN** — HIS works alone, and the other systems attach to it one at a time. It issues the staff identity that the others accept (verified by public key in sign, PACS, edu, twin and cerno; by a shared secret in ERP and Jitsi). Clinic works the other way round: staff signed in to Clinic move into HIS with a one-time token that HIS checks back with Clinic. Not every system uses the HIS login — LIS staff sign in to LIS itself. Lab orders and results move over FHIR R4, AI requests go to the AI Server, signatures go to sign, and billing lines go to ERP. Parts of the lab, signature, billing and e-learning links were called for real between fresh installs of the September 2026 release; AI Server paths were partly called but none end to end; nothing has been re-called on the current development line.
 
 **HIS 는 혼자 동작하고, 다른 시스템은 필요할 때 하나씩 붙습니다.** AI Server 가 없어도 HIS 는 돌고, AI 기능만 쓰지 못합니다.
 
-직원 로그인은 두 갈래입니다.
+직원 로그인은 세 갈래입니다.
 
-- **HIS 로그인을 받아들이는 시스템** — sign · PACS · edu · twin · cerno · ERP · Jitsi · Clinic. 직원은 HIS 에 로그인하고, 이 시스템들은 HIS 가 발급한 신원을 받아들입니다. 받아들이는 방식은 아래 표의 인증 칸처럼 시스템마다 다릅니다.
+- **HIS 로그인을 받아들이는 시스템** — sign · PACS · edu · twin · cerno · ERP · Jitsi. 직원은 HIS 에 로그인하고, 이 시스템들은 HIS 가 발급한 신원을 받아들입니다. 받아들이는 방식은 아래 표의 인증 칸처럼 시스템마다 다릅니다.
+- **반대 방향 — Clinic.** Clinic 에 로그인한 직원이 HIS 로 넘어올 때는 Clinic 이 1회용 토큰을 내고, HIS 가 Clinic 에 되물어 확인합니다. HIS 에서 Clinic 으로 넘어가는 길은 아직 없습니다.
 - **따로 로그인하는 시스템** — LIS. 직원은 LIS 에 따로 로그인하고, LIS 와 HIS 사이는 서버끼리 쓰는 토큰으로 오갑니다.
 
 HIS 가 멈췄을 때 다른 시스템의 로그인 · 서명이 어떻게 되는지는 확인하지 못했습니다.
@@ -185,21 +186,21 @@ flowchart TB
 
 | 상대 | HIS 가 주는 것 | HIS 가 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **LIS** | 검사 오더 · 환자 정보 · 검사 코드 목록 | 검사 결과 · 취소 | 서버 간 표준 토큰(SMART) · 연동 키 | **확인함 5**(2026-09-14~15): 오더 · 결과 · 취소 · 환자 조회 · 검사 코드 반입 — 다만 HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있던 것은 3개<br/>**아직 3**: 반사 검사 · 수혈 동의 · 조직 결재 조회는 만들어져 있음 · 실제 연결 확인은 아직 |
+| **LIS** | 검사 오더 · 오더 취소 · 환자 정보 · 검사 코드 목록 | 검사 결과 | 서버 간 표준 토큰(SMART) · 연동 키 | **확인함 5**(2026-09-14~15): 오더 · 결과 · 취소 · 환자 조회 · 검사 코드 반입 — 다만 HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있던 것은 3개<br/>**확인 전 기능 3가지**(연결로는 4개 — 반사 검사가 오더 · 상태 조회 두 연결): 반사 검사 · 수혈 동의 · 조직 결재 조회는 만들어져 있음 · 실제 연결 확인은 아직<br/>**아직 없음 4**: HL7 v2 대체 경로 2 · 반사 검사의 HL7 오더 · 반사 검사 승인 결과를 HIS 가 먼저 알리는 통지 |
 | **sign** | 서명 요청 · 직원 신원(공개키) | 서명 완료 통지 | HIS 공개키로 검증 · 서명된 통지 | 직원 서명 · 완료 통지 · 오더 서명 봉인 **확인함**(2026-09-14) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 실제 연결 확인은 아직 |
-| **ERP** | 직원 로그인 · 수납 · 운영 이벤트 | 진료비 계산서 · 청구 라인 · 보험 코드 · 정산 회신 | 공유 비밀키 · 연동 키 | 로그인 · 계산서 · 청구 라인 · 보험 코드 매핑 등 **확인함**(2026-09-14~15) · 일부 경로는 아직 |
-| **edu** | 직원 로그인 · 공개키 · 직원 명부 | 교육 이수 기록 | HIS 공개키로 검증 · 연동 키 | 네 경로 모두 **확인함**(2026-09-14) |
-| **PACS** | 영상 오더 · 직원 로그인 | 판독 결과 | HIS 공개키 · 서비스 계정 | 만들어져 있음 · HIS 화면에서 부르는 경로의 실제 연결 확인은 아직 |
+| **ERP** | 직원 로그인 · 수납 · 청구 라인 · 운영 이벤트 | 진료비 계산서 · 보험 코드 · 정산 회신 | 공유 비밀키 · 연동 키 | 로그인 · 계산서 · 청구 라인 · 보험 코드 매핑 등 **확인함**(2026-09-14~15) · 일부 경로는 아직 |
+| **edu** | 직원 로그인 · 공개키 · 직원 명부 · 직원 이벤트 | 교육 이수 기록 | 직원 로그인은 HIS 공개키로 검증 · 명부 · 이수 기록은 HIS 와 나눈 비밀값으로 만든 서비스 토큰 | **확인함 4**(2026-09-14): 로그인 · 공개키 · 명부 · 이수 기록<br/>직원 이벤트 통지 · edu 자체 로그인 화면 경로는 만들어져 있음 · 실제 연결 확인은 아직 · edu 가 HIS 에 알림을 넣는 길은 아직 없음 |
+| **PACS** | 영상 오더 · 직원 로그인 | 판독 결과 | HIS 공개키 · 서비스 계정 | 만들어져 있음 · HIS 화면에서 부르는 경로의 실제 연결 확인은 아직 · 영상 파일 자체를 HIS 가 중계하는 경로는 코드만으로 판정하지 못함 |
 | **AI Server** | 요약 · 번역 · 초안 요청 | 초안 · 결과 | 발급된 API 키 · 보내도 되는 목적지 목록 | 요약 · 번역 등 일부 경로를 불러 봄(2026-09) · 끝까지 확인한 경로는 아직 없음 |
-| **Clinic** | 직원 · 조직 · 알림 | 결재 결과 등 | Clinic 이 발급한 API 키 · 서명된 통지 | 만들어져 있음 · 확인은 아직(설치하지 않음) |
-| **twin · cerno** | 환자 맥락(차트에서 앱을 열 때) | 위험 점수 · 기록 초안(의료진 승인 뒤) | SMART on FHIR | 만들어져 있음 · 확인은 아직 |
+| **Clinic** | 직원 · 조직 · 알림 | 결재 결과 · Clinic 에서 넘어오는 직원 로그인 등 | 서버끼리는 Clinic 이 발급한 API 키 · 서명된 통지 · 직원 로그인은 Clinic 의 1회용 토큰을 HIS 가 되물어 확인 | 만들어져 있음 · 확인은 아직(설치하지 않음) |
+| **twin · cerno** | 환자 맥락(차트에서 앱을 열 때) | 위험 점수 · 기록 초안 — twin 만, 의료진이 저장할 때. cerno 는 읽기만 합니다 | SMART on FHIR | 만들어져 있음 · 확인은 아직 |
 | **Jitsi** | 화상 진료 입장 토큰 | — | 공유 비밀키 | 지금은 쓸 수 없음(화상 서버를 새로 구성해야 함) |
 
 「확인함」은 2026년 9월, 통합 릴리즈 `2026.09` 로 새로 세운 설치본끼리 실제로 불러 본 결과입니다(가상 데이터 · [따라가 본 결과](../build-guide/follow-along-2026-09.md)). 현재 개발본으로 다시 부르지는 않았습니다. 연결마다의 자세한 내용은 [연결 카드](../integration/cards/)와 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에 있습니다.
 
 ## 6. 설치 · 운영
 
-> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU; sizing for a given number of users was not measured. A new install uses the install script (seven steps, rehearsed so far only in a local container); updating an existing server uses the deploy script, which applies the schema differently, and the repository says not to mix the two. Upgrading a newly installed server to the next version is not defined yet: the repository lists it as an open limitation handled with the vendor, and its planned order (backup, apply migrations, one-off fixes, smoke test, restore on failure) has no script. The repository points new sites to the install script rather than the production compose file, though neither has been proven on a real empty server. Four settings are required in every mode; an unset mode counts as real, which also requires the security settings. Most runtime values are changed in the admin screen; the AI server address is set by environment variable. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
+> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU; sizing for a given number of users was not measured. A new install uses the install script (seven steps, rehearsed so far only in a local container); updating an existing server uses the deploy script, which applies the schema differently, and the repository says not to mix the two. Upgrading a newly installed server to the next version is not defined yet: the repository lists it as an open limitation handled with the vendor, and its planned order (backup, apply migrations, one-off fixes, smoke test, restore on failure) has no script. The repository points new sites to the install script rather than the production compose file, though neither has been proven on a real empty server. Four settings are required in every mode; an unset mode counts as real, which also requires the security settings. Most runtime values are changed in the admin screen; the AI server address is set by environment variable. The AI switch is on by default in code, so switch it off until AI Server is ready. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
 
 ### 필요한 것
 
@@ -253,6 +254,7 @@ flowchart TB
 - **운영 모드를 정하지 않으면 리얼 모드로 봅니다**(가장 엄격한 쪽). 그래서 넷만 넣고 모드를 비워 두면 위의 추가 설정 때문에 부팅이 거부됩니다. 시험 설치라면 리허설 모드를 명시합니다.
 - 운영 중 바꾸는 값(약 395개 — 기관 정보 · 청구 규칙 · AI 스위치 · 연동 주소 등)은 환경 변수가 아니라 **관리 화면의 시스템 설정**에서 바꿉니다. 화면은 그 값이 어디서 왔는지(DB · 기본값 · 미설정)를 보여 줍니다.
 - 예외로 **배포로만 바꾸는 값**이 있습니다. 현재 개발본에서는 AI 서버 주소 하나이고, 관리 화면에서는 고칠 수 없으며 환경 변수(`AI_SERVER_URL`)로 정합니다.
+- **AI 스위치(`ai.server.enabled`)는 코드 기본값이 켜짐입니다.** AI Server 를 세우기 전에는 관리 화면에서 끄고 시작하기를 권합니다([AI Server 소개서](ai-server.md) · [S6](../build-guide/S6-ai.md)). 현재 개발본의 기본 시드는 이 값을 DB 에 넣지 않으므로, 꺼 둔 값이 시드로 되돌아가지 않습니다.
 
 ### 운영 모드 세 단계
 
@@ -309,7 +311,7 @@ flowchart TB
 
 ## 9. 통합 릴리즈 `2026.09` 이후 달라진 점
 
-> **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 485 commits: only 7 of them form v4.19.0; the other 478 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, and the AI server address now settable by environment variable.
+> **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 485 commits: only 7 of them form v4.19.0; the other 478 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, the AI server address now settable by environment variable, and the default seed no longer writes AI settings into the database.
 
 이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **485커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **478커밋은 아직 번호가 없는 개발본**입니다. 이 소개서가 설명하고 설치 스크립트가 들어 있는 것은 이 개발본입니다(받을 코드는 §1 「한눈에」).
 
@@ -319,7 +321,7 @@ flowchart TB
 | **리얼 모드** | 보안 설정이 비어 있으면 **부팅 거부** · 운영 모드 미지정 = 리얼 |
 | **컨테이너** | 운영용 compose 에 스키마 적용 · 첫 관리자 · 상시 감시자 서비스 추가(끝까지 기동해 본 기록은 없음) |
 | **백업 · 보존** | 업로드 파일 백업 · 2차 사본 · 복원 시험 · **법적 보존명령**(보존 중인 기록은 파기되지 않게) |
-| **AI** | AI 서버 주소를 **환경 변수로 바꿀 수 있게**(전에는 DB 를 직접 고쳐야 했음) |
+| **AI** | AI 서버 주소를 **환경 변수로 바꿀 수 있게**(전에는 DB 를 직접 고쳐야 했음) · 기본 시드가 AI 설정을 DB 에 심지 않음 — 전에는 시드를 다시 돌리면 꺼 둔 AI 가 다시 켜졌음 |
 | **새 기능** | 공간 · 동선(도면 · 3D 뷰어 · 길안내) · 경영성과 비교 · 환자 메시지 직원 수신함 · 응급 도착 기록 · 비밀번호 변경 화면 |
 | **규모** | 데이터 모델 562 → **573** · API 핸들러 3,251 → **3,323** · 웹 화면 450 → **456** · 메뉴 266 → **272** · 결정 등록부 56 → **156** |
 | **권한 · 정합성 · 연동** | 권한 점검을 전수로 다시 했고, 형제 시스템과의 연동 코드가 여러 곳 고쳐졌습니다 — 각 연결의 상태는 다시 확인한 뒤 [연결 표](../RELEASES/2026.09/compatibility.md)에 반영합니다 |

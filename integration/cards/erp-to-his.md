@@ -17,7 +17,7 @@
 | 휴가 결재 결과를 HIS ESS 로 릴레이 | HTTP POST /api/v1/ess/leave/eapproval-callback | 정적 키 X-Integration-Key(ERP his_webhook_key 값)  | `구현·미검증` | — |
 | 검진권 딜러 정산 지급 회신(settlement.paid) | HTTP POST /api/v1/voucher/settlements/erp-call | 정적 키 X-Integration-Key + 본문 HMAC('{X-Timestamp | `검증됨` | 2026-09-15 |
 | 재고 입고(inventory·CSSD supply)·자산 코드 매핑·청구 심사결과 콜백·환자 조회 — HIS 가 받을 준비만 된 경로들 | HTTP POST /api/v1/integration/inventory/supply | 정적 키 X-Integration-Key (환자 단건은 X-Target-Token  | `미구현` | — |
-| 의료진 계약 전자서명 발의 — ERP 가 계약을 만들면 HIS 가 문서 발급·sign 제출·요청 ID 바인딩(→ B-21·B-22·B-01 sign.complet | HTTP POST /api/v1/sign-integration/erp/request | 전용 정적 키 X-Integration-Key (ERP his_sign_origin | `검증됨` | 2026-09-15 |
+| 의료진 계약 전자서명 발의 — ERP 가 계약을 만들면 HIS 가 문서 발급·sign 제출·요청 ID 바인딩(→ sign.completed 로 이어짐) | HTTP POST /api/v1/sign-integration/erp/request | 전용 정적 키 X-Integration-Key (ERP his_sign_origin | `검증됨` | 2026-09-15 |
 | 서명 완료본(PDF) 회수 — sign.completed 이벤트에 실린 HIS 문서 다운로드 주소로 가져와 첨부 | HTTP GET (이벤트 payload.document 의 단기 토큰 URL) ·  | URL 안 단기 HMAC 토큰(HIS 발급) | `구현·미검증` | — |
 
 ## 양쪽에 넣는 설정 — **키 이름만**

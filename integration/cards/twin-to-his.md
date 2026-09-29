@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | 환자 트윈 FHIR 읽기(Patient·Condition·Observation·MedicationRequest·AllergyIntolerance·Encounter | FHIR R4 REST 검색·단건 — 레거시(서비스 계정 직원 JWT → /fhir | ① 서비스 계정 로그인 JWT(또는 정적 토큰) ② SMART client_cred | `구현·미검증` | — |
 | 운영 트윈 REST(병상·병동·재원·운영통계·의료기기·ICU/ER/OR) + 트윈 전용 EP(AI 활용 동의·일반병동 활력·영상 study 목록) | HTTPS REST(JSON · {data,meta}) | 서비스 계정 직원 JWT(POST /api/v1/auth/login) 또는 정적 토 | `구현·미검증` | — |
-| FHIR write-back — AI 생성 RiskAssessment · SBAR/SOAP DocumentReference 를 의료진 '차트 저장' 액션으로 HI | FHIR R4 POST /fhir/R4/RiskAssessment · /fhir/R | 의료진별 patient 스코프 SMART 토큰(C-TW-02 콜백이 보관) · 토큰 | `구현·미검증` | — |
+| FHIR write-back — AI 생성 RiskAssessment · SBAR/SOAP DocumentReference 를 의료진 '차트 저장' 액션으로 HI | FHIR R4 POST /fhir/R4/RiskAssessment · /fhir/R | 의료진별 patient 스코프 SMART 토큰( 콜백이 보관) · 토큰-환자 일치  | `구현·미검증` | — |
 
 ## 양쪽에 넣는 설정 — **키 이름만**
 

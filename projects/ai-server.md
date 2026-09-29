@@ -155,11 +155,11 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — AI Server is the called side; the connection table lists no call from it to another ecosystem system, though it does need internet access for public reference data. Each caller gets its own API key. HIS, PACS, ERP, edu, twin and cerno are wired to call it; the video-consultation link is not usable now. In the September 2026 follow-along, some HIS, ERP and edu paths were called with a small substitute model, but "tried" is not "verified": no connection was marked verified because each covers many functions or needs an embedding model that was not loaded. The statuses come from the integrated-release install, not the current development line.
+> **EN** — AI Server is the called side; apart from a callback to the video-consultation system that is not usable now, the connection table lists no call from it to another ecosystem system, though it does need internet access for public reference data. Each caller gets its own API key, and chat requests run one at a time per key. HIS, PACS, ERP, edu, twin and cerno are wired to call it; the video-consultation link is not usable now. In the September 2026 follow-along, some HIS, ERP and edu paths were called with a small substitute model, but "tried" is not "verified": no connection was marked verified because each covers many functions or needs an embedding model that was not loaded. The statuses come from the integrated-release install, not the current development line.
 
 **AI Server 는 불리는 쪽입니다.** 부르도록 만들어진 곳은 HIS · PACS · ERP · edu · twin · cerno 여섯입니다. 원격 상담(Jitsi)에서 부르는 길은 지금 쓸 수 없어 그림에 점선으로만 둡니다. 부르는 시스템마다 API 키를 따로 발급합니다.
 
-AI Server 가 생태계의 다른 시스템을 부르는 연결은 없습니다. 그렇다고 폐쇄망에서 그대로 도는 것은 아닙니다 — 공공 데이터를 받으려고 **인터넷으로 나가는 연결**이 필요합니다(8절).
+AI Server 가 생태계의 다른 시스템을 부르는 연결은 없습니다. 예외는 원격 상담(Jitsi)에 회의록 결과를 돌려주는 콜백 하나인데, 지금은 쓸 수 없습니다. 그렇다고 폐쇄망에서 그대로 도는 것은 아닙니다 — 공공 데이터를 받으려고 **인터넷으로 나가는 연결**이 필요합니다(8절).
 
 아래 표의 「불러 봄」과 「확인함」은 다릅니다. 「불러 봄」은 경로 하나가 응답하는 것을 본 것이고, 연결 하나에 묶인 기능 전체를 확인하지는 않았습니다. 그래서 AI Server 의 연결 중 「확인함」은 **하나도 없습니다**. 표의 상태는 통합 릴리즈 기준 설치본에서 본 것이고, 현재 개발본으로 다시 부르지는 않았습니다(9절).
 
@@ -187,6 +187,7 @@ flowchart LR
 
 - 「불러 봄」은 2026년 9월에 새로 세운 설치본에서 **작은 대체 모델 · CPU** 로 불러 본 것입니다(가상 데이터 · [따라가 본 결과](../build-guide/follow-along-2026-09.md)). 품질은 판정하지 않았습니다.
 - **부르는 쪽이 알아 둘 것** — 비용이 큰 경로는 호출 한도를 넘으면 429(요청이 너무 많음)를 돌려줍니다. 부르는 쪽은 기다렸다 다시 시도하게 만듭니다. 응답마다 붙는 계약 버전 표시(`X-API-Contract`)는 예전 호출 방식이 더는 통하지 않게 바뀔 때만 오릅니다. 쓸 수 있는 데이터와 API 는 데이터 카탈로그에서 먼저 확인합니다.
+- **대화 요청은 키마다 한 번에 한 건** — 대화 경로(`/api/chat`)는 API 키 하나당 동시에 한 건, 서버 전체로는 세 건까지 처리합니다. 나머지는 대기열에서 차례를 기다립니다(최대 20건 · 60초). 여러 사람이 키 하나를 나눠 쓰면 요청이 하나씩 차례로 처리됩니다.
 
 연결마다의 자세한 내용: [HIS → AI Server](../integration/cards/his-to-ai-server.md) · [PACS → AI Server](../integration/cards/pacs-to-ai-server.md) · [ERP → AI Server](../integration/cards/erp-to-ai-server.md) · [edu → AI Server](../integration/cards/edu-to-ai-server.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md).
 

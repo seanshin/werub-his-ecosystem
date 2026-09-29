@@ -40,6 +40,15 @@ const pick = (c) => {
 
 // 🔴 괄호 부기를 버리지 않는다 — 버리면 「HIS(환자 포털) → PACS」 와 「HIS → PACS」 가 같은 파일이 되어
 //    한 장이 다른 장을 덮어쓴다(실제로 2장이 사라졌다).
+// 내부 연결 번호(A 두 자리 · B~D-두 자리 · C-AI-두 자리 모양) — 공개 연결 표에는 없는 번호다.
+// 🔴 2026-09-29 — 설명 칸을 옮기면서 이 번호까지 카드에 따라 들어가 09-16 부터 공개돼 있었다(「D-두 자리 과 같음」 모양 등 8장).
+export const INTERNAL_CONN_ID = /(?<![A-Za-z0-9-])(?:A\d{2}|[B-D]-\d{2}|C-(?:AI|TW|CE)-\d{2})(?![0-9])/g;
+export const stripConnIds = (t) => String(t)
+  .replace(new RegExp(`${INTERNAL_CONN_ID.source}(?:\\s*[·,]\\s*${INTERNAL_CONN_ID.source})*\\s*(?:과|와) 같음`, 'g'), '다른 연결과 같음')
+  .replace(INTERNAL_CONN_ID, '')
+  .replace(/\(→\s*[·,\s]*/g, '(→ ')
+  .replace(/[·]\s*[·]+/g, '·')
+  .replace(/ {2,}/g, ' ');
 const slug = (s) => s.trim().replace(/[()]/g, '-').replace(/[\s·]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').toLowerCase();
 const statusOf = (c) => c.liveStatus ?? c.staticStatus;
 
@@ -88,7 +97,7 @@ function cardBody(from, to, list, human) {
   for (const c of list) {
     const st = statusOf(c);
     const date = c.verifiedAt ?? '—';
-    const cell = (s, n) => (s ?? '—').replace(/\|/g, '\\|').replace(/\n/g, ' ').slice(0, n);
+    const cell = (s, n) => stripConnIds(s ?? '—').replace(/\|/g, '\\|').replace(/\n/g, ' ').slice(0, n);
     L.push(`| ${cell(c.purpose, 90)} | ${cell(c.protocol, 46)} | ${cell(c.auth, 46)} | \`${st}\`${c.livePartial ? '(일부만 확인)' : ''} | ${date} |`);
   }
   L.push('');
@@ -166,6 +175,8 @@ try {
     const files = build();
     const all = [...files.values()].join('\n');
     if (/C\d{1,2}\b/.test(all.replace(/C5500|C-AI|CSSD/g, ''))) fails.push('카드에 후보 번호로 보이는 문자열이 있습니다');
+    if (new RegExp(INTERNAL_CONN_ID.source).test(all)) fails.push('카드에 내부 연결 번호 모양이 남아 있습니다');
+    if (stripConnIds('D-99 과 같음(X)') !== '다른 연결과 같음(X)' || /B-98/.test(stripConnIds('(→ B-98·B-99·A99 sign)'))) fails.push('내부 연결 번호를 지우지 못합니다');
     console.log(`자기 검증 — 연결 ${conns.length} · 카드 ${files.size - 1}장 · 읽은 필드 ${PICK.join(',')}`);
     if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
     console.log('  ✓ 공개 금지 필드 차단 · 카드 생성 · 후보 번호 없음');

@@ -25,6 +25,7 @@ const DENY = path.join(ROOT, 'tools', '.denylist.local');
 export const INTERNAL = [
   { name: '내부 항목 ID(후보)', re: /(?<![A-Za-z])C\d{1,2}(?![\d개-])/ },
   { name: '내부 항목 ID(리허설)', re: /(?<![A-Za-z])(?:F\d{2}|P[WXSV]\d|PA\d|R\d{2}|U\d|E1[0-9]|X\d|G\d{2})(?![\d개])/ },
+  { name: '내부 연결 번호', re: /(?<![A-Za-z0-9-])(?:A\d{2}|[B-D]-\d{2}|C-(?:AI|TW|CE)-\d{2})(?![0-9])/ }, // 2026-09-29 — 카드 8장에 09-16 부터 남아 있던 모양(예시는 실제로 없는 번호로)
   { name: '내부 경로(기획서)', re: /planning\/(?:ecosystem-open-materials|notify|p5-)/ },
   { name: '개인 이메일', re: /[\w.+-]+@(?!users\.noreply\.github\.com)[\w-]+\.[\w.]+/ },
 ];
@@ -46,6 +47,7 @@ try {
     if (!hit('후보 C12 를 판정했다').length) fails.push('후보 번호를 잡지 못합니다');
     if (!hit('발견 PW1 · PX1').length) fails.push('리허설 항목 ID 를 잡지 못합니다');
     if (!hit('planning/notify/his.md 참고').length) fails.push('내부 경로를 잡지 못합니다');
+    if (!hit('D-99 과 같음 · A99과 같음').length) fails.push('내부 연결 번호를 잡지 못합니다');
     if (hit('연결 113개 · 검증됨 27개').length) fails.push('멀쩡한 수치를 내부 ID 로 봅니다');
     if (hit('RTX 5080(16GB) · C 언어').length) fails.push('흔한 표기를 내부 ID 로 봅니다');
     if (hit('8508132+seanshin@users.noreply.github.com').length) fails.push('커밋 작성자 주소를 개인 이메일로 봅니다');
@@ -99,7 +101,7 @@ try {
     }
     return baseCache.get(file);
   };
-  const diff = git(['diff', '-M', range, '--unified=0', '--', '.', ':(exclude)tools/check-history.mjs']).split('\n');
+  const diff = git(['diff', '-M', range, '--unified=0', '--', '.', ':(exclude)tools/check-history.mjs', ':(exclude)tools/build-connection-cards.mjs']).split('\n');
   const preExisting = [];
   let oldFile = null;
   for (const l of diff) {

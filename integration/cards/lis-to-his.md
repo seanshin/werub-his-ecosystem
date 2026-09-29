@@ -17,7 +17,7 @@
 | Reflex 추가검사 오더 HL7 ORM^O01(MLLP) — HIS_ORDER_TRANSPORT=ORM 선택 시 | HL7 v2 over MLLP | 없음(MLLP) | `미구현` | — |
 | Reflex PreOrder 승인·반려 상태 폴링(GET ServiceRequest/:id) | FHIR R4 REST read · 10분 폴링 | SMART client_credentials · ServiceRequest.read | `구현·미검증` | — |
 | 검사코드 카탈로그 반입(H1 · edi_code 정본 · 1:N 패널 · since 증분) | HTTPS GET JSON(커스텀) | x-integration-key(LIS HIS_INTEGRATION_KEY ↔ HI | `검증됨` | 2026-09-15 |
-| 조직 게이트 결재 상태 참조(HIS 전자결재 중계 EApprovalRelay) | HTTPS GET JSON(커스텀) | x-integration-key(A11 과 같음) | `구현·미검증` | — |
+| 조직 게이트 결재 상태 참조(HIS 전자결재 중계 EApprovalRelay) | HTTPS GET JSON(커스텀) | x-integration-key(다른 연결과 같음) | `구현·미검증` | — |
 | 수혈 동의 상태 참조(FHIR Consent 파생 상태 · 출고 전 확인) | HTTPS GET JSON(Consent 모양 · 커스텀 EP) | x-integration-key + X-Target-Token(HMAC-SHA256 | `구현·미검증` | — |
 
 ## 양쪽에 넣는 설정 — **키 이름만**

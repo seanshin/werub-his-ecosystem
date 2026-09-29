@@ -13,7 +13,7 @@
 | edu 자체 로그인 화면의 ID/PW 를 HIS `/api/v1/auth/login` 으로 중계 → HIS access 토큰으로 staff-token?aud=ed | 서버간 REST(JSON) | 사용자 ID/PW(HIS 로 전달) → HIS JWT(Bearer) → RS256  | `구현·미검증` | — |
 | staff-token 검증용 공개 JWKS 조회(테넌트별 캐시 1시간 · kid 미스 시 재조회) | HTTPS GET JWKS | 없음(공개 키) | `검증됨` | 2026-09-14 |
 | 직원 디렉터리 조회(교육 대상자 자동 지정 · 야간 폴링 안전망) | REST GET `/api/v1/hr/staff?status=ACTIVE` | his.eduKey 설정 시 X-Edu-Key, 아니면 edu 가 HIS AUTH_ | `검증됨` | 2026-09-14 |
-| 교육 이수기록 기록(법정·보수교육 → HIS 자격·교육 원장) · 카탈로그 이수 | REST POST `/api/v1/staff-qualification/educati | D-17 과 같음(X-Edu-Key 또는 자체 서명 ADMIN 토큰) | `검증됨` | 2026-09-14 |
+| 교육 이수기록 기록(법정·보수교육 → HIS 자격·교육 원장) · 카탈로그 이수 | REST POST `/api/v1/staff-qualification/educati | 다른 연결과 같음(X-Edu-Key 또는 자체 서명 ADMIN 토큰) | `검증됨` | 2026-09-14 |
 | edu → HIS 직원 인앱 알림 인입 | REST POST `/api/v1/integration/edu/notificatio | X-Integration-Key(edu.integrationKey) | `미구현` | — |
 
 ## 양쪽에 넣는 설정 — **키 이름만**

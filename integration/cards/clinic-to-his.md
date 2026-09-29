@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | 직원 SSO 로그인 — Clinic 이 1회용 토큰 발급 → HIS `/sso`(또는 `POST /api/v1/sso/verify`) 가 Clinic `/api/ | HTTPS 리다이렉트(브라우저) + 서버간 REST(JSON) | Clinic 발급 1회용 불투명 토큰(해시 저장·5분) · HIS→Clinic 검증 | `구현·미검증` | — |
 | W.Sign 결재 결과 콜백(wsign.approved/rejected/withdrawn) → HIS 가 ERP 릴레이 결과로 전달 | HTTPS POST 웹훅 → HIS `/api/v1/webhooks/clinic` | X-Clinic-Signature = HMAC-SHA256(rawBody) · HI | `구현·미검증` | — |
-| Clinic 일반 이벤트 웹훅(연차 승인·반려 등) — HIS 가 D-05 webhooks 구독으로 등록한 URL 로 발송 | HTTPS POST 웹훅 {event,cafeId,data,timestamp} | Clinic 은 X-HIS-Signature = sha256 HMAC(body) 로 | `구현·미검증` | — |
+| Clinic 일반 이벤트 웹훅(연차 승인·반려 등) — HIS 가 webhooks 구독으로 등록한 URL 로 발송 | HTTPS POST 웹훅 {event,cafeId,data,timestamp} | Clinic 은 X-HIS-Signature = sha256 HMAC(body) 로 | `구현·미검증` | — |
 | 병원 등록(hospital-register) — Clinic 관리자가 병원을 승인할 때 발급한 API 키·병원 코드를 HIS 에 통지 | HTTPS POST(fire-and-forget) | X-Webhook-Secret(Clinic 쪽 HIS_WEBHOOK_SECRET) | `구현·미검증` | — |
 | 병원 서비스(hospital-web)의 워크그룹(의사 일정·수술·병동·투약·근무)·동선(층·구역·흐름) 데이터 — 메인앱 `/api/clinic/his/{work | REST(JSON) + SSE 패스스루 | Clinic 은 정적 HIS_API_KEY 를 `Authorization: Bear | `판정 불가` | — |
 

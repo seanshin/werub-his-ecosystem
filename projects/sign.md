@@ -136,9 +136,9 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign itself only calls out to deliver completion notices and their retries. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026 (HIS 3, PACS 2, ERP 2, edu 2) — system-to-system paths with synthetic data, not real patient identity checks, text messages or signing started from HIS screens. The HIS three were staff signing with a request created directly in sign, the completion notice, and order-log sealing.
+> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign does not start signing work on its own; what it calls first is the completion notice (with retries), the HIS public-key list, and optionally an external timestamp authority and identity-check provider. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026 (HIS 3, PACS 2, ERP 2, edu 2) — system-to-system paths with synthetic data, not real patient identity checks, text messages or signing started from HIS screens. The HIS three were staff signing with a request created directly in sign, the completion notice, and order-log sealing.
 
-**sign 은 스스로 서명 업무를 시작하지 않습니다.** 다른 시스템이 서명을 요청하고, sign 은 서명이 끝나면 요청한 시스템에 알립니다. sign 이 먼저 부르는 것은 이 완료 통지와 그 재시도뿐입니다.
+**sign 은 스스로 서명 업무를 시작하지 않습니다.** 다른 시스템이 서명을 요청하고, sign 은 서명이 끝나면 요청한 시스템에 알립니다. sign 이 먼저 부르는 것은 이 완료 통지와 그 재시도, 직원 신원을 확인할 HIS 공개키 목록입니다. 선택하면 외부 타임스탬프 기관과 본인확인 사업자도 부릅니다.
 
 **의료진 서명은 세 단계로 이어집니다.**
 
