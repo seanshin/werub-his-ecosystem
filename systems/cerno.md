@@ -1,5 +1,8 @@
 # cerno — 시스템 구성서
 
+> 📘 **처음 읽는다면 → [cerno 소개서](../projects/cerno.md)** — 무엇인지 · 지금 쓸 수 있는지 · 무엇이 필요한지를 쉬운 말로 먼저 설명합니다(현재 개발본 기준). 이 구성서는 설정 키 · 연동 행 · 한계를 빠짐없이 적은 **참고 문서**입니다(통합 릴리즈 `2026.09` 기준).
+> **EN** — New here? Start with the [cerno introduction](../projects/cerno.md). This brief is the complete reference (settings, connections, limits) pinned to release 2026.09.
+
 > 기준 버전 **0.1.0** · 기준 커밋 `4f5c22b331fc` · 구현 상태 `파일럿` — [매니페스트](../RELEASES/2026.09/manifest.md) 기준
 > 사실 확인: 미확인 — 생태계 자료 측 조사 기준(시스템 담당 확인 전) · **이 시스템은 2026-09 따라가기에서 설치하지 않았습니다**(다른 7개 시스템은 설치해 연결을 확인했습니다)
 
