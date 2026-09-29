@@ -46,7 +46,7 @@
 ## 프로젝트 소개서 — 13개를 하나씩
 **Project introductions — one per project**
 
-> **EN** — Each project gets its own introduction written for hospital IT staff, read from the project's **current development line**: what it is, where it is used, what it can do, how it is built, how it connects, what it takes to run, why it was designed that way, and what is not there yet — with an English introduction and English summaries throughout. **HIS is the first one.** The others are being written in this order: PACS, sign, ERP, AI Server, patient app, public website, LIS, edu, Clinic, twin, cerno, Jitsi. Until then, each links to its system brief.
+> **EN** — Each project gets its own introduction written for hospital IT staff, read from the project's **current development line**: what it is, where it is used, what it can do, how it is built, how it connects, what it takes to run, why it was designed that way, and what is not there yet — with an English introduction and English summaries throughout. All thirteen are written; each summary below is taken from section 1 of its introduction.
 
 프로젝트마다 **의료 전산담당자**가 처음 읽을 소개서를 따로 씁니다. 각 소개서는 그 저장소의 **현재 개발본**을 읽고 쓰며, 이 자료의 다른 문서(통합 릴리즈 `2026.09` 기준)와 무엇이 달라졌는지를 따로 적습니다. 목록: [프로젝트 소개서](projects/).
 
@@ -66,19 +66,79 @@
 
 ### 나머지 12개
 
-| 프로젝트 | 한 줄 | 지금 읽을 곳 |
-|---|---|---|
-| 공개 홈페이지 · 환자 앱 | 병원 공개 사이트 · 환자용 모바일 앱(HIS 저장소 안) | [홈페이지 구성서](systems/homepage.md) · [환자 앱 구성서](systems/patient-app.md) |
-| LIS | 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사정보시스템 | [구성서](systems/lis.md) |
-| PACS | 영상 저장 · 판독 워크플로 · 웹 뷰어 · 영상 AI 보조 | [구성서](systems/pacs.md) |
-| sign | 자체 인증서 · 타임스탬프 · PDF 전자서명 · 위변조 증거 | [구성서](systems/sign.md) |
-| ERP | 재무회계 · 원가 · 인사급여 · 자재 · 보험청구 · 세무 | [구성서](systems/erp.md) |
-| AI Server | 기관 안 GPU 한 장의 AI 연산 — 요약 · 초안 · 근거 질의 · 음성 인식 | [구성서](systems/ai-server.md) |
-| twin | 위험 점수 카드 · SBAR · 병상 · 인력 시뮬레이션 | [구성서](systems/twin.md) |
-| cerno | 의료진별 근거 질의(근거가 없으면 만들지 않음) | [구성서](systems/cerno.md) |
-| edu | 직원 이러닝 · 법정교육 · 전자 이수증 | [구성서](systems/edu.md) |
-| Clinic | 병원 그룹웨어 — 인수인계 · 근무 · 알림 · 결재 | [구성서](systems/clinic.md) |
-| Jitsi | 원격진료 화상(현재 설치본은 동작하지 않음) | [구성서](systems/jitsi.md) |
+각 소개서 1절 「한 문장」을 그대로 옮겼습니다. 기능 · 구성 · 연결 · 설치 · 한계는 소개서에 있습니다.
+
+### 공개 홈페이지 — 병원의 바깥 창구 · [소개서](projects/homepage.md)
+
+> **EN** — The public website shows the hospital to the outside world and helps patients book, drawing everything from HIS.
+
+공개 홈페이지는 병원을 바깥에 소개하고 환자의 예약을 돕는 웹사이트이며, 보여 주는 내용은 모두 HIS 에서 가져옵니다.
+
+### 환자 앱 — 환자 손안의 병원 기록 · [소개서](projects/patient-app.md)
+
+> **EN** — The patient app lets patients see their own record and handle bookings, consents and questionnaires on their phone, through HIS.
+
+환자 앱은 환자가 휴대전화로 자기 진료 기록을 보고 예약 · 동의서 · 문진 같은 일을 처리하는 앱이며, 모든 데이터를 HIS 에서 받습니다.
+
+### LIS — 검사실의 업무 시스템 · [소개서](projects/lis.md)
+
+> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR.
+
+LIS 는 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사의 전 과정을 처리하는 검사실 시스템이며, HIS 에서 검사 처방을 받아 검증된 결과를 돌려줍니다.
+
+### PACS — 영상을 저장하고 판독하는 시스템 · [소개서](projects/pacs.md)
+
+> **EN** — PACS stores the hospital's medical images, shows them to the people who need them, and carries the radiologist's reading from the worklist to a signed report.
+
+PACS 는 병원의 의료 영상을 받아 저장하고, 필요한 사람에게 보여 주고, 판독의가 판독문을 쓰고 서명하기까지를 맡습니다.
+
+### sign — 서명의 증거를 만드는 시스템 · [소개서](projects/sign.md)
+
+> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds signing keys.
+
+sign 은 병원 문서에 대해 「누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다」를 나중에 누구나 확인할 수 있게 만드는 전자서명 서비스입니다.
+
+### ERP — 병원 경영지원 시스템 · [소개서](projects/erp.md)
+
+> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting.
+
+ERP 는 병원의 돈 · 사람 · 물자를 하나의 전표 원장(모든 거래가 모이는 회계 장부) 위에서 관리하는 경영지원 시스템입니다.
+
+### AI Server — 기관 안의 AI 연산 서버 · [소개서](projects/ai-server.md)
+
+> **EN** — AI Server gathers the ecosystem's AI work on one GPU server inside the hospital and returns drafts and assisting results to the systems that call it. The repository also holds non-medical features; this introduction covers only the medical side.
+
+AI Server 는 생태계의 AI 연산을 기관 안 GPU 서버 한 대에 모아 맡고, 다른 시스템이 부르면 초안과 보조 결과를 돌려주는 서버입니다.
+
+### twin — 환자와 병원 운영을 읽어 위험을 미리 보여 주는 디지털 트윈 · [소개서](projects/twin.md)
+
+> **EN** — twin reads data from HIS and shows clinicians risk-score cards and handover summaries, and shows managers bed, unit and equipment indicators with what-if simulation.
+
+twin 은 HIS 의 자료를 읽어서, 의료진에게는 환자의 위험 점수와 인계 요약을, 병원 운영 쪽에는 병상 · 병동 · 장비 지표와 「이렇게 바꾸면 어떻게 되나」 시뮬레이션을 보여 주는 별도 서비스입니다.
+
+### cerno — 근거가 있을 때만 답하는 의료진별 임상 질의 도우미 · [소개서](projects/cerno.md)
+
+> **EN** — cerno drafts answers to clinicians' questions only from documents it can cite, and stays silent when it finds no evidence; it runs as a non-clinical shadow pilot.
+
+cerno 는 의료진이 차트에서 던진 질문에, 기관 지침과 본인이 올린 자료에서 찾은 근거로만 답변 초안을 만들고, 근거가 없으면 답하지 않는 도우미입니다. 지금은 임상 결정에 쓰지 않는 섀도우(참고 운영) 파일럿입니다.
+
+### edu — 직원 교육 · 법정교육 · 전자 이수증 · [소개서](projects/edu.md)
+
+> **EN** — edu delivers staff training and statutory courses, and turns each completion into an HIS education record and a signed completion certificate.
+
+edu 는 직원에게 교육을 전하고, 이수 하나를 HIS 의 교육 기록과 전자서명된 이수증으로 남기는 시스템입니다.
+
+### Clinic — 병원 그룹웨어 · [소개서](projects/clinic.md)
+
+> **EN** — Clinic is the hospital groupware where staff hand over shifts, see rosters and ward status, and receive alerts and approval requests, drawing on data from HIS.
+
+Clinic 은 직원이 인수인계 · 근무표 · 병동 현황 · 알림 · 결재를 한곳에서 보는 병원 그룹웨어이고, HIS 의 자료를 받아 보여 줍니다.
+
+### Jitsi — 원격진료 화상 서버 · [소개서](projects/jitsi.md)
+
+> **EN** — Jitsi is the hospital's own video server for telemedicine and remote consultation; the current installation does not work and must be built anew.
+
+Jitsi 는 원격진료 · 원격협진 화상을 병원이 직접 운영하는 화상 서버이며, 지금 설치본은 동작하지 않아 새로 구성해야 합니다.
 
 위 「시스템 13」 절과 아래 「시스템마다 무엇을 하나」는 **통합 릴리즈 `2026.09` 기준**이고, 소개서는 **현재 개발본 기준**입니다. 둘이 다르면 소개서의 「통합 릴리즈 이후 달라진 점」 절에 적습니다.
 
@@ -622,7 +682,7 @@ AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jit
 | [`overview/`](overview/) | 취지·구조 개요서(11장 — 4장 「무엇을 할 수 있나」 2026-09-29 추가) | 🟡 초안 |
 | [`SOURCES.md`](SOURCES.md) | **소스 받기** — 시스템 13 → 저장소 11 · 기준 커밋 · 받은 뒤 처음 여는 파일 · 저장소에 없는 것 | 🟢 생성물(주소 · 커밋 · 파일 존재를 기계로 대조) |
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~16) · 남은 확인 필요 19곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
-| [`projects/`](projects/) | 🆕 **프로젝트 소개서** — 의료 전산담당자용 · 현재 개발본 기준 · 영문 소개 포함 | 🟡 1 / 13(HIS) |
+| [`projects/`](projects/) | 🆕 **프로젝트 소개서** — 의료 전산담당자용 · 현재 개발본 기준 · 영문 소개 포함 | 🟡 13 / 13 · 담당 확인 전 |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
 | [`functions/`](functions/) | **업무별 기능 지도** + [주요 기능 상세 41편](functions/detail/) · [전제와 파급](functions/dependencies.md) · [찾아보기](functions/find.md) — 시스템이 아니라 **하는 일**로 묶은 색인(외래 · 병동 · 검사 · 영상 · 약제 · 원무 · 질·안전 · AI · 교육 · 개원). 구성서 §4 를 업무로 다시 꿴 것 | 🟡 초안 |
 | [`clinicians/`](clinicians/) | **진료하는 사람을 위한 안내** — 공통 + 직역 5(의사 · 간호 · 임상병리 · 영상 · 약제). AI 가 하지 않는 일 · 시스템이 일부러 막는 것 · 내가 승인할 것 · 안 될 때의 대체 | 🟡 초안 |
