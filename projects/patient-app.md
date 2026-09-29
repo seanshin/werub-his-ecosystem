@@ -14,7 +14,7 @@ For an IT team, the key fact is that the app **has no server and no database of 
 
 The app is written to tell the truth when it does not know: a failed lookup is shown as a failure, not as "no results", "0 won" or "normal"; records the hospital has no way to enter (vaccinations, for example) are not shown as "none"; and AI health features show the server's reason when there is no validated way to compute a score. AI features only assist — they draft summaries and suggestions, and the doctor's judgement stands.
 
-What is not there yet, stated plainly: the app is **not published to any app store** and store build settings are not in the repository; sign-up inside the app is blocked until an identity-verification provider is connected; push notifications are not wired on the app side; video visits depend on a video system that is currently unusable; the app is Korean only; and it was not installed during the September 2026 follow-along. Until an institution decides to publish the app, patients use the web patient portal inside HIS. Details are in [What to know](#8-알아-둘-것).
+What is not there yet, stated plainly: the app is **not published to any app store** and store build settings are not in the repository; with default settings HIS keeps patient sign-up closed — in the app and the web portal alike — until an identity-verification provider is connected; consent signing in the app is a typed-name record, not a certificate signature; push notifications are not wired on the app side; video visits depend on a video system that is currently unusable; the app is Korean only; no licence has been chosen for it; and it was not installed during the September 2026 follow-along. Until an institution decides to publish the app, patients use the web patient portal inside HIS. Details are in [What to know](#8-알아-둘-것).
 
 ---
 
@@ -40,7 +40,7 @@ What is not there yet, stated plainly: the app is **not published to any app sto
 **장면으로 보면**
 
 - **검사 뒤 결과 확인** — 환자가 검사 결과 화면을 엽니다. 정상 · 이상 · 위급 판정은 HIS 와 같은 판정 규칙으로 표시되고, 이전 회차와 비교할 수 있습니다. 불러오기에 실패하면 「이상 없음」이 아니라 「불러오지 못했습니다」라고 나옵니다.
-- **수술 전 동의서** — 환자가 서명 대기 동의서를 열어 내용을 확인하고 이름을 입력해 서명합니다. 의사 · 입회인 서명이 더 필요한 서식이면 동의서는 완료되지 않은 채 담당의에게 알림이 갑니다.
+- **수술 전 동의서** — 환자가 서명 대기 동의서를 열어 내용을 확인하고 이름을 입력해 서명합니다. 이 서명은 이름 입력을 HIS 에 기록하는 방식이고, 인증서로 하는 전자서명이 아닙니다(§8). 의사 · 입회인 서명이 더 필요한 서식이면 동의서는 완료되지 않은 채 담당의에게 알림이 갑니다.
 - **내 기록을 누가 봤나** — 환자가 접근 이력 화면에서 자기 기록을 연 직원과, 응급 상황에서 담당이 아닌 의료진이 사유를 남기고 연 기록(비상 열람)과 그 사후 승인 여부를 봅니다.
 
 ## 3. 할 수 있는 일
@@ -51,8 +51,8 @@ What is not there yet, stated plainly: the app is **not published to any app sto
 
 | 묶음 | 무엇이 들어 있나 |
 |---|---|
-| **로그인 · 계정** | 전화번호 · 비밀번호 로그인, 기기 생체인증을 쓰는 PIN 로그인, 프로필 · 알림 설정, 보호자 위임 요청 |
-| **예약 · 진료** | 예약 조회 · 취소, AI 예약 도우미, 진료 기록 목록, 입원 여정(타임라인 · 진료 · 회진 · 검사), 원격진료 예약 · 입장 |
+| **로그인 · 계정** | 전화번호 · 비밀번호 로그인, 기기 생체인증을 쓰는 PIN 로그인, 프로필 · 알림 설정, 보호자 위임 요청(보호자가 환자 대신 기록을 보도록 허락받는 절차) |
+| **예약 · 진료** | 예약 조회 · 취소, AI 예약 도우미, 진료 기록 목록, 입원 여정(타임라인 · 진료 · 회진 · 검사), 원격진료 예약 · 입장(지금은 쓸 수 없음 — §8) |
 | **검사 · 영상 · 검진** | 검사 결과와 추이, 영상검사 목록과 판독 리포트, 검진 결과 상세 · 회차별 비교 · 검진 셀프 예약 · 다음 검사 안내 |
 | **건강 관리** | 알레르기 · 수술 전 체크리스트 · 건강 메모, 만성질환 추이와 자가측정, 복약 시간표, AI 건강 요약 · 재진 권고 · 약물 상호작용 확인 |
 | **문서 · 동의 · 수납** | 동의서 확인과 서명, 문진표, 제증명 · 서류 신청과 발급 상태, 수납 내역 · 연간 요약 · 미수납 |
@@ -67,7 +67,7 @@ What is not there yet, stated plainly: the app is **not published to any app sto
 
 ## 4. 어떻게 만들어졌나
 
-> **EN** — An Expo 56 / React Native 0.85 app using file-based routing. It calls the HIS patient-auth and patient-portal APIs over REST, keeps tokens in the device's secure storage, and refreshes the access token automatically. Shared judgement rules (lab flags, which records the hospital can record) are exact copies checked against the HIS originals.
+> **EN** — An Expo 56 / React Native 0.85 app using file-based routing, with iOS and Android settings. It calls the HIS patient-auth and patient-portal APIs over REST, keeps tokens in the device's secure storage, and refreshes the access token automatically. It keeps no records on the device for offline use. Shared judgement rules (lab flags, which records the hospital can record) are exact copies checked against the HIS originals, because the app bundler cannot pull in the shared package.
 
 ```mermaid
 flowchart LR
@@ -89,15 +89,16 @@ flowchart LR
 
 | 구성 요소 | 무엇 | 기술 |
 |---|---|---|
-| **화면** | 로그인 · 탭 · 입원 여정 화면. 서버 데이터는 조회 도구가 받아 두고 다시 씁니다 | Expo 56 · React Native 0.85 · React 19.2 · expo-router · TanStack Query |
+| **화면** | 로그인 · 탭 · 입원 여정 화면. 화면 하나가 라우트 파일(파일 이름이 곧 화면 주소가 되는 파일) 하나입니다. 서버 데이터는 조회 도구(TanStack Query)가 잠시 받아 두고 다시 씁니다 | Expo 56 · React Native 0.85 · React 19.2 · expo-router · TanStack Query |
 | **API 도우미** | 모든 요청에 로그인 토큰을 붙이고, 만료되면 한 번 갱신해 다시 보냅니다 | — |
 | **보안 저장소** | 로그인 토큰을 기기의 암호화 저장소에 둡니다. PIN 로그인은 기기 생체인증을 거칩니다 | expo-secure-store · expo-local-authentication |
-| **판정 규칙 사본** | 검사 판정 표시 · 「병원이 기록하지 않는 항목」 목록 같은 공용 규칙을 복사해 두고, HIS 저장소 검사가 원본과 대조합니다(앱 번들러가 공용 패키지를 따라가지 못해서) | — |
+| **판정 규칙 사본** | 검사 판정 표시 · 「병원이 기록하지 않는 항목」 목록 같은 공용 규칙을 복사해 둡니다. 앱 코드를 하나로 묶는 도구(번들러)가 저장소의 공용 패키지를 가져오지 못해서입니다. 사본이 원본과 어긋나면 HIS 저장소 검사가 실패하므로, 웹과 앱이 서로 다른 판정을 보이는 채로 나가지 않습니다 | — |
 
 **데이터가 사는 곳**
 
 - **앱에는 자기 서버도 데이터베이스도 없습니다.** 모든 기록은 HIS 데이터베이스에 있습니다.
-- 기기에는 로그인 토큰과 기기 식별값을 보안 저장소에 남깁니다.
+- 기기에는 로그인 토큰과 기기 식별값을 보안 저장소에 남깁니다. 진료 기록을 기기에 따로 저장해 두는 오프라인 기능은 없습니다.
+- 기기를 잃어버리면 — HIS 에는 환자가 등록 기기를 지우는 경로(그 기기의 갱신 토큰을 지워 다시 로그인하게 함)와, 관리자가 환자 계정을 잠그는 경로가 있습니다.
 
 ## 5. 다른 시스템과의 연결
 
@@ -114,14 +115,14 @@ flowchart LR
 
 | 상대 | 앱이 보내는 것 | 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **HIS** | 로그인 · PIN · 토큰 갱신 · 기기 푸시 등록 · 보호자 요청 · 서명 · 문진 · 서류 신청 · 메시지 | 결과 · 영상 · 복약 · 수납 · 동의서 · 알림 등 본인 기록 | HIS 가 발급한 환자 토큰 | 만들어져 있음 · 실제 연결 확인은 아직 |
-| **Jitsi** | 대기실 입장 기록(HIS 에) 뒤 방 주소를 외부 브라우저로 엶 | — | 앱은 화상 토큰을 받지 않습니다 | 지금은 쓸 수 없음(화상 서버를 새로 구성해야 함) |
+| **HIS** | 로그인 · PIN · 토큰 갱신 · 기기 푸시 등록(지금은 알림이 오지 않음 — §8) · 보호자 요청 · 서명 · 문진 · 서류 신청 · 메시지 | 결과 · 영상 · 복약 · 수납 · 동의서 · 알림 등 본인 기록 | HIS 가 발급한 환자 토큰 | 만들어져 있음 · 실제 연결 확인은 아직 |
+| **Jitsi** | 환자가 화상 대기실에 들어왔다는 기록을 HIS 에 남긴 뒤, 방 주소를 외부 브라우저로 엶 | — | 앱은 화상 토큰을 받지 않습니다 | 지금은 쓸 수 없음(화상 서버를 새로 구성해야 함) |
 
 연결의 자세한 내용은 [연결 카드 — 환자 앱 → HIS](../integration/cards/환자-앱-to-his.md) · [환자 앱 → Jitsi](../integration/cards/환자-앱-to-jitsi.md)와 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에 있습니다.
 
 ## 6. 설치 · 운영
 
-> **EN** — There is nothing to install on a server beyond HIS. The app is built and distributed separately from HIS deployments. The repository holds only development run scripts; store accounts, app identifiers, signing keys and store build settings are for the institution to prepare once it decides to publish.
+> **EN** — There is nothing to install on a server beyond HIS. The app is built and distributed separately from HIS deployments, but it must still match the HIS request formats. The repository holds only development run scripts — there is no store build configuration; store accounts, app identifiers, signing keys and store build settings are for the institution to prepare once it decides to publish. If the HIS address is not set at build time, the app connects to another installation's address written in the code.
 
 ### 필요한 것
 
@@ -129,19 +130,21 @@ flowchart LR
 |---|---|
 | 서버 | **HIS 외에는 없습니다.** HIS 의 환자 인증 · 환자 포털 기능이 켜져 있어야 합니다 |
 | 빌드 도구 | Node · Expo SDK 56 · React Native 0.85 |
-| 배포 | 앱 스토어 계정 · 앱 식별자 · 서명 키 · 스토어 빌드 설정은 **저장소에 없습니다.** 배포를 정한 기관이 준비합니다. 저장소의 작업 명령은 개발 실행(`expo start` 계열)과 계약 대조 시험뿐입니다 |
-| 먼저 정할 것 | 앱을 스토어에 배포할지(HIS 결정 등록부의 허가권자 항목) · 환자 알림의 적법 근거와 켤지 · 환자 본인확인 방식 — [사람 결정](../checklist/decisions.md) |
+| 배포 | 앱 스토어 계정 · 앱 식별자(스토어가 앱을 구별하는 이름) · 서명 키(앱이 기관의 것임을 증명하는 키) · 스토어 빌드 설정(Expo 빌드 서비스 설정 등)은 **저장소에 없습니다.** 앱 설정 파일에 iOS · Android 항목은 있지만 앱 식별자는 비어 있습니다. 배포를 정한 기관이 준비합니다. 저장소의 작업 명령은 개발 실행(`expo start` 계열)과 계약 대조 시험뿐입니다 |
+| 먼저 정할 것 | 앱을 스토어에 배포할지(HIS 결정 등록부의 허가권자 항목) · 환자 알림의 적법 근거와 켤지 · 환자 본인확인 방식 — [사람 결정](../checklist/decisions.md). 스토어 심사 · 개인정보 고지 · 의료 앱 규제 요건은 이 자료에서 다루지 않았습니다 |
 
 ### 꼭 넣어야 하는 설정
 
-- **HIS 주소**(`EXPO_PUBLIC_API_URL`)와 **원격 화상 주소**(`EXPO_PUBLIC_TELEHEALTH_URL`)를 빌드할 때 지정합니다. 지정하지 않으면 코드에 적힌 특정 설치본의 주소로 연결됩니다. 앱에 박혀 나가므로 바꾸려면 다시 빌드합니다.
-- **앱 이름 · 식별 이름 · 딥링크 스킴 · 아이콘 · 버전**(앱 설정 파일)은 저장소 기본값입니다. 기관 값으로 바꿉니다.
-- **HIS 쪽 설정** — 푸시 전체 스위치와 발송 자격, 로그인 유지 시간, 가입 허용과 본인확인 요구를 정합니다. 셀프 예약 · 복약 AI 설명 · 복약 알림 같은 기능 스위치는 기본 꺼짐입니다. 앱 최소 버전과 점검 모드도 HIS 에서 정합니다. 키 이름은 [환자 앱 구성서 §6](../systems/patient-app.md#6-주요-설정)에 있습니다.
+- **HIS 주소**(`EXPO_PUBLIC_API_URL`)와 **원격 화상 주소**(`EXPO_PUBLIC_TELEHEALTH_URL`)를 빌드할 때 지정합니다. 앱에 박혀 나가므로 바꾸려면 다시 빌드합니다.
+- **지정하지 않으면 환자 앱이 코드에 적힌 다른 설치본의 주소로 붙습니다.** 빌드 전에 두 값이 자기 기관 주소인지 반드시 확인합니다(§8).
+- **앱 이름 · 식별 이름 · 딥링크 스킴(다른 앱이나 문자 속 링크로 이 앱의 특정 화면을 여는 주소 형식) · 아이콘 · 버전**(앱 설정 파일)은 저장소 기본값입니다. 기관 값으로 바꿉니다.
+- **HIS 쪽 설정** — 푸시 전체 스위치와 발송 자격(푸시 상태는 §8), 로그인 유지 시간, 가입 허용과 본인확인 요구를 정합니다. 셀프 예약 · 복약 AI 설명 · 복약 알림 같은 기능 스위치는 기본 꺼짐입니다. 앱 최소 버전과 점검 모드도 HIS 에서 정합니다. 키 이름은 [환자 앱 구성서 §6](../systems/patient-app.md#6-주요-설정)에 있습니다.
 
 ### 운영
 
-- 앱 변경은 **HIS 서버 배포와 무관**합니다. 앱을 다시 빌드하고 스토어(또는 기관 배포 경로)를 거쳐야 환자 기기에 반영됩니다.
-- 앱의 시험은 서버 계약 대조(앱이 부르는 경로 · 필드가 HIS 에 있는지)이며, 실기기 화면 시험은 없습니다.
+- 앱을 **내보내는 일은 HIS 서버 배포와 따로**입니다. 앱을 다시 빌드하고 스토어(또는 기관 배포 경로)를 거쳐야 환자 기기에 반영됩니다.
+- 그래도 앱이 보내는 요청의 형식은 HIS 가 받는 형식과 맞아야 합니다. 통합 릴리즈 때는 메시지 답장의 필드 이름이 달라 답장이 전부 거절됐고, 현재 개발본에서 고쳐졌습니다(§9).
+- 앱의 시험은 서버 계약 대조(앱이 부르는 경로 · 필드가 HIS 에 있는지)이며, 실기기 화면 시험은 없습니다. 그때의 계약 대조는 위 답장 불일치를 잡지 못했습니다.
 - 백업 · 감시는 HIS 가 맡습니다 — [HIS 소개서 §6](his.md#6-설치--운영).
 
 자세한 설정 순서: [구축 가이드 S2](../build-guide/S2-patient-access.md)(통합 릴리즈 `2026.09` 기준).
@@ -162,15 +165,19 @@ flowchart LR
 
 ## 8. 알아 둘 것
 
-> **EN** — Not published to any store; no in-app sign-up until identity verification is connected; push is not wired on the app side; video visits are unusable now; consent signing in the app is a typed-name record in HIS rather than a certificate signature; Korean only; not called for real in the follow-along.
+> **EN** — Not published to any store; with default settings HIS keeps patient sign-up closed in the app and the web portal alike; not called for real in the follow-along; push is not wired on the app side and is off on the HIS side; consent signing in the app is a typed-name record in HIS rather than a certificate signature (the repository's own documents disagree on this); video visits are unusable now; an unset HIS address points the app at another installation; Korean only; no licence chosen.
 
-- 🔴 **스토어에 배포되지 않았습니다** — 실기기에 설치할 배포본이 없고, 스토어 빌드 설정도 저장소에 없습니다. 배포를 정하기 전에는 HIS 의 **웹 환자 포털**을 씁니다.
-- 🔴 **앱에서 신규 가입이 되지 않습니다** — 휴대전화 본인인증 연동이 없어 가입을 막아 두었습니다. 환자는 홈페이지나 원무과에서 가입한 뒤 앱에서 로그인합니다. 본인확인 문자도 문자 발송 제공자가 없어 모의 발송입니다([HIS 소개서 §8](his.md#8-알아-둘-것)).
+- 🔴 **스토어에 배포되지 않았습니다** — 실기기에 설치할 배포본이 없고, 스토어 빌드 설정도 저장소에 없습니다. 배포를 정하기 전에는 HIS 의 **웹 환자 포털**을 씁니다. 둘은 같은 서버 기능을 쓰지만, 화면별 차이 표는 만들지 않았습니다.
+- 🔴 **기본 설정에서는 환자 가입이 닫혀 있습니다** — 휴대전화 본인인증 연동이 없어 HIS 가 가입 경로를 닫아 둡니다. 앱뿐 아니라 웹 환자 포털도 같은 서버 규칙을 따릅니다.
+- 가입이 막혔을 때의 안내는 앱이 「홈페이지나 원무과」를, 웹 포털이 「창구나 앱」을 가리킵니다. 창구에서 환자 계정을 만들어 주는 화면은 이 소개서에서 확인하지 못했습니다. 본인확인 문자도 문자 발송 제공자가 없어 모의 발송입니다([HIS 소개서 §8](his.md#8-알아-둘-것)).
 - 🔴 **실제 연결 확인이 아직입니다** — 2026년 9월 따라가기에서 이 앱은 설치하지 않았습니다. HIS 와의 연결은 코드를 대조한 판정입니다.
-- **푸시 알림이 동작하지 않습니다** — 앱 쪽 수신 코드는 있지만 알림 패키지가 앱에 들어 있지 않고, HIS 쪽 발송도 기본 꺼짐입니다.
-- **앱의 동의서 서명은 이름을 입력해 HIS 에 기록하는 방식**입니다 — sign 의 서명 인증서 · 타임스탬프를 거치는 경로가 아닙니다. 현재 개발본 코드를 확인한 결과입니다. 통합 릴리즈 기준의 [환자 앱 구성서](../systems/patient-app.md)는 「HIS 를 거쳐 sign 이 처리」로 적고 있어 서로 다르며, 이 소개서는 현재 코드를 따릅니다. 어떤 동의서를 앱에서 받을지, 그 서명의 효력은 기관과 법무가 판단합니다. 인증서 서명 경로는 [동의서 전자서명](../functions/detail/consent-signature.md)에 있습니다.
+- **푸시 알림이 오지 않습니다 — 어디까지 있나** — HIS 에는 발송 코드가 있지만 푸시 전체 스위치가 기본 꺼짐입니다. 앱은 기기를 HIS 에 등록하는 요청까지 보내지만, 알림을 받는 패키지가 앱에 들어 있지 않습니다.
+- **앱의 동의서 서명은 이름을 입력해 HIS 에 기록하는 방식**입니다 — sign 의 서명 인증서 · 타임스탬프를 거치지 않습니다. 저장소 문서끼리 어긋납니다: 이 소개서는 현재 개발본 코드를 따랐고, 통합 릴리즈 기준의 [환자 앱 구성서](../systems/patient-app.md)는 「HIS 를 거쳐 sign 이 처리」로 적고 있습니다.
+- 어떤 동의서를 앱에서 받을지, 그 서명의 효력은 기관과 법무가 판단합니다. 인증서 서명 경로는 [동의서 전자서명](../functions/detail/consent-signature.md)에 있습니다.
 - **원격진료 화상은 지금 쓸 수 없습니다** — 화상 시스템을 새로 구성해야 합니다. 앱이 여는 방 주소에는 입장 토큰이 붙지 않으므로, 입장 통제는 화상 서버 쪽에서 정합니다.
+- **HIS 주소를 빌드 때 지정하지 않으면 다른 설치본으로 붙습니다** — 코드의 기본 주소가 특정 설치본을 가리킵니다. 빌드 설정을 확인하지 않은 앱을 환자에게 내보내지 않습니다(§6).
 - **앱 화면은 한국어뿐**이고, **실기기 화면 시험**이 없습니다. AI 건강 요약 · 권고는 참고용 초안입니다([의료 면책 고지](../DISCLAIMER.md)).
+- **라이선스가 정해지지 않았습니다** — 앱과 HIS 저장소 모두 제품 라이선스가 아직 없습니다(§9 「라이선스 표기」).
 
 전체 한계와 대체 수단: [환자 앱 구성서 §10](../systems/patient-app.md#10-한계와-대체-수단).
 
@@ -187,7 +194,7 @@ flowchart LR
 | **입력 길이** | 프로필 입력칸에 길이 제한이 생겼습니다(서버가 긴 값을 조용히 자르던 것을 막는 변경과 함께) |
 | **라이선스 표기** | 앱 폴더의 라이선스 파일은 Expo 템플릿의 MIT 원문이었는데, 이것이 앱의 라이선스로 읽혀 **제3자 고지 파일로 이름을 바꿨습니다.** 앱과 HIS 저장소의 라이선스는 아직 정해지지 않았습니다 |
 | **입력 안내** | 보호자 신청의 등록번호 입력 예시를 시험용 번호 대신 「진료카드에 적힌 번호」로 바꿨습니다 |
-| **버전** | 앱 패키지 버전이 HIS 와 같은 번호(4.19.0)를 따릅니다. 앱 설정 파일의 앱 버전(1.0.0)은 그대로이며, 스토어 배포 때 따로 정합니다 |
+| **버전** | 앱 패키지 버전이 HIS 와 같은 번호(4.19.0)를 따릅니다. 이것은 개발용 표기입니다. 환자가 스토어와 기기에서 보게 되는 앱 버전은 앱 설정 파일의 값(1.0.0)이고, 스토어 배포 때 따로 정합니다 |
 
 ## 10. 더 깊이
 
@@ -214,5 +221,6 @@ flowchart LR
 | 읽은 것 | HIS 저장소의 **현재 개발본** — 커밋 `f596d24589e6`(2026-09-29) 의 `apps/mobile` 과, 앱이 부르는 HIS 환자 포털 코드 일부(동의서 서명) · 작업 트리의 미커밋 변경은 읽지 않음. `apps/mobile` 은 HIS 소개서가 읽은 커밋 `a39f60fc9d7c` 와 내용이 같습니다 |
 | 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `e9d303984f80`(v4.18.0 · 2026-09-11) |
 | 센 방법 | 화면 = `apps/mobile/app/**/*.tsx` 중 `_layout.tsx` 제외 · 달라진 커밋 = `git log e9d30398..HEAD -- apps/mobile` 의 커밋 수 — 2026-09-29 에 센 값 |
+| 이 소개서가 더 확인한 것 | 가입 가능 여부를 정하는 HIS 서버 규칙(기본 닫힘 · 웹 포털도 같은 규칙) · 기기 지우기와 계정 잠금 경로 · 앱 설정 파일의 iOS · Android 항목과 빈 앱 식별자 · 스토어 빌드 설정 파일 없음 · 메시지 답장 수정 커밋 — HIS 소개서가 읽은 커밋에서 읽음 |
 | 실제 연결 확인 | 없음 — 2026년 9월 따라가기에서 설치하지 않음 |
 | 사실 확인 | HIS 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

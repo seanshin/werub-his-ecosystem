@@ -4,7 +4,7 @@
 
 > 프로젝트 소개서 · 읽는 사람: **의료 전산담당자** · 기준: Jitsi 저장소의 **현재 개발본**(2026-09-29 · 끝의 [이 문서의 근거](#이-문서의-근거)) · [소개서 목록](README.md)
 
-> **지금은 쓸 수 없습니다.** 현재 설치본은 동작하지 않고, 원격진료가 필요한 기관은 **새로 구성해야** 합니다. 이 소개서는 저장소의 코드와 기록이 **무엇을 제공하도록 만들어져 있는지**를 설명합니다 — 아래에 적힌 기능은 지금 돌아가는 것이 아니라, 새로 구성했을 때 얻게 될 것입니다.
+> **지금은 쓸 수 없습니다.** 이 생태계를 개발하며 쓰던 설치본은 지금 동작하지 않고, 원격진료가 필요한 기관은 **새로 구성해야** 합니다. 그 설치본을 되살리는 방법은 이 자료에서 다루지 않습니다. 이 소개서는 저장소의 코드와 기록이 **무엇을 제공하도록 만들어져 있는지**를 설명합니다 — 아래에 적힌 기능 · 설계는 지금 돌아가는 것이 아니라, 새로 구성했을 때 얻도록 만들어진 것입니다 — 실제로 불러 확인한 것은 없습니다.
 
 ---
 
@@ -12,7 +12,7 @@
 
 Jitsi is the video server behind telemedicine in this ecosystem. It packages the open-source Jitsi Meet stack — web client, XMPP signalling, conference focus and media relay — together with a TURN server for difficult networks, server-side recording, a REST API for managing meetings, and Prometheus/Grafana monitoring, all as containers the hospital runs on its own server.
 
-**It is not usable today.** The current installation does not work, and every connection to it in the ecosystem's connection table is marked "not usable now". An institution that needs video visits has to build it anew. This introduction therefore describes what the repository provides and what building it involves, not a running service.
+**It is not usable today.** The installation used while building the ecosystem does not work (this material does not cover reviving it), and every connection to it in the ecosystem's connection table is marked "not usable now". An institution that needs video visits has to build it anew. This introduction therefore describes what the repository provides and what building it involves, not a running service.
 
 The design is straightforward. A doctor opens a telehealth session in HIS; HIS signs a short token with a secret it shares with the video server, and the browser opens the meeting room with that token — the doctor as host, the patient as guest from the patient portal or app. The signalling server checks the token before anyone enters. A separate REST API wraps Jitsi so other systems can schedule meetings, issue join links, control participants, start and stop recordings and receive webhooks.
 
@@ -57,12 +57,12 @@ What to know before building it — the shared-secret sign-in, the open network 
 | 묶음 | 무엇이 들어 있나 |
 |---|---|
 | **화상 진료 입장** | HIS 가 발급한 토큰으로 방에 들어가고, 시그널링 서버가 토큰을 검증합니다. 입장 전 카메라 · 마이크 미리보기와 동의 절차 · 한국어 화면 |
-| **회의 관리 API** | 회의 예약 · 목록 · 설정 변경 · 종료 · 참가자 목록 · 내보내기 · 음소거 · 참가 토큰 발급 · 참가 주소 생성 · 녹화 시작 · 중지 · 상태. API 명세(OpenAPI) 화면이 함께 나옵니다. API 키마다 권한을 세 단계(관리 · 운영 · 읽기 전용)로 나눕니다 |
+| **회의 관리 API** | 회의 예약 · 목록 · 설정 변경 · 종료 · 참가자 목록 · 내보내기 · 음소거 · 참가 토큰 발급 · 참가 주소 생성 · 녹화 시작 · 중지 · 상태. API 사용법을 보여 주는 명세 화면이 함께 나옵니다. API 키마다 권한을 세 단계(관리 · 운영 · 읽기 전용)로 나눕니다 |
 | **이벤트** | 참가자 입장 · 퇴장과 회의 상태 변화를 기록하고, 회의 시작 · 종료 · 참가자 입장 · 퇴장 · 녹화 시작 · 완료를 웹훅으로 알립니다 |
-| **녹화** | 서버 쪽 녹화 · 녹화 관리 화면(검색 · 메모 · 태그) · 녹화 보안 등급 4단계와 접근 기록 · 보존 기간이 지나면 자동 만료 · 녹화 중 표시 · 객체 저장소 업로드(선택) |
+| **녹화** | 서버 쪽 녹화 · 녹화 관리 화면(검색 · 메모 · 태그) · 녹화 보안 등급 4단계와 접근 기록 · 보존 기간이 지나면 자동 만료 · 녹화 중 표시 · 외부 파일 저장소 업로드(선택) |
 | **AI 보조(선택)** | 녹화 회의록 · 요약 · 할 일 · 주요 장면 **초안** · 실시간 한국어 자막 · 영어 번역 자막 · 채팅 번역 병기 |
 | **모니터링** | 서비스 상태 · 사용량 · 녹화 저장 용량 · API 트래픽 대시보드와 알림 규칙 |
-| **보호 장치** | 중계 서버의 내부망 접근 차단 · 웹훅은 공개 https 주소로만 · 토큰 알고리즘 고정 · 요청 속도 · 본문 크기 제한 · 컨테이너 자원 상한 |
+| **보호 장치** | TURN 중계 서버가 병원 내부망 주소로는 이어 주지 않음<br/>웹훅은 공개 https 주소로만 보냄<br/>토큰 서명 방식을 하나로 고정해 다른 방식의 토큰을 받지 않음<br/>요청 속도 · 본문 크기 제한 · 컨테이너 자원 상한 |
 
 ### 화면으로 보기
 
@@ -72,7 +72,7 @@ What to know before building it — the shared-secret sign-in, the open network 
 
 ## 4. 어떻게 만들어졌나
 
-> **EN** — Nine containers from one compose file: the Jitsi Meet web client, Prosody (XMPP signalling with token check), Jicofo (conference focus), Videobridge (media relay), coturn (TURN), Jibri (recording), a meeting-management API (Node.js 20, Hono, SQLite), Prometheus and Grafana. Live captions add two more containers from a second compose file. Meeting metadata sits in SQLite; recordings sit on local disk with optional S3-compatible upload.
+> **EN** — Nine containers from one compose file: the Jitsi Meet web client, Prosody (XMPP signalling with token check), Jicofo (conference focus), Videobridge (media relay), coturn (TURN), Jibri (recording), a meeting-management API (Node.js 20, Hono, SQLite), Prometheus and Grafana. Live captions add two more containers from a second compose file. The front proxy is not one of the nine; the institution runs it, following the repository's example configuration. Meeting metadata sits in SQLite; recordings sit on local disk with optional S3-compatible upload.
 
 ```mermaid
 flowchart LR
@@ -108,10 +108,13 @@ flowchart LR
 
 | 구성 요소 | 무엇 | 기술 |
 |---|---|---|
-| **웹 · 시그널링 · 회의 관리 · 미디어 중계** | 화상 회의 자체 — 방 · 입장 · 영상과 음성 중계 | Jitsi Meet 구성요소(`stable-9823` 이미지) |
+| **웹** | 브라우저에 뜨는 화상 회의 화면 | Jitsi Meet(공식 이미지 판 `stable-9823`) |
+| **시그널링** | 누가 어느 방에 들어오는지 주고받고, 입장 토큰을 확인 | Prosody |
+| **회의 관리** | 방마다 미디어 중계를 배정하고 참가자를 잇는 조정자 | Jicofo |
+| **미디어 중계** | 3명 이상 통화에서 영상 · 음성을 모아 나눠 줌 | Videobridge |
 | **TURN** | 병원 · 가정의 방화벽 뒤에서도 영상이 이어지게 중계 | coturn 4.6 |
-| **녹화** | 가상 화면에 브라우저를 띄워 회의를 녹화 | Jibri |
-| **회의 관리 API** | Jitsi 를 감싸 다른 시스템이 프로그램으로 회의를 다루게 하는 REST API | Node.js 20 · Hono · SQLite |
+| **녹화** | 서버 안의 보이지 않는 화면에 브라우저를 띄워 회의를 녹화 | Jibri |
+| **회의 관리 API** | Jitsi 를 감싸 다른 시스템이 프로그램으로 회의를 다루게 하는 REST API | Node.js 20 · Hono(가벼운 웹 서버 틀) · SQLite |
 | **모니터링** | 지표 수집과 대시보드 | Prometheus v2.54.1 · Grafana 11.2.0 |
 | **자막 구성(선택)** | 실시간 음성 인식 · 번역 자막을 AI Server 와 잇는 중계 | 별도 구성 파일 · Python 3.12 |
 
@@ -121,14 +124,16 @@ flowchart LR
 |---|---|
 | **SQLite**(회의 관리 API 안) | 회의 · 참가자 · 녹화 정보 · 웹훅 · API 키 · 전사 |
 | **로컬 디스크** | 녹화 파일 — 보존 기간이 지나면 자동 만료 |
-| **S3 호환 객체 저장소**(선택) | 녹화 파일 사본 |
+| **S3 호환 저장소**(선택) | 녹화 파일 사본 |
 | **Prometheus** | 서비스 지표 |
+
+**모두 몇 개인가** — 기본 구성 파일의 컨테이너 9개, 자막을 켜면 2개 더, 그리고 기관이 따로 두는 앞단 프록시 하나입니다.
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — HIS signs entry tokens for doctors and patients with a shared secret; the patient portal and app open the room; HIS and Clinic manage recordings through the meeting API; recordings and live audio can go to the AI Server. Every one of these connections is marked not usable now, and one more (a short-lived token from an HIS identity provider) exists only as a design.
+> **EN** — HIS signs entry tokens for doctors and patients with a shared secret; the patient portal and app open the room; HIS and Clinic manage recordings through the meeting API; recordings and live audio can go to the AI Server. The connection table lists eight: seven marked not usable now, and one (a short-lived token from an HIS identity provider) that exists only as a design.
 
-**모든 연결이 지금은 쓸 수 없습니다.** 새로 구성한 뒤 연결마다 실제로 불러 상태를 다시 판정합니다.
+연결 상태 표에 실린 Jitsi 의 연결은 **8개**입니다 — 7개는 지금은 쓸 수 없고, 1개는 설계만 있습니다. 새로 구성한 뒤 연결마다 실제로 불러 상태를 다시 판정합니다.
 
 ```mermaid
 flowchart TB
@@ -137,15 +142,19 @@ flowchart TB
   APP["환자 앱"] -.->|"원격진료 입장"| JI
   CL["Clinic"] -.->|"회의 녹화 제어"| JI
   JI -.->|"회의록 초안 · 자막"| AI["AI Server"]
+  IDP["HIS 신원 제공자"] -.->|"단기 토큰 · 설계만"| JI
 ```
 
-| 상대 | Jitsi 가 주는 것 | Jitsi 가 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
+| # | 방향 | 무엇 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **HIS**(의료진 · 환자 포털) | 화상 방 · 녹화 목록 | 입장 토큰(의사 = 진행자 · 환자 = 게스트) · 녹화 메모 · 삭제 | **공유 비밀키**로 서명한 토큰 · 회의 관리 API 키 | 지금은 쓸 수 없음 |
-| **환자 앱** | 화상 방 | 입장(대기실 기록 뒤 화상 주소 열기) | HIS 가 서명한 토큰 | 지금은 쓸 수 없음 |
-| **Clinic** | 녹화 스트림 · 회의 분석 | 녹화 제어 | 회의 관리 API 키 | 지금은 쓸 수 없음 |
-| **AI Server** | 녹화 · 음성 조각 | 회의록 · 요약 초안 · 자막 · 번역 | 발급된 API 키 | 지금은 쓸 수 없음 |
-| HIS 신원 제공자 | — | 단기 토큰 | — | 설계만 있음 |
+| 1 | HIS → Jitsi | 의사가 진행자로 입장 | HIS 가 **공유 비밀키**로 서명한 토큰 | 지금은 쓸 수 없음 |
+| 2 | HIS 환자 포털 → Jitsi | 환자가 게스트로 입장 — 원격진료 · 원격협진 · 상담 | HIS 가 서명한 토큰 | 지금은 쓸 수 없음 |
+| 3 | HIS 웹 → Jitsi | 녹화 목록 · 메모 · 삭제 · 내려받기 | 회의 관리 API | 지금은 쓸 수 없음 |
+| 4 | 환자 앱 → Jitsi | 대기실 입장을 기록한 뒤 화상 주소를 브라우저로 엶 | HIS 가 서명한 토큰 | 지금은 쓸 수 없음 |
+| 5 | Clinic → Jitsi | 회의 녹화 제어 · 녹화 스트림 · 회의 분석 | 회의 관리 API 키 | 지금은 쓸 수 없음 |
+| 6 | Jitsi → AI Server | 녹화로 회의록 · 요약 초안 | 발급된 API 키 | 지금은 쓸 수 없음 |
+| 7 | Jitsi → AI Server | 실시간 음성 조각으로 자막 · 번역 | 발급된 API 키 | 지금은 쓸 수 없음 |
+| 8 | HIS 신원 제공자 → Jitsi | 짧게 쓰는 토큰으로 입장 | — | 설계만 있음 |
 
 연결마다의 자세한 내용은 [HIS → Jitsi](../integration/cards/his-to-jitsi.md) · [Jitsi → AI Server](../integration/cards/jitsi-to-ai-server.md) 카드와 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에 있습니다.
 
@@ -159,11 +168,11 @@ flowchart TB
 
 | 항목 | 내용 |
 |---|---|
-| 서버 | 컨테이너 9개(자막을 켜면 2개 추가). **GPU 는 필요 없습니다** — 음성 인식 · 번역 · 회의록 연산은 AI Server 가 맡습니다 |
-| 네트워크 | 공개 도메인 · 공인 주소 · TLS 인증서. 미디어 중계와 TURN 용 UDP · TCP 포트를 **방화벽의 모든 계층에서** 열어야 합니다 — 한쪽만 열면 3명 이상 통화에서 영상이 끊긴다고 저장소가 적고 있습니다. 포트 목록은 소스 저장소 README 에 있습니다 |
+| 서버 | 컨테이너 9개(자막을 켜면 2개 추가) · 앞단 프록시. **GPU 는 필요 없습니다** — 음성 인식 · 번역 · 회의록 연산은 AI Server 가 맡습니다. 동시 통화 수 · 화질별 사양과 구성에 드는 기간은 계측하지 않았습니다 |
+| 네트워크 | 공개 도메인 · 공인 주소 · TLS 인증서. 미디어 중계와 TURN 용 UDP · TCP 포트를 **방화벽의 모든 계층에서** 열어야 합니다 — 한쪽만 열면 3명 이상 통화에서 영상이 끊긴다고 저장소가 적고 있습니다. 2명 통화는 두 브라우저가 직접 잇지만, 3명부터는 서버의 미디어 중계를 거치기 때문입니다. 포트 목록은 소스 저장소 README 에 있습니다 |
 | 녹화 | 녹화 컨테이너는 호스트의 **사운드 장치와 추가 권한**이 필요합니다. 저장 공간은 보존 기간에 맞춰 기관이 산정합니다 |
 | 먼저 있어야 할 것 | **HIS**(입장 토큰을 만듦) · AI Server(선택) |
-| 함께 맞출 값 | 토큰 서명 **공유 비밀키 · 앱 식별자를 HIS · Jitsi · 회의 관리 API 세 곳에 같게** 넣습니다. HIS 쪽에는 화상 서버 주소도 넣습니다 |
+| 함께 맞출 값 | 토큰 서명 **공유 비밀키 · 앱 식별자(토큰을 낸 쪽의 이름)를 HIS · Jitsi · 회의 관리 API 세 곳에 같게** 넣습니다. HIS 쪽에는 화상 서버 주소도 넣습니다 |
 
 ### 세우는 순서(저장소 안내)
 
@@ -172,11 +181,13 @@ flowchart TB
 | 1 | 설정 파일 작성 — 도메인 · 공인 주소 · 공유 비밀키 · TURN 비밀값 |
 | 2 | 구성요소 비밀번호를 스크립트로 생성 |
 | 3 | 컨테이너 기동 |
-| 4 | 상태 확인 스크립트 — TURN 중계 할당까지 확인합니다 |
-| 5 | 앞단 프록시를 저장소의 경로별 설정대로 구성 · 인증서 |
+| 4 | 상태 확인 스크립트 — TURN 중계 할당까지 확인합니다. 서버 안에서 컨테이너를 직접 보므로 프록시 전에도 돌릴 수 있습니다 |
+| 5 | 앞단 프록시를 저장소의 경로별 설정 예시대로 구성 · 인증서 |
+
+받을 소스는 [소스 받기](../SOURCES.md)가 가리키는 커밋입니다(버전 표기는 8절).
 
 - **운영 전에 정할 것** — 입장 인증 켜기 · API 키 발급과 권한 · 녹화 사용 여부 · 녹화 보존 기간과 기본 보안 등급 · 녹화 외부 저장 여부 · 운영에서 API 명세 화면 끄기.
-- **병원 내부망에 두는 경우** — 저장소에 내부망 배포 안내 문서가 있습니다(직원 · 환자가 같은 망이나 VPN 안에 있는 전제). 병원 밖 환자가 들어오는 원격진료라면 공개 주소와 TURN 이 필요합니다.
+- **병원 내부망에 두는 경우** — 저장소에 내부망 배포 안내 문서가 있습니다(직원 · 환자가 같은 망이나 VPN 안에 있는 전제). 그 안내는 브라우저끼리 직접 잇게 해 TURN 을 두지 않는 구성을 적습니다. 병원 밖 환자가 들어오는 원격진료라면 공개 주소와 TURN 이 필요합니다.
 
 ### 백업 · 감시
 
@@ -188,11 +199,13 @@ flowchart TB
 
 ## 7. 이렇게 만든 이유
 
-> **EN** — Four choices: video is self-hosted; Jitsi is wrapped by a REST API rather than modified; entry is by a signed token checked before anyone joins; and recordings carry security levels and an access log, with AI kept optional.
+> **EN** — Four choices, as written in the code and plans (none verified in a running service): video is self-hosted, for reasons the repository does not state; Jitsi is wrapped by a REST API rather than modified; entry is by a signed token checked before anyone joins; and recordings carry security levels and an access log, with AI kept optional.
+
+아래는 코드와 기획서에 적힌 설계입니다. 지금 동작하는 서비스에서 확인한 것은 아닙니다.
 
 | 설계 | 왜 |
 |---|---|
-| **화상을 자체 호스팅** | 이 자료의 해석으로는 바깥 화상 서비스에 기대지 않는 선택입니다(저장소는 이유를 직접 적지 않았습니다). 대신 서버 · 방화벽 · 인증서 운영을 기관이 집니다([시스템별 설계 선택](../DESIGN-HISTORY-SYSTEMS.md#5-시스템마다-무엇을-정하고-무엇을-포기했나)) |
+| **화상을 자체 호스팅** | 저장소는 이유를 적지 않았습니다. 이 선택으로 서버 · 방화벽 · 인증서 운영을 기관이 집니다. 상용 화상 솔루션과의 비교는 이 자료에서 하지 않았습니다([시스템별 설계 선택](../DESIGN-HISTORY-SYSTEMS.md#5-시스템마다-무엇을-정하고-무엇을-포기했나)) |
 | **Jitsi 를 고치지 않고 REST API 로 감쌈** | Jitsi 에는 다른 시스템이 프로그램으로 회의를 만들고 녹화를 제어할 관리 API 가 없어서입니다(저장소 기획서). 감싸 두면 HIS · Clinic 이 같은 방식으로 부릅니다 |
 | **입장은 서명된 토큰으로** — 의사는 진행자, 환자는 게스트 | 입장할 때 서명된 토큰을 확인하고, 역할(진행 권한)은 HIS 가 정합니다 |
 | **녹화에 보안 등급과 접근 기록** | 진료 영상은 환자 개인정보라, 등급별로 접근을 달리하고 누가 봤는지 남기려는 것입니다(저장소 기획서) |
@@ -200,14 +213,15 @@ flowchart TB
 
 ## 8. 알아 둘 것
 
-> **EN** — The current installation does not work and has to be built anew; sign-in relies on one secret shared by three places; the mobile web path is on hold and blocked; live captions started as a trial and are assist-only; and the README's release table stops at v2.3.0 while tags go to v2.10.0.
+> **EN** — The current installation does not work and has to be built anew; sign-in relies on one secret shared by three places, with no rotation without downtime; the mobile web path, which the patient app also uses, is on hold and blocked; live captions started as a trial and are assist-only; Grafana is AGPL; and there are three version labels.
 
-- 🔴 **현재 설치본은 동작하지 않습니다** — 연결도 모두 「지금은 쓸 수 없음」입니다. 원격진료가 필요한 기관은 새로 구성하고, 연결을 하나씩 실제로 불러 확인합니다.
-- 🔴 **입장이 공유 비밀키 하나에 기댑니다** — HIS · Jitsi · 회의 관리 API 세 곳이 같은 비밀키를 가져야 하고, 교체할 때도 세 곳을 함께 바꿉니다. 보관 · 교체 절차와 담당자를 정해 둡니다.
-- **모바일 웹 입장은 보류 · 차단돼 있습니다** — 휴대전화로 들어오는 환자의 입장 방법은 새로 구성할 때 정합니다(환자 앱 연결도 지금은 쓸 수 없음).
+- 🔴 **현재 설치본은 동작하지 않습니다** — 5절 표의 Jitsi 연결은 7개가 「지금은 쓸 수 없음」이고 1개는 설계만 있습니다. 원격진료가 필요한 기관은 새로 구성하고, 연결을 하나씩 실제로 불러 확인합니다.
+- 🔴 **입장이 공유 비밀키 하나에 기댑니다** — HIS · Jitsi · 회의 관리 API 세 곳이 같은 비밀키를 가져야 하고, 교체할 때도 세 곳을 함께 바꿉니다. 비밀키는 하나만 받아들여 바꾸는 순간 이전 토큰이 모두 거부되므로, 통화가 없는 시간에 바꿉니다. 보관 · 교체 절차와 담당자를 정해 둡니다.
+- **모바일 웹 입장은 보류 · 차단돼 있습니다** — 휴대전화 브라우저로 열면 「PC 로 접속」 안내가 나오게 돼 있습니다. 환자 앱도 화상 주소를 브라우저로 여는 방식이라 같은 화면을 거칩니다. 휴대전화 환자의 입장 방법은 새로 구성할 때 정합니다.
 - **실시간 자막 · 번역은 시험 구현에서 시작한 선택 구성**입니다. 무음 구간 오인식 완화가 남은 과제로 적혀 있습니다 — 자막은 보조로만 씁니다.
-- **원격진료 규제 대응 표기는 저장소에서 찾지 못했습니다** — 원격진료 허용 범위 · 녹화 보존 · 동의는 나라마다 달라 기관이 판단합니다.
-- **버전 표기가 둘입니다** — 코드 선언은 1.0.0, 태그는 v2.10.0 까지 이어졌고, README 의 릴리즈 표는 v2.3.0 에서 멈춰 있습니다.
+- **원격진료 규제 대응 표기는 저장소에서 찾지 못했습니다** — 원격진료 허용 범위 · 녹화 보존 기간 · 동의 화면 문구는 나라마다 달라 기관이 판단합니다.
+- **모니터링의 Grafana 는 AGPL 약관입니다** — 이 약관은 고친 판을 네트워크로 남에게 제공할 때의 의무를 다룹니다. 고쳐 쓰는지 · 외부에 제공하는지로 기관이 판단합니다(10절 THIRD_PARTY).
+- **버전 표기가 셋입니다** — 코드 선언은 1.0.0, 태그는 v2.10.0 까지 이어졌고, README 의 릴리즈 표는 v2.3.0 에서 멈춰 있습니다. 이 자료가 읽은 것은 v2.10.0 뒤 9번 더 바뀐 상태이며, 새로 구성할 때도 이것을 받습니다(6절).
 
 전체 한계와 대체 수단: [Jitsi 구성서 §10](../systems/jitsi.md#10-한계와-대체-수단).
 
@@ -227,7 +241,7 @@ flowchart TB
 | 이 버전의 변경 내용 | [릴리즈 요약](../RELEASES/2026.09/systems/jitsi.md) |
 | 화면 | [Jitsi 화면](../screens/jitsi.md) |
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
-| 제3자 구성요소 약관(Grafana 는 AGPL) | [THIRD_PARTY](../THIRD_PARTY.md#1-별도-서비스로-쓰는-제3자-서버) |
+| 제3자 구성요소 약관 | [THIRD_PARTY](../THIRD_PARTY.md#1-별도-서비스로-쓰는-제3자-서버) |
 | 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/hospital-jitsi` |
 
 ---

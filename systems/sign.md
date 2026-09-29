@@ -108,7 +108,8 @@ flowchart LR
 | 키 | 뜻 | 기본값의 성격 | 설치 전 |
 |---|---|---|:---:|
 | `DB_URL` (개발) · `POSTGRES_PASSWORD` (운영) | DB 연결 | 로컬 개발용 · 비밀값 | ✔ |
-| `CRYPTO_MASTER_KEY` · `CRYPTO_PEPPER` | 키 볼트 암호화 | 비밀값 — 설치 때 새로 만들고 서버 밖에도 보관합니다 | ✔ |
+| `CRYPTO_MASTER_KEY` | 키 볼트 암호화 | 비밀값 — 설치 때 새로 만들고 서버 밖에도 보관합니다 | ✔ |
+| `CRYPTO_PEPPER` | 본인확인 식별값(전화번호 등)을 해시할 때 섞는 비밀값 | 비밀값 — 설치 때 새로 만듭니다(2026-09-29 정정: 전에는 키 볼트 암호화 재료로 잘못 적었습니다) | ✔ |
 | `KEY_SIGNER_DRIVER` · `CRYPTO_PROXY_URL` · `CRYPTO_PROXY_TOKEN` · `CRYPTO_PROXY_PORT` · `CRYPTO_PROXY_VAULT` | 키 연산 방식(앱 안 · 분리 프록시) | 기본은 소프트웨어 · 토큰은 비밀값 | ✔ |
 | `HSM_PROVIDER` · `PKCS11_MODULE` · `PKCS11_PIN` · `PKCS11_TOKEN_LABEL` · `PKCS11_SLOT` · `AWS_REGION` | HSM · 클라우드 KMS 어댑터 | 기본 미사용 | 결정 |
 | `TSA_PROVIDER` · `TSA_URL` | 서명 타임스탬프 기관 | 기본은 자체 TSA | 결정 |

@@ -22,11 +22,13 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 
 ## 1. 한 문장
 
-> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds signing keys.
+> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds signing keys — including each signer's own key, which sign generates and keeps encrypted.
 
 **sign 은 병원 문서에 대해 「누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다」를 나중에 누구나 확인할 수 있게 만드는 전자서명 서비스입니다.**
 
 생태계에서 **서명용 개인키**(서명을 만드는 비밀 열쇠)를 가진 곳은 sign 하나뿐입니다. HIS · PACS · ERP · edu 는 키를 갖지 않고, 서명이 필요하면 sign 에 요청합니다.
+
+서명하는 **사람마다의 키**도 sign 이 만들어 암호화해 보관합니다. 의사나 환자는 키 파일을 들고 다니지 않습니다. 본인임이 확인되면 sign 이 그 사람의 키로 서명합니다.
 
 ## 2. 병원 업무의 어디에 쓰이나
 
@@ -44,9 +46,9 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 
 **장면으로 보면**
 
-- **판독 서명** — 판독의가 PACS 에서 판독문을 확정하고 서명을 누릅니다. 판독의 본인임은 HIS 가 발급한 서명용 신원으로 확인되고, sign 이 판독문에 서명과 타임스탬프를 붙입니다. 확정하지 않은 판독문은 서명되지 않습니다.
-- **조영제 동의** — 직원이 PACS 에서 동의서 서명을 요청하면 환자용 1회용 서명 링크가 만들어집니다. 환자는 본인확인을 거쳐 서명하고, 같은 링크로는 두 번 서명할 수 없습니다. 서명이 끝나면 PACS 의 동의서 상태가 「완료」로 바뀝니다.
-- **동의서 완료 통지** — 동의서 서명이 끝나면 sign 이 HIS 에 **서명된 완료 통지**를 보냅니다. HIS 는 통지의 서명을 확인한 뒤에야 동의 상태를 바꿉니다. 서명이 틀리거나 없는 통지는 반영되지 않습니다.
+- **판독 서명** — 판독의가 PACS 에서 판독문을 확정하고 서명을 누릅니다. 판독의 본인임은 HIS 가 발급한 서명용 신원으로 확인되고, sign 이 그 판독의의 키로 판독문에 서명과 타임스탬프를 붙입니다. 확정하지 않은 판독문은 서명되지 않습니다.
+- **조영제 동의** — 직원이 PACS 에서 동의서 서명을 요청하면 환자용 1회용 서명 링크가 만들어집니다. 환자는 본인확인을 거쳐 서명하고, 같은 링크로는 두 번 서명할 수 없습니다. 서명이 끝나면 PACS 의 동의서 상태가 「완료」로 바뀝니다. 본인확인은 기관이 사업자와 계약하기 전까지 모의 공급자로 동작합니다.
+- **동의서 완료 통지** — 동의서 서명이 끝나면 sign 이 HIS 에 **서명된 완료 통지**를 보냅니다. HIS 는 통지의 서명을 확인한 뒤에야 동의 상태를 바꿉니다. 서명이 틀리거나 없는 통지는 반영되지 않습니다. 다만 HIS **화면에서** 동의서 서명을 요청하는 길은 아직 끝까지 확인하지 못했습니다(5절).
 - **처방 기록 봉인** — HIS 가 처방 행위(발행 · 접수 · 시행 · 완료 · 취소)의 서명 로그를 sign 의 감사 원장에 올립니다. 나중에 저장된 기록 하나를 바꾸면 검증이 「체인 불일치」로 드러납니다.
 
 ## 3. 할 수 있는 일
@@ -61,9 +63,9 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 | **위변조 증거** | 모든 행위(생성 · 발송 · 열람 · 서명 · 폐기)를 **추가만 되는** 해시 사슬에 쌓고, 사슬 머리를 타임스탬프로 봉인 · 외부 타임스탬프 기관의 교차 봉인(선택) |
 | **키 보관** | 기본은 마스터키로 암호화한 소프트웨어 보관소 · 키 연산을 별도 프로세스로 떼어 내는 구성(선택) · 하드웨어 보안 모듈(HSM) · 클라우드 키 관리 어댑터(준비됨 · 아직 적용 안 함) |
 | **서명 방식** | 연동 시스템이 서명을 요청 · 1회용 링크로 서명자가 브라우저에서 서명 · 의료진이 HIS 신원으로 서명 · 대리 서명. 서명의 위험도에 따라 본인확인 방법을 묶어 둡니다 |
-| **연동** | 한 번의 호출로 인증서 발급과 서명 요청 · 서명된 완료 통지(웹훅 — 재시도 · 중복 방지) · 다른 시스템의 중요한 행위를 봉인해 두는 감사 원장 · 전체 API 명세(OpenAPI) |
-| **일반 전자계약**(켜야 동작) | PDF 서식 · 발송 · 순차 · 동시 서명 · 보관 · 교부 링크 · QR 진위 확인 |
-| **콘솔 · 운영** | 인증서 발급 · 폐기 · 역할별 권한 · 2단계 인증 · 비활동 로그아웃 · 연동 키 무중단 교체 · 이상 징후 탐지(백업 신선도 · 감사 사슬 무결성 · 로그인 실패 급증 · 통지 실패)와 메일 알림 |
+| **연동** | 한 번의 호출로 인증서 발급과 서명 요청 · 서명된 완료 통지(웹훅 — 재시도 · 중복 방지) · 다른 시스템의 중요한 행위를 봉인해 두는 감사 원장 · 전체 API 명세(표준 형식의 API 설명서) |
+| **일반 전자계약**(켜야 동작) | PDF 서식 · 주소록 · 발송 · 순차 · 동시 서명 · 보관 · 교부 링크 · QR 진위 확인. 연동 시스템이 부르는 서명 요청과는 **다른 기능**입니다 — 5절의 ERP 거래처 계약은 서명 요청 쪽을 씁니다 |
+| **콘솔 · 운영** | 인증서 발급 · 폐기 · 역할별 권한 · 2단계 인증 · 비활동 로그아웃 · 연동 키 무중단 교체(마스터키 교체는 다름 — 8절) · 이상 징후 탐지(백업 신선도 · 감사 사슬 무결성 · 로그인 실패 급증 · 통지 실패)와 메일 알림 |
 
 전체 기능과 설정: [sign 구성서 §4](../systems/sign.md#4-핵심-기능) · 동의서 서명의 흐름: [동의서 전자서명](../functions/detail/consent-signature.md) · 처방 서명 봉인: [처방 서명](../functions/detail/order-signature.md).
 
@@ -114,16 +116,22 @@ flowchart LR
 | 저장소 | 무엇이 들어 있나 |
 |---|---|
 | **PostgreSQL 16** | 서명 요청 · 참가자 · 인증서 · 감사 사슬 · 연동 소비자 · 계약 — 데이터 모델 **14개** |
-| **키 보관소 볼륨** | 인증기관 · 타임스탬프 키와 서명자 키 — 마스터키로 암호화. **재기동 뒤에도 남아야 하므로 볼륨 보존과 백업이 필수**입니다 |
+| **키 보관소 볼륨** | 인증기관 · 타임스탬프 키와 서명자(사람)마다의 키 — 마스터키로 암호화. **재기동 뒤에도 남아야 하므로 볼륨 보존과 백업이 필수**입니다 |
 
 - 코드는 **업무 규칙(domain) · 흐름(application) · 바깥 연결(infrastructure) · 입구(presentation)** 네 층으로 나뉘어 있습니다. 키 보관이나 본인확인 사업자처럼 바깥과 닿는 부분은 바깥 연결 층에 모여 있습니다(폴더 구성을 보고 읽은 것입니다).
-- API 는 **162개** 동작입니다(OpenAPI 명세의 항목을 센 값 · 기준 커밋).
+- API 는 **162개** 동작입니다(저장소의 API 명세 항목을 센 값 · 그 뒤 서버 코드는 바뀌지 않음).
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic). Staff identity comes from HIS and is checked with HIS's public key, so no shared secret is needed for it. Other systems use per-system API keys, and sign's completion notices carry an HMAC signature. Nine links were called for real between fresh installs in September 2026.
+> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign itself only calls out to deliver completion notices and their retries. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026, patient identity checks running on a mock provider.
 
-**sign 은 스스로 업무를 시작하지 않습니다.** 다른 시스템이 서명을 요청하고, sign 은 서명이 끝나면 요청한 시스템에 알립니다.
+**sign 은 스스로 서명 업무를 시작하지 않습니다.** 다른 시스템이 서명을 요청하고, sign 은 서명이 끝나면 요청한 시스템에 알립니다. sign 이 먼저 부르는 것은 이 완료 통지와 그 재시도뿐입니다.
+
+**의료진 서명은 세 단계로 이어집니다.**
+
+1. HIS 가 그 직원의 서명용 인증서를 sign 에 미리 발급받게 합니다. 키는 sign 이 만들어 보관합니다.
+2. 직원이 서명을 누르면 HIS 가 서명 전용 신원을 발급합니다.
+3. sign 은 그 신원을 HIS 공개키로 확인하고, 그 직원에게 묶인 서명만 그 직원의 키로 만듭니다. 다른 직원에게 묶인 서명 요청은 거부됩니다.
 
 ```mermaid
 flowchart TB
@@ -137,23 +145,23 @@ flowchart TB
 
 | 상대 | sign 이 받는 것 | sign 이 주는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **HIS** | 직원 신원(서명용) · 처방 서명 로그 봉인 · 동의서 · 발급 문서 서명 요청 | 서명 완료 통지 | 직원 신원은 HIS 공개키로 검증 · 시스템 연동 키 · 서명된 통지 | 직원 서명 · 완료 통지 · 처방 로그 봉인 **확인함**(2026-09-14) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 확인은 아직 |
-| **PACS** | 판독문 서명 · 조영제 동의서 서명 요청 | 서명 완료 | 연동 키 · 판독의 신원은 HIS 발급 | 둘 다 **확인함**(2026-09-15) |
-| **ERP** | 외부 거래처 계약 서명 · 결재 기록 봉인 | 계약 완료 통지 | 연동 키 · 서명된 통지 | 계약 서명 · 완료 통지 **확인함**(2026-09-15) · 결재 기록 봉인은 만들어져 있음 · 확인은 아직 · 일반 전자계약 호출은 ERP 쪽에 아직 없음 |
+| **HIS** | 직원 신원(서명용) · 처방 서명 로그 봉인 · 동의서 · 발급 문서 서명 요청 | 서명 완료 통지 | 직원 신원은 HIS 공개키로 검증 · 시스템 연동 키 · 서명된 통지 | 직원 서명 · 완료 통지 · 처방 로그 봉인 **확인함**(2026-09-14 · 서명 요청은 sign 에 직접 만들어 시험) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 확인은 아직 |
+| **PACS** | 판독문 서명 · 조영제 동의서 서명 요청 | 서명 완료 | 연동 키 · 판독의 신원은 HIS 발급 | 둘 다 **확인함**(2026-09-15 · 환자 본인확인은 모의 공급자로) |
+| **ERP** | 외부 거래처 계약 서명(서명 요청 기능으로) · 결재 기록 봉인 | 계약 완료 통지 | 연동 키 · 서명된 통지 | 거래처 계약 서명 · 완료 통지 **확인함**(2026-09-15) · 결재 기록 봉인은 만들어져 있음 · 확인은 아직 · 3절의 「일반 전자계약」 기능을 부르는 코드는 ERP 쪽에 아직 없음 |
 | **edu** | 법정교육 이수증 봉인 · 폐기 · 철회 | 이수증 완료 통지 | 연동 키 · 서명된 통지 | 둘 다 **확인함**(2026-09-15) |
 | **Clinic** | 그룹웨어 결재 문서 봉인 | — | 연동 키 | 만들어져 있음 · 확인은 아직(설치하지 않음) |
 
-「확인함」은 2026년 9월에 새로 세운 설치본끼리 실제로 불러 본 결과입니다(가상 데이터). 틀린 키 · 위조한 통지 · 망가뜨린 신원 · 같은 링크 재사용을 일부러 넣어 거부되는 것도 확인했습니다([따라가 본 결과](../build-guide/follow-along-2026-09.md)).
+「확인함」은 2026년 9월에 새로 세운 설치본끼리 가상 데이터로 실제로 불러 본 결과입니다. HIS 3 · PACS 2 · ERP 2 · edu 2, 모두 9개입니다. 틀린 키 · 위조한 통지 · 망가뜨린 신원 · 같은 링크 재사용을 일부러 넣어 거부되는 것도 확인했습니다([따라가 본 결과](../build-guide/follow-along-2026-09.md)).
 
 - 완료 통지를 받는 쪽 주소는 운영 설정에서 **`https` 만** 받습니다. 원내 시스템이 `http` 로만 떠 있으면 앞에 TLS 를 두어야 통지가 들어갑니다.
-- 통지는 실패하면 **5분마다 다시 보내고**, 계속 실패하면 「실패 확정」으로 멈춥니다 — 그 뒤에는 따로 다시 보내야 합니다. 재시도 스케줄러를 끄면 밖에서 주기적으로 불러 줘야 밀린 통지가 나갑니다.
-- 부르는 쪽은 sign 주소를 **판본 경로(`/v1`)까지** 넣어야 합니다.
+- 통지는 실패하면 **5분마다 다시 보내고**, 계속 실패하면 「실패 확정」(더는 자동으로 다시 보내지 않는 상태)으로 멈춥니다. 그 뒤에는 재발송 기능으로 따로 다시 보내야 합니다. 재시도 스케줄러를 끄면 밖에서 주기적으로 불러 줘야 밀린 통지가 나갑니다.
+- 부르는 쪽은 sign 주소를 **판본 경로(`/v1`)까지** 넣어야 합니다. HIS 설정에 호스트만 넣었더니 인증서 발급이 「찾을 수 없음」으로 실패했습니다(2026-09-13 시험 · 설정 설명에는 이 말이 없습니다).
 
 연결마다의 자세한 내용: [연결 카드](../integration/cards/)(예: [HIS → sign](../integration/cards/his-to-sign.md) · [PACS → sign](../integration/cards/pacs-to-sign.md) · [sign → HIS](../integration/cards/sign-to-his.md)) · [연결 상태 표](../RELEASES/2026.09/compatibility.md) · 서명 · 재시도 규칙은 [공통 규약](../integration/contracts.md) · 전체 그림은 [신뢰의 사슬](../diagrams/trust-chain.md).
 
 ## 6. 설치 · 운영
 
-> **EN** — Three containers (service, web, PostgreSQL) plus two optional proxies; database migrations apply on container start. The production image built and ran unchanged in the September 2026 rehearsal, but the compose file expects an external network to exist. Several secrets are mandatory and the service refuses to start without them. Backups are GPG-encrypted, and a lost backup passphrase means no backup can be opened.
+> **EN** — Three containers (service, web, PostgreSQL) plus two optional proxies; database migrations apply on container start. The production image built and ran unchanged in the September 2026 rehearsal, but the compose file expects an external network named docker_default to exist. Several secrets are mandatory and the service refuses to start without them. Backups are GPG-encrypted, and a lost backup passphrase means no backup can be opened.
 
 ### 필요한 것
 
@@ -167,24 +175,29 @@ flowchart TB
 ### 설치 경로
 
 - 운영용 compose 로 올립니다. 컨테이너가 뜰 때 **DB 스키마를 스스로 적용**합니다.
-- 2026년 9월 따라가기에서 **운영용 이미지가 원본 그대로 빌드되고 떴습니다.** 다만 compose 가 **미리 만들어 둔 바깥 네트워크 하나를 요구**해, 새 서버에서는 네트워크를 만들거나 설정을 기관 구성에 맞게 바꿔야 합니다([구축 가이드 S4](../build-guide/S4-trust.md)).
+- 2026년 9월 따라가기에서 **운영용 이미지가 원본 그대로 빌드되고 떴습니다.** 다만 compose 가 **미리 만들어 둔 바깥 네트워크 `docker_default` 를 요구**합니다. 원래 서버의 다른 compose 묶음에 맞춘 값입니다. 새 서버에서는 `docker network create docker_default` 로 먼저 만들거나, compose 의 네트워크 설정을 기관 구성에 맞게 바꿉니다([구축 가이드 S4](../build-guide/S4-trust.md)).
 - **첫 관리자**는 설치 때 환경 변수로 만듭니다. 없으면 기동 로그가 「관리자 계정 미부트스트랩」을 경고합니다.
 - 테스트를 마치고 실운영으로 넘어갈 때는 **테스트 데이터와 인증기관을 새로 만드는 초기화 절차**가 있습니다. 이때 연동 시스템이 받아 둔 인증서도 다시 발급받습니다.
 
 ### 꼭 넣어야 하는 설정
 
-- **없으면 시작하지 않는 것** — 마스터키 · 페퍼(키 보관소 암호화 재료) · HIS 연동 키 · 통지 서명 비밀. 임시 키로 떠서 조용히 도는 일이 없게 했습니다.
+- **없으면 시작하지 않는 것** — 마스터키(키 보관소를 암호화하는 열쇠) · 페퍼(본인확인에 쓴 전화번호 같은 식별값을 평문 대신 해시로 남길 때 섞는 비밀값) · HIS 연동 키 · 통지 서명 비밀. 임시 키로 떠서 조용히 도는 일이 없게 했습니다.
 - **DB 비밀번호는 반드시 직접 넣습니다.**
 - **주소** — 공개 주소 · HIS 공개키 목록 주소 등 몇몇 기본값에 **다른 설치본의 주소**가 들어 있습니다. 모두 자기 기관 값으로 바꿉니다([바꿔야 할 코드 기본값 — sign](../build-guide/replace-list.md#sign)).
 - **본인확인 · 알림** — 사업자와 계약하기 전에는 **모의 공급자**로 동작하고, 서명 포털이 스스로 「데모」라고 표시합니다.
-- **보안 헤더** — 콘솔 · 포털의 콘텐츠 보안 정책은 관찰 모드가 기본입니다. 위반 보고를 본 뒤 차단 모드로 바꿉니다.
+- **보안 헤더** — 콘솔 · 포털의 콘텐츠 보안 정책(브라우저가 불러올 수 있는 스크립트 · 주소를 제한하는 규칙)은 위반을 기록만 하는 관찰 모드가 기본입니다. 위반 보고를 본 뒤 차단 모드로 바꿉니다.
 
 ### 백업 · 감시
 
 - **백업** — DB 덤프를 만들어 목차까지 검사한 뒤 **GPG 로 암호화하고 평문을 바로 지웁니다.** 기본 보존은 로컬 14세대 · 서버 밖 30세대입니다. 키 보관소 볼륨도 백업 대상입니다.
 - **백업이 멈춘 것은 「성공 신호가 안 온 것」으로 압니다.** 백업이 끝나면 앱에 성공 신호를 보내고, 기준 시간(기본 26시간)을 넘기면 경보가 납니다.
-- **복구는 해 봐야 압니다.** 저장소 런북은 분기마다 복구 리허설을 두고, **복원본 위에서 감사 사슬 검증이 통과해야** 성공으로 봅니다.
+- **복구는 해 봐야 압니다.** 저장소의 운영 절차서(런북)는 분기마다 복구 리허설을 두고, **복원본 위에서 감사 사슬 검증이 통과해야** 성공으로 봅니다.
 - **이상 징후 탐지** — 감사 사슬 무결성 · 로그인 실패 급증 · 통지 실패 확정 · 준비 상태를 보고 메일로 알립니다. 알림 수신처를 넣지 않으면 로그에만 남습니다.
+
+### 아직 재지 않은 것
+
+- 서명 처리량 · 지연과 권장 서버 사양은 계측하지 않았습니다.
+- 이미 다른 방식으로 서명해 둔 문서를 sign 으로 옮기는 방법과, 인증서 만료 때의 갱신 운영은 이 자료에서 다루지 않았습니다.
 
 자세한 설정 키: [sign 구성서 §6](../systems/sign.md#6-주요-설정) · 설치 순서와 키 관리: [구축 가이드 S4](../build-guide/S4-trust.md).
 
@@ -197,23 +210,24 @@ flowchart TB
 | **개인키는 sign 한 곳에만** | 키를 지킬 곳을 하나로 줄이고, 「누가 서명했나」의 증거를 한 곳에서 만들고 검증하게 |
 | **서명 당시를 기준으로 검증**(PAdES-LTA · 서명 시점의 폐기 여부) | 몇 년 뒤 인증서가 만료돼도 그 문서가 서명 당시 유효했음을 확인할 수 있게 — 의무기록은 오래 보존합니다 |
 | **감사 사슬 + 타임스탬프 봉인 + 외부 교차 봉인(선택)** | 운영자 자신도 기록을 몰래 고칠 수 없게. 외부 봉인을 붙이면 제3자가 sign 없이 표준 도구로 확인할 수 있습니다 |
-| **의료진 신원은 HIS 공개키로 검증** | 두 시스템이 비밀을 나눠 가질 필요가 없게. HIS 가 발급한 신원이 위조되면 검증에서 막힙니다 |
+| **의료진 신원은 HIS 공개키로 검증** | 두 시스템이 비밀을 나눠 가질 필요가 없게. HIS 가 발급한 신원이 위조되면 검증에서 막힙니다. 공개키 목록은 표준 형식(JWKS)이고 그 주소와 발급자 이름은 설정 값입니다. HIS 가 아닌 발급처를 붙여 보지는 않았습니다 |
 | **키 재료가 없으면 기동 거부** | 설정이 빠진 채 임시 키로 서명을 만들어 놓고 나중에 무효가 되는 일이 없게 |
 
 대가도 있습니다 — 외부 인증기관에 기대지 않는 대신 **키를 기관이 보관**해야 하고, 마스터키나 백업 암호를 잃으면 과거 증거를 다시 열 수 없습니다([형제 시스템의 설계 기록 §5](../DESIGN-HISTORY-SYSTEMS.md)).
 
 ## 8. 알아 둘 것
 
-> **EN** — CA keys are kept in software (no HSM yet); identity-verification and messaging providers are mocks until contracted; losing the master key or the backup passphrase means old evidence cannot be reopened. Also: no accredited timestamp authority, no long-term re-timestamping, single institution only, Korean-only screens, and the legal effect of signatures is for the hospital and its lawyers to judge.
+> **EN** — CA keys are kept in software (no HSM yet); identity-verification and messaging providers are mocks until contracted; losing the master key or the backup passphrase means old evidence cannot be reopened. Also: no accredited timestamp authority, no long-term re-timestamping, single institution only, Korean-only screens, and the legal effect of signatures is for the hospital and its lawyers to judge. Rotating the master key has no step-by-step procedure in the repository, and the materials disagree on what the pepper secret is for (this page follows the code).
 
 - 🔴 **인증기관 키를 소프트웨어로 보관합니다.** 하드웨어 보안 모듈(HSM)은 어댑터만 준비돼 있고 적용되지 않았습니다. 실운영 전환 때 장비나 클라우드 키 관리 서비스를 마련해 옮기는 것을 권합니다.
 - 🔴 **본인확인 · 문자 · 메시지 사업자 연결이 모의 상태입니다.** 실제 환자가 서명하기 전에 기관이 사업자와 계약해 연결을 끝냅니다.
-- 🔴 **마스터키와 백업 암호를 잃으면 되돌릴 수 없습니다.** 서버 밖에도 보관합니다(저장소 런북은 사본 세 곳을 적습니다). 마스터키를 바꾸면 봉인된 연동 설정과 관리자 세션이 모두 무효가 됩니다.
+- 🔴 **마스터키와 백업 암호를 잃으면 되돌릴 수 없습니다.** 서버 밖에도 보관합니다(저장소 운영 절차서는 사본 세 곳을 적습니다). 마스터키를 바꾸면 봉인된 연동 설정과 관리자 세션이 모두 무효가 되어, 연동 설정을 다시 넣고 다시 로그인해야 합니다. 단계별 교체 절차서는 저장소에서 찾지 못했습니다.
 - **공인 타임스탬프 기관과 연결돼 있지 않습니다** — 서명에는 자체 타임스탬프를 씁니다. 계약하면 주소 설정만 바꾸도록 돼 있습니다.
 - **장기 보관 문서의 재타임스탬프**(인증서 수명보다 긴 보존을 위한 갱신)는 아직 없습니다.
-- **한 기관(단일 테넌트)** 을 전제로 합니다. 화면은 **한국어뿐**입니다.
+- **한 기관만 쓰는 구성**을 전제로 합니다. 여러 기관이 한 설치본을 나눠 쓰는 구성은 없습니다. 화면은 **한국어뿐**입니다.
 - 계약 첨부는 보존 기간을 설정하지 않으면 **영구 보관**됩니다.
-- **전자서명의 법적 효력 판단**과 국내 검증필 암호모듈(KCMVP)이 필요한지는 구축 기관과 법무가 정합니다. 보안 기준 대응표는 `대응 설계` 이고 외부 인증 · 승인 증빙은 없습니다.
+- **전자서명의 법적 효력 판단**과 국내 검증필 암호모듈(KCMVP)이 필요한지는 구축 기관과 법무가 정합니다. 외부 인증기관이 발급한 인증서(공동인증서 등)와의 관계도 이 자료는 판단하지 않습니다 — sign 은 자체 인증기관을 씁니다. 보안 기준 대응표는 `대응 설계` 이고 외부 인증 · 승인 증빙은 없습니다.
+
 
 전체 한계와 대체 수단: [sign 구성서 §10](../systems/sign.md#10-한계와-대체-수단).
 

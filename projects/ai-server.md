@@ -26,7 +26,7 @@ What an IT team should know first: there is no ready-made install definition for
 
 **AI Server 는 생태계의 AI 연산을 기관 안 GPU 서버 한 대에 모아 맡고, 다른 시스템이 부르면 초안과 보조 결과를 돌려주는 서버입니다.**
 
-twin 과 cerno 는 자기 GPU 를 두지 않고 이 서버를 부릅니다. 그래서 모델을 올리고 GPU 를 나눠 쓰는 일은 이 서버 한 곳에서만 합니다. AI Server 가 없거나 멈춰도 HIS 는 동작하고, 화면은 그 칸을 「폴백」 또는 「산출 불가」로 보여 줍니다.
+twin 과 cerno 는 자기 GPU 를 두지 않고 이 서버를 부릅니다. 그래서 모델을 올리고 GPU 를 나눠 쓰는 일은 이 서버 한 곳에서만 합니다. AI Server 가 없거나 멈춰도 HIS 는 동작합니다. 화면은 그 칸을 「폴백」(AI 대신 미리 정한 기본 동작으로 대신함) 또는 「산출 불가」로 보여 줍니다. 어떻게 보이는지는 기능마다 다릅니다 — 예를 들어 번역은 원문을 그대로 보이며 실패 표시를 붙이고, 약품집 초안은 오류로 끝납니다.
 
 이 저장소에는 의료와 무관한 기능도 함께 들어 있습니다. 이 소개서는 **의료 · 생태계 쪽만** 다룹니다.
 
@@ -59,11 +59,11 @@ twin 과 cerno 는 자기 GPU 를 두지 않고 이 서버를 부릅니다. 그�
 |---|---|
 | **의료 기준 데이터 조회** | 공공 DUR 기준(병용 · 임부 · 연령 금기, 노인 · 용량 주의, 투여기간, 효능군 중복) 점검 **보조** · 약가 · 제품 코드 대조 · 대체조제 조회 · 환자용 의약품 정보 · 질병분류 · 수가 코드 조회. 어떤 데이터가 얼마나 최신인지 알려 주는 **데이터 카탈로그**가 있습니다 |
 | **진료 보조(초안)** | 진료 기록 요약(SOAP) · 의무기록 초안 · 환자 설명문 초안 · 증상 분류 보조 · 의료진용 임상 질의 · 영→한 의학 번역 · 영상 소견 초안 · 이전 영상 비교 초안 |
-| **근거 문서 검색(RAG)** | 문서에서 근거를 찾아 답합니다. 법령 > 고시 > 상대가치 > 발간물 순으로 권위를 둡니다. **근거를 못 찾으면 「근거 없음」이라고 알립니다.** 기관마다 지식 저장소를 나눕니다 |
+| **근거 문서 검색(RAG)** | 문서에서 근거를 찾아 답합니다. 문서마다 법령 > 고시 > 상대가치 > 발간물 순의 권위 등급을 매깁니다. 검색 순위에서 아래 등급에 감점을 주고, 관련 법령 · 고시 상위 2건은 늘 넣습니다. 양이 많은 발간물이 법령을 밀어내지 않게 한 것입니다. **근거를 못 찾으면 「근거 없음」이라고 알립니다.** 기관마다 지식 저장소를 나눕니다 |
 | **음성 인식** | 진료실 실시간 인식 · 녹음 파일 일괄 인식. 모두 서버 안에서 합니다 |
 | **twin 연산 지원** | 비식별 연산(생리 반응 시뮬레이션 · 영상에서 장기 3D 모양 만들기 등) |
-| **GPU 나눠 쓰기** | 역할 → 모델 라우팅 · 상주 모델과 요청할 때 올리는 모델 · 동시에 올리는 모델 수 한도 · 우선순위 · 공정한 대기열 · 같은 요청 합치기 · 응답이 늦을 때 끊는 장치 · 시간대별 운영 프로파일(자동 적용은 기본 꺼짐 — 9절) |
-| **거버넌스** | 부르는 시스템마다 API 키(만료일 · 새 키와 옛 키 병행 교체) · 약물 데이터 정제는 **사람이 승인해야 반영** · 레코드별 출처 이력 · 자기 품질 계측(근거와 맞는지 · 검색 품질) · 응답마다 버전 헤더 |
+| **GPU 나눠 쓰기** | 역할 → 모델 라우팅 · 상주 모델과 요청할 때 올리는 모델 · 동시에 올리는 모델 수 한도 · 우선순위 · 공정한 대기열 · 같은 요청 합치기 · 응답이 늦을 때 끊는 장치 · 시간대별 운영 프로파일(시간대마다 어떤 모델을 올려 둘지 정한 묶음 · 자동 적용은 기본 꺼짐 — 9절) |
+| **관리 · 통제** | 부르는 시스템마다 API 키(만료일 · 새 키와 옛 키 병행 교체) · 약물 데이터 정제는 **사람이 승인해야 반영** · 기록마다 어디서 온 데이터인지 남기는 출처 이력 · 자기 품질 계측(근거와 맞는지 · 검색 품질) · 응답마다 버전 헤더 |
 
 전체 기능 표: [AI Server 구성서 §4](../systems/ai-server.md#4-핵심-기능) · AI 가 하는 일과 하지 않는 일: [개요서 7장](../overview/07-ai.md).
 
@@ -123,27 +123,30 @@ flowchart LR
 | **음성 인식** | 전사 | Whisper 계열 |
 | **근거 검색** | 벡터 검색과 키워드 검색을 합칩니다 | ChromaDB(프로세스 안에 내장) |
 | **관리 화면** | 모델 · 키 · 대기열 · GPU 상태 | 웹 관리 화면 |
-| **보조 작업자**(선택) | Apple Silicon 기기에서 도는 별도 작업자로, 음성 인식 경로가 있습니다(어디까지 나눠 맡는지는 확인하지 않았습니다) | 별도 경량 프로세스 |
+| **보조 작업자**(선택) | Apple Silicon(맥 컴퓨터의 칩) 기기에서 도는 별도 작업자로, 음성 인식을 넘겨받는 경로가 코드에 있습니다. 없어도 서버는 동작합니다. 나눠 맡기는 범위는 시험하지 않았습니다 | 별도 경량 프로세스 |
 
-코드 크기는 API 핸들러 654개입니다 — **저장소 전체**를 센 값이라 의료 밖 기능이 함께 들어 있습니다(기준 커밋 · [구성서 §3](../systems/ai-server.md#3-규모)).
+코드 크기는 **저장소 전체**를 센 값만 있습니다(이 문서의 근거 절). 의료 밖 기능이 함께 들어 있고, 의료 쪽만 따로 세지는 않았습니다. 왜 한 저장소에 함께 있는지는 저장소에서 설명을 찾지 못했습니다.
 
 **데이터가 사는 곳**
 
 | 저장소 | 무엇이 들어 있나 |
 |---|---|
-| **SQLite 파일 여러 개** | 의료 기준 데이터(DUR · 의약품 정보 · 질병 · 수가 코드 · 의료 법령) · 고시 · 작업 대기열 · 품질 평가 기록. 코드 데이터 DB 파일 일부가 저장소에 들어 있습니다(내용은 확인하지 않았습니다) |
+| **SQLite 파일 여러 개** | 의료 기준 데이터(DUR · 의약품 정보 · 질병 · 수가 코드 · 의료 법령) · 고시 · 작업 대기열 · 품질 평가 기록 |
 | **ChromaDB 폴더** | 근거 검색용 벡터 색인 |
 | **설정 파일** | 서버 설정 · 역할 → 모델 라우팅 표 · 외부 제공자 목록 |
 | **모델 저장소**(Ollama) | 기관이 받은 모델 가중치 |
 
 - **별도 DB 서버가 필요 없습니다.**
+- **저장소에 데이터 파일이 몇 개 들어 있습니다** — 코드 데이터 파일 하나는 질병 · 수가 · 약품 코드와 그 출처 기록 같은 표로 짜여 있습니다. 표 이름만 확인했고, 값의 출처 · 이용 조건 · 개인정보가 섞였는지는 확인하지 않았습니다. 받아 쓰기 전에 기관이 확인할 대상입니다.
 - **기록의 정본은 부른 쪽(HIS 등)에 남습니다.** AI Server 는 받은 내용으로 초안을 만들어 돌려줍니다.
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — AI Server is the called side; the connection table lists no call from it to another ecosystem system. Each caller gets its own API key. HIS, PACS, ERP, edu, twin and cerno are wired to call it; the video-consultation link is not usable now. In the September 2026 follow-along, some HIS, ERP and edu paths were called with a small substitute model, but no connection was marked verified because each covers many functions or needs an embedding model that was not loaded.
+> **EN** — AI Server is the called side; the connection table lists no call from it to another ecosystem system, though it does need internet access for public reference data. Each caller gets its own API key. HIS, PACS, ERP, edu, twin and cerno are wired to call it; the video-consultation link is not usable now. In the September 2026 follow-along, some HIS, ERP and edu paths were called with a small substitute model, but "tried" is not "verified": no connection was marked verified because each covers many functions or needs an embedding model that was not loaded. The statuses come from the integrated-release install, not the current development line.
 
-**AI Server 는 불리는 쪽입니다.** 연결 표에서 AI Server 가 생태계의 다른 시스템을 부르는 연결은 없습니다(밖으로 나가는 것은 공공 데이터 동기화). 부르는 시스템마다 API 키를 따로 발급합니다.
+**AI Server 는 불리는 쪽입니다.** 연결 표에서 AI Server 가 생태계의 다른 시스템을 부르는 연결은 없습니다. 다만 공공 데이터를 받으려고 **인터넷으로 나가는 연결**은 필요합니다(8절). 부르는 시스템마다 API 키를 따로 발급합니다.
+
+아래 표의 「불러 봄」과 「확인함」은 다릅니다. 「불러 봄」은 경로 하나가 응답하는 것을 본 것이고, 연결 하나에 묶인 기능 전체를 확인하지는 않았습니다. 그래서 AI Server 의 연결 중 「확인함」은 **하나도 없습니다**. 표의 상태는 통합 릴리즈 기준 설치본에서 본 것이고, 현재 개발본으로 다시 부르지는 않았습니다(9절).
 
 ```mermaid
 flowchart LR
@@ -168,38 +171,45 @@ flowchart LR
 | **Jitsi** | 원격 상담 회의록 · 자막 | — | 지금은 쓸 수 없음 |
 
 - 「불러 봄」은 2026년 9월에 새로 세운 설치본에서 **작은 대체 모델 · CPU** 로 불러 본 것입니다(가상 데이터 · [따라가 본 결과](../build-guide/follow-along-2026-09.md)). 품질은 판정하지 않았습니다.
-- **부르는 쪽이 알아 둘 것** — 비용이 큰 경로는 호출 한도를 넘으면 429 를 돌려줍니다. 부르는 쪽은 기다렸다 다시 시도하게 만듭니다. 응답 헤더의 계약 버전(`X-API-Contract`)은 하위 호환이 깨질 때만 오릅니다. 쓸 수 있는 데이터와 API 는 데이터 카탈로그에서 먼저 확인합니다.
+- **부르는 쪽이 알아 둘 것** — 비용이 큰 경로는 호출 한도를 넘으면 429(요청이 너무 많음)를 돌려줍니다. 부르는 쪽은 기다렸다 다시 시도하게 만듭니다. 응답마다 붙는 계약 버전 표시(`X-API-Contract`)는 예전 호출 방식이 더는 통하지 않게 바뀔 때만 오릅니다. 쓸 수 있는 데이터와 API 는 데이터 카탈로그에서 먼저 확인합니다.
 
 연결마다의 자세한 내용: [HIS → AI Server](../integration/cards/his-to-ai-server.md) · [PACS → AI Server](../integration/cards/pacs-to-ai-server.md) · [ERP → AI Server](../integration/cards/erp-to-ai-server.md) · [edu → AI Server](../integration/cards/edu-to-ai-server.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md).
 
 ## 6. 설치 · 운영
 
-> **EN** — One server with a GPU (developed on a 16GB consumer card; CPU works but its speed is not measured). There is no install definition for a new server: install the Python dependencies, put Ollama on the same host, download the models yourself (including the embedding model under the name the code expects), then issue a key for each caller. The backup script covers the job queue, settings and recent logs, not the reference data or the search index.
+> **EN** — One server with a GPU (developed on a 16GB consumer card; CPU works but its speed is not measured). There is no install definition for a new server: install the Python dependencies, put Ollama on the same host, download the models yourself — the build guide names Qwen2.5 14B/7B, Qwen3 8B and Qwen3-VL 8B for generation, Llama3-Med42-8B and Meditron 7B as clinical candidates, BGE-M3 for embeddings (the name is fixed in code) and Whisper large-v3/medium for speech — then issue a key for each caller. The backup script covers the job queue, settings and recent logs, not the reference data or the search index.
 
 ### 필요한 것
 
 | 항목 | 내용 |
 |---|---|
-| 서버 | **GPU 한 장**(VRAM 16GB 소비자용 카드로 개발 · 운영해 왔습니다). GPU 가 없어도 돌지만 그 속도는 계측하지 않았습니다. CPU 서버용 배치 전용 모드가 있습니다 |
+| 서버 | **GPU 한 장**(VRAM 16GB 소비자용 카드로 개발 · 운영해 왔습니다). GPU 가 없어도 돌지만 그 속도는 계측하지 않았습니다. CPU 서버용 배치 전용 모드가 있습니다. 권장 메모리 · 디스크와 동시 사용자별 응답 시간은 계측하지 않았습니다 |
 | 소프트웨어 | Python 3 · 저장소의 의존성 목록 · Ollama(호스트에 직접 설치) |
 | 먼저 있어야 할 것 | 없습니다. 다만 부르는 시스템(주로 HIS)이 있어야 쓸모가 있습니다 |
 | 기관이 준비할 것 | **모델 가중치**(저장소에 없음 — 모델마다 약관을 읽고 직접 받음) · 공공 데이터 API 이용 키(기관이 직접 신청) · 부르는 시스템마다 API 키 |
 
 ### 설치 경로
 
-- **새 서버에 올리는 설치 정의(컨테이너 정의 · 설치 스크립트)가 없습니다.** 저장소의 안내는 이미 설치된 서버를 갱신하는 용도입니다. 따라가기에서는 의존성을 직접 설치했고, 학습용 GPU 전용 패키지 3개를 빼야 설치가 끝났습니다.
-- **Ollama 를 같은 호스트에 둡니다.** 앱이 모델 서버를 자기 호스트에서 찾습니다. 다른 시스템이 부르려면 앞단 프록시를 둡니다 — 프록시 설정의 주의 사항은 [구축 가이드 S6](../build-guide/S6-ai.md)를 그대로 따릅니다.
-- **받을 모델은 네 종류**입니다 — 문장 생성 · 분류 · **임베딩**(문서를 검색할 수 있게 숫자로 바꾸는 모델) · 음성 인식. **임베딩 모델은 이름이 코드에 정해져 있어** 그 이름 그대로 받아야 합니다. 생성 모델만 받으면 문서 색인이 실패합니다.
+- **새 서버에 올리는 설치 정의(컨테이너 정의 · 설치 스크립트)가 없습니다.** 저장소의 안내는 이미 설치된 서버를 갱신하는 용도입니다. 따라가기에서는 의존성을 직접 설치했습니다. GPU 가 없는 시험 장비라 엔비디아 GPU 가 있어야 설치되는 학습용 패키지 3개를 빼야 했습니다. GPU 서버에서 목록 그대로 설치되는지는 시험하지 않았습니다.
+- **Ollama 를 같은 호스트에 둡니다.** 앱이 모델 서버를 자기 호스트에서 찾습니다. 다른 시스템이 부르려면 앞단 프록시를 둡니다.
+- **앞단 프록시는 원래 요청자를 알리는 전달 헤더(`X-Forwarded-For`)를 반드시 붙이게** 설정합니다. 설정 방법은 [구축 가이드 S6](../build-guide/S6-ai.md)와 저장소의 운영 안내를 따릅니다.
+- **모델을 먼저 넣고 서버를 띄웁니다.** 기동하면 쌓여 있던 작업이 바로 시작되므로, 모델 없이 띄우면 그 작업들이 실패로 끝납니다.
+- **받을 모델은 네 종류**입니다 — 문장 생성 · 분류 · **임베딩**(문서를 검색할 수 있게 숫자로 바꾸는 모델) · 음성 인식. 생성 모델만 받으면 문서 색인이 실패합니다.
+- **구축 가이드 S6 가 적은 모델 이름** — 생성 · 질의는 Qwen2.5 14B · 7B, Qwen3 8B, Qwen3-VL 8B 입니다. 임상 질의 후보는 Llama3-Med42-8B · Meditron 7B 입니다. 임베딩은 BGE-M3, 음성 인식은 Whisper large-v3 · medium 입니다.
+- 기본 라우팅이 부르는 것은 범용 14B 급 모델이고 적재하면 약 10.5GB 입니다. 임베딩 모델은 약 1GB 입니다. 역할마다 부르는 이름이 다르니, 쓰려는 기능이 부르는 이름을 모두 받습니다.
+- **임베딩 모델은 이름이 코드에 정해져 있어**(BGE-M3) 그 이름 그대로 받아야 합니다. 다른 임베딩 모델을 받아 두어도 부르지 않습니다.
+- 임베딩 요청의 문맥 길이는 따로 작게 줍니다(`RAG_EMBED_NUM_CTX` · 기본 2048). 색인만 실패하고 생성은 되면 이 값과 모델 서버의 전역 문맥 길이를 먼저 봅니다.
 - **모델 이름을 바꿔 복사하지 않습니다.** 라우팅 표를 받은 모델에 맞게 고칩니다.
 - **API 키를 새로 발급합니다** — 부르는 시스템마다 하나씩, 만료일과 함께.
 
 ### 꼭 정해야 하는 설정
 
-- **서버 설정 파일** — 기본 모델 · 기본 모델을 늘 올려 둘지 · 앞단 구성 방식(`ingress_mode` — 실제 구성과 맞춰야 상태 점검이 거짓 경보를 내지 않음) · 의료 경로를 공개 모델로만 고정하는 스위치.
+- **서버 설정 파일** — 기본 모델 · 기본 모델을 늘 올려 둘지 · 의료 경로를 공개 모델로만 고정하는 스위치 · 앞단 구성 방식(`ingress_mode`).
+- **`ingress_mode`** 는 기본값이 `ssh_tunnel` 입니다. 앞단을 프록시로 두면 `proxy`, 앞단이 없으면 `none` 으로 바꿉니다. 실제 구성과 다르면 상태 점검이 거짓 경보(기동 직후 `tunnel: down` 등)를 냅니다.
 - **라우팅 표** — 역할마다 쓸 모델. 의료 · 개인건강정보 · 규제 역할은 local only 로 묶여 있습니다.
 - **외부 제공자 목록** — 모두 꺼져 있습니다. 켜지 않는 것이 기본입니다.
 - **환경 변수** — 모델 서버 주소 · 공공 데이터 API 키 · 음성 인식 모델과 장치.
-- **HIS 쪽 AI 스위치** — HIS 의 AI 기능 전체 스위치는 코드 기본값이 켜짐입니다. 구축 가이드는 **설치 직후 끄고, 기관 결정에 따라 하나씩 켜는** 순서로 안내합니다.
+- **HIS 쪽 AI 스위치** — HIS 의 AI 기능 전체 스위치는 코드 기본값이 켜짐입니다. 구축 가이드는 **설치 직후 끄고, 기관 결정에 따라 하나씩 켜는** 순서로 안내합니다. 켜 둔 채 AI Server 가 없으면 각 칸은 1절처럼 폴백이나 실패 표시로 보입니다.
 
 설정 키 전체: [AI Server 구성서 §6](../systems/ai-server.md#6-주요-설정).
 
@@ -208,6 +218,8 @@ flowchart LR
 - **백업** — 저장소의 백업 스크립트는 **작업 대기열 DB · 서버 설정 · 최근 로그**를 묶어 30일 동안 남깁니다. **의료 기준 데이터 · 고시 · 근거 검색 색인 · 라우팅 표는 이 스크립트에 들어 있지 않습니다.** 무엇을 더 백업할지는 기관이 정합니다.
 - **상태 확인** — 상태 점검 주소가 항목별로 답합니다 · Prometheus 지표 · 응답마다 버전 · 계약 버전 · 커밋 헤더 · 디스크 · 메모리 · 스왑 경보 스크립트.
 - **품질 계측** — 근거와 맞는지 · 검색 품질 · 채점기 일관성을 서버가 스스로 잽니다.
+- **기록** — AI 제안과 승인 · 수정 · 거부, AI 호출 기록은 부른 쪽인 HIS 가 남깁니다(구축 가이드 S6). AI Server 자신이 요청과 응답 본문을 얼마나 남기는지는 이 자료에서 확인하지 않았습니다.
+- **장애 뒤 복구 절차**는 이 자료에서 따로 정리하지 않았습니다.
 
 자세한 설치 · 설정 순서: [구축 가이드 S6](../build-guide/S6-ai.md).
 
@@ -227,22 +239,23 @@ flowchart LR
 
 ## 8. 알아 둘 것
 
-> **EN** — No install definition for a new server; model weights are not included and the embedding model must match the name in the code; throughput, response time and answer quality have not been measured on the reference hardware; only one or two models fit on a 16GB GPU at once; the reference data and regulatory sources are Korean; syncing them needs internet access; and regulatory status is "designed to address" only.
+> **EN** — No install definition for a new server; model weights are not included and the embedding model must match the name in the code; throughput, response time and answer quality have not been measured on the reference hardware; few models fit on a 16GB GPU at once (the repository records 1, 2 and 3 at different times — it is an operating value the hospital sets); the reference data and regulatory sources are Korean; both sync paths call out to the internet and there is no file-import path; and regulatory status is "designed to address" only.
 
 - 🔴 **새 서버용 설치 정의가 없습니다** — 의존성을 직접 설치하고, Ollama 를 같은 호스트에 두고, 앞단 프록시를 직접 구성합니다([S6](../build-guide/S6-ai.md)).
 - 🔴 **모델은 기관이 직접 받습니다** — 저장소에 없습니다. 모델마다 약관이 다르고, 일부는 임상 사용 전 검증을 요구합니다([THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치)). 임베딩 모델은 코드가 정한 이름으로 받아야 합니다.
 - 🔴 **처리량 · 응답 시간 · 답의 품질은 기준 장비에서 계측하지 않았습니다** — 2026년 9월 따라가기는 CPU 와 작은 대체 모델로 경로만 불러 본 것입니다. 동시 사용자가 많을 때의 모습은 아직 모릅니다.
-- **16GB GPU 에 동시에 올려 둘 수 있는 모델이 적습니다** — 저장소 문서에 1개와 2개 두 기록이 함께 있습니다. 음성 인식 여러 건 동시 처리 · 영상과 대화 모델 동시 적재는 더 큰 GPU 가 있어야 풀린다고 저장소가 적습니다.
-- **의료 기준 데이터와 법령 · 고시 근거는 한국 공공기관 자료**입니다. 다른 나라에서는 그 나라의 기준 데이터를 새로 붙입니다. 이 데이터를 받으려면 인터넷 연결이 필요하고, 제한된 환경에서 반입하는 방법은 확인 중입니다.
+- **16GB GPU 에 동시에 올려 둘 수 있는 모델이 적습니다.** 음성 인식 여러 건 동시 처리 · 영상과 대화 모델 동시 적재는 더 큰 GPU 가 있어야 풀린다고 저장소가 적습니다.
+- **저장소 문서끼리 어긋납니다**: 동시에 올려 둘 모델 수를 시기마다 1 · 2 · 3 으로 다르게 적습니다. 정본 값은 없고, 기관이 VRAM 과 모델 크기를 보고 정하는 운용 값입니다(`OLLAMA_MAX_LOADED_MODELS` · [S6](../build-guide/S6-ai.md)).
+- **의료 기준 데이터와 법령 · 고시 근거는 한국 공공기관 자료**입니다. 다른 나라에서는 그 나라의 기준 데이터를 새로 붙입니다. 이 데이터를 받는 두 경로(목록 파일 내려받기 · 공공 데이터 API)는 모두 바깥을 직접 부릅니다. 파일을 받아 넣는 반입 경로는 없어서, 인터넷이 막힌 망이라면 그 주소만 예외로 열거나 반입 절차를 기관이 따로 만듭니다([S6](../build-guide/S6-ai.md)).
 - **규제 표기는 「대응 설계」**입니다. 자체 점검 완료 · 외부 인증 · 승인 기록은 없습니다. 의료기기 해당성 판단과 인허가는 구축 기관이 합니다([의료 면책 고지](../DISCLAIMER.md)).
 
 전체 한계와 대체 수단: [AI Server 구성서 §10](../systems/ai-server.md#10-한계와-대체-수단) · [구축 가이드 S6](../build-guide/S6-ai.md).
 
 ## 9. 통합 릴리즈 `2026.09` 이후 달라진 점
 
-> **EN** — The integrated release pinned AI Server at code version 2.125.41 (2026-09-09). The current development line is 2.125.54, 35 commits later, none of them tagged. For the medical side the main changes are in GPU model loading (fewer reloads; time-of-day profiles no longer apply automatically), a fix for fresh installs, guards in the drug-data batch, new quality measurements, a tidier admin settings screen, and fixes in several integration paths that will be re-checked before the connection table changes.
+> **EN** — The integrated release pinned AI Server at code version 2.125.41 (2026-09-09). The current development line is 2.125.56, 37 commits later, none of them tagged. For the medical side the main changes are in GPU model loading (fewer reloads; time-of-day profiles no longer apply automatically), a fix for fresh installs, guards in the drug-data batch, new quality measurements, a regrouped admin console whose settings screen shows the values actually applied, a fix for empty answers from the vision model, and fixes in several integration paths that will be re-checked before the connection table changes.
 
-이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(코드 버전 2.125.41 · 2026-09-09)에 맞춰 쓰여 있습니다. 그 뒤로 **35커밋**이 더해져 현재 개발본은 코드 버전 **2.125.54** 입니다. 저장소의 마지막 태그는 여전히 v2.8.0 이라, 이 커밋들에는 태그가 없습니다.
+이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(코드 버전 2.125.41 · 2026-09-09)에 맞춰 쓰여 있습니다. 그 뒤로 **37커밋**이 더해져 현재 개발본은 코드 버전 **2.125.56** 입니다. 저장소의 마지막 태그는 여전히 v2.8.0 이라, 이 커밋들에는 태그가 없습니다.
 
 | 영역 | 달라진 것 |
 |---|---|
@@ -251,7 +264,8 @@ flowchart LR
 | **새 설치** | 새 데이터베이스에서 표가 만들어지는 순서를 고쳤습니다. 전에는 새로 설치하면 API 키 발급 · 검증이 실패할 수 있었습니다 |
 | **약물 데이터 정제** | 배치가 끝나지 않고 되풀이되던 경우를 멈추고, 영향을 받은 기록을 따로 격리하는 도구가 생겼습니다 |
 | **품질 계측** | 판정마다 확신 정도를 함께 남기는 축 · 교차검증 모델 비교(기존 모델 유지로 결론) · 한국어 출력에 다른 문자가 섞이는지 재는 측정이 생겼습니다 |
-| **관리 화면** | 설정 화면이 **실제로 적용된 값**과 그 출처를 보여 주게 고쳤습니다 |
+| **관리 화면** | 설정 화면이 **실제로 적용된 값**과 그 출처를 보여 주게 고쳤습니다. 메뉴를 다섯 묶음으로 정리하고, 역할마다 보이는 메뉴와 할 수 있는 관리 동작을 역할 정의에 맞췄습니다 |
+| **영상 · 문서 읽기 모델** | 비전 모델이 생각하는 데 할당량을 다 써서 빈 답을 돌려주던 경우를, 할당량을 늘려 고쳤습니다 |
 | **연동** | 형제 시스템과 맞물리는 경로 몇 곳의 코드가 바뀌었습니다 — 각 연결의 상태는 다시 확인한 뒤 [연결 표](../RELEASES/2026.09/compatibility.md)에 반영합니다 |
 
 의료와 무관한 기능의 변경은 이 표에 싣지 않았습니다.
@@ -278,8 +292,8 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 읽은 것 | AI Server 저장소의 **현재 개발본** — 커밋 `e20896776a25`(2026-09-29) · 코드 버전 `2.125.54` · 작업 트리의 미커밋 변경은 읽지 않음 · 의료 · 생태계 쪽 코드와 문서만 |
-| 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `55acaee90068`(코드 버전 2.125.41 · 2026-09-09) · 그 뒤 35커밋 |
-| 센 방법 | 커밋 수 = 기준 커밋부터 현재 개발본까지의 커밋 · API 핸들러 = [구성서 §3](../systems/ai-server.md#3-규모)의 기준 커밋 값(저장소 전체) · 데이터 파일 = 코드가 여는 SQLite 파일 이름 중 의료 쪽 — 2026-09-29 에 센 값 |
+| 읽은 것 | AI Server 저장소의 **현재 개발본** — 커밋 `a4d2f3ca6740`(2026-09-29) · 코드 버전 `2.125.56` · 작업 트리의 미커밋 변경은 읽지 않음 · 의료 · 생태계 쪽 코드와 문서만 |
+| 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `55acaee90068`(코드 버전 2.125.41 · 2026-09-09) · 그 뒤 37커밋 |
+| 센 방법 | 커밋 수 = 기준 커밋부터 현재 개발본까지의 커밋 · API 핸들러 654개 = [구성서 §3](../systems/ai-server.md#3-규모)의 기준 커밋 값(저장소 전체 · 현재 개발본으로 다시 세지 않음) · 데이터 파일 = 코드가 여는 SQLite 파일 이름 중 의료 쪽 — 2026-09-29 에 센 값 |
 | 실제 연결 확인 | 2026-09-15~16 · 통합 릴리즈 기준 설치본 · CPU · 작은 대체 모델 · 가상 데이터([따라가 본 결과](../build-guide/follow-along-2026-09.md)) — `검증됨` 을 붙인 연결 없음 · 현재 개발본으로 다시 부른 것은 아님 |
 | 사실 확인 | AI Server 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |
