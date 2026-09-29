@@ -117,7 +117,7 @@ flowchart LR
 | 〃 | `WHISPER_MODEL` · `WHISPER_DEVICE` · `WHISPER_COMPUTE` · `STT_REALTIME_MODEL` | 음성 인식 모델 · 장치 · 연산 정밀도 · 실시간 인식 모델 | 하드웨어에 맞춤 |
 | 〃 | `BATCH_MODE` | CPU 배치 전용 모드 | GPU 없는 서버에서만 |
 | 모델 서버(Ollama) 환경 | `OLLAMA_KEEP_ALIVE` · `OLLAMA_MAX_LOADED_MODELS` · `OLLAMA_NUM_PARALLEL` · `OLLAMA_CONTEXT_LENGTH` | 쉬는 모델을 내리는 시간 · 동시에 올려 두는 모델 수(저장소 문서에 1개 · 2개 두 기록 · 권장값은 계측 후) · 병렬 처리 수 · 기본 문맥 길이 | 16GB 운용 방식에 맞춤 |
-| 관리 기능 | API 키 · 운영 프로파일 | 호출 키 발급(서버 로컬에서만) · 만료일 · 교체 / 시간대별 운영 프로파일 적용 | 키는 **반드시 새로 발급** |
+| 관리 기능 | API 키 · 운영 프로파일 | 호출 키 발급(서버 로컬에서만) · 만료일 · 교체 / 시간대별 운영 프로파일 적용 | 키는 **반드시 새로 발급** · 🔄 현재 개발본: 시간대 프로파일 **자동 적용은 기본 꺼짐**([달라진 점](../projects/changes-since-2026.09.md)) |
 
 **HIS 쪽 AI 스위치** — HIS 에는 AI 기능 전체 스위치(`ai.server.enabled` · 개시 점검 항목 `ai.werub` 가 추적)가 있고, 코드 기본값은 **켜짐**입니다([README](../README.md#최소한의-사양과-구현으로-쓸-수-있게) · 2026-09-11 코드 확인). 구축 가이드는 **설치 직후 AI 기능을 끄고, 기관 결정에 따라 하나씩 켜는 순서**로 안내합니다.
 

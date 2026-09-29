@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = path.join(ROOT, 'projects');
-const NOT_INTRO = new Set(['README.md', 'terms.md']);
+const NOT_INTRO = new Set(['README.md', 'terms.md', 'changes-since-2026.09.md']);
 
 const WORK_WORDS = [/기준 커밋/, /매니페스트/, /따라가기/, /`검증됨`/, /`구현·미검증`/, /`미구현`/, /livePartial/, /확인 필요\(따라가기\)/];
 const SECTION_ORDER = ['Introduction (English)', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.', '10.', '이 문서의 근거'];
