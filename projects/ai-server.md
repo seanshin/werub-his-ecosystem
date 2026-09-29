@@ -286,9 +286,9 @@ flowchart LR
 
 ## 9. 통합 릴리즈 `2026.09` 이후 달라진 점
 
-> **EN** — The integrated release pinned AI Server at code version 2.125.41 (2026-09-09). The current development line is 2.125.56, 37 commits later, none of them tagged. For the medical side the main changes are in GPU model loading (fewer reloads; time-of-day profiles no longer apply automatically), a fix for fresh installs, guards in the drug-data batch, new quality measurements, a regrouped admin console whose settings screen shows the values actually applied, a fix for empty answers from the vision model, and fixes in several integration paths that will be re-checked before the connection table changes.
+> **EN** — The integrated release pinned AI Server at code version 2.125.41 (2026-09-09). The current development line is 2.125.61, 46 commits later, none of them tagged. For the medical side the main changes are in GPU model loading (fewer reloads; time-of-day profiles no longer apply automatically), a fix for fresh installs, guards in the drug-data batch, new quality measurements, a regrouped admin console whose settings screen shows the values actually applied, a fix for empty answers from the vision model, and fixes in several integration paths that will be re-checked before the connection table changes.
 
-이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(코드 버전 2.125.41 · 2026-09-09)에 맞춰 쓰여 있습니다. 그 뒤로 **37커밋**이 더해져 현재 개발본은 코드 버전 **2.125.56** 입니다. 저장소의 마지막 태그는 여전히 v2.8.0 이라, 이 커밋들에는 태그가 없습니다.
+이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(코드 버전 2.125.41 · 2026-09-09)에 맞춰 쓰여 있습니다. 그 뒤로 **46커밋**이 더해져 현재 개발본은 코드 버전 **2.125.61** 입니다. 저장소의 마지막 태그는 여전히 v2.8.0 이라, 이 커밋들에는 태그가 없습니다.
 
 **그래서 받을 코드는 현재 개발본**(커밋은 끝의 근거 절)입니다. [소스 받기](../SOURCES.md)가 가리키는 커밋은 통합 릴리즈 코드이고, 그 코드로 새로 설치하면 API 키 발급 · 검증이 실패할 수 있습니다(아래 「새 설치」 행). 다만 연결 상태는 통합 릴리즈 코드로 본 것이라, 현재 개발본으로는 다시 확인하지 않았습니다(5절).
 
@@ -299,8 +299,8 @@ flowchart LR
 | **새 설치** | 새 데이터베이스에서 표가 만들어지는 순서를 고쳤습니다. 전에는 새로 설치하면 API 키 발급 · 검증이 실패할 수 있었습니다 |
 | **약물 데이터 정제** | 배치가 끝나지 않고 되풀이되던 경우를 멈추고, 영향을 받은 기록을 따로 격리하는 도구가 생겼습니다 |
 | **품질 계측** | 판정마다 확신 정도를 함께 남기는 축 · 교차검증 모델 비교(기존 모델 유지로 결론) · 한국어 출력에 다른 문자가 섞이는지 재는 측정이 생겼습니다 |
-| **관리 화면** | 설정 화면이 **실제로 적용된 값**과 그 출처를 보여 주게 고쳤습니다. 메뉴를 다섯 묶음으로 정리하고, 역할마다 보이는 메뉴와 할 수 있는 관리 동작을 역할 정의에 맞췄습니다 |
-| **영상 · 문서 읽기 모델** | 비전 모델이 생각하는 데 할당량을 다 써서 빈 답을 돌려주던 경우를, 할당량을 늘려 고쳤습니다 |
+| **관리 화면** | 설정 화면이 **실제로 적용된 값**과 그 출처를 보여 주게 고쳤습니다. 메뉴를 다섯 묶음으로 정리하고, 역할마다 보이는 메뉴와 할 수 있는 관리 동작을 역할 정의에 맞췄습니다. 설정 화면을 여섯 절로 다시 묶고 고급 설정 표를 더했으며, 탭마다의 권한을 서버에서도 확인합니다(2.125.58~61). 학습 탭의 설정값 · 학습 이력이 채워지지 않던 것을 고쳤습니다 |
+| **영상 · 문서 읽기 모델** | 비전 모델이 생각하는 데 할당량을 다 써서 빈 답을 돌려주던 경우를, 할당량을 늘려 고쳤습니다. 그래도 빈 답이면 같은 모델로 한 번 더 시도한 뒤 대체 경로로 넘어갑니다(2.125.60) |
 | **연동** | 형제 시스템과 맞물리는 경로 몇 곳의 코드가 바뀌었습니다 — 각 연결의 상태는 다시 확인한 뒤 [연결 표](../RELEASES/2026.09/compatibility.md)에 반영합니다 |
 
 의료와 무관한 기능의 변경은 이 표에 싣지 않았습니다.
@@ -327,9 +327,9 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 읽은 커밋 | `a4d2f3ca6740` — 이 소개서가 읽은 저장소 커밋입니다. 그 뒤로 저장소가 움직였으면 소개서가 낡았을 수 있습니다 |
-| 읽은 것 | AI Server 저장소의 **현재 개발본** — 커밋 `a4d2f3ca6740`(2026-09-29) · 코드 버전 `2.125.56` · 작업 트리의 미커밋 변경은 읽지 않음 · 의료 · 생태계 쪽 코드와 문서만 |
-| 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `55acaee90068`(코드 버전 2.125.41 · 2026-09-09) · 그 뒤 37커밋 |
+| 읽은 커밋 | `025b5cb4260a` — 이 소개서가 읽은 저장소 커밋입니다. 그 뒤로 저장소가 움직였으면 소개서가 낡았을 수 있습니다 |
+| 읽은 것 | AI Server 저장소의 **현재 개발본** — 커밋 `a4d2f3ca6740`(2026-09-29)에서 처음 쓰고, `025b5cb4260a`(2026-09-29 · 코드 버전 `2.125.61` · 그 뒤 9커밋 — 관리 화면 · 비전 모델)까지 다시 읽음 · 작업 트리의 미커밋 변경은 읽지 않음 · 의료 · 생태계 쪽 코드와 문서만 |
+| 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `55acaee90068`(코드 버전 2.125.41 · 2026-09-09) · 그 뒤 46커밋 |
 | 센 방법 | 커밋 수 = 기준 커밋부터 현재 개발본까지의 커밋 · API 핸들러 654개 = [구성서 §3](../systems/ai-server.md#3-규모)의 기준 커밋 값(저장소 전체 · 현재 개발본으로 다시 세지 않음) · 데이터 파일 = 코드가 여는 SQLite 파일 이름 중 의료 쪽 — 2026-09-29 에 센 값 |
 | 실제 연결 확인 | 2026-09-15~16 · 통합 릴리즈 기준 설치본 · CPU · 작은 대체 모델 · 가상 데이터([따라가 본 결과](../build-guide/follow-along-2026-09.md)) — `검증됨` 을 붙인 연결 없음 · 현재 개발본으로 다시 부른 것은 아님 |
 | 사실 확인 | AI Server 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

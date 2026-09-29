@@ -311,9 +311,9 @@ flowchart TB
 
 ## 9. 통합 릴리즈 `2026.09` 이후 달라진 점
 
-> **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 485 commits: only 7 of them form v4.19.0; the other 478 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, the AI server address now settable by environment variable, and the default seed no longer writes AI settings into the database.
+> **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 500 commits: only 7 of them form v4.19.0; the other 493 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, the AI server address now settable by environment variable, and the default seed no longer writes AI settings into the database.
 
-이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **485커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **478커밋은 아직 번호가 없는 개발본**입니다. 이 소개서가 설명하고 설치 스크립트가 들어 있는 것은 이 개발본입니다(받을 코드는 §1 「한눈에」).
+이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **500커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **493커밋은 아직 번호가 없는 개발본**입니다. 이 소개서가 설명하고 설치 스크립트가 들어 있는 것은 이 개발본입니다(받을 코드는 §1 「한눈에」).
 
 | 영역 | 달라진 것 |
 |---|---|
@@ -323,7 +323,8 @@ flowchart TB
 | **백업 · 보존** | 업로드 파일 백업 · 2차 사본 · 복원 시험 · **법적 보존명령**(보존 중인 기록은 파기되지 않게) |
 | **AI** | AI 서버 주소를 **환경 변수로 바꿀 수 있게**(전에는 DB 를 직접 고쳐야 했음) · 기본 시드가 AI 설정을 DB 에 심지 않음 — 전에는 시드를 다시 돌리면 꺼 둔 AI 가 다시 켜졌음 |
 | **새 기능** | 공간 · 동선(도면 · 3D 뷰어 · 길안내) · 경영성과 비교 · 환자 메시지 직원 수신함 · 응급 도착 기록 · 비밀번호 변경 화면 |
-| **규모** | 데이터 모델 562 → **573** · API 핸들러 3,251 → **3,323** · 웹 화면 450 → **456** · 메뉴 266 → **272** · 결정 등록부 56 → **156** |
+| **화면 정돈**(2026-09-29) | 대시보드 · 접수 · 예약 · 진료실 대기 · 환자 목록 · 외국인 등록 · 통합 상황판 화면을 다시 정돈했고, 정돈하면서 드러난 결함을 고쳤습니다. 좁은 화면에서는 사이드바와 상단 도구가 자동으로 접힙니다. 경영성과 비교에 손익 흐름 · 세목 드릴다운 · 지도 조작이 더해졌습니다 |
+| **규모** | 데이터 모델 562 → **573** · API 핸들러 3,251 → **3,325** · 웹 화면 450 → **456** · 메뉴 266 → **272** · 결정 등록부 56 → **156** |
 | **권한 · 정합성 · 연동** | 권한 점검을 전수로 다시 했고, 형제 시스템과의 연동 코드가 여러 곳 고쳐졌습니다 — 각 연결의 상태는 다시 확인한 뒤 [연결 표](../RELEASES/2026.09/compatibility.md)에 반영합니다 |
 
 ## 10. 더 깊이
@@ -349,8 +350,8 @@ flowchart TB
 
 | 항목 | 값 |
 |---|---|
-| 읽은 커밋 | `a39f60fc9d7c` — 이 소개서가 읽은 저장소 커밋입니다. 그 뒤로 저장소가 움직였으면 소개서가 낡았을 수 있습니다 |
-| 읽은 것 | HIS 저장소의 **현재 개발본** — 커밋 `a39f60fc9d7c`(2026-09-29) · 버전 표기 `v4.19.0`(태그 뒤 미발행 커밋 478개 포함) · 작업 트리의 미커밋 변경은 읽지 않음 |
+| 읽은 커밋 | `4242c0f53eb6` — 이 소개서가 읽은 저장소 커밋입니다. 그 뒤로 저장소가 움직였으면 소개서가 낡았을 수 있습니다 |
+| 읽은 것 | HIS 저장소의 **현재 개발본** — 커밋 `a39f60fc9d7c`(2026-09-29)에서 처음 쓰고, `4242c0f53eb6`(2026-09-29 · 그 뒤 15커밋 — 화면 정돈과 경영성과 비교 보강)까지 다시 읽음 · 버전 표기 `v4.19.0`(태그 뒤 미발행 커밋 493개 포함) · 작업 트리의 미커밋 변경은 읽지 않음 |
 | 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `e9d303984f80`(v4.18.0 · 2026-09-11) |
 | 센 방법 | 데이터 모델 = 스키마 파일의 `model` 선언 · 핸들러 = 컨트롤러 파일의 줄 머리 HTTP 메서드 데코레이터 · 웹 화면 = `page.tsx` 파일 · 메뉴 = 사이드바 메뉴 정의의 항목 · 역할별 메뉴 = 메뉴 정의의 역할 목록 · 결정 등록부 = 등록부 본체와 배치 파일의 항목(66 + 90) — 모두 2026-09-29 에 센 값 |
 | 병원 이름 고정 | HIS 저장소의 병원명 기준선 시험 파일에 동결된 목록 — 124개 파일 · 217곳(그중 `apps/homepage` 40개 파일 · `apps/mobile` 0개). 이 자료의 다른 문서가 적은 118개는 통합 릴리즈 기준 커밋을 이 자료의 거부 목록 규칙으로 센 값이라 범위가 다릅니다 |
