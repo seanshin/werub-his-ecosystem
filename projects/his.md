@@ -1,0 +1,304 @@
+# HIS — 병원 업무의 중심 시스템
+
+**HIS (Hospital RUN) — the system at the center of hospital work**
+
+> 프로젝트 소개서 · 읽는 사람: **의료 전산담당자** · 기준: HIS 저장소의 **현재 개발본**(2026-09-29 · 끝의 [이 문서의 근거](#이-문서의-근거)) · [소개서 목록](README.md)
+
+---
+
+## Introduction (English)
+
+HIS is the hospital information system at the center of this ecosystem. In one codebase it covers the work a hospital does every day: registration and appointments, outpatient and inpatient care, orders and prescriptions, nursing, surgery and intensive care, emergency, the clinical support departments (pharmacy, laboratory, imaging, pathology, blood bank), health checkups, the front desk, billing, and the administrative side (staff, supplies, quality and safety). It keeps the authoritative record for patients, encounters, orders, nursing notes and billing, and every other system in the ecosystem connects to it.
+
+For an IT team, the most important thing to know is that HIS is also the ecosystem's **identity hub**. Staff sign in to HIS, and HIS issues the tokens the other systems accept. Laboratory (LIS), imaging (PACS), e-signature (sign), back-office (ERP), AI, e-learning, groupware and telemedicine all attach to HIS, one at a time, when the hospital is ready for them. HIS itself runs without any of them.
+
+Technically it is a TypeScript monorepo: an API server (NestJS with Prisma on PostgreSQL 16, Redis 7 as a cache), a staff web application (Next.js), a public hospital website and a patient mobile app that ship with it, and a separate always-on **sentinel** process that checks data integrity, pipelines and integration contracts every hour. It exposes REST APIs, a FHIR R4 surface and SMART on FHIR app launch. There is no message broker: outgoing events wait in a database outbox table and are retried.
+
+HIS also carries the machinery for **building a hospital on it**: an opening checklist, a go-live control board, a registry of decisions that people — not the software — must make, safety gates that each run in off / warn / block mode, and three operating modes (development, rehearsal, real). The real mode refuses to start if security settings are missing. AI features only ever assist — they draft, and a person approves — and each one has its own switch.
+
+What is not there yet, stated plainly: transmission to external agencies (insurance claims, disease reporting and similar) is not implemented; there is no SMS provider; the hospital name still appears as fixed text in many files; and the new container install path has been rehearsed locally but not yet on a real empty server. Details are in [What is not there yet](#8-알아-둘-것).
+
+---
+
+## 1. 한 문장
+
+> **EN** — HIS runs the day-to-day work of a hospital in one system and is the hub every other system in the ecosystem connects to.
+
+**HIS 는 병원의 하루 업무(접수부터 진료 · 검사 · 약 · 수납 · 경영지원까지)를 한 시스템에서 처리하고, 생태계의 다른 시스템이 모두 붙는 중심입니다.**
+
+병원 정보 체계에서 HIS 는 **정본**(正本 — 여러 곳에 같은 정보가 있을 때 기준이 되는 원본)을 가진 자리입니다. 환자 · 진료 · 오더 · 간호기록 · 수납 정보의 원본이 HIS 에 있고, 검사 · 영상 · 서명 · 경영 시스템은 HIS 와 주고받습니다.
+
+## 2. 병원 업무의 어디에 쓰이나
+
+> **EN** — Almost every department uses HIS: front desk, doctors, nurses, pharmacists, lab and imaging staff, medical records, checkup center, administration and executives. The menu shows each role only what it needs — an administrator sees 272 menu items, a doctor 122, a nurse 95.
+
+거의 모든 부서가 씁니다. 역할마다 보이는 메뉴가 다릅니다(웹 메뉴 **272개** 가운데 역할별로 보이는 수 — 현재 개발본의 메뉴 정의를 센 값).
+
+| 누가 | 무엇을 하나(예) | 보이는 메뉴 |
+|---|---|---:|
+| 원무 · 접수 | 환자 등록 · 예약 · 접수 · 수납 · 진료비 계산서 | 19 |
+| 의사 | 진료 · 오더 · 처방 · 진료기록 · 협진 · 퇴원요약 | 122 |
+| 간호사 | 간호 워크스테이션 · 활력징후 · 투약 · 간호기록 · 인수인계 | 95 |
+| 약사 | 처방 검토 · 조제 · 마약류 관리 · 복약 설명 | 27 |
+| 임상병리 | 검사 접수 · 결과 · 위험치 통보 | 31 |
+| 검진센터 | 검진 접수 · 동선 · 결과서 | 26 |
+| 의무기록 | 기록 검색 · 사본 · 제증명 · 미비기록 | 20 |
+| 경영진 | 경영 대시보드 · 경영성과 비교 | 24 |
+| 시스템 관리자 | 전부 — 설정 · 권한 · 개원 관제 · 감사 · 연동 | 272 |
+
+**장면으로 보면**
+
+- **외래 한 명** — 원무과가 접수하면 진료실 대기열에 뜨고, 의사가 진료하며 혈액검사와 약을 냅니다. 검사 오더는 검사실(LIS)로, 처방은 약국으로 갑니다. 결과가 돌아오면 차트에 붙고, 원무과에서 수납하면 진료비 계산서가 나옵니다.
+- **병동의 밤** — 간호사가 투약할 때 환자 손목밴드와 약을 바코드로 대조하고, 활력징후를 넣으면 조기경고 점수가 계산됩니다. 입력이 모자라면 점수를 0 이 아니라 「산출 불가」로 보여 줍니다.
+- **개원 준비** — 시스템 관리자가 개원 관제 화면에서 항목을 하나씩 닫고, 사람이 정해야 할 것은 결정 등록부에 기록하고, 운영 전환(Go-Live) 관제에서 준비 상태를 확인합니다.
+
+## 3. 할 수 있는 일
+
+> **EN** — The staff web menu has 8 domains, 26 groups and 272 items: clinical care (46), clinical support (62), patients and customers (17), quality and safety (22), operations (20), intelligent features (7), system administration (90) and personal (8). Beyond the menu, the server runs the build-management tools, safety mechanisms, the sentinel, audit and the standards surface.
+
+웹 메뉴는 **대분류 8 · 묶음 26 · 항목 272** 입니다(메뉴 정의 파일을 센 값 · 통합 릴리즈 `2026.09` 때는 266).
+
+| 대분류(항목 수) | 무엇이 들어 있나 |
+|---|---|
+| **진료**(46) | 외래 · 간호 · 수술 · 회복실 · 응급 · 중환자 · 진료과별 전문 화면 · 투석 · 항암 · 방사선종양 · 재활 · 입원 · 병상 · 회진 · 퇴원 · 협진 |
+| **진료지원**(62) | 약국 · 검사실 · 영상실 · 병리 · 혈액은행 · 부서별 워크스테이션 · 건강검진센터 · 의무기록 · 제증명 |
+| **환자 · 고객**(17) | 고객관계관리(검진 · 해외환자 · 캠페인) · 병원 안내 · 동선 |
+| **질 · 안전**(22) | 환자안전 사고 보고 · 감염관리 · 직원 노출 사고 · 질 지표 · 임상 연구(IRB) |
+| **운영**(20) | 수납 · 청구서 작성 · 인사 · 재고 · 경영 대시보드 · 전원 · 연동 |
+| **지능형**(7) | AI 컨시어지 · AI 예약 도우미 · 시뮬레이터 · 환자 여정 |
+| **시스템 관리**(90) | 개원 전 기준(개원 관제 · 코드 마스터 · 임상 규칙 · 시설 · 권한 · 설정) · 운영 중 관리(인력 · 관제 · 기록 · 감사 · AI 운영) · 외부 연동 · 홈페이지 관리 |
+| **개인**(8) | 내 설정 · 인증서 · 기기 · 비밀번호 |
+
+메뉴 밖에서 서버가 하는 일:
+
+- **구축 관리** — 개원 단계(60항목) · 운영 전환 관제(60항목) · 사람이 정할 것을 모은 결정 등록부(156건).
+- **안전 장치** — 안전 게이트 28개(끔 · 경고 · 차단) · 운영 모드 세 단계 · 밖으로 나가는 통로를 모은 대외 발신 관제 · 값의 출처(DB / 기본값 / 미설정)를 보여 주는 설정 화면.
+- **상시 감시자** — 1시간마다 데이터 정합성 · 흐름 · 연동 계약 · 파이프(백업 등)를 훑고, 판정하지 못한 것은 0 이 아니라 「관측 불가」로 남깁니다.
+- **감사** — 모든 쓰기 요청과 환자 정보 열람을 감사 로그에 남깁니다(값이 아니라 필드 이름만).
+
+전체 메뉴 표: [HIS 메뉴 구성](../systems/his-domains.md)(통합 릴리즈 `2026.09` 기준 266항목) · 업무별로 다시 묶은 것: [업무별 기능 지도](../functions/) · 기능 하나를 자세히: [주요 기능 41편](../functions/detail/).
+
+### 화면으로 보기
+
+> **EN** — A few screens from a rehearsal install with synthetic hospital data.
+
+| | |
+|---|---|
+| ![외래 접수](../assets/screens/his-care-reception.png) **외래 접수** — 오늘 온 환자와 대기 상태 | ![오더](../assets/screens/his-care-orders.png) **오더** — 검사 · 처방 · 처치 오더 |
+| ![개원 관제](../assets/screens/his-system-admin-opening.png) **개원 관제** — 개원 전 · 개원 · 개원 후 단계의 항목 | ![상시 감시자](../assets/screens/his-system-admin-sentinel.png) **상시 감시자** — 네 축의 최근 판정 |
+
+화면은 가상 병원 데이터가 든 리허설 설치본에서 찍었습니다(2026-09-12~13). 293장 전체는 [화면으로 보는 생태계](../screens/his.md)에 있습니다.
+
+## 4. 어떻게 만들어졌나
+
+> **EN** — A TypeScript monorepo (Node 22, npm workspaces, Turborepo): NestJS 11 API with Prisma 6 on PostgreSQL 16; Redis 7 used only as a volatile cache; a Next.js 15 staff web app; a Next.js public website and an Expo patient app in the same repository; a shared package holding the single source of truth for status labels, operating modes and numeric policies; and a sentinel process built from the API code. Files live on local disk. There is no message broker — an outbox table plus scheduled jobs carry outgoing events.
+
+```mermaid
+flowchart LR
+  subgraph repo["HIS 저장소(모노레포)"]
+    WEB["직원 웹<br/>Next.js 15"]
+    API["API 서버<br/>NestJS 11 · Prisma 6"]
+    SEN["상시 감시자<br/>(API 코드 · 별도 프로세스)"]
+    HP["공개 홈페이지<br/>Next.js"]
+    APP["환자 앱<br/>Expo"]
+    SH["공용 패키지<br/>(상태 · 모드 · 수치 정책의 정본)"]
+  end
+  PG[("PostgreSQL 16<br/>업무 데이터 전부")]
+  RD[("Redis 7<br/>휘발성 캐시")]
+  FS[("로컬 디스크<br/>업로드 · 첨부")]
+  PDF["PDF 렌더러<br/>(별도 컨테이너)"]
+  WEB --> API
+  HP --> API
+  APP --> API
+  API --> PG
+  API --> RD
+  API --> FS
+  API --> PDF
+  SEN --> PG
+```
+
+| 구성 요소 | 무엇 | 기술 |
+|---|---|---|
+| **API 서버** | 업무 로직 · REST API · FHIR R4 · SMART on FHIR · 연동 수신 · 토큰 발급 | Node 22 · NestJS 11 · Prisma 6 |
+| **직원 웹** | 직원 화면 전부 + 환자 포털 · 태블릿 · 키오스크 · 서명 기기 화면 | Next.js 15 · React 19 |
+| **공개 홈페이지** | 병원 공개 사이트 → 소개서 준비 중 | Next.js |
+| **환자 앱** | 환자용 모바일 앱 → 소개서 준비 중 | Expo · React Native |
+| **공용 패키지** | 상태 라벨 · 운영 모드 · 수치 정책 · 권한 목록 · 화면 번역의 **정본** — 한 곳을 고치면 API 와 웹이 같이 바뀝니다 | TypeScript |
+| **상시 감시자** | API 와 같은 코드로 만든 **별도 프로세스**(웹 요청을 받지 않음) · 1시간 주기 | API 이미지 그대로 |
+| **PDF 렌더러** | 서식 · 증명서 PDF 를 만드는 헤드리스 브라우저 — 별도 컨테이너 | 제3자 이미지 |
+
+**데이터가 사는 곳**
+
+| 저장소 | 무엇이 들어 있나 |
+|---|---|
+| **PostgreSQL 16** — 데이터베이스 하나 | 업무 데이터 전부 · 런타임 설정 · 감사 로그 · 감시자 판정 · 나가는 이벤트 대기열(outbox) — 데이터 모델 **573개** |
+| **Redis 7** | 로그인 부가 정보 · 요청 제한 같은 **휘발성** 데이터만(최대 512MB · 오래된 것부터 버림) — 영구 저장소로 쓰지 않습니다 |
+| **로컬 디스크** | 업로드 파일 · 진료 첨부 · 녹음 원본 · 홈페이지 미디어 |
+
+- **메시지 브로커가 없습니다.** 다른 시스템으로 보낼 이벤트는 DB 의 outbox 테이블에 쌓이고, 예약 작업(크론 59개)이 보내고 실패하면 다시 시도합니다(최대 6회). 같은 이벤트가 두 번 나가지 않게 **멱등키**(같은 요청이 여러 번 와도 한 번만 처리되게 하는 식별값)를 씁니다.
+- **API 모양** — REST 는 모듈 220개 · 핸들러 약 3,300개입니다. 표준 표면은 FHIR R4(리소스 17종 · 쓰기는 검사 결과 수신만)와 SMART on FHIR(외부 앱을 차트에서 여는 표준 · 서버 간 토큰 발급 포함)입니다.
+- **권한** — 역할 14개(의사 · 간호 · 약사 · 임상병리 · 원무 · 의무기록 · 검진 · 경영 · 관리자 등)와 세부 권한 63개. 화면 메뉴와 API 양쪽에서 역할을 확인합니다.
+
+## 5. 다른 시스템과의 연결
+
+> **EN** — HIS works alone, and the other systems attach to it one at a time. It issues the staff identity that the others accept (verified by public key in sign, PACS, edu, twin and cerno; by a shared secret in ERP and Jitsi; by an API key in Clinic). Lab orders and results move over FHIR R4, AI requests go to the AI Server, signatures go to sign, and billing lines go to ERP. Of the connections that touch HIS, the lab, signature, billing and e-learning links were called for real between fresh installs in September 2026.
+
+**HIS 는 혼자 동작하고, 다른 시스템은 필요할 때 하나씩 붙습니다.** 직원 로그인도 HIS 가 맡습니다 — 직원은 HIS 에 로그인하고, HIS 가 발급한 신원을 다른 시스템이 받아들입니다.
+
+```mermaid
+flowchart TB
+  HIS(("HIS"))
+  LIS["LIS<br/>검사"] <-->|"검사 오더 · 결과<br/>(FHIR R4)"| HIS
+  PACS["PACS<br/>영상"] <-->|"영상 오더 · 판독"| HIS
+  SIGN["sign<br/>전자서명"] <-->|"동의서 서명 요청 · 완료 통지"| HIS
+  ERP["ERP<br/>경영"] <-->|"수납 · 청구 · 직원 셀프서비스"| HIS
+  AI["AI Server"] <-->|"초안 · 요약 · 번역"| HIS
+  EDU["edu<br/>교육"] <-->|"로그인 · 직원 명부 · 이수 기록"| HIS
+  CL["Clinic<br/>그룹웨어"] <-->|"직원 · 조직 동기화 · 알림"| HIS
+  TW["twin · cerno"] <-->|"차트에서 앱 열기<br/>(SMART on FHIR)"| HIS
+  JI["Jitsi<br/>원격 화상"] -.->|"지금은 쓸 수 없음"| HIS
+```
+
+| 상대 | HIS 가 주는 것 | HIS 가 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
+|---|---|---|---|---|
+| **LIS** | 검사 오더 · 환자 정보 · 검사 코드 목록 | 검사 결과 · 취소 | 서버 간 표준 토큰(SMART) · 연동 키 | 오더 · 결과 · 취소 · 환자 조회 · 검사 코드 반입 **확인함**(2026-09-14~15) |
+| **sign** | 서명 요청 · 직원 신원(공개키) | 서명 완료 통지 | HIS 공개키로 검증 · 서명된 통지 | 직원 서명 · 완료 통지 · 오더 서명 봉인 **확인함**(2026-09-14) · HIS 화면에서 보내는 서명 요청은 아직 |
+| **ERP** | 직원 로그인 · 수납 · 운영 이벤트 | 진료비 계산서 · 청구 라인 · 보험 코드 · 정산 회신 | 공유 비밀키 · 연동 키 | 로그인 · 계산서 · 청구 라인 · 보험 코드 매핑 등 **확인함**(2026-09-14~15) · 일부 경로는 아직 |
+| **edu** | 직원 로그인 · 공개키 · 직원 명부 | 교육 이수 기록 | HIS 공개키로 검증 · 연동 키 | 네 경로 모두 **확인함**(2026-09-14) |
+| **PACS** | 영상 오더 · 직원 로그인 | 판독 결과 | HIS 공개키 · 서비스 계정 | 만들어져 있음 · HIS 화면에서 부르는 경로의 실제 연결 확인은 아직 |
+| **AI Server** | 요약 · 번역 · 초안 요청 | 초안 · 결과 | 발급된 API 키 · 보내도 되는 목적지 목록 | 일부 경로를 불러 봄 · 전체 확인은 아직 |
+| **Clinic** | 직원 · 조직 · 알림 | 결재 결과 등 | Clinic 이 발급한 API 키 · 서명된 통지 | 만들어져 있음 · 확인은 아직(설치하지 않음) |
+| **twin · cerno** | 환자 맥락(차트에서 앱을 열 때) | 위험 점수 · 기록 초안(의료진 승인 뒤) | SMART on FHIR | 만들어져 있음 · 확인은 아직 |
+| **Jitsi** | 화상 진료 입장 토큰 | — | 공유 비밀키 | 지금은 쓸 수 없음(화상 서버를 새로 구성해야 함) |
+
+「확인함」은 2026년 9월에 새로 세운 설치본끼리 실제로 불러 본 결과입니다(가상 데이터 · [따라가 본 결과](../build-guide/follow-along-2026-09.md)). 연결마다의 자세한 내용은 [연결 카드](../integration/cards/)와 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에 있습니다.
+
+## 6. 설치 · 운영
+
+> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU. The current development line adds an install script (seven steps: check prerequisites, confirm an empty database, apply migrations, check database objects, load required masters, initialize the institution, create the first administrator, confirm the real-mode boot). Four settings are required just to start, and the real mode refuses to boot until the security settings are filled. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
+
+### 필요한 것
+
+| 항목 | 내용 |
+|---|---|
+| 서버 | 한 대에서 시작할 수 있습니다. **GPU 는 필요 없습니다**(AI 연산은 AI Server 가 합니다). 웹을 빌드할 때 **가용 메모리 6GB 이상**이 필요했습니다(저장소 실측) |
+| 소프트웨어 | Node 22 · PostgreSQL 16 · Redis 7 — 또는 컨테이너(Docker) |
+| 먼저 있어야 할 것 | 없습니다. HIS 는 다른 시스템 없이 동작합니다 |
+| 기관이 준비할 데이터 | **코드 마스터**(약가 · 진단 · 수가 · 검사 코드) — 저장소에 들어 있지 않고, 기관이 배포처에서 받아 반입합니다 · 기관 정보(이름 · 주소 · 코드) · 부서 · 병상 · 직원 |
+
+### 설치 경로 — 현재 개발본에서 새로 생겼습니다
+
+현재 개발본에는 **빈 서버에 새로 설치하는 스크립트**(7단계)가 있습니다.
+
+| 단계 | 하는 일 |
+|---|---|
+| 0 | 전제 확인 |
+| 1 | 데이터베이스가 비어 있는지 확인 |
+| 2 | 스키마 적용 — 마이그레이션(`prisma migrate deploy` · 마이그레이션 18개) |
+| 3 | 부속 객체(부분 유니크 인덱스 · 트리거 등) 확인 |
+| 4 | 필수 코드 마스터 반입 — 출처 · 기준일이 확인되지 않은 마스터가 있으면 멈춥니다 |
+| 5 | 기관 초기화 — 값은 비워 두고, 부팅 뒤 관리 화면에서 기관 정보를 넣습니다 |
+| 6 | 첫 관리자 1명 생성(사용자가 한 명이라도 있으면 거부 · 비밀번호는 12자 이상) |
+| 7 | 리얼 모드로 부팅되는지 확인 |
+
+컨테이너 설치 파일(운영용 compose)에도 스키마 적용 · 첫 관리자 · 상시 감시자 서비스가 들어갔습니다. 다만 저장소가 스스로 **「compose 로 끝까지 올려 본 기록은 없고, 검증된 정본은 설치 스크립트」**라고 적고 있습니다.
+
+### 꼭 넣어야 하는 설정
+
+- **없으면 시작하지 않는 것(4)** — 데이터베이스 주소 · 로그인 토큰 서명 비밀 두 개 · 개인정보 암호화 키.
+- **리얼 모드에서 추가로** — PDF 렌더러 토큰 · 문서 서명 비밀 등이 비어 있거나 개발용 스위치가 켜져 있으면 **부팅을 거부하고 무엇이 빠졌는지 말합니다.**
+- 🔴 **운영 모드를 정하지 않으면 리얼 모드로 봅니다**(가장 엄격한 쪽). 시험 설치라면 리허설 모드를 명시합니다.
+- 운영 중 바꾸는 값(약 395개 — 기관 정보 · 청구 규칙 · AI 스위치 · 연동 주소 등)은 환경 변수가 아니라 **관리 화면의 시스템 설정**에서 바꾸고, 화면이 그 값이 어디서 왔는지(DB · 기본값 · 미설정)를 보여 줍니다.
+
+### 운영 모드 세 단계
+
+| 모드 | 무엇 |
+|---|---|
+| 개발 | 개발용 |
+| **리허설** | 가상 데이터로 전 과정을 시연합니다. 문자 · 메일 · 연동 발송은 **나가지 않고 대기열에 보류**됩니다 |
+| **리얼** | 실제 운영. 시험용 통로가 원천적으로 없습니다 |
+
+빌드(설치)할 때 정한 모드가 **상한**이고, 운영 중에는 더 좁히기만 할 수 있습니다.
+
+### 백업 · 감시
+
+- **백업** — 매일 DB 를 암호화해 덤프하고, 같은 시각에 **업로드 파일도 암호화 아카이브**로 남깁니다. **2차 사본**(다른 매체 · 서버로 복사하고 해시 확인)과 **복원 시험**(빈 임시 DB 에 복원해 행 수 대조) 스크립트가 있습니다. 기본은 **HIS 데이터베이스만** 백업합니다 — 같은 서버에 다른 시스템의 DB 가 있으면 따로 지정합니다.
+- **상태 확인** — 헬스 체크 주소(살아 있나 · 준비됐나 · 버전) · 관리자용 지표.
+- **상시 감시자** — 1시간마다 네 축을 판정하고 관리 화면에 보여 줍니다. 백업 상태도 감시자와 운영 전환 관제가 읽습니다.
+- **배포 스크립트** — 단일 서버용(빌드 → 프로세스 관리자로 재시작). 기존 운영 서버를 갱신할 때 스키마는 이 스크립트의 별도 방식으로 반영합니다(새 설치의 마이그레이션 방식과 다름).
+
+자세한 설치 · 설정 순서: [구축 가이드 S1](../build-guide/S1-core-his.md)(통합 릴리즈 `2026.09` 기준 · 설치 스크립트가 생기기 전의 우회 순서가 적혀 있습니다).
+
+## 7. 이렇게 만든 이유
+
+> **EN** — Five design choices an IT team will notice: one source of truth per fact; "cannot compute" instead of zero; build-time operating mode as a hard ceiling; outbound transmission needs implementation, configuration and approval; and the tools for building a hospital are part of the product.
+
+| 설계 | 왜 |
+|---|---|
+| **정본은 하나** — 상태 라벨 · 수치 정책 · 역할 목록을 공용 패키지 한 곳에 | 같은 말이 화면마다 다르게 나오는 것을 막고, 병원 규정을 바꿀 때 한 곳만 고치게 |
+| **모르는 것은 「산출 불가」** — 표본이 없거나 입력이 모자라면 0 을 쓰지 않음 | 초록불이 「측정 안 함」을 가리지 않게 — 대시보드를 믿을 수 있게 |
+| **운영 모드는 빌드가 상한** — 운영 중에는 좁히기만 | 설정 하나를 잘못 바꿔 시험용 통로가 실운영에서 열리는 일이 없게 |
+| **밖으로 나가려면 세 조건** — 구현 + 설정(기본 꺼짐) + 승인 | 설정 하나 잘못 켜서 환자 정보가 몰래 밖으로 나가지 않게. 나가는 통로 13개를 관제 화면에 모았습니다 |
+| **구축 도구가 제품 안에** — 개원 관제 · 운영 전환 관제 · 결정 등록부 | 구축 과정의 결정이 문서와 메일에 흩어지지 않고, 누가 무엇을 정했는지가 시스템에 남게 |
+
+이 원칙들이 어디서 나왔는지는 [설계 기준은 어떻게 생겼나](../DESIGN-HISTORY.md)(HIS 릴리즈 108개의 기록)에 있습니다.
+
+## 8. 알아 둘 것
+
+> **EN** — Not there yet: transmission to external agencies; an SMS provider; the hospital name is still fixed text in 124 files (the HIS repository's own baseline); the container install path is rehearsed only locally; the default backup covers only the HIS database; UI translations are all AI drafts; and the national rules cover Korea and the UAE only.
+
+- 🔴 **대외 기관 전송이 없습니다** — 보험 청구 전송 · 감염병 신고 · 진료정보교류 · 마약류 보고 등 7개 통로가 모두 구현돼 있지 않습니다. 청구서는 작성까지이고, 전송은 기존 청구 소프트웨어를 함께 쓰거나 모듈을 붙입니다.
+- **문자 발송 제공자가 없습니다** — 이메일은 제공자 하나(Resend)와 연동돼 있지만 문자는 제공자 코드가 없습니다. 밖으로 나가는 통로 13개 중 구현된 것은 2개(이메일 · 포털 안 알림)입니다.
+- 🔴 **병원 이름이 코드에 고정 문자열로 남아 있습니다** — HIS 저장소가 스스로 잡아 둔 기준선으로 124개 파일 · 217곳입니다(늘지 않게 막아 두었을 뿐 줄지는 않았습니다 · 이 자료의 다른 문서에 적힌 118개는 통합 릴리즈 기준 커밋을 다른 규칙으로 센 값). 법정 서식 일부도 데모 기관 값을 찍습니다. 자기 기관 이름을 넣으려면 아직 코드를 고쳐야 합니다.
+- **새 설치 경로는 로컬 컨테이너에서 한 번 돌려 본 것**이고, 실제 빈 서버 설치는 아직입니다. 필수 코드 마스터 가운데 출처가 확인된 것은 **약가 한 가지**라, 진단 · 수가 · 검사 코드는 기관이 채워야 합니다.
+- **백업 기본값은 HIS DB 와 업로드 파일**입니다. 다른 시스템의 DB · 원격지 백업 · 재해 복구는 기관이 준비합니다.
+- **안전 게이트 28개 중 18개는 꺼진 채로 옵니다** — 기관이 정해서 켭니다. 첫 로그인 뒤 비밀번호 변경은 안내만 하고 강제하지 않습니다.
+- **화면 번역은 모두 AI 초안**이고 사람이 검수한 것은 아직 없습니다(기본 한국어 · 영어 · 일본어 카탈로그 + 추가 언어 팩 6개). **국가 규칙은 한국 · UAE 두 곳**이고 청구 · 코드 마스터는 한국 제도 기준입니다.
+
+전체 한계와 대체 수단: [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) · [지금 알고 시작해야 할 것](../README.md#지금-알고-시작해야-할-것).
+
+## 9. 통합 릴리즈 `2026.09` 이후 달라진 점
+
+> **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 485 commits: only 7 of them form v4.19.0; the other 478 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, and the AI server address now settable by environment variable.
+
+이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **485커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **478커밋은 아직 번호가 없는 개발본**입니다.
+
+| 영역 | 달라진 것 |
+|---|---|
+| **설치** | 빈 서버 설치 스크립트(7단계) · 첫 관리자 생성 도구 · 마이그레이션 기준선 — 전에는 첫 관리자를 데모 데이터로만 만들 수 있었습니다 |
+| **리얼 모드** | 보안 설정이 비어 있으면 **부팅 거부** · 운영 모드 미지정 = 리얼 |
+| **컨테이너** | 운영용 compose 에 스키마 적용 · 첫 관리자 · 상시 감시자 서비스 추가(끝까지 기동해 본 기록은 없음) |
+| **백업 · 보존** | 업로드 파일 백업 · 2차 사본 · 복원 시험 · **법적 보존명령**(보존 중인 기록은 파기되지 않게) |
+| **AI** | AI 서버 주소를 **환경 변수로 바꿀 수 있게**(전에는 DB 를 직접 고쳐야 했음) |
+| **새 기능** | 공간 · 동선(도면 · 3D 뷰어 · 길안내) · 경영성과 비교 · 환자 메시지 직원 수신함 · 응급 도착 기록 · 비밀번호 변경 화면 |
+| **규모** | 데이터 모델 562 → **573** · API 핸들러 3,251 → **3,323** · 웹 화면 450 → **456** · 메뉴 266 → **272** · 결정 등록부 56 → **156** |
+| **권한 · 정합성 · 연동** | 권한 점검을 전수로 다시 했고, 형제 시스템과의 연동 코드가 여러 곳 고쳐졌습니다 — 각 연결의 상태는 다시 확인한 뒤 [연결 표](../RELEASES/2026.09/compatibility.md)에 반영합니다 |
+
+## 10. 더 깊이
+
+> **EN** — Where to go next.
+
+| 알고 싶은 것 | 문서 |
+|---|---|
+| 구성 · 설정 키 · 연동 · 한계 전체(통합 릴리즈 기준) | [HIS 구성서](../systems/his.md) |
+| 메뉴 266개와 기본 사용 역할 | [HIS 메뉴 구성](../systems/his-domains.md) |
+| 설치 · 설정 순서 | [구축 가이드 S1](../build-guide/S1-core-his.md) |
+| 화면 | [HIS 화면](../screens/his.md) |
+| 기능 하나를 자세히 | [주요 기능 41편](../functions/detail/) |
+| 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
+| 설계 원칙의 뿌리 | [설계 기준은 어떻게 생겼나](../DESIGN-HISTORY.md) |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werubyHIS` |
+
+---
+
+## 이 문서의 근거
+
+> **EN** — What this introduction was written from.
+
+| 항목 | 값 |
+|---|---|
+| 읽은 것 | HIS 저장소의 **현재 개발본** — 커밋 `a39f60fc9d7c`(2026-09-29) · 버전 표기 `v4.19.0`(태그 뒤 미발행 커밋 478개 포함) · 작업 트리의 미커밋 변경은 읽지 않음 |
+| 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `e9d303984f80`(v4.18.0 · 2026-09-11) |
+| 센 방법 | 데이터 모델 = 스키마 파일의 `model` 선언 · 핸들러 = 컨트롤러 파일의 줄 머리 HTTP 메서드 데코레이터 · 웹 화면 = `page.tsx` 파일 · 메뉴 = 사이드바 메뉴 정의의 항목 · 역할별 메뉴 = 메뉴 정의의 역할 목록 · 결정 등록부 = 등록부 본체와 배치 파일의 항목(66 + 90) — 모두 2026-09-29 에 센 값 |
+| 실제 연결 확인 | 2026-09-14~15 · 통합 릴리즈 기준 설치본끼리 · 가상 데이터([따라가 본 결과](../build-guide/follow-along-2026-09.md)) — 현재 개발본으로 다시 부른 것은 아님 |
+| 사실 확인 | HIS 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

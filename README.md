@@ -24,7 +24,7 @@
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
 | **소스는** | 시스템마다 **저장소가 따로** 있습니다(11곳). 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일은 → **[소스 받기](SOURCES.md)**. 🟢 **모두 공개할 예정**이고 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 주소가 있지만 **주소는 바뀌지 않습니다** |
 
-**처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/09-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) · [화면 293장](screens/)
+**처음이라면 이 다섯만 보세요** — [프로젝트 소개서](projects/)(HIS 부터) · [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/09-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) · [화면 293장](screens/)
 
 **"왜 이렇게 까다로운가"가 궁금하면** → [설계 기준은 어떻게 생겼나](DESIGN-HISTORY.md) — 릴리즈 108개가 남긴 것 · [형제 시스템은 어떻게 자랐나](DESIGN-HISTORY-SYSTEMS.md) — 나머지 12개의 기록 666건
 
@@ -33,6 +33,7 @@
 | 알고 싶은 것 | 절 |
 |---|---|
 | 왜 만들었고 무엇을 믿나 | [이 프로젝트가 바라는 것](#이-프로젝트가-바라는-것) · [설계 취지](#설계-취지) |
+| 🆕 프로젝트를 하나씩 | [프로젝트 소개서 — 13개를 하나씩](#프로젝트-소개서--13개를-하나씩) · [HIS 소개서](projects/his.md) |
 | 무엇으로 이루어졌나 | [시스템 13](#시스템-13) · [기준 버전 · 상태 · 규모 · 기술](#시스템마다--기준-버전--구현-상태--규모--기술) · [시스템마다 무엇을 하나](#시스템마다-무엇을-하나) |
 | 시스템이 어떻게 이어지나 | [시스템을 꿰는 흐름](#시스템을-꿰는-흐름) — 환자 여정 · 신원 · 신뢰 · 표준 |
 | 무엇을 할 수 있나 | [업무로 보면](#업무로-보면--무엇을-할-수-있나) · [주요 기능 41편](#주요-기능--한-편씩-자세히) |
@@ -41,6 +42,46 @@
 | 무엇을 받고, 무엇이 아직 없나 | [지금 받을 수 있는 것](#지금-받을-수-있는-것) · [규모](#규모--지금-말할-수-있는-것) · [지금 알고 시작해야 할 것](#지금-알고-시작해야-할-것) |
 
 ---
+
+## 프로젝트 소개서 — 13개를 하나씩
+**Project introductions — one per project**
+
+> **EN** — Each project gets its own introduction written for hospital IT staff, read from the project's **current development line**: what it is, where it is used, what it can do, how it is built, how it connects, what it takes to run, why it was designed that way, and what is not there yet — with an English introduction and English summaries throughout. **HIS is the first one.** The others are being written in this order: PACS, sign, ERP, AI Server, patient app, public website, LIS, edu, Clinic, twin, cerno, Jitsi. Until then, each links to its system brief.
+
+프로젝트마다 **의료 전산담당자**가 처음 읽을 소개서를 따로 씁니다. 각 소개서는 그 저장소의 **현재 개발본**을 읽고 쓰며, 이 자료의 다른 문서(통합 릴리즈 `2026.09` 기준)와 무엇이 달라졌는지를 따로 적습니다. 목록: [프로젝트 소개서](projects/).
+
+### HIS — 병원 업무의 중심 시스템 · [소개서](projects/his.md)
+
+> **EN** — The hospital information system at the center: registration, outpatient and inpatient care, orders, nursing, surgery, emergency, pharmacy, lab, imaging, checkups, billing and administration in one TypeScript codebase (NestJS API, Next.js web, PostgreSQL 16, Redis 7, a separate hourly sentinel). It is also the identity hub every other system trusts. The current development line adds an install script with a first-administrator tool, and real mode refuses to boot without its security settings. Not there yet: external-agency transmission, an SMS provider, and the hospital name still fixed in code.
+
+| | |
+|---|---|
+| **무엇** | 접수부터 진료 · 검사 · 약 · 수납 · 경영지원까지 병원의 하루를 한 시스템에서 처리하고, 직원 로그인을 맡아 **다른 시스템이 모두 붙는 중심** |
+| **누가** | 거의 모든 부서 — 역할마다 보이는 메뉴가 다릅니다(관리자 272 · 의사 122 · 간호 95 · 임상병리 31 · 약사 27 …) |
+| **할 수 있는 일** | 웹 메뉴 대분류 8 · 항목 272 — 진료 · 진료지원 · 환자·고객 · 질·안전 · 운영 · 지능형 · 시스템 관리 · 개인. 메뉴 밖에서 개원 관제 · 운영 전환 관제 · 결정 등록부(156건) · 안전 게이트 28 · 상시 감시자 |
+| **만들어진 것** | TypeScript 모노레포 — API(NestJS 11 · Prisma 6) · 직원 웹(Next.js 15) · 공개 홈페이지 · 환자 앱 · 공용 정본 패키지 · 상시 감시자. PostgreSQL 16(데이터 모델 573) · Redis 7(휘발성 캐시) · 메시지 브로커 없이 DB 대기열 + 예약 작업 |
+| **연결** | LIS(검사 오더 · 결과 — FHIR R4) · sign(서명) · ERP(수납 · 청구) · edu(교육) — 2026-09 에 새 설치본끼리 실제로 불러 확인 · PACS · AI Server · Clinic · twin · cerno 는 만들어져 있고 확인은 아직 · Jitsi 는 지금 쓸 수 없음 |
+| **설치 · 운영** | 서버 한 대 · GPU 불필요 · 웹 빌드에 메모리 6GB 이상. 현재 개발본에 **빈 서버 설치 스크립트(7단계)** · 첫 관리자 생성 도구 · 리얼 모드는 보안 설정이 비면 부팅 거부 · 매일 암호화 백업(DB + 업로드 파일) · 2차 사본 · 복원 시험 |
+| **아직** | 대외 기관 전송 7종 없음 · 문자 발송 제공자 없음 · 병원 이름이 코드에 고정 · 새 설치 경로는 실제 빈 서버에서 아직 · 코드 마스터는 기관이 반입 |
+
+### 나머지 12개
+
+| 프로젝트 | 한 줄 | 지금 읽을 곳 |
+|---|---|---|
+| 공개 홈페이지 · 환자 앱 | 병원 공개 사이트 · 환자용 모바일 앱(HIS 저장소 안) | [홈페이지 구성서](systems/homepage.md) · [환자 앱 구성서](systems/patient-app.md) |
+| LIS | 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사정보시스템 | [구성서](systems/lis.md) |
+| PACS | 영상 저장 · 판독 워크플로 · 웹 뷰어 · 영상 AI 보조 | [구성서](systems/pacs.md) |
+| sign | 자체 인증서 · 타임스탬프 · PDF 전자서명 · 위변조 증거 | [구성서](systems/sign.md) |
+| ERP | 재무회계 · 원가 · 인사급여 · 자재 · 보험청구 · 세무 | [구성서](systems/erp.md) |
+| AI Server | 기관 안 GPU 한 장의 AI 연산 — 요약 · 초안 · 근거 질의 · 음성 인식 | [구성서](systems/ai-server.md) |
+| twin | 위험 점수 카드 · SBAR · 병상 · 인력 시뮬레이션 | [구성서](systems/twin.md) |
+| cerno | 의료진별 근거 질의(근거가 없으면 만들지 않음) | [구성서](systems/cerno.md) |
+| edu | 직원 이러닝 · 법정교육 · 전자 이수증 | [구성서](systems/edu.md) |
+| Clinic | 병원 그룹웨어 — 인수인계 · 근무 · 알림 · 결재 | [구성서](systems/clinic.md) |
+| Jitsi | 원격진료 화상(현재 설치본은 동작하지 않음) | [구성서](systems/jitsi.md) |
+
+위 「시스템 13」 절과 아래 「시스템마다 무엇을 하나」는 **통합 릴리즈 `2026.09` 기준**이고, 소개서는 **현재 개발본 기준**입니다. 둘이 다르면 소개서의 「통합 릴리즈 이후 달라진 점」 절에 적습니다.
+
 
 ## 이 프로젝트가 바라는 것
 **What this project aims for**
@@ -581,6 +622,7 @@ AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jit
 | [`overview/`](overview/) | 취지·구조 개요서(11장 — 4장 「무엇을 할 수 있나」 2026-09-29 추가) | 🟡 초안 |
 | [`SOURCES.md`](SOURCES.md) | **소스 받기** — 시스템 13 → 저장소 11 · 기준 커밋 · 받은 뒤 처음 여는 파일 · 저장소에 없는 것 | 🟢 생성물(주소 · 커밋 · 파일 존재를 기계로 대조) |
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~16) · 남은 확인 필요 19곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
+| [`projects/`](projects/) | 🆕 **프로젝트 소개서** — 의료 전산담당자용 · 현재 개발본 기준 · 영문 소개 포함 | 🟡 1 / 13(HIS) |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
 | [`functions/`](functions/) | **업무별 기능 지도** + [주요 기능 상세 41편](functions/detail/) · [전제와 파급](functions/dependencies.md) · [찾아보기](functions/find.md) — 시스템이 아니라 **하는 일**로 묶은 색인(외래 · 병동 · 검사 · 영상 · 약제 · 원무 · 질·안전 · AI · 교육 · 개원). 구성서 §4 를 업무로 다시 꿴 것 | 🟡 초안 |
 | [`clinicians/`](clinicians/) | **진료하는 사람을 위한 안내** — 공통 + 직역 5(의사 · 간호 · 임상병리 · 영상 · 약제). AI 가 하지 않는 일 · 시스템이 일부러 막는 것 · 내가 승인할 것 · 안 될 때의 대체 | 🟡 초안 |
