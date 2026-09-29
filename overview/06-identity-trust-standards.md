@@ -3,7 +3,7 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [5. 환자 한 명의 여정](05-patient-journey.md) · 다음 → [7. AI 는 한 곳에서, 판단은 사람이](07-ai.md)
 
-> **EN** — Three things must line up for thirteen systems to behave like one hospital: **who this person is**, **whether this document can be trusted**, and **whether the systems speak the same language**. Staff identity is issued once by the HIS and verified by the others in three different ways — public-key verification (five systems), a shared secret (two, which means key management becomes the institution's job), and a scoped API key (one). Trust — certificates, RFC 3161 timestamps, PAdES-LTA signatures, append-only audit chains — is concentrated in sign. Standards (FHIR R4, SMART on FHIR, CDS Hooks, DICOM, DICOMweb, HL7 v2) carry what they can, but **many connections are plain HTTPS REST or webhooks**, and every row says which it is.
+> **EN** — Three things must line up for thirteen systems to behave like one hospital: **who this person is**, **whether this document can be trusted**, and **whether the systems speak the same language**. Staff identity is issued once by the HIS and accepted by the others in two ways — public-key verification (five systems) and a shared secret (two, which means key management becomes the institution's job). Clinic is linked by a scoped API key and its staff sign-in runs the other way, from Clinic into HIS; LIS staff sign in to LIS itself. Trust — certificates, RFC 3161 timestamps, PAdES-LTA signatures, append-only audit chains — is concentrated in sign. Standards (FHIR R4, SMART on FHIR, CDS Hooks, DICOM, DICOMweb, HL7 v2) carry what they can, but **many connections are plain HTTPS REST or webhooks**, and every row says which it is.
 
 ---
 
@@ -21,13 +21,15 @@
 
 ## 신원 — 직원 한 명의 신원은 HIS 한 곳에서
 
-직원은 HIS 에 로그인합니다. **HIS 가 직원 로그인 토큰을 발급하고**, 형제 시스템은 그 토큰을 검증해 같은 사람으로 받아들입니다. 검증 방식은 시스템마다 세 가지로 나뉩니다.
+직원은 HIS 에 로그인합니다. **HIS 가 직원 로그인 토큰을 발급하고**, 형제 시스템은 그 토큰을 검증해 같은 사람으로 받아들입니다. 연결 방식은 시스템마다 세 가지로 나뉩니다.
 
 | 방식 | 시스템 | 기관이 알아 둘 것 |
 |---|---|---|
 | **공개키로 검증** | sign · PACS · edu · twin · cerno (5곳) | HIS 가 게시한 공개키 목록으로 검증하므로 비밀값을 나눠 가질 필요가 없습니다. twin · cerno 는 차트에서 앱을 여는 SMART on FHIR 흐름 안에서 이 신원을 받습니다 |
 | **공유 비밀키로 검증** | ERP · Jitsi (2곳) | HIS 와 상대 시스템이 같은 비밀키를 가집니다. **키 관리가 따로 필요합니다** — 양쪽에 같은 값으로 두고 함께 교체합니다 |
-| **API 키로 연결** | Clinic (1곳) | Clinic 이 범위를 지정한 API 키를 발급하고, HIS 가 그 키로 Clinic 을 부릅니다 |
+| **API 키로 연결** | Clinic (1곳) | Clinic 이 범위를 지정한 API 키를 발급하고, HIS 가 그 키로 Clinic 을 부릅니다. 직원 로그인은 반대 방향입니다 — Clinic 이 낸 1회용 토큰을 HIS 가 Clinic 에 되물어 확인합니다 |
+
+LIS 는 HIS 로그인을 쓰지 않습니다. 직원은 LIS 에 따로 로그인하고, LIS 와 HIS 사이는 서버끼리 쓰는 토큰으로 오갑니다([HIS 소개서 5절](../projects/his.md#5-다른-시스템과의-연결)).
 
 근거: [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것) · [신원 허브 도식](../diagrams/identity-hub.md).
 
@@ -36,7 +38,7 @@
 **기관에게 의미하는 것**
 
 - 직원 계정 · 역할을 **HIS 한 곳에서** 관리합니다. 형제 시스템마다 계정을 따로 만들고 지우는 일을 줄입니다.
-- 반대로 HIS 가 멈추면 HIS 신원에 기대는 형제 시스템의 로그인도 영향을 받습니다(예: edu 는 로그인이 HIS SSO 뿐이라 HIS 없이 따로 쓸 수 없습니다 — [edu 요약](../RELEASES/2026.09/systems/edu.md)). HIS 의 가용성과 키 관리가 생태계 전체의 기반입니다([2장 취지 4](02-principles.md#4-정본은-하나)).
+- 반대로 HIS 가 멈추면 HIS 신원에 기대는 형제 시스템의 로그인도 영향을 받습니다. 예를 들어 edu 는 로그인 두 경로(HIS 사내교육 단추 · edu 로그인 화면)가 모두 HIS 를 거칩니다([edu 소개서](../projects/edu.md)). HIS 의 가용성과 키 관리가 생태계 전체의 기반입니다([2장 취지 4](02-principles.md#4-정본은-하나)).
 - 연결별 토큰 대상 · 교환 경로 같은 세부는 이 개요서가 다루지 않습니다. [연동 계약 지도](../integration/)(인증 3방식 · 개통 게이트 · 연결 순서)와 각 [시스템 구성서](../systems/)를 봅니다. 운영 보안 점검은 기관이 설치 형태에 맞춰 따로 합니다.
 
 ---
@@ -98,7 +100,7 @@
 
 - **FHIR R4 주 경로(HIS ⇄ LIS 검사 오더 · 결과 · 취소)는 새 설치본끼리 실제로 불러 확인했습니다**(`검증됨` · 2026-09-14~15). **DICOM 쪽은 양쪽 코드가 맞물려 있는 단계**입니다(`구현·미검증` — 촬영 장비와의 연결은 기관이 리허설에서 확인합니다).
 - **HL7 v2 쪽은 경로 몇 개(검사 결과 · 처방 대체 경로, 판독 결과 송신, 환자 인구정보)가 `미구현`입니다.** HL7 v2 로만 말하는 기존 검사 장비 · 시스템이 있다면 S3 에서 연결 방식을 먼저 확인합니다([S3](../build-guide/S3-clinical-departments.md)).
-- **검사 분석기 자동 수집은 `미구현`입니다.** 장비 결과를 자동으로 받아야 하는 기관은 대체 수단을 준비합니다.
+- **검사 분석기 자동 수집은 `미구현`입니다.** LIS 에 장비 결과(ASTM · CSV 원문)를 받는 API 와 코드 매핑은 있지만, 장비의 직렬 · TCP 전송을 받는 부분이 없습니다. 장비와 LIS 사이에 중계 장치를 두거나 결과 파일 · 수기 입력으로 운영합니다([LIS 소개서](../projects/lis.md)).
 - **코드 체계는 기관이 받아 옵니다.** 코드 마스터는 이 저장소에도 소스에도 없습니다. KCD 는 제9차 개정이 2026-01-01 부터 시행 중인데 기준 버전 코드의 표기는 제8차입니다. SNOMED CT 는 국가 배포 센터에 사용 등록이 필요하다고 원문이 적습니다([THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터) · [10장](10-terms.md)).
 
 ---
