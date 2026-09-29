@@ -3,9 +3,9 @@
 **AI 기반 병원정보시스템(HIS)을 오픈 형태로 — 적은 자원으로도 세울 수 있게**
 **An open ecosystem for AI-assisted hospital information systems — buildable with modest resources**
 
-> 이 저장소는 **소개·구축 자료 저장소**입니다. 소스 코드는 담지 않습니다. 각 시스템의 소스는 아래 [시스템 13](#시스템-13)의 링크로 갑니다(링크는 정리되는 대로 채웁니다).
+> 이 저장소는 **소개·구축 자료 저장소**입니다. 소스 코드는 담지 않습니다. 각 시스템의 소스는 아래 [시스템 13](#시스템-13)의 링크로 갑니다(주소는 확정됐고, 저장소는 각 프로젝트의 정리가 끝나는 대로 하나씩 공개됩니다).
 > 현재 상태: **자료 제작 중** — 진행 계획은 [ROADMAP.md](ROADMAP.md)를 보세요.
-> **EN** — This is a **documentation repository**: it introduces the ecosystem and explains how to build it. It contains **no source code**; links to each system's source are listed under [시스템 13 / The 13 systems](#시스템-13) and will be filled in as they are settled. Status: **work in progress** — see [ROADMAP.md](ROADMAP.md).
+> **EN** — This is a **documentation repository**: it introduces the ecosystem and explains how to build it. It contains **no source code**; links to each system's source are listed under [시스템 13 / The 13 systems](#시스템-13) — the addresses are final, and each repository opens as its project finishes clean-up. Status: **work in progress** — see [ROADMAP.md](ROADMAP.md).
 > Documents are written in Korean with English summaries (marked **EN**) in each section.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -27,6 +27,18 @@
 **처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/08-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) · [화면 293장](screens/)
 
 **"왜 이렇게 까다로운가"가 궁금하면** → [설계 기준은 어떻게 생겼나](DESIGN-HISTORY.md) — 릴리즈 108개가 남긴 것 · [형제 시스템은 어떻게 자랐나](DESIGN-HISTORY-SYSTEMS.md) — 나머지 12개의 기록 666건
+
+### 목차
+
+| 알고 싶은 것 | 절 |
+|---|---|
+| 왜 만들었고 무엇을 믿나 | [이 프로젝트가 바라는 것](#이-프로젝트가-바라는-것) · [설계 취지](#설계-취지) |
+| 무엇으로 이루어졌나 | [시스템 13](#시스템-13) · [기준 버전 · 상태 · 규모 · 기술](#시스템마다--기준-버전--구현-상태--규모--기술) · [시스템마다 무엇을 하나](#시스템마다-무엇을-하나) |
+| 시스템이 어떻게 이어지나 | [시스템을 꿰는 흐름](#시스템을-꿰는-흐름) — 환자 여정 · 신원 · 신뢰 · 표준 |
+| 무엇을 할 수 있나 | [업무로 보면](#업무로-보면--무엇을-할-수-있나) · [주요 기능 41편](#주요-기능--한-편씩-자세히) |
+| AI 는 어디까지 | [AI 는 GPU 한 장으로](#ai-는-소비자용-gpu-한-장으로--rtx-508016gb) · [AI 계층 — 어디서 무엇을 하고 어떻게 켜나](#ai-계층--어디서-무엇을-하고-어떻게-켜나) |
+| 어떻게 세우나 | [구축 단계](#구축은-이렇게-진행됩니다) · [구축을 관리하는 화면](#구축을-관리하는-화면--가이드는-이-화면들을-따라갑니다) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) |
+| 무엇을 받고, 무엇이 아직 없나 | [지금 받을 수 있는 것](#지금-받을-수-있는-것) · [규모](#규모--지금-말할-수-있는-것) · [지금 알고 시작해야 할 것](#지금-알고-시작해야-할-것) |
 
 ---
 
@@ -50,7 +62,7 @@
 **Designed to run on minimal hardware**
 
 > **EN** — "AI-based HIS" usually calls to mind a server room and datacenter GPUs. This ecosystem was designed the other way around: it is assembled from **freely available open components** (PostgreSQL, Redis, Node.js, Python, Orthanc, Ollama — note that each carries its own license terms, some of which change by version; see [THIRD_PARTY.md](THIRD_PARTY.md)); systems are **independent and attached as needed** over standard protocols (FHIR, DICOM, HL7 v2), so an institution can start with the HIS alone and connect an existing PACS rather than replacing it; **every AI feature has a switch** and the HIS is designed to work without the AI server, showing "fallback" or "cannot compute" instead of pretending a value exists.
-> **A measured record, not a recommended spec** — eight systems (HIS, PACS, sign, LIS, twin, cerno, edu, Jitsi) ran together on **one 8-core / 16GB virtual server** (operations record of 2026-08-25, about 10GB memory in use, no swap headroom). Treat it as close to a *lower bound that actually ran*, not as a sizing recommendation. Per-system recommended specs will be measured during a fresh install walkthrough and published in the [build guide](build-guide/).
+> **A measured record, not a recommended spec** — eight systems (HIS, PACS, sign, LIS, twin, cerno, edu, Jitsi) ran together on **one 8-core / 16GB virtual server** (operations record of 2026-08-25, about 10GB memory in use, no swap headroom). Treat it as close to a *lower bound that actually ran*, not as a sizing recommendation. The first fresh-install walkthrough (2026-09-13 ~ 09-16) ran on a development PC, so it cannot ground a recommended spec; per-system recommendations wait for a reference machine (x86 + GPU) — see [Sizing](#규모--지금-말할-수-있는-것).
 
 "AI 기반 HIS"라고 하면 대형 서버실과 데이터센터용 GPU 를 먼저 떠올립니다. 이 생태계는 반대 방향으로 설계했습니다.
 
@@ -61,7 +73,7 @@
 | **AI 는 기능마다 스위치가 있고, 기관이 결정해서 켭니다** | AI 서버 없이도 HIS 는 동작하도록 설계했습니다. AI 가 없거나 멈추면 화면이 그 칸을 "폴백" 또는 "산출 불가"로 표시하고, 정상인 척하지 않습니다. 다만 **코드 기본값은 기능마다 다릅니다**. 환자 브리핑 야간 배치 · 데이터 품질 AI 같은 기능은 기본 꺼짐이지만, AI 기능 전체 스위치와 PACS 영상 자동 선별은 기본 켜짐입니다(2026-09-11 코드 확인). 그래서 구축 가이드는 **설치 직후 AI 기능을 끄고, 기관 결정에 따라 하나씩 켜는 순서**로 안내합니다 |
 | **서버 한 대에서 시작할 수 있습니다** | 아래 실측 기록을 보세요 |
 
-**실제로 돌아간 기록** — HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi 8개 시스템이 **8코어 · 16GB 메모리 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용). 다만 이 구성은 여유가 넉넉하지 않았습니다(스왑 여유 없음). 그래서 이 수치는 **"권장 사양"이 아니라 "실제로 돌아간 하한에 가까운 기록"** 입니다. 시스템별 권장 사양은 새 설치본으로 구축 절차를 따라가 보면서 측정해 [구축 가이드](build-guide/)에 싣습니다.
+**실제로 돌아간 기록** — HIS · PACS · sign · LIS · twin · cerno · edu · Jitsi 8개 시스템이 **8코어 · 16GB 메모리 가상 서버 한 대**에 함께 올라가 있었습니다(2026-08-25 운영 기록 · 메모리 약 10GB 사용). 다만 이 구성은 여유가 넉넉하지 않았습니다(스왑 여유 없음). 그래서 이 수치는 **"권장 사양"이 아니라 "실제로 돌아간 하한에 가까운 기록"** 입니다. 새 설치본 따라가기(2026-09-13~16)는 개발 PC 에서 했기 때문에 권장 사양의 근거가 되지 못합니다. 시스템별 권장 사양은 **기준 장비(x86 · GPU)에서 재서** 싣습니다 — 지금 말할 수 있는 값은 [규모](#규모--지금-말할-수-있는-것)에 있습니다.
 
 ### AI 는 소비자용 GPU 한 장으로 — RTX 5080(16GB)
 **AI on a single consumer GPU — RTX 5080 (16GB)**
@@ -119,7 +131,7 @@
 
 **솔직하게 — 새로운 나라에 세울 때 기관이 준비해야 하는 것**
 
-- **코드 마스터**(약품 · 진단 · 수가 · 검사 코드)는 나라마다 다르고, 각 나라 공공기관이 배포 조건을 정합니다. 기관이 직접 받아 반입합니다. 국가 축은 현재 한국 · UAE 두 곳이 있고, 국가별로 어떤 코드 마스터를 반입할 수 있는지는 확인해 [구축 가이드](build-guide/) S1 장에 싣습니다. 그 밖의 나라는 코드 마스터 · 청구 규칙 · 언어 팩을 새로 붙여야 합니다.
+- **코드 마스터**(약품 · 진단 · 수가 · 검사 코드)는 나라마다 다르고, 각 나라 공공기관이 배포 조건을 정합니다. 기관이 직접 받아 반입합니다. 국가 축은 현재 한국 · UAE 두 곳이 있지만, 🔴 **코드 마스터 반입 경로에는 국가 구분이 없습니다** — 기준 커밋의 반입은 한국 기준 데이터로 고정돼 있고, 국가 축은 보유 · 파기 기간과 표기 쪽에만 있습니다([S1](build-guide/S1-core-his.md)). 다른 나라에 세우려면 코드 마스터 · 청구 규칙 · 언어 팩과 **그 반입 경로**를 새로 붙여야 합니다.
 - **청구 · 자격조회 같은 대외 기관 전송**은 나라마다 규격이 다릅니다. 현재는 대외 전송 모듈이 구현돼 있지 않아서, 기관이 전송 모듈을 붙이거나 기존 청구 소프트웨어와 함께 써야 합니다.
 - **의료기기 · 소프트웨어 인허가**와 개인정보 규제 판단은 각 나라의 규정에 따라 **구축 기관이 합니다**([의료 면책 고지](DISCLAIMER.md)).
 - 이 밖에 지금 구현 상태에서 알고 시작해야 할 것은 [아래](#지금-알고-시작해야-할-것)에 적었습니다.
@@ -204,26 +216,269 @@
 
 🟢 **소스 칸의 주소는 확정된 것입니다.** 저장소는 **모두 공개할 예정**이고 각 프로젝트의 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 링크는 눌러도 열리지 않지만 **주소는 바뀌지 않습니다**. 받는 법과 기준 커밋은 [소스 받기](SOURCES.md)에 있습니다.
 
-버전·규모·구현 상태는 첫 [통합 릴리즈](RELEASES/)에서 매니페스트로 고정해 싣습니다. 이 자료의 모든 수치에는 **값 · 센 방법 · 계측일**을 함께 적습니다.
+이 자료의 모든 수치에는 **값 · 센 방법 · 계측일**을 함께 적습니다.
+
+### 시스템마다 — 기준 버전 · 구현 상태 · 규모 · 기술
+**Per system: pinned version, stage, size and stack**
+
+> **EN** — For each system: the version at the pinned base commit of release `2026.09`, its implementation stage (not yet confirmed by each system's owner), a few size counts and the main stack. The counts are **handlers, data models and pages found in the code by fixed rules** — they measure the size of the code, not the number of features and not whether anything runs. Each counting rule sits next to its value in [`data/scale-snapshot.json`](data/scale-snapshot.json) (measured 2026-09-13). The authoritative table is the [release manifest](RELEASES/2026.09/manifest.md).
+
+버전 · 구현 상태는 [통합 릴리즈 `2026.09` 매니페스트](RELEASES/2026.09/manifest.md)의 기준 커밋 값이고, 규모는 같은 커밋의 코드를 정해진 규칙으로 센 값입니다(계측 2026-09-13 · 센 규칙은 값마다 [`data/scale-snapshot.json`](data/scale-snapshot.json)에 적혀 있습니다). 🔴 **규모는 코드의 크기입니다.** 기능의 수도, 동작한다는 증거도 아닙니다. 구현 상태는 **시스템 담당의 확인 전**입니다.
+
+| 시스템 | 기준 버전 | 구현 상태 | 규모(기준 커밋에서 셈) | 기술 |
+|---|---|---|---|---|
+| **HIS** | `v4.18.0` | 통합 — 리허설 모드(가상 병원 데이터) | 데이터 모델 562 · API 핸들러 3,251 · 웹 화면 450 · 메뉴 항목 266 | NestJS · Prisma · Next.js · PostgreSQL 16 · Redis 7 |
+| 공개 홈페이지 | `v4.18.0`(HIS 와 함께) | 운영 — 공개 사이트로 쓰이는 중 | 화면 50 | Next.js |
+| 환자 앱 | `v4.18.0`(HIS 와 함께) | 개발 — 스토어 미배포 | 화면 32 | Expo · React Native |
+| **sign** | `1.30.1` | 통합 | 데이터 모델 14 · API 162(OpenAPI 명세) · 화면 38 | NestJS · Prisma · Next.js |
+| **LIS** | `1.56.18` | 파일럿 | 데이터 모델 84 · API 핸들러 356 · 화면 41 · E2E 시험 470 | NestJS · Prisma · Next.js |
+| **ERP** | `1.287.3` | 파일럿 — 문서마다 표기가 엇갈려 재확인 대상 | 데이터 모델 219 · API 핸들러 717 · 화면 113 · 시험 1,736 | FastAPI · Next.js · PostgreSQL 15 |
+| **PACS** | `v13.48` | 통합 | API 핸들러 475 + 웹소켓 3 · 관리 화면 47 · 시험 166 · E2E 132 | Orthanc · OHIF · FastAPI · Celery · Next.js |
+| **AI Server** | `2.125.41` | 통합 — 의료 기능 기준(비의료 기능은 범위 밖) | API 핸들러 654 · 시험 1,930 | Flask · Gunicorn · Ollama |
+| **twin** | `1.20.88` | 통합 | API 핸들러 107 · 화면 15 · 시험 881 | FastAPI · Next.js |
+| **cerno** | `0.1.0` | 파일럿 — 섀도우 · 비임상 | API 핸들러 11 · 화면 3 · 시험 255 | FastAPI · Next.js · Redis |
+| **edu** | `2.7.0` | 확인 필요 — 운영 여부 재확인 전 | 데이터 모델 40 · API 핸들러 167 · 화면 41 | NestJS · Prisma · Next.js |
+| **Clinic** | `1.4.0`(병원 서비스) | 통합 — 모노레포 안의 병원 서비스만 | 화면 16 · HIS 연동 API 44 | Next.js |
+| **Jitsi** | `1.0.0` | 중단 — 현재 설치본이 동작하지 않음 | 컨테이너 9 | Jitsi Meet 구성요소 · 회의 관리 API |
+
+- **버전 표기가 어긋난 곳이 있습니다** — 태그 · 변경 기록 · 화면에 보이는 번호가 정본과 다른 저장소가 있고(PACS · AI Server · twin · cerno · Jitsi 는 태그가 정본과 다름), 그 목록은 [매니페스트](RELEASES/2026.09/manifest.md)에 그대로 실었습니다. 이 자료는 **정본 번호 하나**로만 말합니다.
+- **기준 커밋은 고정돼 있습니다** — 저장소에 새 커밋이 쌓여도 이 표는 기준 커밋을 옮기기 전까지 바뀌지 않습니다. 받을 커밋은 [소스 받기](SOURCES.md)에 있습니다.
+
+### 시스템마다 무엇을 하나
+**What each system does**
+
+> **EN** — One paragraph per system, condensed from section 4 ("core features") of each [system brief](systems/). Listing a feature here means the code has it at the base commit; it does not mean it has been verified in operation — see the [connection status table](RELEASES/2026.09/compatibility.md) and the [follow-along results](build-guide/follow-along-2026-09.md) for that.
+
+각 [시스템 구성서](systems/) §4 「핵심 기능」을 줄인 것입니다. 🔴 **여기 적혔다는 것은 기준 커밋의 코드에 있다는 뜻이지, 운영에서 확인됐다는 뜻이 아닙니다.** 실제로 불러 확인한 것은 [연결 상태 표](RELEASES/2026.09/compatibility.md)와 [따라가 본 결과](build-guide/follow-along-2026-09.md)에 있습니다.
+
+**HIS — 병원 업무의 정본이자 생태계의 신원 허브** · [구성서](systems/his.md) · [메뉴 266개 전체](systems/his-domains.md)
+- 웹 메뉴는 **도메인 8 · 메뉴 묶음 26 · 메뉴 항목 266** — 진료(45) · 진료지원(62) · 환자·고객(17) · 질·안전(22) · 운영(19) · 지능형(7) · 시스템 관리(87) · 개인(7).
+- **진료** — 외래 접수 · 대기 · 예약 · 처방 입력(CPOE) · 간호 워크스테이션 · 수술 · 회복실 · 응급실 · 중환자실 · Code Blue · 진료과별 전문 화면 · 투석 · 항암 · 방사선종양 · 재활 · 입원 · 병상 · 회진 · 퇴원 · 협진.
+- **진료지원** — 약국 · 약사 임상활동 · 검사실 · 영상실 · 병리 · 혈액은행 · 건강검진센터(접수부터 결과서 · 추적까지) · 의무기록 검색 · 사본 · 제증명.
+- **질 · 안전 · 운영** — 환자안전 사고 보고 · 감염관리 · 직원 노출 사고 · 질 지표 · 임상 연구(IRB) · 수납 · 청구서 · 인사 · 재고 · 경영 대시보드 · 전원.
+- **메뉴 밖에서 서버가 하는 일** — 구축 관리(개원 단계 · Go-Live 관제 · 결정 등록부) · 안전 장치(운영 모드 · 안전 게이트 · 대외 발신 관제 · 값의 출처를 보여 주는 설정) · **상시 감시자**(정합성 · 파이프 생존 · 계약 어긋남 · 흐름 완결성 — 판정 못 하면 「관측 불가」) · 감사(비상 열람 검토 · 오더 서명 로그) · FHIR R4 외부 표면 · SMART on FHIR 앱 등록 · 국가 축과 언어 팩.
+
+**공개 홈페이지** · [구성서](systems/homepage.md) — 병원 · 진료과 · 의료진 · 진료 일정 · 비급여 안내 · 건강검진 프로그램 · **AI 예약 도우미**(증상을 대화로 받아 진료과 **후보를 제안**하고 예약까지) · 이용 안내 · 국제 진료 · 협력 기관 신청. 콘텐츠 편집과 발행은 HIS 관리 화면에서 하고, 반영 여부는 사이트에 실린 빌드 스탬프로 판정합니다.
+
+**환자 앱** · [구성서](systems/patient-app.md) — 로그인(기기 생체인증 PIN) · 보호자 위임 · 예약 · 진료 기록 · 입원 여정 · 검사 결과 · 영상 판독 · 검진 결과 비교 · 복약 · 만성질환 자가측정 · 동의서 전자서명 · 문진 · 제증명 신청 · 수납 · 담당의 메시지 · **내 기록을 누가 언제 열었는지**(비상 열람 사유 포함). 조회 실패를 「없음 · 0원 · 이상 없음」으로 바꿔 보여 주지 않습니다.
+
+**LIS — 검사 다섯 분야** · [구성서](systems/lis.md)
+- **진단검사** — 처방 수신 → 접수 · 라벨 → 검체(거부 · 재채취) → 결과 → 자동 검증 · 델타 체크 → 2차 검증 → **위험치 폐루프**(통보 · 상향 · 복창) → HIS 회신 → 청구 캡처. 참고치가 없거나 단위가 맞지 않으면 자동 확정을 막고, **입력자와 검증자가 같으면 검증을 막습니다.**
+- **미생물**(감수성 전문가 규칙 · 다제내성균 · 법정감염병 신고 기록) · **병리**(그로싱 → 슬라이드 → 2단계 사인아웃 → 개정 보고 · PACS 슬라이드 영상) · **수혈**(ABO 부적합을 막는 독립 판정 · 출고 전 동의 확인 · 시행 2인 확인) · **유전체 · NGS**(ACMG 큐레이션 · **이차 소견 동의 게이트**).
+- 정도관리(Westgard · 외부 정도관리) · **개시 전환 센터** · 해시체인 감사(DB 트리거로 수정 차단) · 파일럿 데이터 정리(실데이터가 감지되면 거부 · 요청과 승인을 다른 관리자가).
+
+**PACS — 영상 저장 · 판독** · [구성서](systems/pacs.md)
+- DICOM(DIMSE) · DICOMweb(토큰 게이트 뒤) · 모달리티 워크리스트 · MPPS · HL7 v2 오더 수신 · 외부 PACS 조회 · 환자 업로드 포털 · 키오스크(CD · USB) · 비표준 DICOM 정규화(원본 백업 · 되돌리기).
+- **판독 워크플로**(배정 · SLA 상향 · 예비판독 → 전문의 · 위급 소견 알림) · **웹 뷰어**(MPR · 3D · 이전 검사 비교 · 병리 슬라이드 현미경 모드).
+- **AI 보조**(판독문 **초안** · 비교 초안 · 자동 선별 알림 · 결과를 DICOM SR · SEG 로 저장 · 모델별 성능 추세와 판독의 수용률) · 비상 열람 · 추가만 되는 감사 · 비식별화 · 판독문 · 동의서는 sign 으로 서명(PACS 는 키를 갖지 않음) · 환자 결과 내보내기.
+
+**sign — 서명 · 인증서 · 타임스탬프** · [구성서](systems/sign.md) — 2단 CA 가 서명자별 X.509 인증서 발급 · CAdES · **PAdES-LTA** 서명 · RFC 3161 타임스탬프 · **서명 시점 기준** 폐기 확인 · 모든 행위를 추가만 되는 해시체인에 쌓고 타임스탬프로 봉인 · 서명 채널 넷(시스템 제출 · 1회용 링크 · 의료진 SSO · 대리) · 웹훅(멱등 · HMAC · 재시도) · 다른 시스템의 행위(처방 · 판독 승인)를 봉인하는 행위 인증 로그. 키는 기본 소프트웨어 수탁이고 HSM 어댑터 자리가 있습니다.
+
+**ERP — 병원 경영** · [구성서](systems/erp.md) — 모든 거래가 **전표 한 창구**로 들어오는 재무회계(멱등 · 결산 잠금) · 활동기준 원가와 진료과별 손익 · 인사 · 급여 · 면허 만료 경보 · 구매 → 발주 → 입고 · 선입선출 재고 · **마약류 수불부 해시 체인** · 원무 수납 · 보험청구 산정 · 삭감 · 이의신청 기한 · 유효 기간을 가진 수가 마스터 · HIS 약품 코드 ↔ 보험 코드 매칭 · 세무 · 전자결재 · **정기업무 레지스트리**(업무마다 수동 / 자동 / AI 보조).
+
+**AI Server — 기관 안의 AI 연산** · [구성서](systems/ai-server.md) — 공공 DUR 기준 점검 **보조** · 약가 · 코드 조회 · 진료 기록 요약 · 설명문 · 분류 보조 · 번역 · 영상 소견 **초안** · 근거 문서 질의(권위 위계 · 근거가 없으면 `has_evidence: false`) · 음성 인식(모두 서버 안에서) · 역할 → 모델 라우팅 · 16GB GPU 나눠 쓰기 · 서킷 브레이커 · API 키 교체 · 약물 데이터 정제의 **스테이징 → 사람 승인** · 자기 품질 계측.
+
+**twin — 위험 예측 · 시뮬레이션** · [구성서](systems/twin.md) — 병상 · 중환자실 · 응급실 · 수술실 **운영 트윈**과 What-if · 공표된 임상 점수를 카드로(계산식 · 변수 · 원 논문 인용을 펼쳐 봄 · **빠진 입력은 0 으로 채우지 않고 「입력 필요」**) · SBAR 는 규칙 기반(LLM 아님) · FHIR 로 HIS 에 write-back(규격 검증 뒤) · CDS Hooks 카드.
+
+**cerno — 의료진별 근거 질의** · [구성서](systems/cerno.md) — 차트에서 SMART on FHIR 로 열려 그 환자 맥락이 붙음 · 서고 세 층(개인 · 그룹 · 공용) · **근거 게이트를 통과할 때만** 답변 초안 · 근거가 부족하면 「근거로 확인되지 않습니다」 · 고위험 표지와 DUR 결과는 **근거 유무와 따로** 표시 · 개인화는 모델 재학습이 아니라 프롬프트 레지스트리 · 서고 가중으로.
+
+**edu — 직원 교육 · 법정교육** · [구성서](systems/edu.md) — 법정의무교육 마스터(근거 법령 · 주기 · 시수) · 직종별 필수교육 매일 자동 배정 · 만료 시 재이수 · SCORM 1.2 · xAPI 수신 · 집체교육 QR 출석 · 실제 학습 시간만 누적 · **sign 이 서명한 전자 이수증** · 미이수자 상급자 요약 알림 · 해시체인 감사 · 단독 배포와 멀티테넌트(행 수준 보안 두 겹).
+
+**Clinic — 병원 그룹웨어** · [구성서](systems/clinic.md) — 역할별 대시보드 · 층별 병동 현황과 알림 · 근무 · 당직 · 교대 · **인수인계**(인수자 「수신 확인」) · 투약 · 수술판 상태 · 긴급 알림 · HIS 가 부르는 연동 API(직원 동기화 · SSO · 근태 · 휴가 · 결재 요청 등). HIS 에서 자료를 못 받은 화면은 **「데모」 배지**를 붙입니다.
+
+**Jitsi — 원격진료 화상** · [구성서](systems/jitsi.md) — 🔴 **기준 커밋의 코드와 기록에 적힌 기능이고, 현재 설치본은 동작하지 않습니다.** HIS 발급 토큰으로 방 입장 · 회의 관리 API(권한 세 단계) · 입퇴장 웹훅 · 서버 녹화와 보존 기간 만료 · AI 회의록 **초안**과 자막(선택) · 모니터링.
+
+---
+
+## 시스템을 꿰는 흐름
+**The threads that run across systems**
+
+> **EN** — The system sections cut the ecosystem vertically; these four threads cut it the other way. **One patient's journey** runs through twelve segments from booking to telehealth, each with its current status. **One staff member's identity** is issued by the HIS and checked by the other systems in three ways (public key for five systems, shared secret for two, API key for one). **Trust** — who signed what, when, and that it has not changed — is produced in one place, sign. **Standards** (FHIR R4, SMART on FHIR, DICOM/DICOMweb, HL7 v2) carry the connections where possible; many links are still plain HTTPS REST and webhooks. Details: [overview chapters 4–5](overview/04-patient-journey.md).
+
+시스템 절은 생태계를 **시스템별로** 자릅니다. 아래 네 흐름은 **가로질러** 자릅니다. 자세한 것은 [개요서 4장](overview/04-patient-journey.md) · [5장](overview/05-identity-trust-standards.md)과 도식([환자 여정](diagrams/patient-journey.md) · [신원 허브](diagrams/identity-hub.md) · [표준 층](diagrams/standards.md))에 있습니다.
+
+### 환자 한 명의 여정
+
+**예약 → 접수 → 진료(AI 보조) → 검사 → 병리 영상 → 영상 → 판독 서명 → 동의서 → 수납 · 청구 → 회계 → 결과 열람 → 원격 상담**
+
+| 구간 | 경계 | 무엇이 오가나 | 상태 |
+|---|---|---|---|
+| 예약 | 홈페이지 · 환자 앱 → HIS | AI 예약 상담 · 예약 · 포털 로그인 | `구현·미검증` |
+| 진료(AI 보조) | HIS → AI Server | 기록 초안 · 분류 보조 · 음성 인식. **의료진이 승인해야 기록이 됩니다** | `구현·미검증` |
+| 검사 오더 · 결과 · 취소 | HIS ⇄ LIS | FHIR R4 오더를 LIS 가 가져가고, 확정 결과를 돌려보냄 | `검증됨`(2026-09-14~15) |
+| 병리 영상 | LIS → PACS | 슬라이드 스캔 워크리스트(HL7 v2) · 뷰어 링크 | `검증됨`(2026-09-15) |
+| 영상 오더 · 촬영 · 판독 반영 | HIS ⇄ PACS · PACS → 촬영 장비 | 워크리스트 자동 등록 · MWL · 판독 결과 반영 | `구현·미검증` — 따라가기에서 **HIS 화면 경로는 끝까지 가지 못했습니다** |
+| 판독 서명 | PACS → sign | 판독의 본인 서명 | `검증됨`(2026-09-15) |
+| 동의서 | HIS ⇄ sign | 서명 요청 · 완료 통지 | 완료 통지 `검증됨`(2026-09-14) · HIS 화면 경로의 직원 서명은 `구현·미검증` |
+| 수납 · 청구 | HIS ⇄ ERP | 진료비 계산서 · 청구 라인 · 미청구분 | `검증됨`(2026-09-15) |
+| 결과 열람 | 환자 앱 → HIS · HIS → PACS | 결과 · 처방 · 수납 · 본인 영상 | `구현·미검증` |
+| 원격 상담 | 포털 · 환자 앱 → Jitsi | 화상 입장 | `중단` |
+
+접수(HIS 안) · 회계(ERP 안)는 시스템 경계를 넘지 않습니다. 구간별 근거는 [개요서 4장](overview/04-patient-journey.md#구간별-상태).
+
+### 직원 한 명의 신원 — HIS 한 곳에서
+
+**HIS 가 직원 로그인 토큰을 발급하고**, 형제 시스템은 그 토큰을 검증해 같은 사람으로 받아들입니다.
+
+| 방식 | 시스템 | 기관이 알아 둘 것 |
+|---|---|---|
+| 공개키로 검증 | sign · PACS · edu · twin · cerno | 비밀값을 나눠 가질 필요가 없습니다. twin · cerno 는 차트에서 앱을 여는 SMART on FHIR 흐름 안에서 받습니다 |
+| 공유 비밀키 | ERP · Jitsi | 양쪽에 같은 값을 두고 **함께 교체**합니다 — 키 관리가 따로 필요합니다 |
+| API 키 | Clinic | Clinic 이 범위를 정한 키를 발급하고 HIS 가 그 키로 부릅니다 |
+
+입사 · 변경 · 퇴직은 HIS 에서 형제 시스템으로 전해집니다. 반대로 **HIS 가 멈추면 HIS 신원에 기대는 형제 시스템의 로그인도 영향을 받습니다**(edu 는 로그인이 HIS SSO 뿐입니다).
+
+### 신뢰의 사슬 — sign 한 곳에서
+
+| 질문 | 장치 |
+|---|---|
+| 누가 | 자체 PKI — 서명자별 X.509 인증서 |
+| 무엇에 | 전자서명 — PDF 는 PAdES-LTA(인증서 만료 뒤에도 검증 가능) |
+| 언제 | RFC 3161 타임스탬프 — 공인 기관을 계약하면 주소 설정으로 바꿈 |
+| 바뀌지 않았다 | 추가만 되는 감사 해시체인 — 체인 머리를 타임스탬프로 봉인 |
+
+동의서(HIS) · 판독(PACS) · 이수증(edu) · 계약(ERP)이 **모두 sign 을 부릅니다.** 그래서 서명을 쓰는 단계보다 sign 을 먼저 세우는 편이 순서가 꼬이지 않습니다. 🔴 전자서명의 법적 효력 판단은 구축 기관과 법무가 합니다.
+
+### 표준의 층
+
+| 층 | 표준 | 대표 연결 | 상태 |
+|---|---|---|---|
+| 임상 자원 | FHIR R4 | HIS ⇄ LIS 검사 오더 · 결과 · 취소 | `검증됨`(2026-09-14~15) |
+| 임상 앱 | SMART on FHIR · CDS Hooks | 차트에서 twin · cerno 열기 · 위험 카드 | `구현·미검증` |
+| 영상 | DICOM(DIMSE · MWL · MPPS) | PACS ⇄ 촬영 장비 · 외부 PACS | `구현·미검증` |
+| 영상 | DICOMweb | LIS → PACS 병리 영상 확인 · 뷰어 링크 | `검증됨`(2026-09-15) |
+| 메시지 | HL7 v2(MLLP) | LIS → PACS 병리 워크리스트 | `검증됨`(2026-09-15) |
+| 메시지 · 장비 | HL7 v2 대체 경로 · ASTM E1394 | 검사 결과 · 처방 대체 경로 · 분석기 직결 | `미구현` |
+
+모든 연결이 표준 프로파일은 아닙니다. 연결 표의 상당수는 **전용 HTTPS REST(JSON) · 웹훅**이고, 그 공통 약속(오류 봉투 · 서명 대상 · 멱등 · 재시도)은 [공통 규약](integration/contracts.md)에 정리했습니다. 🔴 **HL7 v2 로만 말하는 기존 장비 · 시스템이 있으면 S3 에서 먼저 확인하세요.**
+
+---
+
+## 업무로 보면 — 무엇을 할 수 있나
+**By the work a hospital does**
+
+> **EN** — The same features, re-threaded by the work a hospital actually does rather than by system. Each area names the systems that carry it and its main features; the full map is [functions/](functions/). **41 key features are written up one by one** in [functions/detail/](functions/detail/) — what it does, how it runs, **why it was built that way** and **what it prevents** — with what must exist first and what to fall back on in [dependencies](functions/dependencies.md). Listing a feature does not mean it is verified; status lives in the connection table.
+
+기능을 **시스템이 아니라 하는 일로** 다시 묶은 것입니다. 전체 지도는 [업무별 기능 지도](functions/)에 있습니다.
+
+| 업무 | 맡는 시스템 | 대표 기능 |
+|---|---|---|
+| 외래 진료 | HIS · AI Server · cerno · twin | 예약 · 접수 · 대기 · 오더 · 처방 · 기록 **초안** · 근거 질의 · 위험 점수 카드 |
+| 입원 · 병동 간호 | HIS · Clinic | 퇴원 게이트 · 조기경고 점수 · **투약 바코드 대조 · 2인 확인** · 인수인계 |
+| 수술 · 중환자 · 특수 치료 | HIS | 세 단계 체크리스트 · 좌우 판정 · 계수 대조 · 방사선(분할 · 누적선량) · 항암(사이클 게이트 · 무균조제) · 투석 · 재활 · 장기이식 |
+| 응급 · 정신건강 | HIS | 중증도 분류 · 골든타임 프로토콜 · 격리 · 강박의 법정 최대시간 · 비자의입원 기한 |
+| 검사 · 병리 · 수혈 · 유전체 | LIS · HIS · PACS | 검체 품질 · 자동 검증 · 위험치 폐루프 · 2단계 사인아웃 · 독립 판정 · 이차 소견 동의 게이트 |
+| 영상 | PACS · HIS · AI Server | 워크리스트 · 판독 워크플로 · 웹 뷰어 · 판독 **초안** · 조영제 동의 |
+| 약제 · 물류 | HIS · ERP · AI Server | 원내 처방집 · 처방 검토 · 조제 · 마약류 해시 원장 · 재고 · 장비 · 멸균 |
+| 원무 · 경영 | HIS · ERP | 수납 · 계산서 · 청구 · 재무 · 원가 · 인사 · 급여 · 직원 셀프서비스 |
+| 질 · 안전 · 신뢰 | HIS · sign · 전 시스템 | 안전 게이트 · 환자 확인 · 감염관리 · 미비기록 · 비상 열람 · 보유 · 파기 · 위원회 의결 · 서명 봉인 |
+| 사람 · 조직 | edu · Clinic · Jitsi | 법정교육 · 전자 이수증 · 자격 원장 · 인수인계 · 결재 · 원격 상담(`중단`) |
+| 세우고 지키기 | HIS · LIS | 개원 체크리스트 · Go-Live 게이트 · 개시 전환 · 연동 개통 게이트 · 감시자 |
+
+### 주요 기능 — 한 편씩 자세히
+
+환자안전에 닿는 기능부터 **41편**을 따로 썼습니다. 한 편마다 **무엇을 하나 · 어떻게 도나 · 왜 그렇게 만들었나 · 무엇을 막나 · 어디서 보나**를 적고, 실제 호출로 확인하지 않은 것은 그렇다고 밝힙니다. 먼저 있어야 하는 것과 못 쓸 때 대신할 것은 [전제와 파급](functions/dependencies.md), 낱말로 찾으려면 [찾아보기](functions/find.md).
+
+| 묶음 | 편 |
+|---|---|
+| 진료 · 병동 | [외래 예약·대기](functions/detail/outpatient-scheduling.md) · [환자 확인](functions/detail/patient-identification.md) · [투약](functions/detail/medication-administration.md) · [환자 상태 점수](functions/detail/clinical-scores.md) · [퇴원 게이트](functions/detail/discharge-gate.md) · [임상 경로](functions/detail/clinical-pathway.md) · [AI 초안 승인](functions/detail/ai-draft-approval.md) |
+| 수술 · 응급 · 특수 치료 | [수술 안전](functions/detail/surgery-safety.md) · [응급 중증도 분류](functions/detail/emergency-triage.md) · [골든타임 프로토콜](functions/detail/emergency-pathway.md) · [방사선 치료](functions/detail/radiation-therapy.md) · [항암 치료](functions/detail/chemotherapy.md) · [투석](functions/detail/dialysis.md) · [재활](functions/detail/rehabilitation.md) · [장기이식](functions/detail/transplant.md) · [격리·강박과 비자의입원](functions/detail/seclusion-restraint.md) |
+| 검사 · 병리 · 수혈 | [검체](functions/detail/specimen-lifecycle.md) · [검사 결과 검증](functions/detail/result-verification.md) · [위험치 폐루프](functions/detail/critical-value.md) · [검사코드 카탈로그 반입](functions/detail/lab-code-catalog.md) · [병리 2단계 사인아웃](functions/detail/pathology-signout.md) · [수혈 안전](functions/detail/transfusion-safety.md) · [유전체 이차 소견](functions/detail/secondary-findings-gate.md) |
+| 약 · 물류 | [원내 처방집](functions/detail/formulary.md) · [처방 조제](functions/detail/pharmacy-dispensing.md) · [마약류 수불 원장](functions/detail/narcotics-ledger.md) · [재고 · 장비 · 멸균](functions/detail/supply-equipment-sterile.md) |
+| 기록 · 서명 · 환자에게 주기 | [오더 서명 봉인](functions/detail/order-signature.md) · [동의서 전자서명](functions/detail/consent-signature.md) · [진단서 · 기록 사본 발급](functions/detail/record-issuance.md) · [미비기록](functions/detail/incomplete-records.md) · [환자에게 자기 영상을 주는 길](functions/detail/patient-imaging-export.md) · [보유·파기](functions/detail/retention.md) · [비상 열람](functions/detail/emergency-access.md) |
+| 질 · 안전 · 조직 | [안전 게이트](functions/detail/safety-gates.md) · [분모 없는 비율을 내지 않는다](functions/detail/no-ratio-without-denominator.md) · [감염관리](functions/detail/infection-control.md) · [위원회 의결](functions/detail/governance-enactment.md) · [직원 자격·교육](functions/detail/staff-credentials.md) |
+| 세우기 | [개시 전환](functions/detail/golive-center.md) · [연동 개통 게이트](functions/detail/integration-gate.md) |
+
+진료하는 사람이 자기 일부터 보려면 → [진료하는 사람을 위한 안내](clinicians/)(의사 · 간호 · 임상병리 · 영상 · 약제).
+
+---
+
+## AI 계층 — 어디서 무엇을 하고, 어떻게 켜나
+**The AI layer: where it acts and how to turn it on**
+
+> **EN** — What each AI assist produces and who confirms it; which systems call the AI Server; which AI features are **on by default in the code** (turn them off right after install) and which are off; the five-step order for turning features on by recorded decision; and what is kept for oversight. Details: [overview chapter 6](overview/06-ai.md) and [build stage S6](build-guide/S6-ai.md).
+
+### AI 가 만드는 것과, 누가 확정하나
+
+| 보조 | 무엇을 만드나 | 누가 확정하나 |
+|---|---|---|
+| 분류(triage) 보조 | 증상 분류 제안 | 의료진 |
+| 진료 기록 초안 · 음성 기록 | 진료 대화 · 음성에서 기록 초안 | 의료진이 승인해야 기록이 됨 |
+| 약물 설명 · 검진 결과 설명 | 환자용 설명 초안 | 사람이 감수 · 승인하는 화면을 거침 |
+| 약물 상호작용 점검(DUR) 보조 | 점검 결과 제안 | 의료진 · 약사 |
+| 근거 문서 질의(RAG) | 근거에서 찾은 답변 초안(cerno 는 근거가 없으면 만들지 않음) | 의료진 |
+| 위험 점수 카드(twin) | 위험 예측 보조 · SBAR 초안 | 의료진이 「차트 저장」을 눌러야 HIS 에 저장 |
+| 영상 판독 초안(PACS) | 예비 판독문 초안 · 비교 판독 · 자동 선별 알림 | 판독의 |
+
+AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jitsi 입니다(연결별 상태는 [개요서 6장](overview/06-ai.md#누가-ai-server-를-부르나--연결-상태)). 따라가기에서 일부 경로를 불러 봤지만 **연결 전체를 확인하지 못해 모두 `구현·미검증` 그대로**입니다 — 색인 경로는 임베딩 모델이 있는 기준 장비가 필요합니다.
+
+### 끄고 시작해, 결정으로 하나씩 켠다
+
+| 코드 기본값 켜짐 — **설치 직후 끔** | 코드 기본값 꺼짐 — 꺼져 있는지 확인 |
+|---|---|
+| HIS 의 AI 기능 전체 스위치 | 환자 AI 브리핑 야간 배치 |
+| PACS 영상 자동 선별 | 데이터 품질 AI |
+| HIS 의 AI 인사 | 음성 EMR · 앰비언트 기록 · 진료 스크라이브 등 |
+| | PACS 판독문 자동 초안 · 드리프트 자동 격리 |
+
+🔴 코드 기본값이 꺼짐이어도 **설치본의 DB 값(시드 포함)이 다를 수 있습니다** — 기본 시드가 AI 스위치를 켭니다. 설정 화면에서 **값과 출처**를 함께 봅니다.
+
+1. 설치 직후 「기본 켜짐」 기능을 끕니다. 자기 기관 AI Server 주소를 넣기 전에는 켜지 않습니다.
+2. **선행 결정을 기록합니다** — 의료기기(SaMD) 해당성 · 임상데이터 처리 경계 · 진료 음성 녹음 · 보관의 적법 근거 · 전송 목적지의 법적 한정.
+3. **켤 범위를 원내 위원회가 정합니다**(AI 임상 기능 범위 — 개시 전 필수 결정).
+4. HIS 를 AI Server 에 연결하고 전체 스위치를 켭니다. 개별 기능은 아직 꺼 둡니다.
+5. **기능을 하나씩 켭니다** — 결정 기록 → 스위치 → Go-Live 항목 → 감독 화면에서 제안 · 승인 기록 확인 → 다음 기능. 되돌릴 때도 같은 순서로 끕니다.
+
+### 무엇이 남나 — 감독
+
+| 어디 | 남는 것 |
+|---|---|
+| HIS | AI 제안 원장(생성 → 승인 · 수정 · 거부) · 모델 릴리즈 기록 · AI 호출 기록 · 환자를 지목한 AI 조회의 감사 기록 · 품질 임계는 **기본 미설정**이고 표본이 모자라면 판정 보류 |
+| AI Server | 충실도 · 검색 품질 등 자기 품질 계측 · 응답에 실리는 버전 정보 |
+| twin | 쓰는 모델이 바뀌면 알림 |
+| PACS | 모델별 성능 추세 · 판독의 수용률 · 드리프트 감지 |
+
 
 ## 구축은 이렇게 진행됩니다
 **How a build proceeds**
 
 > **EN** — Nine stages. **S0 preparation** (terms, servers, GPU, DB, institution profile, naming decision-makers) and **S1 core HIS** come first; **S2–S6** (patient access, clinical departments, trust layer, management layer, AI layer) are attached only as needed — though the **trust layer (sign) is best stood up before anything that needs signatures**; **S7 rehearsal** runs the whole flow on synthetic data; **S8 real cutover** isolates synthetic data, migrates real data and deploys a *real build* — it is not a settings toggle. Each stage chapter records ① install ② configure ③ what people must decide ④ verification screens and completion criteria ⑤ **what does not work yet and the workaround** ⑥ common pitfalls.
 
-| 단계 · Stage | 내용 · What happens |
-|---|---|
-| S0 준비 | 제공 조건(MIT · 면책 · 제3자 구성요소) 확인 · 서버·GPU·DB 확보 · 기관 프로파일(국가·기관명·진료과) · 결정 권한자 지정 |
-| S1 코어 HIS | 설치 · 코드 마스터 반입 · 부서·병상·직원·역할 · 병원 규정 설정 |
-| S2 환자 접점 | 홈페이지·포털·앱 · 본인확인·알림 채널 |
-| S3 임상 부서 | LIS·PACS 연결 · 장비 인터페이스 |
-| S4 신뢰 계층 | 전자서명·인증서·타임스탬프 · 동의서 서명 |
-| S5 경영 계층 | ERP·그룹웨어·교육 연결 |
-| S6 AI 계층 | AI Server(GPU 한 장) 연결 · **설치 직후 AI 기능을 끄고 → 기관 결정으로 하나씩 켬**(코드 기본값이 켜진 기능이 있음) · 환자 AI 활용 동의 · 감독 지표 |
-| S7 리허설 | 가상 데이터로 전 흐름 시연 · 안전 게이트 경고 운영 · 감시자 판정 |
-| S8 리얼 전환 | 가상 데이터 격리 · 실데이터 이관 · 리얼 빌드 |
+| 단계 · Stage | 무엇을 하나 · What happens | 사람이 정할 것(예) | 확인하는 곳 |
+|---|---|---|---|
+| S0 준비 | 제공 조건(MIT · 면책 · 제3자 구성요소) 확인 · 서버 · GPU · DB 확보 · **네트워크 격리** · 기관 프로파일(국가 · 기관명 · 진료과) · 결정 권한자 지정 | 어느 나라 기관인가 · 결정 세 층(허가권자 · 원내 위원회 · 직원)의 사람 · 임상데이터 처리 경계 | 개원 관제 · 위원회 화면 |
+| S1 코어 HIS | 설치 · 코드 마스터 반입 · 부서 · 병상 · 직원 · 역할 · 병원 규정 설정 | 요양기관 종별 · 코드 신설 승인자 · 원외 처방전 유효기간 근거 | 시스템 설정(값과 출처) · Go-Live 관제 |
+| S2 환자 접점 | 홈페이지 · 포털 · 앱 · 본인확인 · 알림 채널 | 환자 앱 알림의 적법 근거 · 문자 처리위탁 계약 · 스토어 배포 여부 | 대외 발신 관제 |
+| S3 임상 부서 | LIS · PACS 연결 · 장비 인터페이스 · 부서별 대외 보고 | 직원 검사 결과 알림을 살릴지 · 활력 출처와 회복실 통합을 위한 스키마 변경 승인 | 연동 개통 게이트 · 감시자 |
+| S4 신뢰 계층 | 전자서명 · 인증서 · 타임스탬프 · 동의서 서명 | 공인 타임스탬프 기관 계약 · 키 보관 장치(HSM) 이전 시점 · 장기 보관 문서의 재타임스탬프 | Go-Live 관제 |
+| S5 경영 계층 | ERP · 그룹웨어 · 교육 연결 · 청구 자격 | 본인부담 절사 적용 · ERP 로 가는 환자번호 가명화 · 청구 상태 표기의 법적 검토 | ERP 연동 관제 |
+| S6 AI 계층 | AI Server(GPU 한 장) 연결 · **설치 직후 AI 기능을 끄고 → 기관 결정으로 하나씩 켬** · 환자 AI 활용 동의 · 감독 지표 | 의료기기 해당성 · 음성 녹음 근거 · AI 임상 기능 범위([위](#ai-계층--어디서-무엇을-하고-어떻게-켜나)) | AI 설정 · AI 감독 관제 |
+| S7 리허설 | 가상 데이터로 전 흐름 시연 · 안전 게이트 경고 운영 · 감시자 판정 · 연결 확인 | 경보 라우팅표 · 대기 시간 기준 통일 · 질지표 측정값의 출처 기록 | 안전 게이트 · 감시자 |
+| S8 리얼 전환 | 가상 데이터 격리 · 실데이터 이관 · **리얼 빌드** · 개시 확인 | 키 파생 통일과 교체 시점 · **개시 승인(허가권자)** | Go-Live 관제 |
 
-단계마다 ① 설치 ② 설정 ③ 사람이 정할 것 ④ 확인 화면·완료 조건 ⑤ **아직 안 되는 것과 대체 수단** ⑥ 흔한 함정을 [구축 가이드](build-guide/)에 적습니다. 가이드는 저장소와 릴리즈 기록을 읽고 쓴 뒤, **새 설치본으로 S0~S8 을 한 번 따라가 보며 고쳤습니다**(아래).
+단계마다 ① 설치 ② 설정 ③ 사람이 정할 것 ④ 확인 화면 · 완료 조건 ⑤ **아직 안 되는 것과 대체 수단** ⑥ 흔한 함정을 [구축 가이드](build-guide/)에 적습니다. 사람이 정할 것은 모두 **56개**이고, 단계별 개수 · 개원 단계 · Go-Live 항목의 배정은 [가이드의 단계 표](build-guide/README.md#단계)에, 항목 전체는 [체크리스트](checklist/)에 있습니다. 가이드는 저장소와 릴리즈 기록을 읽고 쓴 뒤, **새 설치본으로 S0~S8 을 한 번 따라가 보며 고쳤습니다**(아래).
+
+### 구축을 관리하는 화면 — 가이드는 이 화면들을 따라갑니다
+**The screens that run the build itself**
+
+> **EN** — The HIS already contains the machinery for running a build, so the guide does not invent a separate procedure; it explains these screens. Opening stages with a country axis, the go-live control board (machine-verified items kept apart from self-declared ones), the decision registry (who decided, which option, recorded ≠ applied), committee resolutions, operating modes, settings that show where each value comes from, safety gates (off / warn / block), the outbound-transmission board, and the always-on sentinel.
+
+구축 과정 자체를 관리하는 장치가 HIS 안에 이미 있습니다. 가이드는 새 절차를 지어내지 않고 **그 화면들의 사용 설명서**가 됩니다. 화면은 [HIS 화면](screens/his.md)에 캡처가 있습니다.
+
+| 화면 | 무엇을 하나 |
+|---|---|
+| 개원 관제 `/admin/opening` | 개원 전 · 개원 · 개원 후 단계와 항목 · **국가 축**(한국 · UAE) · 항목 상태를 다른 정본에서 끌어옴 · 증빙 첨부 |
+| Go-Live 관제 `/admin/go-live` | 기술 · 보안 · 연동 · 법정 준비 항목 · **시스템이 판정한 것과 자가신고를 구분** |
+| 결정 등록부 `/admin/decisions` | 사람이 정할 것 56개 · 결정 세 층 · 고른 선택지와 결과 · **기록한 것 ≠ 적용된 것** |
+| 위원회 `/admin/governance` | 안건 · 정족수 · 의결 번호 · 집행 |
+| 운영 모드 · AI 설정 `/admin/ai-settings` | 개발 / 리허설 / 리얼 — 빌드가 상한이고 실행 중에는 **좁히기만** 합니다 |
+| 시스템 설정 `/admin/config` | 병원 규정 값 · **값의 출처**(DB / 기본값 / 미설정) |
+| 안전 게이트 `/admin/safety-gates` | 게이트마다 끔 / 경고 / 차단 · 위반 통계 · 올릴 때의 안내 |
+| 대외 발신 관제 `/admin/outbound-channels` | 밖으로 나가는 채널마다 구현 · 설정 · 승인 상태 |
+| 감시자 `/admin/sentinel` | 정합성 · 흐름 · 계약 · 파이프 상시 감시 — 🔴 감시자 프로세스를 따로 띄워야 합니다 |
+
+체크리스트 세 벌(개원 준비 60 · 개시 점검 60 · 사람 결정 56)은 이 화면들의 원본 레지스트리에서 **코드로 뽑은 것**입니다([checklist/](checklist/)).
+
 ## 새 설치본으로 따라가 본 결과 — 요약
 **What the first follow-along install confirmed (2026-09-13 ~ 2026-09-16)**
 
@@ -309,7 +564,7 @@
 - **전자서명 키 보관** — 인증 기관 키를 소프트웨어로 보관합니다(하드웨어 보안 모듈 **미적용** — 다만 PKCS#11 설정 자리는 이미 있습니다). 공인 타임스탬프 기관 연결과 본인확인 업체 연동은 기관이 준비합니다.
 - **원격 화상(Jitsi)** — 현재 설치본은 동작하지 않습니다. 구축 기관이 새로 구성해야 합니다.
 - **로그인 방식** — HIS 가 발급한 토큰을 다섯 시스템(sign · PACS · edu · twin · cerno)은 공개키로 검증합니다. 두 시스템(ERP · Jitsi)은 공유 비밀키 방식이라 키 관리가 따로 필요하고, Clinic 은 API 키로 붙습니다. edu 는 직원 로그인은 공개키로 검증하지만 **직원 명부 조회 · 이수 기록은 HIS 비밀키를 공유**해 호출합니다. AI Server 는 서버에서 발급한 API 키 두 종류로 붙습니다(따라가기 2026-09-14~15).
-- **기관명 설정** — HIS 코드에 병원명이 고정 문자열로 남아 있는 파일이 있습니다(118개 · 2026-09-17 기준 커밋에서 다시 셈에서 다시 셈 · 09-10 값과 같음 · [파일 목록](build-guide/replace-list.md#his)). 설정값으로 옮기는 작업이 진행 중이며, 끝나기 전까지는 자기 병원명을 넣으려면 코드를 고쳐야 합니다.
+- **기관명 설정** — HIS 코드에 병원명이 고정 문자열로 남아 있는 파일이 있습니다(118개 · 기준 커밋에서 2026-09-17 에 다시 셈 · 09-10 값과 같음 · [파일 목록](build-guide/replace-list.md#his)). 설정값으로 옮기는 작업이 진행 중이며, 끝나기 전까지는 자기 병원명을 넣으려면 코드를 고쳐야 합니다.
 - **기관 주소 설정** — 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 299개 — [파일 목록](build-guide/replace-list.md) · 문서 제외 · 2026-09-17 기준 커밋에서 다시 셈). 자기 기관 주소로 바꾸지 않고 띄우면 **다른 설치본으로 요청이 갈 수 있으므로**, 설치 전에 바꾸고 첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다. 바꿔야 할 설정 목록은 [구축 가이드](build-guide/)에 싣습니다.
 - **HIS 설치 경로** — 🔴 저장소의 운영용 컨테이너 설치 파일(compose · Dockerfile)이 **그대로는 동작하지 않습니다**(새 설치본 따라가기 2026-09-13 · 빌드 메모리 · 누락 의존성 · 스키마 반영 명령 · 내부 바인딩). 첫 관리자 계정도 **데모 시드로만** 만들어집니다. 따라가기에서 한 우회와 순서는 [S1](build-guide/S1-core-his.md#설치-순서)에 있습니다. sign 은 이미지가 그대로 빌드되고 기동합니다([S4](build-guide/S4-trust.md#②-설치)). 다른 시스템에서 나온 것은 [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약)에 모았습니다.
 - **상시 감시자 · 백업** — HIS 운영 compose 에는 **상시 감시자 프로세스가 없고**(배포 스크립트가 따로 띄움), 백업 스크립트는 **HIS DB 하나만** 뜹니다. 컨테이너로 설치하는 기관은 감시자를 따로 올리고, 같은 DB 서버에 둔 다른 시스템(ERP 등)의 백업을 따로 준비합니다([S7](build-guide/S7-rehearsal.md) · [S8](build-guide/S8-go-real.md)).
