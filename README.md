@@ -66,79 +66,175 @@
 
 ### 나머지 12개
 
-각 소개서 1절 「한 문장」을 그대로 옮겼습니다. 기능 · 구성 · 연결 · 설치 · 한계는 소개서에 있습니다.
+각 소개서를 줄인 것입니다(「무엇」은 소개서 1절을 그대로 옮김). 자세한 내용 · 근거는 소개서에 있습니다.
 
 ### 공개 홈페이지 — 병원의 바깥 창구 · [소개서](projects/homepage.md)
 
-> **EN** — The public website shows the hospital to the outside world and helps patients book, drawing everything from HIS.
+> **EN** — The public website shows the hospital to the outside world and helps patients book, drawing everything from HIS. **What is not there yet:** Institution details still live in code files; the HIS address is fixed at build time; only short English, Japanese and Chinese pages exist; the default publish target in the repository belongs to one installation; and the site's connection to HIS has not been called for real.
 
-공개 홈페이지는 병원을 바깥에 소개하고 환자의 예약을 돕는 웹사이트이며, 보여 주는 내용은 모두 HIS 에서 가져옵니다.
+| | |
+|---|---|
+| **무엇** | 공개 홈페이지는 병원을 바깥에 소개하고 환자의 예약을 돕는 웹사이트이며, 보여 주는 내용은 모두 HIS 에서 가져옵니다. |
+| **누가** | 방문자 · 환자가 읽고 예약합니다. 홍보 · 원무 담당이 HIS 관리 화면에서 내용을 고치고, 전산팀이 빌드 · 발행합니다 |
+| **할 수 있는 일** | 공개 페이지 50개 — 병원 소개 · 진료 안내 · 건강검진 · AI 예약 도우미(진료과 후보 제안) · 이용 안내 · 국제 진료. 내용은 HIS 에서 고치고 발행은 사람이 따로 합니다 |
+| **만들어진 것** | HIS 저장소 안의 독립 Next.js 15 앱 — 자기 DB · 캐시 없이 HIS 공개 API 로 화면을 만들고 `/api` · `/media` 를 HIS 로 넘깁니다 |
+| **연결** | HIS 하나 — 로그인 없는 공개 정보 · 접수와, HIS 가 발급한 포털 토큰으로 예약 · 본인 조회. 실제 연결 확인은 아직(따라가기에서 설치하지 않음) |
+| **설치 · 운영** | DB · GPU 없는 작은 Node 22 서버. **HIS 주소가 빌드할 때 고정**돼 기관마다 따로 빌드합니다. 컨테이너 · 프로세스 관리자 · 관리형 호스팅 세 방식 |
+| **아직** | 기관 정보가 코드 파일에 남아 있음 · 영어 · 일본어 · 중국어 페이지는 짧은 것만 · 발행 기본 대상이 특정 설치본 |
 
 ### 환자 앱 — 환자 손안의 병원 기록 · [소개서](projects/patient-app.md)
 
-> **EN** — The patient app lets patients see their own record and handle bookings, consents and questionnaires on their phone, through HIS.
+> **EN** — The patient app lets patients see their own record and handle bookings, consents and questionnaires on their phone, through HIS. **What is not there yet:** Not published to any store; no in-app sign-up until identity verification is connected; push is not wired on the app side; video visits are unusable now; consent signing in the app is a typed-name record in HIS rather than a certificate signature; Korean only; not called for real in the follow-along.
 
-환자 앱은 환자가 휴대전화로 자기 진료 기록을 보고 예약 · 동의서 · 문진 같은 일을 처리하는 앱이며, 모든 데이터를 HIS 에서 받습니다.
+| | |
+|---|---|
+| **무엇** | 환자 앱은 환자가 휴대전화로 자기 진료 기록을 보고 예약 · 동의서 · 문진 같은 일을 처리하는 앱이며, 모든 데이터를 HIS 에서 받습니다. |
+| **누가** | 환자 · 보호자. 의사는 HIS 의 직원 수신함에서 환자 메시지에 답하고, 원무는 앱에서 시작된 서류 신청 · 수납을 처리합니다 |
+| **할 수 있는 일** | 화면 32개 — 예약 · 진료 기록 · 검사 결과 · 영상 판독 · 검진 결과 비교 · 복약 · 자가측정 · 동의서 · 문진 · 제증명 · 수납 · 메시지 · **내 기록을 누가 열었는지** |
+| **만들어진 것** | Expo 56 · React Native 0.85 앱 — HIS 환자 API 만 부르고, 토큰은 기기의 보안 저장소에 둡니다 |
+| **연결** | HIS 하나(환자 토큰). AI 기능은 HIS 를 거쳐 AI Server 로 · 화상 진료는 외부 브라우저로 열지만 화상 시스템은 지금 쓸 수 없음. 실제 연결 확인은 아직 |
+| **설치 · 운영** | 서버에 따로 설치할 것 없음(HIS 만). 앱 빌드 · 배포는 HIS 와 별개 — 스토어 계정 · 앱 식별자 · 서명 키는 배포를 정한 기관이 준비 |
+| **아직** | 스토어 미배포 · 본인확인 연동 전이라 앱 가입 불가 · 푸시 미연결 · 동의서 서명은 이름 입력 기록(인증서 서명 아님) · 한국어만 |
 
 ### LIS — 검사실의 업무 시스템 · [소개서](projects/lis.md)
 
-> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR.
+> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR. **What is not there yet:** Not there yet: the low-level link from analysers; the HL7 v2 fallback with HIS; confirmation of reflex orders, the transfusion-consent lookup and the approval lookup; the install script needed workarounds; one installation per institution; purge of expired data is off until retention is decided.
 
-LIS 는 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사의 전 과정을 처리하는 검사실 시스템이며, HIS 에서 검사 처방을 받아 검증된 결과를 돌려줍니다.
+| | |
+|---|---|
+| **무엇** | LIS 는 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사의 전 과정을 처리하는 검사실 시스템이며, HIS 에서 검사 처방을 받아 검증된 결과를 돌려줍니다. |
+| **누가** | 임상병리 · 판독의 · 미생물 · 병리 · 혈액은행 · 유전체 판독 · 유전상담 · 관리자 · 감사 — 역할 10개, 역할마다 자기 메뉴만 |
+| **할 수 있는 일** | 진단검사 흐름(접수 → 검체 → 결과 → 자동 검증 → 2차 검증 → 위험치 통보) · 미생물 · 병리 · 수혈 · 유전체 · 정도관리 · 개시 전환 · 감사. 화면 41개 |
+| **만들어진 것** | TypeScript 모노레포 — NestJS 11 · Prisma 6 · PostgreSQL 16 · Next.js 15. 판정 로직은 부작용 없는 함수로 모아 단위 시험. 운영 compose 는 컨테이너 3개(DB · API · 웹) |
+| **연결** | HIS(FHIR R4 오더 · 결과 · 취소 · 환자 조회 · 코드 목록) · PACS(병리 워크리스트 · 뷰어 링크) · ERP(검사 청구) — 2026-09 에 실제로 연결해 확인. 반사 검사 · 수혈 동의 · 조직 결재 조회는 확인 전 |
+| **설치 · 운영** | Docker 호스트 한 대 · GPU 불필요. 설치 스크립트가 비밀값 생성 · 마이그레이션 · 시드 · 백업 작업 등록 · 첫 관리자 비밀번호(한 번만 출력). 개시 전 HIS 검사 코드 반입 · 매핑 |
+| **아직** | 분석기 저수준 직결 없음(기관이 중계) · HIS 와의 HL7 v2 대체 경로 없음 · 설치 스크립트에 우회 필요했음 · 한 설치 = 한 기관 |
 
 ### PACS — 영상을 저장하고 판독하는 시스템 · [소개서](projects/pacs.md)
 
-> **EN** — PACS stores the hospital's medical images, shows them to the people who need them, and carries the radiologist's reading from the worklist to a signed report.
+> **EN** — PACS stores the hospital's medical images, shows them to the people who need them, and carries the radiologist's reading from the worklist to a signed report. **What is not there yet:** PACS is not a certified medical device; the paths from the HIS screens into PACS are not yet verified end to end; automatic image screening is on by default and should be switched off at install. Also: no HL7 report sending yet, the install files needed workarounds, some defaults hold another installation's addresses, and third-party licences (GPL/AGPL for Orthanc) come along.
 
-PACS 는 병원의 의료 영상을 받아 저장하고, 필요한 사람에게 보여 주고, 판독의가 판독문을 쓰고 서명하기까지를 맡습니다.
+| | |
+|---|---|
+| **무엇** | PACS 는 병원의 의료 영상을 받아 저장하고, 필요한 사람에게 보여 주고, 판독의가 판독문을 쓰고 서명하기까지를 맡습니다. |
+| **누가** | 판독의 · 전공의(판독) · 방사선사(촬영 워크리스트) · 진료의(영상 · 판독 조회) · 연구자(비식별 코호트) · 관리자 · 병리팀(슬라이드 영상) |
+| **할 수 있는 일** | DICOM 저장 · 교환 · 비표준 영상 정규화 · 판독 워크플로 · 웹 뷰어(2D · 3D · 병리 슬라이드) · AI 판독 **초안** · 보안 · 감사 · 백업 · 통계. 관리 화면 47개 |
+| **만들어진 것** | 컨테이너 약 12개 — FastAPI 백엔드 · Celery 작업자 · Orthanc 영상 서버 · 워크리스트 서버 · HL7 수신기 · Next.js 관리 앱 · OHIF 뷰어. PostgreSQL 16 · Redis 7 · 영상 파일은 디스크 볼륨 |
+| **연결** | 촬영 장비(DICOM) · LIS · sign(판독 · 동의서 서명) · AI Server · HIS. sign · LIS 연결은 2026-09 에 실제로 확인 · HIS 연결은 만들어져 있고 확인은 아직 |
+| **설치 · 운영** | Docker Compose · GPU 불필요. 설치 스크립트 6단계(전제 · 비밀값 · 빌드 · 기동 · 헬스 · 첫 관리자). 백업은 암호화 DB + 영상 증분 스냅샷 · 복구 리허설 스크립트 |
+| **아직** | 인허가받은 의료기기 아님 · HIS 화면에서 부르는 경로 확인 전 · **영상 자동 선별이 기본 켜짐**(설치 때 끔) · HL7 판독 송신 없음 · Orthanc 는 GPL 계열 조건 |
 
 ### sign — 서명의 증거를 만드는 시스템 · [소개서](projects/sign.md)
 
-> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds signing keys.
+> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds signing keys. **What is not there yet:** CA keys are kept in software (no HSM yet); identity-verification and messaging providers are mocks until contracted; losing the master key or the backup passphrase means old evidence cannot be reopened. Also: no accredited timestamp authority, no long-term re-timestamping, single institution only, Korean-only screens, and the legal effect of signatures is for the hospital and its lawyers to judge.
 
-sign 은 병원 문서에 대해 「누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다」를 나중에 누구나 확인할 수 있게 만드는 전자서명 서비스입니다.
+| | |
+|---|---|
+| **무엇** | sign 은 병원 문서에 대해 「누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다」를 나중에 누구나 확인할 수 있게 만드는 전자서명 서비스입니다. |
+| **누가** | 대부분은 모르고 만납니다 — 판독의 서명 · 환자 동의서 서명 · 거래처 계약 서명. 콘솔에는 전산 · 보안팀만(관리자 · 운영자 · 열람자) |
+| **할 수 있는 일** | 자체 인증 기관 · 자체 타임스탬프 · PDF 장기 검증 서명(PAdES-LTA) · 위변조 증거(타임스탬프로 봉인한 감사 해시체인) · 키 보관 · 서명 채널 넷 · 연동 API · 웹훅 · 일반 전자계약(선택). 화면 38개 |
+| **만들어진 것** | Node 22 · NestJS · Prisma · PostgreSQL 16 · Next.js(콘솔 · 서명 포털). 키는 암호화 볼트(별도 볼륨) · 캐시 · 메시지 브로커 · GPU 없음 |
+| **연결** | HIS · PACS · ERP · edu · Clinic 이 부릅니다. 직원 신원은 HIS 공개키로 확인 · 시스템별 API 키 · 완료 통지는 HMAC 서명. **연결 9개를 2026-09 에 실제로 확인** |
+| **설치 · 운영** | 컨테이너 3개(서비스 · 웹 · DB) + 선택 프록시 2. 운영 이미지가 그대로 빌드 · 기동됨. 필수 비밀값이 없으면 기동 거부 · 백업은 GPG 암호화 |
+| **아직** | CA 키가 소프트웨어 보관(HSM 전) · 본인확인 · 문자 사업자는 모의 · 마스터키나 백업 암호를 잃으면 옛 증거를 열 수 없음 · 공인 타임스탬프 기관 미연결 |
 
 ### ERP — 병원 경영지원 시스템 · [소개서](projects/erp.md)
 
-> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting.
+> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting. **What is not there yet:** ERP is built around Korean rules; it cannot be used without HIS; some addresses for calling HIS and the AI Server are fixed in code; HIS sign-in uses a shared secret that both sides must keep; several features wait for real institutional data; and the repository's own status labels disagree.
 
-ERP 는 병원의 돈 · 사람 · 물자를 하나의 전표 원장(모든 거래가 모이는 회계 장부) 위에서 관리하는 경영지원 시스템입니다.
+| | |
+|---|---|
+| **무엇** | ERP 는 병원의 돈 · 사람 · 물자를 하나의 전표 원장(모든 거래가 모이는 회계 장부) 위에서 관리하는 경영지원 시스템입니다. |
+| **누가** | 재무 · 인사 · 구매 · 보험청구 · 전산 담당이 매일, 경영진은 대시보드, 모든 직원은 급여명세 · 경비 · 연차 · 증명서 — 역할 8개 |
+| **할 수 있는 일** | 메뉴 16묶음 · 105항목 — 원무 정산 · 인사 · 급여 · 세무 · 보험청구 · 재고 · 구매 · IT 자산 · 재무회계 · 자금 · 고정자산 · 원가 · 손익 · 전자결재 |
+| **만들어진 것** | Python 모듈러 모놀리스 — FastAPI · SQLAlchemy · PostgreSQL · Redis 7 · Next.js 웹(`/erp` 경로) · 같은 코드의 작업자 2개(연동 · 배치). BI 는 선택 |
+| **연결** | HIS(로그인 · 회계로 바뀌는 이벤트) · sign(계약 서명) · LIS(검사 청구) · Clinic · AI Server. **연결 9개를 2026-09 에 실제로 확인**(로그인 · 계산서 · 보험 코드 · 청구 라인 · 정산 · 계약 서명 등) |
+| **설치 · 운영** | GPU 불필요 · 컨테이너 4개 + PostgreSQL · Redis(보통 HIS 와 같은 서버). 첫 관리자는 HIS 로그인으로 생김 · 매일 암호화 백업(ERP 스키마만 · 백업 폴더를 정해야 켜짐) |
+| **아직** | 한국 제도 기준 · HIS 없이 쓸 수 없음 · HIS · AI Server 를 부르는 주소 일부가 코드에 고정 · 로그인은 양쪽이 같이 가진 공유 비밀키 · 실제 기관 자료가 있어야 하는 기능 다수 |
 
 ### AI Server — 기관 안의 AI 연산 서버 · [소개서](projects/ai-server.md)
 
-> **EN** — AI Server gathers the ecosystem's AI work on one GPU server inside the hospital and returns drafts and assisting results to the systems that call it. The repository also holds non-medical features; this introduction covers only the medical side.
+> **EN** — AI Server gathers the ecosystem's AI work on one GPU server inside the hospital and returns drafts and assisting results to the systems that call it. The repository also holds non-medical features; this introduction covers only the medical side. **What is not there yet:** No install definition for a new server; model weights are not included and the embedding model must match the name in the code; throughput, response time and answer quality have not been measured on the reference hardware; only one or two models fit on a 16GB GPU at once; the reference data and regulatory sources are Korean; syncing them needs internet access; and regulatory status is "designed to address" only.
 
-AI Server 는 생태계의 AI 연산을 기관 안 GPU 서버 한 대에 모아 맡고, 다른 시스템이 부르면 초안과 보조 결과를 돌려주는 서버입니다.
+| | |
+|---|---|
+| **무엇** | AI Server 는 생태계의 AI 연산을 기관 안 GPU 서버 한 대에 모아 맡고, 다른 시스템이 부르면 초안과 보조 결과를 돌려주는 서버입니다. |
+| **누가** | 의료진은 직접 열지 않고 HIS · PACS · ERP · edu 화면 안에서 만납니다. 직접 다루는 사람은 모델을 넣고 키를 발급하고 대기열을 보는 전산 담당 |
+| **할 수 있는 일** | 의료 기준 조회(DUR · 약가 · 질병 · 수가 코드) · 초안(기록 · 요약 · 환자 설명 · 영상 소견) · 근거 문서 검색(근거 유무 표시) · 음성 인식 · twin 계산 · GPU 한 장 나눠 쓰기 · 모델 · 키 관리 |
+| **만들어진 것** | Python Flask(Gunicorn) · 역할 → 모델 라우팅 · 공정 대기열 · 같은 호스트의 Ollama · Whisper · ChromaDB(내장) · SQLite 여러 개. 별도 DB 서버 없음. 저장소의 의료 밖 기능은 범위 밖 |
+| **연결** | 불리는 쪽 — HIS · PACS · ERP · edu · twin · cerno 가 부르고, 부르는 쪽마다 API 키. 2026-09 에 일부 경로를 작은 대체 모델로 불러 봤지만 **연결 확인은 아직** |
+| **설치 · 운영** | GPU 서버 한 대(16GB 소비자용 카드로 개발 · CPU 는 속도 미계측). 새 서버용 설치 정의 없음 — 의존성 · Ollama · 모델(임베딩 모델은 코드가 정한 이름으로)을 직접. 백업은 대기열 · 설정 · 로그만 |
+| **아직** | 새 서버 설치 정의 없음 · 모델 가중치 미포함 · 처리량 · 응답 시간 · 답의 품질 미계측 · 16GB 에 동시에 올라가는 모델은 한두 개 · 기준 데이터는 한국 것 |
 
 ### twin — 환자와 병원 운영을 읽어 위험을 미리 보여 주는 디지털 트윈 · [소개서](projects/twin.md)
 
-> **EN** — twin reads data from HIS and shows clinicians risk-score cards and handover summaries, and shows managers bed, unit and equipment indicators with what-if simulation.
+> **EN** — twin reads data from HIS and shows clinicians risk-score cards and handover summaries, and shows managers bed, unit and equipment indicators with what-if simulation. **What is not there yet:** Not installed in the follow-along, so no connection is verified; medical-device status undecided and two AI failure modes marked as needing action; no database backup script; the 3D organ twin is only a design.
 
-twin 은 HIS 의 자료를 읽어서, 의료진에게는 환자의 위험 점수와 인계 요약을, 병원 운영 쪽에는 병상 · 병동 · 장비 지표와 「이렇게 바꾸면 어떻게 되나」 시뮬레이션을 보여 주는 별도 서비스입니다.
+| | |
+|---|---|
+| **무엇** | twin 은 HIS 의 자료를 읽어서, 의료진에게는 환자의 위험 점수와 인계 요약을, 병원 운영 쪽에는 병상 · 병동 · 장비 지표와 「이렇게 바꾸면 어떻게 되나」 시뮬레이션을 보여 주는 별도 서비스입니다. |
+| **누가** | 의사 · 간호사는 차트에서 위험 카드 · SBAR 초안을, 병상 관리 · 경영진은 운영 콘솔 · 시뮬레이션을, 의공팀은 장비 위험을 봅니다 |
+| **할 수 있는 일** | 운영 트윈 · 병상 · 인력 시뮬레이션 · 장비 트윈 · 공표된 임상 점수 카드(입력을 화면에서 고칠 수 있고 빠진 값은 「입력 필요」) · 치료 What-if · 의료진이 저장할 때만 HIS 에 기록 · 환자 아바타. 화면 15개 |
+| **만들어진 것** | Python 3.12 FastAPI API · 작업자 · PostgreSQL 16 · Redis 7 · Next.js 15 웹. 진료 기록은 twin 에 저장하지 않습니다 |
+| **연결** | HIS(차트에서 열기 · CDS Hooks · FHIR 읽기 · 의료진 저장 시 되쓰기) · AI Server. 만들어져 있고 **확인은 아직**(따라가기에서 설치하지 않음) |
+| **설치 · 운영** | Docker Compose · GPU 불필요. HIS 가 SMART 앱 등록과 읽기 전용 서비스 신원을, AI Server 가 키를 발급. 안전 스위치 몇 개는 꺼진 채로 오며 실사용 전에 정합니다 |
+| **아직** | 실제 연결 확인 없음 · 의료기기 해당성 미정 · DB 백업 스크립트 없음 · 3D 장기 트윈은 설계만 |
 
 ### cerno — 근거가 있을 때만 답하는 의료진별 임상 질의 도우미 · [소개서](projects/cerno.md)
 
-> **EN** — cerno drafts answers to clinicians' questions only from documents it can cite, and stays silent when it finds no evidence; it runs as a non-clinical shadow pilot.
+> **EN** — cerno drafts answers to clinicians' questions only from documents it can cite, and stays silent when it finds no evidence; it runs as a non-clinical shadow pilot. **What is not there yet:** A non-clinical shadow pilot with no recorded results; not installed in the follow-along; prompt injection in natural language cannot be fully blocked; patient-level query logs are a deliberate exception to the no-PHI principle.
 
-cerno 는 의료진이 차트에서 던진 질문에, 기관 지침과 본인이 올린 자료에서 찾은 근거로만 답변 초안을 만들고, 근거가 없으면 답하지 않는 도우미입니다. 지금은 임상 결정에 쓰지 않는 섀도우(참고 운영) 파일럿입니다.
+| | |
+|---|---|
+| **무엇** | cerno 는 의료진이 차트에서 던진 질문에, 기관 지침과 본인이 올린 자료에서 찾은 근거로만 답변 초안을 만들고, 근거가 없으면 답하지 않는 도우미입니다. 지금은 임상 결정에 쓰지 않는 섀도우(참고 운영) 파일럿입니다. |
+| **누가** | 파일럿에 참여하는 의료진이 차트에서 질문하고 답이 도움이 됐는지 기록합니다. 관리자는 참여자를 등록하고 검수 지표를 봅니다 |
+| **할 수 있는 일** | 환자 맥락이 붙은 질문 · **근거 게이트**(근거가 있을 때만 답변 초안) · 안전 신호는 답과 따로 표시 · 서고 세 층(개인 · 그룹 · 공용) · 개인화는 모델 재학습 없이 · 의료진별 격리. 화면 3개 |
+| **만들어진 것** | Next.js 16 웹(밖으로 여는 유일한 부분) · Python 3.13 FastAPI(내부망) · Redis 7 · SQLite · YAML 설정. 문서 본문은 AI Server 색인에만 들어갑니다 |
+| **연결** | HIS(차트에서 열기 · 의료진 토큰으로 읽기만) · AI Server(검색 · 답변 초안 · DUR). HIS 에 아무것도 쓰지 않습니다. **확인은 아직** |
+| **설치 · 운영** | 컨테이너 3개 · 웹만 병원 리버스 프록시 뒤로 공개. 필수 설정이 비면 기동하지 않음 · 데이터 볼륨을 매일 복사해 7일 보관 |
+| **아직** | **임상에 쓰지 않는 섀도우 파일럿**이고 결과 기록 없음 · 따라가기에서 설치하지 않음 · 자연어 프롬프트 주입은 완전히 막을 수 없음 |
 
 ### edu — 직원 교육 · 법정교육 · 전자 이수증 · [소개서](projects/edu.md)
 
-> **EN** — edu delivers staff training and statutory courses, and turns each completion into an HIS education record and a signed completion certificate.
+> **EN** — edu delivers staff training and statutory courses, and turns each completion into an HIS education record and a signed completion certificate. **What is not there yet:** edu cannot be used without HIS; course files and certificates are on a local volume with no backup script in the repository; the install guide misses steps and assumes host networking; bundled content is draft and based on Korean statutes; the audit hash chain assumes a single API process; HIS licence events are not applied; and production use has not been re-checked.
 
-edu 는 직원에게 교육을 전하고, 이수 하나를 HIS 의 교육 기록과 전자서명된 이수증으로 남기는 시스템입니다.
+| | |
+|---|---|
+| **무엇** | edu 는 직원에게 교육을 전하고, 이수 하나를 HIS 의 교육 기록과 전자서명된 이수증으로 남기는 시스템입니다. |
+| **누가** | 모든 직원이 학습자로. 교육 담당(커리큘럼 · 과정) · 콘텐츠 검수자 · 부서장(자기 부서 미이수) · 집체교육 진행자 · 감사 담당 |
+| **할 수 있는 일** | 법정교육 마스터 · 매일 자동 배정 · 과정 · 동영상 · SCORM 1.2 · 시험 · 검수 게이트 · 외부 콘텐츠(xAPI) · 집체교육 QR 출석 · **sign 이 서명한 전자 이수증** · 독촉 · 감사 |
+| **만들어진 것** | TypeScript 모노레포 — NestJS 10 · Prisma 5 · PostgreSQL 16 · Redis 7 · Next.js 15. 밖으로 나가는 쓰기는 모두 outbox(멱등키 · 재시도) · 파일은 로컬 볼륨(S3 호환 보관은 선택) |
+| **연결** | HIS(로그인 · 공개키 · 직원 명부 · 이수 기록) · sign(이수증 봉인 · 완료 통지) — **2026-09 에 실제로 확인**. 직원 이벤트 웹훅 · edu 자체 로그인 · AI · Clinic 은 확인 전 |
+| **설치 · 운영** | 컨테이너 4개 · GPU 불필요. 첫 기동 전에 HIS 주소와 공유 값을 넣어야 로그인 가능. 저장소 설치 안내에 빠진 두 단계(기관 행 · 행 수준 보안) · 백업 스크립트 없음 |
+| **아직** | HIS 없이 쓸 수 없음 · 과정 파일과 이수증이 로컬 볼륨에만 · 설치 안내 누락 · 기본 콘텐츠는 초안 · 운영 사용 여부 재확인 전 |
 
 ### Clinic — 병원 그룹웨어 · [소개서](projects/clinic.md)
 
-> **EN** — Clinic is the hospital groupware where staff hand over shifts, see rosters and ward status, and receive alerts and approval requests, drawing on data from HIS.
+> **EN** — Clinic is the hospital groupware where staff hand over shifts, see rosters and ward status, and receive alerts and approval requests, drawing on data from HIS. **What is not there yet:** Clinic was not installed in the follow-along, so no link has been verified; the hospital service cannot be installed apart from the shared main application; screens silently fill with sample data (badged) when HIS data does not arrive; congestion thresholds are stored but not yet used; joining by hospital code needs no approval by default; and there is no service-specific version tag.
 
-Clinic 은 직원이 인수인계 · 근무표 · 병동 현황 · 알림 · 결재를 한곳에서 보는 병원 그룹웨어이고, HIS 의 자료를 받아 보여 줍니다.
+| | |
+|---|---|
+| **무엇** | Clinic 은 직원이 인수인계 · 근무표 · 병동 현황 · 알림 · 결재를 한곳에서 보는 병원 그룹웨어이고, HIS 의 자료를 받아 보여 줍니다. |
+| **누가** | 간호사(인수인계 · 투약 일정) · 의사(일정 · 수술판) · 병동 관리자(병동 현황 · 근무표 · 교대) · 병원 관리자(병원 등록 · HIS 용 API 키 발급) |
+| **할 수 있는 일** | 역할별 대시보드 · 층별 병동 현황 · 근무표 · 교대 요청 · **인수인계(수신 확인)** · 투약 · 수술판 · 알림 · HIS 연동 API · HIS 자료를 못 받으면 **「데모 데이터」 배지** |
+| **만들어진 것** | 병원 화면(Next.js 16)은 자체 API · DB 없이 저장소의 메인 앱(Next.js 16 · Prisma 7)으로 넘깁니다. 인증은 별도 서비스 · PostgreSQL 15 · Redis. 같은 저장소의 병원 밖 서비스는 범위 밖 |
+| **연결** | HIS → Clinic(직원 · 조직 · 알림 · 결재 요청 · API 키) · Clinic → HIS(로그인 티켓 · 결재 결과 · 서명된 웹훅) · ERP · edu · sign. **실제 연결 확인은 아직**(설치하지 않음) |
+| **설치 · 운영** | 가입형 호스팅 또는 설치형. 설치형은 메인 앱 · 인증 서비스 · PostgreSQL 15 · Redis 를 함께 · GPU 불필요. HIS 쪽은 Clinic 주소 · API 키 · 웹훅 비밀 |
+| **아직** | 연결 확인 없음 · 병원 서비스만 떼어 설치할 수 없음 · HIS 자료가 안 오면 예시 데이터로 채움(배지 표시) · 병원 코드 가입은 기본 승인 없음 |
 
 ### Jitsi — 원격진료 화상 서버 · [소개서](projects/jitsi.md)
 
-> **EN** — Jitsi is the hospital's own video server for telemedicine and remote consultation; the current installation does not work and must be built anew.
+> **EN** — Jitsi is the hospital's own video server for telemedicine and remote consultation; the current installation does not work and must be built anew. **What is not there yet:** The current installation does not work and has to be built anew; sign-in relies on one secret shared by three places; the mobile web path is on hold and blocked; live captions started as a trial and are assist-only; and the README's release table stops at v2.3.0 while tags go to v2.10.0.
 
-Jitsi 는 원격진료 · 원격협진 화상을 병원이 직접 운영하는 화상 서버이며, 지금 설치본은 동작하지 않아 새로 구성해야 합니다.
+| | |
+|---|---|
+| **무엇** | Jitsi 는 원격진료 · 원격협진 화상을 병원이 직접 운영하는 화상 서버이며, 지금 설치본은 동작하지 않아 새로 구성해야 합니다. |
+| **누가** | (코드가 그리는 흐름 · 지금 동작하지 않음) 의사가 HIS 에서 화상 진료를 열고, 환자는 포털 · 앱에서 게스트로 들어오고, 전문의는 원격 협진에, 전산팀은 녹화 · 감시를 관리 |
+| **할 수 있는 일** | 토큰으로 입장 · 회의 관리 API(권한 세 단계) · 입퇴장 웹훅 · 서버 녹화(보안 등급 · 보존 기간) · AI 회의록 **초안** · 실시간 자막(선택) · 모니터링 |
+| **만들어진 것** | 컨테이너 9개 — Jitsi Meet 웹 · Prosody · Jicofo · Videobridge · coturn · Jibri(녹화) · 회의 관리 API(Node.js 20 · Hono · SQLite) · Prometheus · Grafana |
+| **연결** | HIS(공유 비밀키로 입장 토큰) · 환자 포털 · 앱 · Clinic · AI Server — **모두 지금은 쓸 수 없음** |
+| **설치 · 운영** | 새로 구성해야 함 — 공개 도메인 · 공인 주소 · TLS · 모든 방화벽 층의 미디어 · TURN 포트 · 녹화 컨테이너용 사운드 장치 · 보존 기간만큼의 저장소. 공유 비밀키를 HIS · Jitsi · 회의 API 세 곳에 같게 |
+| **아직** | **현재 설치본이 동작하지 않음** · 로그인이 세 곳이 나눠 가진 비밀키 하나에 기댐 · 모바일 웹 경로 보류 |
 
 위 「시스템 13」 절과 아래 「시스템마다 무엇을 하나」는 **통합 릴리즈 `2026.09` 기준**이고, 소개서는 **현재 개발본 기준**입니다. 둘이 다르면 소개서의 「통합 릴리즈 이후 달라진 점」 절에 적습니다.
 
