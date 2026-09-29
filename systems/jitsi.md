@@ -58,7 +58,7 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.jitsi.counts.containers` | 9 | 기본 구성 파일(`docker-compose.yml`)의 최상위 서비스 수(서비스 1개 = 컨테이너 1개 · 복제 설정 없음 전제). 선택 구성 파일에만 있는 서비스 2개(실시간 자막용)는 따로 셉니다 | 2026-09-11 |
+| `systems.jitsi.counts.containers` | 9 | 기본 구성 파일(`docker-compose.yml`)의 최상위 서비스 수(서비스 1개 = 컨테이너 1개 · 복제 설정 없음 전제). 선택 구성 파일에만 있는 서비스 2개(실시간 자막용)는 따로 셉니다 | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `0984fbec7177`.
 

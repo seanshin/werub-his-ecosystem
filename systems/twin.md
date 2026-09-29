@@ -51,9 +51,9 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.twin.counts.apiEndpoints` | 107 | `services/twin/twin/**` 에서 FastAPI 라우터 변수의 HTTP 데코레이터 수(= 핸들러 수) · 웹소켓 제외 | 2026-09-11 |
-| `systems.twin.counts.pages` | 15 | `services/twin-web/app/**/page.*` 파일 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-11 |
-| `systems.twin.counts.testCases` | 881 | `services/twin/tests/**/test_*.py` 의 테스트 함수 선언 수(매개변수로 늘어나는 실행 건수 제외) | 2026-09-11 |
+| `systems.twin.counts.apiEndpoints` | 107 | `services/twin/twin/**` 에서 FastAPI 라우터 변수의 HTTP 데코레이터 수(= 핸들러 수) · 웹소켓 제외 | 2026-09-13 |
+| `systems.twin.counts.pages` | 15 | `services/twin-web/app/**/page.*` 파일 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-13 |
+| `systems.twin.counts.testCases` | 881 | `services/twin/tests/**/test_*.py` 의 테스트 함수 선언 수(매개변수로 늘어나는 실행 건수 제외) | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `526b4f9a4d3f`.
 

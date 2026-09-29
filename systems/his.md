@@ -71,10 +71,10 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.his.counts.dataModels` | 562 | Prisma 스키마의 `model` 선언 수(enum · view 제외) — HIS 저장소 정본 계측기 값을 옮김 | 2026-09-11 |
-| `systems.his.counts.apiEndpoints` | 3,251 | API 컨트롤러의 행 시작 HTTP 메서드 데코레이터 수 = 핸들러 수(고유 경로 수가 아님) | 2026-09-11 |
-| `systems.his.counts.apiEndpointsSse` | 15 | 같은 파일의 실시간 스트림(`@Sse`) 데코레이터 수 — 위 수에 더하지 않음 | 2026-09-11 |
-| `systems.his.counts.pages` | 450 | 웹 앱의 `page.tsx` 수(레이아웃 · 오류 화면 · API 라우트 제외 · 공개 홈페이지 앱 제외) | 2026-09-11 |
+| `systems.his.counts.dataModels` | 562 | Prisma 스키마의 `model` 선언 수(enum · view 제외) — HIS 저장소 정본 계측기 값을 옮김 | 2026-09-13 |
+| `systems.his.counts.apiEndpoints` | 3,251 | API 컨트롤러의 행 시작 HTTP 메서드 데코레이터 수 = 핸들러 수(고유 경로 수가 아님) | 2026-09-13 |
+| `systems.his.counts.apiEndpointsSse` | 15 | 같은 파일의 실시간 스트림(`@Sse`) 데코레이터 수 — 위 수에 더하지 않음 | 2026-09-13 |
+| `systems.his.counts.pages` | 450 | 웹 앱의 `page.tsx` 수(레이아웃 · 오류 화면 · API 라우트 제외 · 공개 홈페이지 앱 제외) | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `e9d303984f80`.
 

@@ -2,7 +2,7 @@
 
 시스템 13개가 실제로 어떤 화면으로 되어 있는지 봅니다. 각 장은 **화면 캡처와 그 화면이 하는 일**을 함께 싣습니다.
 
-> 🟡 **초안 — 캡처 넣는 중** · 기준: [통합 릴리즈 `2026.09` 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11)
+> 🟡 **초안 — 캡처 넣는 중** · 기준: [통합 릴리즈 `2026.09` 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-13)
 > 📸 **이 캡처들이 어디서 나왔나** — 전부 **가상 병원 데이터로 채운 리허설 설치본**에서 찍었습니다(2026-09-12~13). 실환자 데이터는 쓰지 않았습니다. 그 설치본과, 뒤이어 구축 가이드를 따라가며 세운 설치본은 **2026-09-16 에 모두 지웠습니다**(시험용 비밀값 · 가상 데이터 포함). 같은 화면을 다시 보려면 같은 판본으로 설치본을 다시 세워야 합니다 → [따라가 본 결과](../build-guide/follow-along-2026-09.md)
 > **EN** — A screen-by-screen tour of the ecosystem: what each screen does, with screenshots. All captures are taken on **synthetic hospital data**; institution-identifying information, secrets and infrastructure details are masked before publication (see the [capture rules](../assets/screens/README.md)). 293 captures so far (HIS: 264 of 266 menu screens + 2 off-menu; 2 withheld because infrastructure addresses or partner details fill the screen). ⚠️ The HIS screens come from a rehearsal install running **v4.19.0**, one release after the **v4.18.0** base commit these materials describe.
 
@@ -25,7 +25,7 @@
 | 협업·교육 | edu | [edu.md](edu.md) **1장** | 41 |
 | 협업·교육 | Jitsi | [jitsi.md](jitsi.md) | — (`중단` — 현재 설치본이 동작하지 않습니다) |
 
-화면 수는 [계측 스냅샷](../data/scale-snapshot.json)(계측일 2026-09-11 · 기준 커밋 내용을 읽어 셈)에서 옮겼습니다. HIS 는 메뉴 구성표의 **메뉴 항목 수**(266)이고, 계측 스냅샷의 웹 화면 수(450)와 세는 대상이 다릅니다 — 메뉴에 걸리지 않은 화면이 있기 때문입니다.
+화면 수는 [계측 스냅샷](../data/scale-snapshot.json)(계측일 2026-09-13 · 기준 커밋 내용을 읽어 셈)에서 옮겼습니다. HIS 는 메뉴 구성표의 **메뉴 항목 수**(266)이고, 계측 스냅샷의 웹 화면 수(450)와 세는 대상이 다릅니다 — 메뉴에 걸리지 않은 화면이 있기 때문입니다.
 
 > ⚠️ **캡처한 설치본과 이 자료의 기준 판본이 한 판 다릅니다.** 이 자료가 설명하는 HIS 기준은 **v4.18.0**(기준 커밋 · [매니페스트](../RELEASES/2026.09/manifest.md))인데, HIS 화면을 찍은 리허설 설치본의 로그인 화면은 **v4.19.0** 을 표기합니다(2026-09-13 확인). 화면의 문구 · 배지는 v4.19.0 의 것이고, 기준 커밋과 달라진 곳이 있을 수 있습니다. 형제 시스템도 설치본 판본이 저장소 표기와 다른 예가 있습니다([ERP](erp.md) — 화면 `v1.9.0` · 저장소 `1.287.3`).
 

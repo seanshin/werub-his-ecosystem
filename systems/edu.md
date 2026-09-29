@@ -57,9 +57,9 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.edu.counts.dataModels` | 40 | `apps/api/prisma/schema.prisma` 의 `model` 선언 수(enum · view 제외) | 2026-09-11 |
-| `systems.edu.counts.apiEndpoints` | 167 | `apps/api/src/**/*.ts` 의 HTTP 메서드 데코레이터 수(= 핸들러 수) · 테스트 파일 · SSE 제외 | 2026-09-11 |
-| `systems.edu.counts.pages` | 41 | `apps/web/app/**/page.*` 파일 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-11 |
+| `systems.edu.counts.dataModels` | 40 | `apps/api/prisma/schema.prisma` 의 `model` 선언 수(enum · view 제외) | 2026-09-13 |
+| `systems.edu.counts.apiEndpoints` | 167 | `apps/api/src/**/*.ts` 의 HTTP 메서드 데코레이터 수(= 핸들러 수) · 테스트 파일 · SSE 제외 | 2026-09-13 |
+| `systems.edu.counts.pages` | 41 | `apps/web/app/**/page.*` 파일 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `f8127e6ee278`.
 

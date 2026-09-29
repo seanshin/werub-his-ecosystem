@@ -66,11 +66,11 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.pacs.counts.apiEndpoints` | 475 | `backend/app/**` 에서 FastAPI 라우터 변수의 HTTP 데코레이터 수 = 핸들러 수(웹소켓 제외) | 2026-09-11 |
-| `systems.pacs.counts.apiWebsockets` | 3 | 같은 범위의 웹소켓 데코레이터 수 — 위 수에 더하지 않음 | 2026-09-11 |
-| `systems.pacs.counts.pages` | 47 | 관리 화면 `admin/src/app/**/page.*` 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-11 |
-| `systems.pacs.counts.testCases` | 166 | `backend/tests/**/test_*.py` 의 테스트 함수 선언 수(파일 14) — 선언 수이지 통과 수가 아님 | 2026-09-11 |
-| `systems.pacs.counts.e2eCases` | 132 | `e2e/tests/**/*.spec.*` 의 `it` · `test` 선언 수(파일 23) | 2026-09-11 |
+| `systems.pacs.counts.apiEndpoints` | 475 | `backend/app/**` 에서 FastAPI 라우터 변수의 HTTP 데코레이터 수 = 핸들러 수(웹소켓 제외) | 2026-09-13 |
+| `systems.pacs.counts.apiWebsockets` | 3 | 같은 범위의 웹소켓 데코레이터 수 — 위 수에 더하지 않음 | 2026-09-13 |
+| `systems.pacs.counts.pages` | 47 | 관리 화면 `admin/src/app/**/page.*` 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-13 |
+| `systems.pacs.counts.testCases` | 166 | `backend/tests/**/test_*.py` 의 테스트 함수 선언 수(파일 14) — 선언 수이지 통과 수가 아님 | 2026-09-13 |
+| `systems.pacs.counts.e2eCases` | 132 | `e2e/tests/**/*.spec.*` 의 `it` · `test` 선언 수(파일 23) | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `532a8ed13e87`.
 

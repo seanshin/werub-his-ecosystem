@@ -42,7 +42,7 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.patient-app.counts.screens` | 32 | `apps/mobile/app/**/*.tsx`(expo-router 라우트 파일) 중 레이아웃 파일(`_layout.tsx`) 제외 — HIS 저장소 정본 계측기 값을 옮김 | 2026-09-11 |
+| `systems.patient-app.counts.screens` | 32 | `apps/mobile/app/**/*.tsx`(expo-router 라우트 파일) 중 레이아웃 파일(`_layout.tsx`) 제외 — HIS 저장소 정본 계측기 값을 옮김 | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `e9d303984f80`.
 

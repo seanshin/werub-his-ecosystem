@@ -53,8 +53,8 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.clinic.counts.pages` | 16 | `packages/hospital-web/src/app/**/page.*` 파일 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-11 |
-| `systems.clinic.counts.hisApiRoutes` | 44 | HIS 연동 API 경로 파일(`src/app/api/clinic/his/**/route.ts`) 수 — 파일 1개 = 경로 1개. 이 경로들이 내보내는 HTTP 메서드 핸들러는 60개입니다. HIS 연동이 아닌 병원 서비스용 경로 파일 14개는 이 수에 넣지 않았습니다 | 2026-09-11 |
+| `systems.clinic.counts.pages` | 16 | `packages/hospital-web/src/app/**/page.*` 파일 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-13 |
+| `systems.clinic.counts.hisApiRoutes` | 44 | HIS 연동 API 경로 파일(`src/app/api/clinic/his/**/route.ts`) 수 — 파일 1개 = 경로 1개. 이 경로들이 내보내는 HTTP 메서드 핸들러는 60개입니다. HIS 연동이 아닌 병원 서비스용 경로 파일 14개는 이 수에 넣지 않았습니다 | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `2b20a89b7c3a`(저장소 전체의 최신 커밋 — 병원 서비스 패키지의 마지막 변경은 2026-08-19).
 

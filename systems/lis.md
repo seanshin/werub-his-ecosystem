@@ -49,10 +49,10 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.lis.counts.dataModels` | 84 | `apps/api/prisma/schema.prisma` 의 `model` 선언 수 | 2026-09-11 |
-| `systems.lis.counts.apiEndpoints` | 356 | `apps/api/src/**/*.ts` 의 행 시작 HTTP 메서드 데코레이터 수 = 핸들러 수(테스트 제외) | 2026-09-11 |
-| `systems.lis.counts.pages` | 41 | `apps/web/src/app/**/page.*` 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-11 |
-| `systems.lis.counts.e2eCases` | 470 | `apps/api/test/**/*.e2e-spec.ts` 의 `it` · `test` 선언 수(파일 1) — 선언 수이지 통과 수가 아님 | 2026-09-11 |
+| `systems.lis.counts.dataModels` | 84 | `apps/api/prisma/schema.prisma` 의 `model` 선언 수 | 2026-09-13 |
+| `systems.lis.counts.apiEndpoints` | 356 | `apps/api/src/**/*.ts` 의 행 시작 HTTP 메서드 데코레이터 수 = 핸들러 수(테스트 제외) | 2026-09-13 |
+| `systems.lis.counts.pages` | 41 | `apps/web/src/app/**/page.*` 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-13 |
+| `systems.lis.counts.e2eCases` | 470 | `apps/api/test/**/*.e2e-spec.ts` 의 `it` · `test` 선언 수(파일 1) — 선언 수이지 통과 수가 아님 | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `ffb34e9d1dbc`.
 

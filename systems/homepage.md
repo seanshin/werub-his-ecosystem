@@ -47,7 +47,7 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.homepage.counts.pages` | 50 | `apps/homepage/**/page.tsx` 수 — HIS 저장소 정본 계측기 값을 옮김. HIS 웹 화면 수(450)에는 들어가지 않음 | 2026-09-11 |
+| `systems.homepage.counts.pages` | 50 | `apps/homepage/**/page.tsx` 수 — HIS 저장소 정본 계측기 값을 옮김. HIS 웹 화면 수(450)에는 들어가지 않음 | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `e9d303984f80`.
 

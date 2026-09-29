@@ -60,10 +60,10 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.sign.counts.dataModels` | 14 | `prisma/schema.prisma` 의 `model` 선언 수 | 2026-09-11 |
-| `systems.sign.counts.apiOperations` | 162 | OpenAPI 명세(`docs/openapi.json`)의 경로 아래 HTTP 메서드 항목 수(경로 144) | 2026-09-11 |
-| `systems.sign.counts.apiEndpoints` | 162 | `src/**/*.ts` 의 행 시작 HTTP 메서드 데코레이터 수 = 핸들러 수(테스트 제외) | 2026-09-11 |
-| `systems.sign.counts.pages` | 38 | `web/src/app/**/page.*` 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-11 |
+| `systems.sign.counts.dataModels` | 14 | `prisma/schema.prisma` 의 `model` 선언 수 | 2026-09-13 |
+| `systems.sign.counts.apiOperations` | 162 | OpenAPI 명세(`docs/openapi.json`)의 경로 아래 HTTP 메서드 항목 수(경로 144) | 2026-09-13 |
+| `systems.sign.counts.apiEndpoints` | 162 | `src/**/*.ts` 의 행 시작 HTTP 메서드 데코레이터 수 = 핸들러 수(테스트 제외) | 2026-09-13 |
+| `systems.sign.counts.pages` | 38 | `web/src/app/**/page.*` 수(레이아웃 · 오류 화면 · API 라우트 제외) | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `93f56d839c3f`.
 

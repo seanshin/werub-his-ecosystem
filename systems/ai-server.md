@@ -62,8 +62,8 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.ai-server.counts.apiEndpoints` | 654 | Flask 앱과 앱이 등록하는 Blueprint 의 라우트 데코레이터 수(= 핸들러 수). 설정에 따라 꺼질 수 있는 것 포함 · 등록되지 않은 Blueprint · 별도 프로세스 앱 · 테스트 제외 | 2026-09-11 |
-| `systems.ai-server.counts.testCases` | 1,930 | `tests/**/test_*.py` 의 테스트 함수 선언 수(선언 1개 = 1 · 매개변수로 늘어나는 실행 건수 제외) | 2026-09-11 |
+| `systems.ai-server.counts.apiEndpoints` | 654 | Flask 앱과 앱이 등록하는 Blueprint 의 라우트 데코레이터 수(= 핸들러 수). 설정에 따라 꺼질 수 있는 것 포함 · 등록되지 않은 Blueprint · 별도 프로세스 앱 · 테스트 제외 | 2026-09-13 |
+| `systems.ai-server.counts.testCases` | 1,930 | `tests/**/test_*.py` 의 테스트 함수 선언 수(선언 1개 = 1 · 매개변수로 늘어나는 실행 건수 제외) | 2026-09-13 |
 
 - 두 값 모두 **저장소 전체 기준**입니다. 이 생태계 범위 밖의 기능도 함께 세어져 있어, 의료 기능만의 수가 아닙니다.
 - 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `55acaee90068`.

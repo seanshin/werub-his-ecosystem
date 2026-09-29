@@ -58,10 +58,10 @@ flowchart LR
 
 | 항목(스냅샷 키) | 값 | 센 방법(요약) | 계측일 |
 |---|---:|---|---|
-| `systems.erp.counts.dataModels` | 219 | `services/core/src/**/*.py` 의 `__tablename__` 선언 수(SQLAlchemy 모델 1개 = 1) | 2026-09-11 |
-| `systems.erp.counts.apiEndpoints` | 717 | `services/core/src/**` 에서 FastAPI 라우터 변수의 HTTP 데코레이터 수 = 핸들러 수 | 2026-09-11 |
-| `systems.erp.counts.pages` | 113 | `apps/web/src/app/**/page.*` 수(`(app)` 그룹 110 · 그 밖 3) | 2026-09-11 |
-| `systems.erp.counts.testCases` | 1,736 | `services/core/tests/**/test_*.py` 의 테스트 함수 선언 수(파일 222) — 선언 수이지 통과 수가 아님 | 2026-09-11 |
+| `systems.erp.counts.dataModels` | 219 | `services/core/src/**/*.py` 의 `__tablename__` 선언 수(SQLAlchemy 모델 1개 = 1) | 2026-09-13 |
+| `systems.erp.counts.apiEndpoints` | 717 | `services/core/src/**` 에서 FastAPI 라우터 변수의 HTTP 데코레이터 수 = 핸들러 수 | 2026-09-13 |
+| `systems.erp.counts.pages` | 113 | `apps/web/src/app/**/page.*` 수(`(app)` 그룹 110 · 그 밖 3) | 2026-09-13 |
+| `systems.erp.counts.testCases` | 1,736 | `services/core/tests/**/test_*.py` 의 테스트 함수 선언 수(파일 222) — 선언 수이지 통과 수가 아님 | 2026-09-13 |
 
 원본과 규칙 전문: [`data/scale-snapshot.json`](../data/scale-snapshot.json) · 기준 커밋 `0e1f54c5b902`.
 
