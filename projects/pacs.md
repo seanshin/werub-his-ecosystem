@@ -145,7 +145,13 @@ flowchart LR
 
 > **EN** — PACS talks to scanners in DICOM, to the lab system over HL7 and a read-only service account, to sign for report and consent signatures, to the AI Server for drafts, and to HIS in three separate ways: HIS calling PACS's web API, PACS reading and writing the HIS database directly, and HL7 messages. The sign and LIS links were called for real between fresh installs in September 2026. None of the three HIS paths is verified end to end yet.
 
-**PACS 는 혼자서도 영상을 받고 판독할 수 있고, 다른 시스템은 필요할 때 붙습니다.** 이미 쓰는 PACS 가 있는 기관은 이 PACS 대신 표준(DICOM · HL7 v2)으로 기존 PACS 를 연결하는 선택도 있습니다.
+**PACS 는 혼자서도 영상을 받고 판독할 수 있고, 다른 시스템은 필요할 때 붙습니다.**
+
+**HIS 와의 흐름은 아직 끝까지 확인되지 않았습니다.** 오더가 HIS 에서 PACS 로 들어오는 길과 판독 결과가 HIS 로 돌아가는 길은 코드로 만들어져 있지만, 실제로 이어 불러 본 적이 없습니다. 그동안 판독은 PACS 화면에서 직접 하고, 결과는 PACS 에서 봅니다.
+
+이 절의 상태 표기는 세 가지입니다. **확인함** = 이 자료가 새 설치본끼리 실제로 불러 확인(날짜 표시). **자체 확인** = PACS 저장소가 모의 환경에서 스스로 시험한 것(이 자료가 부른 것은 아님). **만들어져 있음** = 코드는 있고 실제 연결 확인은 아직.
+
+이미 쓰는 PACS 가 있는 기관은 이 PACS 대신 표준(DICOM · HL7 v2)으로 기존 PACS 를 연결하는 선택도 있습니다.
 
 ```mermaid
 flowchart TB
@@ -221,7 +227,7 @@ HIS 와 이어 쓸 때 알아 둘 것:
 - **비밀값** — DB · 캐시 비밀번호 · 백엔드 서명 비밀 · 영상 서버 접속 자격. 설치 때 새로 만듭니다.
 - **기관 값과 주소** — 일부 주소 설정의 기본값에 **다른 설치본의 주소**가 들어 있습니다. 전부 자기 기관 주소로 바꿉니다(목록: [바꿔야 할 코드 기본값 — PACS](../build-guide/replace-list.md#pacs)).
 - **연결 값** — HIS 신원 검증 주소 · sign · AI Server 주소와 키. 비워 두면 그 연결이 꺼진 채로 동작합니다.
-- **영상 자동 선별은 기본으로 켜져 있습니다.** 설치할 때 끄고, 기관이 결정한 뒤에 켭니다. 판독문 AI 초안은 기본 꺼짐입니다.
+- **영상 자동 선별은 기본으로 켜져 있습니다.** 설치할 때 환경 변수 `SCREENING_ENABLED` 를 꺼짐으로 두고, 기관이 결정한 뒤에 켭니다. 판독문 AI 초안은 기본 꺼짐입니다.
 - 서비스 계정(다른 시스템이 PACS 에 로그인할 때 쓰는 계정 — 2절)을 두 개 이상 만들 때는 **계정마다 메일 주소를 따로** 줍니다. 기본값이 겹칩니다.
 
 ### 백업 · 감시
