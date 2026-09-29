@@ -20,9 +20,20 @@ cerno was **not installed** in the September 2026 follow-along, so its three con
 
 ## 1. 한 문장
 
-> **EN** — cerno drafts answers to clinicians' questions only from documents it can cite, and stays silent when it finds no evidence; it runs as a non-clinical shadow pilot.
+> **EN** — cerno drafts answers to clinicians' questions only from documents it can cite, and stays silent when it finds no evidence; it runs as a non-clinical shadow pilot. At a glance: usable only as a pilot, with both HIS and the AI Server in place; three containers; the code to take is the same as the integrated release; nothing has been verified by a real call, and there are no pilot results.
 
 **cerno 는 의료진이 차트에서 던진 질문에, 기관 지침과 본인이 올린 자료에서 찾은 근거로만 답변 초안을 만들고, 근거가 없으면 답하지 않는 도우미입니다. 지금은 임상 결정에 쓰지 않는 섀도우(참고 운영) 파일럿입니다.**
+
+### 한눈에 — 도입 판단
+
+| | |
+|---|---|
+| **지금 쓸 수 있나** | 조건부 — **HIS 와 AI Server 가 둘 다 있을 때, 임상 결정에 쓰지 않는 시험 운영으로만** 씁니다. 이 한정은 프로그램이 아니라 운영 규칙으로 지킵니다(8절) |
+| **세워야 하는 것** | 컨테이너 3개 — 웹(밖으로 여는 유일한 곳) · API · Redis 7. 기록은 데이터 볼륨의 SQLite 파일에 둡니다. GPU 는 필요 없습니다 |
+| **먼저 있어야 할 것** | HIS 에 앱 등록 · AI Server 의 호출 키와 답변 · 임베딩 모델 · 참여 의료진 명단 · 공용 서고에 넣을 기관 지침 원문 |
+| **받을 코드** | 통합 릴리즈 코드와 같은 현재 개발본입니다. [소스 받기](../SOURCES.md)가 가리키는 커밋을 받습니다 |
+| **실제로 확인된 것** | 없음 — 2026년 9월 시험 설치에서 cerno 는 세우지 않았습니다. 파일럿 결과도 저장소에 없습니다 |
+| **아직 모르는 것** | 답이 나오기까지 걸리는 시간 · 동시에 몇 명이 쓸 수 있나 · 기관 서고에서의 근거 기준값 · 질의 기록 보존 기간 |
 
 「섀도우 운영」은 도구를 실제 업무 옆에 켜 두되 결정에는 쓰지 않고, 결과가 쓸 만했는지만 기록하는 시험 운영을 말합니다.
 
@@ -55,11 +66,11 @@ cerno was **not installed** in the September 2026 follow-along, so its three con
 | 묶음 | 무엇이 들어 있나 |
 |---|---|
 | **진료 중 질의** | HIS 차트에서 열면 그 환자의 맥락이 질의에 붙습니다. 화면에서 다른 환자로 바꾸는 기능은 일부러 두지 않았습니다. 이어서 질문할 수 있고, 환자 맥락으로 추천 질문을 만듭니다 |
-| **근거 게이트** | 서고 세 층(개인 · 그룹 · 공용)을 함께 찾고, 근거가 기준을 넘을 때만 답변 초안을 만듭니다. 기준은 찾아낸 문서 조각이 질문과 얼마나 가까운가(신뢰도)와 그런 조각이 몇 개인가입니다. 답변의 `[n]` 에서 출처로 바로 갑니다 |
+| **근거 게이트** | 서고 세 층(개인 · 그룹 · 공용)을 함께 찾고, 근거가 기준을 넘을 때만 답변 초안을 만듭니다. 기준은 두 가지입니다 — 찾아낸 문서 조각이 질문과 뜻이 얼마나 가까운가(신뢰도, 0~1 사이 값)와 그런 조각이 몇 개인가. 값을 정하는 법은 6절 6단계입니다. 답변의 `[n]` 에서 출처로 바로 갑니다 |
 | **안전 신호** | 고위험 표지(용량 · 응급 · 금기 · 소아 · 임신 · 항암)와 약물 상호작용 점검(DUR) 결과를 **근거 유무와 따로** 표시 — 막는 것이 아니라 알리는 표시입니다. 약물 점검 문구에는 「최종 판단은 처방의 · 약사」가 붙습니다 |
-| **서고와 개인화** | 문서를 올릴 때 규칙 검사를 거칩니다. 본문은 검사하는 동안 메모리에만 있고, 통과하면 조각으로 나뉘어 AI Server 로 갑니다. 형식이 뚜렷한 개인 식별자가 들어 있으면 거부하고, 공용 문서는 출처와 저작권 검토 표시가 있어야 합니다. 개인화는 모델을 새로 학습하지 않고, 버전이 매겨진 프롬프트 · 개인 서고 가중 · 예시 선별로 합니다 |
+| **서고와 개인화** | 문서를 올릴 때 규칙 검사를 거칩니다. 본문은 검사하는 동안 메모리에만 있고, 통과하면 조각으로 나뉘어 AI Server 로 갑니다. 형식이 뚜렷한 개인 식별자가 들어 있으면 거부하고, 공용 문서는 출처와 저작권 검토 표시가 있어야 합니다. 개인화는 모델을 새로 학습하지 않고, 버전이 매겨진 프롬프트 · 개인 서고 가중 · 예시 선별(지시문에 넣을 모범 문답을 고르는 일)로 합니다 |
 | **격리** | 다른 의료진의 개인 서고와 질의 기록은 보이지 않습니다. 어느 서고를 찾을지는 화면이 아니라 서버가 검증된 신원으로 정합니다 |
-| **검수와 관측** | 답변 카드의 세 문항 검수 · 오도율 · 근거 통과율 · 대기 시간 · AI 키 만료 경보 · 검색용 색인이 제대로 도는지 점검 · 일일 지표. 평가 문항을 다시 돌려 전보다 나빠졌는지 보는 주간 점검(실패하면 종료 코드 1) |
+| **검수와 관측** | 답변 카드의 세 문항 검수 · 오도율 · 근거 통과율 · 대기 시간 · AI 키 만료 경보 · 검색용 색인(문서를 뜻으로 찾기 위한 숫자 목록, 임베딩)이 제대로 만들어지는지 점검 · 일일 지표. 평가 문항을 다시 돌려 전보다 나빠졌는지 보는 주간 점검(실패하면 종료 코드 1) |
 
 업무별로 다시 묶은 것: [업무별 기능 지도](../functions/) · 설정 키까지 전부: [cerno 구성서](../systems/cerno.md).
 
@@ -71,7 +82,7 @@ cerno was **not installed** in the September 2026 follow-along, so its three con
 
 ## 4. 어떻게 만들어졌나
 
-> **EN** — A Next.js 16 web app (the only exposed part, holding the session and a signed-identity proxy), a Python 3.13 FastAPI service on the internal network, Redis 7 for per-user SMART tokens, SQLite files on a data volume for query logs, review records, the document register and metrics, and YAML configuration for clinicians, libraries and prompts. Document bodies go to the AI Server's vector store; cerno keeps only their metadata.
+> **EN** — A Next.js 16 web app (the only exposed part, holding the session and a signed-identity proxy), a Python 3.13 FastAPI service on the internal network, Redis 7 for per-user SMART tokens, SQLite files on a data volume for query logs (clinician, HIS patient identifier, question and answer), review records, the document register and metrics, and YAML configuration for clinicians, libraries and prompts. Document bodies go to the AI Server's vector store; cerno keeps only their metadata.
 
 ```mermaid
 flowchart LR
@@ -106,13 +117,14 @@ flowchart LR
 
 | 저장소 | 무엇이 들어 있나 |
 |---|---|
-| **데이터 볼륨의 SQLite 파일** | 환자별 질의 기록(질문 · 답변 — 작성한 의료진 본인만 조회 · 저장소가 밝힌 「환자 정보를 저장하지 않는다」 원칙의 예외, 8절) · 검수 기록 · 올린 문서의 목록과 메타정보 · 일일 지표 |
+| **데이터 볼륨의 SQLite 파일** | 환자별 질의 기록 — 한 건마다 의료진 식별자 · HIS 의 환자 식별자 · 질문 · 답변을 남깁니다. 작성한 의료진 본인만 조회합니다. 저장소가 밝힌 「환자 정보를 저장하지 않는다」 원칙의 예외입니다(8절)<br/>검수 기록 · 올린 문서의 목록과 메타정보 · 일일 지표 |
 | **Redis 7** | 의료진별 HIS 접근 토큰 |
-| **AI Server** | 올린 문서의 본문 조각(검색용 색인) — cerno 는 본문을 따로 저장하지 않습니다 |
+| **AI Server** | 올린 문서의 본문 조각(검색용 색인) — **개인 노트도 여기에 조각으로 남습니다.** cerno 는 본문을 따로 저장하지 않습니다. 문서를 올린 사람이 지우면 AI Server 의 조각도 함께 지웁니다 |
 | **HIS** | 환자 기록의 원본 — 질의할 때 읽고, 응답은 메모리에서만 씁니다 |
 
 - **규모** — API 핸들러 **11** · 웹 화면 **3** · 테스트 함수 **255**(근거 절의 센 방법).
 - **새로 짓지 않는다** — 검색 · 임베딩 · 벡터 저장 · 약물 점검은 AI Server 의 기능을 부릅니다. cerno 는 신원 · 서고 규칙 · 환자 맥락 · 질의 화면을 맡습니다.
+- **한 번에 보면** — 올린 문서 본문은 검사하는 동안 메모리에만 있다가 조각이 되어 AI Server 로 갑니다. HIS 환자 기록은 질의할 때 읽어 메모리에서만 씁니다. cerno 에 남는 것은 위 표의 SQLite 기록과 Redis 의 토큰뿐입니다.
 
 ## 5. 다른 시스템과의 연결
 
@@ -141,7 +153,7 @@ cerno 는 2026년 9월 따라가기에서 **설치하지 않았습니다**([따�
 
 ## 6. 설치 · 운영
 
-> **EN** — Docker Compose with three containers; only the web app is published, and only behind the hospital's reverse proxy. Required settings left empty stop the containers from starting. HIS must register cerno as a SMART app; the AI Server must issue keys; participating clinicians are listed in a configuration file. A backup script copies the data volume daily and keeps seven days.
+> **EN** — Docker Compose with three containers; only the web app is published, and only behind the hospital's reverse proxy. Required settings left empty stop the containers from starting. HIS must register cerno as a SMART app; the AI Server must issue keys; participating clinicians are listed in a configuration file, which sets preferences rather than controlling access. The evidence threshold is re-measured on the hospital's own library with the repository's evaluation tool. A backup script copies the data volume daily and keeps seven days.
 
 ### 필요한 것
 
@@ -156,18 +168,20 @@ cerno 는 2026년 9월 따라가기에서 **설치하지 않았습니다**([따�
 ### 설치 순서(저장소 기준)
 
 1. 설정 파일(`.env`)을 예시에서 복사해 채웁니다 — 공개 주소 · SMART 클라이언트 · 신뢰할 HIS 발급자 목록 · 세션 비밀 · 내부 키 · AI Server 주소와 키 · Redis 비밀번호. **필수 값이 비어 있으면 컨테이너가 뜨지 않습니다.**
-2. 의료진별 AI Server 키를 적습니다. AI Server 는 키마다 한 번에 한 건씩 처리하므로, 키가 하나면 의료진이 몇 명이든 동시에 한 건만 처리됩니다. 이 매핑은 형식이 틀리면 시작하지 않습니다.
-3. 참여 의료진의 그룹 · 개인화 설정을 설정 파일에 적습니다. 파일에 없는 의료진도 거부되지 않고 기본 설정으로 씁니다. 설정 파일은 시작할 때 한 번 읽으므로, 고친 뒤에는 API 를 다시 띄웁니다.
+2. 의료진별 AI Server 키를 적습니다. AI Server 는 키마다 한 번에 한 건씩 처리하도록 만들어져 있어서([AI Server 소개서](ai-server.md)), 키가 하나면 의료진이 몇 명이든 동시에 한 건만 처리됩니다. 이 매핑은 형식이 틀리면 시작하지 않습니다.
+3. 참여 의료진의 그룹 · 개인화 설정을 설정 파일에 적습니다. 이 명단은 **들어올 사람을 거르는 목록이 아니라 설정용**입니다 — 파일에 없는 의료진도 거부되지 않고 기본 설정으로 씁니다. 누가 파일럿에 참여하는지는 운영 규칙으로 관리합니다(8절). 설정 파일은 시작할 때 한 번 읽으므로, 고친 뒤에는 API 를 다시 띄웁니다.
 4. `docker compose up` 으로 웹 · API · Redis 를 올립니다. **밖으로 여는 것은 웹 하나**이고, 원내 역방향 프록시 뒤에 둡니다. API 와 Redis 는 포트를 열지 않습니다 — API 를 직접 열면 웹의 신원 서명 단계를 건너뛸 길이 생기기 때문입니다.
 5. 공용 서고에 기관 지침을 넣습니다. 저장소의 기본 공용 문서는 AI 가 만든 요약본이라 **원문으로 바꾸기를 권합니다.**
 6. 근거 기준값을 기관 서고로 다시 재서 정합니다. 설정 예시의 값은 최소 신뢰도 0.45 · 최소 근거 1개입니다. 이 값은 AI Server 의 다른 문서 묶음으로 잰 기준선이라 그대로 쓰지 않기를 저장소가 권합니다.
+   - **재는 법** — 저장소의 평가 도구가 미리 정해 둔 질문 묶음을 10번 이상 돌려, 근거 판정 · 인용 · 근거 없을 때 답하지 않은 비율과 대기 시간을 냅니다. 기관 서고가 갖춰지면 질문 묶음을 기관 문서에 맞게 늘리고 다시 돌리라고 저장소가 적습니다.
+   - **0.45 를 고른 근거** — 저장소 기록에 따르면 관련 있는 질문은 0.69~0.74, 관련 없는 질문은 0.38~0.44 가 나와 그 사이에서 골랐습니다.
 
 ### 운영
 
 - **백업** — 데이터 볼륨을 매일 복사하는 스크립트가 있고 7일치를 보관합니다(서버의 예약 작업으로 걸어 둠). 질의 기록 자체의 보존 기간 · 삭제 절차는 정해 두지 않았습니다.
 - **동시 사용** — 몇 명까지 동시에 쓸 수 있는지는 계측하지 않았습니다. 위의 키 구성이 상한을 정합니다.
-- **관측** — 내부 지표 주소에 근거 통과율 · 검수 비율 · 대기 시간 · 오도율 · AI 키 남은 날(만료 7일 전 경보) · 임베딩 이상.
-- **정기 점검** — 평가 도구와 주간 회귀 점검 스크립트. 실패하거나 개인 자료가 섞여 나오면 실패로 끝납니다.
+- **관측** — 내부 지표 주소에 근거 통과율 · 검수 비율 · 대기 시간 · 오도율 · AI 키 남은 날(만료 7일 전 경보) · 임베딩 이상(문서를 색인할 때 쓰는 모델의 응답이 비정상인지).
+- **정기 점검** — 평가 도구와 주간 회귀 점검(같은 질문을 다시 돌려 전보다 나빠졌는지 보는 점검) 스크립트. 실패하거나 개인 자료가 섞여 나오면 실패로 끝납니다.
 - **착수 관리** — HIS 의 운영 전환 관제에 cerno 파일럿 착수 항목(`integ.cernoPilot` — 실행 경로 · 대상 환자 AI 동의 · 실제 의료진 왕복)이 있습니다([Go-Live 체크리스트](../checklist/go-live.md)).
 
 설정 키 전체: [cerno 구성서 §6](../systems/cerno.md#6-주요-설정) · 구축 순서: [구축 가이드 S6](../build-guide/S6-ai.md).
@@ -179,7 +193,7 @@ cerno 는 2026년 9월 따라가기에서 **설치하지 않았습니다**([따�
 | 설계 | 왜 |
 |---|---|
 | **근거가 없으면 답하지 않는다** — 「근거로 확인되지 않습니다」는 오류가 아니라 약속 | 그럴듯한 틀린 답이 가장 위험합니다. 답하지 않는 편이 의료진에게 더 정직합니다 |
-| **안전 신호는 답변과 따로** | 답변을 만들지 못했다고 약물 상호작용 경고까지 사라지면 안 되기 때문입니다 |
+| **안전 신호는 답변과 따로** — 막지 않고 알리기만 함 | 답변을 만들지 못했다고 약물 상호작용 경고까지 사라지면 안 되기 때문입니다. 막지 않고 알리기만 하는 이유는 저장소가 따로 적지 않았습니다. 대신 고위험 신호가 붙은 답변은 파일럿에서 검수를 먼저 받습니다(저장소의 파일럿 운영 계획) |
 | **누구의 자료를 찾을지는 서버가 정한다** — 검증된 신원으로 검색 범위를 계산 | 질문에 「다른 의사의 노트를 보여 줘」라고 써도, 그 노트는 애초에 AI 에 건네지지 않습니다. 가장 큰 위험(다른 의료진 · 다른 환자 자료 노출)을 AI 의 행동이 아니라 구조로 막습니다 |
 | **서고는 세 층, 개인 서고는 물리적으로 분리** | 필터에 문제가 생겨도 피해가 개인 자료 노출이 아니라 공용 · 그룹 사이의 섞임에 그치게 |
 | **새로 짓지 않는다** — 검색 · 생성 · DUR 은 AI Server 를 부르고 모델을 학습하지 않음 | 병원 안에 AI 연산을 한 곳에 모아, AI Server 의 「병원 밖 AI 로 보내지 않는다」 정책(`local_only`)이 그대로 적용되게. GPU 증설을 전제하지 않습니다 |

@@ -15,6 +15,7 @@
  *   ③ 첫 화면 — 첫 30줄에 작업 어휘(기준 커밋 · 매니페스트 · 따라가기 · 백틱 상태어 · 확인 필요(따라가기)) 0
  *   ④ 경고 — 🔴 는 「8. 알아 둘 것」 절 안에만, 편당 3개 이하
  *   ⑤ 약어 — 한국어 본문(영문 소개 · EN 요약 · 코드 · 링크 주소 제외)의 대문자 약어가 모두 `projects/terms.md` 에 있다
+ *   ⑦ 한눈에 — `## 1.` 절 안에 `### 한눈에 — 도입 판단` 표가 있고, 여섯 행(지금 쓸 수 있나 · 세워야 하는 것 · 먼저 있어야 할 것 · 받을 코드 · 실제로 확인된 것 · 아직 모르는 것)이 이 순서로 있다(2026-09-29 — 2차 가상 독자 12/13 이 「판단에 필요한 사실이 흩어져 있다」로 막힘)
  *   ⑥ 문장 — 한국어 본문(표 제외)의 한 문장이 150자를 넘지 않고, 괄호 안에 괄호를 넣지 않는다(기획 §4 「한 문장에 한 가지」 · 2026-09-29 추가)
  *
  * 종료 코드: 0 통과 · 1 걸림 · 2 도구 오류
@@ -28,6 +29,7 @@ const DIR = path.join(ROOT, 'projects');
 const NOT_INTRO = new Set(['README.md', 'terms.md', 'changes-since-2026.09.md']);
 
 const WORK_WORDS = [/기준 커밋/, /매니페스트/, /따라가기/, /`검증됨`/, /`구현·미검증`/, /`미구현`/, /livePartial/, /확인 필요\(따라가기\)/];
+const GLANCE_ROWS = ['지금 쓸 수 있나', '세워야 하는 것', '먼저 있어야 할 것', '받을 코드', '실제로 확인된 것', '아직 모르는 것'];
 const SECTION_ORDER = ['Introduction (English)', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.', '10.', '이 문서의 근거'];
 
 /** terms.md 표의 첫 칸에서 굵게 쓴 말을 모은다 */
@@ -121,6 +123,18 @@ export function checkOne(name, md, terms) {
     if (t.length > 150) p.push(`${name}:${ln} — 문장이 ${t.length}자(150자 이하로 나눕니다): 「${t.slice(0, 40)}…」`);
     if (/\([^()]*\([^()]*\)/.test(t)) p.push(`${name}:${ln} — 괄호 안에 괄호가 있습니다`);
   }
+  {
+    const one = md.indexOf('\n## 1.');
+    const two = md.indexOf('\n## 2.');
+    const sec = one >= 0 ? md.slice(one, two > one ? two : undefined) : '';
+    const at = sec.indexOf('### 한눈에 — 도입 판단');
+    if (at < 0) p.push(`${name} — 1절에 「### 한눈에 — 도입 판단」 표가 없습니다`);
+    else {
+      const rows = sec.slice(at).split('\n').filter((l) => l.startsWith('| **')).map((l) => (l.match(/^\| \*\*(.+?)\*\*/) || [])[1]);
+      const got = rows.slice(0, GLANCE_ROWS.length).join(' · ');
+      if (got !== GLANCE_ROWS.join(' · ')) p.push(`${name} — 한눈에 표의 행이 다릅니다: ${got || '(없음)'}`);
+    }
+  }
   const missing = [...acronyms(md)].filter((a) => !terms.has(a));
   if (missing.length) p.push(`${name} — 용어 풀이에 없는 약어: ${missing.join(' · ')} → projects/terms.md 에 더하거나 풀어 씁니다`);
   return p;
@@ -132,7 +146,8 @@ try {
     const terms = knownTerms('| **HIS** | x | y |\n| **FHIR** · **R4** | x | y |\n| **S0 ~ S8** | x | y |\n| **AE 타이틀** | x | y |');
     if (!terms.has('R4') || !terms.has('S3') || !terms.has('AE')) fails.push('용어 표를 읽지 못합니다');
     const ok = ['# 제목', '', '> 소개서', '', '## Introduction (English)', '', 'HIS text.', '',
-      ...['1.', '2.', '3.', '4.', '5.', '6.', '7.'].flatMap((n) => [`## ${n} 절`, '', '> **EN** — s', '', 'HIS 는 FHIR R4 를 씁니다.', '']),
+      '## 1. 절', '', '> **EN** — s', '', 'HIS 는 FHIR R4 를 씁니다.', '', '### 한눈에 — 도입 판단', '', '| | |', '|---|---|', ...GLANCE_ROWS.map((r) => `| **${r}** | 예 |`), '',
+      ...['2.', '3.', '4.', '5.', '6.', '7.'].flatMap((n) => [`## ${n} 절`, '', '> **EN** — s', '', 'HIS 는 FHIR R4 를 씁니다.', '']),
       '## 8. 알아 둘 것', '', '> **EN** — s', '', '- 🔴 없음', '',
       ...['9.', '10.'].flatMap((n) => [`## ${n} 절`, '', '> **EN** — s', '', '본문', '']),
       '## 이 문서의 근거', '', '> **EN** — s', '', '기준 커밋 abc'].join('\n');
@@ -146,14 +161,16 @@ try {
       ['EN 요약 빠짐', okFixed.replace('## 5. 절\n\n> **EN** — s', '## 5. 절\n\n본문만')],
       ['절 빠짐', okFixed.replace('## 9. 절', '## 구. 절')],
       ['긴 문장', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 ' + '가'.repeat(160) + ' 씁니다.')],
+      ['한눈에 표 없음', okFixed.replace('### 한눈에 — 도입 판단', '### 요약')],
+      ['한눈에 행 순서', okFixed.replace('| **받을 코드** | 예 |', '| **받을 곳** | 예 |')],
       ['괄호 속 괄호', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 FHIR(표준(R4)) 를 씁니다.')],
     ];
     for (const [label, md] of cases) if (!checkOne('x', md, terms).length) fails.push(`「${label}」 을 잡지 못합니다`);
     // 코드 · 링크 주소 · EN 줄의 대문자는 약어로 세지 않는다
     if (acronyms('본문 `ENV_KEY` [링크](../THIRD_PARTY.md)\n> **EN** — ZZZ text').size) fails.push('코드 · 링크 · EN 줄의 대문자를 약어로 셉니다');
-    console.log(`자기 검증 — 검사 6종 · 사례 ${cases.length + 2}`);
+    console.log(`자기 검증 — 검사 7종 · 사례 ${cases.length + 2}`);
     if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-    console.log('  ✓ 틀 · 영문 요약 · 첫 화면 · 경고 · 약어 · 문장 — 멀쩡한 것은 통과, 심은 것은 잡음');
+    console.log('  ✓ 틀 · 영문 요약 · 첫 화면 · 경고 · 약어 · 문장 · 한눈에 — 멀쩡한 것은 통과, 심은 것은 잡음');
     process.exit(0);
   }
 

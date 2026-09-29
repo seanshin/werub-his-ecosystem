@@ -2,7 +2,7 @@
 
 **sign — the service that makes signatures provable**
 
-> 프로젝트 소개서 · 읽는 사람: **의료 전산담당자** · 기준: sign 저장소의 **현재 개발본**(2026-09-29 · 끝의 [이 문서의 근거](#이-문서의-근거)) · [소개서 목록](README.md)
+> 프로젝트 소개서 · 읽는 사람: **의료 전산담당자** · 기준: sign 저장소의 **현재 개발본**(2026-09-29 에 읽음 · 끝의 [이 문서의 근거](#이-문서의-근거)) · [소개서 목록](README.md)
 
 ---
 
@@ -10,11 +10,11 @@
 
 sign is the ecosystem's electronic signature service. Its job is to make one thing checkable later, by anyone: **who signed what, when — and that it has not changed since.** Consent forms from HIS and PACS, radiology reports, e-learning completion certificates and contracts from the back office are all signed here.
 
-For an IT team, the most important design fact is that **private keys live only in sign.** HIS, PACS, ERP and edu hold no signing keys; they ask sign to issue certificates and to sign. sign runs its own two-tier certificate authority, its own time-stamping authority (RFC 3161), and produces long-term PDF signatures (PAdES-LTA) that can still be verified after a certificate expires. Every action is appended to an audit hash chain, which is sealed periodically with a timestamp — optionally cross-sealed by an outside timestamp authority so a third party can check it without sign.
+For an IT team, the most important design fact is that **document-signing private keys live only in sign.** HIS, PACS, ERP and edu hold no document-signing keys (HIS does hold a key of a different kind, used to sign the staff identity tokens that sign checks); they ask sign to issue certificates and to sign. sign runs its own two-tier certificate authority, its own time-stamping authority (RFC 3161), and produces long-term PDF signatures (PAdES-LTA) that can still be verified after a certificate expires. Every action is appended to an audit hash chain, which is sealed periodically with a timestamp — optionally cross-sealed by an outside timestamp authority so a third party can check it without sign.
 
 Technically it is a NestJS service with PostgreSQL 16 and a Next.js web app (admin console, signing portal, contract pages), deployed as three containers, with two optional proxies that move key operations and identity checks out of the main process. There is no GPU and no AI in sign.
 
-What was checked for real: in September 2026, fresh installs were connected and nine links were called end to end — staff signing with an HIS-issued identity, completion notices back to HIS, ERP and edu, the sealing of HIS order-signature logs, PACS report signing and a patient consent signature, ERP vendor contracts and edu certificates.
+What was checked for real: in September 2026, fresh installs were connected and nine links were called end to end — with HIS, staff signing with an HIS-issued identity, completion notices and the sealing of order-signature logs (3); with PACS, report signing and a patient consent signature (2); with ERP, vendor contract signing and its completion notice (2); with edu, certificate sealing and its completion notice (2). Consent requests sent from the HIS screens are not yet confirmed.
 
 What is not there yet, stated plainly: the CA keys are kept in software (no hardware security module yet); identity verification and text-message providers are mock providers until the hospital contracts real ones; there is no link to an accredited timestamp authority; long-term re-timestamping is not built. Details are in [What to know](#8-알아-둘-것).
 
@@ -22,11 +22,24 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 
 ## 1. 한 문장
 
-> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds signing keys — including each signer's own key, which sign generates and keeps encrypted.
+> **EN** — sign makes "who signed what, when, and that it has not changed since" verifiable for the hospital's documents, and it is the only place in the ecosystem that holds document-signing keys — including each signer's own key, which sign generates and keeps encrypted. HIS holds a separate key for staff identity tokens, which is a different kind of signature. At a glance: signing and verification work between fresh installs (nine links confirmed), but patient identity checks and text messages run on mock providers until the hospital signs contracts, and the CA keys are kept in software.
 
 **sign 은 병원 문서에 대해 「누가 · 언제 · 무엇에 서명했고, 그 뒤로 바뀌지 않았다」를 나중에 누구나 확인할 수 있게 만드는 전자서명 서비스입니다.**
 
-생태계에서 **서명용 개인키**(서명을 만드는 비밀 열쇠)를 가진 곳은 sign 하나뿐입니다. HIS · PACS · ERP · edu 는 키를 갖지 않고, 서명이 필요하면 sign 에 요청합니다.
+### 한눈에 — 도입 판단
+
+| | |
+|---|---|
+| **지금 쓸 수 있나** | 조건부 — 다른 시스템의 요청으로 서명을 만들고 검증하는 데까지는 동작을 확인했습니다. 실제 환자가 서명하기 전에 본인확인 · 문자 사업자 계약이 있어야 하고, 법적 효력 판단은 기관이 합니다 |
+| **세워야 하는 것** | 컨테이너 3개 — 서명 서비스 · 웹(관리 콘솔 · 서명 포털) · PostgreSQL 16. 키 보관소 볼륨. 선택으로 키 연산 프록시 · 본인확인 프록시. GPU · 캐시는 필요 없음 |
+| **먼저 있어야 할 것** | 의료진 서명을 쓰려면 HIS. 기관은 마스터키 · 백업 암호의 보관 방법, 본인확인 · 문자 사업자 계약, 공인 타임스탬프 · 키 보관 장치(HSM)를 쓸지를 정합니다 |
+| **받을 코드** | 이 소개서는 통합 릴리즈 코드(1.30.1) 뒤 2커밋을 더한 개발본을 설명합니다. 더해진 것은 콘솔 로그인 화면의 시험용 계정 패널뿐이고 서명 서비스는 같습니다 — [소스 받기](../SOURCES.md) |
+| **실제로 확인된 것** | 2026년 9월 시험 설치에서 9개 연결(HIS 3 · PACS 2 · ERP 2 · edu 2)을 가상 데이터로 불러 확인했습니다. 환자 본인확인은 모의 공급자였고, HIS 화면에서 보내는 동의서 서명 요청은 아직입니다 |
+| **아직 모르는 것** | 서명 처리량 · 지연 · 권장 서버 사양 · 이미 다른 방식으로 서명한 문서를 옮기는 방법 · 인증서 만료 때의 갱신 운영 |
+
+생태계에서 **문서에 서명하는 개인키**(서명을 만드는 비밀 열쇠)를 가진 곳은 sign 하나뿐입니다. HIS · PACS · ERP · edu 는 이 키를 갖지 않고, 서명이 필요하면 sign 에 요청합니다.
+
+HIS 도 개인키를 하나 갖지만 종류가 다릅니다. 직원의 신원 토큰(「이 사람이 지금 서명하려는 직원이다」라는 증표)에 서명하는 키입니다. sign 은 HIS 의 공개키로 그 토큰을 확인만 하고, 문서 서명은 sign 의 키로 만듭니다(5절).
 
 서명하는 **사람마다의 키**도 sign 이 만들어 암호화해 보관합니다. 의사나 환자는 키 파일을 들고 다니지 않습니다. 본인임이 확인되면 sign 이 그 사람의 키로 서명합니다.
 
@@ -48,8 +61,8 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 
 - **판독 서명** — 판독의가 PACS 에서 판독문을 확정하고 서명을 누릅니다. 판독의 본인임은 HIS 가 발급한 서명용 신원으로 확인되고, sign 이 그 판독의의 키로 판독문에 서명과 타임스탬프를 붙입니다. 확정하지 않은 판독문은 서명되지 않습니다.
 - **조영제 동의** — 직원이 PACS 에서 동의서 서명을 요청하면 환자용 1회용 서명 링크가 만들어집니다. 환자는 본인확인을 거쳐 서명하고, 같은 링크로는 두 번 서명할 수 없습니다. 서명이 끝나면 PACS 의 동의서 상태가 「완료」로 바뀝니다. 본인확인은 기관이 사업자와 계약하기 전까지 모의 공급자로 동작합니다.
-- **동의서 완료 통지** — 동의서 서명이 끝나면 sign 이 HIS 에 **서명된 완료 통지**를 보냅니다. HIS 는 통지의 서명을 확인한 뒤에야 동의 상태를 바꿉니다. 서명이 틀리거나 없는 통지는 반영되지 않습니다. 다만 HIS **화면에서** 동의서 서명을 요청하는 길은 아직 끝까지 확인하지 못했습니다(5절).
-- **처방 기록 봉인** — HIS 가 처방 행위(발행 · 접수 · 시행 · 완료 · 취소)의 서명 로그를 sign 의 감사 원장에 올립니다. 나중에 저장된 기록 하나를 바꾸면 검증이 「체인 불일치」로 드러납니다.
+- **동의서 완료 통지** — 먼저 범위부터: 시험에서는 서명 요청을 sign 에 직접 만들어 확인했고, HIS **화면에서** 동의서 서명을 요청하는 길은 아직 끝까지 확인하지 못했습니다(5절). 서명이 끝나면 sign 이 HIS 에 **서명된 완료 통지**를 보냅니다. HIS 는 통지의 서명을 확인한 뒤에야 동의 상태를 바꿉니다. 서명이 틀리거나 없는 통지는 반영되지 않습니다.
+- **처방 기록 봉인** — 서명과는 다른 일입니다. 봉인은 이미 일어난 기록을 나중에 고칠 수 없게 묶어 두는 것입니다. HIS 가 처방 행위(발행 · 접수 · 시행 · 완료 · 취소)의 서명 로그를 sign 의 감사 사슬(3절)에 올립니다. 나중에 저장된 기록 하나를 바꾸면 검증이 「체인 불일치」로 드러납니다.
 
 ## 3. 할 수 있는 일
 
@@ -60,10 +73,10 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 | 묶음 | 무엇이 들어 있나 |
 |---|---|
 | **인증서 · 서명** | 자체 인증기관(2단 — 최상위와 발급용)이 서명자마다 인증서를 발급 · 자체 타임스탬프 · 장기 보존용 PDF 서명(PAdES-LTA) · 서명 **당시** 기준으로 인증서 폐기 여부를 확인하는 검증 |
-| **위변조 증거** | 모든 행위(생성 · 발송 · 열람 · 서명 · 폐기)를 **추가만 되는** 해시 사슬에 쌓고, 사슬 머리를 타임스탬프로 봉인 · 외부 타임스탬프 기관의 교차 봉인(선택) |
+| **위변조 증거** | 모든 행위(생성 · 발송 · 열람 · 서명 · 폐기)를 **추가만 되는** 해시 사슬에 쌓고, 사슬 머리를 타임스탬프로 봉인 · 외부 타임스탬프 기관의 교차 봉인(선택). 이 문서는 이것을 **감사 사슬**이라 부릅니다 — 저장소 문서의 「감사 원장」 · 「해시 체인」도 같은 것입니다 |
 | **키 보관** | 기본은 마스터키로 암호화한 소프트웨어 보관소 · 키 연산을 별도 프로세스로 떼어 내는 구성(선택) · 하드웨어 보안 모듈(HSM) · 클라우드 키 관리 어댑터(준비됨 · 아직 적용 안 함) |
-| **서명 방식** | 연동 시스템이 서명을 요청 · 1회용 링크로 서명자가 브라우저에서 서명 · 의료진이 HIS 신원으로 서명 · 대리 서명. 서명의 위험도에 따라 본인확인 방법을 묶어 둡니다 |
-| **연동** | 한 번의 호출로 인증서 발급과 서명 요청 · 서명된 완료 통지(웹훅 — 재시도 · 중복 방지) · 다른 시스템의 중요한 행위를 봉인해 두는 감사 원장 · 전체 API 명세(표준 형식의 API 설명서) |
+| **서명 방식** | 연동 시스템이 서명을 요청 · 1회용 링크로 서명자가 브라우저에서 서명 · 의료진이 HIS 신원으로 서명 · 대리 서명(환자 대신 보호자 같은 대리인이 서명). 서명의 위험도에 따라 본인확인 방법을 묶어 둡니다 |
+| **연동** | 한 번의 호출로 인증서 발급과 서명 요청 · 서명된 완료 통지(웹훅 — 재시도 · 중복 방지) · 다른 시스템이 자기의 중요한 행위를 감사 사슬에 올려 봉인하는 기능 · 전체 API 명세(표준 형식의 API 설명서) |
 | **일반 전자계약**(켜야 동작) | PDF 서식 · 주소록 · 발송 · 순차 · 동시 서명 · 보관 · 교부 링크 · QR 진위 확인. 연동 시스템이 부르는 서명 요청과는 **다른 기능**입니다 — 5절의 ERP 거래처 계약은 서명 요청 쪽을 씁니다 |
 | **콘솔 · 운영** | 인증서 발급 · 폐기 · 역할별 권한 · 2단계 인증 · 비활동 로그아웃 · 연동 키 무중단 교체(마스터키 교체는 다름 — 8절) · 이상 징후 탐지(백업 신선도 · 감사 사슬 무결성 · 로그인 실패 급증 · 통지 실패)와 메일 알림 |
 
@@ -123,7 +136,7 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign itself only calls out to deliver completion notices and their retries. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026, patient identity checks running on a mock provider.
+> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign itself only calls out to deliver completion notices and their retries. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026 (HIS 3, PACS 2, ERP 2, edu 2), patient identity checks running on a mock provider; consent requests from the HIS screens, ERP ledger sealing and Clinic are not yet confirmed.
 
 **sign 은 스스로 서명 업무를 시작하지 않습니다.** 다른 시스템이 서명을 요청하고, sign 은 서명이 끝나면 요청한 시스템에 알립니다. sign 이 먼저 부르는 것은 이 완료 통지와 그 재시도뿐입니다.
 
@@ -143,15 +156,21 @@ flowchart TB
   CL["Clinic<br/>그룹웨어"] -->|"결재 문서 봉인"| SIGN
 ```
 
+**확인된 9개와 그 경계** — 2026년 9월에 새로 세운 설치본끼리 가상 데이터로 불러 본 것입니다.
+
+- 확인함: HIS 3(HIS 신원으로 직원 서명 · HIS 로 가는 완료 통지 · 처방 로그 봉인) · PACS 2(판독 서명 · 조영제 동의서 환자 서명) · ERP 2(거래처 계약 서명 · 그 완료 통지) · edu 2(이수증 봉인 · 그 완료 통지).
+- 확인 아직: HIS 화면에서 보내는 동의서 서명 요청 · ERP 결재 기록 봉인 · Clinic 결재 문서 봉인.
+- 한계: 환자 본인확인은 모의 공급자였습니다. HIS 쪽 확인은 서명 요청을 sign 에 직접 만들어 시험한 것입니다.
+
 | 상대 | sign 이 받는 것 | sign 이 주는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **HIS** | 직원 신원(서명용) · 처방 서명 로그 봉인 · 동의서 · 발급 문서 서명 요청 | 서명 완료 통지 | 직원 신원은 HIS 공개키로 검증 · 시스템 연동 키 · 서명된 통지 | 직원 서명 · 완료 통지 · 처방 로그 봉인 **확인함**(2026-09-14 · 서명 요청은 sign 에 직접 만들어 시험) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 확인은 아직 |
+| **HIS** | 직원 신원(서명용) · 처방 서명 로그 봉인 · 동의서 · 발급 문서 서명 요청 | 서명 완료 통지 | 직원 신원은 HIS 공개키로 검증 · 시스템 연동 키 · 서명된 통지 | 3개 **확인함**(2026-09-14 · 서명 요청은 sign 에 직접 만들어 시험) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 확인은 아직 |
 | **PACS** | 판독문 서명 · 조영제 동의서 서명 요청 | 서명 완료 | 연동 키 · 판독의 신원은 HIS 발급 | 둘 다 **확인함**(2026-09-15 · 환자 본인확인은 모의 공급자로) |
 | **ERP** | 외부 거래처 계약 서명(서명 요청 기능으로) · 결재 기록 봉인 | 계약 완료 통지 | 연동 키 · 서명된 통지 | 거래처 계약 서명 · 완료 통지 **확인함**(2026-09-15) · 결재 기록 봉인은 만들어져 있음 · 확인은 아직 · 3절의 「일반 전자계약」 기능을 부르는 코드는 ERP 쪽에 아직 없음 |
 | **edu** | 법정교육 이수증 봉인 · 폐기 · 철회 | 이수증 완료 통지 | 연동 키 · 서명된 통지 | 둘 다 **확인함**(2026-09-15) |
 | **Clinic** | 그룹웨어 결재 문서 봉인 | — | 연동 키 | 만들어져 있음 · 확인은 아직(설치하지 않음) |
 
-「확인함」은 2026년 9월에 새로 세운 설치본끼리 가상 데이터로 실제로 불러 본 결과입니다. HIS 3 · PACS 2 · ERP 2 · edu 2, 모두 9개입니다. 틀린 키 · 위조한 통지 · 망가뜨린 신원 · 같은 링크 재사용을 일부러 넣어 거부되는 것도 확인했습니다([따라가 본 결과](../build-guide/follow-along-2026-09.md)).
+틀린 키 · 위조한 통지 · 망가뜨린 신원 · 같은 링크 재사용을 일부러 넣어 거부되는 것도 확인했습니다([따라가 본 결과](../build-guide/follow-along-2026-09.md)).
 
 - 완료 통지를 받는 쪽 주소는 운영 설정에서 **`https` 만** 받습니다. 원내 시스템이 `http` 로만 떠 있으면 앞에 TLS 를 두어야 통지가 들어갑니다.
 - 통지는 실패하면 **5분마다 다시 보내고**, 계속 실패하면 「실패 확정」(더는 자동으로 다시 보내지 않는 상태)으로 멈춥니다. 그 뒤에는 재발송 기능으로 따로 다시 보내야 합니다. 재시도 스케줄러를 끄면 밖에서 주기적으로 불러 줘야 밀린 통지가 나갑니다.
@@ -190,7 +209,7 @@ flowchart TB
 ### 백업 · 감시
 
 - **백업** — DB 덤프를 만들어 목차까지 검사한 뒤 **GPG 로 암호화하고 평문을 바로 지웁니다.** 기본 보존은 로컬 14세대 · 서버 밖 30세대입니다. 키 보관소 볼륨도 백업 대상입니다.
-- **백업이 멈춘 것은 「성공 신호가 안 온 것」으로 압니다.** 백업이 끝나면 앱에 성공 신호를 보내고, 기준 시간(기본 26시간)을 넘기면 경보가 납니다.
+- **백업이 멈춘 것은 「성공 신호가 안 온 것」으로 압니다.** 백업 스크립트는 백업에 성공할 때마다 sign 에 「성공」을 알립니다. sign 은 마지막 성공에서 기준 시간(기본 26시간)이 지나도록 새 알림이 없으면 경보를 냅니다. 경보는 아래 이상 징후 탐지와 같은 메일 수신처로 갑니다.
 - **복구는 해 봐야 압니다.** 저장소의 운영 절차서(런북)는 분기마다 복구 리허설을 두고, **복원본 위에서 감사 사슬 검증이 통과해야** 성공으로 봅니다.
 - **이상 징후 탐지** — 감사 사슬 무결성 · 로그인 실패 급증 · 통지 실패 확정 · 준비 상태를 보고 메일로 알립니다. 알림 수신처를 넣지 않으면 로그에만 남습니다.
 
@@ -207,7 +226,7 @@ flowchart TB
 
 | 설계 | 왜 |
 |---|---|
-| **개인키는 sign 한 곳에만** | 키를 지킬 곳을 하나로 줄이고, 「누가 서명했나」의 증거를 한 곳에서 만들고 검증하게 |
+| **문서 서명 개인키는 sign 한 곳에만** | 키를 지킬 곳을 하나로 줄이고, 「누가 서명했나」의 증거를 한 곳에서 만들고 검증하게 |
 | **서명 당시를 기준으로 검증**(PAdES-LTA · 서명 시점의 폐기 여부) | 몇 년 뒤 인증서가 만료돼도 그 문서가 서명 당시 유효했음을 확인할 수 있게 — 의무기록은 오래 보존합니다 |
 | **감사 사슬 + 타임스탬프 봉인 + 외부 교차 봉인(선택)** | 운영자 자신도 기록을 몰래 고칠 수 없게. 외부 봉인을 붙이면 제3자가 sign 없이 표준 도구로 확인할 수 있습니다 |
 | **의료진 신원은 HIS 공개키로 검증** | 두 시스템이 비밀을 나눠 가질 필요가 없게. HIS 가 발급한 신원이 위조되면 검증에서 막힙니다. 공개키 목록은 표준 형식(JWKS)이고 그 주소와 발급자 이름은 설정 값입니다. HIS 가 아닌 발급처를 붙여 보지는 않았습니다 |

@@ -22,15 +22,26 @@ Stated plainly: twin was **not installed** in the September 2026 follow-along, s
 
 ## 1. 한 문장
 
-> **EN** — twin reads data from HIS and shows clinicians risk-score cards and handover summaries, and shows managers bed, unit and equipment indicators with what-if simulation.
+> **EN** — twin reads data from HIS and shows clinicians risk-score cards and handover summaries, and shows managers bed, unit and equipment indicators with what-if simulation. At a glance: usable only with HIS in place; four containers plus the web app; the code to take is the same as the integrated release; nothing has been verified by a real call, because twin was not built in the September 2026 test installs.
 
 **twin 은 HIS 의 자료를 읽어서, 의료진에게는 환자의 위험 점수와 인계 요약을, 병원 운영 쪽에는 병상 · 병동 · 장비 지표와 「이렇게 바꾸면 어떻게 되나」 시뮬레이션을 보여 주는 별도 서비스입니다.**
+
+### 한눈에 — 도입 판단
+
+| | |
+|---|---|
+| **지금 쓸 수 있나** | 조건부 — **HIS 가 있어야** 씁니다. 다른 시스템과 실제로 이어 본 적이 없고, 의료기기 해당 여부도 정해지지 않았습니다(8절) |
+| **세워야 하는 것** | API · 워커(같은 이미지) · PostgreSQL 16 · Redis 7 에 웹 화면까지 — 웹을 빼면 HIS 차트에서 twin 을 열 수 없습니다. 생리 엔진 컨테이너는 선택입니다. GPU 는 필요 없습니다 |
+| **먼저 있어야 할 것** | HIS — 앱 등록 · twin 전용 읽기 계정 · 환자의 AI 활용 동의 기록. AI Server — 설명 초안 · 아바타 · 영상 계산을 쓸 때만, 호출 키와 함께 |
+| **받을 코드** | 통합 릴리즈 코드와 같은 현재 개발본입니다. 저장소 태그가 아니라 [소스 받기](../SOURCES.md)가 가리키는 커밋을 받습니다 |
+| **실제로 확인된 것** | 없음 — 2026년 9월 시험 설치에서 twin 은 세우지 않았습니다. 화면 캡처는 가상 병원 데이터로 찍은 것이고, 연결 확인은 아닙니다 |
+| **아직 모르는 것** | 동시 사용자 수 · HIS 에 주는 읽기 부하 · HIS 쪽 준비에 걸리는 시간 · 감사 기록 보존 기간 설정 · 의료기기 해당 여부 |
 
 「디지털 트윈」은 실제 병원(환자 · 병상 · 장비)을 컴퓨터 안에 모형으로 옮겨 두고, 그 모형으로 상태를 보고 미래를 가늠하는 방식을 말합니다. twin 은 진료 기록의 원본을 갖지 않습니다. 원본은 HIS 에 있고, twin 은 필요할 때 읽어 와서 계산합니다.
 
 ## 2. 병원 업무의 어디에 쓰이나
 
-> **EN** — Doctors and nurses open it from the chart to see risk cards and an SBAR draft; bed managers and executives use the operations console and simulation; biomedical engineering sees equipment risk; administrators manage alert rules and the audit log.
+> **EN** — Doctors and nurses open it from the chart to see risk cards and a rule-based SBAR summary; bed managers and executives use the operations console and simulation; biomedical engineering sees equipment risk; administrators manage alert rules and the audit log.
 
 | 누가 | 무엇을 하나(예) |
 |---|---|
@@ -43,7 +54,7 @@ Stated plainly: twin was **not installed** in the September 2026 follow-along, s
 **장면으로 보면**
 
 - **외래의 한 환자** — 의사가 HIS 차트에서 twin 을 엽니다. 심혈관 · 신장 위험 카드가 뜨고, 흡연 여부처럼 차트에 없는 입력은 0 으로 채우지 않고 「입력 필요」로 표시됩니다. 의사가 화면에서 값을 넣으면 그 조회에만 반영되고 저장되지 않습니다.
-- **병동 인계** — 간호사가 인계 탭에서 SBAR 초안을 봅니다. SBAR 는 규칙으로 만든 것이라 AI 문장이 섞이지 않습니다. 의료진이 「차트 저장」을 눌러야 HIS 에 문서로 남습니다.
+- **병동 인계** — 간호사가 인계 탭에서 SBAR 요약을 봅니다. SBAR 는 규칙으로 만든 것이라 AI 문장이 섞이지 않습니다. AI Server 는 설명 초안 · 근거 인용 같은 보조만 맡습니다(3절). 의료진이 「차트 저장」을 눌러야 HIS 에 문서로 남습니다.
 - **병상 회의** — 운영 담당자가 운영 콘솔에서 병동별 점유와 위험 분포를 보고, 「병상 10개를 늘리면 응급실 대기가 어떻게 바뀌나」를 시뮬레이션합니다. 이 화면에는 환자 이름이 나오지 않습니다.
 
 ## 3. 할 수 있는 일
@@ -55,12 +66,12 @@ Stated plainly: twin was **not installed** in the September 2026 follow-along, s
 | 묶음 | 무엇이 들어 있나 |
 |---|---|
 | **운영 트윈** | **지표** — 병상 · 중환자실 · 응급실 · 수술실의 점유 · 회전 · 부하, 병동 단위 위험 분포<br/>**시뮬레이션** — 병상 증설 · 인력 변경을 해 보면 어떻게 되나, 필요한 최소 인력 · 병상 수 찾기 |
-| **장비 트윈** | 장비별 점검 준수 · 고장 위험(예지 정비) · 점검 초과 알림 |
-| **환자 위험 점수 카드** | 심혈관 · 신장 · 조기경고(NEWS2) · 정맥혈전색전증 · 폐색전증 중증도 · 간 · 폐렴 · 심방세동 · 소화기 출혈 · 급성 췌장염. 카드마다 계산식 · 변수 · 등급 · 적용 범위 · 원 논문 인용. 모든 모델은 모델 목록에 등재돼야 합니다. 입력은 HIS 가 FHIR 로 내주는 관찰 값에서 국제 검사 코드(LOINC)나 항목 이름으로 찾아 채웁니다 |
+| **장비 트윈** | 장비별 점검 준수 · 고장 위험(고장 나기 전에 점검할 때를 가늠하는 예지 정비) · 점검 초과 알림 |
+| **환자 위험 점수 카드** | **10종** — 심혈관 · 신장 · 조기경고(NEWS2) · 정맥혈전색전증 · 폐색전증 중증도 · 간 · 폐렴 · 심방세동 · 소화기 출혈 · 급성 췌장염<br/>**카드마다** — 계산식 · 변수 · 등급 · 적용 범위 · 원 논문 인용. 모든 모델은 모델 목록에 등재돼야 합니다<br/>**입력** — HIS 가 FHIR 로 내주는 관찰 값에서 국제 검사 코드(LOINC)나 항목 이름으로 찾아 채웁니다 |
 | **임상 입력** | 자동으로 채운 입력을 의료진이 화면에서 고칠 수 있습니다(그 조회에만 적용 · 저장 안 함). 빠진 입력은 「입력 필요」 |
 | **치료 중재 비교** | 금연 · 혈압 · 혈당 · 스타틴 같은 중재의 효과를 여러 모델로 비교 |
 | **임상 문서 · HIS 반영** | 위험 평가 · SBAR · SOAP(의료진이 쓴 경과 기록)를 FHIR 형식으로 HIS 에 저장 — 보내기 전에 형식 검증. 차트를 열 때 위험 카드를 HIS 화면에 띄우는 CDS Hooks(차트에 참고 카드를 끼워 넣는 표준) |
-| **환자 아바타** | 장기 3D 모형 · 심장 전기 활동 시각화 · 생리 엔진으로 보는 예후 시뮬레이션(무거운 계산은 AI Server 나 별도 컨테이너) |
+| **환자 아바타** | 장기 3D 모형 · 심장 전기 활동 시각화 · 생리 엔진으로 보는 예후 시뮬레이션. 셋 다 AI Server 나 별도 생리 엔진 컨테이너가 있어야 돕니다. 이보다 넓은 「장기 · 생체 3D 트윈」은 아직 설계 단계입니다(8절) |
 | **외부 AI 에이전트 연결(선택)** | MCP 로 외부 AI 도구에 **읽기** 기능을 엽니다. 기본 꺼짐 · 켜면 응답의 직접 식별자를 가립니다. 쓰기 도구는 따로 켜야 하며(6절), 켜도 쓰는 것은 위의 위험 평가 · SBAR 뿐입니다 |
 | **관측 · 감사** | 환자 정보 조회 감사 기록 · Prometheus 지표 · 요청별 지연과 HIS 호출 수 · 쓰는 AI 모델이 바뀌면 알림 |
 
@@ -72,7 +83,7 @@ Stated plainly: twin was **not installed** in the September 2026 follow-along, s
 
 | | |
 |---|---|
-| ![twin 환자 차트](../assets/screens/twin-patient-chart.png) **환자 차트** — NEWS2 · 위험 점수 · eGFR 배지 · twin 이 만든 카드에 「트윈 파생 · 규칙기반 파생 · 임상 판단 보조」 표시 | ![twin 운영 콘솔](../assets/screens/twin-ops-console.png) **운영 콘솔** — 「운영 모드 · 비PHI 집계」 · 환자는 식별자로만 · 고위험 · 장비 알림 |
+| ![twin 환자 차트](../assets/screens/twin-patient-chart.png) **환자 차트** — NEWS2 · 위험 점수 · eGFR 배지 · twin 이 만든 카드에 「트윈 파생 · 규칙기반 파생 · 임상 판단 보조」 표시 | ![twin 운영 콘솔](../assets/screens/twin-ops-console.png) **운영 콘솔** — 「운영 모드 · 비PHI 집계」(환자 식별 정보가 없는 집계라는 화면 표시) · 환자는 식별자로만 · 고위험 · 장비 알림 |
 
 화면은 가상 병원 데이터로 찍었습니다(2026-09-12). 설명은 [twin 화면](../screens/twin.md)에 있습니다.
 
@@ -108,7 +119,7 @@ flowchart LR
 |---|---|---|
 | **twin-api** | 위험 점수 계산 · SBAR · HIS 반영 · 운영 지표 · 감사 · 지표 · 시작할 때 DB 스키마를 올림 | Python 3.12 · FastAPI · Alembic |
 | **twin-worker** | 시뮬레이션 작업 실행 · HIS 에서 운영 자료를 주기적으로 읽음(기본 60초) · 알림 판정 | twin-api 와 같은 이미지 · SimPy(시뮬레이션 라이브러리) |
-| **twin-web** | 의료진 화면 · 운영 콘솔 · 3D 보기 · 차트에서 여는 입구(SMART) — 설치 파일에서는 선택(`web` 프로파일)이지만, 빼면 HIS 차트에서 twin 을 열 수 없습니다 | Next.js 15 |
+| **twin-web** | 의료진 화면 · 운영 콘솔 · 3D 보기 · 차트에서 여는 입구(SMART) — 설치 파일에서는 선택(`web` 프로파일)으로 적혀 있지만, 빼면 HIS 차트에서 twin 을 열 수 없어 **병원에서 쓰려면 사실상 필요합니다** | Next.js 15 |
 | **생리 엔진** | 예후 시뮬레이션용 별도 컨테이너 — 선택(`pulse` 프로파일 · 기본 꺼짐) | 제3자 생리 엔진(Pulse)을 감싼 컨테이너 |
 | **MCP 질의 서버** | 외부 AI 에이전트용 도구 — 기본 꺼짐 | twin-api 안 |
 
@@ -153,13 +164,13 @@ flowchart LR
 | 6 | twin → HIS | 위험 평가 · SBAR · SOAP 저장(의료진이 저장할 때만) | 저장을 누른 의료진 본인의 토큰 | 만들어져 있음 · 실제 연결 확인은 아직 |
 | 7 | twin → AI Server | 초안 · 요약 · 약물 상호작용 · 영상 계산 요청 | 발급된 API 키 | 만들어져 있음 · 실제 연결 확인은 아직 |
 
-1번과 2번은 둘 다 살아 있습니다. twin 은 두 방식을 모두 받도록 만들어져 있고, 어느 쪽으로 여는지는 HIS 쪽 구성에 달렸습니다. twin 이 PACS 에서 영상 목록을 읽는 기능도 있지만, 연결 상태 표에는 싣지 않았습니다.
+1번과 2번은 둘 다 살아 있습니다. twin 은 두 방식을 모두 받도록 만들어져 있고, 어느 쪽으로 여는지는 HIS 쪽 구성에 달렸습니다. twin 이 PACS 에서 영상 목록을 읽는 기능도 있습니다. 이 연결은 연결 상태 표에 행이 없고 구성서에도 「확인 중」으로만 적혀 있어, 여기서도 상태를 적지 않습니다.
 
 twin 은 2026년 9월 따라가기에서 **설치하지 않았습니다**([따라가 본 결과](../build-guide/follow-along-2026-09.md)). 연결마다의 자세한 내용은 [연결 카드 — HIS → twin](../integration/cards/his-to-twin.md) · [twin → HIS](../integration/cards/twin-to-his.md) · [twin → AI Server](../integration/cards/twin-to-ai-server.md)와 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에 있습니다.
 
 ## 6. 설치 · 운영
 
-> **EN** — Docker Compose with API, worker, PostgreSQL and Redis by default, the web app and physiology engine as optional profiles. No GPU on the twin server. HIS must register twin as a SMART app and issue a read-only service identity; the AI Server must issue a key. The API applies database migrations on start. The Redis password is mandatory. Several safety switches ship off and must be decided before real use.
+> **EN** — Docker Compose with API, worker, PostgreSQL and Redis by default; the web app is an optional profile in the file but is needed in practice, since without it twin cannot be opened from the HIS chart; the physiology engine is optional. Most safety switches ship off; only evidence citations and the avatar ship on. No GPU on the twin server. HIS must register twin as a SMART app and issue a read-only service identity; the AI Server must issue a key. The API applies database migrations on start. The Redis password is mandatory.
 
 ### 필요한 것
 
@@ -173,23 +184,25 @@ twin 은 2026년 9월 따라가기에서 **설치하지 않았습니다**([따�
 ### 설치 순서(저장소 기준)
 
 1. 설정 파일(`.env`)을 예시에서 복사해 DB · Redis 비밀번호 · API 키 · HIS 와 AI Server 주소 · SMART 클라이언트를 채웁니다. **Redis 비밀번호와 API 키는 비어 있으면 시작하지 않습니다.**
-2. `docker compose up` 으로 API · 워커 · DB · Redis 를 올립니다. 웹 화면까지 쓰려면 `web` 프로파일을 붙입니다.
+2. `docker compose up` 으로 API · 워커 · DB · Redis 를 올리면서 `web` 프로파일을 붙입니다. 웹이 없으면 HIS 차트에서 twin 을 열 수 없습니다(4절).
 3. API 가 시작할 때 DB 스키마(마이그레이션)를 자동으로 올립니다.
 4. 의존성 상태 확인 주소로 HIS · AI Server 연결을 봅니다.
 
 ### 운영 전에 정할 스위치
 
+대부분 **꺼진 채로** 옵니다. 켜진 채로 오는 것은 맨 아래 「근거 인용 · 환자 아바타」 하나뿐입니다.
+
 | 스위치 | 뜻 | 기본 |
 |---|---|---|
 | 환자 동의 요구 | 워커가 주기적으로 읽을 때 HIS 의 AI 활용 동의를 먼저 확인하고, 동의가 없으면 파생 지표를 만들지 않음 — 저장소는 동의 운영을 확인한 뒤 켜기를 권함 | 꺼짐 |
-| 웹 · API 사이 신원 서명 검증 강제 | 운영 전에 켭니다 | 꺼짐 |
+| 웹 · API 사이 신원 서명 검증 강제 | 웹이 API 에 넘기는 사용자 · 역할 정보에 붙인 서명을 API 가 확인하게 합니다. 운영 전에 켭니다 | 꺼짐 |
 | MCP 질의 서버 | 외부 AI 에이전트용 | 꺼짐 |
 | MCP 쓰기 도구 | 질의 서버와 별개의 스위치. 켜도 「미리보기 → 확인」 두 단계와 의료진 로그인 세션이 있어야 위험 평가 · SBAR 를 기록 | 꺼짐 |
 | 생리 엔진 예후 | 별도 컨테이너 | 꺼짐 |
 | 근거 인용 · 환자 아바타 | AI Server 를 부르는 기능 | 코드 기본값은 켜짐. AI Server 가 없으면 근거 칸은 카드에서 빠지고, 아바타는 AI 계산 없이 기본 모형만 보입니다. 켤지는 기관이 정합니다 |
 | 관리자 보조 로그인 | HIS 를 거치지 않고 비밀번호로 들어오는 관리자 진입 | 비밀번호를 넣지 않으면 꺼짐 |
 
-위 「환자 동의 요구」와 같은 동의 기록을 HIS 도 씁니다. 동의가 없으면 HIS 가 외부 앱으로 환자 정보를 넘기는 실행과 twin 의 되쓰기를 거부합니다([구축 가이드 S6](../build-guide/S6-ai.md)). 즉 동의는 하나이고, twin 스위치는 주기 읽기에서도 그 동의를 볼지를 정합니다.
+환자의 AI 활용 동의 기록은 **HIS 에 하나** 있습니다. 동의가 없으면 HIS 가 차트에서 twin 을 여는 실행과 twin 의 되쓰기를 거부합니다([구축 가이드 S6](../build-guide/S6-ai.md)). twin 의 「환자 동의 요구」 스위치는 여기에 더해, 워커가 주기적으로 읽을 때도 같은 동의를 확인하게 할지를 정합니다.
 
 ### 백업 · 감시
 

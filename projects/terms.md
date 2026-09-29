@@ -155,7 +155,7 @@
 |---|---|---|
 | **코드 마스터** | 약 · 진단 · 수가 · 검사 코드처럼 병원이 공통으로 쓰는 코드표. 기관이 배포처에서 받아 넣는다 | code masters |
 | **시드** | 설치 직후 넣는 기본 · 예시 데이터. 가상 병원 데모 데이터는 실운영에 넣지 않는다 | seed data |
-| **스키마** | 데이터베이스의 테이블 구조 정의 | schema |
+| **스키마** | 한 데이터베이스 안을 업무별로 나눈 칸막이 | Database schema (namespace) |
 | **크론 · 예약 작업** | 정해진 시각이나 간격마다 서버가 스스로 도는 작업 | cron · scheduled job |
 | **트리거 · 부분 유니크 인덱스** | 데이터베이스 안에 두는 보조 규칙. 트리거는 수정을 막거나 자동 기록을 남기고, 부분 유니크 인덱스는 조건에 맞는 행끼리만 중복을 막는다 | trigger · partial unique index |
 | **헤드리스 브라우저** | 화면 없이 서버에서 도는 브라우저. 서식을 PDF 로 찍는 데 쓴다 | headless browser |
@@ -216,7 +216,7 @@
 | **사인아웃** | 병리 판독의가 보고서를 최종 확정 · 서명하는 단계. LIS 는 2단계로 한다 | sign-out |
 | **교차시험** | 수혈 전 환자 혈액과 혈액 제제가 맞는지 보는 시험 | crossmatch |
 | **이차 소견** | 유전체 검사에서 원래 목적과 다르게 드러난 의미 있는 변이. 동의 없이는 보이지 않는다 | secondary findings |
-| **개시 전환 센터 · 개시 키** | LIS 가 실운영을 시작하기 전 확인 항목을 모은 화면, 그리고 그 전환을 허락하는 값 | go-live center · go-live key |
+| **개시 전환 센터 · 개시 키** | LIS 가 실운영을 시작하기 전 확인 항목을 모은 화면, 그리고 실운영 전에 꼭 넣어야 하는 설정 묶음(위험치 통보 채널 · 운영 알림 · 원격지 백업 경로 · HIS · PACS 운영 자격) — 3차 고치기에서 정정: 「전환을 허락하는 값」이 아님(LIS 개시 전환 센터 기획서 §3.6) | go-live center · go-live settings bundle |
 | **다운타임 오더** | HIS 연결이 멈췄을 때 LIS 에서 직접 만드는 오더. 사유를 남기고 나중에 HIS 오더 번호와 맞춘다 | downtime order |
 | **종단 시험** | 화면부터 저장까지 실제 흐름을 처음부터 끝까지 돌려 보는 시험 | end-to-end test |
 | **루프백 · 사설 대역** | 같은 서버 안에서만 닿는 주소, 그리고 기관 내부망에서만 쓰는 주소 범위 | loopback · private address range |
@@ -235,7 +235,7 @@
 |---|---|---|
 | **JWKS** | 토큰을 확인할 공개키들을 표준 형식으로 모아 웹 주소로 내놓은 목록 — sign 은 HIS 의 이 목록으로 직원 신원을 확인합니다 | JSON Web Key Set |
 | **PAdES** | PDF 안에 전자서명을 넣는 유럽 표준 형식. 소개서의 **PAdES-LTA** 는 그 장기 보존판입니다 | PDF Advanced Electronic Signatures |
-| **OpenAPI** | API 의 주소 · 입력 · 응답을 기계가 읽을 수 있게 적는 표준 설명서 형식 | Machine-readable API description standard |
+| **OpenAPI** | REST API 의 주소 · 입력 · 출력을 정해진 형식으로 적은 명세. 이것으로 사용법 화면을 자동으로 만듭니다 | API description standard |
 | **RFC 3161** | 신뢰할 수 있는 타임스탬프를 주고받는 인터넷 표준 문서 번호 | Internet standard for trusted timestamps |
 | **런북** | 운영자가 장애 · 복구 · 교체 때 따라 하는 절차서 | Runbook (operations procedure) |
 | **테넌트** | 한 설치본을 나눠 쓰는 기관 하나하나. 「단일 테넌트」는 한 기관만 쓰는 구성 | Tenant |
@@ -306,3 +306,28 @@
 |---|---|---|
 | **XMPP** | 실시간 메시지 · 접속 상태를 주고받는 공개 규약. Jitsi 는 이것으로 방 입장 · 참가자 정보를 주고받습니다 | Extensible Messaging and Presence Protocol |
 | **Prosody · Jicofo · Videobridge · Jibri** | Jitsi 를 이루는 부품 — 각각 시그널링 서버 · 회의 조정자 · 미디어 중계 · 녹화기 | Jitsi components |
+
+### 3차 고치기에서 더한 말
+
+| 말 | 풀이 | English |
+|---|---|---|
+| **국가 축** | 나라별 규칙(개원 항목 · 보유 기간 · 표기 등)을 담는 설정 자리. 지금 들어 있는 나라는 한국 · UAE | country axis |
+| **db push · 마이그레이션** | 둘 다 DB 테이블 구조를 코드의 정의에 맞추는 Prisma 의 방식. 마이그레이션은 변경 이력 파일을 차례로 적용하고, db push 는 이력 없이 지금 정의에 바로 맞춘다. HIS 저장소는 둘을 섞지 말라고 적는다 | migrate deploy · db push |
+| **상시 감시자의 네 축** | 데이터 정합성 · 업무 흐름 · 연동 계약 · 파이프(백업 등) | sentinel's four axes |
+| **빌드 스탬프** | 빌드 시각을 적어 사이트에 함께 싣는 작은 파일(`/build-stamp.txt`). HIS 홈페이지 배포 화면이 이 값으로 새 빌드가 실렸는지 대조한다 | build stamp |
+| **입원 여정** | 환자 앱에서 입원 중의 일정 · 진료 · 회진 · 검사를 시간순으로 보는 화면 | inpatient journey |
+| **연동 키** | 두 시스템이 서로를 알아보려고 미리 나눠 가진 키. LIS 는 HIS 의 검사 코드 카탈로그를 부를 때 쓴다 | integration key |
+| **코호트** | 연구를 위해 조건에 맞춰 모은 환자 묶음 | Cohort |
+| **비식별화** | 이름 · 번호처럼 사람을 알아볼 수 있는 정보를 지우거나 바꾸는 것 | De-identification |
+| **허용 장비 목록** | 영상 서버가 영상을 받아도 되는 촬영 장비를 AE 타이틀 · 주소로 적은 목록 — 비어 있는 채로 옵니다 | DICOM modality allow-list |
+| **감사 사슬** | 모든 행위를 차례로 이어 쌓아 하나만 바꿔도 드러나게 만든 기록 — 저장소는 감사 원장 · 해시 체인이라고도 부릅니다 | Audit hash chain |
+| **봉인** | 이미 일어난 기록을 감사 사슬에 올리고 타임스탬프로 묶어 나중에 고칠 수 없게 하는 것(서명과 다름) | Sealing |
+| **대리 서명** | 환자 대신 보호자 같은 대리인이 서명하는 방식 | Proxy (representative) signing |
+| **진료비 산정** | 진료비를 공단 부담 · 본인 부담 · 비급여로 나눠 계산하는 일 — 이 생태계에서는 ERP 가 하고 HIS 가 그 계산서를 보여 줍니다 | Patient bill calculation |
+| **결정 대기함** | AI 보조 방식의 정기업무가 만든 초안을 사람이 승인하기 전까지 모아 두는 목록 | Pending-decision inbox |
+| **OCR** | 사진 · 스캔 문서 속 글자를 읽어 글로 바꾸는 기술(모델 이름 DeepSeek-OCR 의 뒷부분) | Optical character recognition |
+| **HAI-DEF** | 구글이 의료 AI 모델(MedGemma 등)에 붙인 이용 약관의 이름 | Google Health AI Developer Foundations terms |
+| **ECAPA** | 목소리로 말한 사람을 구분하는 모델 방식(SpeechBrain ECAPA — 화자 구분에 씀) | Speaker-embedding model architecture |
+| **local only** | 기관 밖 AI 제공자로 보내지 못하게 묶은 역할 표시 — 의료 · 개인건강정보 · 규제 역할에 붙음 | Local-only data policy for a role |
+| **X-Forwarded-For** | 앞단 프록시가 원래 요청한 컴퓨터의 주소를 뒤쪽 서버에 알려 주는 헤더 | Proxy forwarding header |
+| **소비자 키** | sign 이 자기를 부르는 시스템(소비자)마다 따로 발급하는 호출 키. 어느 시스템이 서명을 요청했는지 가립니다 | Consumer key issued by sign |

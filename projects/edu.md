@@ -22,9 +22,20 @@ What to know up front is collected in [What to know](#8-알아-둘-것): edu can
 
 ## 1. 한 문장
 
-> **EN** — edu delivers staff training and statutory courses, and turns each completion into an HIS education record and a signed completion certificate.
+> **EN** — edu delivers staff training and statutory courses, and turns each completion into an HIS education record and a signed completion certificate. At a glance: usable once HIS is running, with sign needed for certificates; four containers plus a content volume; the code to take is the same as the integrated release, installed as a single-hospital deployment in the order of section 6; sign-in from HIS, the roster, completion records and certificates were verified between test installs with made-up data in September 2026.
 
 **edu 는 직원에게 교육을 전하고, 이수 하나를 HIS 의 교육 기록과 전자서명된 이수증으로 남기는 시스템입니다.**
+
+### 한눈에 — 도입 판단
+
+| | |
+|---|---|
+| **지금 쓸 수 있나** | 조건부 — **HIS 가 먼저 돌고 있어야** 씁니다. 이수증까지 내려면 sign 도 있어야 합니다 |
+| **세워야 하는 것** | 컨테이너 4개 — API · 웹 · PostgreSQL 16 · Redis 7. 동영상 · 이수증을 담는 콘텐츠 볼륨과 그 백업. GPU 는 필요 없습니다 |
+| **먼저 있어야 할 것** | HIS — edu 주소 설정 · 서명 비밀값 공유. sign — 이수증에 서명할 자격(등록자 인증서) · https 로 edu 에 닿는 길. 기관이 정할 교육 담당과 콘텐츠 검수 책임자 |
+| **받을 코드** | 통합 릴리즈 코드와 같은 현재 개발본입니다([소스 받기](../SOURCES.md)). 병원 하나에 세우는 **단독 배포**이며, 저장소 설치 안내에 빠진 단계가 있어 6절 순서를 따릅니다 |
+| **실제로 확인된 것** | 2026년 9월 시험 설치에서 가상 데이터로 — HIS 사내교육 단추 로그인 · 공개키 · 직원 명부 · 이수 기록, sign 이수증 서명과 완료 통지. 운영 병원이 아니고, edu 로그인 화면 경로 · 직원 이벤트 · Clinic 은 확인 전이며 AI 는 문항 생성만 불러 봤습니다 |
+| **아직 모르는 것** | 동시에 몇 명이 배울 수 있나 · 동영상 저장 용량 · 복구 절차와 걸리는 시간 · sign 없이 쓰는 구성 · 실제 기관의 운영 여부 |
 
 병원 정보 체계에서 edu 는 **학습을 전하는 자리**입니다. 직원이 누구인지(명부)와 무엇을 이수했는지(교육 기록)의 원본은 HIS 에 있습니다. edu 는 HIS 에 없는 것 — 과정 · 시험 · 집체교육 · 배정 규칙 — 을 맡고, 결과를 HIS 와 sign 에 넘깁니다.
 
@@ -61,11 +72,11 @@ What to know up front is collected in [What to know](#8-알아-둘-것): edu can
 | **외부 콘텐츠** | 외부 제공업체와 링크 · 수료증 · SCORM · 로그인 연계로 이어 붙이고 정산 리포트를 냅니다. 외부 업체가 학습 기록을 표준 형식(xAPI 1.0.3)으로 보내면 받습니다 |
 | **학습 · 이수** | HIS 계정으로 로그인(아래) · 과정 신청 · 집체교육(일정 · QR 출석 · 진행 화면) · 실제 학습 시간만 쌓는 최소 학습시간 검증 · 설치형 웹 앱(PWA — 휴대전화에 앱처럼 설치 · 오프라인 · QR 스캐너) |
 | **전자 이수증** | sign 이 전자서명 · 타임스탬프로 발급 · QR 진위 확인 · 폐기 · 재발급. edu 는 기관마다 sign 에서 받은 **등록자 인증서**(이수증에 서명할 자격)로 요청합니다 |
-| **알림 · 자동화** | 마감 리마인드 · 기한 초과 시 윗선에 알림 · 미이수자의 부서장에게 하루 한 번 요약 · 이메일 · 문자 · 그룹웨어(Clinic) 채널 — 채널을 설정했을 때만 실제로 보내고, 아니면 모의 발송 |
+| **알림 · 자동화** | 마감 리마인드 · 기한 초과 시 윗선에 알림 · 미이수자의 부서장에게 하루 한 번 요약 · 이메일 · 문자 · 그룹웨어(Clinic) 채널 — 채널을 설정했을 때만 실제로 보내고, 아니면 모의 발송입니다. **운영 중에도 채널 값이 비어 있으면 알림이 나가지 않으므로**, 개시 전에 연결 점검 단추로 확인합니다 |
 | **관리 · 감사** | 대시보드(준수율 · 인증 커버리지 · 부족분) · 이수 명부 · 연간 이수 체크리스트(CSV) · 역할 세분화 · 해시체인 감사 로그와 검증 · 퇴직자 연락처 익명화 |
-| **배포 형태** | 기관 하나만 쓰는 **단독 배포**, 또는 한 배포에서 여러 기관을 나눠 쓰는 **멀티테넌트** — 코드는 둘 다 지원합니다. 병원이 자기 서버에 세울 때는 단독 배포입니다(8절) |
+| **배포 형태** | 기관 하나만 쓰는 **단독 배포**, 또는 한 배포에서 여러 기관을 나눠 쓰는 **멀티테넌트** — 코드는 둘 다 지원합니다. **병원이 자기 서버에 세울 때는 단독 배포**이고, 설치는 6절 「병원 하나에 세울 때」만 보면 됩니다 |
 
-**로그인은 두 길이고, 둘 다 HIS 계정입니다.** HIS 화면의 **사내교육** 단추로 바로 들어가거나, edu 로그인 화면에 HIS 이메일 · 비밀번호를 넣습니다. edu 만의 계정은 없습니다.
+**로그인은 두 길이고, 둘 다 HIS 계정입니다.** HIS 화면의 **사내교육** 단추로 바로 들어가거나, edu 로그인 화면에 HIS 이메일 · 비밀번호를 넣습니다. edu 만의 계정은 없습니다. 2026년 9월 시험 설치에서 실제로 확인한 것은 **사내교육 단추 길**이고, edu 로그인 화면 길은 아직 확인 전입니다(5절).
 
 기관 정보와 연동 설정(HIS · sign · AI · 메일 · 그룹웨어)은 **관리 화면의 시스템 설정**에서 바꿉니다. 저장한 값은 최대 1분 안에 반영됩니다. 화면은 각 값이 어디서 왔는지(관리 설정 · 환경 변수 · 기본값)를 보여 주고, 연동마다 **연결 점검** 단추가 있습니다.
 
@@ -123,7 +134,7 @@ flowchart LR
 
 > **EN** — edu depends on HIS for sign-in, staff roster and education records, and on sign for certificates. AI Server and Clinic are optional. Sign-in from the HIS screen, the HIS public-key lookup, the roster and the completion record, plus certificate sealing and the completion notice with sign, were verified by real calls between test installs in September 2026; the staff-event webhook, sign-in through the edu login form with an HIS password, AI and Clinic links are built but not yet verified end to end.
 
-**edu 는 HIS 가 먼저 있어야 하고, sign 이 있어야 이수증이 나옵니다.** AI Server 와 Clinic 은 선택입니다.
+**edu 는 HIS 가 먼저 있어야 하고, sign 이 있어야 이수증이 나옵니다.** 이수 기록 자체는 HIS 로 가고, sign 은 이수증에만 쓰입니다. sign 없이 이수 기록만 쓰는 구성은 확인하지 못했습니다. AI Server 와 Clinic 은 선택입니다.
 
 ```mermaid
 flowchart TB
@@ -141,7 +152,7 @@ flowchart TB
 | **HIS** — 이수 기록 | 교육 이수 기록 | — | 서비스 토큰 | 확인함(2026-09-14) |
 | **HIS** — 직원 이벤트 | — | 입사 · 변경 · 퇴직 알림 | 서명된 통지 | 만들어져 있음 · 실제 연결 확인은 아직 |
 | **HIS** — edu 로그인 화면 | — | 직원 로그인 | HIS 이메일 · 비밀번호로 HIS 에 로그인 | 만들어져 있음 · 실제 연결 확인은 아직 |
-| **sign** | 이수증 서명 요청 · 폐기 · 철회 | 서명 완료 통지 | sign 이 발급한 소비자 키 · 서명된 통지 | 확인함(2026-09-15 · 가상 데이터) |
+| **sign** | 이수증 서명 요청 · 폐기 · 철회 | 서명 완료 통지 | sign 이 연결하는 시스템마다 발급한 키(소비자 키) · 서명된 통지 | 확인함(2026-09-15 · 가상 데이터) |
 | **AI Server** | 문항 생성 · 요약 · 번역 · 녹취 분석 요청 | 초안 | 발급된 API 키 | 일부만 — 문항 생성은 불러 봄. 요약 · 번역 · 녹취 분석은 실제 연결 확인은 아직 |
 | **Clinic** | 교육 알림(미이수 독촉 등) | 자동 로그인 연결 | Clinic 이 발급한 키 · 토큰 | 만들어져 있음 · 실제 연결 확인은 아직(Clinic 을 설치하지 않음) |
 | HIS 인앱 알림 | — | — | — | 아직 없음 — 알림은 메일 · 그룹웨어로 보냅니다 |
@@ -150,32 +161,34 @@ flowchart TB
 
 ## 6. 설치 · 운영
 
-> **EN** — edu runs as four containers (API, web, PostgreSQL 16, Redis 7) and needs no GPU. HIS must be reachable before anyone can sign in, so database passwords, the HIS address and the shared value go into the environment file before first start; the first administrator is an HIS administrator, and everything else is set on the settings screen. The production install order that worked in the follow-along adds two steps the repository's guide leaves out — creating the institution row and applying the app database role with row-level security. There is no backup script in the repository.
+> **EN** — edu runs as four containers (API, web, PostgreSQL 16, Redis 7) and needs no GPU. HIS must be reachable before anyone can sign in, so database passwords, the HIS address and the shared value go into the environment file before first start; the first administrator is an HIS administrator, and everything else is set on the settings screen. A hospital installing it for itself uses the single-institution deployment and follows one table, "installing for one hospital". That order, which worked in the September 2026 test installs, adds two steps the repository's guide leaves out — creating the institution row and applying the app database role with row-level security. There is no backup script in the repository.
 
 ### 필요한 것
 
 | 항목 | 내용 |
 |---|---|
 | 서버 | 컨테이너 4개(API · 웹 · PostgreSQL 16 · Redis 7). **GPU 는 필요 없습니다**(AI 연산은 AI Server 가 합니다). 저장소 안내는 메모리 2GB 이상을 적고 있습니다 |
-| 먼저 있어야 할 것 | **HIS**(필수 — 로그인이 HIS 를 거칩니다) · **sign**(이수증) — sign 없이 이수 기록만 쓰는 구성은 확인하지 못했습니다 |
+| 먼저 있어야 할 것 | **HIS**(필수 — 로그인이 HIS 를 거칩니다) · **sign**(이수증) — sign 없이 이수 기록만 쓰는 구성은 확인하지 못했습니다(5절) |
 | HIS 쪽 준비 | HIS 설정 `edu.url` 에 edu 주소를 넣어 사내교육 단추를 잇고, HIS 의 서명 비밀값을 edu 와 나눕니다([구축 가이드 S5](../build-guide/S5-management.md)) |
 | 네트워크 | 직원 브라우저와 **sign 서버가 같은 https 주소로 edu 에 닿아야** 합니다 — sign 은 https 로만 완료 통지를 보냅니다 |
 | 기관이 준비할 데이터 | 기관명 · 공개 주소 · 부서별 교육 담당과 **콘텐츠 검수 책임자** · 기관 고유 정보(온보딩 자료의 자리표시를 채움) |
 
-### 설치 순서 — 따라가기에서 실제로 된 순서
+### 병원 하나에 세울 때 — 이 순서만 따릅니다
+
+병원이 자기 서버에 세우는 경우는 모두 **단독 배포**입니다. 멀티테넌트 · 플랫폼 콘솔에 관한 설명은 건너뛰어도 됩니다. 아래는 2026년 9월 시험 설치에서 실제로 된 순서이고, 저장소의 기관 설치 안내에 빠진 3단계가 들어 있습니다.
 
 | 단계 | 하는 일 |
 |---|---|
-| 1 | 환경 파일 작성 — DB 비밀번호 두 개(관리용 · 앱 전용)를 새로 만들고, HIS 주소 · HIS 와 공유하는 값을 넣습니다. 로그인이 HIS 를 거치므로 **관리 화면에 들어가기 전에** 넣어야 합니다. 그 밖의 연동 값은 5단계에서 화면으로 넣습니다 |
+| 1 | 환경 파일 작성 — DB 비밀번호 두 개(관리용 · 앱 전용)를 새로 만들고, HIS 주소 · HIS 와 공유하는 값을 넣습니다. 앱 전용 비밀번호는 3단계에서 만드는 앱 전용 DB 역할이 씁니다. 로그인이 HIS 를 거치므로 **관리 화면에 들어가기 전에** 넣어야 합니다. 그 밖의 연동 값은 5단계에서 화면으로 넣습니다 |
 | 2 | 기동 → 스키마 반영 |
-| 3 | **기관 행 만들기 → 앱 전용 DB 역할 · 행 수준 보안 적용** → API 재기동 — 저장소의 기관 설치 안내에는 이 단계가 빠져 있습니다 |
+| 3 | **기관 행 만들기 → 앱 전용 DB 역할 · 행 수준 보안 적용** → API 재기동 — 단독 배포여도 필요합니다. 운영용 구성은 API 가 앱 전용 역할로 DB 에 붙고, 시작할 때 기관 목록을 읽기 때문입니다. 저장소의 기관 설치 안내에는 이 단계가 빠져 있습니다 |
 | 4 | 기본 콘텐츠 반입(커리큘럼 · 법정교육 · 요약 · 시험 문항 · 온보딩) |
 | 5 | HIS 관리자 계정으로 들어가 관리 화면에서 sign · AI · 메일 · 그룹웨어 설정 → **연결 점검** |
 
 - 운영용 컨테이너 설정은 **HIS · sign · AI 와 같은 서버의 호스트 네트워크**를 전제로 합니다. 즉 네 컨테이너가 그 서버의 네트워크를 그대로 씁니다. 서버를 나누려면 컨테이너 설정의 네트워크와 주소 값을 고쳐야 하며, 그 방법은 저장소에 없습니다.
 - 스키마를 바꾸는 명령은 행 수준 보안을 붙이지 않습니다. 새 테이블이 생기면 보안 적용 절차를 다시 돌립니다.
 - 새로 설치하면 **AI 주소 · 키가 비어 있습니다.**
-- 규모 — 몇 명까지 쓸 수 있는지 · 동영상 저장 용량은 계측하지 않았습니다. 저장소 안내는 메모리 2GB 이상만 적습니다.
+- 규모 — 몇 명까지 쓸 수 있는지 · 동영상 저장 용량은 계측하지 않았습니다. 저장소 안내는 메모리 2GB 이상만 적습니다. 동영상을 많이 쓰는 기관에서 이 값으로 충분한지는 확인하지 못했습니다.
 
 ### 백업 · 감시
 
@@ -206,7 +219,7 @@ flowchart TB
 
 - 🔴 **HIS 없이는 쓸 수 없습니다** — 두 로그인 길(3절) 모두 HIS 계정을 씁니다. edu 만의 계정이나 다른 외부 로그인은 설계만 있고 만들어지지 않았습니다. HIS 가 멈추면 edu 에도 들어갈 수 없습니다.
 - 🔴 **이수증과 이수 자료가 기본으로는 로컬 볼륨 한 곳에만 있습니다** — 저장소에 백업 스크립트가 없습니다. 법정 증빙이므로 개시 전에 백업이나 외부 아카이브를 정합니다.
-- **설치 안내만으로는 서지 않습니다** — 기관 행 · 앱 전용 DB 역할 단계가 빠져 있고, 운영용 구성은 호스트 네트워크를 전제로 합니다(6절 순서를 따릅니다). 또 기관 설치 안내는 「멀티테넌트 보류 · 한 배포 = 한 기관」이라고 적습니다. 이 문장은 멀티테넌트가 들어오기 전(v1.5.0)에 쓰였고, 그 뒤 v2.0.0 에서 들어왔습니다. 단독 배포 절차로는 그대로 따를 수 있습니다.
+- **설치 안내만으로는 서지 않습니다** — 기관 행 · 앱 전용 DB 역할 단계가 빠져 있고, 운영용 구성은 호스트 네트워크를 전제로 합니다(6절 순서를 따릅니다). 또 기관 설치 안내는 「멀티테넌트 보류 · 한 배포 = 한 기관」이라고 적습니다. 이 문장은 멀티테넌트가 들어오기 전(v1.5.0)에 쓰였고, 그 뒤 v2.0.0 에서 들어왔습니다. 병원 하나에 세울 때는 이 문장과 상관없이 6절 순서를 따르면 됩니다.
 - **기본 콘텐츠는 초안 · 검수 상태**입니다. 법정교육 마스터는 한국 법령 기준이라, 기관이 자기 나라 · 자기 시점의 기준으로 검토하고 병원 고유 정보를 채운 뒤 노출합니다. 한국 병원이어도 최신인지는 기관의 검수 책임자가 확인합니다.
 - **API 서버는 하나로 운영합니다** — 감사 로그의 해시체인이 한 프로세스 안의 순서에 기대고 있습니다.
 - **HIS 의 자격(면허) 변경은 반영하지 않습니다** — 자격에 따라 달라지는 교육은 개인 예외로 관리합니다.

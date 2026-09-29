@@ -22,9 +22,20 @@ What is not there yet, stated plainly: transmission to external agencies (insura
 
 ## 1. 한 문장
 
-> **EN** — HIS runs the day-to-day work of a hospital in one system and is the hub every other system in the ecosystem connects to.
+> **EN** — HIS runs the day-to-day work of a hospital in one system and is the hub every other system in the ecosystem connects to. At a glance: usable now for trial installs and review, but real operation still needs the hospital's own code masters, code edits for the hospital name and a separate path for claims to insurers; it runs on one server with no other system required.
 
 **HIS 는 병원의 하루 업무(접수부터 진료 · 검사 · 약 · 수납 · 경영지원까지)를 한 시스템에서 처리하고, 생태계의 다른 시스템이 모두 붙는 중심입니다.**
+
+### 한눈에 — 도입 판단
+
+| | |
+|---|---|
+| **지금 쓸 수 있나** | **조건부.** 시험 설치와 기능 검토는 지금 됩니다. 실운영에는 코드 마스터 반입 · 병원 이름을 코드에서 고치기 · 보험 청구 전송을 따로 마련하기가 필요합니다(§8) |
+| **세워야 하는 것** | 서버 한 대(GPU 없음)에 API 서버 · 직원 웹 · 상시 감시자(별도 프로세스) · PostgreSQL 16 · Redis 7 · PDF 렌더러(별도 컨테이너) |
+| **먼저 있어야 할 것** | 다른 시스템은 없어도 됩니다. 기관이 준비할 것은 코드 마스터(약가 · 진단 · 수가 · 검사) · 기관 정보 · 부서 · 병상 · 직원 · 필수 설정 · 운영 모드 결정입니다 |
+| **받을 코드** | 이 소개서는 **현재 개발본**(버전 번호 없음 · v4.19.0 이후)을 설명하고, 새 설치 스크립트는 여기에만 있습니다. 통합 릴리즈 코드(v4.18.0)는 [구축 가이드 S1](../build-guide/S1-core-his.md)의 우회 순서로 세웁니다 · [소스 받기](../SOURCES.md) |
+| **실제로 확인된 것** | 2026년 9월 시험 설치(통합 릴리즈 코드 · 가상 데이터)에서 LIS · sign · ERP · edu 연결 일부를 실제로 불러 확인했습니다. 다만 LIS 는 HIS 기본 검사 코드 15개 중 3개만 매핑돼 있었고, 현재 개발본으로는 다시 부르지 않았습니다(§5) |
+| **아직 모르는 것** | 사용자 수에 맞춘 서버 사양 · 빈 서버에서의 설치 · 운영용 컨테이너 구성(compose)으로 끝까지 띄우기 · 서버 이중화와 복구 목표 시간 · 이관에 걸리는 시간 · HIS 가 멈췄을 때 다른 시스템의 동작 |
 
 병원 정보 체계에서 HIS 는 **정본**(正本 — 여러 곳에 같은 정보가 있을 때 기준이 되는 원본)을 가진 자리입니다. 환자 · 진료 · 오더 · 간호기록 · 수납 정보의 원본이 HIS 에 있고, 검사 · 영상 · 서명 · 경영 시스템은 HIS 와 주고받습니다.
 
@@ -33,6 +44,8 @@ What is not there yet, stated plainly: transmission to external agencies (insura
 > **EN** — Almost every department uses HIS: front desk, doctors, nurses, pharmacists, lab and imaging staff, medical records, checkup center, administration and executives. The menu shows each role only what it needs — an administrator sees 272 menu items, a doctor 122, a nurse 95.
 
 거의 모든 부서가 씁니다. 역할마다 보이는 메뉴가 다릅니다(웹 메뉴 **272개** 가운데 역할별로 보이는 수 — 현재 개발본의 메뉴 정의를 센 값).
+
+아래 수는 규모가 아니라 **권한 설계**를 보여 줍니다. 한 메뉴가 여러 역할에 보이므로, 역할별 수를 더하면 272 를 넘습니다.
 
 | 누가 | 무엇을 하나(예) | 보이는 메뉴 |
 |---|---|---:|
@@ -73,7 +86,7 @@ What is not there yet, stated plainly: transmission to external agencies (insura
 
 - **구축 관리** — 개원 단계(60항목) · 운영 전환 관제(60항목) · 사람이 정할 것을 모은 결정 등록부(156건).
 - **안전 장치** — 안전 게이트 28개(끔 · 경고 · 차단) · 운영 모드 세 단계 · 밖으로 나가는 통로를 모은 대외 발신 관제 · 값의 출처(DB / 기본값 / 미설정)를 보여 주는 설정 화면.
-- **상시 감시자** — 1시간마다 데이터 정합성 · 흐름 · 연동 계약 · 파이프(백업 등)를 훑고, 판정하지 못한 것은 0 이 아니라 「관측 불가」로 남깁니다.
+- **상시 감시자** — 1시간마다 **네 축**을 훑습니다. 네 축은 데이터 정합성 · 업무 흐름 · 연동 계약 · 파이프(백업 등)입니다. 판정하지 못한 것은 0 이 아니라 「관측 불가」로 남깁니다.
 - **감사** — 모든 쓰기 요청과 환자 정보 열람을 감사 로그에 남깁니다(값이 아니라 필드 이름만).
 
 전체 메뉴 표: [HIS 메뉴 구성](../systems/his-domains.md)(통합 릴리즈 `2026.09` 기준 목록 — 지금 메뉴와의 차이는 §9) · 업무별로 다시 묶은 것: [업무별 기능 지도](../functions/) · 기능 하나를 자세히: [주요 기능 41편](../functions/detail/).
@@ -136,19 +149,24 @@ flowchart LR
 | **로컬 디스크** | 업로드 파일 · 진료 첨부 · 녹음 원본 · 홈페이지 미디어 |
 
 - **메시지 브로커가 없습니다.** 다른 시스템으로 보낼 이벤트는 DB 의 outbox 테이블에 쌓입니다. 정해진 시각마다 도는 예약 작업(크론 · 59개)이 이것을 보내고, 실패하면 다시 시도합니다(최대 6회).
-- 같은 이벤트가 두 번 나가지 않게 대기열의 이벤트마다 **멱등키**(같은 요청이 여러 번 와도 한 번만 처리되게 하는 식별값)를 붙입니다. 업무 종류와 대상 번호의 짝이 그 키입니다.
+- 같은 이벤트가 두 번 나가지 않게 대기열의 이벤트마다 **멱등키**(같은 요청이 여러 번 와도 한 번만 처리되게 하는 식별값)를 붙입니다. 키는 업무 종류와 대상 번호를 이어 붙인 값이라, 같은 업무 · 같은 대상이면 같은 키가 됩니다.
 - **API 모양** — REST 는 모듈 220개 · 핸들러 약 3,300개입니다. 형제 시스템 연결은 대부분 이 REST 로 오갑니다.
 - **표준 표면** — FHIR R4(의료 데이터 국제 표준 · 리소스 17종)는 LIS 와 차트에서 여는 앱들이 씁니다. 검사 오더는 LIS 가 FHIR 로 읽어 가고, 결과는 FHIR 로 넣습니다. FHIR 표면으로 받는 쓰기는 이 검사 결과뿐입니다.
-- **SMART on FHIR** — 의사가 환자 차트를 연 채로 외부 앱 단추를 누르면, 그 환자와 로그인 정보가 앱으로 넘어가 다시 로그인하지 않고 열립니다. 서버끼리 쓰는 토큰 발급도 이 표준으로 합니다.
+- **SMART on FHIR** — 의사가 환자 차트를 연 채로 외부 앱 단추를 누르면, 그 환자와 로그인 정보가 앱으로 넘어가 다시 로그인하지 않고 열립니다. 사람이 아니라 서버가 HIS 에 접속할 때(예: LIS)도 이 표준의 토큰 발급 방식을 씁니다.
 - **권한** — 역할 14개(의사 · 간호 · 약사 · 임상병리 · 원무 · 의무기록 · 검진 · 경영 · 관리자 등)와 세부 권한 63개. 화면 메뉴와 API 양쪽에서 역할을 확인합니다.
 
 ## 5. 다른 시스템과의 연결
 
 > **EN** — HIS works alone, and the other systems attach to it one at a time. It issues the staff identity that the others accept (verified by public key in sign, PACS, edu, twin and cerno; by a shared secret in ERP and Jitsi; by an API key in Clinic). Not every system uses the HIS login — LIS staff sign in to LIS itself. Lab orders and results move over FHIR R4, AI requests go to the AI Server, signatures go to sign, and billing lines go to ERP. Parts of the lab, signature, billing and e-learning links were called for real between fresh installs of the September 2026 release; AI Server paths were partly called but none end to end; nothing has been re-called on the current development line.
 
-**HIS 는 혼자 동작하고, 다른 시스템은 필요할 때 하나씩 붙습니다.** 직원 로그인도 HIS 가 맡습니다 — 직원은 HIS 에 로그인하고, HIS 가 발급한 신원을 다른 시스템이 받아들입니다.
+**HIS 는 혼자 동작하고, 다른 시스템은 필요할 때 하나씩 붙습니다.** AI Server 가 없어도 HIS 는 돌고, AI 기능만 쓰지 못합니다.
 
-다만 모든 시스템이 HIS 로그인을 쓰지는 않습니다. 아래 표의 인증 칸처럼 받아들이는 방식이 시스템마다 다르고, **LIS 는 직원이 LIS 에 따로 로그인**합니다. LIS 와 HIS 사이는 서버끼리 쓰는 토큰으로 오갑니다.
+직원 로그인은 두 갈래입니다.
+
+- **HIS 로그인을 받아들이는 시스템** — sign · PACS · edu · twin · cerno · ERP · Jitsi · Clinic. 직원은 HIS 에 로그인하고, 이 시스템들은 HIS 가 발급한 신원을 받아들입니다. 받아들이는 방식은 아래 표의 인증 칸처럼 시스템마다 다릅니다.
+- **따로 로그인하는 시스템** — LIS. 직원은 LIS 에 따로 로그인하고, LIS 와 HIS 사이는 서버끼리 쓰는 토큰으로 오갑니다.
+
+HIS 가 멈췄을 때 다른 시스템의 로그인 · 서명이 어떻게 되는지는 확인하지 못했습니다.
 
 ```mermaid
 flowchart TB
@@ -167,7 +185,7 @@ flowchart TB
 
 | 상대 | HIS 가 주는 것 | HIS 가 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **LIS** | 검사 오더 · 환자 정보 · 검사 코드 목록 | 검사 결과 · 취소 | 서버 간 표준 토큰(SMART) · 연동 키 | 오더 · 결과 · 취소 · 환자 조회 · 검사 코드 반입 **확인함**(2026-09-14~15) · 다만 HIS 기본 시드의 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개 · 반사 검사 · 수혈 동의 · 조직 결재 조회는 만들어져 있음 · 실제 연결 확인은 아직 |
+| **LIS** | 검사 오더 · 환자 정보 · 검사 코드 목록 | 검사 결과 · 취소 | 서버 간 표준 토큰(SMART) · 연동 키 | **확인함 5**(2026-09-14~15): 오더 · 결과 · 취소 · 환자 조회 · 검사 코드 반입 — 다만 HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있던 것은 3개<br/>**아직 3**: 반사 검사 · 수혈 동의 · 조직 결재 조회는 만들어져 있음 · 실제 연결 확인은 아직 |
 | **sign** | 서명 요청 · 직원 신원(공개키) | 서명 완료 통지 | HIS 공개키로 검증 · 서명된 통지 | 직원 서명 · 완료 통지 · 오더 서명 봉인 **확인함**(2026-09-14) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 실제 연결 확인은 아직 |
 | **ERP** | 직원 로그인 · 수납 · 운영 이벤트 | 진료비 계산서 · 청구 라인 · 보험 코드 · 정산 회신 | 공유 비밀키 · 연동 키 | 로그인 · 계산서 · 청구 라인 · 보험 코드 매핑 등 **확인함**(2026-09-14~15) · 일부 경로는 아직 |
 | **edu** | 직원 로그인 · 공개키 · 직원 명부 | 교육 이수 기록 | HIS 공개키로 검증 · 연동 키 | 네 경로 모두 **확인함**(2026-09-14) |
@@ -181,7 +199,7 @@ flowchart TB
 
 ## 6. 설치 · 운영
 
-> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU; sizing for a given number of users was not measured. A new install uses the install script (seven steps, rehearsed so far only in a local container); updating an existing server uses the deploy script, which applies the schema differently. The repository names the install script, not the production compose file, as the verified path. Four settings are required just to start, and the real mode refuses to boot until the security settings are filled. Most runtime values are changed in the admin screen; the AI server address is set by environment variable. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
+> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU; sizing for a given number of users was not measured. A new install uses the install script (seven steps, rehearsed so far only in a local container); updating an existing server uses the deploy script, which applies the schema differently, and the repository says not to mix the two. The repository points new sites to the install script rather than the production compose file, though neither has been proven on a real empty server. Four settings are required in every mode; an unset mode counts as real, which also requires the security settings. Most runtime values are changed in the admin screen; the AI server address is set by environment variable. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
 
 ### 필요한 것
 
@@ -199,9 +217,12 @@ flowchart TB
 | 내 경우 | 쓰는 것 | 스키마(테이블 구조)를 맞추는 방식 |
 |---|---|---|
 | **빈 서버에 새로 설치** | 설치 스크립트(아래 7단계 · 현재 개발본에서 새로 생김) | 마이그레이션 — 변경 이력 파일을 차례로 적용 |
-| **이미 돌고 있는 서버를 갱신** | 배포 스크립트(빌드 → 프로세스 관리자로 재시작) | 이력 없이 현재 정의에 DB 를 바로 맞추는 별도 방식 |
+| **이미 돌고 있는 서버를 갱신** | 배포 스크립트(빌드 → 프로세스 관리자 pm2 로 재시작) | Prisma 의 `db push` — 변경 이력 없이 지금의 스키마 정의에 DB 를 바로 맞춤 |
 
-두 길이 갈린 이유는 기존 운영 서버가 마이그레이션 이력 없이 세워졌기 때문입니다. **새로 세우는 기관은 첫 번째 길만 봅니다.** 기존 서버를 마이그레이션 방식으로 옮기는 절차는 저장소에서 찾지 못했습니다.
+두 길이 갈린 이유는 기존 운영 서버가 마이그레이션 이력 없이 세워졌기 때문입니다. 저장소의 설치 안내는 **두 길을 섞지 말라**고 적습니다. **새로 세우는 기관은 첫 번째 길만 봅니다.**
+
+- 배포 스크립트에는 마이그레이션을 적용하는 단계가 없습니다. 그래서 새로 설치한 서버를 나중에 갱신하는 절차는 저장소에서 찾지 못했습니다.
+- 기존 서버를 마이그레이션 방식으로 옮기는 절차도 찾지 못했습니다.
 
 설치 스크립트의 7단계는 이렇습니다.
 
@@ -218,13 +239,13 @@ flowchart TB
 
 이 스크립트는 저장소 측이 로컬 컨테이너에서 한 번 돌려 본 것이고, 실제 빈 서버 설치는 아직입니다(§8).
 
-**컨테이너로 가려면** — 운영용 compose 에도 스키마 적용 · 첫 관리자 · 상시 감시자 서비스가 들어갔습니다. 그러나 저장소는 compose 로 끝까지 올려 본 기록이 없다고 적고, **설치 스크립트를 기준 경로로** 둡니다. 그 설치 스크립트도 실제 빈 서버에서는 아직이라는 점은 위와 같습니다. compose 로 세우려면 기관이 처음부터 끝까지 올려 확인해야 합니다.
+**컨테이너로 가려면** — 운영용 compose 에도 스키마 적용 · 첫 관리자 · 상시 감시자 서비스가 들어갔습니다. 그러나 저장소는 compose 로 끝까지 올려 본 기록이 없다고 적고, 새 기관에는 설치 스크립트를 **먼저 안내**합니다. 둘 다 실제 빈 서버에서는 아직입니다. compose 로 세우려면 기관이 처음부터 끝까지 올려 확인해야 합니다.
 
 ### 꼭 넣어야 하는 설정
 
-- **없으면 시작하지 않는 것(4)** — 데이터베이스 주소 · 로그인 토큰 서명 비밀 두 개 · 개인정보 암호화 키.
+- **어느 모드에서든 없으면 시작하지 않는 것(4)** — 데이터베이스 주소 · 로그인 토큰 서명 비밀 두 개 · 개인정보 암호화 키.
 - **리얼 모드에서 추가로** — PDF 렌더러 토큰 · 문서 서명 비밀 등이 비어 있거나 개발용 스위치가 켜져 있으면 **부팅을 거부하고 무엇이 빠졌는지 말합니다.**
-- **운영 모드를 정하지 않으면 리얼 모드로 봅니다**(가장 엄격한 쪽). 시험 설치라면 리허설 모드를 명시합니다.
+- **운영 모드를 정하지 않으면 리얼 모드로 봅니다**(가장 엄격한 쪽). 그래서 넷만 넣고 모드를 비워 두면 위의 추가 설정 때문에 부팅이 거부됩니다. 시험 설치라면 리허설 모드를 명시합니다.
 - 운영 중 바꾸는 값(약 395개 — 기관 정보 · 청구 규칙 · AI 스위치 · 연동 주소 등)은 환경 변수가 아니라 **관리 화면의 시스템 설정**에서 바꿉니다. 화면은 그 값이 어디서 왔는지(DB · 기본값 · 미설정)를 보여 줍니다.
 - 예외로 **배포로만 바꾸는 값**이 있습니다. 현재 개발본에서는 AI 서버 주소 하나이고, 관리 화면에서는 고칠 수 없으며 환경 변수(`AI_SERVER_URL`)로 정합니다.
 
@@ -243,7 +264,7 @@ flowchart TB
 - **백업** — 매일 DB 를 암호화해 덤프하고, 같은 시각에 **업로드 파일도 암호화 아카이브**로 남깁니다. **2차 사본**(다른 매체 · 서버로 복사하고 해시 확인)과 **복원 시험**(빈 임시 DB 에 복원해 행 수 대조) 스크립트가 있습니다. 기본은 **HIS 데이터베이스만** 백업합니다 — 같은 서버에 다른 시스템의 DB 가 있으면 따로 지정합니다.
 - **상태 확인** — 헬스 체크 주소(살아 있나 · 준비됐나 · 버전) · 관리자용 지표.
 - **상시 감시자** — 1시간마다 네 축을 판정하고 관리 화면에 보여 줍니다. 백업 상태도 감시자와 운영 전환 관제가 읽습니다.
-- **배포 스크립트** — 단일 서버용 갱신 도구입니다. 스키마를 맞추는 방식은 위 「설치 경로」 표에 있습니다.
+- **배포 스크립트** — 이미 돌고 있는 단일 서버를 갱신하는 도구입니다. 새 설치와의 관계는 위 「설치 경로」에 있습니다.
 
 자세한 설치 · 설정 순서: [구축 가이드 S1](../build-guide/S1-core-his.md)(통합 릴리즈 `2026.09` 기준 · 설치 스크립트가 생기기 전의 우회 순서가 적혀 있습니다).
 
@@ -263,17 +284,20 @@ flowchart TB
 
 ## 8. 알아 둘 것
 
-> **EN** — Not there yet: transmission to external agencies (7 of the 13 outbound channels, none built); an SMS provider; the hospital name is still fixed text in 124 files; the install script is rehearsed only in a local container and the production compose file never brought up end to end; the default backup covers only the HIS database and uploads; no licence has been chosen; UI translations are all AI drafts; and the national rules cover Korea and the UAE only.
+> **EN** — Not there yet: transmission to external agencies (7 of the 13 outbound channels, none built); an SMS provider (only 2 of the 13 channels are built, both messaging); the hospital name is still fixed text in 124 files; the install script is rehearsed only in a local container and the production compose file never brought up end to end; the default backup covers only the HIS database and uploads; no licence has been chosen; UI translations are all AI drafts; and the national rules cover Korea and the UAE only.
 
 - 🔴 **대외 기관 전송이 없습니다** — 밖으로 나가는 통로 13개 가운데 7개가 대외 기관 전송입니다. 보험 청구 전송 · 감염병 신고 · 진료정보교류 · 마약류 보고 등 7개 모두 구현돼 있지 않습니다. 청구서는 작성까지이고, 전송은 기존 청구 소프트웨어를 함께 쓰거나 모듈을 붙입니다. 두 소프트웨어를 함께 쓰는 구체 절차는 이 자료에 정리하지 않았습니다.
-- **문자 발송 제공자가 없습니다** — 13개 가운데 나머지 6개는 환자 · 직원에게 가는 메시지 통로이고, 구현된 것은 2개(이메일 · 포털 안 알림)입니다. 이메일은 제공자 하나(Resend)와 연동돼 있고, 문자는 제공자 코드가 없습니다.
-- 🔴 **병원 이름이 코드에 고정 문자열로 남아 있습니다** — HIS 저장소가 스스로 잡아 둔 기준선으로 124개 파일 · 217곳입니다(그중 공개 홈페이지 앱이 40개 파일). 늘지 않게 막아 두었을 뿐 줄지는 않았습니다. 법정 서식 일부도 데모 기관 값을 찍습니다. 자기 기관 이름을 넣으려면 아직 코드를 고쳐야 합니다.
+- **문자 발송 제공자가 없습니다** — 13개 가운데 나머지 6개는 환자 · 직원에게 가는 메시지 통로입니다. 그 6개 중 구현된 것은 2개입니다.
+  - 구현됨: 검진권 인증코드 이메일(제공자 Resend) · 환자 포털 안 알림.
+  - 구현 안 됨: 범용 이메일(발송 라이브러리가 없음) · 문자 · WhatsApp · WeChat.
+  - 13개를 합쳐 보면 구현된 것은 2개입니다(대외 기관 7개는 모두 0).
+- 🔴 **병원 이름이 코드에 고정 문자열로 남아 있습니다** — HIS 저장소가 스스로 잡아 둔 기준선으로 124개 파일 · 217곳입니다(그중 공개 홈페이지 앱이 40개 파일). 늘지 않게 막아 두었을 뿐 줄지는 않았습니다. 법정 서식 일부도 데모 기관 값을 찍습니다. 자기 기관 이름을 넣으려면 아직 코드를 고쳐야 합니다. 다른 문서의 「118개」는 통합 릴리즈 코드를 다른 규칙으로 센 값입니다(근거 절).
 - 🔴 **지금 시작해도 되나 — 설치는 아직 실제 서버에서 검증되지 않았습니다** — 새 설치 스크립트는 저장소 측이 로컬 컨테이너에서 한 번 돌려 본 것이고, 빈 서버 설치는 아직입니다. 운영용 compose 는 끝까지 올려 본 기록이 없습니다. 연결을 실제로 불러 본 것도 통합 릴리즈 기준 설치본이었습니다(§5).
-- **코드 마스터는 기관이 채웁니다** — 필수 코드 마스터 가운데 출처가 확인된 것은 약가 한 가지입니다. 진단 · 수가 · 검사 코드는 기관이 받아 넣습니다. 기존 시스템에서 옮겨 오는 도구는 환자 일괄 등록 API 하나입니다(통합 릴리즈 기준 · [구축 가이드 S8](../build-guide/S8-go-real.md)).
+- **코드 마스터는 기관이 채웁니다** — 필수 코드 마스터 가운데 출처가 확인된 것은 약가 한 가지입니다. 진단 · 수가 · 검사 코드는 기관이 받아 넣습니다. 기존 시스템에서 옮겨 오는 도구는 환자 일괄 등록 API 하나입니다(통합 릴리즈 기준 · [구축 가이드 S8](../build-guide/S8-go-real.md)). 진료 · 처방 이력의 이관 범위와 순서는 기관이 설계하고, 이관에 걸리는 시간은 계측하지 않았습니다.
 - **백업 기본값은 HIS DB 와 업로드 파일**입니다. 다른 시스템의 DB · 원격지 백업 · 재해 복구는 기관이 준비합니다. 운영용 compose 는 API · 웹을 두 벌씩 띄우지만 한 서버 안의 일입니다. 서버 이중화와 복구 목표 시간은 확인하지 못했습니다.
-- **안전 게이트 28개 중 18개는 꺼진 채로 옵니다** — 기관이 정해서 켭니다. 첫 로그인 뒤 비밀번호 변경은 안내만 하고 강제하지 않습니다.
+- **안전 게이트 28개 중 18개는 꺼진 채로 옵니다** — 기관이 정해서 켭니다. 게이트가 꺼져 있으면 그 보호가 없다는 뜻입니다. 밖으로 나가는 통로가 기본 꺼짐인 것(나가지 않는 쪽이 안전)과 방향이 반대입니다. 첫 로그인 뒤 비밀번호 변경은 안내만 하고 강제하지 않습니다.
 - **라이선스와 지원 주체가 정해지지 않았습니다** — 저장소의 고지 파일이 제품 라이선스를 「미정 — 사람 결정 필요」로 적고 있습니다. 전자의무기록 인증 같은 외부 인증 · 승인의 증빙은 이 자료에 없습니다.
-- **화면 번역은 모두 AI 초안**이고 사람이 검수한 것은 아직 없습니다(기본 한국어 · 영어 · 일본어 카탈로그 + 추가 언어 팩 6개). **국가 규칙은 한국 · UAE 두 곳**이고 청구 · 코드 마스터는 한국 제도 기준입니다.
+- **화면 번역은 모두 AI 초안**이고 사람이 검수한 것은 아직 없습니다(기본 한국어 · 영어 · 일본어 카탈로그 + 추가 언어 팩 6개). **국가 규칙은 한국 · UAE 두 곳**입니다 — 나라별 규칙을 담는 자리(국가 축)에 지금 들어 있는 나라가 이 둘입니다. 청구 · 코드 마스터는 한국 제도 기준입니다.
 
 전체 한계와 대체 수단: [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) · [지금 알고 시작해야 할 것](../README.md#지금-알고-시작해야-할-것).
 
@@ -281,7 +305,7 @@ flowchart TB
 
 > **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 485 commits: only 7 of them form v4.19.0; the other 478 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, and the AI server address now settable by environment variable.
 
-이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **485커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **478커밋은 아직 번호가 없는 개발본**입니다.
+이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **485커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **478커밋은 아직 번호가 없는 개발본**입니다. 이 소개서가 설명하고 설치 스크립트가 들어 있는 것은 이 개발본입니다(받을 코드는 §1 「한눈에」).
 
 | 영역 | 달라진 것 |
 |---|---|

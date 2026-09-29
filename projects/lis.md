@@ -20,9 +20,20 @@ What is not there yet, stated plainly: automatic result capture from analysers l
 
 ## 1. 한 문장
 
-> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR.
+> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR. At a glance: usable with HIS in place once test codes are mapped and the laboratory has signed its reference and critical values; the main HIS links were confirmed in September 2026, but with only 3 of 15 starter test codes mapped, three HIS links still unconfirmed, and an install script that needs manual steps.
 
 **LIS 는 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사의 전 과정을 처리하는 검사실 시스템이며, HIS 에서 검사 처방을 받아 검증된 결과를 돌려줍니다.**
+
+### 한눈에 — 도입 판단
+
+| | |
+|---|---|
+| **지금 쓸 수 있나** | **조건부.** HIS 가 먼저 있어야 하고, 개시 전에 검사 코드 매핑과 참고치 · 위험치 서명을 끝내야 합니다. 장비 결과를 자동으로 받으려면 중계 장치나 파일 반입이 필요합니다(§8) |
+| **세워야 하는 것** | Docker 호스트 하나에 컨테이너 셋(PostgreSQL 16 · API · 웹)과, 서버의 예약 작업으로 도는 매일 백업. 캐시 · 메시지 브로커 · GPU 는 없습니다 |
+| **먼저 있어야 할 것** | HIS(검사 처방 · 서버 간 자격 · 코드 카탈로그 키) · 검사 코드 매핑 · 검사실과 법무가 서명한 참고치 · 위험치 · 수가 코드 · TLS · DNS · 방화벽 · 백업 저장소 · LIS 직원 계정. PACS · ERP 는 필요할 때 |
+| **받을 코드** | LIS 저장소의 현재 개발본은 **통합 릴리즈 코드와 같습니다** · [소스 받기](../SOURCES.md). 설치 스크립트는 그대로는 끝나지 않으므로 [구축 가이드 S3](../build-guide/S3-clinical-departments.md)의 순서를 함께 봅니다(§6) |
+| **실제로 확인된 것** | 2026년 9월 시험 설치(가상 데이터)에서 HIS 와의 오더 · 취소 · 결과 · 환자 조회 · 코드 반입, PACS 병리 슬라이드 두 경로, ERP 청구를 실제로 불러 확인했습니다. **다만 HIS 기본 검사 코드 15개 중 LIS 에 매핑된 것은 3개**라, 나머지 코드의 오더는 흐르지 않았습니다 |
+| **아직 모르는 것** | HIS 와의 세 경로(반사 검사 · 수혈 동의 · 조직 결재)의 실제 동작 · 하루 검체 수와 동시 사용자에 맞춘 사양 · 기존 검사실 시스템의 데이터를 옮기는 방법 · 어떤 장비 중계 장치를 쓸지 |
 
 병원 정보 체계에서 LIS 는 **임상 부서** 계층에 있습니다. 검사 처방의 원본은 HIS 에 있고, 검체 · 결과 · 정도관리 · 검사실 판정의 원본은 LIS 에 있습니다.
 
@@ -51,19 +62,20 @@ What is not there yet, stated plainly: automatic result capture from analysers l
 
 ## 3. 할 수 있는 일
 
-> **EN** — Nine groups: the core laboratory flow, microbiology, pathology, transfusion, genomics, quality control, governance and go-live, pilot-data cleanup, and operations and audit. Forty-one web screens.
+> **EN** — Ten groups (the core laboratory flow split in two): the core laboratory flow, microbiology, pathology, transfusion, genomics, quality control, governance and go-live, pilot-data cleanup, and operations and audit. Forty-one web screens.
 
 웹 화면은 **41개**입니다(현재 개발본의 페이지 파일 수).
 
 | 묶음 | 무엇이 들어 있나 |
 |---|---|
-| **진단검사** | 처방 수신 → 접수 · 라벨 → 검체(분주 — 나눠 담기 · 거부 · 재채취) → 결과(장비 결과 파일 · 수기) → 자동 검증 · 델타 체크(같은 환자의 이전 결과와 비교) → 2차 검증 → 위험치 통보와 복창 기록 → HIS 회신 → 청구 |
+| **진단검사 — 접수 · 검체** | 처방 수신 → 접수 · 라벨 → 검체(분주 — 나눠 담기 · 거부 · 재채취) |
+| **진단검사 — 결과 · 회신** | 결과(장비 결과 파일 · 수기) → 자동 검증 · 델타 체크(같은 환자의 이전 결과와 비교) → 2차 검증 → 위험치 통보와 복창 기록 → HIS 회신 → 청구 |
 | **미생물** | 배양 → 그람 예비보고 → 동정 → 감수성(전문가 규칙) → 다제내성균 판정 · 격리 알림 → 법정감염병 신고 기록 → 누적 항균제 감수성 통계 |
 | **병리** | 접수 → 그로싱 → 블록 → 슬라이드(특수 염색 · 면역조직화학) → 동결절편 → 판독 → 구조화 보고 → 2단계 사인아웃 → 개정 · 추가 보고 → PACS 슬라이드 영상 보기 |
-| **수혈** | 혈액형 · 항체 → 입고 · 유효기간 → 교차시험 자동 판정 → ABO 부적합을 막는 독립 판정 → 출고(동의 상태 확인) → 시행(2인 확인) → 부작용 조사 |
+| **수혈** | 혈액형 · 항체 → 입고 · 유효기간 → 교차시험 자동 판정 → ABO 부적합을 막는 독립 판정 → 출고(동의 상태 확인 — HIS 쪽 확인 경로는 아직 실제 연결 확인 전이라, 지금은 사람이 확인 · §8) → 시행(2인 확인) → 부작용 조사 |
 | **유전체 · 분자진단 · NGS** | 동의 → 수탁 · 시퀀싱 → 변이 입력 → ACMG 기준 해석 → 확정 → 이차 소견 동의 게이트 → 보고서 서명 · 배포 → 재분류 |
 | **정도관리** | 내부 정도관리(Westgard 규칙 — 관리 물질 결과로 장비 이상을 잡는 통계 규칙) · 외부 정도관리 · 장비 목록 · 소요 시간과 재검률 통계. 정도관리 실패는 결과 확정을 막습니다 |
-| **거버넌스 · 개시 전환** | 반사 검사(Reflex — 결과에 따라 추가검사를 자동 제안) 승인 프로토콜 · 조직 결재 게이트 · 검사실 서명 기록. **개시 전환 센터**에서 체크리스트 · 개시 키(실운영 전환을 허락하는 값) · 전환 실행을 한 화면에서 합니다 |
+| **거버넌스 · 개시 전환** | 반사 검사(Reflex — 결과에 따라 추가검사를 자동 제안) 승인 프로토콜 · 조직 결재 게이트 · 검사실 서명 기록. **개시 전환 센터**에서 체크리스트 · 개시 키 · 전환 실행을 한 화면에서 합니다. 개시 키는 실운영 전에 꼭 넣어야 하는 설정 묶음입니다(위험치 통보 채널 · 운영 알림 · 원격지 백업 경로 · HIS · PACS 운영 자격) |
 | **파일럿 데이터 정리** | 시드(설치 때 넣은 기본 · 시험 데이터)가 만든 행만 지우고, 실제 환자 데이터가 보이면 멈춥니다. 요청과 승인을 다른 관리자가 따로 합니다 |
 | **운영 · 감사** | 연계 상태 · 실패 메시지 대기열과 재적재 · 다운타임 오더 · 외부 위탁 · 감사 기록 · 기능 × 역할 권한 |
 
@@ -120,11 +132,11 @@ flowchart LR
 
 > **EN** — LIS pulls orders and cancellations from HIS and sends results back over FHIR R4 with a server-to-server SMART token; it imports the HIS test-code catalogue with an integration key; it registers pathology scans with PACS over HL7 v2 and checks slide arrival over DICOMweb; and it sends charges to ERP with a signed request. Orders, cancellations, results, patient lookup, the code catalogue, the pathology worklist and viewer link, and billing were called for real in September 2026. Reflex add-on orders, the transfusion-consent lookup and the approval lookup are built but not yet confirmed end to end. The code catalogue link works, but only 3 of the 15 test codes in the HIS starter data were mapped in LIS. Staff sign in to LIS itself.
 
-**LIS 는 평소 HIS 에서 처방을 받고, PACS · ERP 는 필요할 때 붙입니다.** HIS 연결이 멈췄을 때는 LIS 에서 직접 오더를 만들 수 있습니다(다운타임 오더 · 사유 기록). 이 오더는 나중에 HIS 오더 번호와 맞춥니다.
+**LIS 는 평소 HIS 에서 처방을 받고, PACS · ERP 는 필요할 때 붙입니다.** PACS 와의 연결은 병리 슬라이드를 다루는 두 경로뿐입니다. HIS 연결이 멈췄을 때는 LIS 에서 직접 오더를 만들 수 있습니다(다운타임 오더 · 사유 기록). 이 오더는 나중에 HIS 오더 번호와 맞춥니다.
 
 직원 로그인은 LIS 자체 로그인을 씁니다. HIS 와 LIS 사이는 서버끼리의 토큰으로 오가므로, 직원 계정은 LIS 에서 따로 관리합니다.
 
-한눈에 보면 — **HIS 와는 오더 · 결과 · 취소 · 환자 조회 · 코드 반입을 확인했고, 반사 검사 · 수혈 동의 · 조직 결재의 세 경로는 확인 전입니다.** PACS · ERP 는 확인했고, 장비 직결과 HL7 v2 대체 경로는 아직 없습니다.
+정리하면 — **HIS 와는 오더 · 결과 · 취소 · 환자 조회 · 코드 반입을 확인했고, 반사 검사 · 수혈 동의 · 조직 결재의 세 경로는 확인 전입니다.** 코드 반입은 확인했지만 매핑된 검사 코드가 적었습니다(아래 표). PACS 병리 경로 · ERP 청구는 확인했고, 장비 직결과 HL7 v2 대체 경로는 아직 없습니다.
 
 ```mermaid
 flowchart TB
@@ -140,7 +152,7 @@ flowchart TB
 | 상대 | LIS 가 주는 것 | LIS 가 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
 | **HIS** — 오더 · 결과 | 검증된 결과 · 환자 이름 조회 | 검사 오더 · 취소(5분마다 가져옴) | 서버 간 표준 토큰(SMART 클라이언트 자격 — HIS 관리자가 LIS 를 서버 클라이언트로 등록해 내주는 아이디 · 비밀값) | 오더 · 취소 · 결과 · 환자 조회 **확인함**(2026-09-14~15) |
-| **HIS** — 검사 코드 | — | 검사 코드 카탈로그(전량 · 바뀐 것만) | 연동 키 | **확인함**(2026-09-15) · 다만 HIS 기본 시드의 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개 — 매핑이 없는 코드의 오더는 흐르지 않습니다 |
+| **HIS** — 검사 코드 | — | 검사 코드 카탈로그(전량 · 바뀐 것만) | 연동 키(코드 카탈로그를 부를 때 쓰는, HIS 가 내준 키) | **확인함**(2026-09-15) · 다만 HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개 — 매핑이 없는 코드의 오더는 흐르지 않습니다 |
 | **HIS** — 반사 검사 · 수혈 동의 · 조직 결재 | 추가검사 오더(의사 승인 대기로) | 승인 상태 · 수혈 동의 상태 · 결재 상태 | 서버 간 표준 토큰 · 연동 키 | 만들어져 있음 · 실제 연결 확인은 아직 |
 | **PACS** | 병리 슬라이드 스캔 워크리스트 등록 · 취소 | 슬라이드 도착 여부 · 뷰어 링크 | HL7 v2(자체 암호화 · 로그인이 없어 원내망 안에서 쓰는 전송) · PACS 읽기 전용 서비스 계정 | 두 경로 모두 **확인함**(2026-09-15) |
 | **ERP** | 검사 청구(수량) | 처리 상태 | 공유 비밀로 서명한 요청 | **확인함**(2026-09-15) |
@@ -151,7 +163,7 @@ flowchart TB
 
 ## 6. 설치 · 운영
 
-> **EN** — One host with Docker and compose, PostgreSQL 16 and no GPU; sizing for daily specimen volume was not measured. The install script generates secrets, checks migrations, loads the starter seed, registers the daily backup in the host's scheduler and prints the first administrator password once — but in the follow-along it did not finish as-is and needed workarounds. The institution prepares the operating system, firewall, TLS, DNS and backup storage. Before go-live, the HIS test codes must be imported and mapped, and site values such as the critical-value notification channel filled in.
+> **EN** — One host with Docker and compose, PostgreSQL 16 and no GPU; sizing for daily specimen volume was not measured. The install script generates secrets, checks migrations, loads the starter seed, registers the daily backup in the host's scheduler and prints the first administrator password once — but in the September 2026 trial it stopped at the migration check, could not simply be re-run, and the remaining steps had to be done by hand. The institution prepares the operating system, firewall, TLS, DNS and backup storage. Before go-live, the HIS test codes must be imported and mapped, and site values such as the critical-value notification channel filled in.
 
 ### 필요한 것
 
@@ -164,7 +176,7 @@ flowchart TB
 
 ### 설치 스크립트가 하는 일
 
-먼저 알아 둘 것 — 2026년 9월에 따라가 보았을 때 이 스크립트는 **그대로는 끝나지 않았습니다**(아래 표 다음 문단 · §8).
+먼저 알아 둘 것 — 2026년 9월 시험 설치에서 이 스크립트는 **그대로는 끝나지 않았습니다**(아래 표 다음 문단).
 
 | 단계 | 하는 일 |
 |---|---|
@@ -175,14 +187,19 @@ flowchart TB
 | 백업 | 서버의 예약 작업(cron)에 매일 새벽 백업을 등록합니다. 예약을 다른 도구로 관리하면 등록을 건너뛰는 선택지가 있습니다 |
 | 첫 관리자 | 초기 비밀번호를 **한 번만** 화면에 출력합니다 |
 
-사이트 코드와 https 공개 주소를 인자로 받고, http 주소는 거부합니다. 따라가기(2026-09-13~16)에서는 스크립트가 **성공한 단계를 실패로 판정하는 곳**이 있어 그대로는 끝나지 않았고, 운영 이미지로는 시드를 넣을 수 없었습니다 — 우회는 [구축 가이드 S3](../build-guide/S3-clinical-departments.md)에 있습니다.
+사이트 코드와 https 공개 주소를 인자로 받고, http 주소는 거부합니다. 2026년 9월 시험 설치에서 일어난 일은 이렇습니다.
+
+- 스크립트는 **마이그레이션 확인 단계에서 멈췄습니다.** 실제로는 적용됐는데 「찾지 못했다」로 판정했습니다.
+- **다시 돌리면 거부됩니다.** 앞에서 만든 환경 파일이 이미 있기 때문입니다. 그래서 남은 단계(시드 → 웹 기동 → 백업 일정)를 스크립트와 같은 명령으로 손으로 진행했습니다.
+- **운영 이미지 안에서는 시드가 돌지 않았습니다.** 시드를 건너뛰면 사용자 0명으로 떠 로그인할 수 없습니다.
+- 우회 순서는 [구축 가이드 S3](../build-guide/S3-clinical-departments.md)에 있습니다. 관리자 초기 비밀번호는 한 번만 출력되므로 설치 화면 기록을 남겨 둡니다.
 
 ### 꼭 넣어야 하는 설정
 
 - **DB · 로그인 토큰 비밀 · 공개 주소 · 사이트 코드** — 설치 스크립트가 만들거나 받습니다.
 - **HIS 연결** — HIS FHIR 주소 · 토큰 주소 · 클라이언트 자격 · 권한 범위, 그리고 코드 카탈로그용 연동 주소와 키. 오더 가져오기는 자격을 넣은 뒤 켭니다.
 - **PACS · ERP 연결** — 쓸 때만. 비어 있으면 그 연결을 쓰지 않습니다.
-- **위험치 외부 통보 채널 · 운영 알림 · 원격지 백업 경로** — 기관이 정해서 넣습니다. 개시 전환 센터 체크리스트가 입력과 완료를 확인합니다.
+- **위험치 외부 통보 채널 · 운영 알림 · 원격지 백업 경로** — 기관이 정해서 넣습니다(개시 키). 위험치 통보 채널은 기관이 정한 https 주소로 보내는 자동 알림 호출이고, 시험 발송이 성공해야 개시 전환 센터가 완료로 처리합니다.
 - **보존 기간 지난 데이터 파기** — 기본 꺼짐. 법무가 보존 기간을 확정한 뒤 켭니다.
 
 키 이름 전체: [LIS 구성서 §6](../systems/lis.md#6-주요-설정).
@@ -215,12 +232,14 @@ flowchart TB
 
 - 🔴 **검사 장비에서 결과를 자동으로 받는 저수준 연결이 없습니다** — ASTM · CSV 결과를 받는 API 와 장비 코드 매핑은 있지만, 장비의 직렬 · TCP 전송을 받는 부분은 없습니다. 장비와 LIS 사이에 **인터페이스 중계 장치**를 두거나, 결과 파일 · 수기 입력으로 운영합니다.
 - 🔴 **HIS 와의 세 경로는 아직 끝까지 확인하지 못했습니다** — 반사 검사 추가 오더 · 수혈 출고 전 동의 확인 · 조직 결재 참조. 개시 전까지 **수혈 동의는 사람이 확인하는 절차를 유지**합니다. LIS 는 확인되지 않으면 「대기」로 두고 출고를 자동 통과시키지 않습니다. 조직 결재는 LIS 관리 화면에서 사람이 기록하는 경로를 씁니다.
-- 🔴 **설치 스크립트가 그대로는 끝나지 않았고, 관리자 초기 비밀번호는 한 번만 출력됩니다** — 우회 순서는 [S3](../build-guide/S3-clinical-departments.md)에 있습니다. 설치 화면 기록을 남겨 두십시오.
+- 🔴 **설치 스크립트가 그대로는 끝나지 않았고, 관리자 초기 비밀번호는 한 번만 출력됩니다** — 무엇이 멈췄는지와 손으로 한 단계는 §6, 우회 순서는 [S3](../build-guide/S3-clinical-departments.md)에 있습니다. 설치 화면 기록을 남겨 두십시오.
 - **HL7 v2 대체 경로(HIS 구간)가 없습니다** — FHIR 주 경로를 쓰고, 멈췄을 때는 LIS 에서 다운타임 오더를 만들어 나중에 HIS 와 맞춥니다(§5).
-- **막는 곳과 「대기」로 두는 곳의 기준은 하나입니다 — 모르면 자동으로 넘기지 않습니다.** 정도관리 실패는 LIS 안에서 판정이 끝나므로 확정을 막습니다. 수혈 동의는 HIS 의 답이 필요하므로, 답을 확인하지 못하면 「대기」로 두고 출고를 자동 통과시키지 않습니다.
+- **모르면 자동으로 넘기지 않습니다** — LIS 가 스스로 판정할 수 있으면 막고, 남의 답이 필요하면 기다립니다.
+  - 정도관리 실패는 LIS 안에서 판정이 끝나므로 **결과 확정을 막습니다.**
+  - 수혈 동의는 HIS 의 답이 필요합니다. 답을 확인하지 못하면 **「대기」로 두고** 출고를 자동 통과시키지 않습니다.
 - **설치 때 들어 있는 참고치 · 위험치는 임시 대표값입니다** — 개시 서명 화면이 스스로 「임상 권위 값 아님」이라고 밝힙니다. 검사실과 법무가 서명해 실값으로 바꾸기 전에는 임상 기준으로 쓰지 않습니다.
 - **오더는 5분마다 가져옵니다** — 간격은 코드에 고정돼 있고, 급한 오더는 수동으로 가져오기를 부르는 경로가 있습니다. 응급 검사에 5분이 허용되는지는 기관이 판단합니다.
-- **검사 코드가 맞아야 흐릅니다** — HIS 기본 시드의 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개였습니다(따라가기 실측). 개시 전에 카탈로그 반입과 매핑을 끝냅니다.
+- **검사 코드가 맞아야 흐릅니다** — HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개였습니다(2026년 9월 시험 설치 실측). 개시 전에 카탈로그 반입과 매핑을 끝냅니다.
 - **청구는 대상 집계까지입니다** — 확정된 검사를 국내 건강보험 청구 코드 매핑으로 모으지만, 청구 파일을 만드는 부분은 아직 없습니다.
 - **정해 두지 않은 것** — 장비 중계 장치로 어떤 제품을 쓸지, 기존 검사실 시스템의 데이터를 옮기는 방법은 이 자료가 정하거나 확인하지 않았습니다.
 - **한 설치본 = 한 기관**입니다. 보존 기간이 지난 데이터 파기는 법무 확정 전까지 꺼져 있습니다. 법정감염병 신고는 **기록**하는 것이고 대외 기관으로 보내지 않습니다.
@@ -232,7 +251,7 @@ flowchart TB
 
 > **EN** — None. The current development line of LIS is the same commit as the integrated release `2026.09`.
 
-기준 커밋과 같습니다 — 달라진 점 없음.
+기준 커밋과 같습니다 — 달라진 점 없음. LIS 저장소의 마지막 커밋(2026-09-09)이 통합 릴리즈에 고정된 커밋입니다.
 
 ## 10. 더 깊이
 
@@ -258,7 +277,7 @@ flowchart TB
 
 | 항목 | 값 |
 |---|---|
-| 읽은 것 | LIS 저장소의 **현재 개발본** — 커밋 `ffb34e9d1dbc`(2026-09-09) · 버전 1.56.18(태그 뒤 문서 커밋 1개) · 작업 트리의 미커밋 변경은 읽지 않음 |
+| 읽은 것 | LIS 저장소의 **현재 개발본** — 커밋 `ffb34e9d1dbc`(2026-09-09) · 버전 표기 1.56.18 — 그 버전 태그 뒤에 문서만 고친 커밋 1개가 더 있음 · 작업 트리의 미커밋 변경은 읽지 않음 |
 | 비교 기준 | 통합 릴리즈 `2026.09` — 같은 커밋 `ffb34e9d1dbc` |
 | 센 방법 | 데이터 모델 = 스키마 파일의 `model` 선언 · 웹 화면 = `apps/web/src/app/**/page.*` · 역할 = 저장소 권한 설계 문서의 역할 정의 표 — 2026-09-29 에 다시 센 값(통합 릴리즈 계측과 같음) |
 | 이 소개서가 더 확인한 것 | 다운타임 오더와 대사(오더 모듈) · 오더 가져오기 5분 주기와 수동 가져오기 경로(연계 모듈) · 백업의 예약 작업 등록(설치 스크립트) · 배포 전 종단 시험과 무중단 전환의 전제(배포 스크립트 머리말) · 청구 집계 범위(청구 모듈) · 시드 대표값 표기(관리 모듈) — 같은 커밋에서 읽음 |
