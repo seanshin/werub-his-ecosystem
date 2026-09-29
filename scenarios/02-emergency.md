@@ -3,7 +3,7 @@
 > 🟡 **초안** — 화면 캡처 9 자리 중 ✅ 8 · 🟡 1(가상 병원 데이터 · [캡처 표](#화면-캡처-자리)) · 데모 병원(위루비병원) 이름이 보이는 화면은 그 이름으로 설정한 설치본에서 · 새 설치본 따라가기 1차 완료(2026-09-13~16) — 각 단계의 연결이 실제로 동작하는지는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 `검증됨` 으로 봅니다
 > 연결 상태: [연결 상태 표](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 읽는 법은 [시나리오 안내](README.md#연결-상태를-읽는-법)
 
-> **EN** — An unconscious patient arrives by ambulance at the demo hospital: registration before the identity is known, triage assistance, urgent labs and imaging, a critical lab value and a critical imaging finding, a Code Blue, transfusion, then transfer or admission. Because emergency care turns on **time and alerting**, this walkthrough tracks which connection each alert travels over and marks the ones the connection table cannot confirm. 🔴 **None of the connections in this scenario have been verified by real calls** — whether an alert arrives in time cannot be established by reading code, so it is left for a rehearsal. Screenshot slots: 9, of which 8 are complete and 1 shows the screen but not yet the exact moment; people appear by role only and all data is synthetic.
+> **EN** — An unconscious patient arrives by ambulance at the demo hospital: registration before the identity is known, triage assistance, urgent labs and imaging, a critical lab value and a critical imaging finding, a Code Blue, transfusion, then transfer or admission. Because emergency care turns on **time and alerting**, this walkthrough tracks which connection each alert travels over and marks the ones the connection table cannot confirm. Four steps are verified by real calls (urgent lab order, lab result, reading signature, invoice; 2026-09-14~15). So is the sign-completion notice inside the consent step. 🔴 **None of the alert paths are verified** — whether an alert arrives in time cannot be established by reading code, so it is left for a rehearsal. Screenshot slots: 9, of which 8 are complete and 1 shows the screen but not yet the exact moment; people appear by role only and all data is synthetic.
 
 의식이 흐린 환자B 가 구급차로 데모 병원 응급실에 옵니다. 신원을 모르는 채로 등록하고, 분류 · 긴급 검사 · 긴급 영상을 거치는 동안 위급값과 위급 소견이 나오고, 상태가 나빠져 Code Blue 가 호출됩니다. 수혈을 받은 뒤 전원하거나 입원합니다(입원은 [시나리오 04](04-inpatient-to-discharge.md)로 이어집니다).
 
@@ -45,17 +45,17 @@ sequenceDiagram
   Note over HIS: 4 병상 · 보드 · 5 긴급 오더 - 의사B (시스템 안)
 
   Note over PT,ERP: 긴급 검사 · 위급값
-  LIS->>HIS: 6 긴급 검사 오더를 가져감 (구현·미검증)
+  LIS->>HIS: 6 긴급 검사 오더를 가져감 (검증됨 2026-09-14)
   Note over LIS: 7 검사 · 8 위험치 통보 · 복창 기록 - 검사기사B (시스템 안)
   LIS->>HIS: 9 위험치 알림 전용 연결 (확인 중)
-  LIS->>HIS: 10 결과 회신 (구현·미검증)
+  LIS->>HIS: 10 결과 회신 (검증됨 2026-09-15)
 
   Note over PT,ERP: 긴급 영상 · 위급 소견
   HIS->>PACS: 11 영상 오더 - 워크리스트 (구현·미검증)
   PACS->>MOD: 12 촬영 (구현·미검증)
   PACS->>AIS: 13 영상 자동 선별 알림 (구현·미검증)
   Note over PACS: 14 판독 · 위급 소견 알림 - 판독의B (시스템 안)
-  PACS->>SIGN: 15 판독 서명 (구현·미검증)
+  PACS->>SIGN: 15 판독 서명 (검증됨 2026-09-15)
   PACS->>HIS: 16 판독 반영 (구현·미검증)
 
   Note over PT,ERP: Code Blue · 응급 열람 · 수혈
@@ -63,13 +63,13 @@ sequenceDiagram
   HIS->>CLINIC: 18 긴급 알림 (구현·미검증)
   Note over HIS,PACS: 19 응급 열람 - 사유 기록 · 사후 검토 (시스템 안)
   HIS->>SIGN: 20 수혈 동의서 - 보호자B 대리 서명 (구현·미검증)
-  SIGN-->>HIS: 20 서명 완료 통지 (구현·미검증)
+  SIGN-->>HIS: 20 서명 완료 통지 (검증됨 2026-09-14)
   LIS->>HIS: 21 출고 전 수혈 동의 상태 확인 (구현·미검증)
 
   Note over PT,ERP: 신원 확인 · 수납 · 다음 단계
   Note over HIS: 22 신원 정보 정리 - 원무B (시스템 안)
   PACS->>HIS: 23 영상 쪽 환자 병합 재조정 (구현·미검증)
-  HIS->>ERP: 24 진료비 계산서 조회 (구현·미검증)
+  HIS->>ERP: 24 진료비 계산서 조회 (검증됨 2026-09-15)
   HIS->>EXT: 25 전원 의뢰 (확인 중)
 ```
 
@@ -84,25 +84,25 @@ sequenceDiagram
 | 3 | 분류(triage) | 응급 간호사B | HIS → AI Server | 증상에 따라 긴급도와 진료과를 가립니다 | `구현·미검증`<br>HIS ⇄ AI Server · 임상 보조 스킬(트리아지) | `응급실`(`/emergency`) | AI 가 증상을 뽑아 **진료과 후보를 제시하고 응급 신호를 표시하며 추가 질문을 만듭니다** → **분류 등급은 간호사B 가 정합니다** |
 | 4 | 병상 배정 · 보드 | 응급 간호사B | HIS | 응급실 병상을 배정하고 보드에 올립니다 | `시스템 안` | `응급실 보드`(`/emergency-board`) · `응급실` 워크스테이션(`/workstation/emergency`) | — |
 | 5 | 초기 진료 · 긴급 오더 | 응급 의사B | HIS | 진료하고 긴급 혈액검사 · 긴급 CT 오더를 넣습니다 | `시스템 안` | `처방(CPOE)`(`/orders`) | — |
-| 6 | 긴급 검사 오더 전달 | (자동) | HIS → LIS | LIS 가 HIS 의 검사 오더를 FHIR 로 가져갑니다 | `구현·미검증`<br>HIS ⇄ LIS · 검사 오더 전달(연결 표 기준 5분 주기 증분 폴링) | — | — |
+| 6 | 긴급 검사 오더 전달 | (자동) | HIS → LIS | LIS 가 HIS 의 검사 오더를 FHIR 로 가져갑니다 | `검증됨`(2026-09-14)<br>HIS ⇄ LIS · 검사 오더 전달(연결 표 기준 5분 주기 증분 폴링) | — | — |
 | 7 | 긴급 검사 | 검사기사B | LIS | 검체를 접수해 검사하고 자동 검증 · 델타 체크로 확인합니다 | `시스템 안` | LIS 결과 · 검증 | — (자동 검증은 규칙 기반 판정입니다) |
 | 8 | 위험치 통보 · 복창 | 검사기사B → 응급 의사B | LIS | 위험치를 담당 의료진에게 통보하고, 받은 사람의 복창을 기록합니다. 응답이 없으면 상향합니다 | `시스템 안`<br>LIS 의 위험치 폐루프(통보 · 상향 · 복창 기록) | LIS 위험치 | — |
 | 9 | 위험치 화면 알림 | (자동) | LIS → HIS | HIS 화면에 위험치를 따로 알립니다 | `확인 중`<br>연결 상태 표의 LIS → HIS 에는 결과 전달만 있고 위험치 알림 전용 연결은 없음 | — | — |
-| 10 | 결과 회신 | 검사기사B | LIS → HIS | 확정 결과를 HIS 로 보내고, HIS 에서 직원이 확인한 뒤 반영합니다 | `구현·미검증`<br>HIS ⇄ LIS · 검사 결과 전달 | `검사·영상 보드`(`/diagnostics-board`) | — |
+| 10 | 결과 회신 | 검사기사B | LIS → HIS | 확정 결과를 HIS 로 보내고, HIS 에서 직원이 확인한 뒤 반영합니다 | `검증됨`(2026-09-15)<br>HIS ⇄ LIS · 검사 결과 전달 | `검사·영상 보드`(`/diagnostics-board`) | — |
 | 11 | 긴급 영상 오더 | (자동) | HIS → PACS | 긴급 CT 오더가 PACS 워크리스트에 등록됩니다 | `구현·미검증`<br>HIS ⇄ PACS · 워크리스트 자동 등록 | `영상실`(`/imaging`) | — |
 | 12 | 촬영 | 영상 검사기사B | PACS → 촬영 장비 | 워크리스트로 촬영하고 영상을 PACS 에 저장합니다 | `구현·미검증`<br>검사 장비 ⇄ PACS · MWL · MPPS · C-STORE | `영상실` 워크스테이션(`/workstation/imaging`) | — |
 | 13 | 영상 자동 선별 | 판독의B | PACS → AI Server | 영상이 들어오면 조치가 필요할 수 있는 소견을 골라 판독의에게 알립니다 | `구현·미검증`<br>AI Server ⇄ PACS · 영상 AI 보조 | PACS 응급 보드 | AI 가 조치가 필요할 수 있는 소견을 골라 **알림을 올립니다** → **영상을 보고 판단하는 것은 판독의B 입니다.** 코드 기본값이 켜짐이라 설치할 때 끄고 기관 결정 뒤 켭니다 |
 | 14 | 판독 · 위급 소견 알림 | 판독의B | PACS | 긴급 판독을 하고, 위급 소견을 실시간 알림으로 올립니다 | `시스템 안`<br>PACS 의 응급 보드 · 위급 소견 실시간 알림 | PACS 응급 보드 · 판독 화면 · HIS `판독 대기`(`/workstation/reading`) | 판독문 초안 보조는 [시나리오 01](01-outpatient-journey.md) 17 과 같습니다(판독의가 고쳐 확정) |
-| 15 | 판독 서명 | 판독의B | PACS → sign | 판독의 본인이 판독보고서에 서명합니다 | `구현·미검증`<br>PACS ⇄ sign · 판독보고서 STAFF 전자서명 | PACS 판독 화면 | — |
+| 15 | 판독 서명 | 판독의B | PACS → sign | 판독의 본인이 판독보고서에 서명합니다 | `검증됨`(2026-09-15)<br>PACS ⇄ sign · 판독보고서 STAFF 전자서명 | PACS 판독 화면 | — |
 | 16 | 판독 반영 | (자동) | PACS → HIS | 확정 판독이 HIS 에 반영됩니다 | `구현·미검증`<br>HIS ⇄ PACS · 판독 결과 반영 | `검사·영상 보드` | — |
 | 17 | Code Blue | 응급 간호사B | HIS | 상태가 나빠진 환자B 에 대해 Code Blue · 신속대응팀을 호출합니다 | `시스템 안` | `Code Blue / RRT`(`/code-blue`) | — |
 | 18 | 팀 긴급 알림 | (자동) | HIS → Clinic | 그룹웨어의 긴급 알림으로 팀에 알립니다 | `구현·미검증`<br>HIS ⇄ Clinic · 업무 연동 API 군(알림 · 긴급 알림) | Clinic 알림함 | — |
 | 19 | 응급 열람 | 응급 의사B | HIS · PACS | 평소 권한 밖의 기록 · 영상을 사유를 남기고 엽니다 | `시스템 안`<br>시스템마다 따로(연결 아님) | HIS `응급 접근 검토`(`/admin/break-glass`) | — |
-| 20 | 수혈 동의서 | 응급 의사B · 보호자B | HIS ⇄ sign | 수혈 동의서 서명을 요청하고, 보호자B 가 대리 서명합니다. 서명 완료가 HIS 에 반영됩니다 | `구현·미검증`<br>HIS ⇄ sign · 서명요청 제출 / 서명 이벤트 통지 | `동의서`(`/workstation/consent`) | — |
+| 20 | 수혈 동의서 | 응급 의사B · 보호자B | HIS ⇄ sign | 수혈 동의서 서명을 요청하고, 보호자B 가 대리 서명합니다. 서명 완료가 HIS 에 반영됩니다 | `구현·미검증`<br>HIS ⇄ sign · 서명요청 제출 `구현·미검증` / 서명 이벤트 통지 `검증됨`(2026-09-14) | `동의서`(`/workstation/consent`) | — |
 | 21 | 수혈 동의 확인 · 출고 | 검사기사B | LIS → HIS | 혈액을 내주기 전에 LIS 가 HIS 의 수혈 동의 상태를 확인합니다. 시행은 2인 확인입니다 | `구현·미검증`<br>HIS ⇄ LIS · 수혈 동의 상태 참조 | `혈액은행`(`/blood-bank`) · `혈액은행` 워크스테이션(`/workstation/blood-bank`) | — (교차시험 · ABO 판정은 규칙 기반 판정입니다) |
 | 22 | 신원 정보 정리 | 원무B | HIS | 신원이 확인되면 환자 정보를 채웁니다 | `시스템 안` | `환자 관리`(`/patients`) | — |
 | 23 | 영상 쪽 환자 병합 | (관리자) | PACS → HIS | PACS 가 HIS 쪽 환자 병합을 읽어 영상의 환자 귀속을 다시 맞춥니다 | `구현·미검증`<br>HIS ⇄ PACS · 영상 오더 동기화 · 환자 병합 재조정 | PACS 관리 화면 | — |
-| 24 | 수납 | 원무B | HIS → ERP | 진료비 계산서를 ERP 산정값으로 조회해 수납합니다 | `구현·미검증`<br>HIS ⇄ ERP · 진료비 계산서 조회 | `수납`(`/billing`) | — |
+| 24 | 수납 | 원무B | HIS → ERP | 진료비 계산서를 ERP 산정값으로 조회해 수납합니다 | `검증됨`(2026-09-15)<br>HIS ⇄ ERP · 진료비 계산서 조회 | `수납`(`/billing`) | — |
 | 25 | 전원 의뢰 | 응급 의사B | HIS → 다른 기관 | 다른 기관으로 전원을 의뢰합니다(입원하면 [시나리오 04](04-inpatient-to-discharge.md)) | `확인 중`<br>연결 상태 표에 기관 사이 전원 연결이 없음 | `전원 의뢰`(`/transfer/request`) · `전원 관리`(`/transfer`) | — |
 
 - 6: 연결 상태 표 기준으로 LIS 는 HIS 의 오더를 5분 주기로 가져갑니다(LIS 설정 `HIS_ORDER_POLL`). 긴급 검사에서 이 간격을 어떻게 다룰지 — 주기 설정 · 원내 연락 절차 — 는 새 설치본으로 따라가 보며 확인합니다.
@@ -152,7 +152,7 @@ sequenceDiagram
 | **다른 기관으로의 전원 전송**(25)이 연결 상태 표에 없습니다. 감염병 신고 같은 대외 기관 전송은 구현돼 있지 않습니다(LIS 의 법정감염병 신고는 기록까지) | README · [LIS 구성서 §8](../systems/lis.md#8-표준과-규제) | 전원 서류는 기관의 기존 절차로 보냅니다 |
 | **문자 발송**이 모의 발송입니다 — 보호자에게 문자로 알릴 수 없습니다 | README | 문자 발송 제공자를 연동합니다 |
 | **영상 AI 사전판독** — HIS 사용 매뉴얼상 "사용 불가"입니다 | [HIS 구성서 §10](../systems/his.md#10-한계와-대체-수단) | 판독은 PACS 의 판독 흐름으로 합니다 |
-| **실제 호출로 확인된 연결이 없습니다** — 응급에서 알림이 제시간에 가는지는 코드 대조로 알 수 없습니다 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) | 리허설(구축 단계 S7)에서 가상 환자로 알림 경로를 끝까지 따라가 봅니다 |
+| **알림 경로는 실제 호출로 확인되지 않았습니다** — `검증됨` 은 오더 · 결과 · 판독 서명 · 계산서 · 서명 완료 통지뿐입니다(2026-09-14~15). 알림이 제시간에 가는지는 코드 대조로 알 수 없습니다 | [연결 상태 표](../RELEASES/2026.09/compatibility.md) | 리허설(구축 단계 S7)에서 가상 환자로 알림 경로를 끝까지 따라가 봅니다 |
 
 ## 화면 캡처 자리
 

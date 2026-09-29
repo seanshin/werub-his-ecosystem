@@ -1,7 +1,7 @@
 # E 데모 시나리오
 **E — Demo scenarios**
 
-> **EN** — Four walkthroughs at a fictional demo hospital — outpatient, emergency, health checkup, and admission through discharge — following one patient across system boundaries. Each step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI assists. People appear by role only (Doctor A, Nurse A …); all data is synthetic. 27 connections across these walkthroughs have been verified by real calls between fresh installs (2026-09-14~15, each with a date); the rest are still `구현·미검증`, i.e. the two sides match in code but were not exercised. Screenshot slots: **44 of 52** filled (36 complete, 8 showing the screen but not yet the exact moment); the remaining 8 wait on a patient-app build, the demo hospital name, an AI-enabled install, or a rebuilt Jitsi.
+> **EN** — Four walkthroughs at a fictional demo hospital — outpatient, emergency, health checkup, and admission through discharge — following one patient across system boundaries. Each step records who acts, which system, what crosses the boundary, **the connection status**, the screen, and where AI assists. People appear by role only (Doctor A, Nurse A …); all data is synthetic. 27 connections in the ecosystem have been verified by real calls between fresh installs (2026-09-14~15, each with a date). Across the four walkthroughs, 23 steps now carry `검증됨` (6 · 4 · 4 · 9). Most other cross-system steps are `구현·미검증`: the two sides match in code but were not exercised. Screenshot slots: **44 of 52** filled (36 complete, 8 showing the screen but not yet the exact moment); the remaining 8 wait on a patient-app build, the demo hospital name, an AI-enabled install, or a rebuilt Jitsi.
 
 
 가상 데모 병원에서 환자 한 명이 시스템 사이를 어떻게 지나가는지 봅니다 — 외래 · 응급 · 검진 · 입원→퇴원.
@@ -14,7 +14,7 @@
 
 - 병원은 **"데모 병원"** 이라고 부르고, 데모 병원의 이름은 **위루비병원**입니다(2026-09-14 확정). 주소 · 전화 · 기관 코드는 싣지 않습니다. 이미 들어온 캡처는 리허설 설치본의 가상 기관명으로 찍혀 있고, 이름이 드러나는 나머지 화면은 위루비병원으로 설정한 설치본에서 찍습니다.
 - 등장 인물은 **역할로만** 적습니다(의사A · 간호사A · 원무A · 환자A …). 실존 인물이나 실제 환자가 아닙니다. 데모는 모두 가상 병원 데이터로 합니다.
-- 각 단계의 **연결 상태**는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 값만 옮겼습니다. 이 표는 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조한 것이며(2026-09-11), **실제로 호출해 확인한 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다. 이 시나리오의 단계 가운데 그 연결에 해당하는 것(직원 서명 · 검사 오더가 LIS 로 넘어가는 단계)이 `검증됨` 후보이고, 나머지는 `구현·미검증` 그대로입니다.
+- 각 단계의 **연결 상태**는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 값만 옮겼습니다. 이 표는 양쪽 시스템의 코드를 기준 커밋에서 읽어 대조한 것이며(2026-09-11), **실제로 호출해 확인한 연결은 27개** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다. 그 연결에 해당하는 단계는 `검증됨` 과 확인일을 적었고(네 시나리오 합 23단계), 나머지는 표의 상태 그대로입니다.
 - 시나리오를 새 설치본으로 실제로 따라가 보는 일은 [ROADMAP](../ROADMAP.md) P1 에서 합니다. 따라가 본 뒤 단계 · 화면 · 상태를 고칩니다.
 
 | # | 시나리오 | 한 줄 | 단계 |
@@ -55,14 +55,14 @@
 
 ### 시나리오별 합계
 
-| 시나리오 | `구현·미검증` | `미구현` | `중단` | `시스템 안` | `확인 중` | 합계 |
-|---|---:|---:|---:|---:|---:|---:|
-| 01 외래 | 23 | 3 | 2 | 6 | 0 | 34 |
-| 02 응급 | 13 | 0 | 0 | 9 | 3 | 25 |
-| 03 검진 | 12 | 1 | 0 | 9 | 2 | 24 |
-| 04 입원→퇴원 | 23 | 1 | 0 | 11 | 1 | 36 |
+| 시나리오 | `검증됨` | `구현·미검증` | `미구현` | `중단` | `시스템 안` | `확인 중` | 합계 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 01 외래 | 6 | 17 | 3 | 2 | 6 | 0 | 34 |
+| 02 응급 | 4 | 9 | 0 | 0 | 9 | 3 | 25 |
+| 03 검진 | 4 | 8 | 1 | 0 | 9 | 2 | 24 |
+| 04 입원→퇴원 | 9 | 14 | 1 | 0 | 11 | 1 | 36 |
 
-센 방법: 각 시나리오 단계 표의 "연결 상태" 칸 첫 표시를 행마다 하나씩 셌습니다(2026-09-11). `미구현` 5행 중 4행(01 의 자격 조회 · 대외 청구 전송, 03 의 안내 문자 발송, 04 의 대외 청구 전송)은 연결 상태 표 밖의 한계로, README 와 시스템 구성서를 근거로 적었습니다. 01 의 영상 바이트 중계(`판정 불가`)는 단계 표가 아니라 표 아래 메모에 적었습니다.
+센 방법: 각 시나리오 단계 표의 "연결 상태" 칸 첫 표시를 행마다 하나씩 셌습니다. 상태는 실호출 확인일을 포함한 [연결 상태 표](../RELEASES/2026.09/compatibility.md)를 따릅니다. 한 행에 상태가 다른 연결 둘이 있는 곳(02 의 20 — 서명요청 제출 `구현·미검증` · 서명 완료 통지 `검증됨`)은 첫 표시로 셌습니다. `미구현` 5행 중 4행(01 의 자격 조회 · 대외 청구 전송, 03 의 안내 문자 발송, 04 의 대외 청구 전송)은 연결 상태 표 밖의 한계로, README 와 시스템 구성서를 근거로 적었습니다. 01 의 영상 바이트 중계(`판정 불가`)는 단계 표가 아니라 표 아래 메모에 적었습니다.
 
 ## 화면 이름
 
