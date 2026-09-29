@@ -207,7 +207,7 @@ flowchart TB
 > **EN** — Not there yet: the low-level link from analysers; the HL7 v2 fallback with HIS; confirmation of reflex orders, the transfusion-consent lookup and the approval lookup; the install script needed workarounds; one installation per institution; purge of expired data is off until retention is decided.
 
 - 🔴 **검사 장비에서 결과를 자동으로 받는 저수준 연결이 없습니다** — ASTM · CSV 결과를 받는 API 와 장비 코드 매핑은 있지만, 장비의 직렬 · TCP 전송을 받는 부분은 없습니다. 장비와 LIS 사이에 **인터페이스 중계 장치**를 두거나, 결과 파일 · 수기 입력으로 운영합니다.
-- 🔴 **HIS 와의 세 경로는 아직 끝까지 확인하지 못했습니다** — 반사 검사 추가 오더 · 수혈 출고 전 동의 확인 · 조직 결재 참조. 개시 전까지 **수혈 동의는 사람이 확인하는 절차를 유지**합니다(LIS 는 확인되지 않으면 「대기」로 두고 출고를 자동 통과시키지 않습니다). 조직 결재는 LIS 관리 화면에서 사람이 기록하는 경로를 씁니다.
+- 🔴 **HIS 와의 세 경로는 아직 끝까지 확인하지 못했습니다** — 반사 검사 추가 오더 · 수혈 출고 전 동의 확인 · 조직 결재 참조. 개시 전까지 **수혈 동의는 사람이 확인하는 절차를 유지**합니다. LIS 는 확인되지 않으면 「대기」로 두고 출고를 자동 통과시키지 않습니다. 조직 결재는 LIS 관리 화면에서 사람이 기록하는 경로를 씁니다.
 - 🔴 **설치 스크립트가 그대로는 끝나지 않았고, 관리자 초기 비밀번호는 한 번만 출력됩니다** — 우회 순서는 [S3](../build-guide/S3-clinical-departments.md)에 있습니다. 설치 화면 기록을 남겨 두십시오.
 - **HL7 v2 대체 경로(HIS 구간)가 없습니다** — FHIR 주 경로를 쓰고, 멈췄을 때는 다운타임 오더 절차를 씁니다.
 - **검사 코드가 맞아야 흐릅니다** — HIS 기본 시드의 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개였습니다(따라가기 실측). 개시 전에 카탈로그 반입과 매핑을 끝냅니다.

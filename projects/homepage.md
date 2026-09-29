@@ -71,7 +71,7 @@ What is not there yet, stated plainly: institution details (name, contact, addre
 | ![온라인 진료 예약](../assets/screens/homepage-booking.png) **온라인 진료 예약** — 본인 확인 뒤 AI 예약 도우미가 안내 | ![홈페이지 관리](../assets/screens/his-system-admin-homepage.png) **홈페이지 관리(HIS)** — 콘텐츠 수와 「비어 있는 항목」 |
 | ![홈페이지 배포](../assets/screens/his-system-admin-homepage-deploy.png) **홈페이지 배포(HIS)** — 콘텐츠 변경과 코드 변경을 나누고, 서비스 중인 빌드를 대조 | |
 
-화면은 가상 병원 데이터가 든 리허설 설치본에서 찍었습니다(2026-09-12). 공개 사이트 앱 자체는 그때 설치하지 않았으므로, 예약 화면은 **직원 웹 안에 있는 같은 모양의 공개 페이지 묶음**에서 찍은 것으로 보입니다(찍은 경로의 기록은 남아 있지 않습니다). 더 많은 화면은 [공개 홈페이지 화면](../screens/homepage.md)에 있습니다.
+화면은 가상 병원 데이터가 든 리허설 설치본에서 찍었습니다(2026-09-12). 공개 사이트 앱 자체는 그때 설치하지 않았습니다. 그래서 예약 화면은 **직원 웹 안에 있는 같은 모양의 공개 페이지 묶음**에서 찍은 것으로 보입니다. 찍은 경로의 기록은 남아 있지 않습니다. 더 많은 화면은 [공개 홈페이지 화면](../screens/homepage.md)에 있습니다.
 
 ## 4. 어떻게 만들어졌나
 
@@ -190,7 +190,7 @@ HIS 의 단독 운영용 compose 에는 홈페이지가 들어 있지 않습니�
 
 > **EN** — Institution details still live in code files; the HIS address is fixed at build time; only short English, Japanese and Chinese pages exist; the default publish target in the repository belongs to one installation; and the site's connection to HIS has not been called for real.
 
-- 🔴 **병원 이름 · 연락처 · 주소가 코드 파일에 있습니다** — 사이트 정보 상수와 일부 페이지 문구에 특정 기관의 값이 들어 있습니다(구성서의 계측: 병원명 고정 문자열이 든 파일 36개 · 2026-09-10). 자기 기관 정보로 바꾸려면 아직 코드를 고쳐야 합니다.
+- 🔴 **병원 이름 · 연락처 · 주소가 코드 파일에 있습니다** — 사이트 정보 상수와 일부 페이지 문구에 특정 기관의 값이 들어 있습니다. 구성서의 계측으로는 병원명 고정 문자열이 든 파일이 36개입니다(2026-09-10). 자기 기관 정보로 바꾸려면 아직 코드를 고쳐야 합니다.
 - 🔴 **HIS 주소는 빌드할 때 고정됩니다** — 기관 · 환경마다 이미지를 따로 빌드합니다. 저장소의 기본값(Dockerfile · 예시 파일 · 발행 스크립트)은 특정 설치본을 가리키므로 모두 바꿉니다.
 - 🔴 **실제 연결 확인이 아직입니다** — 2026년 9월 따라가기에서 이 앱은 설치하지 않았습니다. HIS 와의 두 연결은 코드를 대조한 판정입니다.
 - **다국어는 소개 페이지 수준**입니다 — 영어 · 일본어 · 중국어는 소개 페이지 한 장씩이고 나머지는 한국어입니다.

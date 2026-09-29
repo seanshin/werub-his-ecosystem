@@ -15,6 +15,7 @@
  *   ③ 첫 화면 — 첫 30줄에 작업 어휘(기준 커밋 · 매니페스트 · 따라가기 · 백틱 상태어 · 확인 필요(따라가기)) 0
  *   ④ 경고 — 🔴 는 「8. 알아 둘 것」 절 안에만, 편당 3개 이하
  *   ⑤ 약어 — 한국어 본문(영문 소개 · EN 요약 · 코드 · 링크 주소 제외)의 대문자 약어가 모두 `projects/terms.md` 에 있다
+ *   ⑥ 문장 — 한국어 본문(표 제외)의 한 문장이 150자를 넘지 않고, 괄호 안에 괄호를 넣지 않는다(기획 §4 「한 문장에 한 가지」 · 2026-09-29 추가)
  *
  * 종료 코드: 0 통과 · 1 걸림 · 2 도구 오류
  */
@@ -60,6 +61,27 @@ export function acronyms(md) {
   return found;
 }
 
+/** 한국어 본문(표 · 코드 · EN 요약 · 영문 소개 제외)의 문장들 — [줄 번호, 문장] */
+export function proseSentences(md) {
+  const out = [];
+  const intro = md.indexOf('## Introduction (English)');
+  const one = md.indexOf('\n## 1.');
+  const lines = md.split('\n');
+  let inCode = false;
+  lines.forEach((raw, i) => {
+    const pos = lines.slice(0, i).join('\n').length;
+    if (raw.startsWith('```')) { inCode = !inCode; return; }
+    if (inCode || (intro >= 0 && pos >= intro && pos < one)) return;
+    if (raw.startsWith('> **EN**') || raw.startsWith('|') || !/[가-힣]/.test(raw)) return;
+    const l = raw.replace(/\]\([^)]*\)/g, ']').replace(/`[^`]*`/g, 'X');
+    for (const x of l.split(/(?<=니다)\.\s*|(?<=[다요])\.\s+/)) {
+      const t = x.replace(/^[\s>*-]+/, '').trim();
+      if (/[가-힣]/.test(t)) out.push([i + 1, t]);
+    }
+  });
+  return out;
+}
+
 export function checkOne(name, md, terms) {
   const p = [];
   const heads = [...md.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
@@ -88,6 +110,10 @@ export function checkOne(name, md, terms) {
     if (!inEight) p.push(`${name}:${i + 1} — 🔴 는 「8. 알아 둘 것」 절에만 둡니다`);
   });
   if (reds > 3) p.push(`${name} — 🔴 ${reds}개(편당 3개 이하)`);
+  for (const [ln, t] of proseSentences(md)) {
+    if (t.length > 150) p.push(`${name}:${ln} — 문장이 ${t.length}자(150자 이하로 나눕니다): 「${t.slice(0, 40)}…」`);
+    if (/\([^()]*\([^()]*\)/.test(t)) p.push(`${name}:${ln} — 괄호 안에 괄호가 있습니다`);
+  }
   const missing = [...acronyms(md)].filter((a) => !terms.has(a));
   if (missing.length) p.push(`${name} — 용어 풀이에 없는 약어: ${missing.join(' · ')} → projects/terms.md 에 더하거나 풀어 씁니다`);
   return p;
@@ -112,13 +138,15 @@ try {
       ['풀이 없는 약어', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 XYZQ 를 씁니다.')],
       ['EN 요약 빠짐', okFixed.replace('## 5. 절\n\n> **EN** — s', '## 5. 절\n\n본문만')],
       ['절 빠짐', okFixed.replace('## 9. 절', '## 구. 절')],
+      ['긴 문장', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 ' + '가'.repeat(160) + ' 씁니다.')],
+      ['괄호 속 괄호', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 FHIR(표준(R4)) 를 씁니다.')],
     ];
     for (const [label, md] of cases) if (!checkOne('x', md, terms).length) fails.push(`「${label}」 을 잡지 못합니다`);
     // 코드 · 링크 주소 · EN 줄의 대문자는 약어로 세지 않는다
     if (acronyms('본문 `ENV_KEY` [링크](../THIRD_PARTY.md)\n> **EN** — ZZZ text').size) fails.push('코드 · 링크 · EN 줄의 대문자를 약어로 셉니다');
-    console.log(`자기 검증 — 검사 5종 · 사례 ${cases.length + 2}`);
+    console.log(`자기 검증 — 검사 6종 · 사례 ${cases.length + 2}`);
     if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-    console.log('  ✓ 틀 · 영문 요약 · 첫 화면 · 경고 · 약어 — 멀쩡한 것은 통과, 심은 것은 잡음');
+    console.log('  ✓ 틀 · 영문 요약 · 첫 화면 · 경고 · 약어 · 문장 — 멀쩡한 것은 통과, 심은 것은 잡음');
     process.exit(0);
   }
 
