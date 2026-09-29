@@ -242,6 +242,44 @@ flowchart TB
 
 ---
 
+## 무엇을 할 수 있나 — 업무로 본 기능
+
+**HIS 메뉴만 266개**(도메인 8 · 메뉴 묶음 26 · 기준 커밋에서 기계적으로 뽑음). 여기에 검사 · 영상 · 서명 · 경영 · AI · 교육 · 협업 시스템의 기능이 더해집니다.
+
+| 업무 | 맡는 시스템 | 대표 기능 |
+|---|---|---|
+| 외래 · 병동 | HIS · Clinic · AI Server | 예약 · 오더 · 처방 · 기록 **초안** · 조기경고 점수 · 투약 바코드 대조 · 퇴원 게이트 · 인수인계 |
+| 수술 · 응급 · 특수 치료 | HIS | 수술 체크리스트 · 좌우 판정 · 중증도 분류 · 골든타임 · 방사선 · 항암 · 투석 · 재활 · 장기이식 · 격리·강박 기한 |
+| 검사 · 영상 | LIS · PACS · HIS | 검체 품질 · 자동 검증 · 위험치 폐루프 · 병리 사인아웃 · 수혈 독립 판정 · 판독 워크플로 · 판독 **초안** |
+| 약 · 물류 | HIS · ERP | 원내 처방집 · 조제 · 마약류 해시 원장 · 재고 · 장비 · 멸균 |
+| 원무 · 경영 · 사람 | HIS · ERP · edu · Clinic | 수납 · 계산서 · 청구 · 재무 · 인사 · 급여 · 법정교육 · 전자 이수증 · 결재 |
+| 질 · 안전 · 세우기 | HIS · sign · LIS | 안전 게이트 · 환자 확인 · 감염관리 · 비상 열람 · 위원회 의결 · 서명 봉인 · 개원 · Go-Live · 개시 전환 |
+
+> 🔴 **여기 적혔다는 것은 기준 커밋의 코드에 있다는 뜻입니다.** 동작 확인은 Ⅳ 장의 연결 상태가 정본입니다.
+
+근거: [A 4장](../overview/04-functions.md) · [업무별 기능 지도](../functions/) · [HIS 메뉴 266](../systems/his-domains.md)
+
+---
+
+## 기능들이 함께 지키는 여섯 가지
+
+주요 기능 41편을 한 편씩 쓰고 나니, 서로 다른 업무의 기능이 **같은 버릇**을 갖고 있었습니다. 현장에서 「왜 여기서 막히지?」가 나오는 자리가 대개 여기입니다.
+
+| 버릇 | 예 |
+|---|---|
+| **① 만든 사람이 스스로 확정하지 않는다** | 결과 입력자 ≠ 검증자 · 조제자 ≠ 검수자 · 방사선 처방자 ≠ 승인자 |
+| **② 모르는 것을 0 으로 말하지 않는다** | 입력이 모자란 점수 · 분모 없는 비율 · 잴 수 없는 대기 시간은 「산출 불가」 |
+| **③ 막을 때도, 비켜 갈 때도 기록이 남는다** | 투약 우회 사유 · 퇴원 면제 · 비상 열람은 막지 않되 모르게 열리지 않음 |
+| **④ 나가지 않은 것을 나갔다고 적지 않는다** | 대외 보고 채널이 없는 마약류 · 감염 신고를 「제출 완료」로 적지 않음 |
+| **⑤ 안전 게이트는 대부분 꺼진 채로 온다** | 배선된 28개 중 코드 기본값 **차단 6 · 경고 4 · 끔 18** — 꺼진 게이트가 가장 깨끗해 보입니다 |
+| **⑥ 켜는 것은 스위치가 아니라 결정이다** | 연동 개통 · 개시 전환 · AI 기능 · 위원회 정책은 기록된 결정을 거쳐 반영 |
+
+**기관에게** — 도입 첫날은 「설정 전」 상태입니다. 반발이 예상되는 곳은 ① · ③(두 번째 사람 · 사유 입력), 대시보드의 「산출 불가」는 결함이 아니라 입력이 아직 없다는 뜻입니다.
+
+근거: [A 4장 「함께 지키는 여섯 가지」](../overview/04-functions.md#기능들이-함께-지키는-여섯-가지) · [주요 기능 — 자세히](../functions/detail/) · [진료하는 사람을 위한 안내](../clinicians/)
+
+---
+
 ## 환자 한 명의 여정 — 경계마다의 연결 상태
 
 **예약 → 접수 → 진료(AI 보조) → 검사 → 병리 영상 → 영상 → 판독 서명 → 동의서 → 수납 · 청구 → 회계 → 결과 열람 → 원격 상담**
@@ -260,7 +298,7 @@ flowchart TB
 
 **대체 수단을 준비할 곳** — 대외 기관 청구 · 자격조회 전송 모듈 `미구현` · 문자 발송 제공자 없음(모의 발송) · Jitsi 새로 구성 · HL7 v2 대체 경로 일부 `미구현`.
 
-근거: [③ 환자 여정 스윔레인](../diagrams/patient-journey.md) · [A 4장](../overview/04-patient-journey.md)
+근거: [③ 환자 여정 스윔레인](../diagrams/patient-journey.md) · [A 5장](../overview/05-patient-journey.md)
 
 ---
 
@@ -278,7 +316,7 @@ flowchart TB
 - 직원 계정 · 역할을 **HIS 한 곳에서** 관리합니다. 반대로 **HIS 가 멈추면** HIS 신원에 기대는 형제 시스템의 로그인도 영향을 받습니다(edu 는 로그인이 HIS SSO 뿐).
 - → **HIS 의 가용성 · 백업 · 키 관리가 생태계 전체의 기반입니다.**
 
-근거: [④ 신원 허브](../diagrams/identity-hub.md) · [A 5장](../overview/05-identity-trust-standards.md)
+근거: [④ 신원 허브](../diagrams/identity-hub.md) · [A 6장](../overview/06-identity-trust-standards.md)
 
 ---
 
@@ -298,7 +336,7 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 인증서 발급 · �
 > ⚠️ **기관이 준비하는 것** — 기준 버전은 인증 기관 키를 **소프트웨어로 보관**합니다(HSM 미적용). 하드웨어 보안 모듈 · 공인 타임스탬프 기관 · 본인확인 사업자는 구축 기관이 준비합니다. **전자서명의 법적 효력 판단은 구축 기관과 법무가 합니다.**
 > **순서 조언** — 동의서 · 판독 · 이수증 · 계약이 모두 sign 을 부르므로, **서명을 쓰는 단계보다 sign 을 먼저** 세웁니다.
 
-근거: [⑤ 신뢰의 사슬](../diagrams/trust-chain.md) · [A 5장](../overview/05-identity-trust-standards.md)
+근거: [⑤ 신뢰의 사슬](../diagrams/trust-chain.md) · [A 6장](../overview/06-identity-trust-standards.md)
 
 ---
 
@@ -319,7 +357,7 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 인증서 발급 · �
 - **HL7 v2 로만 말하는 기존 장비 · 시스템이 있다면** S3 에서 연결 방식을 먼저 확인합니다.
 - 연결 표의 상당수는 표준 프로파일이 아니라 **전용 HTTPS REST(JSON) · 웹훅**입니다.
 
-근거: [⑥ 표준 층](../diagrams/standards.md) · [A 5장](../overview/05-identity-trust-standards.md)
+근거: [⑥ 표준 층](../diagrams/standards.md) · [A 6장](../overview/06-identity-trust-standards.md)
 
 ---
 
@@ -346,7 +384,7 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 인증서 발급 · �
 
 **`local_only`** — 의료 · 개인건강정보 · 규제 관련 작업은 외부 AI 제공자로 보내려 하면 **코드가 거부합니다**. 외부 제공자 자리는 있지만 기본값은 모두 꺼짐.
 
-근거: [⑦ AI 호출 지도](../diagrams/ai-map.md) · [A 6장](../overview/06-ai.md)
+근거: [⑦ AI 호출 지도](../diagrams/ai-map.md) · [A 7장](../overview/07-ai.md)
 
 ---
 
@@ -369,7 +407,7 @@ sign 을 부르는 곳: HIS(동의서 · 발급 문서 · 인증서 발급 · �
 
 AI 계층의 사람 결정 **10개** · 이 단계를 닫는 Go-Live 항목 **15개**(모두 개시를 막지 않는 추적 항목 · HIS v4.18.0 레지스트리 기준 커밋에서 추출).
 
-근거: [A 6장](../overview/06-ai.md) · [S6 AI 계층](../build-guide/S6-ai.md)
+근거: [A 7장](../overview/07-ai.md) · [S6 AI 계층](../build-guide/S6-ai.md)
 
 ---
 
@@ -402,7 +440,7 @@ AI 계층의 사람 결정 **10개** · 이 단계를 닫는 Go-Live 항목 **15
 
 > 기관이 받아 둔 모델은 **의료 · 범용으로 나뉘어 목록**으로 관리되고, **용도 칸이 전부 `보조`** 입니다. 아직 받는 중인 모델은 비활성으로 흐리게 표시됩니다.
 
-근거: [A 6장](../overview/06-ai.md) · [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책 고지](../DISCLAIMER.md) · [화면](../screens/pacs.md)
+근거: [A 7장](../overview/07-ai.md) · [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책 고지](../DISCLAIMER.md) · [화면](../screens/pacs.md)
 
 ---
 
@@ -435,7 +473,7 @@ flowchart LR
 - **S2~S6 은 필요한 것만, 필요한 순서로** — 13개를 다 세울 필요는 없습니다. 다만 **S4 의 sign 은 먼저**.
 - **S7 · S8 은 모두가 모이는 곳** — 가상 병원 데이터로 전 흐름을 돌려 본 뒤 리얼로 전환합니다.
 
-근거: [② 구축 단계 로드맵](../diagrams/build-roadmap.md) · [A 7장](../overview/07-build-path.md) · [B 구축 가이드](../build-guide/)
+근거: [② 구축 단계 로드맵](../diagrams/build-roadmap.md) · [A 8장](../overview/08-build-path.md) · [B 구축 가이드](../build-guide/)
 
 ---
 
@@ -503,7 +541,7 @@ flowchart LR
 
 **덧붙여** — HIS 코드에 병원명이 고정 문자열로 남은 파일이 **118개** 있습니다(기준 커밋에서 2026-09-17 에 다시 셈). 설정값으로 옮기는 작업이 진행 중이며, 끝나기 전까지 자기 병원명을 넣으려면 코드를 고칩니다(S1).
 
-근거: [A 7장](../overview/07-build-path.md) · [S0](../build-guide/S0-prepare.md) · [S8](../build-guide/S8-go-real.md)
+근거: [A 8장](../overview/08-build-path.md) · [S0](../build-guide/S0-prepare.md) · [S8](../build-guide/S8-go-real.md)
 
 ---
 
@@ -525,7 +563,7 @@ flowchart LR
 > ### `구현·미검증`은 "동작한다"는 뜻이 아닙니다.
 > "양쪽 코드가 맞물려 있다"까지입니다. 기관은 **리허설(S7)에서 가상 병원 데이터로 흐름을 끝까지 돌려**, 쓰려는 연결마다 확인합니다. 남은 61개가 그렇습니다.
 
-근거: [A 8장](../overview/08-status-and-preparation.md) · [따라가 본 결과](../build-guide/follow-along-2026-09.md)
+근거: [A 9장](../overview/09-status-and-preparation.md) · [따라가 본 결과](../build-guide/follow-along-2026-09.md)
 
 ---
 
@@ -581,7 +619,7 @@ flowchart LR
 - 화면 번역은 한국어가 기본이고 영어 · 일본어 카탈로그가 있으며 아랍어는 준비 중 — **지금 번역은 모두 AI 초안이고 사람 검수를 마친 것이 없습니다**(검수 흐름은 있음).
 - 국가 축은 현재 **한국 · UAE 두 곳**입니다. 그 밖의 나라는 코드 마스터 · 청구 규칙 · 언어 팩을 새로 붙입니다.
 
-근거: [A 8장](../overview/08-status-and-preparation.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+근거: [A 9장](../overview/09-status-and-preparation.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
 
 ---
 
@@ -607,7 +645,7 @@ flowchart LR
 - 공인 타임스탬프 기관 · 하드웨어 보안 모듈 · 본인확인 사업자 · 원격 화상을 쓰려면 Jitsi 새로 구성
 - `미구현`인 연결 가운데 기관에 필요한 것의 대체 수단(예: 검사 분석기 자동 수집 · HL7 v2 경로)
 
-근거: [A 8장](../overview/08-status-and-preparation.md)
+근거: [A 9장](../overview/09-status-and-preparation.md)
 
 ---
 
@@ -727,7 +765,7 @@ sequenceDiagram
 
 > 이 장은 **법률 검토가 아닙니다.** 라이선스 이름 · 원문이 적는 사실 · 원문 위치만 옮깁니다.
 
-근거: [A 9장](../overview/09-terms.md) · [DISCLAIMER.md](../DISCLAIMER.md) · [THIRD_PARTY.md](../THIRD_PARTY.md)
+근거: [A 10장](../overview/10-terms.md) · [DISCLAIMER.md](../DISCLAIMER.md) · [THIRD_PARTY.md](../THIRD_PARTY.md)
 
 ---
 
@@ -748,7 +786,7 @@ sequenceDiagram
 
 | 역할 | 다음 문서 |
 |---|---|
-| 병원장 · CIO | [A 개요서 2 · 3 · 8 · 9장](../overview/) · [사람 결정 체크리스트](../checklist/decisions.md) · [통합 릴리즈 매니페스트](../RELEASES/2026.09/manifest.md) |
+| 병원장 · CIO | [A 개요서 2 · 3 · 4 · 9 · 10장](../overview/) · [사람 결정 체크리스트](../checklist/decisions.md) · [통합 릴리즈 매니페스트](../RELEASES/2026.09/manifest.md) |
 | 전산 · 인프라팀 | [B 구축 가이드 S0 · S1](../build-guide/) · [C 시스템 구성서](../systems/) · [⑧ 배포 구성](../diagrams/deployment.md) · [THIRD_PARTY.md](../THIRD_PARTY.md) |
 | 의료정보 · 임상 리더 | [E 데모 시나리오](../scenarios/) · [③ 환자 여정](../diagrams/patient-journey.md) · [HIS 구성서](../systems/his.md) · [개원 체크리스트](../checklist/opening.md) |
 | AI · 거버넌스 · 법무 | [S6 AI 계층](../build-guide/S6-ai.md) · [⑦ AI 호출 지도](../diagrams/ai-map.md) · [THIRD_PARTY §3](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책](../DISCLAIMER.md) |

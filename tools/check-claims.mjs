@@ -212,8 +212,8 @@ function check(T) {
         problems.push(`${at} — EN: 확인 ${T.verified}개 중 결함 재주입은 ${T.fault}개인데 "all" 로 적었습니다`);
       }
       // 덱 내용 슬라이드 수
-      for (const m of line.matchAll(/(?:내용\s*슬라이드|덱)\s*\**\s*(\d+)\s*\**\s*장/g)) {
-        if (Number(m[1]) !== T.deckSlides) problems.push(`${at} — 덱 내용 슬라이드 수: 문서 ${m[1]} · 실제 ${T.deckSlides}`);
+      for (const n of deckSlideNums(line)) {
+        if (n !== T.deckSlides) problems.push(`${at} — 덱 내용 슬라이드 수: 문서 ${n} · 실제 ${T.deckSlides}`);
       }
       // "27개 모두 … 결함" 류 과장 — 확인 수와 결함 재주입 수가 다르면 "모두" 를 쓸 수 없다
       if (T.fault !== T.verified && new RegExp(`${T.verified}개\\s*\\*{0,2}모두\\*{0,2}[^\\n]{0,40}(결함|변조|틀린 키|위조)`).test(line)) {
@@ -222,6 +222,22 @@ function check(T) {
     });
   }
   return problems;
+}
+
+
+/**
+ * 한 줄에서 「덱 내용 슬라이드 수」로 읽히는 수를 모두 뽑는다.
+ * 🔴 2026-09-29 — 첫 규칙(「내용 슬라이드 N장」 · 「덱 N장」)은 6곳 중 1곳만 잡았다.
+ *    놓친 모양: 「[발표 덱](deck/) 32장」(덱 뒤에 링크) · 「발표 덱(내용 32장」 · 「내용 32장(화면 11장 …)」 · EN 「32 content slides」.
+ *    「내용 N장」 은 같은 줄에 덱(또는 deck/)이 있을 때만 센다 — 구성서 · 화면의 「N장」 과 섞이지 않게.
+ */
+function deckSlideNums(line) {
+  const out = [];
+  for (const m of line.matchAll(/(?:내용\s*슬라이드|덱)\s*\**\s*(\d+)\s*\**\s*장/g)) out.push(Number(m[1]));
+  for (const m of line.matchAll(/덱\]\([^)]*\)\s*\**\s*(\d+)\s*\**\s*장/g)) out.push(Number(m[1]));
+  if (/덱|deck\//.test(line)) for (const m of line.matchAll(/내용\s*\**\s*(\d+)\s*\**\s*장/g)) out.push(Number(m[1]));
+  for (const m of line.matchAll(/(\d+)\s+content\s+slides/gi)) out.push(Number(m[1]));
+  return [...new Set(out)];
 }
 
 if (process.argv.includes('--self-test')) {
@@ -244,6 +260,20 @@ if (process.argv.includes('--self-test')) {
       } return p; };
     if (run(bad).length !== 1) fails.push('화살표만 쓴 옛 값을 잡지 못합니다');
     if (run(good).length !== 0) fails.push('맞는 값을 틀렸다고 합니다');
+  }
+  // 🔴 덱 슬라이드 수 — 2026-09-29 에 실제로 놓쳤던 다섯 모양
+  {
+    const old = T.deckSlides - 2;
+    const missed = [
+      `| **20분** | [발표 덱](deck/) ${old}장 — 취지 |`,
+      `| [\`deck/\`](deck/) | 발표 덱(내용 ${old}장 · 화면 11장) |`,
+      `| [F 발표 덱](../deck/) | A · E 시각 요약 — 내용 ${old}장(화면 11장) |`,
+      `written for the director: ${old} content slides (11 with screenshots)`,
+      `— 내용 슬라이드 **${old}장** + 장 표지 6장`,
+    ];
+    missed.forEach((l, i) => { if (!deckSlideNums(l).includes(old)) fails.push(`덱 옛 슬라이드 수 모양 ${i + 1} 을 잡지 못합니다`); });
+    if (deckSlideNums(`| [발표 덱](deck/) ${T.deckSlides}장 |`).some((n) => n !== T.deckSlides)) fails.push('덱 맞는 수를 틀렸다고 합니다');
+    if (deckSlideNums('| [시스템 구성서](systems/) | 13장 · 내용 13장 |').length) fails.push('덱이 없는 줄의 「내용 N장」 을 덱으로 셉니다');
   }
   if (!(T.detailArticles > 0)) fails.push('기능 상세 편수를 세지 못했습니다');
   {

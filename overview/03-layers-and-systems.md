@@ -1,7 +1,7 @@
 # 3. 계층 구조와 시스템 13
 
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
-> [개요서 목차](README.md) · ← [2. 취지 8가지](02-principles.md) · 다음 → [4. 환자 한 명의 여정](04-patient-journey.md)
+> [개요서 목차](README.md) · ← [2. 취지 8가지](02-principles.md) · 다음 → [4. 무엇을 할 수 있나](04-functions.md)
 
 > **EN** — The thirteen systems arranged in **seven layers**, with the core HIS in the middle holding the source of truth for patients, encounters, orders and billing, and issuing the staff login token the others verify. For each system: a one-line definition, the version its repository declares at the base commit, and how far it is implemented — `운영` in production use, `통합` integrated, `파일럿` pilot, `개발` in development, `중단` discontinued. Each layer also says **what happens if you do not build it**, because layers are meant to be added one at a time rather than all at once. Scale figures are read from a measured snapshot of the base commits (2026-09-11), not copied from repository READMEs.
 
@@ -86,7 +86,7 @@ flowchart TB
 | ⑦ 협업·교육 | **edu** | 직원 이러닝 · 법정교육 · 전자 이수증 | `2.7.0` | `확인 필요` — 운영 여부 재확인 전 | [edu.md](../systems/edu.md) |
 | ⑦ 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | `1.0.0` | `중단` — 현재 설치본이 동작하지 않음 · 구축 기관은 새로 구성 | [jitsi.md](../systems/jitsi.md) |
 
-버전 · 구현 상태: [통합 릴리즈 `2026.09` 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11). 공개 홈페이지와 환자 앱은 HIS 저장소 안에서 HIS 와 함께 릴리즈되므로 버전이 같습니다. 태그 · 문서의 버전 표기가 정본과 다른 저장소가 여럿 있으니, 소스를 받을 때는 매니페스트의 **정본 버전과 기준 커밋**을 기준으로 삼습니다 → [8장](08-status-and-preparation.md).
+버전 · 구현 상태: [통합 릴리즈 `2026.09` 매니페스트](../RELEASES/2026.09/manifest.md)(계측일 2026-09-11). 공개 홈페이지와 환자 앱은 HIS 저장소 안에서 HIS 와 함께 릴리즈되므로 버전이 같습니다. 태그 · 문서의 버전 표기가 정본과 다른 저장소가 여럿 있으니, 소스를 받을 때는 매니페스트의 **정본 버전과 기준 커밋**을 기준으로 삼습니다 → [9장](09-status-and-preparation.md).
 
 ## 계층마다 맡는 일
 
@@ -95,9 +95,9 @@ flowchart TB
 | ① 코어 | 환자 · 진료 · 오더 · 간호 · 원무 · 청구의 정본, 직원 신원 발급, 개원 · Go-Live · 결정 등록부 같은 구축 관리 화면 | 생태계가 성립하지 않습니다. 모든 구축은 HIS 에서 시작합니다 |
 | ② 환자 접점 | 예약 · 환자 포털 · 앱 — 환자가 기관과 만나는 곳 | HIS 의 원내 업무는 그대로 돌아갑니다. 환자 쪽 창구가 없을 뿐입니다 |
 | ③ 임상 부서 | 검사(LIS) · 영상(PACS) — 부서 업무와 장비 인터페이스 | 이미 쓰는 PACS 가 있으면 새로 세우지 않고 표준 프로토콜로 연결하는 선택이 있습니다 |
-| ④ 신뢰 | 전자서명 · 인증서 · 타임스탬프 · 감사 해시체인 → [5장](05-identity-trust-standards.md) | 동의서 · 판독 · 이수증 · 계약 서명이 모두 여기를 부르므로, 서명을 쓰는 단계보다 먼저 세우는 편이 순서가 꼬이지 않습니다 |
+| ④ 신뢰 | 전자서명 · 인증서 · 타임스탬프 · 감사 해시체인 → [6장](06-identity-trust-standards.md) | 동의서 · 판독 · 이수증 · 계약 서명이 모두 여기를 부르므로, 서명을 쓰는 단계보다 먼저 세우는 편이 순서가 꼬이지 않습니다 |
 | ⑤ 경영 | 재무회계 · 원가 · 인사급여 · 자재 · 보험청구 · 세무 | HIS 안에도 원무 · 청구서 작성 · 경영지원 화면이 있습니다. 재무회계 · 세무처럼 ERP 의 영역이 필요할 때 붙입니다 |
-| ⑥ AI | AI 연산(AI Server) · 의료진별 근거 질의(cerno) · 위험 점수 카드(twin) → [6장](06-ai.md) | HIS 는 AI 없이도 동작하도록 설계했습니다. AI 칸은 "폴백" · "산출 불가"로 표시됩니다 |
+| ⑥ AI | AI 연산(AI Server) · 의료진별 근거 질의(cerno) · 위험 점수 카드(twin) → [7장](07-ai.md) | HIS 는 AI 없이도 동작하도록 설계했습니다. AI 칸은 "폴백" · "산출 불가"로 표시됩니다 |
 | ⑦ 협업·교육 | 그룹웨어 · 결재(Clinic) · 직원 교육(edu) · 원격 화상(Jitsi) | HIS 는 이 계층 없이도 동작합니다. 없는 동안은 기관이 쓰던 그룹웨어 · 교육 수단을 그대로 씁니다. 원격 화상을 쓰려면 Jitsi 를 새로 구성해야 합니다 |
 
 ## 규모 — 계측 스냅샷
@@ -124,7 +124,7 @@ flowchart TB
 
 - **API 핸들러 수는 고유 경로 수가 아닙니다.** 핸들러(데코레이터 · 함수) 수입니다. 언어와 프레임워크마다 세는 규칙이 달라(각 항목의 `rule`), **시스템끼리 크기를 견주는 데 쓰지 않습니다.**
 - HIS 의 웹 화면 수에는 공개 홈페이지 앱이 들어가지 않습니다. HIS · 공개 홈페이지 · 환자 앱의 값은 HIS 저장소의 정본 계측기가 낸 값을 그대로 옮긴 것입니다.
-- 이 수치는 "무엇이 있는가"의 크기이지 "얼마나 검증됐는가"가 아닙니다. 연결이 실제로 동작하는지는 [4장](04-patient-journey.md) · [8장](08-status-and-preparation.md)에서 따로 봅니다.
+- 이 수치는 "무엇이 있는가"의 크기이지 "얼마나 검증됐는가"가 아닙니다. 연결이 실제로 동작하는지는 [5장](05-patient-journey.md) · [9장](09-status-and-preparation.md)에서 따로 봅니다.
 
 ## 서버는 얼마나 필요한가 — 지금 말할 수 있는 것
 
@@ -135,4 +135,4 @@ flowchart TB
 
 ---
 
-← [2. 취지 8가지](02-principles.md) · 다음 → [4. 환자 한 명의 여정](04-patient-journey.md)
+← [2. 취지 8가지](02-principles.md) · 다음 → [4. 무엇을 할 수 있나](04-functions.md)

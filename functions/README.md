@@ -60,7 +60,7 @@
 |---|---|---|---|
 | **환자안전 · 질 지표** | HIS | 안전 사건 · 질 지표 · 감염관리 · **환자 확인** · **안전 게이트(끔 · 경고 · 차단)**. 🔴 표본이 없으면 **비율을 내지 않습니다** | [안전 게이트](detail/safety-gates.md) · [환자 확인](detail/patient-identification.md) · [감염관리](detail/infection-control.md) · [개요서 2장](../overview/02-principles.md#화면이-모른다고-말하는-아홉-가지-방식) |
 | **전자서명 · 위변조 증거** | sign | 자체 PKI · 타임스탬프 · PAdES-LTA · 감사 이벤트 **봉인** · 검증 주소 | [sign §4](../systems/sign.md#4-핵심-기능) |
-| **감사 · 기록 보존** | 전 시스템 | 해시체인 · 변경 차단 · 보존 기간 정책 · 비상 열람 기록 | [비상 열람](detail/emergency-access.md) · 🔴 [보유·파기](detail/retention.md)(세기만 합니다) · [개요서 5장](../overview/05-identity-trust-standards.md) |
+| **감사 · 기록 보존** | 전 시스템 | 해시체인 · 변경 차단 · 보존 기간 정책 · 비상 열람 기록 | [비상 열람](detail/emergency-access.md) · 🔴 [보유·파기](detail/retention.md)(세기만 합니다) · [개요서 6장](../overview/06-identity-trust-standards.md) |
 | **의무기록 완결도** | HIS | 퇴원요약 · 미서명 진료·간호기록 · 🔴 **상병 미입력** 을 기한과 함께 세고 책임자에게 독촉 | [미비기록](detail/incomplete-records.md) · [화면](../screens/his.md) |
 | **위원회 · 정책 의결** | HIS | 위원회 9 · 안건 → 정족수 → 의결 번호 → **집행(배선함)** · 🔴 파기 실행은 바인딩 제외 | [위원회 의결](detail/governance-enactment.md) · [사람 결정 체크리스트](../checklist/decisions.md) |
 | **신원 · 권한** | HIS(신원 허브) | 토큰 발급 · 형제 시스템 검증(공개키 5 · 공유 비밀 2 · API 키 1) · 역할 · 단계 상승 | [신원 허브 도식](../diagrams/identity-hub.md) |
@@ -69,7 +69,7 @@
 
 | 업무 | 맡는 시스템 | 대표 기능 | 어디서 보나 |
 |---|---|---|---|
-| **진료 보조** | AI Server · HIS | 분류 보조 · 기록 초안 · 설명 초안 · 요약 · 번역 | [개요서 6장](../overview/06-ai.md) |
+| **진료 보조** | AI Server · HIS | 분류 보조 · 기록 초안 · 설명 초안 · 요약 · 번역 | [개요서 7장](../overview/07-ai.md) |
 | **근거 질의(RAG)** | AI Server · cerno | 근거 검색 · **근거가 없으면 생성하지 않음** · 안전 신호 | [cerno §4](../systems/cerno.md#4-핵심-기능) |
 | **위험 예측 · 시뮬레이션** | twin | 위험 점수 카드 · What-if · SBAR · 차트 반영(의료진 승인) | [twin §4](../systems/twin.md#4-핵심-기능) |
 | **음성 인식** | AI Server · HIS | 실시간 전사 · 앰비언트 스크라이브 | [AI Server §4](../systems/ai-server.md#4-핵심-기능) |

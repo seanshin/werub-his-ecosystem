@@ -1,7 +1,7 @@
-# 8. 지금 구현 상태와 구축 기관이 준비할 것
+# 9. 지금 구현 상태와 구축 기관이 준비할 것
 
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
-> [개요서 목차](README.md) · ← [7. 구축은 이렇게 진행된다](07-build-path.md) · 다음 → [9. 제공 조건](09-terms.md)
+> [개요서 목차](README.md) · ← [8. 구축은 이렇게 진행된다](08-build-path.md) · 다음 → [10. 제공 조건](10-terms.md)
 
 > **EN** — Where things actually stand, written so an institution does not plan around something that is not there. Of the 113 connections listed, **27 were called end to end between fresh installs** and carry a verification date, while 61 are wired in code but unverified; the rest are not implemented, discontinued, undecidable from code, or design only. The chapter then gives per-system implementation status, the things worth knowing **before** starting rather than discovering mid-build, and a single consolidated list of what the institution must prepare — hardware, accounts, code masters, decisions, and the connections that need a manual fallback. It ends by saying what would have to change for this chapter to change.
 
@@ -55,7 +55,7 @@
 | **문자 발송 제공자** | 등록돼 있지 않습니다. 환자 본인확인 문자는 모의 발송입니다 | 문자 발송 제공자와 처리위탁 계약을 준비합니다(S2) |
 | **전자서명 키 보관** | 인증 기관 키를 소프트웨어로 보관합니다(하드웨어 보안 모듈 **미적용**). 다만 **붙일 자리는 있습니다** — PKCS#11 설정 키(`HSM_PROVIDER` · `PKCS11_*`)가 이미 있고, 키 서명을 맡을 드라이버를 `KEY_SIGNER_DRIVER` 로 고릅니다(2026-09-12 기준 커밋 확인) | 하드웨어 보안 모듈 · 공인 타임스탬프 기관 연결 · 본인확인 업체 연동을 준비합니다([S4](../build-guide/S4-trust.md)) |
 | **원격 화상(Jitsi)** | 현재 설치본은 동작하지 않습니다 | 새로 구성합니다 |
-| **로그인 방식** | 공개키 검증 5곳(sign · PACS · edu · twin · cerno) · 공유 비밀키 2곳(ERP · Jitsi) · API 키 1곳(Clinic) | 공유 비밀키 쪽은 키 관리를 따로 합니다 → [5장](05-identity-trust-standards.md) |
+| **로그인 방식** | 공개키 검증 5곳(sign · PACS · edu · twin · cerno) · 공유 비밀키 2곳(ERP · Jitsi) · API 키 1곳(Clinic) | 공유 비밀키 쪽은 키 관리를 따로 합니다 → [6장](06-identity-trust-standards.md) |
 | **기관명 설정** | HIS 코드에 병원명이 고정 문자열로 남은 파일이 118개 있습니다(기준 커밋에서 2026-09-17 에 다시 셈 · 09-10 값과 같음). 설정값으로 옮기는 작업이 진행 중입니다 | 끝나기 전까지 자기 병원명을 넣으려면 코드를 고칩니다(S1) |
 | **기관 주소 설정** | 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 든 파일이 있습니다(11개 저장소 합계 299개 — [파일 목록](../build-guide/replace-list.md) · 문서 제외 · 2026-09-17 기준 커밋에서 다시 셈) | 설치 전에 자기 기관 주소로 바꾸고, 첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다(S0 · S1) |
 
@@ -67,7 +67,7 @@
 
 - [ ] 결정 권한자 지정 — 허가권자 · 원내 위원회 · 직원의 세 층(S0)
 - [ ] 개시 전 필수 결정 11건 기록([결정 등록부](../checklist/decisions.md))
-- [ ] AI 를 켤 범위와 선행 결정 — 의료기기 해당성 · 임상데이터 처리 경계 · 진료 음성 녹음 근거 · 전송 목적지 한정 → [6장](06-ai.md)
+- [ ] AI 를 켤 범위와 선행 결정 — 의료기기 해당성 · 임상데이터 처리 경계 · 진료 음성 녹음 근거 · 전송 목적지 한정 → [7장](07-ai.md)
 - [ ] 의료기기 · 소프트웨어 인허가와 개인정보 규제 판단 — 각 나라 규정에 따라 **구축 기관이 합니다**([의료 면책 고지](../DISCLAIMER.md))
 
 **인프라**
@@ -87,7 +87,7 @@
 - [ ] 문자 발송 제공자 · 처리위탁 계약
 - [ ] 공인 타임스탬프 기관 · 하드웨어 보안 모듈 · 본인확인 사업자
 - [ ] 원격 화상을 쓰려면 Jitsi 새로 구성
-- [ ] `미구현`인 연결 가운데 기관에 필요한 것의 대체 수단(예: 검사 분석기 자동 수집 · HL7 v2 경로) → [4장](04-patient-journey.md) · [5장](05-identity-trust-standards.md)
+- [ ] `미구현`인 연결 가운데 기관에 필요한 것의 대체 수단(예: 검사 분석기 자동 수집 · HL7 v2 경로) → [5장](05-patient-journey.md) · [6장](06-identity-trust-standards.md)
 
 **다른 나라에 세울 때 더할 것**
 
@@ -105,4 +105,4 @@
 
 ---
 
-← [7. 구축은 이렇게 진행된다](07-build-path.md) · 다음 → [9. 제공 조건](09-terms.md)
+← [8. 구축은 이렇게 진행된다](08-build-path.md) · 다음 → [10. 제공 조건](10-terms.md)

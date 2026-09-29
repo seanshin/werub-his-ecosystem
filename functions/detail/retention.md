@@ -81,7 +81,7 @@
 
 ## 6. 어디서 보나 · 확인된 범위
 
-[HIS 구성서](../../systems/his.md) · [HIS 화면](../../screens/his.md) · [개요서 5장 — 신원 · 신뢰 · 표준](../../overview/05-identity-trust-standards.md) · [기능 지도 — 질 · 안전 · 신뢰](../README.md) · [개원·개시 체크리스트](../../checklist/) · [S8 — 개시 전환](../../build-guide/S8-go-real.md)
+[HIS 구성서](../../systems/his.md) · [HIS 화면](../../screens/his.md) · [개요서 6장 — 신원 · 신뢰 · 표준](../../overview/06-identity-trust-standards.md) · [기능 지도 — 질 · 안전 · 신뢰](../README.md) · [개원·개시 체크리스트](../../checklist/) · [S8 — 개시 전환](../../build-guide/S8-go-real.md)
 
 - 🔴 **실제 호출로 확인하지 않았습니다.** 따라가기에서 이 영역을 부르지 않았습니다([따라가 본 결과](../../build-guide/follow-along-2026-09.md)). 위 내용은 **기준 커밋 코드와 그 저장소의 릴리즈 기록·기획 문서**를 읽은 것입니다.
 - **권한** — 이 화면은 민감 권한으로 분류돼 있고, 기본으로 관리자만 가집니다.

@@ -1,7 +1,7 @@
-# 5. 신원 · 신뢰 · 표준
+# 6. 신원 · 신뢰 · 표준
 
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
-> [개요서 목차](README.md) · ← [4. 환자 한 명의 여정](04-patient-journey.md) · 다음 → [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md)
+> [개요서 목차](README.md) · ← [5. 환자 한 명의 여정](05-patient-journey.md) · 다음 → [7. AI 는 한 곳에서, 판단은 사람이](07-ai.md)
 
 > **EN** — Three things must line up for thirteen systems to behave like one hospital: **who this person is**, **whether this document can be trusted**, and **whether the systems speak the same language**. Staff identity is issued once by the HIS and verified by the others in three different ways — public-key verification (five systems), a shared secret (two, which means key management becomes the institution's job), and a scoped API key (one). Trust — certificates, RFC 3161 timestamps, PAdES-LTA signatures, append-only audit chains — is concentrated in sign. Standards (FHIR R4, SMART on FHIR, CDS Hooks, DICOM, DICOMweb, HL7 v2) carry what they can, but **many connections are plain HTTPS REST or webhooks**, and every row says which it is.
 
@@ -99,8 +99,8 @@
 - **FHIR R4 주 경로(HIS ⇄ LIS 검사 오더 · 결과 · 취소)는 새 설치본끼리 실제로 불러 확인했습니다**(`검증됨` · 2026-09-14~15). **DICOM 쪽은 양쪽 코드가 맞물려 있는 단계**입니다(`구현·미검증` — 촬영 장비와의 연결은 기관이 리허설에서 확인합니다).
 - **HL7 v2 쪽은 경로 몇 개(검사 결과 · 처방 대체 경로, 판독 결과 송신, 환자 인구정보)가 `미구현`입니다.** HL7 v2 로만 말하는 기존 검사 장비 · 시스템이 있다면 S3 에서 연결 방식을 먼저 확인합니다([S3](../build-guide/S3-clinical-departments.md)).
 - **검사 분석기 자동 수집은 `미구현`입니다.** 장비 결과를 자동으로 받아야 하는 기관은 대체 수단을 준비합니다.
-- **코드 체계는 기관이 받아 옵니다.** 코드 마스터는 이 저장소에도 소스에도 없습니다. KCD 는 제9차 개정이 2026-01-01 부터 시행 중인데 기준 버전 코드의 표기는 제8차입니다. SNOMED CT 는 국가 배포 센터에 사용 등록이 필요하다고 원문이 적습니다([THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터) · [9장](09-terms.md)).
+- **코드 체계는 기관이 받아 옵니다.** 코드 마스터는 이 저장소에도 소스에도 없습니다. KCD 는 제9차 개정이 2026-01-01 부터 시행 중인데 기준 버전 코드의 표기는 제8차입니다. SNOMED CT 는 국가 배포 센터에 사용 등록이 필요하다고 원문이 적습니다([THIRD_PARTY §4](../THIRD_PARTY.md#4-코드-마스터기준-데이터) · [10장](10-terms.md)).
 
 ---
 
-← [4. 환자 한 명의 여정](04-patient-journey.md) · 다음 → [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md)
+← [5. 환자 한 명의 여정](05-patient-journey.md) · 다음 → [7. AI 는 한 곳에서, 판단은 사람이](07-ai.md)

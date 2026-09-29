@@ -1,7 +1,7 @@
-# 9. 제공 조건 — MIT · 의료 면책 · MIT 가 덮지 않는 것
+# 10. 제공 조건 — MIT · 의료 면책 · MIT 가 덮지 않는 것
 
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
-> [개요서 목차](README.md) · ← [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md) · 다음 → [10. 다음 읽을 것](10-next.md)
+> [개요서 목차](README.md) · ← [9. 지금 구현 상태와 구축 기관이 준비할 것](09-status-and-preparation.md) · 다음 → [11. 다음 읽을 것](11-next.md)
 
 > **EN** — What you may do with this, in three layers: ① **this repository is MIT**; ② the ecosystem's own code is **intended** to be MIT, but the individual source repositories have not finished sorting out their licence statements; ③ **MIT does not cover** the third-party servers, modified third-party code, AI model weights and national code masters the ecosystem runs alongside — each carries its own terms. The medical disclaimer is summarised in five points, beginning with **this is not a medical device in any jurisdiction** and **conformity assessment and regulatory approval are the deploying institution's responsibility**. 🔴 This chapter is not a legal review: it repeats licence names, what the upstream text itself says, and where to find it — nothing further.
 
@@ -67,7 +67,7 @@ PACS 웹 뷰어는 OHIF Viewer 와 Cornerstone3D(둘 다 MIT)를 받아 함께 �
 
 ### AI 모델 가중치
 
-이 저장소에도 생태계 소스에도 들어 있지 않고, 기관이 모델마다 약관을 읽고 직접 받습니다 → [6장](06-ai.md#모델은-기관이-골라서-직접-받습니다).
+이 저장소에도 생태계 소스에도 들어 있지 않고, 기관이 모델마다 약관을 읽고 직접 받습니다 → [7장](07-ai.md#모델은-기관이-골라서-직접-받습니다).
 
 - **MedGemma 계열(HAI-DEF 약관)** — 임상 사용(환자의 진단 · 치료에 쓰는 것, 연구 포함)에 해당하면 관할 규제 기관의 승인을 받으라고 적습니다. 금지 사용 정책도 약관에 포함됩니다.
 - **Llama 계열 파생 모델(Med42 · Meditron)** — Llama 3 / Llama 2 Community License 입니다. 배포할 때의 표시 요건이 있고, 개발사 모델 카드는 추가 검증 없이 임상에 쓰지 말라고 경고합니다.
@@ -95,4 +95,4 @@ PACS 웹 뷰어는 OHIF Viewer 와 Cornerstone3D(둘 다 MIT)를 받아 함께 �
 
 ---
 
-← [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md) · 다음 → [10. 다음 읽을 것](10-next.md)
+← [9. 지금 구현 상태와 구축 기관이 준비할 것](09-status-and-preparation.md) · 다음 → [11. 다음 읽을 것](11-next.md)

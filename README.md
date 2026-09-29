@@ -24,7 +24,7 @@
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
 | **소스는** | 시스템마다 **저장소가 따로** 있습니다(11곳). 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일은 → **[소스 받기](SOURCES.md)**. 🟢 **모두 공개할 예정**이고 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 주소가 있지만 **주소는 바뀌지 않습니다** |
 
-**처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/08-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) · [화면 293장](screens/)
+**처음이라면 이 넷만 보세요** — [한 문장](overview/01-one-sentence.md) · [지금 상태](overview/09-status-and-preparation.md) · [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) · [화면 293장](screens/)
 
 **"왜 이렇게 까다로운가"가 궁금하면** → [설계 기준은 어떻게 생겼나](DESIGN-HISTORY.md) — 릴리즈 108개가 남긴 것 · [형제 시스템은 어떻게 자랐나](DESIGN-HISTORY-SYSTEMS.md) — 나머지 12개의 기록 666건
 
@@ -157,12 +157,12 @@
 | 역할 · Role | 들고 오는 질문 · The question they bring | 먼저 볼 것 |
 |---|---|---|
 | 🆕 **진료하는 사람**(의사 · 간호 · 검사 · 영상 · 약제) | 내 일에서 무엇이 달라지나? AI 가 내 이름으로 무엇을 하나? 막히면 왜 막히나? | **[진료하는 사람을 위한 안내](clinicians/)** → [업무별 기능 지도](functions/) → [화면 293장](screens/) |
-| 병원장·CIO | 왜 이 구조인가? 무엇을 얻고 무엇을 감수하나? 구축 규모와 비용은? | [발표 덱](deck/) → [개요서 2 · 8장](overview/) → [규모 — 지금 말할 수 있는 것](#규모--지금-말할-수-있는-것) |
+| 병원장·CIO | 왜 이 구조인가? 무엇을 얻고 무엇을 감수하나? 구축 규모와 비용은? | [발표 덱](deck/) → [개요서 2 · 4 · 9장](overview/) → [규모 — 지금 말할 수 있는 것](#규모--지금-말할-수-있는-것) |
 | 전산·인프라팀 | 무엇을 어디에 설치하나? 서버·GPU·DB 요구사항은? | [지금 받을 수 있는 것](#지금-받을-수-있는-것) → [구축 가이드 S0](build-guide/S0-prepare.md) → [규모](#규모--지금-말할-수-있는-것) → [시스템 구성서](systems/) |
 | 의료정보·임상 리더 | 진료 흐름이 시스템 사이를 어떻게 지나가나? 병원 규정은 어디서 설정하나? | [데모 시나리오](scenarios/) → [화면으로 보는 생태계](screens/) |
-| AI·거버넌스 위원회·법무 | AI 가 어디서 무엇을 하나? 어디까지 켜도 되나? 누가 승인하고 무엇이 남나? | [개요서 6장](overview/06-ai.md) → [S6 AI 계층](build-guide/S6-ai.md) → [AI 감독 화면](screens/his.md#ai-감독-관제--분모가-없으면-비율을-내지-않는다) |
+| AI·거버넌스 위원회·법무 | AI 가 어디서 무엇을 하나? 어디까지 켜도 되나? 누가 승인하고 무엇이 남나? | [개요서 7장](overview/07-ai.md) → [S6 AI 계층](build-guide/S6-ai.md) → [AI 감독 화면](screens/his.md#ai-감독-관제--분모가-없으면-비율을-내지-않는다) |
 | 연동 개발자·파트너 | 시스템끼리 무슨 프로토콜·인증으로 붙나? 무엇이 검증됐나? | [연결 카드](integration/cards/)(붙이려는 쌍 한 장) → [공통 규약](integration/contracts.md)(오류 봉투 · 서명 · 멱등 · 재시도) → [연동 계약 지도](integration/) → [연결 상태 표](RELEASES/2026.09/compatibility.md) |
-| 보건 당국·국제 협력 기관 | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [개발도상국에서도](#개발도상국에서도-세울-수-있는-수준으로) → [제공 조건](overview/09-terms.md) |
+| 보건 당국·국제 협력 기관 | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [개발도상국에서도](#개발도상국에서도-세울-수-있는-수준으로) → [제공 조건](overview/10-terms.md) |
 
 ## 설계 취지
 **Design principles**
@@ -293,9 +293,9 @@
 ## 시스템을 꿰는 흐름
 **The threads that run across systems**
 
-> **EN** — The system sections cut the ecosystem vertically; these four threads cut it the other way. **One patient's journey** runs through twelve segments from booking to telehealth, each with its current status. **One staff member's identity** is issued by the HIS and checked by the other systems in three ways (public key for five systems, shared secret for two, API key for one). **Trust** — who signed what, when, and that it has not changed — is produced in one place, sign. **Standards** (FHIR R4, SMART on FHIR, DICOM/DICOMweb, HL7 v2) carry the connections where possible; many links are still plain HTTPS REST and webhooks. Details: [overview chapters 4–5](overview/04-patient-journey.md).
+> **EN** — The system sections cut the ecosystem vertically; these four threads cut it the other way. **One patient's journey** runs through twelve segments from booking to telehealth, each with its current status. **One staff member's identity** is issued by the HIS and checked by the other systems in three ways (public key for five systems, shared secret for two, API key for one). **Trust** — who signed what, when, and that it has not changed — is produced in one place, sign. **Standards** (FHIR R4, SMART on FHIR, DICOM/DICOMweb, HL7 v2) carry the connections where possible; many links are still plain HTTPS REST and webhooks. Details: [overview chapters 4–5](overview/05-patient-journey.md).
 
-시스템 절은 생태계를 **시스템별로** 자릅니다. 아래 네 흐름은 **가로질러** 자릅니다. 자세한 것은 [개요서 4장](overview/04-patient-journey.md) · [5장](overview/05-identity-trust-standards.md)과 도식([환자 여정](diagrams/patient-journey.md) · [신원 허브](diagrams/identity-hub.md) · [표준 층](diagrams/standards.md))에 있습니다.
+시스템 절은 생태계를 **시스템별로** 자릅니다. 아래 네 흐름은 **가로질러** 자릅니다. 자세한 것은 [개요서 5장](overview/05-patient-journey.md) · [6장](overview/06-identity-trust-standards.md)과 도식([환자 여정](diagrams/patient-journey.md) · [신원 허브](diagrams/identity-hub.md) · [표준 층](diagrams/standards.md))에 있습니다.
 
 ### 환자 한 명의 여정
 
@@ -314,7 +314,7 @@
 | 결과 열람 | 환자 앱 → HIS · HIS → PACS | 결과 · 처방 · 수납 · 본인 영상 | `구현·미검증` |
 | 원격 상담 | 포털 · 환자 앱 → Jitsi | 화상 입장 | `중단` |
 
-접수(HIS 안) · 회계(ERP 안)는 시스템 경계를 넘지 않습니다. 구간별 근거는 [개요서 4장](overview/04-patient-journey.md#구간별-상태).
+접수(HIS 안) · 회계(ERP 안)는 시스템 경계를 넘지 않습니다. 구간별 근거는 [개요서 5장](overview/05-patient-journey.md#구간별-상태).
 
 ### 직원 한 명의 신원 — HIS 한 곳에서
 
@@ -396,7 +396,7 @@
 ## AI 계층 — 어디서 무엇을 하고, 어떻게 켜나
 **The AI layer: where it acts and how to turn it on**
 
-> **EN** — What each AI assist produces and who confirms it; which systems call the AI Server; which AI features are **on by default in the code** (turn them off right after install) and which are off; the five-step order for turning features on by recorded decision; and what is kept for oversight. Details: [overview chapter 6](overview/06-ai.md) and [build stage S6](build-guide/S6-ai.md).
+> **EN** — What each AI assist produces and who confirms it; which systems call the AI Server; which AI features are **on by default in the code** (turn them off right after install) and which are off; the five-step order for turning features on by recorded decision; and what is kept for oversight. Details: [overview chapter 6](overview/07-ai.md) and [build stage S6](build-guide/S6-ai.md).
 
 ### AI 가 만드는 것과, 누가 확정하나
 
@@ -410,7 +410,7 @@
 | 위험 점수 카드(twin) | 위험 예측 보조 · SBAR 초안 | 의료진이 「차트 저장」을 눌러야 HIS 에 저장 |
 | 영상 판독 초안(PACS) | 예비 판독문 초안 · 비교 판독 · 자동 선별 알림 | 판독의 |
 
-AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jitsi 입니다(연결별 상태는 [개요서 6장](overview/06-ai.md#누가-ai-server-를-부르나--연결-상태)). 따라가기에서 일부 경로를 불러 봤지만 **연결 전체를 확인하지 못해 모두 `구현·미검증` 그대로**입니다 — 색인 경로는 임베딩 모델이 있는 기준 장비가 필요합니다.
+AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jitsi 입니다(연결별 상태는 [개요서 7장](overview/07-ai.md#누가-ai-server-를-부르나--연결-상태)). 따라가기에서 일부 경로를 불러 봤지만 **연결 전체를 확인하지 못해 모두 `구현·미검증` 그대로**입니다 — 색인 경로는 임베딩 모델이 있는 기준 장비가 필요합니다.
 
 ### 끄고 시작해, 결정으로 하나씩 켠다
 
@@ -578,7 +578,7 @@ AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jit
 | [`ROADMAP.md`](ROADMAP.md) | 자료 제작 계획 | ✅ |
 | [`DESIGN-HISTORY.md`](DESIGN-HISTORY.md) | **설계 기준은 어떻게 생겼나** — 코어 HIS 릴리즈 108개와 판정 규칙 9축 | 🟡 초안 |
 | [`DESIGN-HISTORY-SYSTEMS.md`](DESIGN-HISTORY-SYSTEMS.md) | **형제 시스템은 어떻게 자랐나** — 나머지 12개의 릴리즈 기록 666건 · 되풀이된 장면 다섯 | 🟡 초안 |
-| [`overview/`](overview/) | 취지·구조 개요서(10장) | 🟡 초안 |
+| [`overview/`](overview/) | 취지·구조 개요서(11장 — 4장 「무엇을 할 수 있나」 2026-09-29 추가) | 🟡 초안 |
 | [`SOURCES.md`](SOURCES.md) | **소스 받기** — 시스템 13 → 저장소 11 · 기준 커밋 · 받은 뒤 처음 여는 파일 · 저장소에 없는 것 | 🟢 생성물(주소 · 커밋 · 파일 존재를 기계로 대조) |
 | [`build-guide/`](build-guide/) | **AI 기반 HIS 구축 가이드**(S0 준비 ~ S8 리얼 전환) | 🟡 초안 · **한 번 따라가 봄**(2026-09-13~16) · 남은 확인 필요 19곳 · [부록: 바꿔야 할 코드 기본값](build-guide/replace-list.md) |
 | [`systems/`](systems/) | 시스템 구성서 13장 | 🟡 초안 |
@@ -586,7 +586,7 @@ AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jit
 | [`clinicians/`](clinicians/) | **진료하는 사람을 위한 안내** — 공통 + 직역 5(의사 · 간호 · 임상병리 · 영상 · 약제). AI 가 하지 않는 일 · 시스템이 일부러 막는 것 · 내가 승인할 것 · 안 될 때의 대체 | 🟡 초안 |
 | [`integration/`](integration/) | **연동 계약 지도** — 인증 3방식 · 개통 게이트 · **구축 시 연결 순서** · **[연결 카드 48장](integration/cards/)** · **[공통 규약](integration/contracts.md)**(오류 봉투 · 서명 대상 · 멱등 · 재시도) · [매트릭스](integration/matrix.md)(자동 생성) | 🟡 초안 · `검증됨` 27 / 113 |
 | [`scenarios/`](scenarios/) | 데모 시나리오 4편(외래 · 응급 · 검진 · 입원→퇴원) | 🟡 초안 · 캡처 자리 52 중 **44**(✅ 36 · 🟡 8) · 응급 시나리오는 9/9 |
-| [`deck/`](deck/) | 발표 덱(내용 32장 · A·E 시각 요약 + 화면 11장) | 🟡 초안 |
+| [`deck/`](deck/) | 발표 덱(내용 34장 · A·E 시각 요약 + 화면 11장) | 🟡 초안 |
 | [`checklist/`](checklist/) | 구축 체크리스트(개원 준비 60 · 개시 점검 60 · 사람 결정 56 — 레지스트리에서 자동 생성) | ✅ 1차 생성 |
 | [`data/`](data/) | 규모 계측 스냅샷(계측일 · 기준 커밋 포함) | ✅ 1차 계측 |
 | [`RELEASES/`](RELEASES/) | 생태계 통합 릴리즈([릴리즈 노트](RELEASES/2026.09/RELEASE.md) · 버전 조합 매니페스트 · 시스템별 릴리즈 요약 13 · [연결 상태](RELEASES/2026.09/compatibility.md) — 확인일 칸) | 🟢 **`2026.09`** · 담당 확인 전 |
@@ -601,8 +601,8 @@ AI Server 를 부르는 쪽은 HIS · PACS · ERP · twin · cerno · edu · Jit
 | 시간 | 이렇게 |
 |---|---|
 | **3분** | 위 [30초 요약](#30초-요약) → [한 문장](overview/01-one-sentence.md) |
-| **20분** | [발표 덱](deck/) 32장 — 취지 · 구조 · 구축 · **지금 상태** · 데모 · 조건 |
-| **1시간** | [개요서](overview/) 10장(병원장 · CIO 가 처음부터 끝까지 읽도록 씀) |
+| **20분** | [발표 덱](deck/) 34장 — 취지 · 구조 · 구축 · **지금 상태** · 데모 · 조건 |
+| **1시간** | [개요서](overview/) 11장(병원장 · CIO 가 처음부터 끝까지 읽도록 씀) |
 | **소스를 받으려면** | **[소스 받기](SOURCES.md)** — 어느 저장소에 무엇이 있고, 어느 커밋을 받아야 이 자료와 같은 것을 보는지 |
 | **구축을 앞두고** | [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) → [구축 가이드](build-guide/) S0~S8 + [체크리스트](checklist/) 세 벌(개원 60 · 개시 점검 60 · 사람 결정 56) |
 | **화면이 궁금하면** | [화면으로 보는 생태계](screens/) — 돌아가는 설치본에서 찍은 293장 |

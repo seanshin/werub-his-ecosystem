@@ -32,7 +32,7 @@
 | **공유 비밀키로 검증** | ERP · Jitsi (**2곳**) | 양쪽에 **같은 값**을 두고 함께 교체합니다. 교체 절차와 보관 위치를 정해야 합니다 | 🔴 **양쪽 다 바꿔야 합니다.** 한쪽만 바꾸면 로그인이 끊깁니다 |
 | **API 키로 연결** | Clinic (**1곳**) | Clinic 이 범위를 지정한 키를 발급하고, HIS 가 그 키로 Clinic 을 부릅니다 | Clinic 에서 키를 폐기하고 다시 발급합니다 |
 
-- 근거: [신원 허브 도식](../diagrams/identity-hub.md) · [5장 「신원」](../overview/05-identity-trust-standards.md)
+- 근거: [신원 허브 도식](../diagrams/identity-hub.md) · [6장 「신원」](../overview/06-identity-trust-standards.md)
 - 이 밖에 **시스템 대 시스템** 인증이 따로 있는 연결이 있습니다 — 예: PACS 가 HIS 인바운드를 받을 때 쓰는 API 키, ERP 웹훅의 서명. 연결별 세부는 [연결 상태 표](../RELEASES/2026.09/compatibility.md)의 프로토콜 칸에 적혀 있습니다.
 - 🔴 **키 · 비밀값은 설치할 때 새로 만들어 넣습니다.** 저장소의 예시 값을 그대로 쓰지 않습니다([S0](../build-guide/S0-prepare.md)).
 

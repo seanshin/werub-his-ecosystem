@@ -18,21 +18,22 @@ AI 기반 HIS 를 세우려는 의료기관이 **취지(왜) · 구조(무엇으
 | 1 | [한 문장 — AI 시대의 병원을 위한 13개 시스템의 생태계](01-one-sentence.md) | 이것은 무엇이고, 왜 만들었나. 이 저장소에 있는 것과 없는 것 |
 | 2 | [취지 8가지](02-principles.md) | 설계 원칙마다 제품에서 보이는 곳, 기관이 얻는 것과 감수하는 것 |
 | 3 | [계층 구조와 시스템 13](03-layers-and-systems.md) | 7계층 · 13개 시스템의 정의 · 버전 · 구현 상태 · 규모 · 서버 규모 |
-| 4 | [환자 한 명의 여정](04-patient-journey.md) | 예약부터 원격 상담까지, 시스템 경계마다의 연결 상태 |
-| 5 | [신원 · 신뢰 · 표준](05-identity-trust-standards.md) | 직원 신원은 HIS 에서, 서명은 sign 에서, 연결은 표준으로 |
-| 6 | [AI 는 한 곳에서, 판단은 사람이](06-ai.md) | GPU 한 장 · `local_only` · 초안과 승인 · 끄고 시작해 결정으로 켜기 · 모델 약관 |
-| 7 | [구축은 이렇게 진행된다](07-build-path.md) | S0~S8 한 장 · 단계별 사람 결정 · 체크리스트 셋 |
-| 8 | [지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md) | `검증됨` 27 · 연결 상태 합계 · 시스템별 상태 · 준비 목록 |
-| 9 | [제공 조건 — MIT · 의료 면책 · MIT 가 덮지 않는 것](09-terms.md) | 라이선스 세 겹 · 면책 · 제3자 서버 · 모델 · 코드 마스터 |
-| 10 | [다음 읽을 것](10-next.md) | 역할별로 이어 읽을 문서 |
+| 4 | [무엇을 할 수 있나 — 업무로 본 기능](04-functions.md) | HIS 메뉴 266 · 업무 11 영역 · **기능들이 함께 지키는 여섯 가지** · 기관에게 의미하는 것 |
+| 5 | [환자 한 명의 여정](05-patient-journey.md) | 예약부터 원격 상담까지, 시스템 경계마다의 연결 상태 |
+| 6 | [신원 · 신뢰 · 표준](06-identity-trust-standards.md) | 직원 신원은 HIS 에서, 서명은 sign 에서, 연결은 표준으로 |
+| 7 | [AI 는 한 곳에서, 판단은 사람이](07-ai.md) | GPU 한 장 · `local_only` · 초안과 승인 · 끄고 시작해 결정으로 켜기 · 모델 약관 |
+| 8 | [구축은 이렇게 진행된다](08-build-path.md) | S0~S8 한 장 · 단계별 사람 결정 · 체크리스트 셋 |
+| 9 | [지금 구현 상태와 구축 기관이 준비할 것](09-status-and-preparation.md) | `검증됨` 27 · 연결 상태 합계 · 시스템별 상태 · 준비 목록 |
+| 10 | [제공 조건 — MIT · 의료 면책 · MIT 가 덮지 않는 것](10-terms.md) | 라이선스 세 겹 · 면책 · 제3자 서버 · 모델 · 코드 마스터 |
+| 11 | [다음 읽을 것](11-next.md) | 역할별로 이어 읽을 문서 |
 
 ## 바쁜 분을 위한 읽는 순서
 
 | 시간이 있다면 | 읽을 장 |
 |---|---|
 | 한 장만 | [1](01-one-sentence.md) |
-| 결정을 앞두고 | [1](01-one-sentence.md) → [2](02-principles.md) → [8](08-status-and-preparation.md) → [9](09-terms.md) |
-| 구축을 앞두고 | [3](03-layers-and-systems.md) → [6](06-ai.md) → [7](07-build-path.md) → [8](08-status-and-preparation.md) → [구축 가이드](../build-guide/) |
+| 결정을 앞두고 | [1](01-one-sentence.md) → [2](02-principles.md) → [4](04-functions.md) → [9](09-status-and-preparation.md) → [10](10-terms.md) |
+| 구축을 앞두고 | [3](03-layers-and-systems.md) → [4](04-functions.md) → [7](07-ai.md) → [8](08-build-path.md) → [9](09-status-and-preparation.md) → [구축 가이드](../build-guide/) |
 
 ## 이 개요서의 기준
 

@@ -76,7 +76,7 @@
 
 ## 6. 어디서 보나 · 확인된 범위
 
-[PACS 구성서](../../systems/pacs.md) · [환자 앱 구성서](../../RELEASES/2026.09/systems/patient-app.md) · [영상의학 안내](../../clinicians/radiology.md) · [개요서 5장](../../overview/05-identity-trust-standards.md) · [기능 지도 — 검사 · 영상](../README.md) · [S2 — 환자 접점](../../build-guide/S2-patient-access.md)
+[PACS 구성서](../../systems/pacs.md) · [환자 앱 구성서](../../RELEASES/2026.09/systems/patient-app.md) · [영상의학 안내](../../clinicians/radiology.md) · [개요서 6장](../../overview/06-identity-trust-standards.md) · [기능 지도 — 검사 · 영상](../README.md) · [S2 — 환자 접점](../../build-guide/S2-patient-access.md)
 
 - 🔴 **실제 호출로 확인하지 않았습니다.** 따라가기에서 이 경로를 부르지 않았습니다 — 환자 포털을 세우지 않았고, 이 기능은 기본이 꺼져 있습니다([따라가 본 결과](../../build-guide/follow-along-2026-09.md)).
 - 🔵 위 내용은 **기준 커밋 코드 · 그 저장소의 릴리즈 기록 · 두 시스템이 주고받은 연동 규약 문서**를 읽은 것입니다.

@@ -49,4 +49,4 @@
 
 ## 6. 더 볼 것
 
-[HIS 구성서](../systems/his.md) · [HIS 화면](../screens/his.md) · [환자 여정](../overview/04-patient-journey.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md)
+[HIS 구성서](../systems/his.md) · [HIS 화면](../screens/his.md) · [환자 여정](../overview/05-patient-journey.md) · [연결 상태 표](../RELEASES/2026.09/compatibility.md)

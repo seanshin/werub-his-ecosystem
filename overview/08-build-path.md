@@ -1,7 +1,7 @@
-# 7. 구축은 이렇게 진행된다
+# 8. 구축은 이렇게 진행된다
 
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
-> [개요서 목차](README.md) · ← [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md) · 다음 → [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md)
+> [개요서 목차](README.md) · ← [7. AI 는 한 곳에서, 판단은 사람이](07-ai.md) · 다음 → [9. 지금 구현 상태와 구축 기관이 준비할 것](09-status-and-preparation.md)
 
 > **EN** — Building runs in **nine stages, S0 (preparation) through S8 (cutover to real operation)**. It does not invent a new process: it walks the management screens the HIS already has — opening-stage registry, Go-Live console, decision registry, safety gates, outbound-transmission console, the standing watcher, system settings — in stage order. Each stage lists what gets done, the decisions a person must make there, and how many registry items it carries (56 decisions, 60 opening items and 60 Go-Live items in total). Progress is tracked by three checklists rather than by prose, and the chapter is explicit that the walkthrough behind it was done once, on one developer machine.
 
@@ -76,7 +76,7 @@ flowchart LR
 ## 시작 전에 꼭 알아야 할 세 가지
 
 1. **첫 기동은 외부로 나가는 연결을 막은 상태에서 합니다.** 각 시스템의 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 파일이 있습니다(11개 저장소 합계 299개 — [파일 목록](../build-guide/replace-list.md) · 문서 제외 · 2026-09-17 기준 커밋에서 다시 셈). 바꾸지 않고 띄우면 다른 설치본으로 요청이 갈 수 있습니다([S0](../build-guide/S0-prepare.md)).
-2. **AI 는 끄고 시작합니다.** 코드 기본값이 켜진 AI 기능이 있습니다 → [6장](06-ai.md).
+2. **AI 는 끄고 시작합니다.** 코드 기본값이 켜진 AI 기능이 있습니다 → [7장](07-ai.md).
 3. **리얼 전환은 설정 토글이 아니라 리얼 빌드 배포입니다.** 가상 데이터 격리 → 키 · 인증서 새로 만들기 → 실데이터 이관 → 리얼 빌드 배포 → 개시 확인 순서입니다([S8](../build-guide/S8-go-real.md)).
 
 ## 이 경로가 아직 말하지 않는 것
@@ -86,4 +86,4 @@ flowchart LR
 
 ---
 
-← [6. AI 는 한 곳에서, 판단은 사람이](06-ai.md) · 다음 → [8. 지금 구현 상태와 구축 기관이 준비할 것](08-status-and-preparation.md)
+← [7. AI 는 한 곳에서, 판단은 사람이](07-ai.md) · 다음 → [9. 지금 구현 상태와 구축 기관이 준비할 것](09-status-and-preparation.md)
