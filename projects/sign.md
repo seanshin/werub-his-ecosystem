@@ -39,7 +39,7 @@ What is not there yet, stated plainly: the CA keys are kept in software (no hard
 
 생태계에서 **문서에 서명하는 개인키**(서명을 만드는 비밀 열쇠)를 가진 곳은 sign 하나뿐입니다. HIS · PACS · ERP · edu 는 이 키를 갖지 않고, 서명이 필요하면 sign 에 요청합니다.
 
-HIS 도 개인키를 하나 갖지만 종류가 다릅니다. 직원의 신원 토큰(「이 사람이 지금 서명하려는 직원이다」라는 증표)에 서명하는 키입니다. sign 은 HIS 의 공개키로 그 토큰을 확인만 하고, 문서 서명은 sign 의 키로 만듭니다(5절).
+HIS 도 개인키를 하나 갖지만 종류가 다릅니다. 직원의 신원 토큰(「이 사람이 지금 서명하려는 직원이다」라는 증표)에 서명하는 키입니다. sign 은 HIS 의 공개키로 그 토큰을 확인만 하고, 문서 서명은 sign 의 키로 만듭니다(5절). 설치 때 다루는 열쇠 다섯 가지는 6절 표에 모았습니다.
 
 서명하는 **사람마다의 키**도 sign 이 만들어 암호화해 보관합니다. 의사나 환자는 키 파일을 들고 다니지 않습니다. 본인임이 확인되면 sign 이 그 사람의 키로 서명합니다.
 
@@ -61,7 +61,7 @@ HIS 도 개인키를 하나 갖지만 종류가 다릅니다. 직원의 신원 �
 
 - **판독 서명** — 판독의가 PACS 에서 판독문을 확정하고 서명을 누릅니다. 판독의 본인임은 HIS 가 발급한 서명용 신원으로 확인되고, sign 이 그 판독의의 키로 판독문에 서명과 타임스탬프를 붙입니다. 확정하지 않은 판독문은 서명되지 않습니다.
 - **조영제 동의** — 직원이 PACS 에서 동의서 서명을 요청하면 환자용 1회용 서명 링크가 만들어집니다. 환자는 본인확인을 거쳐 서명하고, 같은 링크로는 두 번 서명할 수 없습니다. 서명이 끝나면 PACS 의 동의서 상태가 「완료」로 바뀝니다. 본인확인은 기관이 사업자와 계약하기 전까지 모의 공급자로 동작합니다.
-- **동의서 완료 통지** — 먼저 범위부터: 시험에서는 서명 요청을 sign 에 직접 만들어 확인했고, HIS **화면에서** 동의서 서명을 요청하는 길은 아직 끝까지 확인하지 못했습니다(5절). 서명이 끝나면 sign 이 HIS 에 **서명된 완료 통지**를 보냅니다. HIS 는 통지의 서명을 확인한 뒤에야 동의 상태를 바꿉니다. 서명이 틀리거나 없는 통지는 반영되지 않습니다.
+- **동의서 완료 통지** — 서명이 끝나면 sign 이 HIS 에 **서명된 완료 통지**를 보냅니다. HIS 는 통지의 서명을 확인한 뒤에야 동의 상태를 바꿉니다. 서명이 틀리거나 없는 통지는 반영되지 않습니다. 이 통지는 시험에서 확인했지만, 요청은 sign 에 직접 만든 것입니다. HIS **화면에서** 동의서 서명을 요청하는 길은 아직 끝까지 확인하지 못했습니다(5절).
 - **처방 기록 봉인** — 서명과는 다른 일입니다. 봉인은 이미 일어난 기록을 나중에 고칠 수 없게 묶어 두는 것입니다. HIS 가 처방 행위(발행 · 접수 · 시행 · 완료 · 취소)의 서명 로그를 sign 의 감사 사슬(3절)에 올립니다. 나중에 저장된 기록 하나를 바꾸면 검증이 「체인 불일치」로 드러납니다.
 
 ## 3. 할 수 있는 일
@@ -136,7 +136,7 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign itself only calls out to deliver completion notices and their retries. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026 (HIS 3, PACS 2, ERP 2, edu 2), patient identity checks running on a mock provider; consent requests from the HIS screens, ERP ledger sealing and Clinic are not yet confirmed.
+> **EN** — Five systems call sign: HIS, PACS, ERP, edu and the groupware (Clinic); sign itself only calls out to deliver completion notices and their retries. Staff signing is three steps: HIS has a certificate issued for the staff member (sign generates and keeps the key), HIS issues a signing identity, and sign checks it with HIS's public key. Other systems use per-system API keys and HMAC-signed notices. Nine links were called for real in September 2026 (HIS 3, PACS 2, ERP 2, edu 2) — system-to-system paths with synthetic data, not real patient identity checks, text messages or signing started from HIS screens. The HIS three were staff signing with a request created directly in sign, the completion notice, and order-log sealing.
 
 **sign 은 스스로 서명 업무를 시작하지 않습니다.** 다른 시스템이 서명을 요청하고, sign 은 서명이 끝나면 요청한 시스템에 알립니다. sign 이 먼저 부르는 것은 이 완료 통지와 그 재시도뿐입니다.
 
@@ -156,15 +156,18 @@ flowchart TB
   CL["Clinic<br/>그룹웨어"] -->|"결재 문서 봉인"| SIGN
 ```
 
-**확인된 9개와 그 경계** — 2026년 9월에 새로 세운 설치본끼리 가상 데이터로 불러 본 것입니다.
+**확인된 9개의 경계 — 시스템끼리 부르는 길을 가상 데이터로 확인한 것입니다. 실제 환자의 본인확인 · 문자 발송 · HIS 화면에서 시작하는 서명은 들어 있지 않습니다.**
 
-- 확인함: HIS 3(HIS 신원으로 직원 서명 · HIS 로 가는 완료 통지 · 처방 로그 봉인) · PACS 2(판독 서명 · 조영제 동의서 환자 서명) · ERP 2(거래처 계약 서명 · 그 완료 통지) · edu 2(이수증 봉인 · 그 완료 통지).
-- 확인 아직: HIS 화면에서 보내는 동의서 서명 요청 · ERP 결재 기록 봉인 · Clinic 결재 문서 봉인.
-- 한계: 환자 본인확인은 모의 공급자였습니다. HIS 쪽 확인은 서명 요청을 sign 에 직접 만들어 시험한 것입니다.
+- **HIS 3개가 시험한 것**
+  - 직원 서명 — HIS 가 발급한 서명용 신원으로 sign 이 그 직원의 키로 서명했습니다. 서명 요청은 sign 에 직접 만들었습니다. 신원을 망가뜨리면 거부됐습니다.
+  - 완료 통지 — 서명이 끝난 뒤 sign 이 보낸 통지로 HIS 의 동의서 상태가 바뀌었습니다. 위조한 통지는 반영되지 않았습니다.
+  - 처방 로그 봉인 — HIS 의 처방 서명 로그를 sign 감사 사슬에 올렸고, 기록 하나를 바꾸자 검증에서 드러났습니다.
+- PACS 2(판독 서명 · 조영제 동의서 환자 서명) · ERP 2(거래처 계약 서명 · 그 완료 통지) · edu 2(이수증 봉인 · 그 완료 통지).
+- 확인 아직: HIS 화면에서 보내는 동의서 서명 요청 · ERP 결재 기록 봉인 · Clinic 결재 문서 봉인. 환자 본인확인은 모의 공급자였습니다.
 
 | 상대 | sign 이 받는 것 | sign 이 주는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **HIS** | 직원 신원(서명용) · 처방 서명 로그 봉인 · 동의서 · 발급 문서 서명 요청 | 서명 완료 통지 | 직원 신원은 HIS 공개키로 검증 · 시스템 연동 키 · 서명된 통지 | 3개 **확인함**(2026-09-14 · 서명 요청은 sign 에 직접 만들어 시험) · HIS 화면에서 보내는 동의서 서명 요청은 만들어져 있음 · 확인은 아직 |
+| **HIS** | 직원 신원(서명용) · 처방 서명 로그 봉인 · 동의서 · 발급 문서 서명 요청 | 서명 완료 통지 | 직원 신원은 HIS 공개키로 검증 · 시스템 연동 키 · 서명된 통지 | 3개 **확인함**(2026-09-14 · 위 목록) · HIS 화면에서 보내는 동의서 요청은 확인 아직 |
 | **PACS** | 판독문 서명 · 조영제 동의서 서명 요청 | 서명 완료 | 연동 키 · 판독의 신원은 HIS 발급 | 둘 다 **확인함**(2026-09-15 · 환자 본인확인은 모의 공급자로) |
 | **ERP** | 외부 거래처 계약 서명(서명 요청 기능으로) · 결재 기록 봉인 | 계약 완료 통지 | 연동 키 · 서명된 통지 | 거래처 계약 서명 · 완료 통지 **확인함**(2026-09-15) · 결재 기록 봉인은 만들어져 있음 · 확인은 아직 · 3절의 「일반 전자계약」 기능을 부르는 코드는 ERP 쪽에 아직 없음 |
 | **edu** | 법정교육 이수증 봉인 · 폐기 · 철회 | 이수증 완료 통지 | 연동 키 · 서명된 통지 | 둘 다 **확인함**(2026-09-15) |
@@ -180,7 +183,7 @@ flowchart TB
 
 ## 6. 설치 · 운영
 
-> **EN** — Three containers (service, web, PostgreSQL) plus two optional proxies; database migrations apply on container start. The production image built and ran unchanged in the September 2026 rehearsal, but the compose file expects an external network named docker_default to exist. Several secrets are mandatory and the service refuses to start without them. Backups are GPG-encrypted, and a lost backup passphrase means no backup can be opened.
+> **EN** — Three containers (service, web, PostgreSQL) plus two optional proxies; database migrations apply on container start. The production image built and ran unchanged in the September 2026 rehearsal, but the compose file expects an external network named docker_default to exist. Five kinds of key are set up at install — master key, pepper, per-system integration keys, console-registered consumer keys, and HIS's own identity key (which stays in HIS) — and the service refuses to start without its mandatory secrets. Backups are GPG-encrypted, and a lost backup passphrase means no backup can be opened.
 
 ### 필요한 것
 
@@ -200,7 +203,17 @@ flowchart TB
 
 ### 꼭 넣어야 하는 설정
 
-- **없으면 시작하지 않는 것** — 마스터키(키 보관소를 암호화하는 열쇠) · 페퍼(본인확인에 쓴 전화번호 같은 식별값을 평문 대신 해시로 남길 때 섞는 비밀값) · HIS 연동 키 · 통지 서명 비밀. 임시 키로 떠서 조용히 도는 일이 없게 했습니다.
+- **열쇠 다섯 가지** — 이름이 비슷해 헷갈리기 쉬워 한 표로 모읍니다.
+
+| 열쇠 | 무엇을 하나 | 누가 만드나 | 잃으면 |
+|---|---|---|---|
+| **마스터키** | 키 보관소(인증기관 · 타임스탬프 · 서명자별 키)를 암호화 | 설치 담당이 설치 때 만듦. 없으면 운영 설정이 시작하지 않음 | 보관된 키를 열 수 없어 과거 증거를 다시 열 수 없음(8절). 바꾸면 봉인된 연동 설정과 관리자 세션이 무효 |
+| **페퍼** | 본인확인에 쓴 식별값(전화번호 등)을 평문 대신 해시로 남길 때 섞는 비밀값 | 설치 담당이 설치 때 만듦. 없으면 운영 설정이 시작하지 않음 | 같은 값에서 같은 해시를 다시 만들 수 없어, 전에 남긴 해시를 사람과 다시 맞춰 볼 수 없음 |
+| **연동 키** | HIS · PACS · ERP 가 sign 을 부를 때 내는 시스템별 호출 키 | 설치 담당이 만들어 sign 설정과 부르는 쪽 설정에 같이 넣음. HIS 키는 없으면 시작하지 않음 | 새로 만들어 양쪽에 넣음. 콘솔에서 새 키와 옛 키를 잠시 함께 받는 무중단 교체가 됨 |
+| **소비자 키** | 콘솔에서 등록한 그 밖의 연동 시스템(예: edu)의 호출 키. 시스템마다 허용 범위가 붙음 | sign 관리 콘솔에서 등록 · 발급 | 콘솔에서 새로 발급 · 교체 |
+| **신원 키** | HIS 가 직원 서명용 신원 토큰에 서명하는 키 — sign 의 키가 아님 | HIS 가 만들고 보관. sign 에는 HIS 공개키 목록의 주소만 넣음 | HIS 쪽에서 다룸. sign 에는 이 키의 비밀이 없음 |
+
+- 이 밖에 **통지 서명 비밀**(완료 통지에 붙이는 서명의 비밀 · 없으면 시작하지 않음) · **백업 암호** · **DB 비밀번호**도 설치 때 정합니다. 필수 비밀값이 비었을 때 임시 값으로 떠서 조용히 도는 일이 없게 했습니다.
 - **DB 비밀번호는 반드시 직접 넣습니다.**
 - **주소** — 공개 주소 · HIS 공개키 목록 주소 등 몇몇 기본값에 **다른 설치본의 주소**가 들어 있습니다. 모두 자기 기관 값으로 바꿉니다([바꿔야 할 코드 기본값 — sign](../build-guide/replace-list.md#sign)).
 - **본인확인 · 알림** — 사업자와 계약하기 전에는 **모의 공급자**로 동작하고, 서명 포털이 스스로 「데모」라고 표시합니다.
@@ -236,7 +249,7 @@ flowchart TB
 
 ## 8. 알아 둘 것
 
-> **EN** — CA keys are kept in software (no HSM yet); identity-verification and messaging providers are mocks until contracted; losing the master key or the backup passphrase means old evidence cannot be reopened. Also: no accredited timestamp authority, no long-term re-timestamping, single institution only, Korean-only screens, and the legal effect of signatures is for the hospital and its lawyers to judge. Rotating the master key has no step-by-step procedure in the repository, and the materials disagree on what the pepper secret is for (this page follows the code).
+> **EN** — CA keys are kept in software (no HSM yet); identity-verification and messaging providers are mocks until contracted; losing the master key or the backup passphrase means old evidence cannot be reopened. Also: no accredited timestamp authority, no long-term re-timestamping, single institution only, Korean-only screens, and the legal effect of signatures is for the hospital and its lawyers to judge. Rotating the master key has no step-by-step procedure in the repository.
 
 - 🔴 **인증기관 키를 소프트웨어로 보관합니다.** 하드웨어 보안 모듈(HSM)은 어댑터만 준비돼 있고 적용되지 않았습니다. 실운영 전환 때 장비나 클라우드 키 관리 서비스를 마련해 옮기는 것을 권합니다.
 - 🔴 **본인확인 · 문자 · 메시지 사업자 연결이 모의 상태입니다.** 실제 환자가 서명하기 전에 기관이 사업자와 계약해 연결을 끝냅니다.

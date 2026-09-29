@@ -20,7 +20,7 @@ What is not there yet, stated plainly: automatic result capture from analysers l
 
 ## 1. 한 문장
 
-> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR. At a glance: usable with HIS in place once test codes are mapped and the laboratory has signed its reference and critical values; the main HIS links were confirmed in September 2026, but with only 3 of 15 starter test codes mapped, three HIS links still unconfirmed, and an install script that needs manual steps.
+> **EN** — LIS runs the laboratory's work from order to verified result across five fields, and exchanges orders and results with HIS over FHIR. At a glance: usable with HIS in place once test codes are mapped and the laboratory has signed its reference and critical values; the main HIS links were confirmed in September 2026 with one test (TSH) flowing from order to verified result and cancellation, while an unmapped blood-count order was held with an alert — only 3 of 15 starter test codes were mapped — three HIS links still unconfirmed, and an install script that needs manual steps.
 
 **LIS 는 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사의 전 과정을 처리하는 검사실 시스템이며, HIS 에서 검사 처방을 받아 검증된 결과를 돌려줍니다.**
 
@@ -32,7 +32,7 @@ What is not there yet, stated plainly: automatic result capture from analysers l
 | **세워야 하는 것** | Docker 호스트 하나에 컨테이너 셋(PostgreSQL 16 · API · 웹)과, 서버의 예약 작업으로 도는 매일 백업. 캐시 · 메시지 브로커 · GPU 는 없습니다 |
 | **먼저 있어야 할 것** | HIS(검사 처방 · 서버 간 자격 · 코드 카탈로그 키) · 검사 코드 매핑 · 검사실과 법무가 서명한 참고치 · 위험치 · 수가 코드 · TLS · DNS · 방화벽 · 백업 저장소 · LIS 직원 계정. PACS · ERP 는 필요할 때 |
 | **받을 코드** | LIS 저장소의 현재 개발본은 **통합 릴리즈 코드와 같습니다** · [소스 받기](../SOURCES.md). 설치 스크립트는 그대로는 끝나지 않으므로 [구축 가이드 S3](../build-guide/S3-clinical-departments.md)의 순서를 함께 봅니다(§6) |
-| **실제로 확인된 것** | 2026년 9월 시험 설치(가상 데이터)에서 HIS 와의 오더 · 취소 · 결과 · 환자 조회 · 코드 반입, PACS 병리 슬라이드 두 경로, ERP 청구를 실제로 불러 확인했습니다. **다만 HIS 기본 검사 코드 15개 중 LIS 에 매핑된 것은 3개**라, 나머지 코드의 오더는 흐르지 않았습니다 |
+| **실제로 확인된 것** | 2026년 9월 시험 설치(가상 데이터)에서 HIS 와의 오더 · 취소 · 결과 · 환자 조회 · 코드 반입, PACS 병리 슬라이드 두 경로, ERP 청구를 실제로 불러 확인했습니다. **범위는 검사 하나입니다** — 갑상선기능(TSH) 오더가 LIS 에 접수되고, 결과가 HIS 에서 확정되고, 취소가 전해졌습니다. 매핑이 없는 혈액검사(CBC) 오더는 LIS 가 보류하고 경보를 냈습니다. HIS 기본 검사 코드 15개 중 매핑된 것은 3개였습니다 |
 | **아직 모르는 것** | HIS 와의 세 경로(반사 검사 · 수혈 동의 · 조직 결재)의 실제 동작 · 하루 검체 수와 동시 사용자에 맞춘 사양 · 기존 검사실 시스템의 데이터를 옮기는 방법 · 어떤 장비 중계 장치를 쓸지 |
 
 병원 정보 체계에서 LIS 는 **임상 부서** 계층에 있습니다. 검사 처방의 원본은 HIS 에 있고, 검체 · 결과 · 정도관리 · 검사실 판정의 원본은 LIS 에 있습니다.
@@ -151,8 +151,8 @@ flowchart TB
 
 | 상대 | LIS 가 주는 것 | LIS 가 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
-| **HIS** — 오더 · 결과 | 검증된 결과 · 환자 이름 조회 | 검사 오더 · 취소(5분마다 가져옴) | 서버 간 표준 토큰(SMART 클라이언트 자격 — HIS 관리자가 LIS 를 서버 클라이언트로 등록해 내주는 아이디 · 비밀값) | 오더 · 취소 · 결과 · 환자 조회 **확인함**(2026-09-14~15) |
-| **HIS** — 검사 코드 | — | 검사 코드 카탈로그(전량 · 바뀐 것만) | 연동 키(코드 카탈로그를 부를 때 쓰는, HIS 가 내준 키) | **확인함**(2026-09-15) · 다만 HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개 — 매핑이 없는 코드의 오더는 흐르지 않습니다 |
+| **HIS** — 오더 · 결과 | 검증된 결과 · 환자 이름 조회 | 검사 오더 · 취소(5분마다 가져옴) | 서버 간 표준 토큰(SMART 클라이언트 자격 — HIS 관리자가 LIS 를 서버 클라이언트로 등록해 내주는 아이디 · 비밀값) | 오더 · 취소 · 결과 · 환자 조회 **확인함**(2026-09-14~15) · 갑상선기능(TSH) 한 검사로 확인 · 매핑 없는 혈액검사(CBC) 오더는 보류 · 경보 |
+| **HIS** — 검사 코드 | — | 검사 코드 카탈로그(전량 · 바뀐 것만) | 연동 키(코드 카탈로그를 부를 때 쓰는, HIS 가 내준 키) | **확인함**(2026-09-15) · 다만 반입된 HIS 검사 코드 24개와 겹친 LIS 기본 매핑은 45개 중 5개 — 반입은 매핑을 대신 만들지 않습니다 |
 | **HIS** — 반사 검사 · 수혈 동의 · 조직 결재 | 추가검사 오더(의사 승인 대기로) | 승인 상태 · 수혈 동의 상태 · 결재 상태 | 서버 간 표준 토큰 · 연동 키 | 만들어져 있음 · 실제 연결 확인은 아직 |
 | **PACS** | 병리 슬라이드 스캔 워크리스트 등록 · 취소 | 슬라이드 도착 여부 · 뷰어 링크 | HL7 v2(자체 암호화 · 로그인이 없어 원내망 안에서 쓰는 전송) · PACS 읽기 전용 서비스 계정 | 두 경로 모두 **확인함**(2026-09-15) |
 | **ERP** | 검사 청구(수량) | 처리 상태 | 공유 비밀로 서명한 요청 | **확인함**(2026-09-15) |
@@ -239,7 +239,7 @@ flowchart TB
   - 수혈 동의는 HIS 의 답이 필요합니다. 답을 확인하지 못하면 **「대기」로 두고** 출고를 자동 통과시키지 않습니다.
 - **설치 때 들어 있는 참고치 · 위험치는 임시 대표값입니다** — 개시 서명 화면이 스스로 「임상 권위 값 아님」이라고 밝힙니다. 검사실과 법무가 서명해 실값으로 바꾸기 전에는 임상 기준으로 쓰지 않습니다.
 - **오더는 5분마다 가져옵니다** — 간격은 코드에 고정돼 있고, 급한 오더는 수동으로 가져오기를 부르는 경로가 있습니다. 응급 검사에 5분이 허용되는지는 기관이 판단합니다.
-- **검사 코드가 맞아야 흐릅니다** — HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개였습니다(2026년 9월 시험 설치 실측). 개시 전에 카탈로그 반입과 매핑을 끝냅니다.
+- **검사 코드가 맞아야 흐릅니다** — HIS 기본 검사 코드 15개 중 LIS 기본 매핑에 있는 것은 3개였습니다(2026년 9월 시험 설치 실측). 매핑된 셋은 갑상선기능 · 일반뇨 · 혈액배양입니다. 일반혈액 · 전해질 · 염증 수치(CRP) · 간기능 · 신장기능 · 혈당 · 지질 · 당화혈색소 · 혈액응고 오더는 매핑을 채우기 전에는 LIS 가 보류합니다. 개시 전에 카탈로그 반입과 매핑을 끝냅니다.
 - **청구는 대상 집계까지입니다** — 확정된 검사를 국내 건강보험 청구 코드 매핑으로 모으지만, 청구 파일을 만드는 부분은 아직 없습니다.
 - **정해 두지 않은 것** — 장비 중계 장치로 어떤 제품을 쓸지, 기존 검사실 시스템의 데이터를 옮기는 방법은 이 자료가 정하거나 확인하지 않았습니다.
 - **한 설치본 = 한 기관**입니다. 보존 기간이 지난 데이터 파기는 법무 확정 전까지 꺼져 있습니다. 법정감염병 신고는 **기록**하는 것이고 대외 기관으로 보내지 않습니다.

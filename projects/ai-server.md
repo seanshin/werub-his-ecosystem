@@ -22,7 +22,7 @@ What an IT team should know first: there is no ready-made install definition for
 
 ## 1. 한 문장
 
-> **EN** — AI Server gathers the ecosystem's AI work on one GPU server inside the hospital and returns drafts and assisting results to the systems that call it. HIS keeps running without it, but its AI switch is on by default, so switch it off until AI Server is ready. The repository also holds non-medical features; this introduction covers only the medical side. At a glance: installed by hand (no install definition), models downloaded by the hospital, no connection verified yet, and throughput and answer quality not measured.
+> **EN** — AI Server gathers the ecosystem's AI work on one GPU server inside the hospital and returns drafts and assisting results to the systems that call it. HIS keeps running without it, but its AI switch is on by default, so switch it off until AI Server is ready. The repository also holds non-medical features; this introduction covers only the medical side. At a glance: installed by hand (no install definition), models downloaded by the hospital, take the current development line because the integrated-release code can fail to issue API keys on a fresh install, no connection verified yet, and throughput and answer quality not measured.
 
 **AI Server 는 생태계의 AI 연산을 기관 안 GPU 서버 한 대에 모아 맡고, 다른 시스템이 부르면 초안과 보조 결과를 돌려주는 서버입니다.**
 
@@ -33,8 +33,8 @@ What an IT team should know first: there is no ready-made install definition for
 | **지금 쓸 수 있나** | 조건부 — 새 서버에 올리는 설치 정의가 없어 손으로 설치하고, 모델은 기관이 직접 받습니다. 부르는 시스템과의 연결은 아직 하나도 끝까지 확인되지 않았고, 처리량과 답의 품질은 재지 않았습니다 |
 | **세워야 하는 것** | GPU 서버 한 대 — API 서버(Flask · Gunicorn 프로세스 하나) · 같은 호스트의 모델 서빙(Ollama) · 음성 인식(Whisper). 검색 색인(ChromaDB)과 SQLite 파일은 앱 안에 있어 별도 DB 서버가 없습니다. 다른 시스템이 부르려면 앞단 프록시를 둡니다 |
 | **먼저 있어야 할 것** | 다른 프로젝트 없이도 뜨지만, 부르는 시스템(주로 HIS)이 있어야 쓸모가 있습니다. 기관은 모델 가중치(약관 확인) · 공공 데이터 이용 키 · 공공 데이터를 받을 인터넷 연결이나 반입 절차를 준비합니다 |
-| **받을 코드** | 이 소개서는 현재 개발본(코드 버전 2.125.56)을 설명합니다. 다른 문서와 연결 상태는 통합 릴리즈 코드(2.125.41) 기준입니다. 통합 릴리즈 코드에는 새로 설치할 때 API 키 발급이 실패할 수 있던 문제의 수정이 없습니다(9절) — [소스 받기](../SOURCES.md) |
-| **실제로 확인된 것** | 없음 — 2026년 9월 시험 설치에서 HIS · ERP · edu 쪽 경로 몇 개를 CPU 와 작은 대체 모델로 불러 응답이 오는 것만 봤습니다(통합 릴리즈 코드 · 품질은 판정하지 않음) |
+| **받을 코드** | 이 소개서가 설명하는 현재 개발본을 받습니다. 통합 릴리즈 코드로 새로 설치하면 API 키 발급이 실패할 수 있어서입니다. 판 번호 · 커밋 · 달라진 점은 9절 · [소스 받기](../SOURCES.md) |
+| **실제로 확인된 것** | 없음 |
 | **아직 모르는 것** | 처리량 · 응답 시간 · 답의 품질 · 동시 사용자에 따른 GPU · 메모리 · 디스크 · 모델을 모두 받았을 때의 디스크 합계 · 장애 뒤 복구 절차 · 요청과 응답 본문을 얼마나 남기는지 |
 
 twin 과 cerno 는 자기 GPU 를 두지 않고 이 서버를 부릅니다. 그래서 모델을 올리고 GPU 를 나눠 쓰는 일은 이 서버 한 곳에서만 합니다.
@@ -288,6 +288,8 @@ flowchart LR
 > **EN** — The integrated release pinned AI Server at code version 2.125.41 (2026-09-09). The current development line is 2.125.56, 37 commits later, none of them tagged. For the medical side the main changes are in GPU model loading (fewer reloads; time-of-day profiles no longer apply automatically), a fix for fresh installs, guards in the drug-data batch, new quality measurements, a regrouped admin console whose settings screen shows the values actually applied, a fix for empty answers from the vision model, and fixes in several integration paths that will be re-checked before the connection table changes.
 
 이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(코드 버전 2.125.41 · 2026-09-09)에 맞춰 쓰여 있습니다. 그 뒤로 **37커밋**이 더해져 현재 개발본은 코드 버전 **2.125.56** 입니다. 저장소의 마지막 태그는 여전히 v2.8.0 이라, 이 커밋들에는 태그가 없습니다.
+
+**그래서 받을 코드는 현재 개발본**(커밋은 끝의 근거 절)입니다. [소스 받기](../SOURCES.md)가 가리키는 커밋은 통합 릴리즈 코드이고, 그 코드로 새로 설치하면 API 키 발급 · 검증이 실패할 수 있습니다(아래 「새 설치」 행). 다만 연결 상태는 통합 릴리즈 코드로 본 것이라, 현재 개발본으로는 다시 확인하지 않았습니다(5절).
 
 | 영역 | 달라진 것 |
 |---|---|

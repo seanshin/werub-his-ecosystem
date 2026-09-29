@@ -124,7 +124,7 @@ flowchart LR
 
 - **이 앱에는 데이터베이스도 캐시 서버도 없습니다.** 모든 사실은 HIS 의 데이터베이스에 있고, 미디어 파일은 HIS 서버 디스크에 있습니다.
 - 앱이 가진 것은 빌드 결과물과, Next.js 가 잠시 보관하는 그려 둔 페이지뿐입니다.
-- 예외로 **병원 이름 · 연락처 · 주소는 코드 파일**(사이트 정보를 모은 파일 `src/lib/site-info.ts` 와 일부 페이지 문구)에 있습니다 — [8. 알아 둘 것](#8-알아-둘-것).
+- 예외로 **병원 이름 · 연락처 · 주소는 코드 파일**(사이트 정보를 모은 파일 `src/lib/site-info.ts` 와 여러 페이지 문구)에 있습니다 — [8. 알아 둘 것](#8-알아-둘-것).
 
 ## 5. 다른 시스템과의 연결
 
@@ -158,7 +158,7 @@ flowchart LR
 |---|---|
 | 서버 | Node 22 로 도는 작은 웹 서버 하나. **데이터베이스 · 캐시 · GPU 는 필요 없습니다**. 방문자 규모에 맞춘 사양이나 콘텐츠 전송망이 필요한지는 계측하지 않았습니다 |
 | 먼저 있어야 할 것 | **HIS**(공개 API · 환자 포털 인증 · 홈페이지 관리 화면) |
-| 기관이 준비할 것 | 병원 이름 · 연락처 · 주소(코드 파일 수정) · HIS 관리 화면의 콘텐츠(진료시간 글 · 소개 글 · 배너 등) · 개인정보처리방침 · 이용약관 · 비급여 고지의 기관 문안 |
+| 기관이 준비할 것 | 병원 이름 · 연락처 · 주소(코드 파일 수정 — 고칠 곳은 §8) · HIS 관리 화면의 콘텐츠(진료시간 글 · 소개 글 · 배너 등) · 개인정보처리방침 · 이용약관 · 비급여 고지의 기관 문안 |
 
 ### 띄우는 방식
 
@@ -205,9 +205,15 @@ HIS 의 단독 운영용 compose 에는 홈페이지가 들어 있지 않습니�
 
 ## 8. 알아 둘 것
 
-> **EN** — Institution details still live in code files (40 files carry the hospital name); the HIS address the browser goes through is fixed at build time; only short English, Japanese and Chinese pages exist; the default publish target in the repository belongs to one installation; and the site's connection to HIS has not been called for real. Public routes are rate-limited on the HIS side; how long booking-chat content is kept was not checked.
+> **EN** — Institution details still live in code files — not one file: a site-info file holds name, phones, address and e-mail, but the name is also written directly in 39 other files, phone numbers in 3 and the address in 9, and the portal address is written out in 7 files despite its environment variable; the HIS address the browser goes through is fixed at build time; only short English, Japanese and Chinese pages exist; the default publish target in the repository belongs to one installation; and the site's connection to HIS has not been called for real. Public routes are rate-limited on the HIS side; how long booking-chat content is kept was not checked.
 
-- 🔴 **병원 이름 · 연락처 · 주소가 코드 파일에 있습니다** — 사이트 정보 상수와 일부 페이지 문구에 특정 기관의 값이 들어 있습니다. HIS 저장소가 스스로 잡아 둔 병원명 기준선으로는 이 앱에서 40개 파일 · 70곳입니다. HIS 소개서의 124개 파일은 이 40개를 포함한 저장소 전체 수입니다. 자기 기관 정보로 바꾸려면 아직 코드를 고쳐야 합니다. 이것을 한 번에 바꾸는 도구는 저장소에서 찾지 못했습니다.
+- 🔴 **병원 이름 · 연락처 · 주소가 코드 파일에 있습니다** — 사이트 정보 상수와 여러 페이지 문구에 특정 기관의 값이 들어 있습니다. HIS 저장소가 스스로 잡아 둔 병원명 기준선으로는 이 앱에서 40개 파일 · 70곳입니다. HIS 소개서의 124개 파일은 이 40개를 포함한 저장소 전체 수입니다. 자기 기관 정보로 바꾸려면 아직 코드를 고쳐야 합니다. 한 번에 바꾸는 도구는 저장소에 없습니다.
+  - **고칠 곳은 한 파일이 아닙니다.** `src/lib/site-info.ts` 가 이름 · 대표전화 · 응급전화 · 주소 · 이메일을 모은 파일이고, 14개 파일이 이 값을 읽습니다.
+  - 그러나 병원 이름은 이 파일 밖 **39개 파일**에도 직접 적혀 있습니다(페이지 문구 · 페이지 제목과 검색용 정보 · 머리글 · 바닥글).
+  - 전화번호는 이 파일 밖 3개 파일, 주소는 9개 파일(오시는 길 · 언어별 첫 화면 · 국제 진료 안내 등)에 따로 있습니다.
+  - 사이트 주소는 12개 파일에 따로 있고, 기관 사진은 전용 이미지 폴더(8장)에 있습니다.
+  - 환자 포털 주소는 환경 변수(`NEXT_PUBLIC_PORTAL_URL`)로 바꾸지만, 언어별 페이지와 국제 진료 안내 등 7개 파일에는 주소가 따로 적혀 있습니다.
+  - 파일 수는 이 자료가 HIS 소개서의 커밋에서 기관 값 문자열을 찾아 센 것입니다(주석 제외 · 근거 절).
 - 🔴 **브라우저 요청을 넘길 HIS 주소는 빌드할 때 고정됩니다** — 두 벌 가운데 앞의 것(`HOMEPAGE_API_ORIGIN`)입니다. 그래서 기관 · 환경마다 이미지를 따로 빌드합니다. 저장소의 기본값(Dockerfile · 예시 파일 · 발행 스크립트)은 특정 설치본을 가리키므로 모두 바꿉니다.
 - 🔴 **실제 연결 확인이 아직입니다** — 2026년 9월 시험 설치에서 이 앱은 설치하지 않았습니다. HIS 와의 두 연결은 코드를 대조한 판정입니다.
 - **다국어는 소개 페이지 수준**입니다 — 영어 · 일본어 · 중국어는 소개 페이지 한 장씩이고 나머지는 한국어입니다.
@@ -258,7 +264,7 @@ HIS 의 단독 운영용 compose 에는 홈페이지가 들어 있지 않습니�
 |---|---|
 | 읽은 것 | HIS 저장소의 **현재 개발본** — 커밋 `f596d24589e6`(2026-09-29) 의 `apps/homepage` 와 HIS 쪽 발행 스크립트 · 작업 트리의 미커밋 변경은 읽지 않음. `apps/homepage` 는 HIS 소개서가 읽은 커밋 `a39f60fc9d7c` 와 내용이 같습니다 |
 | 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `e9d303984f80`(v4.18.0 · 2026-09-11) |
-| 센 방법 | 페이지 = `apps/homepage/**/page.tsx` 파일 수 · 달라진 커밋 = `git log e9d30398..HEAD -- apps/homepage` 의 커밋 수 — 2026-09-29 에 센 값. 병원명 고정 = HIS 저장소의 병원명 기준선 시험 파일에 동결된 목록 중 `apps/homepage` 항목(40개 파일 · 70곳 · HIS 소개서가 읽은 커밋). 구성서의 36개는 통합 릴리즈 무렵(2026-09-10) 이 자료의 규칙으로 센 값이라 수가 다릅니다 |
+| 센 방법 | 페이지 = `apps/homepage/**/page.tsx` 파일 수 · 달라진 커밋 = `git log e9d30398..HEAD -- apps/homepage` 의 커밋 수 — 2026-09-29 에 센 값. 병원명 고정 = HIS 저장소의 병원명 기준선 시험 파일에 동결된 목록 중 `apps/homepage` 항목(40개 파일 · 70곳 · HIS 소개서가 읽은 커밋). 구성서의 36개는 통합 릴리즈 무렵(2026-09-10) 이 자료의 규칙으로 센 값이라 수가 다릅니다. 고칠 곳(§8) = 커밋 `a39f60fc9d7c` 의 `apps/homepage/src` 에서 기관 이름 · 대표 · 응급 전화 · 주소 조각 · 사이트 주소 · 포털 주소 문자열이 든 파일 수(주석 제외 · 이름은 기준선과 같은 40개) — 2026-09-29 에 센 값 |
 | 이 소개서가 더 확인한 것 | 즉시 반영 요청이 저장된 페이지를 버리는 방식(`revalidate` 경로) · 격리 빌드의 목적(빌드 설정 주석) · HIS 공개 경로의 요청 횟수 제한 — HIS 소개서가 읽은 커밋에서 읽음 |
 | 실제 연결 확인 | 없음 — 2026년 9월 따라가기에서 설치하지 않음 |
 | 사실 확인 | HIS 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

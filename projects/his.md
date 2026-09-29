@@ -33,7 +33,7 @@ What is not there yet, stated plainly: transmission to external agencies (insura
 | **지금 쓸 수 있나** | **조건부.** 시험 설치와 기능 검토는 지금 됩니다. 실운영에는 코드 마스터 반입 · 병원 이름을 코드에서 고치기 · 보험 청구 전송을 따로 마련하기가 필요합니다(§8) |
 | **세워야 하는 것** | 서버 한 대(GPU 없음)에 API 서버 · 직원 웹 · 상시 감시자(별도 프로세스) · PostgreSQL 16 · Redis 7 · PDF 렌더러(별도 컨테이너) |
 | **먼저 있어야 할 것** | 다른 시스템은 없어도 됩니다. 기관이 준비할 것은 코드 마스터(약가 · 진단 · 수가 · 검사) · 기관 정보 · 부서 · 병상 · 직원 · 필수 설정 · 운영 모드 결정입니다 |
-| **받을 코드** | 이 소개서는 **현재 개발본**(버전 번호 없음 · v4.19.0 이후)을 설명하고, 새 설치 스크립트는 여기에만 있습니다. 통합 릴리즈 코드(v4.18.0)는 [구축 가이드 S1](../build-guide/S1-core-his.md)의 우회 순서로 세웁니다 · [소스 받기](../SOURCES.md) |
+| **받을 코드** | 이 소개서는 **현재 개발본**(버전 번호 없음 · v4.19.0 이후)을 설명하고, 새 설치 스크립트는 여기에만 있습니다. 통합 릴리즈 코드(v4.18.0)는 [구축 가이드 S1](../build-guide/S1-core-his.md)의 우회 순서로 세웁니다 · [소스 받기](../SOURCES.md). 세운 서버를 다음 판으로 올리는 절차는 저장소가 아직 정하지 않았습니다(§6) |
 | **실제로 확인된 것** | 2026년 9월 시험 설치(통합 릴리즈 코드 · 가상 데이터)에서 LIS · sign · ERP · edu 연결 일부를 실제로 불러 확인했습니다. 다만 LIS 는 HIS 기본 검사 코드 15개 중 3개만 매핑돼 있었고, 현재 개발본으로는 다시 부르지 않았습니다(§5) |
 | **아직 모르는 것** | 사용자 수에 맞춘 서버 사양 · 빈 서버에서의 설치 · 운영용 컨테이너 구성(compose)으로 끝까지 띄우기 · 서버 이중화와 복구 목표 시간 · 이관에 걸리는 시간 · HIS 가 멈췄을 때 다른 시스템의 동작 |
 
@@ -199,7 +199,7 @@ flowchart TB
 
 ## 6. 설치 · 운영
 
-> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU; sizing for a given number of users was not measured. A new install uses the install script (seven steps, rehearsed so far only in a local container); updating an existing server uses the deploy script, which applies the schema differently, and the repository says not to mix the two. The repository points new sites to the install script rather than the production compose file, though neither has been proven on a real empty server. Four settings are required in every mode; an unset mode counts as real, which also requires the security settings. Most runtime values are changed in the admin screen; the AI server address is set by environment variable. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
+> **EN** — HIS needs one server with PostgreSQL 16 and Redis 7 and no GPU; sizing for a given number of users was not measured. A new install uses the install script (seven steps, rehearsed so far only in a local container); updating an existing server uses the deploy script, which applies the schema differently, and the repository says not to mix the two. Upgrading a newly installed server to the next version is not defined yet: the repository lists it as an open limitation handled with the vendor, and its planned order (backup, apply migrations, one-off fixes, smoke test, restore on failure) has no script. The repository points new sites to the install script rather than the production compose file, though neither has been proven on a real empty server. Four settings are required in every mode; an unset mode counts as real, which also requires the security settings. Most runtime values are changed in the admin screen; the AI server address is set by environment variable. Backups cover the HIS database and uploaded files, with a script for a second copy and a restore test.
 
 ### 필요한 것
 
@@ -221,8 +221,13 @@ flowchart TB
 
 두 길이 갈린 이유는 기존 운영 서버가 마이그레이션 이력 없이 세워졌기 때문입니다. 저장소의 설치 안내는 **두 길을 섞지 말라**고 적습니다. **새로 세우는 기관은 첫 번째 길만 봅니다.**
 
-- 배포 스크립트에는 마이그레이션을 적용하는 단계가 없습니다. 그래서 새로 설치한 서버를 나중에 갱신하는 절차는 저장소에서 찾지 못했습니다.
-- 기존 서버를 마이그레이션 방식으로 옮기는 절차도 찾지 못했습니다.
+**새로 세운 서버를 다음 판으로 올리기** — 저장소는 이것을 **아직 정하지 않은 일**로 적습니다.
+
+- 알려진 한계 목록이 「버전 간 업그레이드 절차 미정 — 현재 설치본의 업그레이드는 공급자 지원 작업」이라고 적습니다. 지금은 HIS 프로젝트와 함께 하는 작업입니다.
+- 운영 매뉴얼에 **예정 절차**가 한 줄 있습니다: 백업 → 마이그레이션 적용 → 판마다 한 번 도는 데이터 보정 → 점검 → 실패하면 백업 복원. 이 순서를 실행하는 스크립트는 찾지 못했습니다.
+- 지금 있는 두 스크립트는 이 일에 맞지 않습니다. 설치 스크립트는 DB 가 비어 있지 않으면 멈추고, 배포 스크립트는 기존 운영 서버용이라 `db push` 로 맞춥니다.
+- 운영용 compose 는 올릴 때마다 마이그레이션 적용 서비스가 먼저 돌도록 짜여 있습니다. 다만 끝까지 올려 본 기록이 없습니다(아래).
+- 기존 운영 서버를 마이그레이션 이력 방식으로 옮기는 순서는 저장소 문서에 있고, 실행은 사람 결정을 기다립니다. 새로 세우는 기관과는 상관없습니다.
 
 설치 스크립트의 7단계는 이렇습니다.
 
@@ -284,7 +289,7 @@ flowchart TB
 
 ## 8. 알아 둘 것
 
-> **EN** — Not there yet: transmission to external agencies (7 of the 13 outbound channels, none built); an SMS provider (only 2 of the 13 channels are built, both messaging); the hospital name is still fixed text in 124 files; the install script is rehearsed only in a local container and the production compose file never brought up end to end; the default backup covers only the HIS database and uploads; no licence has been chosen; UI translations are all AI drafts; and the national rules cover Korea and the UAE only.
+> **EN** — Not there yet: transmission to external agencies (7 of the 13 outbound channels, none built); an SMS provider (only 2 of the 13 channels are built, both messaging); the hospital name is still fixed text in 124 files; the install script is rehearsed only in a local container, the production compose file never brought up end to end, and upgrading an installed server is not defined yet; staff cannot create patient-portal accounts and self sign-up stays closed until identity verification is connected; the default backup covers only the HIS database and uploads; no licence has been chosen; UI translations are all AI drafts; and the national rules cover Korea and the UAE only.
 
 - 🔴 **대외 기관 전송이 없습니다** — 밖으로 나가는 통로 13개 가운데 7개가 대외 기관 전송입니다. 보험 청구 전송 · 감염병 신고 · 진료정보교류 · 마약류 보고 등 7개 모두 구현돼 있지 않습니다. 청구서는 작성까지이고, 전송은 기존 청구 소프트웨어를 함께 쓰거나 모듈을 붙입니다. 두 소프트웨어를 함께 쓰는 구체 절차는 이 자료에 정리하지 않았습니다.
 - **문자 발송 제공자가 없습니다** — 13개 가운데 나머지 6개는 환자 · 직원에게 가는 메시지 통로입니다. 그 6개 중 구현된 것은 2개입니다.
@@ -292,7 +297,8 @@ flowchart TB
   - 구현 안 됨: 범용 이메일(발송 라이브러리가 없음) · 문자 · WhatsApp · WeChat.
   - 13개를 합쳐 보면 구현된 것은 2개입니다(대외 기관 7개는 모두 0).
 - 🔴 **병원 이름이 코드에 고정 문자열로 남아 있습니다** — HIS 저장소가 스스로 잡아 둔 기준선으로 124개 파일 · 217곳입니다(그중 공개 홈페이지 앱이 40개 파일). 늘지 않게 막아 두었을 뿐 줄지는 않았습니다. 법정 서식 일부도 데모 기관 값을 찍습니다. 자기 기관 이름을 넣으려면 아직 코드를 고쳐야 합니다. 다른 문서의 「118개」는 통합 릴리즈 코드를 다른 규칙으로 센 값입니다(근거 절).
-- 🔴 **지금 시작해도 되나 — 설치는 아직 실제 서버에서 검증되지 않았습니다** — 새 설치 스크립트는 저장소 측이 로컬 컨테이너에서 한 번 돌려 본 것이고, 빈 서버 설치는 아직입니다. 운영용 compose 는 끝까지 올려 본 기록이 없습니다. 연결을 실제로 불러 본 것도 통합 릴리즈 기준 설치본이었습니다(§5).
+- 🔴 **지금 시작해도 되나 — 설치는 아직 실제 서버에서 검증되지 않았습니다** — 새 설치 스크립트는 저장소 측이 로컬 컨테이너에서 한 번 돌려 본 것이고, 빈 서버 설치는 아직입니다. 운영용 compose 는 끝까지 올려 본 기록이 없습니다. 세운 뒤 다음 판으로 올리는 절차도 저장소가 「미정 · 공급자 지원 작업」으로 적습니다(§6). 연결을 실제로 불러 본 것도 통합 릴리즈 기준 설치본이었습니다(§5).
+- **환자 포털 계정을 직원이 만들어 주는 기능이 없습니다** — 자가 가입은 본인인증 연동 전까지 닫혀 있습니다. 자세한 것은 [환자 앱 소개서 §8](patient-app.md#8-알아-둘-것).
 - **코드 마스터는 기관이 채웁니다** — 필수 코드 마스터 가운데 출처가 확인된 것은 약가 한 가지입니다. 진단 · 수가 · 검사 코드는 기관이 받아 넣습니다. 기존 시스템에서 옮겨 오는 도구는 환자 일괄 등록 API 하나입니다(통합 릴리즈 기준 · [구축 가이드 S8](../build-guide/S8-go-real.md)). 진료 · 처방 이력의 이관 범위와 순서는 기관이 설계하고, 이관에 걸리는 시간은 계측하지 않았습니다.
 - **백업 기본값은 HIS DB 와 업로드 파일**입니다. 다른 시스템의 DB · 원격지 백업 · 재해 복구는 기관이 준비합니다. 운영용 compose 는 API · 웹을 두 벌씩 띄우지만 한 서버 안의 일입니다. 서버 이중화와 복구 목표 시간은 확인하지 못했습니다.
 - **안전 게이트 28개 중 18개는 꺼진 채로 옵니다** — 기관이 정해서 켭니다. 게이트가 꺼져 있으면 그 보호가 없다는 뜻입니다. 밖으로 나가는 통로가 기본 꺼짐인 것(나가지 않는 쪽이 안전)과 방향이 반대입니다. 첫 로그인 뒤 비밀번호 변경은 안내만 하고 강제하지 않습니다.
@@ -345,6 +351,6 @@ flowchart TB
 | 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `e9d303984f80`(v4.18.0 · 2026-09-11) |
 | 센 방법 | 데이터 모델 = 스키마 파일의 `model` 선언 · 핸들러 = 컨트롤러 파일의 줄 머리 HTTP 메서드 데코레이터 · 웹 화면 = `page.tsx` 파일 · 메뉴 = 사이드바 메뉴 정의의 항목 · 역할별 메뉴 = 메뉴 정의의 역할 목록 · 결정 등록부 = 등록부 본체와 배치 파일의 항목(66 + 90) — 모두 2026-09-29 에 센 값 |
 | 병원 이름 고정 | HIS 저장소의 병원명 기준선 시험 파일에 동결된 목록 — 124개 파일 · 217곳(그중 `apps/homepage` 40개 파일 · `apps/mobile` 0개). 이 자료의 다른 문서가 적은 118개는 통합 릴리즈 기준 커밋을 이 자료의 거부 목록 규칙으로 센 값이라 범위가 다릅니다 |
-| 이 소개서가 더 확인한 것 | 배포로만 바꾸는 설정 키(환경 변수 덮어쓰기 정본 파일) · 제품 라이선스 미정(저장소 고지 파일) · 운영용 compose 의 두 벌 기동 — 같은 커밋에서 읽음 |
+| 이 소개서가 더 확인한 것 | 배포로만 바꾸는 설정 키(환경 변수 덮어쓰기 정본 파일) · 제품 라이선스 미정(저장소 고지 파일) · 운영용 compose 의 두 벌 기동 · 업그레이드 절차(알려진 한계 목록 · 운영 매뉴얼의 배포 · 업그레이드 절 · 설치 · 배포 스크립트 · 운영용 compose) · 환자 계정을 만드는 코드와 관리자용 환자 계정 API — 같은 커밋에서 읽음 |
 | 실제 연결 확인 | 2026-09-14~15 · 통합 릴리즈 기준 설치본끼리 · 가상 데이터([따라가 본 결과](../build-guide/follow-along-2026-09.md)) — 현재 개발본으로 다시 부른 것은 아님 |
 | 사실 확인 | HIS 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

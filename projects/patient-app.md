@@ -14,13 +14,13 @@ For an IT team, the key fact is that the app **has no server and no database of 
 
 The app is written to tell the truth when it does not know: a failed lookup is shown as a failure, not as "no results", "0 won" or "normal"; records the hospital has no way to enter (vaccinations, for example) are not shown as "none"; and AI health features show the server's reason when there is no validated way to compute a score. AI features only assist — they draft summaries and suggestions, and the doctor's judgement stands.
 
-What is not there yet, stated plainly: the app is **not published to any app store** and store build settings are not in the repository; with default settings HIS keeps patient sign-up closed — in the app and the web portal alike — until an identity-verification provider is connected; consent signing in the app is a typed-name record, not a certificate signature; push notifications are not wired on the app side; video visits depend on a video system that is currently unusable; the app is Korean only; no licence has been chosen for it; and it was not installed during the September 2026 follow-along. Until an institution decides to publish the app, patients use the web patient portal inside HIS. Details are in [What to know](#8-알아-둘-것).
+What is not there yet, stated plainly: the app is **not published to any app store** and store build settings are not in the repository; with default settings HIS keeps patient sign-up closed — in the app and the web portal alike — until an identity-verification provider is connected, and there is no screen or API for staff to create or invite a patient account; consent signing in the app is a typed-name record, not a certificate signature; push notifications are not wired on the app side; video visits depend on a video system that is currently unusable; the app is Korean only; no licence has been chosen for it; and it was not installed during the September 2026 follow-along. Until an institution decides to publish the app, patients use the web patient portal inside HIS. Details are in [What to know](#8-알아-둘-것).
 
 ---
 
 ## 1. 한 문장
 
-> **EN** — The patient app lets patients see their own record and handle bookings, consents and questionnaires on their phone, through HIS. At a glance: not usable by patients today — it is not in any app store and patient sign-up is closed by default, and this material could not confirm another way for a patient to get an account; meanwhile patients use the web portal in HIS.
+> **EN** — The patient app lets patients see their own record and handle bookings, consents and questionnaires on their phone, through HIS. At a glance: not usable by patients today — it is not in any app store, patient sign-up is closed by default, and HIS has no desk-side way for staff to create an account; the web portal in HIS needs the same account, so an institution must first contract identity verification or ask for a desk-side issuing feature.
 
 **환자 앱은 환자가 휴대전화로 자기 진료 기록을 보고 예약 · 동의서 · 문진 같은 일을 처리하는 앱이며, 모든 데이터를 HIS 에서 받습니다.**
 
@@ -28,12 +28,12 @@ What is not there yet, stated plainly: the app is **not published to any app sto
 
 | | |
 |---|---|
-| **지금 쓸 수 있나** | **아니오.** 스토어에 배포된 앱이 없고, 기본 설정에서 환자 가입이 닫혀 있습니다. 그동안 환자는 HIS 의 웹 환자 포털을 씁니다(가입 규칙은 같습니다) |
+| **지금 쓸 수 있나** | **아니오.** 스토어에 배포된 앱이 없고, 기본 설정에서 환자 가입이 닫혀 있으며, 직원이 환자 계정을 만들어 주는 기능도 없습니다. HIS 의 웹 환자 포털도 같은 계정을 쓰므로 같은 제약을 받습니다(§8) |
 | **세워야 하는 것** | 서버는 HIS 외에 없습니다. 앱을 빌드(Node · Expo SDK 56)해 스토어나 기관 배포 경로로 내보내는 일이 따로 있습니다 |
 | **먼저 있어야 할 것** | HIS(환자 인증 · 환자 포털 켜짐) · 스토어 계정 · 앱 식별자 · 서명 키 · 스토어 빌드 설정(모두 저장소에 없음) · 배포 여부 · 알림의 적법 근거 · 본인인증 방식의 결정 |
 | **받을 코드** | HIS 저장소 **현재 개발본**의 `apps/mobile` · [소스 받기](../SOURCES.md). 통합 릴리즈 코드에서는 담당의 메시지 답장이 보내지지 않습니다(§9). 빌드 때 HIS 주소를 꼭 지정합니다(§6) |
 | **실제로 확인된 것** | 없음. 2026년 9월 시험 설치에서 앱은 설치하지 않았고, 실기기 화면 시험도 없습니다 |
-| **아직 모르는 것** | **환자가 계정을 얻는 경로** — 스스로 가입은 닫혀 있고, 창구에서 만들어 주는 화면은 확인하지 못했습니다(§8) · 스토어 심사와 의료 앱 규제 요건 · 웹 포털과의 화면별 차이 |
+| **아직 모르는 것** | 스토어 심사와 의료 앱 규제 요건 · 웹 포털과의 화면별 차이 |
 
 병원 정보 체계에서 환자 앱은 **환자 접점**에 있습니다. HIS 의 웹 환자 포털과 같은 서버 기능을 모바일 화면으로 쓰는 것이고, 원본 기록은 HIS 에 있습니다.
 
@@ -109,7 +109,7 @@ flowchart LR
 
 - **앱에는 자기 서버도 데이터베이스도 없습니다.** 모든 기록은 HIS 데이터베이스에 있습니다.
 - 기기에는 로그인 토큰과 기기 식별값을 보안 저장소에 남깁니다. 진료 기록을 기기에 따로 저장해 두는 오프라인 기능은 없습니다.
-- 기기를 잃어버리면 — HIS 에는 환자가 등록 기기를 지우는 경로(그 기기의 갱신 토큰을 지워 다시 로그인하게 함)와, 관리자가 환자 계정을 잠그는 경로가 있습니다.
+- 기기를 잃어버리면 — HIS 에는 환자가 등록 기기를 지우는 경로(그 기기의 갱신 토큰을 지워 다시 로그인하게 함)와, 관리자가 환자 계정을 잠그는 API 가 있습니다(이 API 를 부르는 직원 화면은 찾지 못했습니다).
 
 ## 5. 다른 시스템과의 연결
 
@@ -176,14 +176,16 @@ flowchart LR
 
 ## 8. 알아 둘 것
 
-> **EN** — Not published to any store; how a patient gets an account is unresolved — sign-up is closed by default in the app and the web portal alike, a desk-side account screen was not confirmed, and each points to the other; not called for real in the September 2026 trial install; push is not wired on the app side and is off on the HIS side; consent signing in the app is a typed-name record in HIS rather than a certificate signature (the repository's own documents disagree on this); video visits are unusable now; an unset HIS address points the app at another installation; Korean only; no licence chosen.
+> **EN** — Not published to any store; there is no way today for a patient to get an account — sign-up is closed by default in the app and the web portal alike, HIS has no screen or API for staff to create or invite a patient account, and each points to the other; not called for real in the September 2026 trial install; push is not wired on the app side and is off on the HIS side; consent signing in the app is a typed-name record in HIS rather than a certificate signature (the repository's own documents disagree on this); video visits are unusable now; an unset HIS address points the app at another installation; Korean only; no licence chosen.
 
 - 🔴 **스토어에 배포되지 않았습니다** — 실기기에 설치할 배포본이 없고, 스토어 빌드 설정도 저장소에 없습니다. 배포를 정하기 전에는 HIS 의 **웹 환자 포털**을 씁니다. 둘은 같은 서버 기능을 쓰지만, 화면별 차이 표는 만들지 않았습니다.
-- 🔴 **환자가 계정을 얻는 경로를 이 자료는 제시하지 못합니다** — 세 가지가 겹칩니다.
+- 🔴 **환자가 계정을 얻는 길이 지금은 없습니다** — HIS 현재 개발본의 코드를 읽은 결과입니다.
   - **스스로 가입은 기본으로 닫혀 있습니다.** 휴대전화 본인인증 연동이 없어 HIS 가 가입 경로를 닫아 둡니다. 앱과 웹 환자 포털이 같은 서버 규칙을 따릅니다.
-  - **창구에서 환자 계정을 만들어 주는 화면은 확인하지 못했습니다.**
+  - **직원이 환자 계정을 만들거나 초대하는 화면 · API 가 없습니다.** 관리자용 환자 계정 API 는 목록 · 조회 · 잠금 · 잠금 해제 · 보호자 승인뿐입니다.
+  - 그 밖에 계정이 생기는 길은 외국인 검진권 구매자가 활성화 코드로 스스로 만드는 것 하나입니다. 시험용 계정을 만드는 경로는 리얼 모드에서 막힙니다.
+  - HIS 결정 등록부의 본인확인 기관 결정에는 「자가 가입을 열지 않고 창구에서 확인한 계정만 내준다」는 선택지가 있습니다. 그 선택을 실행할 창구 발급 기능은 코드에 없습니다.
   - **안내가 서로를 가리킵니다.** 가입이 막히면 앱은 「홈페이지나 원무과」를, 웹 포털은 「창구나 앱」을 안내합니다.
-  - 기관은 환자 계정을 어떻게 내줄지를 도입 전에 정하고 확인해야 합니다. 로그인 인증번호 문자도 문자 발송 제공자가 없어 모의 발송입니다([HIS 소개서 §8](his.md#8-알아-둘-것)).
+  - 그래서 기관은 본인인증 기관과 계약해 가입을 열거나, 창구 발급 기능을 HIS 프로젝트에 요청해야 합니다. 로그인 인증번호 문자도 문자 발송 제공자가 없어 모의 발송입니다([HIS 소개서 §8](his.md#8-알아-둘-것)).
 - **실제 연결 확인이 아직입니다** — 2026년 9월 시험 설치에서 이 앱은 설치하지 않았습니다. HIS 와의 연결은 코드를 대조한 판정입니다.
 - **푸시 알림이 오지 않습니다 — 어디까지 있나** — HIS 에는 발송 코드가 있지만 푸시 전체 스위치가 기본 꺼짐입니다. 앱은 기기를 HIS 에 등록하는 요청까지 보내지만, 알림을 받는 패키지가 앱에 들어 있지 않습니다.
 - **앱의 동의서 서명은 이름을 입력해 HIS 에 기록하는 방식**입니다 — sign 의 서명 인증서 · 타임스탬프를 거치지 않습니다. 저장소 문서끼리 어긋납니다: 이 소개서는 현재 개발본 코드를 따랐고, 통합 릴리즈 기준의 [환자 앱 구성서](../systems/patient-app.md)는 「HIS 를 거쳐 sign 이 처리」로 적고 있습니다.
@@ -235,6 +237,6 @@ flowchart LR
 | 읽은 것 | HIS 저장소의 **현재 개발본** — 커밋 `f596d24589e6`(2026-09-29) 의 `apps/mobile` 과, 앱이 부르는 HIS 환자 포털 코드 일부(동의서 서명) · 작업 트리의 미커밋 변경은 읽지 않음. `apps/mobile` 은 HIS 소개서가 읽은 커밋 `a39f60fc9d7c` 와 내용이 같습니다 |
 | 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `e9d303984f80`(v4.18.0 · 2026-09-11) |
 | 센 방법 | 화면 = `apps/mobile/app/**/*.tsx` 중 `_layout.tsx` 제외 · 달라진 커밋 = `git log e9d30398..HEAD -- apps/mobile` 의 커밋 수 — 2026-09-29 에 센 값 |
-| 이 소개서가 더 확인한 것 | 가입 가능 여부를 정하는 HIS 서버 규칙(기본 닫힘 · 웹 포털도 같은 규칙) · 기기 지우기와 계정 잠금 경로 · 앱 설정 파일의 iOS · Android 항목과 빈 앱 식별자 · 스토어 빌드 설정 파일 없음 · 메시지 답장 수정 커밋 — HIS 소개서가 읽은 커밋에서 읽음 |
+| 이 소개서가 더 확인한 것 | 가입 가능 여부를 정하는 HIS 서버 규칙(기본 닫힘 · 웹 포털도 같은 규칙) · 기기 지우기와 계정 잠금 경로 · 앱 설정 파일의 iOS · Android 항목과 빈 앱 식별자 · 스토어 빌드 설정 파일 없음 · 메시지 답장 수정 커밋 · 환자 계정이 만들어지는 코드 세 곳(자가 가입 · 외국인 검진권 · 시험용)과 관리자용 환자 계정 API · 결정 등록부의 본인확인 기관 항목 — HIS 소개서가 읽은 커밋에서 읽음 |
 | 실제 연결 확인 | 없음 — 2026년 9월 따라가기에서 설치하지 않음 |
 | 사실 확인 | HIS 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

@@ -29,7 +29,7 @@ For an IT team, the practical points are: HIS must be in place first (sign-in an
 | | |
 |---|---|
 | **지금 쓸 수 있나** | 조건부 — HIS 가 먼저 서 있어야 하고, HIS 와 같은 호스트에 둘 때 동작을 확인했습니다. 국내 의료 · 세무 · 노동 제도를 전제로 만들어졌습니다 |
-| **세워야 하는 것** | 앱 컨테이너 4개(core API · 웹 · 연동 작업자 · 배치 작업자) · PostgreSQL(기본 배치는 HIS 의 DB 서버를 함께 씀) · Redis 7 · 첨부와 백업을 둘 디스크. 경영분석(BI)은 선택. GPU 는 필요 없음 |
+| **세워야 하는 것** | 앱 컨테이너 4개(core API · 웹 · 연동 작업자 · 배치 작업자) · PostgreSQL — 권장 배치는 HIS 의 DB 서버 안에 ERP 전용 데이터베이스(6절) · Redis 7 · 첨부와 백업을 둘 디스크. 경영분석(BI)은 선택. GPU 는 필요 없음 |
 | **먼저 있어야 할 것** | HIS — 로그인 · 첫 관리자 · 회계로 옮길 사건이 모두 HIS 에서 옵니다. 기관은 수가 · 약제 마스터 · 고시 원문 · 기관 정보 · 급여 규칙 · 담당 역할 배정을 준비합니다 |
 | **받을 코드** | 이 소개서가 설명하는 개발본은 통합 릴리즈 코드와 같습니다 — [소스 받기](../SOURCES.md). HIS · AI Server 를 부르는 주소 일부가 코드에 고정돼 있어, 다른 호스트에 두려면 코드를 고쳐야 합니다(8절) |
 | **실제로 확인된 것** | 2026년 9월 시험 설치에서 9개 연결(HIS 6 · sign 2 · LIS 1)을 가상 데이터로 불러 확인했습니다. HIS 와 같은 호스트에 둔 구성이었습니다 |
@@ -115,7 +115,7 @@ ERP 가 맡는 일은 둘입니다. 하나는 HIS 가 보내는 수납 · 청구
 
 ## 4. 어떻게 만들어졌나
 
-> **EN** — A Python modular monolith: a FastAPI core API with SQLAlchemy and Alembic on PostgreSQL, Redis 7, a Next.js web front end served under the `/erp` path, and two background workers built from the same code (integration and batch). Business modules are separated inside one codebase rather than split into services. The 113 web screens count page files, including detail pages, so they exceed the 105 menu items. ERP shares the HIS database server by design, so both share its connection limit.
+> **EN** — A Python modular monolith: a FastAPI core API with SQLAlchemy and Alembic on PostgreSQL, Redis 7, a Next.js web front end served under the `/erp` path, and two background workers built from the same code (integration and batch). Business modules are separated inside one codebase rather than split into services. The 113 web screens count page files, including detail pages, so they exceed the 105 menu items. Where the database lives is settled once, in section 6.
 
 ```mermaid
 flowchart LR
@@ -154,12 +154,11 @@ flowchart LR
 
 | 저장소 | 무엇이 들어 있나 |
 |---|---|
-| **PostgreSQL** | ERP 데이터 전부 — 스키마 9개(공통 · 인사 · 재무 · 원무 · 청구 · 규제 · 연동 · 감사 · 구매자재) |
+| **PostgreSQL** | ERP 데이터 전부 — ERP 전용 데이터베이스 안의 스키마 9개(공통 · 인사 · 재무 · 원무 · 청구 · 규제 · 연동 · 감사 · 구매자재) |
 | **Redis 7** | 캐시 · 들어온 이벤트를 바로 처리하라는 신호 |
 | **디스크** | 첨부 파일 · 내보내기 파일 · 고시 원문 투입 폴더 · 백업 |
 
-- **HIS 와 DB 서버를 함께 쓰는 배치**를 전제로 설계됐습니다. 같은 PostgreSQL 서버 안에 ERP 자기 스키마(데이터베이스 안의 칸막이)를 두고, 연결 수 한도도 나눠 씁니다.
-- 그래서 한쪽이 연결을 많이 쓰면 다른 쪽이 모자랄 수 있습니다. 연결 수 경보를 보고, 규모가 커지면 DB 를 나누는 것이 저장소 문서의 예정 방향입니다. 나눴을 때의 차이는 재 보지 않았습니다.
+- DB 서버를 어디에 두나(HIS 와 함께 쓰나 · 나누나)는 6절 「어디에 세우나」에 한 번에 적었습니다.
 - **메시지 브로커가 없습니다.** 주고받는 이벤트는 DB 의 대기열 테이블에 쌓였다가 작업자가 처리합니다. 같은 출처의 전표를 두 번 만들지 않게 **멱등키**(같은 요청이 여러 번 와도 한 번만 처리되게 하는 식별값)를 씁니다.
 - **민감한 인사 정보는 암호화해 저장**합니다(전화번호는 검색용 색인을 따로 둠).
 
@@ -205,26 +204,34 @@ HIS 와 확인한 6개를 부르는 방향으로 나누면 이렇습니다.
 
 ## 6. 설치 · 운영
 
-> **EN** — ERP needs no GPU. It runs as four application containers (core, web, two workers); the development compose adds PostgreSQL and Redis, the production compose adds only Redis and uses an outside database, and the co-located compose shares HIS's database server and Redis — start with the co-located one, which is the repository's default and what the September 2026 test used. Migrations run at start-up and need two database extensions. The first administrator is created through HIS sign-in. Daily encrypted backups cover ERP's own schemas only and are switched off until a backup folder is set.
+> **EN** — ERP needs no GPU. It runs as four application containers (core, web, two workers). Recommended placement: on the HIS host, with ERP's own database inside HIS's PostgreSQL server — both installation compose files assume this and differ mainly in whether Redis is shared; the September 2026 test used the co-located one. Moving the database elsewhere means pointing the database setting at another server, which no compose file does and nobody measured. Migrations run at start-up and need two database extensions. The first administrator is created through HIS sign-in. Daily encrypted backups cover ERP's own schemas only and are switched off until a backup folder is set.
 
 ### 필요한 것
 
 | 항목 | 내용 |
 |---|---|
-| 서버 | **GPU 는 필요 없습니다.** 사용자 수 · 거래량에 따른 사양은 계측하지 않았습니다. 운영에서는 PostgreSQL 을 ERP 가 직접 띄우지 않고 바깥 DB 서버를 씁니다(아래 설치 경로) |
+| 서버 | **GPU 는 필요 없습니다.** 사용자 수 · 거래량에 따른 사양은 계측하지 않았습니다. 어디에 세우나는 바로 아래 절에 있습니다 |
 | 소프트웨어 | 컨테이너(Docker) — core · 웹 · 연동 작업자 · 배치 작업자. PostgreSQL · Redis 7 |
 | DB 확장 | `btree_gist`(수가 기간이 겹치지 않게) · `pg_trgm`(약품명 검색). DB 계정에 확장을 만들 권한을 주거나 미리 만들어 둡니다 |
 | 먼저 있어야 할 것 | **HIS**(로그인 · 첫 관리자 · 회계로 옮길 사건) |
 | 기관이 준비할 데이터 | 수가 · 약제 마스터(반입 경로는 [구성서](../systems/erp.md) 참고) · 고시 원문 · 기관 정보(이름 · 법인명 · 기관 코드) · 급여 규칙 · 담당 역할 배정 |
 
+### 어디에 세우나 — 결론
+
+**권장 배치: HIS 와 같은 호스트에 두고, HIS 의 PostgreSQL 서버 안에 ERP 전용 데이터베이스를 만들어 씁니다.**
+
+- 저장소의 설치용 compose 둘이 모두 이 배치를 전제로 합니다. 앱 컨테이너 4개(core · 웹 · 작업자 둘)는 같습니다.
+  - **HIS 와 함께 올리는 배치용** — Redis 도 HIS 것을 함께 씁니다. 2026년 9월 시험이 이 파일로 확인했습니다. 여기서 시작합니다.
+  - **운영용** — Redis 만 자기 것을 띄웁니다. DB 는 같은 호스트의 HIS DB 서버를 씁니다.
+  - 개발용 compose 는 PostgreSQL · Redis 까지 함께 띄우는 개발 PC 용입니다.
+- **같은 DB 서버를 쓰는 대가** — 연결 수 한도를 HIS 와 나눠 씁니다. 한쪽이 연결을 많이 쓰면 다른 쪽이 모자랄 수 있어, 연결 수 경보를 봅니다. 백업은 따로입니다(아래).
+- **다른 배치의 조건**
+  - DB 만 다른 서버로 옮기기 — DB 주소는 설정 파일 값이라 다른 서버를 가리킬 수 있습니다. 그렇게 짠 compose 는 없고, 나눴을 때의 차이는 재 보지 않았습니다. 규모가 커지면 DB 를 나누는 것이 저장소 문서의 예정 방향입니다.
+  - ERP 자체를 다른 호스트로 옮기기 — ERP 가 HIS · AI Server 를 부르는 주소 일부가 코드에 고정돼 있어, 코드를 고쳐야 합니다(8절).
+- BI 는 별도 compose 로 선택해 붙입니다.
+
 ### 설치 경로
 
-- **먼저 결론: HIS 와 함께 올리는 배치용 compose 로 시작합니다.** 저장소가 기본으로 삼은 배치이고, 2026년 9월 시험에서도 HIS 와 같은 호스트에 두었습니다. 코드에 고정된 주소(8절) 때문에도 이 배치가 가장 덜 막힙니다.
-- **compose 파일은 세 가지**입니다. 앱 컨테이너 4개(core · 웹 · 작업자 둘)는 셋 모두 같습니다.
-  - **HIS 와 함께 올리는 배치용** — HIS 의 DB 서버와 Redis 를 함께 씁니다.
-  - **운영용** — Redis 는 자기 것을 띄우고, PostgreSQL 은 바깥 DB 서버를 씁니다.
-  - **개발용** — PostgreSQL · Redis 까지 함께 띄웁니다.
-- BI 는 별도 compose 로 선택해 붙입니다.
 - **스키마는 기동할 때 적용됩니다**(마이그레이션 247개).
 - **첫 관리자는 HIS 로그인으로 만들어집니다.** ERP 안에서 첫 관리자를 만드는 경로는 없습니다. HIS 에서 ERP 단추를 눌러 처음 들어올 때 ERP 계정이 생깁니다.
 - 웹은 **HIS 와 같은 주소 아래 `/erp` 경로**에 둡니다. 따라가기에서는 이렇게 묶어야 로그인이 이어졌습니다.
@@ -277,7 +284,7 @@ HIS 와 확인한 6개를 부르는 방향으로 나누면 이렇습니다.
 
 - 🔴 **국내 제도를 전제로 설계했습니다** — 심사 · 고시 · 수가 · 세법 · 노동 규정이 모두 국내 의료기관 기준입니다. 다른 나라에 세우려면 청구 · 세무 · 급여 규칙을 새로 붙여야 합니다.
 - 🔴 **HIS 없이는 쓸 수 없습니다** — 로그인 · 첫 관리자 · 회계로 옮길 사건이 모두 HIS 에서 옵니다. HIS 를 먼저 세웁니다. 다른 회사의 HIS 에 붙이는 대체 경로는 없습니다.
-- 🔴 **ERP 가 HIS · AI Server 를 부르는 주소 일부가 코드에 고정돼 있습니다.** 다른 도메인에 두면 코드를 고치거나 HIS 와 같은 호스트에 둡니다. 2026년 9월 시험도 같은 호스트로 두고 확인했습니다. 두 가지를 나눠 보면 이렇습니다([구축 가이드 S5](../build-guide/S5-management.md)).
+- 🔴 **ERP 가 HIS · AI Server 를 부르는 주소 일부가 코드에 고정돼 있습니다.** 다른 도메인에 두면 코드를 고치거나 HIS 와 같은 호스트에 둡니다(6절 「어디에 세우나」). 두 가지를 나눠 보면 이렇습니다([구축 가이드 S5](../build-guide/S5-management.md)).
   - **설정으로 바꾸는 주소** — 공개 주소 · 웹이 부르는 API 주소 · 허용 호스트 · 연동 상대마다의 주소와 키(6절).
   - **코드에 고정된 주소 ①** — ERP 가 HIS 를 부를 수 있는 허용 목록입니다. 직원 번호 연결 · 검진권 정산 회신 · 수가 마스터 올리기가 이것을 씁니다.
   - **코드에 고정된 주소 ②** — ERP 가 AI Server 를 부르는 주소입니다. 사전심사 근거 검색 · 고시 색인이 이것을 씁니다.

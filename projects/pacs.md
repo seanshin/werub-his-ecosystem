@@ -14,7 +14,7 @@ For an IT team, the key point is that PACS is built around a standard image serv
 
 PACS does not hold signing keys. When a radiologist signs a report, or a patient signs a contrast-agent consent, PACS asks the ecosystem's signature service (sign) to do it. AI features only assist: they draft a preliminary report or point out images that may need attention, and a radiologist reviews and confirms. The computation runs on the separate AI Server.
 
-What was checked for real: in September 2026, fresh installs were connected and the links to sign (report signing, patient consent) and to the laboratory system (pathology worklist, viewer link) were called end to end. The paths from the HIS screens into PACS (worklist registration, image lookup, report writing and signing, opening the viewer) are built but not yet verified end to end, so for now reading is done on the PACS screens directly.
+What was checked for real: in September 2026, fresh installs were connected and the links to sign (report signing, patient consent) and to the laboratory system (pathology worklist, viewer link) were called end to end. On its own, PACS was brought up and took an HL7 pathology order, stored an uploaded synthetic slide and finalized a report for signing; receiving images from a real scanner over DICOM was not tried. The paths from the HIS screens into PACS (worklist registration, image lookup, report writing and signing, opening the viewer) are built but not yet verified end to end, so for now reading is done on the PACS screens directly.
 
 What is not there yet, stated plainly: PACS is not a certified medical device; it does not yet send reports back as HL7 messages; the installation files did not run unchanged on a fresh machine; and one AI feature (automatic image screening) is switched on by default and should be switched off at install. Details are in [What to know](#8-알아-둘-것).
 
@@ -22,7 +22,7 @@ What is not there yet, stated plainly: PACS is not a certified medical device; i
 
 ## 1. 한 문장
 
-> **EN** — PACS stores the hospital's medical images, shows them to the people who need them, and carries the radiologist's reading from the worklist to a signed report. At a glance: usable on its own for receiving, storing and reading images; the paths that tie it to HIS are built but not yet confirmed, the install files needed workarounds, and it is not a certified medical device.
+> **EN** — PACS stores the hospital's medical images, shows them to the people who need them, and carries the radiologist's reading from the worklist to a signed report. At a glance: built to receive, store and read images on its own, and the September 2026 trial install confirmed part of that (twelve containers up, an HL7 order reaching the worklist, an uploaded slide stored, a finalized report signed) but not image reception from a real scanner; the paths that tie it to HIS are built but not yet confirmed, the install files needed workarounds, and it is not a certified medical device.
 
 **PACS 는 병원의 의료 영상을 받아 저장하고, 필요한 사람에게 보여 주고, 판독의가 판독문을 쓰고 서명하기까지를 맡습니다.**
 
@@ -30,11 +30,11 @@ What is not there yet, stated plainly: PACS is not a certified medical device; i
 
 | | |
 |---|---|
-| **지금 쓸 수 있나** | 조건부 — 영상을 받아 저장하고 PACS 화면에서 판독 · 서명하는 데까지는 혼자 동작합니다. HIS 와 오더 · 결과를 자동으로 주고받는 길은 아직 확인하지 못했고, 인허가받은 의료기기가 아닙니다 |
+| **지금 쓸 수 있나** | 조건부 — 영상을 받아 저장하고 판독 · 서명하는 기능은 다른 시스템 없이 돌도록 만들어져 있습니다. 시험 설치에서는 그 일부만 확인했고, 촬영 장비에서 영상을 받는 것은 확인하지 않았습니다(§6). HIS 와 오더 · 결과를 자동으로 주고받는 길도 아직이고, 인허가받은 의료기기가 아닙니다 |
 | **세워야 하는 것** | 컨테이너 약 12개 — 웹 입구(nginx) · 백엔드 API · 비동기 작업자 · 영상 서버(Orthanc) · 워크리스트 서버 · HL7 수신기 · 관리 화면 · 웹 뷰어 · PostgreSQL 16 · Redis 7. 영상 파일을 담을 디스크. 모니터링은 선택. GPU 는 필요 없음 |
 | **먼저 있어야 할 것** | 다른 프로젝트는 없어도 됩니다. HIS 신원으로 들어오려면 HIS, 판독 서명에는 sign, AI 보조에는 AI Server. 기관은 촬영 장비 목록 · 공개 주소와 TLS 인증서 · 영상 저장 용량을 준비합니다 |
 | **받을 코드** | 이 소개서가 설명하는 개발본은 통합 릴리즈 코드와 같습니다 — [소스 받기](../SOURCES.md). 설치 파일이 그대로는 끝나지 않아 [우회 순서](../build-guide/S3-clinical-departments.md)를 함께 봅니다 |
-| **실제로 확인된 것** | 2026년 9월 시험 설치에서 sign(판독 서명 · 조영제 동의서 환자 서명 — 본인확인은 모의)과 LIS(병리 워크리스트 등록 · 취소 · 뷰어 링크 · 도착 확인 — 합성 슬라이드)를 불러 확인했습니다. HIS · 촬영 장비 · AI Server 와는 아직 |
+| **실제로 확인된 것** | 2026년 9월 시험 설치에서 sign(판독 서명 · 조영제 동의서 환자 서명 — 본인확인은 모의)과 LIS(병리 워크리스트 등록 · 취소 · 뷰어 링크 · 도착 확인 — 합성 슬라이드)를 불러 확인했습니다. PACS 혼자 해 본 범위는 §6 「시험 설치에서 PACS 혼자 해 본 것」. HIS · 촬영 장비 · AI Server 와는 아직 |
 | **아직 모르는 것** | 서버 사양 · 영상 한 건의 평균 용량 · 백업 크기와 복구 시간 · 기존 PACS 에서 옮기는 시간 · 실제 촬영 장비와의 호환 |
 
 PACS 는 「영상 저장 · 전송 시스템」(Picture Archiving and Communication System)의 줄임말입니다. 촬영 장비가 찍은 영상과 판독문의 **원본은 PACS 에** 있습니다. 환자 · 오더의 원본은 HIS 에 있고, PACS 는 그것을 받아 씁니다. 판독 결과를 HIS 쪽에 넣는 길은 5절에 있습니다.
@@ -57,7 +57,7 @@ PACS 에는 역할이 7개 정의돼 있습니다(현재 개발본의 역할 정
 
 **장면으로 보면**
 
-- **흉부 CT 한 건** — 영상 오더가 PACS 워크리스트에 올라옵니다. HIS 없이도 HL7 오더 메시지나 관리 화면으로 넣을 수 있고, HL7 은 LIS 와 실제로 확인했습니다. HIS 에서 오더가 자동으로 넘어오는 길은 아직 끝까지 확인하지 못했습니다(5절). 방사선사가 촬영 장비에서 이 목록을 불러오므로 환자 정보를 손으로 치지 않습니다. 촬영이 시작 · 끝나면 장비가 PACS 에 알려 상태가 바뀝니다. 영상이 저장되면 판독 큐에 뜨고, 판독의가 뷰어에서 보고 판독문을 써서 확정한 뒤 본인 서명을 합니다.
+- **흉부 CT 한 건** — 영상 오더가 PACS 워크리스트에 올라옵니다. HIS 없이도 HL7 오더 메시지나 관리 화면으로 넣을 수 있습니다. HL7 수신은 LIS 의 병리 오더로 실제로 확인했고, 영상 오더로 확인한 것은 아닙니다. HIS 에서 오더가 자동으로 넘어오는 길은 아직 끝까지 확인하지 못했습니다(5절). 방사선사가 촬영 장비에서 이 목록을 불러오므로 환자 정보를 손으로 치지 않습니다. 촬영이 시작 · 끝나면 장비가 PACS 에 알려 상태가 바뀝니다. 영상이 저장되면 판독 큐에 뜨고, 판독의가 뷰어에서 보고 판독문을 써서 확정한 뒤 본인 서명을 합니다.
 - **조영제 동의** — 조영제(혈관 · 장기를 잘 보이게 하려고 몸에 넣는 약)를 쓰는 검사 전에, 직원이 PACS 에서 동의서 서명을 요청합니다. 환자는 서명 포털에서 본인확인을 거쳐 서명하고, PACS 의 동의서 상태가 「완료」로 바뀝니다. 본인확인은 기관이 사업자와 계약하기 전까지 모의 공급자로 동작합니다.
 - **병리 슬라이드** — 검사실(LIS)에서 병리 케이스가 생기면 PACS 워크리스트에 스캔할 슬라이드가 등록됩니다. 스캔된 슬라이드가 PACS 에 도착하면, 병리의는 LIS 화면의 링크로 현미경 모드 뷰어를 엽니다.
 - **응급실의 밤** — 응급 영상 보드가 15초마다 저절로 갱신되며 긴급 검사와 판독 대기 건수를 보여 줍니다.
@@ -154,7 +154,7 @@ flowchart LR
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — PACS talks to scanners in DICOM, to the lab system over HL7 and a read-only service account, to sign for report and consent signatures, to the AI Server for drafts, and to HIS in three separate ways: HIS calling PACS's web API, PACS reading and writing the HIS database directly, and HL7 messages. The sign and LIS links were called for real between fresh installs in September 2026. None of the three HIS paths is verified end to end yet, so for now orders come in by HL7 or the admin screen and doctors read results in PACS. The database path copies the report into HIS; order reading is capped at 200 recent orders per run.
+> **EN** — PACS talks to scanners in DICOM, to the lab system over HL7 and a read-only service account, to sign for report and consent signatures, to the AI Server for drafts, and to HIS in two ways: HIS calling PACS's web API, and PACS reading and writing the HIS database directly (the HIS patient portal also asks PACS for a patient's own images). HL7 is a separate inbound channel open to any sender; HIS does not use it today. The sign and LIS links were called for real between fresh installs in September 2026. Neither HIS path is verified end to end yet, so for now orders come in by HL7 or the admin screen and doctors read results in PACS. The database path copies the report into HIS; order reading is capped at 200 recent orders per run.
 
 **PACS 는 혼자서도 영상을 받고 판독할 수 있고, 다른 시스템은 필요할 때 붙습니다.**
 
@@ -213,7 +213,7 @@ HIS 와 이어 쓸 때 알아 둘 것:
 
 ## 6. 설치 · 운영
 
-> **EN** — PACS runs as containers with Docker Compose, with no GPU. An install script does six steps (prerequisites, generate secrets and institution values, build, start, wait for health, create the first administrator) plus default seeds and a smoke check. In the September 2026 rehearsal the files did not run unchanged; the four workarounds are in the build guide. Scanners are added to the image server's allow-list, which ships empty. Automatic image screening is on by default: it scans new studies every five minutes and alerts a reader only on high-confidence or critical results; switch it off at install. Backup covers the encrypted database and incremental image snapshots, with a restore rehearsal script; server sizing, restore time and migration time were not measured.
+> **EN** — PACS runs as containers with Docker Compose, with no GPU. An install script does six steps (prerequisites, generate secrets and institution values, build, start, wait for health, create the first administrator) plus default seeds and a smoke check. In the September 2026 rehearsal the files did not run unchanged; the four workarounds are in the build guide. What PACS did on its own there is listed (containers up, HL7 pathology order to worklist, uploaded slide stored, report finalized and signed); DICOM reception from a scanner and scanner worklist queries were not tried. Scanners are added to the image server's allow-list, which ships empty. Automatic image screening is on by default: it scans new studies every five minutes and alerts a reader only on high-confidence or critical results; switch it off at install. Backup covers the encrypted database and incremental image snapshots, with a restore rehearsal script; server sizing, restore time and migration time were not measured.
 
 ### 필요한 것
 
@@ -239,6 +239,19 @@ HIS 와 이어 쓸 때 알아 둘 것:
 | — | 기관 기본값(영상 검증 규칙 · 촬영 종류 · 메시지) 넣기 · 설치 확인 |
 
 2026년 9월에 새 PC 에서 그대로 돌려 보니 **그대로는 끝나지 않았습니다.** 막힌 곳은 네 군데였습니다 — 영상 서버 이미지 태그를 받을 수 없음 · TLS 파일 · 헬스 체크 · 기본 테이블 생성. 가장 가까운 이미지 판으로 바꾸고, 테이블을 먼저 만든 뒤 스크립트를 다시 돌려 끝냈습니다. 걸린 시간은 재지 않았습니다. 우회한 순서는 [구축 가이드 S3](../build-guide/S3-clinical-departments.md)에 있습니다.
+
+### 시험 설치에서 PACS 혼자 해 본 것
+
+「혼자 동작한다」는 말의 근거입니다. 2026년 9월 시험 설치(가상 데이터)에서 PACS 쪽 기능으로 해 본 것과 하지 않은 것을 나눕니다([따라가 본 결과](../build-guide/follow-along-2026-09.md)).
+
+| 해 봄 | 하지 않음 |
+|---|---|
+| 우회 네 곳을 거쳐 컨테이너 12개 기동 | 촬영 장비에서 DICOM 으로 영상 받기 |
+| HL7 오더(LIS 가 보낸 병리 오더) → 워크리스트 등록 · 취소 반영 | 촬영 장비가 워크리스트를 불러 가기 · 촬영 진행 보고 |
+| 웹으로 올린 합성 병리 슬라이드 1장 저장 → 도착 확인 · 뷰어 링크 | 실제 CT · 자기공명영상 같은 영상 저장과 뷰어 표시 성능 |
+| 보고서 확정 → sign 으로 판독 서명 · 확정 전 서명은 거부 | 영상 자동 선별 · AI 초안 |
+
+그래서 「혼자 동작」은 **설치 · HL7 오더 수신 · 저장 · 판독 확정과 서명**까지를 확인한 말입니다. 촬영 장비 쪽은 장비를 붙여 기관이 확인합니다.
 
 ### 촬영 장비 붙이기
 

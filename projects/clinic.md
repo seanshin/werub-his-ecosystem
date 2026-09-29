@@ -14,7 +14,7 @@ Clinic is the groupware of the ecosystem — the place where hospital staff hand
 
 Clinic lives in a repository that holds several other, non-hospital services. This introduction covers only the hospital service and the HIS integration API it relies on. That scope matters for installation: the hospital screens have no API or database of their own — every request is passed to the repository's shared main application, which also holds the HIS integration routes and the webhook receivers. So the hospital service cannot be installed on its own; the main application, its authentication service and its database and cache come with it.
 
-HIS connects to Clinic with an API key that a Clinic hospital administrator issues, limited to named scopes. This differs from most systems in the ecosystem, which verify an HIS token by public key; here the key has to be issued, stored and rotated as its own task. Clinic signs the webhooks it sends back to HIS. In the other direction, the hospital screens fetch ward and floor data from HIS through the main application, which needs its own HIS address and key.
+HIS connects to Clinic with an API key that a Clinic hospital manager issues on the main application's hospital admin screen, limited to named scopes. This differs from most systems in the ecosystem, which verify an HIS token by public key; here the key has to be issued, stored and rotated as its own task. Clinic signs the webhooks it sends back to HIS. In the other direction, the hospital screens fetch ward and floor data from HIS through the main application, which needs its own HIS address and key — and no procedure for issuing that key was found in the HIS repository.
 
 Clinic comes in two forms: a hosted sign-up service run by its operator, and an installed form on the hospital's own server. It does not use AI in this version.
 
@@ -24,7 +24,7 @@ Clinic was **not installed** during the September 2026 follow-along, so none of 
 
 ## 1. 한 문장
 
-> **EN** — Clinic is the hospital groupware where staff hand over shifts, see rosters and ward status, and receive alerts and approval requests, drawing on data from HIS. At a glance: hosted or installed; an installed Clinic means running three processes (the shared main application, the hospital screens, the authentication service), two containers (PostgreSQL 15 and Redis) and a SQL script; the code is the same as the integrated release but comes with the whole repository; no link has been verified by a real call.
+> **EN** — Clinic is the hospital groupware where staff hand over shifts, see rosters and ward status, and receive alerts and approval requests, drawing on data from HIS. At a glance: hosted or installed; an installed Clinic means running three processes (the shared main application, the hospital screens, the authentication service), two containers (PostgreSQL 15 and Redis) and a SQL script, plus the scheduler process if calendar reminders are wanted — the other eight processes are not called by the hospital service; the code is the same as the integrated release but comes with the whole repository; no link has been verified by a real call.
 
 **Clinic 은 직원이 인수인계 · 근무표 · 병동 현황 · 알림 · 결재를 한곳에서 보는 병원 그룹웨어이고, HIS 의 자료를 받아 보여 줍니다.**
 
@@ -33,11 +33,11 @@ Clinic was **not installed** during the September 2026 follow-along, so none of 
 | | |
 |---|---|
 | **지금 쓸 수 있나** | 조건부 — 운영사 서버에 가입해 쓰거나(가입형), 병원 서버에 세웁니다(설치형). 설치형은 병원 화면만 떼어 세울 수 없습니다. HIS 자료를 보려면 HIS 가 있어야 하고, 실제로 이어 본 연결은 없습니다 |
-| **세워야 하는 것** | **설치형에서 띄우는 것 전부:**<br/>① 메인앱 프로세스 — 같은 저장소의 다른 서비스와 함께 쓰는 공용 앱. HIS 연동 API · 웹훅 수신이 여기 있습니다<br/>② 병원 화면 프로세스 ③ 인증 서비스 프로세스<br/>④ PostgreSQL 15 컨테이너(벡터 검색 확장이 든 이미지) ⑤ Redis 컨테이너<br/>⑥ 병원 서비스 상태 테이블을 더하는 SQL 스크립트 실행<br/>HIS 연동만 쓰면 ①④⑤ 로 됩니다. GPU 는 필요 없습니다 |
-| **먼저 있어야 할 것** | HIS — Clinic 주소 · Clinic 이 발급한 API 키 · 병원 코드 · 웹훅 서명 비밀값. 메인앱에 넣을 HIS 주소와 HIS 쪽 키. 빌드할 때 봇 방지 사이트 키 |
+| **세워야 하는 것** | **설치형에서 띄우는 것 전부:**<br/>① 메인앱 프로세스 — 같은 저장소의 다른 서비스와 함께 쓰는 공용 앱. HIS 연동 API · 웹훅 수신이 여기 있습니다<br/>② 병원 화면 프로세스 ③ 인증 서비스 프로세스<br/>④ PostgreSQL 15 컨테이너(벡터 검색 확장이 든 이미지) ⑤ Redis 컨테이너<br/>⑥ 병원 서비스 상태 테이블을 더하는 SQL 스크립트 실행<br/>HIS 연동만 쓰면 ①④⑤ 로 됩니다. 근무 캘린더 일정 알림을 쓰려면 예약 작업 프로세스를 더합니다. 저장소의 나머지 프로세스 8개는 병원 서비스가 부르지 않습니다(4절). GPU 는 필요 없습니다 |
+| **먼저 있어야 할 것** | HIS — Clinic 주소 · Clinic 이 발급한 API 키(6절) · 병원 코드 · 웹훅 서명 비밀값. 메인앱에 넣을 HIS 주소와 HIS 쪽 키. 빌드할 때 봇 방지 사이트 키 |
 | **받을 코드** | 통합 릴리즈 코드와 같은 현재 개발본입니다([소스 받기](../SOURCES.md)). 병원 밖 서비스까지 든 **저장소 전체**를 받고, 병원 서비스 전용 태그가 없어 커밋으로 고정합니다 |
 | **실제로 확인된 것** | 없음 — 2026년 9월 시험 설치에서 Clinic 은 세우지 않았습니다. 공급 형태 · 로그인 흐름만 운영사의 공개 소개 페이지로 읽었습니다 |
-| **아직 모르는 것** | HIS 쪽 키를 어디서 발급하나 · 서버 사양 · 나머지 프로세스 9개를 빼도 되나 · 병동 자료 요청이 HIS 에서 어떻게 받아지나 · 백업과 복구 · 가입형의 저장 위치와 계약 조건 |
+| **아직 모르는 것** | 메인앱이 HIS 에 병동 자료를 물을 때 쓰는 키를 HIS 에서 어떻게 받나 · 그 요청이 HIS 쪽과 맞물리나 · 서버 사양 · 백업과 복구 · 가입형의 저장 위치와 계약 조건 |
 
 병원 정보 체계에서 Clinic 은 **협업의 창**입니다. 환자 · 오더 · 병상 같은 진료 정보의 원본은 HIS 에 있고, Clinic 은 그것을 직원이 함께 보는 화면으로 묶습니다. 직원 · 조직 정보도 HIS 에서 받아 옵니다 — 직원 명부의 원본은 HIS 이고, Clinic 의 직원 목록은 그것을 옮겨 온 사본입니다.
 
@@ -91,7 +91,7 @@ Clinic was **not installed** during the September 2026 follow-along, so none of 
 
 ## 4. 어떻게 만들어졌나
 
-> **EN** — The hospital service is a Next.js 16 / React 19 front end with no API or database of its own; it forwards every API and upload request to the repository's main application (Next.js 16 with Prisma 7), which holds the hospital routes, the HIS integration API and the webhook receivers. Authentication is a separate service. Data lives in PostgreSQL 15 (a pgvector image) and Redis. Of the repository's 12 processes and 3 containers, the hospital service uses the main application, the hospital screens and the authentication service plus the database and cache.
+> **EN** — The hospital service is a Next.js 16 / React 19 front end with no API or database of its own; it forwards every API and upload request to the repository's main application (Next.js 16 with Prisma 7), which holds the hospital routes, the HIS integration API and the webhook receivers. Authentication is a separate service. Data lives in PostgreSQL 15 (a pgvector image) and Redis. Of the repository's 12 processes and 3 containers, the hospital service uses the main application, the hospital screens and the authentication service plus the database and cache; the scheduler process is needed only for calendar reminders. The other eight processes and the mobile-web container are not called by the hospital screens or the HIS integration routes.
 
 ```mermaid
 flowchart LR
@@ -125,20 +125,23 @@ flowchart LR
 | **PostgreSQL 15**(저장소 전체가 쓰는, 벡터 검색 확장이 든 이미지) | 병원 · 직원 · 알림 · 결재 · HIS 연동 키 등 메인앱 데이터 전부. 병원 서비스가 따로 저장하는 상태(투약 완료 · 수술판 · 알림 확인 · 교대 요청 · 인수인계)는 저장소의 SQL 스크립트로 테이블을 추가합니다 |
 | **Redis** | 캐시 |
 
-**무엇을 몇 개 띄우나** — 저장소 구성 파일에는 컨테이너 3개와 프로세스 12개가 있습니다. 병원 서비스에 쓰는 것은 아래와 같습니다.
+**무엇을 몇 개 띄우나** — 저장소의 시작 설정 파일에는 프로세스 12개가, compose 파일에는 컨테이너 3개가 있습니다. 병원 서비스 쪽에서 본 결론은 이렇습니다.
 
-| 쓰는 곳 | 띄우는 것 |
+| 무엇까지 쓰나 | 띄우는 것 |
 |---|---|
 | HIS 연동만 | 메인앱 프로세스 1 · DB · 캐시 컨테이너 2 |
 | 병원 화면까지 | 위에 더해 병원 화면 · 인증 서비스 프로세스 2 |
-| 나머지 | 프로세스 9개(블로그 · 기업 · 오피스 · 바이브 · 로그 대시보드 · 채널 · 공동 편집 · 예약 작업 · 실시간 소켓)와 모바일 웹 컨테이너 1 |
-| **합계** | 병원 서비스에 쓰는 것 프로세스 3 · 컨테이너 2 + 나머지 프로세스 9 · 컨테이너 1 = 구성 파일의 프로세스 12 · 컨테이너 3 |
+| 근무 캘린더 일정 알림까지 | 위에 더해 예약 작업 프로세스 1 — 일정 30분 전에 참석자에게 알림을 만듭니다 |
+| 병원 서비스가 부르지 않는 것 | 프로세스 8개(블로그 · 기업 · 오피스 · 바이브 · 로그 대시보드 · 채널 · 공동 편집 · 실시간 소켓)와 모바일 웹 컨테이너 1 |
 
-나머지는 병원 화면 코드와 HIS 연동 경로 · 예약 작업에서 부르는 곳을 찾지 못했습니다. 메인앱 안의 다른 기능이 이들을 쓰는지는 끝까지 보지 않아, 빼도 된다고 단정하지는 않습니다. 서버 사양은 계측하지 않았습니다.
+- **판정한 방법** — 병원 화면이 부르는 주소를 모두 모아 보았습니다. 모두 메인앱 주소였고, 실시간 소켓 · 채널 · 공동 편집을 부르는 곳은 없었습니다.
+- HIS 연동 경로가 쓰는 코드도 이 8개를 부르지 않습니다. HIS 가 보낸 알림은 메인앱이 DB 에 저장하고, 병원 화면이 알림함에서 불러옵니다.
+- **예약 작업 프로세스**에는 병원과 무관한 작업(뉴스 수집 · 날씨 · 검색용 색인 등)도 함께 들어 있습니다. 일정 알림만 골라 켜는 설정은 찾지 못했습니다. 이 프로세스는 자기 비밀값이 없으면 시작하지 않습니다.
+- 이 판정은 병원 화면과 HIS 연동에 한한 것입니다. 메인앱의 병원 밖 화면까지 따라가지는 않았습니다. 서버 사양은 계측하지 않았습니다.
 
 ## 5. 다른 시스템과의 연결
 
-> **EN** — HIS sends staff, organisation, alerts and approval requests to Clinic with a scoped API key; Clinic sends staff sign-in tickets, approval results and events back to HIS as signed webhooks; and the hospital screens fetch ward data from HIS through the main application. ERP reads the Clinic staff list, edu sends training alerts through Clinic, and Clinic records approval events with sign. None of these links has been called for real — Clinic was not installed.
+> **EN** — HIS sends staff, organisation, alerts and approval requests to Clinic with a scoped API key; Clinic sends staff sign-in tickets, approval results and events back to HIS as signed webhooks; and the hospital screens fetch ward data from HIS through the main application — whether that request fits how HIS receives it has not been confirmed, and no HIS-side procedure for issuing its key was found. ERP reads the Clinic staff list, edu sends training alerts through Clinic, and Clinic records approval events with sign. None of these links has been called for real — Clinic was not installed.
 
 **Clinic 과 HIS 는 양방향으로 이어집니다.** HIS 는 Clinic 이 발급한 API 키로 부르고, Clinic 은 서명한 통지로 HIS 에 결과를 알립니다. 병원 화면의 병동 · 동선 자료는 반대로 메인앱이 HIS 에 그때그때 물어 가져옵니다.
 
@@ -157,19 +160,21 @@ flowchart TB
 | 상대 | Clinic 이 주는 것 | Clinic 이 받는 것 | 로그인 · 인증 방식 | 실제로 연결해 확인했나 |
 |---|---|---|---|---|
 | **HIS** — HIS 가 부르고 Clinic 이 통지 | 직원 로그인(1회용 토큰) · 결재 결과 · 일반 이벤트(연차 승인 등) · 병원 등록 통지 | 직원 일괄 등록 · 조직도 · 알림 · 채널 메시지(그룹웨어 대화방 글) · 캘린더 일정 · 근태 · 휴가 · 결재 요청 | Clinic 이 발급한 **범위 지정 API 키** · 서명된 웹훅 | 만들어져 있음 · 실제 연결 확인은 아직 · HIS 에서 재로그인 없이 결재 문서를 여는 경로는 아직 없음 |
-| **HIS** — 병동 자료 요청 | — | 병동 · 동선 · 근무 자료(병원 화면이 메인앱을 거쳐 HIS 에 물음) | 메인앱에 넣은 HIS 주소와 HIS 쪽 키 | 코드만으로 판정하지 못함 — 배포 구성에 따라 달라짐(아래) |
+| **HIS** — 병동 자료 요청 | — | 병동 · 동선 · 근무 자료(병원 화면이 메인앱을 거쳐 HIS 에 물음) | 메인앱에 넣은 HIS 주소와 HIS 쪽 키 | 만들어져 있음 · HIS 쪽과 맞물리는지 확인하지 못함(아래) |
 | **ERP** | 직원 명단(HIS 에서 옮겨 온 사본) | — | API 키 | 명단 수집은 만들어져 있음 · 확인은 아직 · 근태 수집은 아직 없음 |
 | **edu** | 자동 로그인 연결 | 교육 알림 | 키 · 토큰 | 만들어져 있음 · 확인은 아직 |
 | **sign** | 결재 이벤트 기록 · 검증 요청 | — | sign 이 발급한 키 | 만들어져 있음 · 확인은 아직 |
 | **Jitsi** | 회의 녹화 제어 | — | — | 지금은 쓸 수 없음(화상 서버를 새로 구성해야 함) |
 
-- 표의 「병동 자료 요청」은 메인앱이 HIS 로 요청을 넘기는 방식입니다. 이 구간이 HIS 쪽에서 어떻게 받아지는지는 **배포 구성(주소 · 앞단 프록시)에 따라 달라져** 코드만으로 판정하지 못했습니다.
+- 표의 「병동 자료 요청」은 메인앱이 키 하나와 병원 코드를 붙여 HIS 에 병동 · 동선 · 업무 그룹 자료를 묻는 방식입니다.
+- 이 키를 HIS 에서 발급하는 절차는 HIS 저장소에서 찾지 못했습니다. HIS 쪽이 이 요청을 받는 방식과 맞물리는지도 확인하지 못했습니다. 이 경로는 실제 연결 확인 전입니다.
+- 맞물리지 않으면 병동 화면은 예시 데이터로 채워지고 「데모」 배지가 붙습니다(8절).
 - ERP 결재는 ERP → HIS → Clinic 으로 올라와 Clinic 에서 승인되고, 결과는 Clinic → HIS → ERP 로 돌아갑니다(그림의 결재 화살표). Clinic 이 멈췄을 때 다른 결재 길이 있는지는 확인하지 못했습니다.
 - 연결마다의 자세한 내용은 [HIS → Clinic](../integration/cards/his-to-clinic.md) · [Clinic → HIS](../integration/cards/clinic-to-his.md) 카드와 [연결 상태 표](../RELEASES/2026.09/compatibility.md)에 있습니다.
 
 ## 6. 설치 · 운영
 
-> **EN** — Two supply forms: a hosted sign-up service, or an installed form on the hospital's server. The installed form brings up the main application, its authentication service, PostgreSQL 15 and Redis alongside the hospital screens; no GPU is needed. HIS is prepared with the Clinic address and API key as environment variables and a webhook secret; the main application in turn needs the HIS address and an HIS key, without which screens fall back to sample data. No backup or health-check tooling specific to the hospital service was found.
+> **EN** — Hosted sign-up or installed on the hospital's server; the installed form brings up the main application, authentication service, PostgreSQL 15 and Redis with the hospital screens, and no GPU. HIS gets the Clinic address, a scoped API key and a webhook secret; the key is issued once on the main application's admin screen, but by the code its button sends no scopes, so the issuing API has to be called with scopes (not tried). The main application needs an HIS address and key, or screens fall back to sample data. No service-specific backup tooling was found.
 
 ### 공급 형태
 
@@ -185,13 +190,17 @@ flowchart TB
 | 서버 | Node.js · PostgreSQL 15 · Redis. **GPU 는 필요 없습니다** |
 | 먼저 있어야 할 것 | 화면만 볼 때는 없습니다. HIS 자료를 보려면 **HIS** 가 있어야 합니다 |
 | 빌드할 때 | 봇 방지(Turnstile) 사이트 키 |
-| 꼭 넣어야 하는 설정 | 병원 화면이 요청을 넘길 **메인앱 주소**와 공개 주소 · 메인앱이 병동 자료를 물을 **HIS 주소와 HIS 쪽 키**. 키가 비어 있으면 화면이 예시 데이터로 채워집니다. 이 키는 아래 「HIS 쪽 준비」 1번의 키(Clinic 이 HIS 에 내주는 키)와 방향이 반대인 다른 키입니다. HIS 쪽 키를 어디서 발급하는지는 확인하지 못했습니다 |
+| 꼭 넣어야 하는 설정 | 병원 화면이 요청을 넘길 **메인앱 주소**와 공개 주소 · 메인앱이 병동 자료를 물을 **HIS 주소와 HIS 쪽 키**. 키가 비어 있으면 화면이 예시 데이터로 채워집니다. 이 키는 아래 「HIS 쪽 준비」 1번의 키(Clinic 이 HIS 에 내주는 키)와 방향이 반대인 다른 키입니다. HIS 저장소에서 이 키를 발급하는 절차는 찾지 못했습니다(5절) |
 | 주소 기본값 | 코드와 설정 예시에 특정 설치본의 주소가 기본값으로 들어 있는 곳이 있습니다. 병원 화면의 메인앱 주소 · 공개 주소, 메인앱의 HIS 주소, 인증 서비스의 허용 주소를 모두 자기 기관 값으로 바꿉니다([바꿀 곳 목록](../build-guide/replace-list.md)) |
 | DB 변경 | 병원 서비스의 상태 저장 테이블은 저장소의 SQL 스크립트로 추가합니다. 업그레이드할 때 적용 순서를 확인합니다 |
 
 ### HIS 쪽 준비
 
-1. Clinic 병원 관리자가 **범위를 지정한 API 키**를 발급합니다(필요한 범위만 고름 · 활성 키는 5개까지 · 허용 IP 목록을 둘 수 있음).
+1. Clinic 병원 관리자(매니저 이상 역할)가 **범위를 지정한 API 키**를 발급합니다. 발급하는 곳은 메인앱의 병원 관리 화면 「HIS 연동」 탭입니다.
+   - 범위는 결재 서명 · 직원 · 알림 · 채널 · 캘린더 · 체크리스트 · 위키 · 휴가 중에서 필요한 것만 고릅니다. 활성 키는 5개까지이고, 허용 IP 목록을 둘 수 있습니다.
+   - 키 원문은 발급할 때 한 번만 보입니다. 다시 볼 수 없으니 바로 HIS 설정에 옮깁니다.
+   - **다만** 그 탭의 발급 단추는 범위를 고르는 칸 없이 요청하고, 서버는 범위 없는 발급을 거절하게 돼 있습니다. 코드대로라면 범위를 넣어 발급 API 를 직접 불러야 합니다(실행해 보지는 않았습니다).
+   - 운영사가 병원 가입을 승인할 때 키를 자동으로 만들어 HIS 에 알리는 경로도 코드에 있습니다. 그 키로 HIS 연동 API 를 부를 수 있는지는 확인하지 못했습니다.
 2. HIS API 의 환경 변수에 Clinic 주소 · API 키 · Clinic 의 병원 코드를 넣습니다. 주소를 비워 두면 HIS 쪽 Clinic 연동 전체가 꺼집니다.
 3. Clinic 이 HIS 로 보내는 웹훅을 검증할 **서명 비밀값**을 HIS 에 반드시 설정합니다.
 4. HIS **직원 관리** 화면의 Clinic 동기화로 조직 · 직원을 보냅니다.
@@ -219,12 +228,13 @@ flowchart TB
 
 ## 8. 알아 둘 것
 
-> **EN** — Clinic was not installed in the follow-along, so no link has been verified; the hospital service cannot be installed apart from the shared main application; screens silently fill with sample data (badged) when HIS data does not arrive; congestion thresholds are stored but not yet used; joining by hospital code needs no approval by default; and there is no service-specific version tag.
+> **EN** — Clinic was not installed in the follow-along, so no link has been verified; the hospital service cannot be installed apart from the shared main application; screens silently fill with sample data (badged) when HIS data does not arrive; congestion thresholds are stored but not yet used; the HIS key may not be issuable from the admin screen alone; joining by hospital code needs no approval by default; and there is no service-specific version tag.
 
 - 🔴 **실제로 불러 본 연결이 하나도 없습니다** — 2026년 9월 따라가기에서 설치하지 않았습니다. 연결 상태는 모두 코드를 읽어 판정한 것입니다. 운영사의 공개 소개 페이지로 본 것은 공급 형태와 로그인 흐름뿐입니다. 쓰는 연결마다 리허설에서 직접 불러 확인합니다.
 - 🔴 **병원 서비스만 떼어 세울 수 없습니다** — 메인앱 · 인증 서비스 · DB · 캐시가 함께 필요하고, 메인앱은 병원 밖 서비스와 함께 바뀝니다. 그 변경 이력은 이 자료 범위 밖입니다.
 - **HIS 자료가 없으면 예시 데이터로 채웁니다** — 화면을 미리 보는 데는 쓸모가 있지만, 운영에서는 착각의 원인이 됩니다. 이 동작을 끄는 설정은 찾지 못했습니다. 「데모」 배지가 보이면 HIS 연결부터 점검합니다.
 - **혼잡도 임계값은 설정에 저장되지만 아직 판정에 쓰이지 않습니다** — 등급은 HIS 판정값을 씁니다(7절). 설정 자리만 먼저 둔 이유는 저장소에 적혀 있지 않습니다.
+- **HIS 용 키는 화면만으로 발급되지 않을 수 있습니다** — 발급 단추가 범위를 보내지 않아, 코드대로라면 발급 API 를 범위와 함께 직접 불러야 합니다(6절 · 실행해 보지는 않음).
 - **병원 코드로 합류할 때 기본은 승인 없이 들어옵니다** — 승인제는 병원을 등록할 때 켜 둡니다.
 - **이 버전은 AI 를 쓰지 않습니다** — 첫 화면의 AI 지식 기능은 「준비 중」입니다.
 
@@ -258,8 +268,8 @@ flowchart TB
 | 항목 | 값 |
 |---|---|
 | 읽은 것 | Clinic 저장소의 **현재 개발본** — 커밋 `2b20a89b7c3a`(저장소 전체의 마지막 커밋 2026-09-09) · 병원 서비스 버전 `1.4.0`(마지막 변경 2026-08-19) · HIS 연동 API 마지막 변경 2026-08-20 · 2026-09-29 에 읽음 · 작업 트리의 미커밋 변경은 읽지 않음 |
-| 범위 | 병원 서비스 패키지 · HIS 연동 API 경로 · 구성 파일 · 병원 서비스 릴리즈 기록 7건 — 병원 밖 서비스는 읽지 않음 |
+| 범위 | 병원 서비스 패키지 · HIS 연동 API 경로 · 구성 파일 · 병원 서비스 릴리즈 기록 7건 · 2026-09-29 추가: 프로세스 시작 설정 파일 · 예약 작업 스크립트 · HIS 키 발급 경로와 병원 관리 화면 · 병원 승인 경로 · HIS 저장소의 병동 · 업무 그룹 API(커밋 `a39f60fc9d7c`) — 병원 밖 서비스는 읽지 않음 |
 | 비교 기준 | 통합 릴리즈 `2026.09` — 커밋 `2b20a89b7c3a`(같은 커밋) |
-| 센 방법 | HIS 연동 API 경로 = 연동 경로 폴더의 경로 파일 수(1파일 = 1경로) · 프로세스 · 컨테이너 = 구성 파일의 항목 수 · 필요한 프로세스 = 병원 화면 코드 · HIS 연동 경로 · 예약 작업 코드를 읽어 판정 |
+| 센 방법 | HIS 연동 API 경로 = 연동 경로 폴더의 경로 파일 수(1파일 = 1경로) · 프로세스 · 컨테이너 = 구성 파일의 항목 수 · 필요한 프로세스 = 병원 화면 코드가 부르는 주소 전부 · HIS 연동 경로가 쓰는 코드 · 예약 작업 목록을 읽어 판정 |
 | 실제 연결 확인 | 없음 — 2026-09 따라가기에서 설치하지 않음. 공급 형태와 로그인 흐름은 운영사의 공개 소개 페이지(로그인 전 화면)를 읽어 확인(2026-09-15) — 연결을 불러 본 것은 아님 |
 | 사실 확인 | Clinic 담당의 확인 전 · 생태계 자료 측이 저장소를 읽고 쓴 것 |

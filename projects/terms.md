@@ -331,3 +331,15 @@
 | **local only** | 기관 밖 AI 제공자로 보내지 못하게 묶은 역할 표시 — 의료 · 개인건강정보 · 규제 역할에 붙음 | Local-only data policy for a role |
 | **X-Forwarded-For** | 앞단 프록시가 원래 요청한 컴퓨터의 주소를 뒤쪽 서버에 알려 주는 헤더 | Proxy forwarding header |
 | **소비자 키** | sign 이 자기를 부르는 시스템(소비자)마다 따로 발급하는 호출 키. 어느 시스템이 서명을 요청했는지 가립니다 | Consumer key issued by sign |
+
+### 4차 조사에서 더한 말
+
+| 말 | 풀이 | English |
+|---|---|---|
+| **TSH** | 갑상선자극호르몬 검사. 갑상선기능을 보는 흔한 혈액검사 — 2026년 9월 시험 설치에서 HIS ↔ LIS 흐름을 끝까지 확인한 검사 | thyroid-stimulating hormone |
+| **CBC** | 일반혈액검사(혈구 수 · 혈색소 등). 가장 흔한 혈액검사 | complete blood count |
+| **CRP** | C 반응성 단백. 몸의 염증 정도를 보는 혈액검사 | C-reactive protein |
+| **페퍼** | 식별값(전화번호 등)을 해시로 바꿀 때 섞는 서버 비밀값. 같은 값이라도 이 비밀이 없으면 같은 해시를 만들 수 없습니다 | Pepper (server-side secret mixed into hashes) |
+| **마스터키** | 서명 키들을 보관하는 곳 전체를 암호화하는 최상위 열쇠 | Master key |
+| **신원 키** | HIS 가 직원 신원 토큰에 서명하는 개인키. sign 은 그 공개키로 확인만 합니다 | Identity-token signing key (held by HIS) |
+| **예약 작업(cron)** | 정해진 시각마다 저절로 도는 작업. Clinic 저장소에서는 일정 알림 · 뉴스 수집 등을 한 프로세스가 맡습니다 | Scheduled job (cron) |
