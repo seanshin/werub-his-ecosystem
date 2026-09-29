@@ -1,7 +1,7 @@
 # F 발표 덱
 **F — Presentation deck**
 
-> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 34 content slides (11 with screenshots from a rehearsal install on synthetic data) plus 6 section covers, in six parts — intent, structure, build, **current status** (including what a first follow-along install confirmed: 27 connections driven end to end; 23 of them also re-tested against a tampered key, a forged signature, a replay or a mismatched target), demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
+> **EN** — A visual summary of the overview (A) and the demo scenarios (E), written for the hospital director or CIO deciding whether to build on this ecosystem: 47 content slides (34 in the body plus a 13-slide appendix, one per project) (11 with screenshots from a rehearsal install on synthetic data) plus 6 section covers, in six parts — intent, structure, build, **current status** (including what a first follow-along install confirmed: 27 connections driven end to end; 23 of them also re-tested against a tampered key, a forged signature, a replay or a mismatched target), demo, and terms. It renders directly on GitHub (mermaid included) and converts to slides or PDF with Marp using `marp-header.yml`.
 
 
 A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태계로 AI 기반 HIS 를 세울지 정하는 **병원장 · CIO** 가 한 번에 볼 수 있게 썼습니다.
@@ -11,7 +11,7 @@ A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태�
 
 ## 본문
 
-**→ [slides.md](slides.md)** — 내용 슬라이드 **34장** + 장 표지 6장. GitHub 에서 그대로 읽히고, mermaid 도식과 **화면 캡처**가 함께 들어 있습니다.
+**→ [slides.md](slides.md)** — 내용 슬라이드 **47장**(본문 34 · 부록 「프로젝트 13 — 한 장씩」 13) + 장 표지 6장. GitHub 에서 그대로 읽히고, mermaid 도식과 **화면 캡처**가 함께 들어 있습니다.
 
 ## 짜임
 
@@ -24,6 +24,7 @@ A 개요서 · E 데모 시나리오의 **시각 요약**입니다. 이 생태�
 | **Ⅳ 지금 상태** | 5 | **`검증됨` 27 / 113** · **따라가 보고 확인된 것**(설치본 7개 · 가드 재시험 · 백업 복원) · 시스템별 상태 · 알고 시작할 것 · 준비할 것 | [A 9장](../overview/09-status-and-preparation.md) · [연결 상태](../RELEASES/2026.09/compatibility.md) · [따라가 본 결과](../build-guide/follow-along-2026-09.md) |
 | **Ⅴ 데모로 보기** | 3 | 시나리오 4 합계 · **권한은 화면으로 드러난다**(역할 비교 3장) · 외래 34단계 한 장 | [E 시나리오](../scenarios/) · [화면](../screens/by-onboarding.md) |
 | **Ⅵ 조건과 다음** | 3 | MIT 세 겹 · 면책 · 남은 일 · 역할별 읽을 것 | [A 10 · 11장](../overview/) · [THIRD_PARTY](../THIRD_PARTY.md) |
+| **부록 프로젝트 13** | 13 | 프로젝트마다 무엇 · 누가 · 할 수 있는 일 · 만들어진 것 · 연결 · 설치 · 운영 · 아직 | [프로젝트 소개서](../projects/) |
 
 ## 이 덱이 지키는 것
 
