@@ -16,6 +16,7 @@
  *   ④ 경고 — 🔴 는 「8. 알아 둘 것」 절 안에만, 편당 3개 이하
  *   ⑤ 약어 — 한국어 본문(영문 소개 · EN 요약 · 코드 · 링크 주소 제외)의 대문자 약어가 모두 `projects/terms.md` 에 있다
  *   ⑦ 한눈에 — `## 1.` 절 안에 `### 한눈에 — 도입 판단` 표가 있고, 여섯 행(지금 쓸 수 있나 · 세워야 하는 것 · 먼저 있어야 할 것 · 받을 코드 · 실제로 확인된 것 · 아직 모르는 것)이 이 순서로 있다(2026-09-29 — 2차 가상 독자 12/13 이 「판단에 필요한 사실이 흩어져 있다」로 막힘)
+ *   ⑧ 읽은 커밋 — 근거 표에 `| 읽은 커밋 | \`<커밋>\` |` 행이 있다(tools/check-intro-freshness.mjs 가 읽는다)
  *   ⑥ 문장 — 한국어 본문(표 제외)의 한 문장이 150자를 넘지 않고, 괄호 안에 괄호를 넣지 않는다(기획 §4 「한 문장에 한 가지」 · 2026-09-29 추가)
  *
  * 종료 코드: 0 통과 · 1 걸림 · 2 도구 오류
@@ -135,6 +136,7 @@ export function checkOne(name, md, terms) {
       if (got !== GLANCE_ROWS.join(' · ')) p.push(`${name} — 한눈에 표의 행이 다릅니다: ${got || '(없음)'}`);
     }
   }
+  if (!/^\| 읽은 커밋 \| `[0-9a-f]{7,40}`/m.test(md)) p.push(`${name} — 근거 표에 「| 읽은 커밋 | \`<커밋>\` |」 행이 없습니다(신선도 확인용)`);
   const missing = [...acronyms(md)].filter((a) => !terms.has(a));
   if (missing.length) p.push(`${name} — 용어 풀이에 없는 약어: ${missing.join(' · ')} → projects/terms.md 에 더하거나 풀어 씁니다`);
   return p;
@@ -150,7 +152,7 @@ try {
       ...['2.', '3.', '4.', '5.', '6.', '7.'].flatMap((n) => [`## ${n} 절`, '', '> **EN** — s', '', 'HIS 는 FHIR R4 를 씁니다.', '']),
       '## 8. 알아 둘 것', '', '> **EN** — s', '', '- 🔴 없음', '',
       ...['9.', '10.'].flatMap((n) => [`## ${n} 절`, '', '> **EN** — s', '', '본문', '']),
-      '## 이 문서의 근거', '', '> **EN** — s', '', '기준 커밋 abc'].join('\n');
+      '## 이 문서의 근거', '', '> **EN** — s', '', '| 항목 | 값 |', '|---|---|', '| 읽은 커밋 | `abcdef123456` — 설명 |'].join('\n');
     const okFixed = ok;
     if (checkOne('ok', okFixed, terms).length) fails.push(`멀쩡한 소개서를 걸었습니다: ${checkOne('ok', okFixed, terms).join(' / ')}`);
     const cases = [
@@ -163,14 +165,15 @@ try {
       ['긴 문장', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 ' + '가'.repeat(160) + ' 씁니다.')],
       ['한눈에 표 없음', okFixed.replace('### 한눈에 — 도입 판단', '### 요약')],
       ['한눈에 행 순서', okFixed.replace('| **받을 코드** | 예 |', '| **받을 곳** | 예 |')],
+      ['읽은 커밋 행 없음', okFixed.replace('| 읽은 커밋 |', '| 읽은 것 |')],
       ['괄호 속 괄호', okFixed.replace('HIS 는 FHIR R4 를 씁니다.', 'HIS 는 FHIR(표준(R4)) 를 씁니다.')],
     ];
     for (const [label, md] of cases) if (!checkOne('x', md, terms).length) fails.push(`「${label}」 을 잡지 못합니다`);
     // 코드 · 링크 주소 · EN 줄의 대문자는 약어로 세지 않는다
     if (acronyms('본문 `ENV_KEY` [링크](../THIRD_PARTY.md)\n> **EN** — ZZZ text').size) fails.push('코드 · 링크 · EN 줄의 대문자를 약어로 셉니다');
-    console.log(`자기 검증 — 검사 7종 · 사례 ${cases.length + 2}`);
+    console.log(`자기 검증 — 검사 8종 · 사례 ${cases.length + 2}`);
     if (fails.length) { fails.forEach((f) => console.log(`  ✗ ${f}`)); process.exit(1); }
-    console.log('  ✓ 틀 · 영문 요약 · 첫 화면 · 경고 · 약어 · 문장 · 한눈에 — 멀쩡한 것은 통과, 심은 것은 잡음');
+    console.log('  ✓ 틀 · 영문 요약 · 첫 화면 · 경고 · 약어 · 문장 · 한눈에 · 읽은 커밋 — 멀쩡한 것은 통과, 심은 것은 잡음');
     process.exit(0);
   }
 

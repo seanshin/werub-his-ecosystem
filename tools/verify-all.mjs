@@ -36,6 +36,8 @@ const CHECKS = [
   ['프로젝트 소개서가 쉬운 글 조건을 지키는가', 'check-plain.mjs', []],
   ['프로젝트 요약 생성기 자기 검증', 'build-project-digest.mjs', ['--self-test']],
   ['README · 덱 부록의 프로젝트 요약 = 소개서 1절', 'build-project-digest.mjs', ['--check']],
+  ['소개서 신선도 검사기 자기 검증', 'check-intro-freshness.mjs', ['--self-test']],
+  ['소개서가 읽은 커밋 뒤로 저장소가 움직였나(알림 · 실패 아님)', 'check-intro-freshness.mjs', []],
   ['내부 문구 누출 검사기 자기 검증', 'check-internal-leak.mjs', ['--self-test']],
   ['공개 문서 = 내부 서술과 겹치지 않는가', 'check-internal-leak.mjs', []],
   ['링크 검사기 자기 검증', 'check-links.mjs', ['--self-test']],
