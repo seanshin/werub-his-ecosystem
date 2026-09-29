@@ -20,6 +20,8 @@
 | **ERP** | 전사적 자원관리 — 여기서는 병원의 재무 · 원가 · 인사급여 · 자재 · 보험청구 | Enterprise resource planning (back office) |
 | **AI** | 인공지능. 이 생태계에서는 **보조하고 초안을 만들 뿐**, 진단 · 판단은 사람이 합니다 | Artificial intelligence — assists and drafts only |
 | **IT** | 정보기술 — 소개서에서는 병원 전산팀을 가리킵니다 | Information technology (the hospital's IT team) |
+| **Clinic** | 이 생태계의 병원 그룹웨어 — 인수인계 · 근무표 · 알림 · 결재 | Hospital groupware |
+| **sign** · **edu** · **twin** · **cerno** · **Jitsi** | 전자서명 · 직원 교육 · 위험 예측 · 의료진 근거 질의 · 원격 화상 시스템의 이름 | Names of the e-signature, e-learning, digital-twin, evidence-Q&A and video systems |
 
 ## 2. 표준과 연동 방식
 
@@ -35,6 +37,8 @@
 | **CDS** | 임상 의사결정 지원. **CDS Hooks** 는 차트를 열 때 외부 시스템이 알림 카드를 보내는 표준입니다 | Clinical decision support; CDS Hooks sends cards into the chart |
 | **HL7** | 의료 메시지 표준을 만드는 기구와 그 표준. 소개서의 「HL7 v2」는 오래 쓰여 온 줄 단위 메시지 형식입니다 | Health Level Seven; "HL7 v2" is the classic message format |
 | **DICOM** | 의료 영상과 그 정보를 담고 주고받는 국제 표준. **DICOMweb** 은 그것을 웹 API 로 하는 방식 | Standard for medical images; DICOMweb is its web API |
+| **AE 타이틀** | DICOM 장비 · 서버가 서로를 알아보는 이름표. 촬영 장비와 PACS 를 이을 때 양쪽에 등록합니다(나라 코드 AE 와는 다른 말) | DICOM Application Entity title |
+| **MWL** | 촬영 장비가 PACS 에서 「오늘 찍을 환자 목록」을 받아 가는 DICOM 기능(모달리티 워크리스트) | DICOM Modality Worklist |
 | **IHE** · **XDS-I** · **PIX** | IHE 는 표준들을 병원 업무에 맞게 묶은 규약집. XDS-I 는 영상 문서 공유, PIX 는 환자 식별 번호 대조 규약입니다 | Integration profiles: image document sharing, patient ID cross-reference |
 | **ASTM** | 검사 장비가 결과를 보내는 오래된 통신 규격(ASTM E1394) | Lab-analyser interface standard |
 | **SR** · **SEG** | DICOM 안에 AI 결과를 담는 형식 — 구조화 보고(SR) · 영역 표시(SEG) | DICOM structured report and segmentation |
@@ -136,6 +140,6 @@
 
 | 말 | 풀이 | English |
 |---|---|---|
-| **UAE** · **AE** | 아랍에미리트(국가 축의 두 번째 나라 · AE 는 그 코드) | United Arab Emirates |
+| **UAE** | 아랍에미리트(국가 축의 두 번째 나라). 국가 코드로는 **AE** 로 적습니다 — 영상 장비의 「AE 타이틀」과는 다른 말입니다 | United Arab Emirates (country code AE) |
 | **S0 ~ S8** | 이 자료의 [구축 가이드](../build-guide/) 단계 번호(준비 → 코어 HIS → … → 리얼 전환) | Build-guide stages |
 | **README** · **THIRD_PARTY** | 저장소 첫 안내 문서 · 제3자 구성요소 목록 문서 | Repository readme; third-party list |

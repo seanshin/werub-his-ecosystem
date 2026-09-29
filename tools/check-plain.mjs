@@ -37,7 +37,14 @@ export function knownTerms(termsMd) {
     if (!line.startsWith('| **')) continue;
     const cell = line.split('|')[1];
     for (const m of cell.matchAll(/\*\*([^*]+)\*\*/g)) {
-      for (const part of m[1].split(/\s*[·(),]\s*|\s+~\s+/)) if (part.trim()) set.add(part.trim());
+      for (const part of m[1].split(/\s*[·(),]\s*|\s+~\s+/)) {
+        const t = part.trim();
+        if (!t) continue;
+        set.add(t);
+        // 「AE 타이틀」 처럼 약어 + 우리말로 된 용어는 앞의 약어도 풀린 것으로 본다
+        const head = t.match(/^([A-Z][A-Z0-9-]+)\s+\S/);
+        if (head) set.add(head[1]);
+      }
     }
     // 「S0 ~ S8」 은 S0 … S8 을 모두 뜻한다
     if (/S0 ~ S8/.test(cell)) for (let i = 0; i <= 8; i++) set.add(`S${i}`);
@@ -122,8 +129,8 @@ export function checkOne(name, md, terms) {
 try {
   if (process.argv.includes('--self-test')) {
     const fails = [];
-    const terms = knownTerms('| **HIS** | x | y |\n| **FHIR** · **R4** | x | y |\n| **S0 ~ S8** | x | y |');
-    if (!terms.has('R4') || !terms.has('S3')) fails.push('용어 표를 읽지 못합니다');
+    const terms = knownTerms('| **HIS** | x | y |\n| **FHIR** · **R4** | x | y |\n| **S0 ~ S8** | x | y |\n| **AE 타이틀** | x | y |');
+    if (!terms.has('R4') || !terms.has('S3') || !terms.has('AE')) fails.push('용어 표를 읽지 못합니다');
     const ok = ['# 제목', '', '> 소개서', '', '## Introduction (English)', '', 'HIS text.', '',
       ...['1.', '2.', '3.', '4.', '5.', '6.', '7.'].flatMap((n) => [`## ${n} 절`, '', '> **EN** — s', '', 'HIS 는 FHIR R4 를 씁니다.', '']),
       '## 8. 알아 둘 것', '', '> **EN** — s', '', '- 🔴 없음', '',
