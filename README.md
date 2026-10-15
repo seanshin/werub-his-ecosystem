@@ -22,7 +22,7 @@
 | **지금 상태** | 시스템 사이 연결 113개 가운데 **27개는 새로 세운 설치본끼리 실제로 불러 동작을 확인했습니다**(2026-09-14~15). 61개는 양쪽 코드가 만들어져 있지만 실제 연결 확인은 아직입니다. 설치 순서(S0~S8)는 개발 PC 한 대에서 한 번 따라가 봤습니다(GPU 없음) → [따라가 본 결과](#새-설치본으로-따라가-본-결과--요약) |
 | **규모 · 비용** | 개발 PC 한 대에 7개 시스템이 함께 떴습니다(메모리 약 2.9GB · 가상 데이터 · 디스크는 **200GB 이상** 권장). **금액은 적지 않습니다** — 기관 조건이 정합니다 → [규모 — 지금 말할 수 있는 것](#규모--지금-말할-수-있는-것) |
 | **이 저장소** | 소스가 아니라 **소개 · 구축 자료**입니다. [MIT](LICENSE) · [의료기기가 아닙니다](DISCLAIMER.md) |
-| **소스는** | 시스템마다 **저장소가 따로** 있습니다(11곳). 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일은 → **[소스 받기](SOURCES.md)**. 🟢 **모두 공개할 예정**이고 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 주소가 있지만 **주소는 바뀌지 않습니다** |
+| **소스는** | 시스템마다 **저장소가 따로** 있습니다(11곳). 주소 · 기준 커밋 · 받은 뒤 처음 여는 파일은 → **[소스 받기](SOURCES.md)**. 🟢 시스템마다 **공개판 저장소**(`seanshin/werub-…` · MIT)를 하나씩 엽니다 — 개발 저장소의 최종 상태에서 내부 작업 기록 · 운영 정보를 뺀 것입니다. 열린 곳은 [`source/`](source/README.md) 폴더에 하위 모듈로 연결되고, 아직 열지 않은 시스템이 들어갈 자리(`source/his` … `source/jitsi`)도 그 색인에 미리 적어 두었습니다. 아직 「준비 중」인 주소는 열리지 않습니다 |
 
 ### 처음이라면 — 세 걸음
 
@@ -421,22 +421,22 @@
 
 | 계층 · Layer | 시스템 · System | 한 줄 정의 · In one line | 소스 · Source |
 |---|---|---|---|
-| 코어 | **Hospital RUN (HIS)** | 외래·입원·수술·응급·검사·약제·검진·경영지원 통합 HIS · 생태계의 신원 허브 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) |
-| 환자 접점 | 공개 홈페이지 · 환자 앱 | 예약·결과 열람·동의·문진 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) (HIS 와 같은 저장소) |
-| 임상 부서 | **LIS** | 진단검사·미생물·병리·수혈·유전체 검사정보시스템 | [seanshin/lis](https://github.com/seanshin/lis) |
-| 임상 부서 | **PACS** | 웹 PACS — 영상 서버·뷰어·판독 워크플로·AI 연동 | [seanshin/openpacs](https://github.com/seanshin/openpacs) |
-| 신뢰 | **sign** | 자체 PKI·RFC 3161 타임스탬프·PAdES-LTA 전자서명 | [seanshin/sign](https://github.com/seanshin/sign) |
-| 경영 | **ERP** | 재무회계·원가·인사급여·자재·보험청구·세무 | [seanshin/hospital-erp](https://github.com/seanshin/hospital-erp) |
-| AI | **AI Server** | 온프레미스 GPU 통합 AI — 의료 분류·요약·DUR·RAG·음성 인식 보조 | [seanshin/WeRUBLLMManager](https://github.com/seanshin/WeRUBLLMManager) |
-| AI | **cerno** | 의료진별 개인화 임상 AI(근거가 없으면 생성하지 않는 RAG) | [seanshin/cerno](https://github.com/seanshin/cerno) |
-| AI | **twin** | 디지털 트윈 — 위험 점수 카드·SBAR·시뮬레이션 | [seanshin/medical-digital-twin](https://github.com/seanshin/medical-digital-twin) |
-| 협업·교육 | **Clinic** | 병원 그룹웨어 — 인수인계·근무표·알림·결재 | [weruby-co-kr/WeRUB](https://github.com/weruby-co-kr/WeRUB) |
-| 협업·교육 | **edu** | 직원 이러닝·법정교육·전자 이수증 | [seanshin/edu](https://github.com/seanshin/edu) |
-| 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | [seanshin/hospital-jitsi](https://github.com/seanshin/hospital-jitsi) |
+| 코어 | **Hospital RUN (HIS)** | 외래·입원·수술·응급·검사·약제·검진·경영지원 통합 HIS · 생태계의 신원 허브 | [seanshin/werub-his](https://github.com/seanshin/werub-his) |
+| 환자 접점 | 공개 홈페이지 · 환자 앱 | 예약·결과 열람·동의·문진 | [seanshin/werub-his](https://github.com/seanshin/werub-his) (HIS 와 같은 저장소) |
+| 임상 부서 | **LIS** | 진단검사·미생물·병리·수혈·유전체 검사정보시스템 | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) |
+| 임상 부서 | **PACS** | 웹 PACS — 영상 서버·뷰어·판독 워크플로·AI 연동 | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) |
+| 신뢰 | **sign** | 자체 PKI·RFC 3161 타임스탬프·PAdES-LTA 전자서명 | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) |
+| 경영 | **ERP** | 재무회계·원가·인사급여·자재·보험청구·세무 | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) |
+| AI | **AI Server** | 온프레미스 GPU 통합 AI — 의료 분류·요약·DUR·RAG·음성 인식 보조 | [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) |
+| AI | **cerno** | 의료진별 개인화 임상 AI(근거가 없으면 생성하지 않는 RAG) | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) |
+| AI | **twin** | 디지털 트윈 — 위험 점수 카드·SBAR·시뮬레이션 | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) |
+| 협업·교육 | **Clinic** | 병원 그룹웨어 — 인수인계·근무표·알림·결재 | [seanshin/werub-clinic](https://github.com/seanshin/werub-clinic) |
+| 협업·교육 | **edu** | 직원 이러닝·법정교육·전자 이수증 | [seanshin/werub-edu](https://github.com/seanshin/werub-edu) |
+| 협업·교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) |
 
-> **EN** — A core HIS at the center (also the ecosystem's **identity hub**), with patient-facing, clinical-department, trust, management, AI, and collaboration/education layers around it. The Source column gives each repository's final address. **All of them are to be made public**, one at a time as each project finishes its clean-up — until then a link will not open, and the address will not change. See [Getting the source](SOURCES.md).
+> **EN** — A core HIS at the center (also the ecosystem's **identity hub**), with patient-facing, clinical-department, trust, management, AI, and collaboration/education layers around it. The Source column gives each system's **public-edition repository** (`seanshin/werub-…`, MIT): the final state of the private development repository with internal working records and operational details removed. They are opened one at a time; an opened one is also linked as a submodule under `source/`, and a link still marked "in preparation" will not open yet. See [Getting the source](SOURCES.md).
 
-🟢 **소스 칸의 주소는 확정된 것입니다.** 저장소는 **모두 공개할 예정**이고 각 프로젝트의 정리가 끝나는 대로 하나씩 열립니다 — 아직 열리지 않은 링크는 눌러도 열리지 않지만 **주소는 바뀌지 않습니다**. 받는 법과 기준 커밋은 [소스 받기](SOURCES.md)에 있습니다.
+🟢 **소스 칸은 공개판 저장소 주소입니다.** 개발은 비공개 저장소에서 계속하고, 정리가 끝난 시스템부터 **공개판 저장소**(MIT · 내부 작업 기록 · 운영 정보 제외)를 하나씩 엽니다. 열린 곳과 받는 법 · 기준 판은 [소스 받기](SOURCES.md)에 있습니다 — 아직 「준비 중」인 링크는 눌러도 열리지 않습니다.
 
 이 자료의 모든 수치에는 **값 · 센 방법 · 계측일**을 함께 적습니다.
 

@@ -26,7 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SKIP_DIRS = new Set(['.git', 'node_modules']);
+const SKIP_DIRS = new Set(['.git', 'source', 'node_modules']);
 
 /** 엄격 — 영숫자 · 한글 · 공백 · 하이픈 · 밑줄만 남긴다 */
 export const slug = (h) => h.trim().toLowerCase()

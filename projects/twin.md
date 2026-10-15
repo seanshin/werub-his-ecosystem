@@ -260,7 +260,7 @@ twin 은 2026년 9월 따라가기에서 **설치하지 않았습니다**([따�
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [연결 상태 표](../RELEASES/2026.09/compatibility.md) |
 | 의사가 읽을 안내 | [의사 안내](../clinicians/physician.md) |
 | 제3자 구성요소 · 모델 약관 | [THIRD_PARTY](../THIRD_PARTY.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/medical-digital-twin` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-twin` |
 
 ---
 

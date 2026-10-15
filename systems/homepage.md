@@ -146,7 +146,7 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) — 공개 예정(정리가 끝나는 대로 열립니다 · 주소는 바뀌지 않습니다) |
+| 소스 링크 | [seanshin/werub-his](https://github.com/seanshin/werub-his) — 공개판 저장소 준비 중(들어갈 자리 [`source/his`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 기준 커밋 | `e9d303984f80` (2026-09-11 · HIS 저장소 · [`data/base-commits.json`](../data/base-commits.json)) |
 | 확인일 | 2026-09-11 — 기준 커밋의 앱 설정 파일 · 환경 변수 예시에서 **키 이름만** 읽었습니다 |

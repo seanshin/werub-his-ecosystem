@@ -290,7 +290,7 @@ flowchart TB
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
 | 실제로 확인한 것 | [따라가 본 결과](../build-guide/follow-along-2026-09.md) |
 | 이 판에서 바뀐 것(통합 릴리즈 기준) | [sign 릴리즈 요약](../RELEASES/2026.09/systems/sign.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/sign` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-sign` |
 
 ---
 

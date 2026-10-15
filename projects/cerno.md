@@ -231,7 +231,7 @@ cerno 는 2026년 9월 따라가기에서 **설치하지 않았습니다**([따�
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [연결 상태 표](../RELEASES/2026.09/compatibility.md) |
 | 의사가 읽을 안내 | [의사 안내](../clinicians/physician.md) |
 | 규제 판단 | [의료 면책 고지](../DISCLAIMER.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/cerno` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-cerno` |
 
 ---
 

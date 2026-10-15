@@ -340,7 +340,7 @@ HIS 와 이어 쓸 때 알아 둘 것:
 | 실제로 확인한 것 | [따라가 본 결과](../build-guide/follow-along-2026-09.md) |
 | 이 판에서 바뀐 것(통합 릴리즈 기준) | [PACS 릴리즈 요약](../RELEASES/2026.09/systems/pacs.md) |
 | 제3자 구성요소 | [THIRD_PARTY](../THIRD_PARTY.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/openpacs` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-pacs` |
 
 ---
 

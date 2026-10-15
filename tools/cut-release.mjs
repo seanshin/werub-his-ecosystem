@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OLD = 'RELEASES/draft';
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'assets']);
+const SKIP_DIRS = new Set(['.git', 'source', 'node_modules', 'assets']);
 // 🔴 이 파일 자신은 건드리지 않는다 — 안에 옛 이름이 상수와 자기 검증 예시로 들어 있어서,
 //    치환하면 **도구가 자기 검증을 통과하지 못하게 된다**(2026-09-18 에 실제로 그랬다).
 const SKIP_FILES = new Set(['tools/cut-release.mjs']);

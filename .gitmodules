@@ -1,0 +1,3 @@
+[submodule "source/cerno"]
+	path = source/cerno
+	url = https://github.com/seanshin/werub-cerno.git

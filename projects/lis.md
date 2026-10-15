@@ -267,7 +267,7 @@ flowchart TB
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
 | 실제로 불러 본 결과 | [따라가 본 결과](../build-guide/follow-along-2026-09.md) |
 | 릴리즈 요약 | [통합 릴리즈 `2026.09` — LIS](../RELEASES/2026.09/systems/lis.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/lis` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-lis` |
 
 ---
 

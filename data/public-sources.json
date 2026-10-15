@@ -1,0 +1,54 @@
+{
+  "note": "시스템별 공개판 저장소 — 개발 저장소(비공개)의 최종 상태에서 내부 작업 기록 · 운영 정보를 빼고 MIT 로 연 저장소. status 는 공개 | 준비 중. 공개된 곳은 source/<key> 하위 모듈로 연결한다. tag 는 원본 태그를 그대로 쓰며, fromBase=true 면 이 자료의 기준 커밋(data/base-commits.json)과 같은 시점이다.",
+  "repos": {
+    "his": {
+      "repo": "seanshin/werub-his",
+      "status": "준비 중"
+    },
+    "sign": {
+      "repo": "seanshin/werub-sign",
+      "status": "준비 중"
+    },
+    "lis": {
+      "repo": "seanshin/werub-lis",
+      "status": "준비 중"
+    },
+    "erp": {
+      "repo": "seanshin/werub-erp",
+      "status": "준비 중"
+    },
+    "pacs": {
+      "repo": "seanshin/werub-pacs",
+      "status": "준비 중"
+    },
+    "ai-server": {
+      "repo": "seanshin/werub-ai-server",
+      "status": "준비 중"
+    },
+    "twin": {
+      "repo": "seanshin/werub-twin",
+      "status": "준비 중"
+    },
+    "cerno": {
+      "repo": "seanshin/werub-cerno",
+      "status": "공개",
+      "openedAt": "2026-10-15",
+      "tag": "v0.1.8",
+      "commit": "69b4cd78e9390c931b7397107fe3be639c678360",
+      "fromBase": true,
+      "license": "MIT"
+    },
+    "edu": {
+      "repo": "seanshin/werub-edu",
+      "status": "준비 중"
+    },
+    "clinic": {
+      "repo": "seanshin/werub-clinic",
+      "status": "준비 중"
+    },
+    "jitsi": {
+      "repo": "seanshin/werub-jitsi",
+      "status": "준비 중"
+    }
+  }
+}

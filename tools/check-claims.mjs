@@ -29,7 +29,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TABLE = 'RELEASES/2026.09/compatibility.md';
 const FOLLOW = 'build-guide/follow-along-2026-09.md';
-const SKIP_DIRS = ['checklist', 'assets', 'data', 'tools', '.git', 'node_modules'];
+const SKIP_DIRS = ['source', 'checklist', 'assets', 'data', 'tools', '.git', 'node_modules'];
 const SKIP_FILES = [TABLE, 'RELEASES/2026.09/manifest.md', 'diagrams/connections.md', 'integration/matrix.md'];
 
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');

@@ -224,7 +224,7 @@ flowchart LR
 | 연결 하나를 자세히 | [환자 앱 → HIS](../integration/cards/환자-앱-to-his.md) · [환자 앱 → Jitsi](../integration/cards/환자-앱-to-jitsi.md) · [공통 규약](../integration/contracts.md) |
 | 비상 열람 · 환자에게 영상을 주는 길 | [비상 열람](../functions/detail/emergency-access.md) · [환자 영상 내보내기](../functions/detail/patient-imaging-export.md) |
 | 뒷단인 HIS | [HIS 소개서](his.md) |
-| 소스 | [소스 받기](../SOURCES.md) — HIS 저장소 `seanshin/werubyHIS` 의 `apps/mobile` |
+| 소스 | [소스 받기](../SOURCES.md) — HIS 저장소 `seanshin/werub-his` 의 `apps/mobile` |
 
 ---
 

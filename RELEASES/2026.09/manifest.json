@@ -71,7 +71,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/werubyHIS"
+        "link": "https://github.com/seanshin/werub-his"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.his"
     },
@@ -122,7 +122,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/werubyHIS"
+        "link": "https://github.com/seanshin/werub-his"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.homepage"
     },
@@ -180,7 +180,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/werubyHIS"
+        "link": "https://github.com/seanshin/werub-his"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.patient-app"
     },
@@ -231,7 +231,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/sign"
+        "link": "https://github.com/seanshin/werub-sign"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.sign"
     },
@@ -290,7 +290,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/lis"
+        "link": "https://github.com/seanshin/werub-lis"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.lis"
     },
@@ -341,7 +341,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/hospital-erp"
+        "link": "https://github.com/seanshin/werub-erp"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.erp"
     },
@@ -406,7 +406,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/openpacs"
+        "link": "https://github.com/seanshin/werub-pacs"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.pacs"
     },
@@ -461,7 +461,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/WeRUBLLMManager"
+        "link": "https://github.com/seanshin/werub-ai-server"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.ai-server"
     },
@@ -519,7 +519,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/medical-digital-twin"
+        "link": "https://github.com/seanshin/werub-twin"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.twin"
     },
@@ -577,7 +577,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/cerno"
+        "link": "https://github.com/seanshin/werub-cerno"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.cerno"
     },
@@ -639,7 +639,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/edu"
+        "link": "https://github.com/seanshin/werub-edu"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.edu"
     },
@@ -698,7 +698,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/weruby-co-kr/WeRUB"
+        "link": "https://github.com/seanshin/werub-clinic"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.clinic"
     },
@@ -749,7 +749,7 @@
         "basis": "2026-09-11 생태계 자료 측 조사 · 시스템 담당 확인 전"
       },
       "source": {
-        "link": "https://github.com/seanshin/hospital-jitsi"
+        "link": "https://github.com/seanshin/werub-jitsi"
       },
       "scaleSnapshotKey": "data/scale-snapshot.json#systems.jitsi"
     }

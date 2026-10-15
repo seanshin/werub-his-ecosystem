@@ -252,7 +252,7 @@ HIS 의 단독 운영용 compose 에는 홈페이지가 들어 있지 않습니�
 | 연결 하나를 자세히 | [연결 카드 — 공개 홈페이지 → HIS](../integration/cards/공개-홈페이지-to-his.md) · [공통 규약](../integration/contracts.md) |
 | 뒷단인 HIS | [HIS 소개서](his.md) |
 | 릴리즈 요약 | [통합 릴리즈 `2026.09` — 공개 홈페이지](../RELEASES/2026.09/systems/homepage.md) |
-| 소스 | [소스 받기](../SOURCES.md) — HIS 저장소 `seanshin/werubyHIS` 의 `apps/homepage` |
+| 소스 | [소스 받기](../SOURCES.md) — HIS 저장소 `seanshin/werub-his` 의 `apps/homepage` |
 
 ---
 

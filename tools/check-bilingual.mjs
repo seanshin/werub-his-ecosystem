@@ -19,7 +19,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SKIP_DIRS = ['.git', 'node_modules', 'tools'];
+const SKIP_DIRS = ['source', '.git', 'node_modules', 'tools'];
 
 // 예외 — 읽는 사람을 위한 글이 아니거나, 그 자체가 목록인 것
 const EXEMPT = new Map([

@@ -25,7 +25,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
 const SELF = path.relative(ROOT, fileURLToPath(import.meta.url));
 
-const SKIP_DIRS = new Set(['.git', 'node_modules', '.next', 'dist', 'build', '.cache']);
+const SKIP_DIRS = new Set(['.git', 'source', 'node_modules', '.next', 'dist', 'build', '.cache']);
 const SKIP_FILES = new Set(['tools/.denylist.local']);
 const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.bmp', '.pdf', '.svgz']);
 const LEDGER = 'assets/CAPTURE-LEDGER.md';

@@ -53,6 +53,7 @@ function entries(dir, commit) {
 function build() {
   const inputs = read('RELEASES/2026.09/inputs.json');
   const base = read('data/base-commits.json');
+  const pub = read('data/public-sources.json').repos;
   let local;
   try { local = read('tools/.local.json'); } catch { return null; } // 미실행
 
@@ -60,33 +61,48 @@ function build() {
   for (const [sys, label, stage] of SYSTEMS) {
     const rk = repoKey(sys);
     const link = inputs.systems[sys]?.sourceLink ?? '';
+    const p = pub[rk] ?? { status: '준비 중' };
+    if (link !== `https://github.com/${p.repo}`) throw new Error(`주소 불일치 — ${sys}: 릴리즈 입력값 ${link} ↔ public-sources ${p.repo}`);
     const commit = base.commits[rk] ?? '';
-    const rel = local.repos[rk];
-    const dir = rel ? path.resolve(ROOT, rel) : null;
-    const found = dir && commit ? entries(dir, commit) : [];
-    rows.push({ sys, label, stage, link, commit, entry: found });
+    let found = [];
+    let checkedIn = null;
+    if (p.status === '공개') {
+      // 공개판은 하위 모듈(source/<key>)의 그 커밋에서 확인한다 — 공개된 것과 같은 것을 본다
+      const sub = path.join(ROOT, 'source', rk);
+      if (fs.existsSync(path.join(sub, '.git'))) { found = entries(sub, p.commit); checkedIn = '공개판'; }
+    } else {
+      const rel = local.repos[rk];
+      const dir = rel ? path.resolve(ROOT, rel) : null;
+      if (dir && commit) { found = entries(dir, commit); checkedIn = '기준 커밋'; }
+    }
+    rows.push({ sys, label, stage, link, commit, pub: p, entry: found, checkedIn });
   }
   const seen = new Set();
   const repoRows = rows.filter((r) => { const k = r.link; if (seen.has(k)) return false; seen.add(k); return true; });
+  const opened = repoRows.filter((r) => r.pub.status === '공개');
+  const STAGE = { S1: 'S1-core-his', S2: 'S2-patient-access', S3: 'S3-clinical-departments', S4: 'S4-trust', S5: 'S5-management', S6: 'S6-ai' };
 
   const L = [];
   L.push('# 소스 받기');
   L.push('');
   L.push('**Getting the source**');
   L.push('');
-  L.push('> **EN** — Each system lives in its own repository. This page maps the thirteen systems to their repositories, pins the **base commit** every number in these materials was read from, and names the file to open first. **All of them are to be made public**, one at a time as each project finishes its clean-up; until a given one is, its link will not open. An open repository does not mean an MIT licence \u2014 each repository states its own, and they currently differ (\u00a72).');
+  L.push(`> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (\`seanshin/werub-…\`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — ${opened.length} of ${repoRows.length} so far. An opened edition carries the original release tag, is linked as a submodule under \`source/\`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.`);
   L.push('');
-  L.push('> 🟢 **위 저장소는 모두 공개할 예정입니다.** 각 프로젝트의 정리가 끝나는 대로 **하나씩** 열립니다. 아직 열리지 않은 주소는 눌러도 열리지 않습니다 — 접근 권한이 없다는 뜻이고, **이 안내는 열리는 순간 그대로 동작합니다**(주소도 커밋도 바뀌지 않습니다).\n>\n> 🔴 **열린 저장소라고 라이선스가 MIT 라는 뜻은 아닙니다** — 저장소마다 표기가 다릅니다(§2).');
+  L.push(`> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **${opened.length}/${repoRows.length}곳** 공개.\n>\n> 「준비 중」인 주소는 아직 열리지 않습니다.`);
   L.push('');
-  L.push('이 자료의 모든 수치 · 화면 · 연결 상태는 아래 **기준 커밋**에서 읽은 것입니다. 같은 것을 보려면 그 커밋을 받으십시오 — 최신 커밋은 이 자료보다 앞서 있을 수 있습니다.');
+  L.push('이 자료의 모든 수치 · 화면 · 연결 상태는 개발 저장소의 **기준 커밋**에서 읽은 것입니다. 공개판의 **기준 판**(원본 태그를 그대로 씀)이 그 커밋과 같은 시점이면 표에 「기준 커밋과 같음」으로 적었습니다.');
   L.push('');
   L.push('## 1. 어느 저장소에 무엇이 있나');
   L.push('');
-  L.push('| 시스템 | 저장소 | 기준 커밋 | 구축 단계 |');
-  L.push('|---|---|---|---|');
+  L.push('| 시스템 | 공개판 저장소 | 상태 | 기준 판 | 구축 단계 |');
+  L.push('|---|---|---|---|---|');
   for (const r of rows) {
-    const short = r.commit ? `\`${r.commit.slice(0, 12)}\`` : '—';
-    L.push(`| ${r.label} | [${r.link.replace('https://github.com/', '')}](${r.link}) | ${short} | [${r.stage}](build-guide/${{ S1: 'S1-core-his', S2: 'S2-patient-access', S3: 'S3-clinical-departments', S4: 'S4-trust', S5: 'S5-management', S6: 'S6-ai' }[r.stage]}.md) |`);
+    const st = r.pub.status === '공개' ? `🟢 공개(${r.pub.openedAt})` : '준비 중';
+    const ver = r.pub.status === '공개'
+      ? `\`${r.pub.tag}\` · \`${r.pub.commit.slice(0, 12)}\`${r.pub.fromBase ? ' — 기준 커밋과 같음' : ''}`
+      : '—';
+    L.push(`| ${r.label} | [${r.link.replace('https://github.com/', '')}](${r.link}) | ${st} | ${ver} | [${r.stage}](build-guide/${STAGE[r.stage]}.md) |`);
   }
   L.push('');
   const repoCount = new Set(SYSTEMS.map((s) => repoKey(s[0]))).size;
@@ -94,26 +110,31 @@ function build() {
   L.push('');
   L.push('## 2. 받는 법');
   L.push('');
+  L.push('공개된 시스템은 이 저장소의 `source/` 폴더에 **하위 모듈**로 연결되어 있습니다. 둘 중 편한 쪽으로 받습니다.');
+  L.push('');
   L.push('```sh');
-  L.push('# 예: HIS');
-  L.push('git clone <위 표의 주소>.git his');
-  L.push('cd his');
-  L.push('git checkout <위 표의 기준 커밋>      # 🔴 이 자료와 같은 것을 보려면 이 커밋');
-  L.push('git rev-parse HEAD                    # 표의 커밋과 같은지 확인');
+  L.push('# ① 소개 자료와 공개된 소스를 한 번에');
+  L.push('git clone --recurse-submodules https://github.com/seanshin/werub-his-ecosystem.git');
+  L.push('');
+  L.push('# ② 시스템 하나만 (예: cerno)');
+  L.push('git clone https://github.com/seanshin/werub-cerno.git cerno');
+  L.push('cd cerno');
+  L.push('git checkout <위 표의 기준 판 태그>   # 🔴 이 자료와 같은 것을 보려면 이 판');
   L.push('```');
   L.push('');
-  L.push('- **기준 커밋을 쓰는 이유** — 이 자료의 수치(데이터 모델 수 · 화면 수 · 연결 상태 · 체크리스트 항목 수)는 전부 그 커밋에서 기계로 읽은 것입니다. 최신 커밋을 받으면 **자료와 숫자가 달라집니다**(틀린 것이 아니라 시점이 다른 것입니다).');
+  L.push('- **기준 판을 쓰는 이유** — 이 자료의 수치(데이터 모델 수 · 화면 수 · 연결 상태 · 체크리스트 항목 수)는 전부 그 시점에서 기계로 읽은 것입니다. 이후 판을 받으면 **자료와 숫자가 달라집니다**(틀린 것이 아니라 시점이 다른 것입니다).');
+  L.push('- **공개판에서 빠진 것** — 내부 작업 기록 문서와 운영 정보입니다. 코드는 그대로이고, 운영 도메인 · 서버 주소 · 계정 같은 값은 예시 값(`example.org` 등)으로 바뀌어 있습니다. 소스 주석이 빠진 문서를 가리키는 곳이 남아 있을 수 있습니다.');
+  L.push('- **라이선스** — 공개판은 **MIT** 입니다(저장소마다 `LICENSE`). [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)의 「저장소 라이선스 표기」 칸은 개발 저장소의 기준 커밋 표기를 기록한 것입니다.');
   L.push('- **최신으로 세우고 싶다면** 그렇게 해도 됩니다. 다만 이 자료의 「막힌 곳」과 「우회」는 기준 커밋에서 겪은 것이므로, 최신에서는 이미 고쳐졌거나 다른 자리에서 막힐 수 있습니다.');
-  L.push('- 저장소마다 **라이선스 표기가 다릅니다**(일부는 독점 · 일부는 표기 없음). 받기 전에 [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)의 「저장소 라이선스 표기」 칸을 보십시오. **이 소개 저장소의 MIT 는 이 자료에만 적용됩니다.**');
   L.push('');
   L.push('## 3. 받은 뒤 처음 여는 파일');
   L.push('');
-  L.push('기준 커밋에 **실제로 있는 파일만** 적었습니다(2026-09-17 확인).');
+  L.push('그 판에 **실제로 있는 파일만** 적었습니다 — 공개된 곳은 공개판에서, 준비 중인 곳은 개발 저장소의 기준 커밋에서 확인했습니다(준비 중인 곳은 공개판에서 빠질 수 있습니다).');
   L.push('');
   L.push('| 저장소 | 처음 여는 파일 |');
   L.push('|---|---|');
   for (const r of repoRows) {
-    const e = r.entry.length ? r.entry.map((f) => `\`${f}\``).join(' · ') : '— (설치 진입점을 찾지 못했습니다)';
+    const e = r.checkedIn === null ? '— (확인하지 못했습니다)' : r.entry.length ? r.entry.map((f) => `\`${f}\``).join(' · ') : '— (설치 진입점을 찾지 못했습니다)';
     L.push(`| ${r.link.replace('https://github.com/', '')} | ${e} |`);
   }
   L.push('');
@@ -138,18 +159,75 @@ function build() {
   L.push('');
   L.push('---');
   L.push('');
-  L.push('> 이 문서는 `node tools/build-sources.mjs` 가 만듭니다 — 주소는 릴리즈 입력값에서, 커밋은 기준 커밋 파일에서, 처음 여는 파일은 **그 커밋에 있는지 확인해** 싣습니다. 손으로 고치지 마십시오.');
+  L.push('> 이 문서는 `node tools/build-sources.mjs` 가 만듭니다 — 주소는 릴리즈 입력값에서(공개판 상태 `data/public-sources.json` 과 어긋나면 실패), 처음 여는 파일은 **그 판에 있는지 확인해** 싣습니다. 손으로 고치지 마십시오.');
   L.push('');
   return L.join('\n');
 }
 
+
+// source/README.md — 공개판이 들어갈 자리(예측 위치 포함)를 한 장으로. 상태는 data/public-sources.json 하나에서 온다.
+const LABEL = { his: 'HIS · 공개 홈페이지 · 환자 앱', sign: 'sign', lis: 'LIS', erp: 'ERP', pacs: 'PACS', 'ai-server': 'AI Server', twin: 'twin', cerno: 'cerno', edu: 'edu', clinic: 'Clinic', jitsi: 'Jitsi' };
+function buildSourceIndex() {
+  const pub = read('data/public-sources.json').repos;
+  const keys = Object.keys(LABEL);
+  for (const k of Object.keys(pub)) if (!keys.includes(k)) throw new Error(`source 색인에 없는 저장소 키: ${k}`);
+  const opened = keys.filter((k) => pub[k]?.status === '공개');
+  // 공개된 자리는 하위 모듈이 실제로 등록돼 있어야 한다(.gitmodules)
+  const gm = fs.existsSync(path.join(ROOT, '.gitmodules')) ? fs.readFileSync(path.join(ROOT, '.gitmodules'), 'utf8') : '';
+  for (const k of opened) {
+    const want = `path = source/${k}`;
+    if (!gm.includes(want) || !gm.includes(`url = https://github.com/${pub[k].repo}.git`)) throw new Error(`공개(${k})인데 하위 모듈이 없거나 주소가 다르다 — .gitmodules`);
+  }
+  for (const m of gm.matchAll(/path = source\/([\w-]+)/g)) if (pub[m[1]]?.status !== '공개') throw new Error(`하위 모듈 source/${m[1]} 이 있는데 상태가 「공개」가 아니다`);
+  const L = [];
+  L.push('# source — 공개판 소스');
+  L.push('');
+  L.push('**source — public editions of each system**');
+  L.push('');
+  L.push(`> **EN** — Each system's public edition is linked here as a git submodule, one folder per repository. The table also lists the folders reserved for editions not yet opened, with the address each will have — ${opened.length} of ${keys.length} are open now. Clone with \`--recurse-submodules\` (or run \`git submodule update --init\`) to fetch the opened ones. How to pick a version and what was removed from an edition: [Getting the source](../SOURCES.md).`);
+  L.push('');
+  L.push(`이 폴더에는 시스템별 **공개판 저장소**가 하위 모듈로 들어옵니다. 저장소 하나에 폴더 하나이고, 아직 열지 않은 시스템도 **들어갈 자리와 주소를 미리** 적어 두었습니다 — 지금 **${opened.length}/${keys.length}곳** 공개.`);
+  L.push('');
+  L.push('| 폴더 | 시스템 | 공개판 저장소 | 상태 | 기준 판 |');
+  L.push('|---|---|---|---|---|');
+  for (const k of keys) {
+    const p = pub[k];
+    const open = p.status === '공개';
+    const folder = open ? `[\`source/${k}\`](${k})` : `\`source/${k}\``;
+    const st = open ? `🟢 공개(${p.openedAt})` : '준비 중';
+    const ver = open ? `\`${p.tag}\` · \`${p.commit.slice(0, 12)}\`` : '—';
+    L.push(`| ${folder} | ${LABEL[k]} | [${p.repo}](https://github.com/${p.repo}) | ${st} | ${ver} |`);
+  }
+  L.push('');
+  L.push('```sh');
+  L.push('git clone --recurse-submodules https://github.com/seanshin/werub-his-ecosystem.git');
+  L.push('# 이미 받았다면');
+  L.push('git submodule update --init');
+  L.push('```');
+  L.push('');
+  L.push('- 「준비 중」인 폴더는 아직 없습니다. 공개되는 순간 이 표의 이름 그대로 생깁니다.');
+  L.push('- 공개판에서 무엇이 빠졌고 어느 판을 받아야 이 자료와 같은지는 [소스 받기](../SOURCES.md)에 있습니다.');
+  L.push('');
+  L.push('---');
+  L.push('');
+  L.push('> 이 문서는 `node tools/build-sources.mjs` 가 `data/public-sources.json` 과 `.gitmodules` 를 대조해 만듭니다. 손으로 고치지 마십시오.');
+  L.push('');
+  return L.join('\n');
+}
+const IDX = path.join(ROOT, 'source', 'README.md');
 const made = build();
 if (made === null) { console.log('미실행 — tools/.local.json 이 없어 저장소를 확인할 수 없습니다'); process.exit(3); }
+let madeIdx;
+try { madeIdx = buildSourceIndex(); } catch (e) { console.log(`실패 — ${e.message}`); process.exit(1); } // 🔴 상태 ↔ 하위 모듈 대조를 무엇보다 먼저(쓰기 전에)
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
   if (cur !== made) { console.log('불일치 — SOURCES.md 가 다시 만든 결과와 다르다. node tools/build-sources.mjs 로 다시 만든다.'); process.exit(1); }
-  console.log('일치 — SOURCES.md');
+  const curIdx = fs.existsSync(IDX) ? fs.readFileSync(IDX, 'utf8') : '';
+  if (curIdx !== madeIdx) { console.log('불일치 — source/README.md 가 다시 만든 결과와 다르다. node tools/build-sources.mjs 로 다시 만든다.'); process.exit(1); }
+  console.log('일치 — SOURCES.md · source/README.md');
   process.exit(0);
 }
 fs.writeFileSync(OUT, made);
+fs.mkdirSync(path.dirname(IDX), { recursive: true });
+fs.writeFileSync(IDX, madeIdx);
 console.log(`SOURCES.md 생성 — 시스템 ${SYSTEMS.length} · 저장소 ${new Set(SYSTEMS.map((s) => repoKey(s[0]))).size}`);

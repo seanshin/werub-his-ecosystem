@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PLAN = path.resolve(ROOT, '..', 'planning', 'ecosystem-open-materials.plan.md');
-const SKIP_DIRS = new Set(['.git', 'node_modules']);
+const SKIP_DIRS = new Set(['.git', 'source', 'node_modules']);
 const N = 12;   // n-그램 길이 — 짧으면 흔한 말이 걸리고, 길면 조금만 고쳐 써도 놓친다
 const STEP = 3; // 훑는 간격
 const ALLOW = path.resolve(ROOT, '..', 'planning', 'p1', 'leak-allow.json');

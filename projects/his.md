@@ -340,7 +340,7 @@ flowchart TB
 | 기능 하나를 자세히 | [주요 기능 41편](../functions/detail/) |
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
 | 설계 원칙의 뿌리 | [설계 기준은 어떻게 생겼나](../DESIGN-HISTORY.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werubyHIS` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-his` |
 
 ---
 

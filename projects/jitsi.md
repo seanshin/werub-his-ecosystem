@@ -255,7 +255,7 @@ flowchart TB
 | 화면 | [Jitsi 화면](../screens/jitsi.md) |
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
 | 제3자 구성요소 약관 | [THIRD_PARTY](../THIRD_PARTY.md#1-별도-서비스로-쓰는-제3자-서버) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/hospital-jitsi` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-jitsi` |
 
 ---
 

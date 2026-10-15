@@ -203,7 +203,7 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/hospital-erp](https://github.com/seanshin/hospital-erp) — 공개 예정(정리가 끝나는 대로 열립니다 · 주소는 바뀌지 않습니다) |
+| 소스 링크 | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) — 공개판 저장소 준비 중(들어갈 자리 [`source/erp`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 표기 없음 — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · Grafana · Metabase |
 | 기준 커밋 | `0e1f54c5b902` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |

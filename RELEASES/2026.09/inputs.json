@@ -7,69 +7,69 @@
     "his": {
       "status": "통합",
       "statusNote": "리허설 모드(가상 병원 데이터)",
-      "sourceLink": "https://github.com/seanshin/werubyHIS"
+      "sourceLink": "https://github.com/seanshin/werub-his"
     },
     "homepage": {
       "status": "운영",
       "statusNote": "공개 사이트로 쓰이는 중",
-      "sourceLink": "https://github.com/seanshin/werubyHIS"
+      "sourceLink": "https://github.com/seanshin/werub-his"
     },
     "patient-app": {
       "status": "개발",
       "statusNote": "스토어 미배포",
-      "sourceLink": "https://github.com/seanshin/werubyHIS"
+      "sourceLink": "https://github.com/seanshin/werub-his"
     },
     "sign": {
       "status": "통합",
       "statusNote": null,
-      "sourceLink": "https://github.com/seanshin/sign"
+      "sourceLink": "https://github.com/seanshin/werub-sign"
     },
     "lis": {
       "status": "파일럿",
       "statusNote": null,
-      "sourceLink": "https://github.com/seanshin/lis"
+      "sourceLink": "https://github.com/seanshin/werub-lis"
     },
     "erp": {
       "status": "파일럿",
       "statusNote": "문서마다 운영·개발 표기가 엇갈려 재확인 대상",
-      "sourceLink": "https://github.com/seanshin/hospital-erp"
+      "sourceLink": "https://github.com/seanshin/werub-erp"
     },
     "pacs": {
       "status": "통합",
       "statusNote": null,
-      "sourceLink": "https://github.com/seanshin/openpacs"
+      "sourceLink": "https://github.com/seanshin/werub-pacs"
     },
     "ai-server": {
       "status": "통합",
       "statusNote": "의료 기능 기준 — 비의료 기능은 이 생태계 범위 밖",
-      "sourceLink": "https://github.com/seanshin/WeRUBLLMManager"
+      "sourceLink": "https://github.com/seanshin/werub-ai-server"
     },
     "twin": {
       "status": "통합",
       "statusNote": null,
-      "sourceLink": "https://github.com/seanshin/medical-digital-twin"
+      "sourceLink": "https://github.com/seanshin/werub-twin"
     },
     "cerno": {
       "status": "파일럿",
       "statusNote": "섀도우 · 비임상",
-      "sourceLink": "https://github.com/seanshin/cerno"
+      "sourceLink": "https://github.com/seanshin/werub-cerno"
     },
     "edu": {
       "status": "확인 필요",
       "statusNote": "운영 여부 재확인 전",
-      "sourceLink": "https://github.com/seanshin/edu"
+      "sourceLink": "https://github.com/seanshin/werub-edu"
     },
     "clinic": {
       "status": "통합",
       "statusNote": "모노레포 안의 병원 서비스만",
-      "sourceLink": "https://github.com/weruby-co-kr/WeRUB",
+      "sourceLink": "https://github.com/seanshin/werub-clinic",
       "pathScope": "packages/hospital-web"
     },
     "jitsi": {
       "status": "중단",
       "statusNote": "현재 설치본이 동작하지 않음 — 구축 기관은 새로 구성",
-      "sourceLink": "https://github.com/seanshin/hospital-jitsi"
+      "sourceLink": "https://github.com/seanshin/werub-jitsi"
     }
   },
-  "_sourceLinkNote": "소스 저장소 주소. 각 프로젝트의 정리가 끝나는 대로 하나씩 공개되며, 그 전에는 링크가 열리지 않습니다(접근 권한이 아직 없다는 뜻이고, 자료가 가리키는 대상은 이 주소입니다)."
+  "_sourceLinkNote": "공개판 저장소 주소(seanshin/werub-… · MIT). 개발 저장소는 비공개로 남고, 정리가 끝난 시스템부터 공개판 저장소를 하나씩 엽니다. 상태 · 태그 · 커밋은 data/public-sources.json."
 }

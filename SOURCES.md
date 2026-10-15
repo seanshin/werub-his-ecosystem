@@ -2,65 +2,70 @@
 
 **Getting the source**
 
-> **EN** — Each system lives in its own repository. This page maps the thirteen systems to their repositories, pins the **base commit** every number in these materials was read from, and names the file to open first. **All of them are to be made public**, one at a time as each project finishes its clean-up; until a given one is, its link will not open. An open repository does not mean an MIT licence — each repository states its own, and they currently differ (§2).
+> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 1 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
 
-> 🟢 **위 저장소는 모두 공개할 예정입니다.** 각 프로젝트의 정리가 끝나는 대로 **하나씩** 열립니다. 아직 열리지 않은 주소는 눌러도 열리지 않습니다 — 접근 권한이 없다는 뜻이고, **이 안내는 열리는 순간 그대로 동작합니다**(주소도 커밋도 바뀌지 않습니다).
+> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **1/11곳** 공개.
 >
-> 🔴 **열린 저장소라고 라이선스가 MIT 라는 뜻은 아닙니다** — 저장소마다 표기가 다릅니다(§2).
+> 「준비 중」인 주소는 아직 열리지 않습니다.
 
-이 자료의 모든 수치 · 화면 · 연결 상태는 아래 **기준 커밋**에서 읽은 것입니다. 같은 것을 보려면 그 커밋을 받으십시오 — 최신 커밋은 이 자료보다 앞서 있을 수 있습니다.
+이 자료의 모든 수치 · 화면 · 연결 상태는 개발 저장소의 **기준 커밋**에서 읽은 것입니다. 공개판의 **기준 판**(원본 태그를 그대로 씀)이 그 커밋과 같은 시점이면 표에 「기준 커밋과 같음」으로 적었습니다.
 
 ## 1. 어느 저장소에 무엇이 있나
 
-| 시스템 | 저장소 | 기준 커밋 | 구축 단계 |
-|---|---|---|---|
-| HIS | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) | `e9d303984f80` | [S1](build-guide/S1-core-his.md) |
-| 공개 홈페이지 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) | `e9d303984f80` | [S2](build-guide/S2-patient-access.md) |
-| 환자 앱 | [seanshin/werubyHIS](https://github.com/seanshin/werubyHIS) | `e9d303984f80` | [S2](build-guide/S2-patient-access.md) |
-| sign | [seanshin/sign](https://github.com/seanshin/sign) | `93f56d839c3f` | [S4](build-guide/S4-trust.md) |
-| LIS | [seanshin/lis](https://github.com/seanshin/lis) | `ffb34e9d1dbc` | [S3](build-guide/S3-clinical-departments.md) |
-| ERP | [seanshin/hospital-erp](https://github.com/seanshin/hospital-erp) | `0e1f54c5b902` | [S5](build-guide/S5-management.md) |
-| PACS | [seanshin/openpacs](https://github.com/seanshin/openpacs) | `532a8ed13e87` | [S3](build-guide/S3-clinical-departments.md) |
-| AI Server | [seanshin/WeRUBLLMManager](https://github.com/seanshin/WeRUBLLMManager) | `55acaee90068` | [S6](build-guide/S6-ai.md) |
-| twin | [seanshin/medical-digital-twin](https://github.com/seanshin/medical-digital-twin) | `526b4f9a4d3f` | [S5](build-guide/S5-management.md) |
-| cerno | [seanshin/cerno](https://github.com/seanshin/cerno) | `4f5c22b331fc` | [S5](build-guide/S5-management.md) |
-| edu | [seanshin/edu](https://github.com/seanshin/edu) | `f8127e6ee278` | [S5](build-guide/S5-management.md) |
-| Clinic | [weruby-co-kr/WeRUB](https://github.com/weruby-co-kr/WeRUB) | `2b20a89b7c3a` | [S5](build-guide/S5-management.md) |
-| Jitsi | [seanshin/hospital-jitsi](https://github.com/seanshin/hospital-jitsi) | `0984fbec7177` | [S5](build-guide/S5-management.md) |
+| 시스템 | 공개판 저장소 | 상태 | 기준 판 | 구축 단계 |
+|---|---|---|---|---|
+| HIS | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S1](build-guide/S1-core-his.md) |
+| 공개 홈페이지 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
+| 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
+| sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 준비 중 | — | [S4](build-guide/S4-trust.md) |
+| LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 준비 중 | — | [S3](build-guide/S3-clinical-departments.md) |
+| ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| PACS | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) | 준비 중 | — | [S3](build-guide/S3-clinical-departments.md) |
+| AI Server | [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) | 준비 중 | — | [S6](build-guide/S6-ai.md) |
+| twin | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8` · `69b4cd78e939` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
+| edu | [seanshin/werub-edu](https://github.com/seanshin/werub-edu) | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| Clinic | [seanshin/werub-clinic](https://github.com/seanshin/werub-clinic) | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| Jitsi | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) | 준비 중 | — | [S5](build-guide/S5-management.md) |
 
 **HIS · 공개 홈페이지 · 환자 앱은 한 저장소**입니다(모노레포). 나머지는 시스템마다 저장소가 하나입니다 — 저장소 **11개**로 시스템 **13개**가 됩니다.
 
 ## 2. 받는 법
 
+공개된 시스템은 이 저장소의 `source/` 폴더에 **하위 모듈**로 연결되어 있습니다. 둘 중 편한 쪽으로 받습니다.
+
 ```sh
-# 예: HIS
-git clone <위 표의 주소>.git his
-cd his
-git checkout <위 표의 기준 커밋>      # 🔴 이 자료와 같은 것을 보려면 이 커밋
-git rev-parse HEAD                    # 표의 커밋과 같은지 확인
+# ① 소개 자료와 공개된 소스를 한 번에
+git clone --recurse-submodules https://github.com/seanshin/werub-his-ecosystem.git
+
+# ② 시스템 하나만 (예: cerno)
+git clone https://github.com/seanshin/werub-cerno.git cerno
+cd cerno
+git checkout <위 표의 기준 판 태그>   # 🔴 이 자료와 같은 것을 보려면 이 판
 ```
 
-- **기준 커밋을 쓰는 이유** — 이 자료의 수치(데이터 모델 수 · 화면 수 · 연결 상태 · 체크리스트 항목 수)는 전부 그 커밋에서 기계로 읽은 것입니다. 최신 커밋을 받으면 **자료와 숫자가 달라집니다**(틀린 것이 아니라 시점이 다른 것입니다).
+- **기준 판을 쓰는 이유** — 이 자료의 수치(데이터 모델 수 · 화면 수 · 연결 상태 · 체크리스트 항목 수)는 전부 그 시점에서 기계로 읽은 것입니다. 이후 판을 받으면 **자료와 숫자가 달라집니다**(틀린 것이 아니라 시점이 다른 것입니다).
+- **공개판에서 빠진 것** — 내부 작업 기록 문서와 운영 정보입니다. 코드는 그대로이고, 운영 도메인 · 서버 주소 · 계정 같은 값은 예시 값(`example.org` 등)으로 바뀌어 있습니다. 소스 주석이 빠진 문서를 가리키는 곳이 남아 있을 수 있습니다.
+- **라이선스** — 공개판은 **MIT** 입니다(저장소마다 `LICENSE`). [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)의 「저장소 라이선스 표기」 칸은 개발 저장소의 기준 커밋 표기를 기록한 것입니다.
 - **최신으로 세우고 싶다면** 그렇게 해도 됩니다. 다만 이 자료의 「막힌 곳」과 「우회」는 기준 커밋에서 겪은 것이므로, 최신에서는 이미 고쳐졌거나 다른 자리에서 막힐 수 있습니다.
-- 저장소마다 **라이선스 표기가 다릅니다**(일부는 독점 · 일부는 표기 없음). 받기 전에 [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)의 「저장소 라이선스 표기」 칸을 보십시오. **이 소개 저장소의 MIT 는 이 자료에만 적용됩니다.**
 
 ## 3. 받은 뒤 처음 여는 파일
 
-기준 커밋에 **실제로 있는 파일만** 적었습니다(2026-09-17 확인).
+그 판에 **실제로 있는 파일만** 적었습니다 — 공개된 곳은 공개판에서, 준비 중인 곳은 개발 저장소의 기준 커밋에서 확인했습니다(준비 중인 곳은 공개판에서 빠질 수 있습니다).
 
 | 저장소 | 처음 여는 파일 |
 |---|---|
-| seanshin/werubyHIS | `infra/docker/docker-compose.prod.yml` · `infra/scripts/deploy.sh` · `README.md` |
-| seanshin/sign | `docker-compose.prod.yml` · `docker-compose.yml` · `README.md` |
-| seanshin/lis | `infra/docker/docker-compose.prod.yml` · `infra/scripts/deploy.sh` · `README.md` |
-| seanshin/hospital-erp | `infra/docker-compose.prod.yml` · `infra/docker-compose.yml` · `infra/deploy.sh` · `services/core/Dockerfile` · `README.md` |
-| seanshin/openpacs | `docker-compose.yml` · `backend/Dockerfile` · `README.md` |
-| seanshin/WeRUBLLMManager | `gunicorn.conf.py` · `requirements.txt` · `README.md` |
-| seanshin/medical-digital-twin | `docker-compose.yml` · `README.md` |
-| seanshin/cerno | `docker-compose.yml` · `README.md` |
-| seanshin/edu | `infra/docker/docker-compose.prod.yml` · `README.md` |
-| weruby-co-kr/WeRUB | `docker-compose.yml` · `ecosystem.config.cjs` · `README.md` |
-| seanshin/hospital-jitsi | `docker-compose.yml` · `README.md` |
+| seanshin/werub-his | `infra/docker/docker-compose.prod.yml` · `infra/scripts/deploy.sh` · `README.md` |
+| seanshin/werub-sign | `docker-compose.prod.yml` · `docker-compose.yml` · `README.md` |
+| seanshin/werub-lis | `infra/docker/docker-compose.prod.yml` · `infra/scripts/deploy.sh` · `README.md` |
+| seanshin/werub-erp | `infra/docker-compose.prod.yml` · `infra/docker-compose.yml` · `infra/deploy.sh` · `services/core/Dockerfile` · `README.md` |
+| seanshin/werub-pacs | `docker-compose.yml` · `backend/Dockerfile` · `README.md` |
+| seanshin/werub-ai-server | `gunicorn.conf.py` · `requirements.txt` · `README.md` |
+| seanshin/werub-twin | `docker-compose.yml` · `README.md` |
+| seanshin/werub-cerno | `docker-compose.yml` · `README.md` |
+| seanshin/werub-edu | `infra/docker/docker-compose.prod.yml` · `README.md` |
+| seanshin/werub-clinic | `docker-compose.yml` · `ecosystem.config.cjs` · `README.md` |
+| seanshin/werub-jitsi | `docker-compose.yml` · `README.md` |
 
 - 🔴 **저장소의 설치 파일이 그대로 도는 것은 아닙니다.** 새 설치본으로 따라가 본 결과, 여러 시스템에서 이미지 빌드 · 스키마 반영 · 기동이 원본 파일로는 막혔습니다 — 무엇이 어떻게 막혔고 어떻게 우회했는지는 [따라가 본 결과](build-guide/follow-along-2026-09.md)와 각 단계 장에 있습니다. **그 장을 먼저 읽고 시작하십시오.**
 - 위 표는 "여기서 시작한다"는 뜻이지 "이것만 있으면 된다"는 뜻이 아닙니다.
@@ -83,4 +88,4 @@ git rev-parse HEAD                    # 표의 커밋과 같은지 확인
 
 ---
 
-> 이 문서는 `node tools/build-sources.mjs` 가 만듭니다 — 주소는 릴리즈 입력값에서, 커밋은 기준 커밋 파일에서, 처음 여는 파일은 **그 커밋에 있는지 확인해** 싣습니다. 손으로 고치지 마십시오.
+> 이 문서는 `node tools/build-sources.mjs` 가 만듭니다 — 주소는 릴리즈 입력값에서(공개판 상태 `data/public-sources.json` 과 어긋나면 실패), 처음 여는 파일은 **그 판에 있는지 확인해** 싣습니다. 손으로 고치지 마십시오.

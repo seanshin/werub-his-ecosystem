@@ -245,7 +245,7 @@ flowchart TB
 | 화면 | [edu 화면](../screens/edu.md) |
 | HIS 쪽에서 교육 기록을 쓰는 곳 | [직원 자격 · 교육](../functions/detail/staff-credentials.md) |
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/edu` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-edu` |
 
 ---
 

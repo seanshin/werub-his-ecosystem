@@ -257,7 +257,7 @@ flowchart TB
 | 이 버전의 변경 내용 | [릴리즈 요약](../RELEASES/2026.09/systems/clinic.md) |
 | 화면 | [Clinic 화면](../screens/clinic.md) |
 | 연결 하나를 자세히 | [연결 카드](../integration/cards/) · [공통 규약](../integration/contracts.md) |
-| 소스 | [소스 받기](../SOURCES.md) — 저장소 `weruby-co-kr/WeRUB` |
+| 소스 | [소스 받기](../SOURCES.md) — 저장소 `seanshin/werub-clinic` |
 
 ---
 
