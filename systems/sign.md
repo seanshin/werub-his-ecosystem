@@ -205,7 +205,7 @@ AI 기능이 없습니다. 설정 키에도 AI 연결 항목이 없습니다(202
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) — 공개판 저장소 준비 중(들어갈 자리 [`source/sign`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md)) |
+| 소스 링크 | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) — 🟢 공개(2026-10-15 · 공개판 `v1.30.1` · MIT · 이 저장소의 [`source/sign`](../source/sign) · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | UNLICENSED(비공개 선언 · `package.json`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL |
 | 기준 커밋 | `93f56d839c3f` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |

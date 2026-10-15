@@ -4,3 +4,6 @@
 [submodule "source/lis"]
 	path = source/lis
 	url = https://github.com/seanshin/werub-lis.git
+[submodule "source/sign"]
+	path = source/sign
+	url = https://github.com/seanshin/werub-sign.git

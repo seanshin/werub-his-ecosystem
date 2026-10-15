@@ -7,14 +7,20 @@
     },
     "sign": {
       "repo": "seanshin/werub-sign",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-15",
+      "tag": "v1.30.1",
+      "commit": "0813933bd01cd4d4fad654a4839e2bd764bd6e09",
+      "fromBase": false,
+      "note": "코드는 기준 커밋과 같음 — 기준 커밋은 그 뒤 운영 기록 문서만 더했다",
+      "license": "MIT"
     },
     "lis": {
       "repo": "seanshin/werub-lis",
       "status": "공개",
       "openedAt": "2026-10-15",
-      "tag": "v1.56.18",
-      "commit": "df9cc3640e13d81626bdbe927967313ca0ca7238",
+      "tag": "v1.56.18-public.2",
+      "commit": "7b8a549619f19c3a3c4d21a220c5b75b8caf6d18",
       "fromBase": true,
       "license": "MIT"
     },

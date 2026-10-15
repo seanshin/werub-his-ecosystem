@@ -100,7 +100,7 @@ function build() {
   for (const r of rows) {
     const st = r.pub.status === '공개' ? `🟢 공개(${r.pub.openedAt})` : '준비 중';
     const ver = r.pub.status === '공개'
-      ? `\`${r.pub.tag}\` · \`${r.pub.commit.slice(0, 12)}\`${r.pub.fromBase ? ' — 기준 커밋과 같음' : ''}`
+      ? `\`${r.pub.tag}\` · \`${r.pub.commit.slice(0, 12)}\`${r.pub.fromBase ? ' — 기준 커밋과 같음' : r.pub.note ? ` — ${r.pub.note}` : ''}`
       : '—';
     L.push(`| ${r.label} | [${r.link.replace('https://github.com/', '')}](${r.link}) | ${st} | ${ver} | [${r.stage}](build-guide/${STAGE[r.stage]}.md) |`);
   }
