@@ -2,13 +2,13 @@
 
 **Getting the source**
 
-> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 1 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
+> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 2 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
 
-> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **1/11곳** 공개.
+> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **2/11곳** 공개.
 >
 > 「준비 중」인 주소는 아직 열리지 않습니다.
 
-이 자료의 모든 수치 · 화면 · 연결 상태는 개발 저장소의 **기준 커밋**에서 읽은 것입니다. 공개판의 **기준 판**(원본 태그를 그대로 씀)이 그 커밋과 같은 시점이면 표에 「기준 커밋과 같음」으로 적었습니다.
+이 자료의 모든 수치 · 화면 · 연결 상태는 개발 저장소의 **기준 커밋**에서 읽은 것입니다. 공개판의 **기준 판**은 원본 태그를 그대로 쓰고, 같은 원본을 다시 내보내면 `-public.N` 을 붙입니다(공개된 이력은 다시 쓰지 않고 그 위에 커밋을 더합니다). 그 커밋과 같은 시점이면 표에 「기준 커밋과 같음」으로 적었습니다.
 
 ## 1. 어느 저장소에 무엇이 있나
 
@@ -18,12 +18,12 @@
 | 공개 홈페이지 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
 | 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
 | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 준비 중 | — | [S4](build-guide/S4-trust.md) |
-| LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 준비 중 | — | [S3](build-guide/S3-clinical-departments.md) |
+| LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18` · `df9cc3640e13` — 기준 커밋과 같음 | [S3](build-guide/S3-clinical-departments.md) |
 | ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 준비 중 | — | [S5](build-guide/S5-management.md) |
 | PACS | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) | 준비 중 | — | [S3](build-guide/S3-clinical-departments.md) |
 | AI Server | [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) | 준비 중 | — | [S6](build-guide/S6-ai.md) |
 | twin | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) | 준비 중 | — | [S5](build-guide/S5-management.md) |
-| cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8` · `69b4cd78e939` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
+| cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8-public.2` · `9b34828d4d62` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 | edu | [seanshin/werub-edu](https://github.com/seanshin/werub-edu) | 준비 중 | — | [S5](build-guide/S5-management.md) |
 | Clinic | [seanshin/werub-clinic](https://github.com/seanshin/werub-clinic) | 준비 중 | — | [S5](build-guide/S5-management.md) |
 | Jitsi | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) | 준비 중 | — | [S5](build-guide/S5-management.md) |
@@ -46,6 +46,7 @@ git checkout <위 표의 기준 판 태그>   # 🔴 이 자료와 같은 것을
 
 - **기준 판을 쓰는 이유** — 이 자료의 수치(데이터 모델 수 · 화면 수 · 연결 상태 · 체크리스트 항목 수)는 전부 그 시점에서 기계로 읽은 것입니다. 이후 판을 받으면 **자료와 숫자가 달라집니다**(틀린 것이 아니라 시점이 다른 것입니다).
 - **공개판에서 빠진 것** — 내부 작업 기록 문서와 운영 정보입니다. 코드는 그대로이고, 운영 도메인 · 서버 주소 · 계정 같은 값은 예시 값(`example.org` 등)으로 바뀌어 있습니다. 소스 주석이 빠진 문서를 가리키는 곳이 남아 있을 수 있습니다.
+- 🔴 **비밀값은 들어 있지 않습니다** — 비밀번호 · 비밀 · 토큰 · 키는 `CHANGE_ME` 로 비웠습니다. **받은 뒤 직접 정해야 하는 값**은 공개판마다 루트의 `PUBLIC-EDITION.md` 에 목록으로 있습니다.
 - **라이선스** — 공개판은 **MIT** 입니다(저장소마다 `LICENSE`). [통합 릴리즈 매니페스트](RELEASES/2026.09/manifest.md)의 「저장소 라이선스 표기」 칸은 개발 저장소의 기준 커밋 표기를 기록한 것입니다.
 - **최신으로 세우고 싶다면** 그렇게 해도 됩니다. 다만 이 자료의 「막힌 곳」과 「우회」는 기준 커밋에서 겪은 것이므로, 최신에서는 이미 고쳐졌거나 다른 자리에서 막힐 수 있습니다.
 

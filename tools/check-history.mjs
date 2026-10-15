@@ -96,7 +96,8 @@ try {
     if (!file) return '';
     if (!baseCache.has(file)) {
       let t = '';
-      try { t = git(['show', `${base}:${file}`]); } catch { t = ''; }
+      // 하위 모듈 경로(gitlink)는 파일이 아니라 읽히지 않는다 — 빈 값이면 예외가 적용되지 않아 더 엄격한 쪽이다
+      try { t = execFileSync('git', ['show', `${base}:${file}`], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); } catch { t = ''; }
       baseCache.set(file, t);
     }
     return baseCache.get(file);

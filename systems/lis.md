@@ -201,7 +201,7 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) — 공개판 저장소 준비 중(들어갈 자리 [`source/lis`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md)) |
+| 소스 링크 | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) — 🟢 공개(2026-10-15 · 공개판 `v1.56.18` · MIT · 이 저장소의 [`source/lis`](../source/lis) · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 독점(`LICENSE`) · UNLICENSED(비공개 선언 · `package.json`) · 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · 코드 마스터 |
 | 기준 커밋 | `ffb34e9d1dbc` (2026-09-09 · [`data/base-commits.json`](../data/base-commits.json)) |

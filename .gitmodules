@@ -1,3 +1,6 @@
 [submodule "source/cerno"]
 	path = source/cerno
 	url = https://github.com/seanshin/werub-cerno.git
+[submodule "source/lis"]
+	path = source/lis
+	url = https://github.com/seanshin/werub-lis.git

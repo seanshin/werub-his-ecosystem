@@ -1,5 +1,5 @@
 {
-  "note": "시스템별 공개판 저장소 — 개발 저장소(비공개)의 최종 상태에서 내부 작업 기록 · 운영 정보를 빼고 MIT 로 연 저장소. status 는 공개 | 준비 중. 공개된 곳은 source/<key> 하위 모듈로 연결한다. tag 는 원본 태그를 그대로 쓰며, fromBase=true 면 이 자료의 기준 커밋(data/base-commits.json)과 같은 시점이다.",
+  "note": "시스템별 공개판 저장소 — 개발 저장소(비공개)의 최종 상태에서 내부 작업 기록 · 운영 정보를 빼고 MIT 로 연 저장소. status 는 공개 | 준비 중. 공개된 곳은 source/<key> 하위 모듈로 연결한다. tag 는 처음 공개 때 원본 태그를 그대로 쓰고, 같은 원본을 다시 내보내면 <원본 태그>-public.N 을 붙이며, fromBase=true 면 이 자료의 기준 커밋(data/base-commits.json)과 같은 시점이다.",
   "repos": {
     "his": {
       "repo": "seanshin/werub-his",
@@ -11,7 +11,12 @@
     },
     "lis": {
       "repo": "seanshin/werub-lis",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-15",
+      "tag": "v1.56.18",
+      "commit": "df9cc3640e13d81626bdbe927967313ca0ca7238",
+      "fromBase": true,
+      "license": "MIT"
     },
     "erp": {
       "repo": "seanshin/werub-erp",
@@ -33,8 +38,8 @@
       "repo": "seanshin/werub-cerno",
       "status": "공개",
       "openedAt": "2026-10-15",
-      "tag": "v0.1.8",
-      "commit": "69b4cd78e9390c931b7397107fe3be639c678360",
+      "tag": "v0.1.8-public.2",
+      "commit": "9b34828d4d62dd90f1936abc3de1e4090d83905a",
       "fromBase": true,
       "license": "MIT"
     },
