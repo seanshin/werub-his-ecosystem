@@ -13,3 +13,6 @@
 [submodule "source/twin"]
 	path = source/twin
 	url = https://github.com/seanshin/werub-twin.git
+[submodule "source/jitsi"]
+	path = source/jitsi
+	url = https://github.com/seanshin/werub-jitsi.git

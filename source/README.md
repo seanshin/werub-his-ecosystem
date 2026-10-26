@@ -2,9 +2,9 @@
 
 **source — public editions of each system**
 
-> **EN** — Each system's public edition is linked here as a git submodule, one folder per repository. The table also lists the folders reserved for editions not yet opened, with the address each will have — 5 of 11 are open now. Clone with `--recurse-submodules` (or run `git submodule update --init`) to fetch the opened ones. How to pick a version and what was removed from an edition: [Getting the source](../SOURCES.md).
+> **EN** — Each system's public edition is linked here as a git submodule, one folder per repository. The table also lists the folders reserved for editions not yet opened, with the address each will have — 6 of 11 are open now. Clone with `--recurse-submodules` (or run `git submodule update --init`) to fetch the opened ones. How to pick a version and what was removed from an edition: [Getting the source](../SOURCES.md).
 
-이 폴더에는 시스템별 **공개판 저장소**가 하위 모듈로 들어옵니다. 저장소 하나에 폴더 하나이고, 아직 열지 않은 시스템도 **들어갈 자리와 주소를 미리** 적어 두었습니다 — 지금 **5/11곳** 공개.
+이 폴더에는 시스템별 **공개판 저장소**가 하위 모듈로 들어옵니다. 저장소 하나에 폴더 하나이고, 아직 열지 않은 시스템도 **들어갈 자리와 주소를 미리** 적어 두었습니다 — 지금 **6/11곳** 공개.
 
 | 폴더 | 시스템 | 공개판 저장소 | 상태 | 기준 판 |
 |---|---|---|---|---|
@@ -18,7 +18,7 @@
 | [`source/cerno`](cerno) | cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8-public.2` · `9b34828d4d62` |
 | [`source/edu`](edu) | edu | [seanshin/werub-edu](https://github.com/seanshin/werub-edu) | 🟢 공개(2026-10-26) | `v2.7.0` · `1808f0c3eb8b` |
 | `source/clinic` | Clinic | [seanshin/werub-clinic](https://github.com/seanshin/werub-clinic) | 준비 중 | — |
-| `source/jitsi` | Jitsi | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) | 준비 중 | — |
+| [`source/jitsi`](jitsi) | Jitsi | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) | 🟢 공개(2026-10-26) | `v2.10.0-9-g0984fbe` · `6d41dfc9dd40` |
 
 ```sh
 git clone --recurse-submodules https://github.com/seanshin/werub-his-ecosystem.git

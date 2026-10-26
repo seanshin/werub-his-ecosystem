@@ -69,7 +69,12 @@
     },
     "jitsi": {
       "repo": "seanshin/werub-jitsi",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-26",
+      "tag": "v2.10.0-9-g0984fbe",
+      "commit": "6d41dfc9dd4074b2993a816a80c4a870be5a7366",
+      "fromBase": true,
+      "license": "MIT"
     }
   }
 }
