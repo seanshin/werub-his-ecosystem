@@ -171,7 +171,7 @@ flowchart LR
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
-- **소스 링크**: [seanshin/werub-edu](https://github.com/seanshin/werub-edu) — 공개판 저장소 준비 중(들어갈 자리 [`source/edu`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md))
+- **소스 링크**: [seanshin/werub-edu](https://github.com/seanshin/werub-edu) — 🟢 공개(2026-10-26 · 공개판 `v2.7.0` · MIT · 이 저장소의 [`source/edu`](../source/edu) · [소스 받기](../SOURCES.md))
 - **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL 16 · Redis(판본에 따라 약관이 다름)
 - **확인일**: 2026-09-11 — 기준 커밋 `f8127e6ee278` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

@@ -51,7 +51,12 @@
     },
     "edu": {
       "repo": "seanshin/werub-edu",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-26",
+      "tag": "v2.7.0",
+      "commit": "1808f0c3eb8b7bc67b7929c70c4e7d20f0e08263",
+      "fromBase": true,
+      "license": "MIT"
     },
     "clinic": {
       "repo": "seanshin/werub-clinic",

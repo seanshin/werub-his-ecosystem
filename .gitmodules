@@ -7,3 +7,6 @@
 [submodule "source/sign"]
 	path = source/sign
 	url = https://github.com/seanshin/werub-sign.git
+[submodule "source/edu"]
+	path = source/edu
+	url = https://github.com/seanshin/werub-edu.git
