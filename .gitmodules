@@ -10,3 +10,6 @@
 [submodule "source/edu"]
 	path = source/edu
 	url = https://github.com/seanshin/werub-edu.git
+[submodule "source/twin"]
+	path = source/twin
+	url = https://github.com/seanshin/werub-twin.git

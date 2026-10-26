@@ -160,7 +160,7 @@ flowchart LR
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
-- **소스 링크**: [seanshin/werub-twin](https://github.com/seanshin/werub-twin) — 공개판 저장소 준비 중(들어갈 자리 [`source/twin`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md))
+- **소스 링크**: [seanshin/werub-twin](https://github.com/seanshin/werub-twin) — 🟢 공개(2026-10-26 · 공개판 `v1.20.72-19-g526b4f9` · MIT · 이 저장소의 [`source/twin`](../source/twin) · [소스 받기](../SOURCES.md))
 - **저장소 라이선스 표기**: 표기 없음 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소**: [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis(판본에 따라 약관이 다름) · Pulse Physiology Engine(선택) · Synthea(검증용 합성 데이터)
 - **확인일**: 2026-09-11 — 기준 커밋 `526b4f9a4d3f` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다
