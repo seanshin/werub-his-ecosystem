@@ -4,7 +4,7 @@
 
 > **EN** — The build path S0 → S8 as one picture, with the human decisions that gate each stage marked as hexagons. It shows what can be stood up independently and what has to wait for a decision rather than for code.
 
-근거: [README 「구축은 이렇게 진행됩니다」](../README.md#구축은-이렇게-진행됩니다) · [ROADMAP §4](../ROADMAP.md#4-구축-가이드의-단계-b) · 사람이 정할 것은 [결정 등록부 체크리스트](../checklist/decisions.md)(HIS v4.18.0 · 기준 커밋에서 추출)와 [sign 릴리즈 요약 §5](../RELEASES/2026.09/systems/sign.md)
+근거: [README 「구축은 이렇게 진행됩니다」](../ABOUT.md#구축은-이렇게-진행됩니다) · [ROADMAP §4](../ROADMAP.md#4-구축-가이드의-단계-b) · 사람이 정할 것은 [결정 등록부 체크리스트](../checklist/decisions.md)(HIS v4.18.0 · 기준 커밋에서 추출)와 [sign 릴리즈 요약 §5](../RELEASES/2026.09/systems/sign.md)
 
 ```mermaid
 flowchart TB

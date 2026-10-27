@@ -4,7 +4,7 @@
 
 > **EN** — Staff sign-in is issued in one place (the HIS) and verified by the sibling systems against its published keys. This diagram shows which system trusts which, by what token format, and where the shared-secret path is used instead.
 
-근거: [README 「지금 알고 시작해야 할 것」 — 로그인 방식](../README.md#지금-알고-시작해야-할-것) · [HIS 릴리즈 요약 §1](../RELEASES/2026.09/systems/his.md) · 방식 이름(RS256 · JWKS · HS256)은 각 시스템 요약([sign](../RELEASES/2026.09/systems/sign.md) · [PACS](../RELEASES/2026.09/systems/pacs.md) · [edu](../RELEASES/2026.09/systems/edu.md) · [twin](../RELEASES/2026.09/systems/twin.md) · [cerno](../RELEASES/2026.09/systems/cerno.md) · [ERP](../RELEASES/2026.09/systems/erp.md) · [Jitsi](../RELEASES/2026.09/systems/jitsi.md) · [Clinic](../RELEASES/2026.09/systems/clinic.md))
+근거: [README 「지금 알고 시작해야 할 것」 — 로그인 방식](../ABOUT.md#지금-알고-시작해야-할-것) · [HIS 릴리즈 요약 §1](../RELEASES/2026.09/systems/his.md) · 방식 이름(RS256 · JWKS · HS256)은 각 시스템 요약([sign](../RELEASES/2026.09/systems/sign.md) · [PACS](../RELEASES/2026.09/systems/pacs.md) · [edu](../RELEASES/2026.09/systems/edu.md) · [twin](../RELEASES/2026.09/systems/twin.md) · [cerno](../RELEASES/2026.09/systems/cerno.md) · [ERP](../RELEASES/2026.09/systems/erp.md) · [Jitsi](../RELEASES/2026.09/systems/jitsi.md) · [Clinic](../RELEASES/2026.09/systems/clinic.md))
 
 ```mermaid
 flowchart LR

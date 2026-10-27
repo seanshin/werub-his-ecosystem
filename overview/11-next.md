@@ -7,7 +7,7 @@
 
 ---
 
-이 개요서는 전 역할이 함께 읽는 첫 문서입니다. 여기서부터는 역할마다 들고 온 질문에 따라 갈 곳이 갈립니다. 역할과 질문은 [README 「누가 읽나」](../README.md#누가-읽나)의 표를 따릅니다.
+이 개요서는 전 역할이 함께 읽는 첫 문서입니다. 여기서부터는 역할마다 들고 온 질문에 따라 갈 곳이 갈립니다. 역할과 질문은 [README 「누가 읽나」](../ABOUT.md#누가-읽나)의 표를 따릅니다.
 
 ## 역할별로
 
@@ -18,7 +18,7 @@
 | **의료정보 · 임상 리더** | 진료 흐름이 시스템 사이를 어떻게 지나가나? 병원 규정은 어디서 설정하나? | [2](02-principles.md) · [5](05-patient-journey.md) · [6](06-identity-trust-standards.md) | [환자 여정 스윔레인](../diagrams/patient-journey.md) · [HIS 구성서](../systems/his.md) · [HIS 도메인 목록](../systems/his-domains.md) · [개원 · 운영 단계 체크리스트](../checklist/opening.md) · [데모 시나리오](../scenarios/) · **[화면으로 보는 생태계](../screens/)** |
 | **AI · 거버넌스 위원회 · 법무** | AI 가 어디서 무엇을 하나? 어디까지 켜도 되나? 누가 승인하고 무엇이 남나? | [7](07-ai.md) · [10](10-terms.md) · [2 취지 1 · 5 · 7](02-principles.md) | [구축 가이드 S6 AI 계층](../build-guide/S6-ai.md) · [AI 호출 지도](../diagrams/ai-map.md) · **[AI 감독 화면](../screens/his.md)** · [AI Server 구성서](../systems/ai-server.md) · [THIRD_PARTY §3 모델 가중치](../THIRD_PARTY.md#3-ai-모델-가중치) · [의료 면책 고지](../DISCLAIMER.md) |
 | **연동 개발자 · 파트너** | 시스템끼리 무슨 프로토콜 · 인증으로 붙나? 무엇이 검증됐나? | [5](05-patient-journey.md) · [6](06-identity-trust-standards.md) · [9](09-status-and-preparation.md) | [연결 상태](../RELEASES/2026.09/compatibility.md) · [연결 지도](../diagrams/connections.md) · [표준 층](../diagrams/standards.md) · [신원 허브](../diagrams/identity-hub.md) · [연동 계약 지도](../integration/) |
-| **보건 당국 · 국제 협력 기관** | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [1](01-one-sentence.md) · [3](03-layers-and-systems.md) · [9](09-status-and-preparation.md) · [10](10-terms.md) | [README 「개발도상국에서도 세울 수 있는 수준으로」](../README.md#개발도상국에서도-세울-수-있는-수준으로) · [구축 가이드 「시작 전에 알아야 할 것」](../build-guide/README.md#시작-전에-알아야-할-것--요구사항-요약) · [THIRD_PARTY §4 코드 마스터](../THIRD_PARTY.md#4-코드-마스터기준-데이터) |
+| **보건 당국 · 국제 협력 기관** | 자원이 적은 지역에 세울 수 있나? 무엇을 현지에서 준비해야 하나? | [1](01-one-sentence.md) · [3](03-layers-and-systems.md) · [9](09-status-and-preparation.md) · [10](10-terms.md) | [README 「개발도상국에서도 세울 수 있는 수준으로」](../ABOUT.md#개발도상국에서도-세울-수-있는-수준으로) · [구축 가이드 「시작 전에 알아야 할 것」](../build-guide/README.md#시작-전에-알아야-할-것--요구사항-요약) · [THIRD_PARTY §4 코드 마스터](../THIRD_PARTY.md#4-코드-마스터기준-데이터) |
 
 - "구축 규모와 비용"은 아직 계측이 없어 수치로 답하지 못합니다. 지금 말할 수 있는 것은 [3장 「서버는 얼마나 필요한가」](03-layers-and-systems.md#서버는-얼마나-필요한가--지금-말할-수-있는-것)와 [9장](09-status-and-preparation.md)의 준비 목록입니다.
 - "무엇이 검증됐나"의 답은 지금 **`검증됨` 27** — 목록은 [따라가 본 결과](../build-guide/follow-along-2026-09.md#실제로-호출해-검증됨-을-붙인-연결) 한 곳에 있습니다 → [9장](09-status-and-preparation.md#연결-상태-합계).

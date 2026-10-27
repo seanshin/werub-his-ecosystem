@@ -1,9 +1,9 @@
-<!-- 이 문서는 README 의 「따라가 본 결과」 절을 옮겨 온 것입니다. 요약은 [README](../README.md#새-설치본으로-따라가-본-결과--요약). -->
+<!-- 이 문서는 README 의 「따라가 본 결과」 절을 옮겨 온 것입니다. 요약은 [README](../ABOUT.md#새-설치본으로-따라가-본-결과--요약). -->
 
 # 새 설치본으로 따라가 본 결과
 **What a first follow-along install showed (2026-09-13 ~ 2026-09-16)**
 
-> [구축 가이드 목차](README.md) · [README 요약](../README.md#새-설치본으로-따라가-본-결과--요약) · 연결별 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md)
+> [구축 가이드 목차](README.md) · [README 요약](../ABOUT.md#새-설치본으로-따라가-본-결과--요약) · 연결별 확인일은 [연결 상태](../RELEASES/2026.09/compatibility.md)
 
 > **EN** — Each system was unpacked from its **pinned base commit** and installed from its own production container files on **one development PC** (Apple Silicon arm64, 8 GB VM, **no GPU**) inside a network that **could not reach the outside**. Calls were made **only between these new installs** — no production server was called. Result: **27 of 113 connections are now `검증됨` (verified)** with a date; 23 of them were also tested by **deliberately injecting a fault** (tampered tokens, wrong keys, forged webhook signatures, replays, mismatched targets). Many production install files **did not work as-is** (build memory, missing dependencies, schema commands, loopback-only binding, a missing sentinel service); every workaround is written into the stage chapters. Not done yet: x86/GPU reference hardware and throughput, real-data volumes, the actual switch to *real* mode, PACS worklist/viewer completion, Clinic and Jitsi installs.
 
@@ -89,7 +89,7 @@ ERP → AI 공시 검색도 AI 주소가 코드에 고정돼, 원내 AI 로 설�
 
 ### 장비 · 디스크 참고 (기준 장비 아님)
 
-> 요약과 "무엇이 비용을 만드는가"는 [README 「규모 — 지금 말할 수 있는 것」](../README.md#규모--지금-말할-수-있는-것)에 있습니다. 아래는 그 근거가 된 실측입니다.
+> 요약과 "무엇이 비용을 만드는가"는 [README 「규모 — 지금 말할 수 있는 것」](../ABOUT.md#규모--지금-말할-수-있는-것)에 있습니다. 아래는 그 근거가 된 실측입니다.
 
 
 - 여러 시스템을 함께 띄운 조합(HIS · ERP · PACS 코어 · AI Server + 작은 모델)에서 가상 머신 메모리 사용은 약 **2.9GB** 였습니다(가상 데이터 · 사용자 없음 · 2026-09-15).

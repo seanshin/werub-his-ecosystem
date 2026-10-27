@@ -14,18 +14,18 @@
 
 | 시스템 | 공개판 저장소 | 상태 | 기준 판 | 구축 단계 |
 |---|---|---|---|---|
-| HIS | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S1](build-guide/S1-core-his.md) |
-| 공개 홈페이지 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
-| 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
+| HIS | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S1](build-guide/S1-core-his.md) |
+| 공개 홈페이지 | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
+| 환자 앱 | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
 | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` — 코드는 기준 커밋과 같음 — 기준 커밋은 그 뒤 운영 기록 문서만 더했다 | [S4](build-guide/S4-trust.md) |
 | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.2` · `7b8a549619f1` — 기준 커밋과 같음 | [S3](build-guide/S3-clinical-departments.md) |
-| ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 준비 중 | — | [S5](build-guide/S5-management.md) |
-| PACS | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) | 준비 중 | — | [S3](build-guide/S3-clinical-departments.md) |
+| ERP | `seanshin/werub-erp` · 준비 중 | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| PACS | `seanshin/werub-pacs` · 준비 중 | 준비 중 | — | [S3](build-guide/S3-clinical-departments.md) |
 | AI Server | [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) | 🟢 공개(2026-10-27) | `v2.125.73` · `c012ac37e057` — 현재 개발본(새 설치는 이 판을 받습니다 · 원본에 태그가 없어 코드 버전으로 표기) | [S6](build-guide/S6-ai.md) |
 | twin | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) | 🟢 공개(2026-10-26) | `v1.20.72-19-g526b4f9` · `7a25b11232c2` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 | cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8-public.2` · `9b34828d4d62` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 | edu | [seanshin/werub-edu](https://github.com/seanshin/werub-edu) | 🟢 공개(2026-10-26) | `v2.7.0` · `1808f0c3eb8b` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
-| Clinic | [seanshin/werub-clinic](https://github.com/seanshin/werub-clinic) | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| Clinic | `seanshin/werub-clinic` · 준비 중 | 준비 중 | — | [S5](build-guide/S5-management.md) |
 | Jitsi | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) | 🟢 공개(2026-10-26) | `v2.10.0-9-g0984fbe` · `6d41dfc9dd40` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 
 **HIS · 공개 홈페이지 · 환자 앱은 한 저장소**입니다(모노레포). 나머지는 시스템마다 저장소가 하나입니다 — 저장소 **11개**로 시스템 **13개**가 됩니다.

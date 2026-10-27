@@ -13,7 +13,7 @@
 ## 1. 정체성과 계층
 
 - **정의**: 영상 서버(Orthanc) · 웹 뷰어 · 판독 워크플로 · 관리 화면 · AI 연동을 갖춘 웹 PACS 입니다. 모달리티 워크리스트와 HL7 v2 오더 수신으로 검사 흐름을 잇고, 판독 서명은 sign 에 맡깁니다.
-- **계층**: ③ 임상 부서. 구축 단계로는 [S3 임상 부서](../README.md#구축은-이렇게-진행됩니다)에서 붙입니다. 이미 쓰는 PACS 가 있으면 이 PACS 대신 표준 프로토콜로 연결하는 선택도 있습니다.
+- **계층**: ③ 임상 부서. 구축 단계로는 [S3 임상 부서](../ABOUT.md#구축은-이렇게-진행됩니다)에서 붙입니다. 이미 쓰는 PACS 가 있으면 이 PACS 대신 표준 프로토콜로 연결하는 선택도 있습니다.
 - **로그인**: 직원은 **HIS 가 발급한 토큰을 공개키로 검증**해 들어옵니다(HIS 공통 SSO). 서비스 계정(LIS 연동 등)은 PACS 로그인을 씁니다. 역할 기반 접근 제어로 환자 정보를 돌려주는 조회를 임상 역할로 묶습니다.
 - **제3자 소스로 만든 부분**: 웹 뷰어는 OHIF Viewer(v3.12.0 태그) 소스를 받아 패치 · 자체 확장 · 한국어 번역을 얹어 빌드하고, Cornerstone3D 를 함께 묶습니다(둘 다 MIT). 영상 서버 Orthanc 와 플러그인은 GPL · AGPL 계열이며 별도 컨테이너로 씁니다([THIRD_PARTY](../THIRD_PARTY.md)).
 - **버전 표기**: 코드에 버전 선언이 없어 릴리즈 기록 파일명의 가장 높은 번호(v13.48)를 정본으로 씁니다. 마지막 태그는 v11.2 이고, 관리 화면 패키지와 백엔드 API 문서는 2.0.0 을 내보냅니다(매니페스트 등급 `주요`).
@@ -229,7 +229,7 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) — 공개판 저장소 준비 중(들어갈 자리 [`source/pacs`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md)) |
+| 소스 링크 | `seanshin/werub-pacs` — 공개판 저장소 준비 중(들어갈 자리 [`source/pacs`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — Orthanc(GPL · AGPL) · OHIF · Cornerstone3D(MIT) · PostgreSQL · Redis · nginx · Prometheus · Grafana · exporter |
 | 기준 커밋 | `532a8ed13e87` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |

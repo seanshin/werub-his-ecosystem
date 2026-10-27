@@ -174,4 +174,4 @@ sequenceDiagram
 
 ## 근거
 
-[연결 상태 표](../RELEASES/2026.09/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [Clinic](../systems/clinic.md) · [AI Server](../systems/ai-server.md) · 릴리즈 요약 [HIS](../RELEASES/2026.09/systems/his.md) · [AI Server](../RELEASES/2026.09/systems/ai-server.md) · [PACS](../RELEASES/2026.09/systems/pacs.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+[연결 상태 표](../RELEASES/2026.09/compatibility.md) · [HIS 메뉴 구성](../systems/his-domains.md) · 시스템 구성서 [HIS](../systems/his.md) · [LIS](../systems/lis.md) · [PACS](../systems/pacs.md) · [sign](../systems/sign.md) · [Clinic](../systems/clinic.md) · [AI Server](../systems/ai-server.md) · 릴리즈 요약 [HIS](../RELEASES/2026.09/systems/his.md) · [AI Server](../RELEASES/2026.09/systems/ai-server.md) · [PACS](../RELEASES/2026.09/systems/pacs.md) · [사람 결정 체크리스트](../checklist/decisions.md) · [개시 점검](../checklist/go-live.md) · [README 「지금 알고 시작해야 할 것」](../ABOUT.md#지금-알고-시작해야-할-것)

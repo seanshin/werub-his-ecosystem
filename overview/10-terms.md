@@ -3,7 +3,7 @@
 > 🟡 초안 — 시스템 담당 확인 전 · **새 설치본 따라가기 1차 완료**(2026-09-13~16) · 기준: [RELEASES/2026.09 매니페스트](../RELEASES/2026.09/manifest.md)
 > [개요서 목차](README.md) · ← [9. 지금 구현 상태와 구축 기관이 준비할 것](09-status-and-preparation.md) · 다음 → [11. 다음 읽을 것](11-next.md)
 
-> **EN** — What you may do with this, in three layers: ① **this repository is MIT**; ② the ecosystem's own code is **intended** to be MIT, but the individual source repositories have not finished sorting out their licence statements; ③ **MIT does not cover** the third-party servers, modified third-party code, AI model weights and national code masters the ecosystem runs alongside — each carries its own terms. The medical disclaimer is summarised in five points, beginning with **this is not a medical device in any jurisdiction** and **conformity assessment and regulatory approval are the deploying institution's responsibility**. 🔴 This chapter is not a legal review: it repeats licence names, what the upstream text itself says, and where to find it — nothing further.
+> **EN** — What you may do with this, in three layers: ① **this repository is MIT**; ② the ecosystem's own code is published as **MIT public editions**, one repository at a time; ③ **MIT does not cover** the third-party servers, modified third-party code, AI model weights and national code masters the ecosystem runs alongside — each carries its own terms. The medical disclaimer is summarised in five points, beginning with **this is not a medical device in any jurisdiction** and **conformity assessment and regulatory approval are the deploying institution's responsibility**. 🔴 This chapter is not a legal review: it repeats licence names, what the upstream text itself says, and where to find it — nothing further.
 
 ---
 
@@ -14,7 +14,7 @@
 | 겹 | 무엇 | 조건 |
 |---|---|---|
 | ① 이 저장소 | 소개 · 구축 자료 | [MIT](../LICENSE) · Copyright (c) 2026 Sean Shin (신현묵) |
-| ② 생태계 소프트웨어 | 13개 시스템의 자체 코드 | MIT 로 제공하는 것이 목표입니다. **각 소스 저장소의 라이선스 표기는 아직 MIT 로 정리되지 않았습니다**(아래) |
+| ② 생태계 소프트웨어 | 13개 시스템의 자체 코드 | **공개판 저장소는 MIT** 로 엽니다(저장소마다 `LICENSE` · 하나씩 공개 중 — [소스 받기](../SOURCES.md)). 통합 릴리즈 매니페스트의 라이선스 칸은 개발 저장소 기준 커밋의 표기를 기록한 것입니다 |
 | ③ MIT 가 덮지 않는 것 | 제3자 서버 · 고쳐 쓰는 제3자 코드 · AI 모델 가중치 · 코드 마스터 | **각자의 조건**을 따릅니다([THIRD_PARTY.md](../THIRD_PARTY.md)) |
 
 그리고 이 모두에 [의료 면책 고지](../DISCLAIMER.md)가 붙습니다.
@@ -87,7 +87,7 @@ PACS 웹 뷰어는 OHIF Viewer 와 Cornerstone3D(둘 다 MIT)를 받아 함께 �
 
 ## 구축 기관이 할 일 — 요약
 
-- [ ] 받으려는 소스 저장소의 라이선스 표기를 확인합니다(아직 MIT 로 정리되지 않았습니다)
+- [ ] 받으려는 소스가 공개판 저장소(MIT)인지, 그 저장소의 `PUBLIC-EDITION.md`(직접 정할 값 · 보안 설정)를 확인합니다
 - [ ] [THIRD_PARTY.md](../THIRD_PARTY.md)의 「한눈에」 표와 각 절의 원문을 법무와 함께 봅니다 — 특히 AGPL · GPL 서버, Redis 판본, browserless 용도
 - [ ] 받을 AI 모델마다 약관 원문을 읽고, 약관 확인 주체를 정합니다
 - [ ] 코드 마스터 배포 기관별 이용 조건을 확인하고, SNOMED CT 는 NRC 에 사용을 등록합니다

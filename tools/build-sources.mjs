@@ -41,6 +41,12 @@ const ENTRY_CANDIDATES = [
   'gunicorn.conf.py', 'requirements.txt', 'README.md',
 ];
 
+
+// 공개판 저장소 표기 — 🔴 공개된 곳만 링크한다(아직 없는 저장소로 거는 링크는 404 다 · 2026-10-27 README 에서 실제로 그랬다)
+function repoRef(p) {
+  return p.status === '공개' ? `[${p.repo}](https://github.com/${p.repo})` : `\`${p.repo}\` · 준비 중`;
+}
+
 function entries(dir, commit) {
   const found = [];
   for (const f of ENTRY_CANDIDATES) {
@@ -102,7 +108,7 @@ function build() {
     const ver = r.pub.status === '공개'
       ? `\`${r.pub.tag}\` · \`${r.pub.commit.slice(0, 12)}\`${r.pub.fromBase ? ' — 기준 커밋과 같음' : r.pub.note ? ` — ${r.pub.note}` : ''}`
       : '—';
-    L.push(`| ${r.label} | [${r.link.replace('https://github.com/', '')}](${r.link}) | ${st} | ${ver} | [${r.stage}](build-guide/${STAGE[r.stage]}.md) |`);
+    L.push(`| ${r.label} | ${repoRef(r.pub)} | ${st} | ${ver} | [${r.stage}](build-guide/${STAGE[r.stage]}.md) |`);
   }
   L.push('');
   const repoCount = new Set(SYSTEMS.map((s) => repoKey(s[0]))).size;
@@ -196,7 +202,7 @@ function buildSourceIndex() {
     const folder = open ? `[\`source/${k}\`](${k})` : `\`source/${k}\``;
     const st = open ? `🟢 공개(${p.openedAt})` : '준비 중';
     const ver = open ? `\`${p.tag}\` · \`${p.commit.slice(0, 12)}\`` : '—';
-    L.push(`| ${folder} | ${LABEL[k]} | [${p.repo}](https://github.com/${p.repo}) | ${st} | ${ver} |`);
+    L.push(`| ${folder} | ${LABEL[k]} | ${repoRef(p)} | ${st} | ${ver} |`);
   }
   L.push('');
   L.push('```sh');
@@ -214,20 +220,82 @@ function buildSourceIndex() {
   L.push('');
   return L.join('\n');
 }
+
+// README 「시스템 13」 표 — 상태 파일에서 만든다(소스 칸을 손으로 쓰지 않는다)
+const README = path.join(ROOT, 'README.md');
+const RM_START = '<!-- 시스템 표: 생성물 시작 — tools/build-sources.mjs 가 data/public-sources.json 에서 만든다. 손으로 고치지 않는다 -->';
+const RM_END = '<!-- 시스템 표: 생성물 끝 -->';
+const SYS_ROWS = [
+  ['코어', 'HIS', 'his', '외래 · 입원 · 수술 · 응급 · 검사 · 약제 · 검진 · 원무를 묶는 병원 업무의 중심 · 생태계의 신원 허브', 'his'],
+  ['환자 접점', '공개 홈페이지', 'his', '병원 소개 · 예약 · 안내 — 환자가 처음 만나는 바깥 창구', 'homepage'],
+  ['환자 접점', '환자 앱', 'his', '예약 · 결과 열람 · 동의 · 문진을 환자 손안에서', 'patient-app'],
+  ['임상 부서', 'LIS', 'lis', '진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사정보시스템', 'lis'],
+  ['임상 부서', 'PACS', 'pacs', '영상 저장 · 뷰어 · 판독 워크플로', 'pacs'],
+  ['신뢰', 'sign', 'sign', '자체 PKI · 타임스탬프 · 장기 검증 전자서명', 'sign'],
+  ['경영', 'ERP', 'erp', '재무회계 · 원가 · 인사급여 · 자재 · 보험청구', 'erp'],
+  ['AI', 'AI Server', 'ai-server', '기관 안 GPU 한 장으로 도는 AI — 분류 · 요약 · DUR · RAG · 음성 인식 보조', 'ai-server'],
+  ['AI', 'twin', 'twin', '환자 · 병원 운영의 위험을 미리 보여 주는 디지털 트윈', 'twin'],
+  ['AI', 'cerno', 'cerno', '근거가 있을 때만 답하는 의료진별 임상 질의 도우미', 'cerno'],
+  ['협업 · 교육', 'Clinic', 'clinic', '인수인계 · 근무표 · 알림 · 결재 그룹웨어', 'clinic'],
+  ['협업 · 교육', 'edu', 'edu', '직원 이러닝 · 법정교육 · 전자 이수증', 'edu'],
+  ['협업 · 교육', 'Jitsi', 'jitsi', '원격진료 화상(자체 호스팅)', 'jitsi'],
+];
+function buildReadmeSystems() {
+  const pub = read('data/public-sources.json').repos;
+  const L = [RM_START, '', '| 계층 | 시스템 | 하는 일 | 소개서 | 소스 |', '|---|---|---|---|---|'];
+  for (const [layer, label, rk, what, intro] of SYS_ROWS) {
+    const p = pub[rk];
+    const src = p.status === '공개' ? `[${p.repo.replace('seanshin/', '')}](https://github.com/${p.repo}) \`${p.tag}\`` : '준비 중';
+    L.push(`| ${layer} | **${label}** | ${what} | [소개서](projects/${intro}.md) | ${src} |`);
+  }
+  const opened = Object.values(pub).filter((p) => p.status === '공개').length;
+  L.push('', `소스는 시스템마다 **공개판 저장소**(MIT)로 하나씩 엽니다 — 지금 **${opened}/${Object.keys(pub).length}곳**. HIS · 공개 홈페이지 · 환자 앱은 한 저장소입니다. 받는 법과 기준 판은 [소스 받기](SOURCES.md), 공개판에서 무엇을 뺐는지는 각 저장소의 \`PUBLIC-EDITION.md\` 에 있습니다.`, '', RM_END);
+  return L.join('\n');
+}
+function withReadmeSystems(cur) {
+  const a = cur.indexOf(RM_START), b = cur.indexOf(RM_END);
+  if (a < 0 || b < 0) throw new Error('README 에 시스템 표 표시가 없다');
+  return cur.slice(0, a) + buildReadmeSystems() + cur.slice(b + RM_END.length);
+}
+// 🔴 저장소 전체 — 아직 없는 공개판 저장소로 거는 링크 · 맨 주소가 있으면 실패
+function deadRepoLinks() {
+  const pub = read('data/public-sources.json').repos;
+  const closed = Object.values(pub).filter((p) => p.status !== '공개').map((p) => p.repo);
+  const bad = [];
+  // 🔴 한글 파일 이름은 기본 출력에서 따옴표로 감싸져 열리지 않는다 — quotePath=false · -z
+  const files = execFileSync('git', ['-c', 'core.quotePath=false', 'ls-files', '-z', '*.md', '**/*.md'], { cwd: ROOT, encoding: 'utf8' }).split('\0').filter((f) => f && !f.startsWith('source/'));
+  for (const f of new Set(files)) {
+    const t = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    for (const r of closed) {
+      const re = new RegExp(`https?://github\\.com/${r.replace('/', '\\/')}(?![\\w-])`, 'g');
+      for (const m of t.matchAll(re)) bad.push(`${f}:${t.slice(0, m.index).split('\n').length} → ${r}`);
+    }
+  }
+  return bad;
+}
+
 const IDX = path.join(ROOT, 'source', 'README.md');
 const made = build();
 if (made === null) { console.log('미실행 — tools/.local.json 이 없어 저장소를 확인할 수 없습니다'); process.exit(3); }
 let madeIdx;
 try { madeIdx = buildSourceIndex(); } catch (e) { console.log(`실패 — ${e.message}`); process.exit(1); } // 🔴 상태 ↔ 하위 모듈 대조를 무엇보다 먼저(쓰기 전에)
+const curRm = fs.readFileSync(README, 'utf8');
+let madeRm;
+try { madeRm = withReadmeSystems(curRm); } catch (e) { console.log(`실패 — ${e.message}`); process.exit(1); }
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
   if (cur !== made) { console.log('불일치 — SOURCES.md 가 다시 만든 결과와 다르다. node tools/build-sources.mjs 로 다시 만든다.'); process.exit(1); }
   const curIdx = fs.existsSync(IDX) ? fs.readFileSync(IDX, 'utf8') : '';
   if (curIdx !== madeIdx) { console.log('불일치 — source/README.md 가 다시 만든 결과와 다르다. node tools/build-sources.mjs 로 다시 만든다.'); process.exit(1); }
-  console.log('일치 — SOURCES.md · source/README.md');
+  if (curRm !== madeRm) { console.log('불일치 — README 시스템 표가 다시 만든 결과와 다르다. node tools/build-sources.mjs 로 다시 만든다.'); process.exit(1); }
+  const dead = deadRepoLinks();
+  if (dead.length) { console.log(`실패 — 아직 없는 공개판 저장소로 거는 주소 ${dead.length}곳(링크하지 말고 「준비 중」으로):`); dead.slice(0, 20).forEach((d) => console.log(`  ${d}`)); process.exit(1); }
+  console.log('일치 — SOURCES.md · source/README.md · README 시스템 표 · 없는 저장소 링크 0');
   process.exit(0);
 }
 fs.writeFileSync(OUT, made);
 fs.mkdirSync(path.dirname(IDX), { recursive: true });
 fs.writeFileSync(IDX, madeIdx);
+fs.writeFileSync(README, madeRm);
+{ const dead = deadRepoLinks(); if (dead.length) { console.log(`⚠ 아직 없는 공개판 저장소로 거는 주소 ${dead.length}곳:`); dead.slice(0, 20).forEach((d) => console.log(`  ${d}`)); } }
 console.log(`SOURCES.md 생성 — 시스템 ${SYSTEMS.length} · 저장소 ${new Set(SYSTEMS.map((s) => repoKey(s[0]))).size}`);

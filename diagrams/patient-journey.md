@@ -5,7 +5,7 @@
 
 > **EN** — One patient's path from booking to remote follow-up, and which system carries each step. It is drawn so you can see where a step crosses a system boundary — those crossings are the connections the status table judges.
 
-근거: [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · 상태는 [`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 대외 청구 전송은 [README 「지금 알고 시작해야 할 것」](../README.md#지금-알고-시작해야-할-것)
+근거: [ROADMAP §3 관통 흐름 1](../ROADMAP.md#3-관통-흐름--시스템-경계를-넘어-한-줄로-읽히는-것) · 상태는 [`RELEASES/2026.09/compatibility.md`](../RELEASES/2026.09/compatibility.md)(판정 2026-09-11 · 코드 대조 + 새 설치본 실호출 27개(2026-09-14~15 · 확인일 칸)) · 대외 청구 전송은 [README 「지금 알고 시작해야 할 것」](../ABOUT.md#지금-알고-시작해야-할-것)
 
 ```mermaid
 sequenceDiagram

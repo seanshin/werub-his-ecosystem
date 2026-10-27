@@ -173,9 +173,16 @@ function build(repos) {
 function renderMd(m) {
   const rows = Object.entries(m.systems).map(([k, s]) => {
     const mm = s.version.mismatches;
+    // 소스 칸 — 🔴 공개된 공개판 저장소만 주소로 적는다(맨 주소도 GitHub 이 링크로 바꿔 404 가 된다)
+    const srcCell = (link) => {
+      if (!link) return '정리 중';
+      const repo = link.replace('https://github.com/', '');
+      const pub = Object.values(JSON.parse(fs.readFileSync(path.join(ROOT, 'data/public-sources.json'), 'utf8')).repos).find((p) => p.repo === repo);
+      return pub && pub.status === '공개' ? link : `\`${repo}\` · 준비 중`;
+    };
     const major = mm.items.filter((i) => i.differs && i.grade === '주요').map((i) => `${i.kind} ${i.value}`).join(' · ');
     const lic = s.license.declared.map((d) => d.kind).join(' · ');
-    return `| ${s.name} | \`${s.version.value}\` | ${mm.grade}${major ? ` (${major})` : ''} | \`${s.baseCommit.hash.slice(0, 12)}\` · ${s.baseCommit.date} | ${s.releaseDate.value ?? '—'}${s.releaseDate.commitsAfter ? ` (+${s.releaseDate.commitsAfter}커밋)` : ''} | ${lic} | ${s.status.value}${s.status.note ? ` — ${s.status.note}` : ''} | ${s.source.link ?? '정리 중'} |`;
+    return `| ${s.name} | \`${s.version.value}\` | ${mm.grade}${major ? ` (${major})` : ''} | \`${s.baseCommit.hash.slice(0, 12)}\` · ${s.baseCommit.date} | ${s.releaseDate.value ?? '—'}${s.releaseDate.commitsAfter ? ` (+${s.releaseDate.commitsAfter}커밋)` : ''} | ${lic} | ${s.status.value}${s.status.note ? ` — ${s.status.note}` : ''} | ${srcCell(s.source.link)} |`;
   });
   return [
     '<!-- 생성물 — 직접 수정 금지. `node tools/build-manifest.mjs` 로 다시 만듭니다. -->',
