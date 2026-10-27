@@ -37,7 +37,7 @@
 | 코어 | **HIS** | 외래 · 입원 · 수술 · 응급 · 검사 · 약제 · 검진 · 원무를 묶는 병원 업무의 중심 · 생태계의 신원 허브 | [소개서](projects/his.md) | 준비 중 |
 | 환자 접점 | **공개 홈페이지** | 병원 소개 · 예약 · 안내 — 환자가 처음 만나는 바깥 창구 | [소개서](projects/homepage.md) | 준비 중 |
 | 환자 접점 | **환자 앱** | 예약 · 결과 열람 · 동의 · 문진을 환자 손안에서 | [소개서](projects/patient-app.md) | 준비 중 |
-| 임상 부서 | **LIS** | 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사정보시스템 | [소개서](projects/lis.md) | [werub-lis](https://github.com/seanshin/werub-lis) `v1.56.18-public.2` |
+| 임상 부서 | **LIS** | 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사정보시스템 | [소개서](projects/lis.md) | [werub-lis](https://github.com/seanshin/werub-lis) `v1.56.18-public.3` |
 | 임상 부서 | **PACS** | 영상 저장 · 뷰어 · 판독 워크플로 | [소개서](projects/pacs.md) | [werub-pacs](https://github.com/seanshin/werub-pacs) `v13.48` |
 | 신뢰 | **sign** | 자체 PKI · 타임스탬프 · 장기 검증 전자서명 | [소개서](projects/sign.md) | [werub-sign](https://github.com/seanshin/werub-sign) `v1.30.1` |
 | 경영 | **ERP** | 재무회계 · 원가 · 인사급여 · 자재 · 보험청구 | [소개서](projects/erp.md) | 준비 중 |

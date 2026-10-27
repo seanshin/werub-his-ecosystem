@@ -10,9 +10,9 @@
 |---|---|---|---|---|
 | `source/his` | HIS · 공개 홈페이지 · 환자 앱 | `seanshin/werub-his` · 준비 중 | 준비 중 | — |
 | [`source/sign`](sign) | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` |
-| [`source/lis`](lis) | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.2` · `7b8a549619f1` |
+| [`source/lis`](lis) | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.3` · `a83e9d14d281` |
 | `source/erp` | ERP | `seanshin/werub-erp` · 준비 중 | 준비 중 | — |
-| [`source/pacs`](pacs) | PACS | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) | 🟢 공개(2026-10-27) | `v13.48` · `e106ac8c1a52` |
+| [`source/pacs`](pacs) | PACS | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) | 🟢 공개(2026-10-27) | `v13.48` · `721c7ea5dabc` |
 | [`source/ai-server`](ai-server) | AI Server | [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) | 🟢 공개(2026-10-27) | `v2.125.73` · `c012ac37e057` |
 | [`source/twin`](twin) | twin | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) | 🟢 공개(2026-10-26) | `v1.20.72-19-g526b4f9` · `7a25b11232c2` |
 | [`source/cerno`](cerno) | cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8-public.2` · `9b34828d4d62` |

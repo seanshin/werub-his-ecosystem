@@ -19,8 +19,8 @@
       "repo": "seanshin/werub-lis",
       "status": "공개",
       "openedAt": "2026-10-15",
-      "tag": "v1.56.18-public.2",
-      "commit": "7b8a549619f19c3a3c4d21a220c5b75b8caf6d18",
+      "tag": "v1.56.18-public.3",
+      "commit": "a83e9d14d2819e001a7458a983dd6711b0d4cd73",
       "fromBase": true,
       "license": "MIT"
     },
@@ -33,7 +33,7 @@
       "status": "공개",
       "openedAt": "2026-10-27",
       "tag": "v13.48",
-      "commit": "e106ac8c1a528154b7ed56cb135dd9d402d04859",
+      "commit": "721c7ea5dabcf2f2e23680aef7c6ecebcaef2568",
       "fromBase": true,
       "note": "원본 태그는 v11.2 까지 — 릴리즈 노트 최고 번호로 표기 · 릴리즈 노트 본문은 운영 기록이 섞여 빼고 버전 · 날짜 · 주제 목록만 실었습니다",
       "license": "MIT"
