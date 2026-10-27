@@ -16,3 +16,6 @@
 [submodule "source/jitsi"]
 	path = source/jitsi
 	url = https://github.com/seanshin/werub-jitsi.git
+[submodule "source/ai-server"]
+	path = source/ai-server
+	url = https://github.com/seanshin/werub-ai-server.git

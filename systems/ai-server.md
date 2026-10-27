@@ -183,7 +183,7 @@ flowchart LR
 
 ## 11. 소스 · 라이선스 표기 · 확인일
 
-- **소스 링크**: [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) — 공개판 저장소 준비 중(들어갈 자리 [`source/ai-server`](../source/README.md) · 정리가 끝나는 대로 엽니다 · [소스 받기](../SOURCES.md))
+- **소스 링크**: [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) — 🟢 공개(2026-10-27 · 공개판 `v2.125.73` = 현재 개발본 · MIT · 이 저장소의 [`source/ai-server`](../source/ai-server) · [소스 받기](../SOURCES.md))
 - **저장소 라이선스 표기**: 독점 · 독점 — [매니페스트](../RELEASES/2026.09/manifest.md) 기준(생태계 소프트웨어는 MIT 로 제공하는 것이 목표이며 표기는 정리 중입니다)
 - **제3자 구성요소 · 모델 약관**: [THIRD_PARTY.md](../THIRD_PARTY.md) — Ollama(MIT) · ChromaDB(Apache-2.0) · 모델 가중치(모델마다 별도 약관)
 - **확인일**: 2026-09-11 — 기준 커밋 `55acaee90068` 의 코드 · 설정 예시 · 저장소 문서를 읽어 작성했습니다

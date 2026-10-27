@@ -34,7 +34,13 @@
     },
     "ai-server": {
       "repo": "seanshin/werub-ai-server",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-27",
+      "tag": "v2.125.73",
+      "commit": "c012ac37e057435c1c300d359d85dcc1ec5ace6c",
+      "fromBase": false,
+      "note": "현재 개발본(새 설치는 이 판을 받습니다 · 원본에 태그가 없어 코드 버전으로 표기)",
+      "license": "MIT"
     },
     "twin": {
       "repo": "seanshin/werub-twin",
