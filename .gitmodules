@@ -19,3 +19,6 @@
 [submodule "source/ai-server"]
 	path = source/ai-server
 	url = https://github.com/seanshin/werub-ai-server.git
+[submodule "source/pacs"]
+	path = source/pacs
+	url = https://github.com/seanshin/werub-pacs.git

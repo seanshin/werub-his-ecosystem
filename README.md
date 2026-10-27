@@ -38,7 +38,7 @@
 | 환자 접점 | **공개 홈페이지** | 병원 소개 · 예약 · 안내 — 환자가 처음 만나는 바깥 창구 | [소개서](projects/homepage.md) | 준비 중 |
 | 환자 접점 | **환자 앱** | 예약 · 결과 열람 · 동의 · 문진을 환자 손안에서 | [소개서](projects/patient-app.md) | 준비 중 |
 | 임상 부서 | **LIS** | 진단검사 · 미생물 · 병리 · 수혈 · 유전체 검사정보시스템 | [소개서](projects/lis.md) | [werub-lis](https://github.com/seanshin/werub-lis) `v1.56.18-public.2` |
-| 임상 부서 | **PACS** | 영상 저장 · 뷰어 · 판독 워크플로 | [소개서](projects/pacs.md) | 준비 중 |
+| 임상 부서 | **PACS** | 영상 저장 · 뷰어 · 판독 워크플로 | [소개서](projects/pacs.md) | [werub-pacs](https://github.com/seanshin/werub-pacs) `v13.48` |
 | 신뢰 | **sign** | 자체 PKI · 타임스탬프 · 장기 검증 전자서명 | [소개서](projects/sign.md) | [werub-sign](https://github.com/seanshin/werub-sign) `v1.30.1` |
 | 경영 | **ERP** | 재무회계 · 원가 · 인사급여 · 자재 · 보험청구 | [소개서](projects/erp.md) | 준비 중 |
 | AI | **AI Server** | 기관 안 GPU 한 장으로 도는 AI — 분류 · 요약 · DUR · RAG · 음성 인식 보조 | [소개서](projects/ai-server.md) | [werub-ai-server](https://github.com/seanshin/werub-ai-server) `v2.125.73` |
@@ -48,7 +48,7 @@
 | 협업 · 교육 | **edu** | 직원 이러닝 · 법정교육 · 전자 이수증 | [소개서](projects/edu.md) | [werub-edu](https://github.com/seanshin/werub-edu) `v2.7.0` |
 | 협업 · 교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | [소개서](projects/jitsi.md) | [werub-jitsi](https://github.com/seanshin/werub-jitsi) `v2.10.0-9-g0984fbe` |
 
-소스는 시스템마다 **공개판 저장소**(MIT)로 하나씩 엽니다 — 지금 **7/11곳**. HIS · 공개 홈페이지 · 환자 앱은 한 저장소입니다. 받는 법과 기준 판은 [소스 받기](SOURCES.md), 공개판에서 무엇을 뺐는지는 각 저장소의 `PUBLIC-EDITION.md` 에 있습니다.
+소스는 시스템마다 **공개판 저장소**(MIT)로 하나씩 엽니다 — 지금 **8/11곳**. HIS · 공개 홈페이지 · 환자 앱은 한 저장소입니다. 받는 법과 기준 판은 [소스 받기](SOURCES.md), 공개판에서 무엇을 뺐는지는 각 저장소의 `PUBLIC-EDITION.md` 에 있습니다.
 
 <!-- 시스템 표: 생성물 끝 -->
 

@@ -30,7 +30,13 @@
     },
     "pacs": {
       "repo": "seanshin/werub-pacs",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-27",
+      "tag": "v13.48",
+      "commit": "e106ac8c1a528154b7ed56cb135dd9d402d04859",
+      "fromBase": true,
+      "note": "원본 태그는 v11.2 까지 — 릴리즈 노트 최고 번호로 표기 · 릴리즈 노트 본문은 운영 기록이 섞여 빼고 버전 · 날짜 · 주제 목록만 실었습니다",
+      "license": "MIT"
     },
     "ai-server": {
       "repo": "seanshin/werub-ai-server",
