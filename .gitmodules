@@ -22,3 +22,6 @@
 [submodule "source/pacs"]
 	path = source/pacs
 	url = https://github.com/seanshin/werub-pacs.git
+[submodule "source/erp"]
+	path = source/erp
+	url = https://github.com/seanshin/werub-erp.git

@@ -26,7 +26,13 @@
     },
     "erp": {
       "repo": "seanshin/werub-erp",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-27",
+      "tag": "v1.306.1",
+      "commit": "0692e7cbcb0baa2e87cf08c1bbc2e4bf73d02be6",
+      "fromBase": false,
+      "note": "최신 태그 판 — 이 자료의 기준 커밋(태그 없음) 뒤 기능 릴리즈 19개가 더 들어 있습니다",
+      "license": "MIT"
     },
     "pacs": {
       "repo": "seanshin/werub-pacs",

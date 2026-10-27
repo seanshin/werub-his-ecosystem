@@ -2,9 +2,9 @@
 
 **Getting the source**
 
-> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 8 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
+> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 9 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
 
-> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **8/11곳** 공개.
+> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **9/11곳** 공개.
 >
 > 「준비 중」인 주소는 아직 열리지 않습니다.
 
@@ -19,7 +19,7 @@
 | 환자 앱 | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
 | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` — 코드는 기준 커밋과 같음 — 기준 커밋은 그 뒤 운영 기록 문서만 더했다 | [S4](build-guide/S4-trust.md) |
 | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.3` · `a83e9d14d281` — 기준 커밋과 같음 | [S3](build-guide/S3-clinical-departments.md) |
-| ERP | `seanshin/werub-erp` · 준비 중 | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 🟢 공개(2026-10-27) | `v1.306.1` · `0692e7cbcb0b` — 최신 태그 판 — 이 자료의 기준 커밋(태그 없음) 뒤 기능 릴리즈 19개가 더 들어 있습니다 | [S5](build-guide/S5-management.md) |
 | PACS | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) | 🟢 공개(2026-10-27) | `v13.48` · `721c7ea5dabc` — 기준 커밋과 같음 | [S3](build-guide/S3-clinical-departments.md) |
 | AI Server | [seanshin/werub-ai-server](https://github.com/seanshin/werub-ai-server) | 🟢 공개(2026-10-27) | `v2.125.73` · `c012ac37e057` — 현재 개발본(새 설치는 이 판을 받습니다 · 원본에 태그가 없어 코드 버전으로 표기) | [S6](build-guide/S6-ai.md) |
 | twin | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) | 🟢 공개(2026-10-26) | `v1.20.72-19-g526b4f9` · `7a25b11232c2` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |

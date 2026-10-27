@@ -15,7 +15,7 @@
 | 환자 앱 | `v4.18.0` | 표면 | `e9d303984f80` · 2026-09-11 | 2026-09-10 (+3커밋) | 독점 | 개발 — 스토어 미배포 | `seanshin/werub-his` · 준비 중 |
 | sign | `1.30.1` | 참고 | `93f56d839c3f` · 2026-09-10 | 2026-09-10 (+1커밋) | UNLICENSED(비공개 선언) | 통합 | https://github.com/seanshin/werub-sign |
 | LIS | `1.56.18` | 표면 | `ffb34e9d1dbc` · 2026-09-09 | 2026-09-09 (+1커밋) | 독점 · UNLICENSED(비공개 선언) · 독점 | 파일럿 | https://github.com/seanshin/werub-lis |
-| ERP | `1.287.3` | 참고 | `0e1f54c5b902` · 2026-09-10 | 2026-09-09 (+3커밋) | 표기 없음 | 파일럿 — 문서마다 운영·개발 표기가 엇갈려 재확인 대상 | `seanshin/werub-erp` · 준비 중 |
+| ERP | `1.287.3` | 참고 | `0e1f54c5b902` · 2026-09-10 | 2026-09-09 (+3커밋) | 표기 없음 | 파일럿 — 문서마다 운영·개발 표기가 엇갈려 재확인 대상 | https://github.com/seanshin/werub-erp |
 | PACS | `v13.48` | 주요 (태그 v11.2) | `532a8ed13e87` · 2026-09-10 | 2026-09-10 (+2커밋) | 독점 | 통합 | https://github.com/seanshin/werub-pacs |
 | AI Server | `2.125.41` | 주요 (태그 v2.8.0) | `55acaee90068` · 2026-09-09 | 2026-09-09 (+4커밋) | 독점 · 독점 | 통합 — 의료 기능 기준 — 비의료 기능은 이 생태계 범위 밖 | https://github.com/seanshin/werub-ai-server |
 | twin | `1.20.88` | 주요 (태그 v1.20.72) | `526b4f9a4d3f` · 2026-09-03 | 2026-09-03 (+1커밋) | 표기 없음 | 통합 | https://github.com/seanshin/werub-twin |
