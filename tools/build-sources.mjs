@@ -185,6 +185,14 @@ function buildSourceIndex() {
     if (!gm.includes(want) || !gm.includes(`url = https://github.com/${pub[k].repo}.git`)) throw new Error(`공개(${k})인데 하위 모듈이 없거나 주소가 다르다 — .gitmodules`);
   }
   for (const m of gm.matchAll(/path = source\/([\w-]+)/g)) if (pub[m[1]]?.status !== '공개') throw new Error(`하위 모듈 source/${m[1]} 이 있는데 상태가 「공개」가 아니다`);
+  // 하위 모듈이 실제로 가리키는 커밋(인덱스의 gitlink) = 상태 파일의 commit — 상태만 고치고 포인터를 안 옮기면
+  // 새로 받는 사람은 옛 판을 받는다(2026-10-29 PACS 포인터가 옛 판에 머문 채 올라간 일)
+  for (const k of opened) {
+    let link = '';
+    try { link = execFileSync('git', ['-C', ROOT, 'ls-files', '-s', `source/${k}`], { encoding: 'utf8' }).trim(); } catch { /* git 없음 */ }
+    const sha = (link.match(/^160000 ([0-9a-f]{40}) /) ?? [])[1];
+    if (sha && pub[k].commit && sha !== pub[k].commit) throw new Error(`source/${k} 하위 모듈 포인터(${sha.slice(0, 7)}) ≠ 상태 파일 commit(${pub[k].commit.slice(0, 7)}) — 하위 모듈을 옮기고 git add 하라`);
+  }
   const L = [];
   L.push('# source — 공개판 소스');
   L.push('');
