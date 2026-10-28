@@ -28,3 +28,6 @@
 [submodule "source/clinic"]
 	path = source/clinic
 	url = https://github.com/seanshin/werub-clinic.git
+[submodule "source/his"]
+	path = source/his
+	url = https://github.com/seanshin/werub-his.git

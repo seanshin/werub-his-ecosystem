@@ -95,7 +95,7 @@ function build() {
   L.push('');
   L.push(`> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (\`seanshin/werub-…\`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — ${opened.length} of ${repoRows.length} so far. An opened edition carries the original release tag, is linked as a submodule under \`source/\`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.`);
   L.push('');
-  L.push(`> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **${opened.length}/${repoRows.length}곳** 공개.\n>\n> 「준비 중」인 주소는 아직 열리지 않습니다.`);
+  L.push(`> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **${opened.length}/${repoRows.length}곳** 공개.${opened.length < repoRows.length ? "\n>\n> 「준비 중」인 주소는 아직 열리지 않습니다." : ""}`);
   L.push('');
   L.push('이 자료의 모든 수치 · 화면 · 연결 상태는 개발 저장소의 **기준 커밋**에서 읽은 것입니다. 공개판의 **기준 판**은 원본 태그를 그대로 쓰고, 같은 원본을 다시 내보내면 `-public.N` 을 붙입니다(공개된 이력은 다시 쓰지 않고 그 위에 커밋을 더합니다). 그 커밋과 같은 시점이면 표에 「기준 커밋과 같음」으로 적었습니다.');
   L.push('');
@@ -135,7 +135,7 @@ function build() {
   L.push('');
   L.push('## 3. 받은 뒤 처음 여는 파일');
   L.push('');
-  L.push('그 판에 **실제로 있는 파일만** 적었습니다 — 공개된 곳은 공개판에서, 준비 중인 곳은 개발 저장소의 기준 커밋에서 확인했습니다(준비 중인 곳은 공개판에서 빠질 수 있습니다).');
+  L.push(opened.length < repoRows.length ? '그 판에 **실제로 있는 파일만** 적었습니다 — 공개된 곳은 공개판에서, 준비 중인 곳은 개발 저장소의 기준 커밋에서 확인했습니다(준비 중인 곳은 공개판에서 빠질 수 있습니다).' : '그 판에 **실제로 있는 파일만** 적었습니다 — 모두 공개판에서 확인했습니다.');
   L.push('');
   L.push('| 저장소 | 처음 여는 파일 |');
   L.push('|---|---|');

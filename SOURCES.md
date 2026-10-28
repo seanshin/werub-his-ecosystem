@@ -2,11 +2,9 @@
 
 **Getting the source**
 
-> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 10 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
+> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 11 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
 
-> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **10/11곳** 공개.
->
-> 「준비 중」인 주소는 아직 열리지 않습니다.
+> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **11/11곳** 공개.
 
 이 자료의 모든 수치 · 화면 · 연결 상태는 개발 저장소의 **기준 커밋**에서 읽은 것입니다. 공개판의 **기준 판**은 원본 태그를 그대로 쓰고, 같은 원본을 다시 내보내면 `-public.N` 을 붙입니다(공개된 이력은 다시 쓰지 않고 그 위에 커밋을 더합니다). 그 커밋과 같은 시점이면 표에 「기준 커밋과 같음」으로 적었습니다.
 
@@ -14,9 +12,9 @@
 
 | 시스템 | 공개판 저장소 | 상태 | 기준 판 | 구축 단계 |
 |---|---|---|---|---|
-| HIS | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S1](build-guide/S1-core-his.md) |
-| 공개 홈페이지 | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
-| 환자 앱 | `seanshin/werub-his` · 준비 중 | 준비 중 | — | [S2](build-guide/S2-patient-access.md) |
+| HIS | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S1](build-guide/S1-core-his.md) |
+| 공개 홈페이지 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S2](build-guide/S2-patient-access.md) |
+| 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S2](build-guide/S2-patient-access.md) |
 | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` — 코드는 기준 커밋과 같음 — 기준 커밋은 그 뒤 운영 기록 문서만 더했다 | [S4](build-guide/S4-trust.md) |
 | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.3` · `a83e9d14d281` — 기준 커밋과 같음 | [S3](build-guide/S3-clinical-departments.md) |
 | ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 🟢 공개(2026-10-27) | `v1.306.1` · `0692e7cbcb0b` — 최신 태그 판 — 이 자료의 기준 커밋(태그 없음) 뒤 기능 릴리즈 19개가 더 들어 있습니다 | [S5](build-guide/S5-management.md) |
@@ -52,7 +50,7 @@ git checkout <위 표의 기준 판 태그>   # 🔴 이 자료와 같은 것을
 
 ## 3. 받은 뒤 처음 여는 파일
 
-그 판에 **실제로 있는 파일만** 적었습니다 — 공개된 곳은 공개판에서, 준비 중인 곳은 개발 저장소의 기준 커밋에서 확인했습니다(준비 중인 곳은 공개판에서 빠질 수 있습니다).
+그 판에 **실제로 있는 파일만** 적었습니다 — 모두 공개판에서 확인했습니다.
 
 | 저장소 | 처음 여는 파일 |
 |---|---|

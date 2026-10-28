@@ -2,13 +2,13 @@
 
 **source — public editions of each system**
 
-> **EN** — Each system's public edition is linked here as a git submodule, one folder per repository. The table also lists the folders reserved for editions not yet opened, with the address each will have — 10 of 11 are open now. Clone with `--recurse-submodules` (or run `git submodule update --init`) to fetch the opened ones. How to pick a version and what was removed from an edition: [Getting the source](../SOURCES.md).
+> **EN** — Each system's public edition is linked here as a git submodule, one folder per repository. The table also lists the folders reserved for editions not yet opened, with the address each will have — 11 of 11 are open now. Clone with `--recurse-submodules` (or run `git submodule update --init`) to fetch the opened ones. How to pick a version and what was removed from an edition: [Getting the source](../SOURCES.md).
 
-이 폴더에는 시스템별 **공개판 저장소**가 하위 모듈로 들어옵니다. 저장소 하나에 폴더 하나이고, 아직 열지 않은 시스템도 **들어갈 자리와 주소를 미리** 적어 두었습니다 — 지금 **10/11곳** 공개.
+이 폴더에는 시스템별 **공개판 저장소**가 하위 모듈로 들어옵니다. 저장소 하나에 폴더 하나이고, 아직 열지 않은 시스템도 **들어갈 자리와 주소를 미리** 적어 두었습니다 — 지금 **11/11곳** 공개.
 
 | 폴더 | 시스템 | 공개판 저장소 | 상태 | 기준 판 |
 |---|---|---|---|---|
-| `source/his` | HIS · 공개 홈페이지 · 환자 앱 | `seanshin/werub-his` · 준비 중 | 준비 중 | — |
+| [`source/his`](his) | HIS · 공개 홈페이지 · 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` |
 | [`source/sign`](sign) | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` |
 | [`source/lis`](lis) | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.3` · `a83e9d14d281` |
 | [`source/erp`](erp) | ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 🟢 공개(2026-10-27) | `v1.306.1` · `0692e7cbcb0b` |
