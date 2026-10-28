@@ -25,3 +25,6 @@
 [submodule "source/erp"]
 	path = source/erp
 	url = https://github.com/seanshin/werub-erp.git
+[submodule "source/clinic"]
+	path = source/clinic
+	url = https://github.com/seanshin/werub-clinic.git

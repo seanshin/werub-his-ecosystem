@@ -44,11 +44,11 @@
 | AI | **AI Server** | 기관 안 GPU 한 장으로 도는 AI — 분류 · 요약 · DUR · RAG · 음성 인식 보조 | [소개서](projects/ai-server.md) | [werub-ai-server](https://github.com/seanshin/werub-ai-server) `v2.125.73` |
 | AI | **twin** | 환자 · 병원 운영의 위험을 미리 보여 주는 디지털 트윈 | [소개서](projects/twin.md) | [werub-twin](https://github.com/seanshin/werub-twin) `v1.20.72-19-g526b4f9` |
 | AI | **cerno** | 근거가 있을 때만 답하는 의료진별 임상 질의 도우미 | [소개서](projects/cerno.md) | [werub-cerno](https://github.com/seanshin/werub-cerno) `v0.1.8-public.2` |
-| 협업 · 교육 | **Clinic** | 인수인계 · 근무표 · 알림 · 결재 그룹웨어 | [소개서](projects/clinic.md) | 준비 중 |
+| 협업 · 교육 | **Clinic** | 인수인계 · 근무표 · 알림 · 결재 그룹웨어 | [소개서](projects/clinic.md) | [werub-clinic](https://github.com/seanshin/werub-clinic) `v1.4.0` |
 | 협업 · 교육 | **edu** | 직원 이러닝 · 법정교육 · 전자 이수증 | [소개서](projects/edu.md) | [werub-edu](https://github.com/seanshin/werub-edu) `v2.7.0` |
 | 협업 · 교육 | **Jitsi** | 원격진료 화상(자체 호스팅) | [소개서](projects/jitsi.md) | [werub-jitsi](https://github.com/seanshin/werub-jitsi) `v2.10.0-9-g0984fbe` |
 
-소스는 시스템마다 **공개판 저장소**(MIT)로 하나씩 엽니다 — 지금 **9/11곳**. HIS · 공개 홈페이지 · 환자 앱은 한 저장소입니다. 받는 법과 기준 판은 [소스 받기](SOURCES.md), 공개판에서 무엇을 뺐는지는 각 저장소의 `PUBLIC-EDITION.md` 에 있습니다.
+소스는 시스템마다 **공개판 저장소**(MIT)로 하나씩 엽니다 — 지금 **10/11곳**. HIS · 공개 홈페이지 · 환자 앱은 한 저장소입니다. 받는 법과 기준 판은 [소스 받기](SOURCES.md), 공개판에서 무엇을 뺐는지는 각 저장소의 `PUBLIC-EDITION.md` 에 있습니다.
 
 <!-- 시스템 표: 생성물 끝 -->
 

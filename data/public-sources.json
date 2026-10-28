@@ -83,7 +83,13 @@
     },
     "clinic": {
       "repo": "seanshin/werub-clinic",
-      "status": "준비 중"
+      "status": "공개",
+      "openedAt": "2026-10-28",
+      "tag": "v1.4.0",
+      "commit": "a8d5cd6f7f87904425ae2be867259661fddc94bd",
+      "fromBase": true,
+      "note": "병원 서비스 부분만 — 병원 화면 · 병원 서비스 · HIS 연동 API 와 그것이 쓰는 라이브러리. 커뮤니티 플랫폼 본체 · 데이터베이스 스키마는 싣지 않아 단독으로 실행되지 않습니다",
+      "license": "MIT"
     },
     "jitsi": {
       "repo": "seanshin/werub-jitsi",

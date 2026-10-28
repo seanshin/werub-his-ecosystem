@@ -2,9 +2,9 @@
 
 **Getting the source**
 
-> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 9 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
+> **EN** — Development happens in private repositories; what is published is a **public edition** of each system (`seanshin/werub-…`, MIT): the final state of the development repository with internal working records and operational details removed, starting from a single commit. They are opened one at a time — 10 of 11 so far. An opened edition carries the original release tag, is linked as a submodule under `source/`, and, where marked, is the same point in time as the base commit every number in these materials was read from. A repository still marked "in preparation" will not open yet.
 
-> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **9/11곳** 공개.
+> 🟢 **개발은 비공개 저장소에서 하고, 공개는 시스템마다 「공개판 저장소」로 합니다.** 공개판은 개발 저장소의 최종 상태에서 **내부 작업 기록(다른 시스템과 주고받은 결함 보고 · 회신 · 키 교체 런북 등)과 운영 정보(운영 도메인 · 서버 주소 · 계정)를 뺀 것**이고, 커밋 하나에서 시작하며 **MIT** 입니다. 정리가 끝난 시스템부터 **하나씩** 엽니다 — 지금 **10/11곳** 공개.
 >
 > 「준비 중」인 주소는 아직 열리지 않습니다.
 
@@ -25,7 +25,7 @@
 | twin | [seanshin/werub-twin](https://github.com/seanshin/werub-twin) | 🟢 공개(2026-10-26) | `v1.20.72-19-g526b4f9` · `7a25b11232c2` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 | cerno | [seanshin/werub-cerno](https://github.com/seanshin/werub-cerno) | 🟢 공개(2026-10-15) | `v0.1.8-public.2` · `9b34828d4d62` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 | edu | [seanshin/werub-edu](https://github.com/seanshin/werub-edu) | 🟢 공개(2026-10-26) | `v2.7.0` · `1808f0c3eb8b` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
-| Clinic | `seanshin/werub-clinic` · 준비 중 | 준비 중 | — | [S5](build-guide/S5-management.md) |
+| Clinic | [seanshin/werub-clinic](https://github.com/seanshin/werub-clinic) | 🟢 공개(2026-10-28) | `v1.4.0` · `a8d5cd6f7f87` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 | Jitsi | [seanshin/werub-jitsi](https://github.com/seanshin/werub-jitsi) | 🟢 공개(2026-10-26) | `v2.10.0-9-g0984fbe` · `6d41dfc9dd40` — 기준 커밋과 같음 | [S5](build-guide/S5-management.md) |
 
 **HIS · 공개 홈페이지 · 환자 앱은 한 저장소**입니다(모노레포). 나머지는 시스템마다 저장소가 하나입니다 — 저장소 **11개**로 시스템 **13개**가 됩니다.
@@ -65,7 +65,7 @@ git checkout <위 표의 기준 판 태그>   # 🔴 이 자료와 같은 것을
 | seanshin/werub-twin | `docker-compose.yml` · `README.md` |
 | seanshin/werub-cerno | `docker-compose.yml` · `README.md` |
 | seanshin/werub-edu | `infra/docker/docker-compose.prod.yml` · `README.md` |
-| seanshin/werub-clinic | `docker-compose.yml` · `ecosystem.config.cjs` · `README.md` |
+| seanshin/werub-clinic | `README.md` |
 | seanshin/werub-jitsi | `docker-compose.yml` · `README.md` |
 
 - 🔴 **저장소의 설치 파일이 그대로 도는 것은 아닙니다.** 새 설치본으로 따라가 본 결과, 여러 시스템에서 이미지 빌드 · 스키마 반영 · 기동이 원본 파일로는 막혔습니다 — 무엇이 어떻게 막혔고 어떻게 우회했는지는 [따라가 본 결과](build-guide/follow-along-2026-09.md)와 각 단계 장에 있습니다. **그 장을 먼저 읽고 시작하십시오.**

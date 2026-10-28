@@ -21,7 +21,7 @@
 | twin | `1.20.88` | 주요 (태그 v1.20.72) | `526b4f9a4d3f` · 2026-09-03 | 2026-09-03 (+1커밋) | 표기 없음 | 통합 | https://github.com/seanshin/werub-twin |
 | cerno | `0.1.0` | 주요 (릴리즈 기록 0.1.8 · 태그 v0.1.8) | `4f5c22b331fc` · 2026-08-04 | 2026-07-30 (+46커밋) | 표기 없음 | 파일럿 — 섀도우 · 비임상 | https://github.com/seanshin/werub-cerno |
 | edu | `2.7.0` | 참고 | `f8127e6ee278` · 2026-07-30 | 2026-07-30 | 독점 · 독점 | 확인 필요 — 운영 여부 재확인 전 | https://github.com/seanshin/werub-edu |
-| Clinic | `1.4.0` | 참고 | `2b20a89b7c3a` · 2026-09-09 | 2026-08-19 | 독점 | 통합 — 모노레포 안의 병원 서비스만 | `seanshin/werub-clinic` · 준비 중 |
+| Clinic | `1.4.0` | 참고 | `2b20a89b7c3a` · 2026-09-09 | 2026-08-19 | 독점 | 통합 — 모노레포 안의 병원 서비스만 | https://github.com/seanshin/werub-clinic |
 | Jitsi | `1.0.0` | 주요 (태그 v2.10.0) | `0984fbec7177` · 2026-07-24 | 2026-05-29 (+121커밋) | 표기 없음 | 중단 — 현재 설치본이 동작하지 않음 — 구축 기관은 새로 구성 | https://github.com/seanshin/werub-jitsi |
 
 ## 읽는 법
