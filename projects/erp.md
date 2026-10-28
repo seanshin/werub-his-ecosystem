@@ -20,7 +20,7 @@ For an IT team, the practical points are: HIS must be in place first (sign-in an
 
 ## 1. 한 문장
 
-> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting, and it also calculates the patient bill that HIS displays. At a glance: usable only with HIS in place and on the same host as HIS (some addresses are fixed in code); nine connections were confirmed in a September 2026 test install; sizing and migration effort are not measured.
+> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting, and it also calculates the patient bill that HIS displays. At a glance: usable only with HIS in place; confirmed on the same host as HIS (the public edition v1.306.1 sets the callable hosts in configuration); nine connections were confirmed in a September 2026 test install; sizing and migration effort are not measured.
 
 **ERP 는 병원의 돈 · 사람 · 물자를 하나의 전표 원장(모든 거래가 모이는 회계 장부) 위에서 관리하는 경영지원 시스템입니다.**
 

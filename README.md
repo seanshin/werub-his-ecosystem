@@ -8,13 +8,14 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Systems](https://img.shields.io/badge/systems-13-informational.svg)](#시스템-13)
 [![Release](https://img.shields.io/badge/release-2026.09-success.svg)](RELEASES/2026.09/RELEASE.md)
+[![Public editions](https://img.shields.io/badge/public%20editions-11%20of%2011-brightgreen.svg)](#공개판-저장소)
 [![Not a medical device](https://img.shields.io/badge/medical%20device-no-lightgrey.svg)](DISCLAIMER.md)
 
 [프로젝트 소개서](projects/) · [구축 가이드](build-guide/) · [소스 받기](SOURCES.md) · [전체 안내](ABOUT.md) · [로드맵](ROADMAP.md)
 
 </div>
 
-> **EN** — Thirteen systems that together run a hospital — a core HIS, a public website, a patient app, laboratory, imaging, e-signature, back-office, AI and collaboration services — documented so that an institution can understand them and build them with modest resources. AI **assists and drafts**; a person approves before anything becomes the record. This repository holds the introductions, the build guide and the release record; each system's source is published as a separate MIT-licensed public edition, linked below.
+> **EN** — Thirteen systems that together run a hospital — a core HIS, a public website, a patient app, laboratory, imaging, e-signature, back-office, AI and collaboration services — documented so that an institution can understand them and build them with modest resources. AI **assists and drafts**; a person approves before anything becomes the record. This repository holds the introductions, the build guide and the release record. The source of every system is now published as a separate MIT-licensed **public edition** (11 repositories for 13 systems), linked below and included here as git submodules under `source/`. Public editions carry no secrets, replace the operating hospital's identity with a demo hospital, and leave security-relevant settings for the installing institution to decide.
 
 ## 한눈에
 
@@ -22,13 +23,15 @@
 |---|---|
 | **무엇** | 병원 하나를 돌리는 **13개 시스템**을 한 벌로 세우는 생태계 |
 | **AI 는** | 기관 안 GPU 한 장에서 돌고, **보조만 합니다** — 초안과 제안을 만들고 사람이 승인해야 정본이 됩니다 |
-| **지금** | 시스템 사이 연결 113개 중 **27개를 실제로 불러 확인**했습니다(2026-09-14~15) · [따라가 본 결과](build-guide/follow-along-2026-09.md) |
-| **소스** | 시스템마다 공개판 저장소(MIT) — 아래 표의 소스 칸 · [소스 받기](SOURCES.md) |
+| **지금** | 시스템 사이 연결 113개 중 **27개를 실제로 불러 확인**했습니다(2026-09-14~15 · 통합 릴리즈 `2026.09` 코드) · [따라가 본 결과](build-guide/follow-along-2026-09.md) |
+| **소스** | **13개 시스템 모두 공개** — 공개판 저장소 11곳(MIT · HIS · 공개 홈페이지 · 환자 앱은 한 저장소) · 아래 [공개판 저장소](#공개판-저장소) · [소스 받기](SOURCES.md) |
+| **데모 병원** | 공개판의 병원 이름 · 지역 · 연락처는 가상 병원 **위루비병원**입니다. 실제로 쓰려면 기관 정보로 바꿉니다 |
+| **비밀값** | 공개판에는 비밀번호 · 키가 없습니다. 받은 뒤 정할 값과 보안 설정은 저장소마다 `PUBLIC-EDITION.md` 에 있습니다 |
 
 ## 시스템 13
 **The 13 systems**
 
-> **EN** — One row per system: its layer, what it does, its introduction, and its source. The source column is generated from the publication status — an opened public edition links to its repository and version; the others say "in preparation" and carry no link yet.
+> **EN** — One row per system: its layer, what it does, its introduction, and its source. The source column is generated from the publication status and links each system to its public edition and version; all thirteen systems are published.
 
 <!-- 시스템 표: 생성물 시작 — tools/build-sources.mjs 가 data/public-sources.json 에서 만든다. 손으로 고치지 않는다 -->
 
@@ -51,6 +54,59 @@
 소스는 시스템마다 **공개판 저장소**(MIT)로 하나씩 엽니다 — 지금 **11/11곳**. HIS · 공개 홈페이지 · 환자 앱은 한 저장소입니다. 받는 법과 기준 판은 [소스 받기](SOURCES.md), 공개판에서 무엇을 뺐는지는 각 저장소의 `PUBLIC-EDITION.md` 에 있습니다.
 
 <!-- 시스템 표: 생성물 끝 -->
+
+## 공개판 저장소
+**Public editions**
+
+> **EN** — Development continues in private repositories; what is published is a public edition of each — the development repository's state at a chosen tag, with internal working records and operational details removed, secrets emptied, and the operating hospital replaced by the demo hospital. Each edition starts from one commit under MIT; re-exports add a commit on top and a `-public.N` tag. Most editions are the same point in time as the integrated release `2026.09`; HIS, ERP and AI Server are newer. Clinic contains only its hospital service and does not run on its own.
+
+| 공개판 | 판 | 기준 시점 | 알아둘 것 |
+|---|---|---|---|
+| [werub-his](https://github.com/seanshin/werub-his) | `v4.130.0-public.3` | 통합 릴리즈보다 **새 판** | HIS · 공개 홈페이지 · 환자 앱 · 병원 정보는 데모 병원(위루비병원) · 공개판에서 바뀐 업무 규칙은 아래 · 바뀐 동작은 `apps/api/test/public-edition/` 시험이 지킵니다 |
+| [werub-lis](https://github.com/seanshin/werub-lis) | `v1.56.18-public.3` | 통합 릴리즈와 같은 시점 | 데모 공용 비밀번호를 없애고 시드 · 스모크 시험이 비밀번호를 환경 변수로 받습니다 |
+| [werub-pacs](https://github.com/seanshin/werub-pacs) | `v13.48` | 통합 릴리즈와 같은 시점 | 영상 경로는 토큰을 요구하고, 환자 결과 내보내기는 기본 꺼짐 · 상한이 있습니다 · 릴리즈 노트는 버전 · 날짜 · 주제 목록으로 |
+| [werub-sign](https://github.com/seanshin/werub-sign) | `v1.30.1` | 통합 릴리즈와 같은 서명 서비스 | 연동 소비자마다 자기 요청만 봅니다 · 페퍼가 없으면 운영에서 기동하지 않고, 프록시는 토큰이 없으면 요청을 거부합니다 |
+| [werub-erp](https://github.com/seanshin/werub-erp) | `v1.306.1` | 통합 릴리즈보다 **새 판** | HIS SSO 정책을 정하지 않으면 안전한 쪽(URL 토큰 차단 · ERP 전용 토큰만)으로 동작 · 부를 수 있는 호스트는 설정으로 |
+| [werub-ai-server](https://github.com/seanshin/werub-ai-server) | `v2.125.73` | 통합 릴리즈보다 **새 판**(2026-10-27 개발본) | 로컬 우회(127.0.0.1 을 관리자로 보던 동작)는 기본 꺼짐 |
+| [werub-twin](https://github.com/seanshin/werub-twin) | `v1.20.72-19-g526b4f9` | 통합 릴리즈와 같은 시점 | |
+| [werub-cerno](https://github.com/seanshin/werub-cerno) | `v0.1.8-public.2` | 통합 릴리즈와 같은 시점 | |
+| [werub-edu](https://github.com/seanshin/werub-edu) | `v2.7.0` | 통합 릴리즈와 같은 시점 | SSO 토큰은 1회만 · 옛 서명 방식(HS256)은 기본 꺼짐 |
+| [werub-clinic](https://github.com/seanshin/werub-clinic) | `v1.4.0` | 통합 릴리즈와 같은 시점 | **병원 서비스 부분만**(병원 화면 · 병원 서비스와 HIS 연동 API) — 커뮤니티 플랫폼 본체 · 스키마가 없어 **단독으로 실행되지 않습니다** |
+| [werub-jitsi](https://github.com/seanshin/werub-jitsi) | `v2.10.0-9-g0984fbe` | 통합 릴리즈와 같은 시점 | 내부 등급 입장도 토큰을 검증합니다 · 기본 등급은 내부 |
+
+**공개판이 개발 저장소와 다른 점(모든 공개판 공통)**
+
+- **빼는 것** — 다른 시스템과 주고받은 결함 보고 · 회신, 키 교체 런북, 운영 서버 실측 · 배치 기록, 감사 · 보안 점검 결과, 개발 도우미 지침. 출처를 확인할 수 없는 이미지 · 재배포 조건을 확인하지 못한 외부 문서도 뺍니다.
+- **바꾸는 것** — 운영 도메인 · 서버 주소 · 계정 · 포트는 예시 값(`example.org` · 문서용 IP 대역)으로, 운영 병원의 이름 · 지역 · 연락처 · 협력 기관은 가상 값으로 바꿉니다.
+- **비우는 것** — 비밀번호 · 비밀 · 토큰 · 키는 `CHANGE_ME` 로 비우거나 환경 변수로 받게 합니다. 직접 정할 값의 목록은 `PUBLIC-EDITION.md` 에 있습니다.
+- **고치는 것** — 보안에 닿는 동작은 공개판에서 고치거나, **설정하지 않으면 안전한 쪽으로 멈추게** 하고 「켜기 전에 기관이 정할 보안 설정」으로 안내합니다. 코드를 고친 판은 원본과 시험 · 타입 검사를 비교해 새 오류가 없는 것을 확인했습니다.
+- **판 번호** — 처음 공개 때는 원본 태그를 그대로 쓰고, 같은 원본을 다시 내보내면 공개 이력 위에 커밋을 더하고 `-public.N` 을 붙입니다(공개된 이력을 다시 쓰지 않습니다).
+
+**HIS 공개판에서 바뀐 업무 규칙** — 기관이 업무를 짤 때 알아야 하는 것만 적습니다(자세한 것은 `werub-his` 의 `PUBLIC-EDITION.md`).
+
+| 영역 | 공개판의 동작 |
+|---|---|
+| 계정 개통 | 직원 계정 개통에 관리자 승인을 요구하는 설정이 **기본 켬**입니다 |
+| 임상 경로 | 발행 · 폐기된 경로는 그 자리에서 고치지 않고 **복제해 새 버전**으로 고친 뒤 발행합니다. 폐기도 발행과 같은 의결 판정을 거칩니다 |
+| 조제 | 취소는 **교부 전까지만**, 조제 품목은 처방 약품이나 **승인된 대체조제** 약품만 됩니다 |
+| 마약류 | 반납은 수행자를 남기고 상태를 확인한 뒤 바뀝니다. 폐기 · 반납은 약사 · 간호사 · 관리자, 재고 불일치 경보의 기본 대상은 약사 · 관리자입니다 |
+| 장기이식 | 기증자 **승인 · 거절 경로**(`POST /api/v1/transplant/donors/:id/approve` · `/reject` · 거절은 사유 필수)가 있고, 이식 게이트의 경고 · 차단은 위반 기록에 남습니다 |
+| 재활 | 완료된 세션을 다시 시작하거나 다시 완료하지 않습니다 |
+| 보유 · 파기 | 보유 정책의 **법정 하한은 낮출 수 없습니다**(올리는 것만) |
+| 공식 문서 | **등록된 문서 종류만** 발급합니다 |
+| 안전 게이트 관제 | 「평가 건수」는 실제로 판정한 기록만 셉니다 |
+
+**받는 법**
+
+```bash
+# 이 자료와 공개판 11곳을 한 번에
+git clone --recurse-submodules https://github.com/seanshin/werub-his-ecosystem.git
+
+# 시스템 하나만
+git clone https://github.com/seanshin/werub-his.git
+```
+
+각 공개판의 처음 여는 파일 · 기준 판 · 빌드 순서는 [소스 받기](SOURCES.md)와 [구축 가이드](build-guide/)를 보십시오.
 
 ## 처음 읽는다면
 **Where to start**
@@ -183,7 +239,7 @@
 
 ### ERP — 병원 경영지원 시스템 · [소개서](projects/erp.md)
 
-> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting, and it also calculates the patient bill that HIS displays. At a glance: usable only with HIS in place and on the same host as HIS (some addresses are fixed in code); nine connections were confirmed in a September 2026 test install; sizing and migration effort are not measured.
+> **EN** — ERP keeps the hospital's money, people and materials on one ledger. Patient and encounter records stay in HIS; ERP turns what HIS sends into accounting, and it also calculates the patient bill that HIS displays. At a glance: usable only with HIS in place; confirmed on the same host as HIS (the public edition v1.306.1 sets the callable hosts in configuration); nine connections were confirmed in a September 2026 test install; sizing and migration effort are not measured.
 
 **ERP 는 병원의 돈 · 사람 · 물자를 하나의 전표 원장(모든 거래가 모이는 회계 장부) 위에서 관리하는 경영지원 시스템입니다.**
 
@@ -293,15 +349,27 @@
 ## 지금 받을 수 있는 것
 **What you can get today**
 
-> **EN** — Available now: the materials in this repository and the public editions of the systems already opened. Not included anywhere: prebuilt container images, AI model weights, and government-distributed code masters.
+> **EN** — Available now: the materials in this repository and the public editions of all thirteen systems. Not included anywhere: prebuilt container images, AI model weights, government-distributed code masters, and Clinic's community platform.
 
 | 있는 것 | 없는 것 |
 |---|---|
 | 소개서 · 구축 가이드 · 구성서 · 연결 상태 표 · 화면 · 체크리스트 | 미리 만든 **컨테이너 이미지** — 각 저장소에서 직접 빌드합니다 |
 | 통합 릴리즈 `2026.09`(버전 조합 · 시스템별 요약) | **AI 모델 가중치** — 기관이 약관을 읽고 직접 받습니다([THIRD_PARTY](THIRD_PARTY.md)) |
-| 공개판 소스 — [시스템 13](#시스템-13)의 소스 칸 · [`source/`](source/README.md) 하위 모듈 | **코드 마스터**(수가 · 약가 · 상병) — 배포 기관에서 받습니다 |
+| **공개판 소스 11곳(13개 시스템 전부)** — [공개판 저장소](#공개판-저장소) · [`source/`](source/README.md) 하위 모듈 | **코드 마스터**(수가 · 약가 · 상병) — 배포 기관에서 받습니다 |
+| 저장소마다 `PUBLIC-EDITION.md` — 직접 정할 값 · 켜기 전에 정할 보안 설정 | **Clinic 커뮤니티 플랫폼 본체** — 병원 서비스 부분만 공개했습니다 |
 
-공개판 저장소에는 비밀값이 들어 있지 않습니다. 받은 뒤 직접 정할 값과 보안 설정은 저장소마다 `PUBLIC-EDITION.md` 에 있습니다.
+공개판 저장소에는 비밀값이 들어 있지 않습니다.
+
+## 알아둘 점
+**Before you rely on it**
+
+> **EN** — The connection table, build guide and component descriptions were written against the integrated release `2026.09`; the newer public editions of HIS, ERP and AI Server have not been re-verified against them by real calls. Public editions use a demo hospital, are not approved medical devices, and leave security-relevant decisions to the installing institution.
+
+- **연결 상태는 통합 릴리즈 기준입니다.** [연결 상태 표](RELEASES/2026.09/compatibility.md)의 「실제로 불러 확인」은 2026년 9월 통합 릴리즈 코드로 한 것입니다. HIS · ERP · AI Server 공개판은 그보다 새 판이라, 그 판끼리 다시 불러 확인하지는 않았습니다.
+- **구성서 · 구축 가이드도 통합 릴리즈 기준입니다.** 새 판에서 바뀐 동작은 각 공개판의 `PUBLIC-EDITION.md` 와 소개서의 「받을 코드」 행을 먼저 보십시오.
+- **데모 병원입니다.** 공개판의 병원 이름 · 지역 · 연락처 · 협력 기관은 가상 값입니다. 화면 · 시드 · 문서에서 기관 정보로 바꿔야 합니다.
+- **설정하지 않으면 멈추는 곳이 있습니다.** 운영 모드 · 비밀값 · 연동 키 · 허용 호스트처럼 공개판이 일부러 비워 둔 값은 정하지 않으면 기동을 거부하거나 그 기능이 꺼진 채로 있습니다.
+- **인허가받은 의료기기가 아닙니다.** AI 는 보조 · 초안까지이고, 임상 판단과 책임은 의료진과 구축 기관에 있습니다([의료 면책 고지](DISCLAIMER.md)).
 
 ## 참여
 **Contributing**
