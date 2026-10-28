@@ -12,9 +12,9 @@
 
 | 시스템 | 공개판 저장소 | 상태 | 기준 판 | 구축 단계 |
 |---|---|---|---|---|
-| HIS | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S1](build-guide/S1-core-his.md) |
-| 공개 홈페이지 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S2](build-guide/S2-patient-access.md) |
-| 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0` · `88fdaecb2430` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S2](build-guide/S2-patient-access.md) |
+| HIS | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0-public.2` · `79e549c2a9cf` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S1](build-guide/S1-core-his.md) |
+| 공개 홈페이지 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0-public.2` · `79e549c2a9cf` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S2](build-guide/S2-patient-access.md) |
+| 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0-public.2` · `79e549c2a9cf` — 최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다 | [S2](build-guide/S2-patient-access.md) |
 | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` — 코드는 기준 커밋과 같음 — 기준 커밋은 그 뒤 운영 기록 문서만 더했다 | [S4](build-guide/S4-trust.md) |
 | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.3` · `a83e9d14d281` — 기준 커밋과 같음 | [S3](build-guide/S3-clinical-departments.md) |
 | ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 🟢 공개(2026-10-27) | `v1.306.1` · `0692e7cbcb0b` — 최신 태그 판 — 이 자료의 기준 커밋(태그 없음) 뒤 기능 릴리즈 19개가 더 들어 있습니다 | [S5](build-guide/S5-management.md) |
