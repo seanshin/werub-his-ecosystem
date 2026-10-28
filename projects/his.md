@@ -33,7 +33,7 @@ What is not there yet, stated plainly: transmission to external agencies (insura
 | **지금 쓸 수 있나** | **조건부.** 시험 설치와 기능 검토는 지금 됩니다. 실운영에는 코드 마스터 반입 · 병원 이름을 코드에서 고치기 · 보험 청구 전송을 따로 마련하기가 필요합니다(§8) |
 | **세워야 하는 것** | 서버 한 대(GPU 없음)에 API 서버 · 직원 웹 · 상시 감시자(별도 프로세스) · PostgreSQL 16 · Redis 7 · PDF 렌더러(별도 컨테이너) |
 | **먼저 있어야 할 것** | 다른 시스템은 없어도 됩니다. 기관이 준비할 것은 코드 마스터(약가 · 진단 · 수가 · 검사) · 기관 정보 · 부서 · 병상 · 직원 · 필수 설정 · 운영 모드 결정입니다 |
-| **받을 코드** | **공개판 `v4.130.0-public.2`** 을 받습니다(`seanshin/werub-his` · 새 설치 스크립트 포함 · 이 소개서가 설명한 개발본보다 새 판). 공개판은 병원 이름 · 지역 · 연락처를 데모 병원(위루비병원)으로 바꿨습니다. 통합 릴리즈 코드(v4.18.0)로 세우려면 [구축 가이드 S1](../build-guide/S1-core-his.md)의 우회 순서를 따릅니다 · [소스 받기](../SOURCES.md). 세운 뒤 다음 판으로 올리는 절차는 저장소가 아직 정하지 않았습니다(§6) |
+| **받을 코드** | **공개판 `v4.130.0-public.3`** 을 받습니다(`seanshin/werub-his` · 새 설치 스크립트 포함 · 이 소개서가 설명한 개발본보다 새 판). 공개판은 병원 이름 · 지역 · 연락처를 데모 병원(위루비병원)으로 바꿨습니다. 통합 릴리즈 코드(v4.18.0)로 세우려면 [구축 가이드 S1](../build-guide/S1-core-his.md)의 우회 순서를 따릅니다 · [소스 받기](../SOURCES.md). 세운 뒤 다음 판으로 올리는 절차는 저장소가 아직 정하지 않았습니다(§6) |
 | **실제로 확인된 것** | 2026년 9월 시험 설치(통합 릴리즈 코드 · 가상 데이터)에서 LIS · sign · ERP · edu 연결 일부를 실제로 불러 확인했습니다. 다만 LIS 는 HIS 기본 검사 코드 15개 중 3개만 매핑돼 있었고, 현재 개발본으로는 다시 부르지 않았습니다(§5) |
 | **아직 모르는 것** | 사용자 수에 맞춘 서버 사양 · 빈 서버에서의 설치 · 운영용 컨테이너 구성(compose)으로 끝까지 띄우기 · 서버 이중화와 복구 목표 시간 · 이관에 걸리는 시간 · HIS 가 멈췄을 때 다른 시스템의 동작 |
 
@@ -313,7 +313,7 @@ flowchart TB
 
 > **EN** — The ecosystem's first integrated release pinned HIS at v4.18.0 (2026-09-11). Since then HIS has gained 500 commits: only 7 of them form v4.19.0; the other 493 sit on the development line without a version number yet. The biggest changes for IT: a new install script and a first-administrator tool, the real mode refusing to boot with missing security settings, backups now including uploaded files with a second-copy and restore-test script, the AI server address now settable by environment variable, and the default seed no longer writes AI settings into the database.
 
-이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **500커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **493커밋은 아직 번호가 없는 개발본**입니다. 이 소개서가 설명하고 설치 스크립트가 들어 있는 것은 이 개발본입니다. 공개판 `v4.130.0-public.2`(2026-10-28)은 그보다 새 판입니다(받을 코드는 §1 「한눈에」).
+이 자료의 다른 문서(구성서 · 구축 가이드 · 연결 표)는 **통합 릴리즈 `2026.09`**(HIS v4.18.0 · 2026-09-11)에 맞춰 쓰여 있습니다. 그 뒤로 HIS 에 **500커밋**이 더해졌고, 그중 **7커밋만 v4.19.0**(2026-09-12)으로 발행됐습니다. 나머지 **493커밋은 아직 번호가 없는 개발본**입니다. 이 소개서가 설명하고 설치 스크립트가 들어 있는 것은 이 개발본입니다. 공개판 `v4.130.0-public.3`(2026-10-28)은 그보다 새 판입니다(받을 코드는 §1 「한눈에」).
 
 | 영역 | 달라진 것 |
 |---|---|

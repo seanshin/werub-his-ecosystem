@@ -359,7 +359,7 @@ HIS 설정은 두 층입니다. **환경 변수**는 설치할 때 서버에 넣
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werub-his](https://github.com/seanshin/werub-his) — 🟢 공개(2026-10-28 · 공개판 `v4.130.0-public.2` · 이 자료의 기준 커밋보다 새 판 · HIS · 공개 홈페이지 · 환자 앱이 한 저장소 · MIT · 이 저장소의 [`source/his`](../source/his) · [소스 받기](../SOURCES.md)) |
+| 소스 링크 | [seanshin/werub-his](https://github.com/seanshin/werub-his) — 🟢 공개(2026-10-28 · 공개판 `v4.130.0-public.3` · 이 자료의 기준 커밋보다 새 판 · HIS · 공개 홈페이지 · 환자 앱이 한 저장소 · MIT · 이 저장소의 [`source/his`](../source/his) · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · nginx · browserless · Prometheus · Grafana |
 | 기준 커밋 | `e9d303984f80` (2026-09-11 · [`data/base-commits.json`](../data/base-commits.json)) |

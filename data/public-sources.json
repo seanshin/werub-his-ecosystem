@@ -5,8 +5,8 @@
       "repo": "seanshin/werub-his",
       "status": "공개",
       "openedAt": "2026-10-28",
-      "tag": "v4.130.0-public.2",
-      "commit": "79e549c2a9cf98dfc914729bae86f33dc8b918d6",
+      "tag": "v4.130.0-public.3",
+      "commit": "3fa6e5e81df0029c6a313c80428b4601d4bd724d",
       "fromBase": false,
       "note": "최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다",
       "license": "MIT"

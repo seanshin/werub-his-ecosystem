@@ -8,7 +8,7 @@
 
 | 폴더 | 시스템 | 공개판 저장소 | 상태 | 기준 판 |
 |---|---|---|---|---|
-| [`source/his`](his) | HIS · 공개 홈페이지 · 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0-public.2` · `79e549c2a9cf` |
+| [`source/his`](his) | HIS · 공개 홈페이지 · 환자 앱 | [seanshin/werub-his](https://github.com/seanshin/werub-his) | 🟢 공개(2026-10-28) | `v4.130.0-public.3` · `3fa6e5e81df0` |
 | [`source/sign`](sign) | sign | [seanshin/werub-sign](https://github.com/seanshin/werub-sign) | 🟢 공개(2026-10-15) | `v1.30.1` · `0813933bd01c` |
 | [`source/lis`](lis) | LIS | [seanshin/werub-lis](https://github.com/seanshin/werub-lis) | 🟢 공개(2026-10-15) | `v1.56.18-public.3` · `a83e9d14d281` |
 | [`source/erp`](erp) | ERP | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) | 🟢 공개(2026-10-27) | `v1.306.1` · `0692e7cbcb0b` |
