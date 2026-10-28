@@ -5,8 +5,8 @@
       "repo": "seanshin/werub-his",
       "status": "공개",
       "openedAt": "2026-10-28",
-      "tag": "v4.130.0-public.3",
-      "commit": "3fa6e5e81df0029c6a313c80428b4601d4bd724d",
+      "tag": "v4.130.0-public.4",
+      "commit": "b6929dd6d3d33b812a011fd542dea1142ca518aa",
       "fromBase": false,
       "note": "최신 태그 판(공개 홈페이지 · 환자 앱 포함) — 이 자료의 기준 커밋 뒤 개발이 더 들어 있습니다 · 병원 이름 · 지역 · 연락처는 데모 병원(위루비병원)으로 바꿨습니다",
       "license": "MIT"
@@ -34,8 +34,8 @@
       "repo": "seanshin/werub-erp",
       "status": "공개",
       "openedAt": "2026-10-27",
-      "tag": "v1.306.1",
-      "commit": "0692e7cbcb0baa2e87cf08c1bbc2e4bf73d02be6",
+      "tag": "v1.306.1-public.2",
+      "commit": "c5b8d90ee242431d7867845182987aa070678761",
       "fromBase": false,
       "note": "최신 태그 판 — 이 자료의 기준 커밋(태그 없음) 뒤 기능 릴리즈 19개가 더 들어 있습니다",
       "license": "MIT"
@@ -44,8 +44,8 @@
       "repo": "seanshin/werub-pacs",
       "status": "공개",
       "openedAt": "2026-10-27",
-      "tag": "v13.48",
-      "commit": "721c7ea5dabcf2f2e23680aef7c6ecebcaef2568",
+      "tag": "v13.48-public.2",
+      "commit": "384206a6f76378bd098db10fd55ba1622abc4fb5",
       "fromBase": true,
       "note": "원본 태그는 v11.2 까지 — 릴리즈 노트 최고 번호로 표기 · 릴리즈 노트 본문은 운영 기록이 섞여 빼고 버전 · 날짜 · 주제 목록만 실었습니다",
       "license": "MIT"
@@ -54,8 +54,8 @@
       "repo": "seanshin/werub-ai-server",
       "status": "공개",
       "openedAt": "2026-10-27",
-      "tag": "v2.125.73",
-      "commit": "c012ac37e057435c1c300d359d85dcc1ec5ace6c",
+      "tag": "v2.125.73-public.2",
+      "commit": "4d1515285f728b3368dac213e84bed52a5983971",
       "fromBase": false,
       "note": "현재 개발본(새 설치는 이 판을 받습니다 · 원본에 태그가 없어 코드 버전으로 표기)",
       "license": "MIT"
@@ -101,8 +101,8 @@
       "repo": "seanshin/werub-jitsi",
       "status": "공개",
       "openedAt": "2026-10-26",
-      "tag": "v2.10.0-9-g0984fbe",
-      "commit": "6d41dfc9dd4074b2993a816a80c4a870be5a7366",
+      "tag": "v2.10.0-9-g0984fbe-public.2",
+      "commit": "573d0f34ff954a9f3b9e7ec2e1310afbe83d70c8",
       "fromBase": true,
       "license": "MIT"
     }

@@ -229,7 +229,7 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) — 🟢 공개(2026-10-27 · 공개판 `v13.48` · MIT · 이 저장소의 [`source/pacs`](../source/pacs) · [소스 받기](../SOURCES.md)) |
+| 소스 링크 | [seanshin/werub-pacs](https://github.com/seanshin/werub-pacs) — 🟢 공개(2026-10-27 · 공개판 `v13.48-public.2` · MIT · 이 저장소의 [`source/pacs`](../source/pacs) · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 독점(`README.md`) — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — Orthanc(GPL · AGPL) · OHIF · Cornerstone3D(MIT) · PostgreSQL · Redis · nginx · Prometheus · Grafana · exporter |
 | 기준 커밋 | `532a8ed13e87` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |

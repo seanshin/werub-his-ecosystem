@@ -203,7 +203,7 @@ flowchart LR
 
 | 항목 | 값 |
 |---|---|
-| 소스 링크 | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) — 🟢 공개(2026-10-27 · 공개판 `v1.306.1` · 이 자료의 기준 커밋보다 새 판 · MIT · 이 저장소의 [`source/erp`](../source/erp) · [소스 받기](../SOURCES.md)) |
+| 소스 링크 | [seanshin/werub-erp](https://github.com/seanshin/werub-erp) — 🟢 공개(2026-10-27 · 공개판 `v1.306.1-public.2` · 이 자료의 기준 커밋보다 새 판 · MIT · 이 저장소의 [`source/erp`](../source/erp) · [소스 받기](../SOURCES.md)) |
 | 저장소 라이선스 표기 | 표기 없음 — 목표는 MIT, 정리 전([매니페스트](../RELEASES/2026.09/manifest.md)) |
 | 제3자 구성요소 | [THIRD_PARTY.md](../THIRD_PARTY.md) — PostgreSQL · Redis · Grafana · Metabase |
 | 기준 커밋 | `0e1f54c5b902` (2026-09-10 · [`data/base-commits.json`](../data/base-commits.json)) |
